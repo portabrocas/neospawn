@@ -41,7 +41,7 @@ public final class RealmTravel {
     /** Right-clicking a travel ant. */
     @SubscribeEvent
     static void onInteract(PlayerInteractEvent.EntityInteract event) {
-        if (event.getHand() != InteractionHand.MAIN_HAND || !(event.getTarget() instanceof NeoMob mob)) {
+        if (event.getHand() != InteractionHand.MAIN_HAND || !(event.getTarget() instanceof NeoMob mob) || event.isCanceled()) {
             return;
         }
         Realm realm = Realm.byAnt(mob.spec().id);

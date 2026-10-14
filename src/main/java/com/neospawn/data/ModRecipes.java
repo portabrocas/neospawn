@@ -64,6 +64,12 @@ public class ModRecipes extends RecipeProvider {
         charm(out, ModItems.SOVEREIGN_CHARM.get(), ModItems.KING_SCALE.get(), Items.GOLD_BLOCK, null, "SSS", "SGS", "SSS");
         charm(out, ModItems.PARAGON_CHARM.get(), ModItems.PARAGON_INGOT.get(), Items.NETHER_STAR, null, " P ", "PNP", " P ");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.ZOO_CAGE.get(), 2)
+                .pattern("IBI").pattern("BGB").pattern("IBI")
+                .define('I', Items.IRON_INGOT).define('B', Items.IRON_BARS).define('G', Items.GOLD_INGOT)
+                .unlockedBy("has_iron_bars", has(Items.IRON_BARS))
+                .save(out, NeoSpawn.id("zoo_cage"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModItems.ANT_MECH_KIT.get())
                 .pattern("TIT").pattern("IRI").pattern("T T")
                 .define('T', ModItems.TITANIUM_INGOT.get()).define('I', Items.IRON_BLOCK).define('R', Items.REDSTONE_BLOCK)

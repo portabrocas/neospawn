@@ -5,14 +5,18 @@ import com.neospawn.client.model.TheKingModel;
 import com.neospawn.client.renderer.NeoMobRenderer;
 import com.neospawn.client.renderer.TheKingRenderer;
 import com.neospawn.client.shape.Shapes;
+import com.neospawn.item.ZooCageItem;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.mob.NeoBoss;
+import com.neospawn.registry.ModItems;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 // Client-only: never loaded on a dedicated server.
@@ -32,6 +36,12 @@ public final class NeoSpawnClient {
                 event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
             }
         }
+    }
+
+    @SubscribeEvent
+    static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> ItemProperties.register(ModItems.ZOO_CAGE.get(), NeoSpawn.id("filled"),
+                (stack, level, entity, seed) -> ZooCageItem.isFilled(stack) ? 1 : 0));
     }
 
     @SubscribeEvent

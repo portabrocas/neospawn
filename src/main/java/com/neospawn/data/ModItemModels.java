@@ -1,6 +1,7 @@
 package com.neospawn.data;
 
 import com.neospawn.NeoSpawn;
+import com.neospawn.item.ZooCageItem;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ModItemModels extends ItemModelProvider {
@@ -24,7 +26,12 @@ public class ModItemModels extends ItemModelProvider {
             if (item instanceof BlockItem) {
                 continue; // made by ModBlockStates
             }
-            if (item instanceof SpawnEggItem) {
+            if (item instanceof ZooCageItem) {
+                withExistingParent(name + "_filled", mcLoc("item/generated")).texture("layer0", modLoc("item/" + name + "_filled"));
+                withExistingParent(name, mcLoc("item/generated")).texture("layer0", modLoc("item/" + name))
+                        .override().predicate(modLoc("filled"), 1)
+                        .model(new ModelFile.UncheckedModelFile(modLoc("item/" + name + "_filled"))).end();
+            } else if (item instanceof SpawnEggItem) {
                 withExistingParent(name, mcLoc("item/template_spawn_egg"));
             } else if (item instanceof TieredItem) {
                 withExistingParent(name, mcLoc("item/handheld")).texture("layer0", modLoc("item/" + name));

@@ -331,6 +331,10 @@
   "item.neospawn.warbee_spawn_egg": "Warbee Spawn Egg",
   "item.neospawn.whale_spawn_egg": "Whale Spawn Egg",
   "item.neospawn.worker_ant_spawn_egg": "Worker Ant Spawn Egg",
+  "item.neospawn.zoo_cage": "Zoo Cage",
+  "item.neospawn.zoo_cage.empty": "Right-click a mob to catch it. Hostile mobs must be below half health",
+  "item.neospawn.zoo_cage.holds": "Holds: %s (%s health)",
+  "item.neospawn.zoo_cage.release": "Use on the ground to release it",
   "itemGroup.neospawn": "NeoSpawn",
   "itemGroup.neospawn.creatures": "NeoSpawn Creatures",
   "message.neospawn.ascended_king": "The sky darkens. The Ascended King has come.",
@@ -338,5 +342,8 @@
   "message.neospawn.realm.arrive": "You arrive in %s.",
   "message.neospawn.realm.empty_handed": "Nothing but the charm may enter %s. Empty your inventory first.",
   "message.neospawn.realm.leave_first": "Return home before traveling to another realm.",
-  "message.neospawn.realm.need_charm": "The ant ignores you. You need a %s to reach %s."
+  "message.neospawn.realm.need_charm": "The ant ignores you. You need a %s to reach %s.",
+  "message.neospawn.zoo_cage.boss": "Bosses can't be caged.",
+  "message.neospawn.zoo_cage.not_yours": "That's someone else's pet.",
+  "message.neospawn.zoo_cage.too_strong": "It's too strong to catch. Weaken it below half health first."
 }

@@ -491,6 +491,25 @@ for name, core in (("ant_mech_kit", (230, 60, 40)), ("spider_mech_kit", (240, 20
             k.set(x, y, core)
     save(k.image((40, 40, 50)), f"item/{name}.png")
 
+# Zoo cage: a gold-capped iron birdcage, empty and with a creature inside.
+for name, inside in (("zoo_cage", None), ("zoo_cage_filled", (120, 200, 90))):
+    c = Sprite()
+    for x in range(3, 13):
+        for y in range(4, 15):
+            if y in (4, 14):
+                c.set(x, y, (212, 175, 55))
+            elif x % 2 == 1:
+                c.set(x, y, (170, 170, 180))
+    c.line(6, 3, 9, 3, (212, 175, 55))
+    c.set(7, 1, (212, 175, 55)); c.set(8, 1, (212, 175, 55)); c.set(7, 2, (212, 175, 55))
+    if inside:
+        for x in range(5, 11):
+            for y in range(8, 14):
+                if (x - 7.5) ** 2 / 7 + (y - 11) ** 2 / 6 <= 1 and x % 2 == 0:
+                    c.set(x, y, inside)
+        c.set(6, 9, (20, 20, 20)); c.set(8, 9, (20, 20, 20))
+    save(c.image((60, 50, 30)), f"item/{name}.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

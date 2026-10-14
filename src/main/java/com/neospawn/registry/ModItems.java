@@ -8,6 +8,7 @@ import com.neospawn.item.ParagonTools;
 import com.neospawn.item.RoyalSigilItem;
 import com.neospawn.item.SetArmorItem;
 import com.neospawn.item.TunnelChargeItem;
+import com.neospawn.item.ZooCageItem;
 import com.neospawn.realm.CharmItem;
 import com.neospawn.realm.Realm;
 import net.minecraft.core.Holder;
@@ -165,6 +166,10 @@ public final class ModItems {
     public static final DeferredItem<MountItem> TIDE_DRAGON_EGG = mountItem("tide_dragon_egg", "tamed_tide_dragon");
     public static final DeferredItem<MountItem> ANT_MECH_KIT = mountItem("ant_mech_kit", "ant_mech");
     public static final DeferredItem<MountItem> SPIDER_MECH_KIT = mountItem("spider_mech_kit", "spider_mech");
+
+    /** Catch a mob, carry it, release it. Stacks while empty; each catch fills one cage. */
+    public static final DeferredItem<ZooCageItem> ZOO_CAGE = ITEMS.register("zoo_cage",
+            () -> new ZooCageItem(new Item.Properties().stacksTo(16)));
 
     /** Summons The Ascended King. */
     public static final DeferredItem<RoyalSigilItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",

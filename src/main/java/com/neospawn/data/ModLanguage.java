@@ -81,6 +81,12 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.mount_item.tooltip_climbing", "Walks up walls");
         add("item.neospawn.mount_item.tooltip_mech", "Repair it with iron ingots");
         add("message.neospawn.mount_item.hatched", "Your %s is ready to ride.");
+        add("item.neospawn.zoo_cage.empty", "Right-click a mob to catch it. Hostile mobs must be below half health");
+        add("item.neospawn.zoo_cage.holds", "Holds: %s (%s health)");
+        add("item.neospawn.zoo_cage.release", "Use on the ground to release it");
+        add("message.neospawn.zoo_cage.boss", "Bosses can't be caged.");
+        add("message.neospawn.zoo_cage.not_yours", "That's someone else's pet.");
+        add("message.neospawn.zoo_cage.too_strong", "It's too strong to catch. Weaken it below half health first.");
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();
