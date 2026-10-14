@@ -31,7 +31,8 @@ public class ModLanguage extends LanguageProvider {
             Map.entry("king_scale_chestplate", "King's Scale Chestplate"),
             Map.entry("king_scale_leggings", "King's Scale Leggings"),
             Map.entry("king_scale_boots", "King's Scale Boots"),
-            Map.entry("kings_fang", "King's Fang"));
+            Map.entry("kings_fang", "King's Fang"),
+            Map.entry("prospectors_charm", "Prospector's Charm"));
 
     public ModLanguage(PackOutput output) {
         super(output, NeoSpawn.MODID, "en_us");
@@ -67,6 +68,13 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.lifesteal", "Heals you on every hit");
         add("item.neospawn.royal_sigil.tooltip", "Use on the ground, in open sky, to summon The Ascended King");
         add("message.neospawn.ascended_king", "The sky darkens. The Ascended King has come.");
+        add("item.neospawn.charm.tooltip", "Carry it and right-click the realm's ant to travel to %s");
+        add("item.neospawn.charm.tooltip_direct", "Use it to travel to %s, and use it again to come home");
+        add("item.neospawn.charm.tooltip_empty_handed", "You may bring nothing else");
+        add("message.neospawn.realm.need_charm", "The ant ignores you. You need a %s to reach %s.");
+        add("message.neospawn.realm.leave_first", "Return home before traveling to another realm.");
+        add("message.neospawn.realm.empty_handed", "Nothing but the charm may enter %s. Empty your inventory first.");
+        add("message.neospawn.realm.arrive", "You arrive in %s.");
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();

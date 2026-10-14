@@ -448,6 +448,26 @@ LATE_WEAPONS = {
 for name, (blade, edge, hilt, outline, width, guard) in LATE_WEAPONS.items():
     save(big_blade(blade, edge, hilt, outline, width=width, guard=guard), f"item/{name}.png")
 
+# Realm charms: a gold amulet on a cord with the realm's gem.
+CHARMS = {
+    "verdant_charm": (110, 220, 90), "prospectors_charm": (230, 60, 70), "crystal_charm": (150, 110, 255),
+    "sovereign_charm": (255, 210, 60), "paragon_charm": (200, 120, 255), "chaos_charm": (60, 20, 80),
+}
+for name, gem in CHARMS.items():
+    c = Sprite()
+    for x in range(16):
+        for y in range(16):
+            d = math.hypot(x - 7.5, y - 9.5)
+            if d <= 4.6:
+                c.set(x, y, (212, 175, 55) if d > 3.0 else shade(gem, 40 if (x + y) < 16 else -20))
+    c.set(6, 8, (255, 255, 255))
+    c.line(4, 5, 7, 1, (150, 120, 90))
+    c.line(11, 5, 8, 1, (150, 120, 90))
+    if name == "chaos_charm":
+        for x, y in ((7, 9), (8, 10), (9, 9)):
+            c.set(x, y, (255, 60, 200))
+    save(c.image((70, 50, 20)), f"item/{name}.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

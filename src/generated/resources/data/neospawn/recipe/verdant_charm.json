@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "G": {
+      "item": "minecraft:golden_apple"
+    }
+  },
+  "pattern": [
+    " E ",
+    "EGE",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:verdant_charm"
+  }
+}

@@ -57,6 +57,13 @@ public class ModRecipes extends RecipeProvider {
                 .unlockedBy("has_uranium", has(ModItems.URANIUM_INGOT.get()))
                 .save(out, NeoSpawn.id("paragon_ingot"));
 
+        // Realm charms: each made from what the previous realm gives you. The Chaos Charm can only be found.
+        charm(out, ModItems.VERDANT_CHARM.get(), Items.EMERALD, Items.GOLDEN_APPLE, null, " E ", "EGE", " E ");
+        charm(out, ModItems.PROSPECTORS_CHARM.get(), ModItems.TITANIUM_INGOT.get(), Items.DIAMOND, ModItems.RUBY.get(), "TRT", "RDR", "TRT");
+        charm(out, ModItems.CRYSTAL_CHARM.get(), ModItems.TANZANITE.get(), Items.ENDER_PEARL, Items.AMETHYST_SHARD, "TAT", "APA", "TAT");
+        charm(out, ModItems.SOVEREIGN_CHARM.get(), ModItems.KING_SCALE.get(), Items.GOLD_BLOCK, null, "SSS", "SGS", "SSS");
+        charm(out, ModItems.PARAGON_CHARM.get(), ModItems.PARAGON_INGOT.get(), Items.NETHER_STAR, null, " P ", "PNP", " P ");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ROYAL_SIGIL.get())
                 .pattern("SSS").pattern("SNS").pattern("SPS")
                 .define('S', ModItems.KING_SCALE.get())
@@ -79,6 +86,29 @@ public class ModRecipes extends RecipeProvider {
                     .unlockedBy("has_salt", has(ModItems.SALT.get()))
                     .save(out, NeoSpawn.id("salted_jerky_from_" + getItemName(meat)));
         }
+    }
+
+    /**
+     * Pattern letters: the ring material is the first letter used in the outer squares, the
+     * centerpiece is the middle letter, and an optional accent fills the rest.
+     */
+    private void charm(RecipeOutput out, Item charm, Item ring, Item center, Item accent, String... pattern) {
+        char ringKey = pattern[0].replace(" ", "").charAt(0);
+        char centerKey = pattern[1].charAt(1);
+        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, charm)
+                .define(ringKey, ring).define(centerKey, center);
+        for (String row : pattern) {
+            builder.pattern(row);
+        }
+        if (accent != null) {
+            for (char c : String.join("", pattern).toCharArray()) {
+                if (c != ' ' && c != ringKey && c != centerKey) {
+                    builder.define(c, accent);
+                    break;
+                }
+            }
+        }
+        builder.unlockedBy("has_" + getItemName(center), has(center)).save(out, NeoSpawn.id(getItemName(charm)));
     }
 
     private void storage(RecipeOutput out, Item item, ItemLike block, String name) {

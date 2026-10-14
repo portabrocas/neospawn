@@ -1,0 +1,11 @@
+{
+  "type": "neospawn:crystal_realm",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:large_biomes",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "neospawn:crystal_realm"
+    }
+  }
+}

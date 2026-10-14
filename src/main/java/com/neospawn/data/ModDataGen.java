@@ -49,6 +49,7 @@ public final class ModDataGen {
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(),
                 List.of(new LootTableProvider.SubProviderEntry(ModBlockLoot::new, LootContextParamSets.BLOCK)), lookup));
         generator.addProvider(event.includeServer(), new ModRecipes(output, lookup));
+        generator.addProvider(event.includeServer(), new ModLootModifiers(output, lookup));
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookup,
                 new RegistrySetBuilder().add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModDataGen::spawnModifiers),
                 Set.of(NeoSpawn.MODID)));

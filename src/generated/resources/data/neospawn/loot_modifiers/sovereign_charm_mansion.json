@@ -1,0 +1,14 @@
+{
+  "type": "neospawn:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/woodland_mansion"
+    },
+    {
+      "chance": 0.25,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "neospawn:sovereign_charm"
+}

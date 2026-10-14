@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "T": {
+      "item": "neospawn:tanzanite"
+    }
+  },
+  "pattern": [
+    "TAT",
+    "APA",
+    "TAT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:crystal_charm"
+  }
+}

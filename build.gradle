@@ -58,6 +58,13 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
+        // Opens a throwaway copy of the test world and checks every realm end to end (see RealmSelfCheck).
+        realmCheck {
+            client()
+            systemProperty 'neospawn.realmcheck', 'true'
+            programArguments.addAll '--quickPlaySingleplayer', 'neospawn_realmcheck'
+        }
+
         server {
             server()
             programArgument '--nogui'

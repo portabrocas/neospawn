@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "R": {
+      "item": "neospawn:ruby"
+    },
+    "T": {
+      "item": "neospawn:titanium_ingot"
+    }
+  },
+  "pattern": [
+    "TRT",
+    "RDR",
+    "TRT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:prospectors_charm"
+  }
+}

@@ -7,6 +7,8 @@ import com.neospawn.item.ParagonTools;
 import com.neospawn.item.RoyalSigilItem;
 import com.neospawn.item.SetArmorItem;
 import com.neospawn.item.TunnelChargeItem;
+import com.neospawn.realm.CharmItem;
+import com.neospawn.realm.Realm;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
@@ -148,6 +150,14 @@ public final class ModItems {
                 .orElseThrow(() -> new IllegalArgumentException("Unknown boss weapon " + name));
     }
 
+    // ---------------------------------------------------------------- realm charms (see docs/ROSTER.md)
+    public static final DeferredItem<CharmItem> VERDANT_CHARM = charm("verdant_charm", Realm.UTOPIA, Rarity.UNCOMMON);
+    public static final DeferredItem<CharmItem> PROSPECTORS_CHARM = charm("prospectors_charm", Realm.MINING_REALM, Rarity.UNCOMMON);
+    public static final DeferredItem<CharmItem> CRYSTAL_CHARM = charm("crystal_charm", Realm.CRYSTAL_REALM, Rarity.RARE);
+    public static final DeferredItem<CharmItem> SOVEREIGN_CHARM = charm("sovereign_charm", Realm.VILLAGE_REALM, Rarity.RARE);
+    public static final DeferredItem<CharmItem> PARAGON_CHARM = charm("paragon_charm", Realm.DANGER_REALM, Rarity.EPIC);
+    public static final DeferredItem<CharmItem> CHAOS_CHARM = charm("chaos_charm", Realm.CHAOS_ISLES, Rarity.EPIC);
+
     /** Summons The Ascended King. */
     public static final DeferredItem<RoyalSigilItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",
             () -> new RoyalSigilItem(paragonProps().stacksTo(1)));
@@ -189,6 +199,10 @@ public final class ModItems {
 
     private static DeferredItem<BossWeapon> weapon(String name, BossWeapon.Effect effect, float damage, float speed, float reach) {
         return ITEMS.register(name, () -> new BossWeapon(PARAGON_TIER, effect, damage, speed, reach, paragonProps()));
+    }
+
+    private static DeferredItem<CharmItem> charm(String name, Realm realm, Rarity rarity) {
+        return ITEMS.register(name, () -> new CharmItem(() -> realm, new Item.Properties().stacksTo(1).rarity(rarity).fireResistant()));
     }
 
     private static Item.Properties paragonProps() {

@@ -228,7 +228,7 @@ public final class ModMobs {
                 .egg(0x8B5A2B, 0x2A1A0A).spawn("c:is_desert", 30, 1, 2).spawn("c:is_badlands", 20, 1, 2);
         monster("termite", "Termite", look(Family.INSECT).body(6, 3, 3).leg(4)
                 .with(Extra.MANDIBLES, Extra.ANTENNAE).colors(0xE8D5B0, 0x8B5A2B, 0x5A3A1A).pattern(Pattern.BANDS))
-                .size(0.5f, 0.3f).stats(6, 2, 0.3).abilities(Ability.PACK).voice(Voice.BUG)
+                .size(0.5f, 0.3f).stats(6, 2, 0.3).temper(Temper.NEUTRAL).abilities(Ability.PACK).voice(Voice.BUG)
                 .egg(0xE8D5B0, 0x8B5A2B).spawn("c:is_savanna", 20, 2, 4).spawn("c:is_forest", 10, 2, 3);
         ant("worker_ant", "Worker Ant", 0x1A1A1A, 0x333333, 0x5A5A5A, false).stats(4, 1, 0.3)
                 .spawn("c:is_plains", 15, 3, 5).spawn("c:is_forest", 10, 3, 5);
@@ -622,8 +622,9 @@ public final class ModMobs {
         if (glow) {
             look.glow();
         }
-        return monster(id, name, look).size(0.5f, 0.3f).abilities(Ability.PACK).dayActive().voice(Voice.BUG)
-                .egg(base, accent);
+        // Ants are realm travel tokens (see realm/Realm.java): they only fight back when attacked.
+        return monster(id, name, look).size(0.5f, 0.3f).temper(Temper.NEUTRAL).abilities(Ability.PACK).dayActive()
+                .voice(Voice.BUG).egg(base, accent);
     }
 
     public static MobSpec byType(EntityType<?> type) {

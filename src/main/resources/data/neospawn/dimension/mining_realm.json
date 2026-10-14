@@ -1,0 +1,11 @@
+{
+  "type": "neospawn:mining_realm",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:amplified",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "neospawn:mining_realm"
+    }
+  }
+}

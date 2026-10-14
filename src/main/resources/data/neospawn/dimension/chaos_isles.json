@@ -1,0 +1,11 @@
+{
+  "type": "neospawn:chaos_isles",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:floating_islands",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "neospawn:chaos_isles"
+    }
+  }
+}

@@ -2,6 +2,7 @@ package com.neospawn;
 
 import com.mojang.logging.LogUtils;
 import com.neospawn.mob.ModMobs;
+import com.neospawn.realm.AddItemLootModifier;
 import com.neospawn.registry.ModArmor;
 import com.neospawn.registry.ModBlocks;
 import com.neospawn.registry.ModCreativeTabs;
@@ -26,6 +27,7 @@ public class NeoSpawn {
         ModItems.ITEMS.register(modEventBus);
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModCreativeTabs.TABS.register(modEventBus);
+        AddItemLootModifier.SERIALIZERS.register(modEventBus);
 
         modEventBus.addListener(ModMobs::registerAttributes);
         modEventBus.addListener(ModMobs::registerSpawnPlacements);

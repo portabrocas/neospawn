@@ -1,0 +1,12 @@
+{
+  "entries": [
+    "neospawn:verdant_charm_dungeon",
+    "neospawn:verdant_charm_village",
+    "neospawn:prospectors_charm_mineshaft",
+    "neospawn:crystal_charm_ancient_city",
+    "neospawn:crystal_charm_buried_treasure",
+    "neospawn:sovereign_charm_mansion",
+    "neospawn:paragon_charm_end_city"
+  ],
+  "replace": false
+}
