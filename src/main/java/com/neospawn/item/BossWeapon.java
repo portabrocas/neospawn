@@ -57,7 +57,13 @@ public class BossWeapon extends SwordItem {
         /** Weakens the target and eats away at it with acid. */
         CORRODE,
         /** Lightning on every hit, and it cleaves the monsters around the target. */
-        ASCENDANT
+        ASCENDANT,
+        /** Sets the target and every monster around it ablaze. */
+        INFERNO,
+        /** Steals the target's breath and slows it. */
+        DROWN,
+        /** Heals you for part of every hit. */
+        LIFESTEAL
     }
 
     private final Effect effect;
@@ -181,6 +187,19 @@ public class BossWeapon extends SwordItem {
                     other.hurt(level.damageSources().mobAttack(attacker), 30);
                 }
             }
+            case INFERNO -> {
+                level.sendParticles(ParticleTypes.FLAME, target.getX(), target.getY() + 1, target.getZ(), 40, 2, 0.5, 2, 0.05);
+                for (LivingEntity other : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(4),
+                        e -> e != attacker && (e == target || e instanceof Enemy))) {
+                    other.igniteForSeconds(8);
+                }
+            }
+            case DROWN -> {
+                target.setAirSupply(Math.max(-20, target.getAirSupply() - 100));
+                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), attacker);
+                level.sendParticles(ParticleTypes.BUBBLE, target.getX(), target.getY() + 1, target.getZ(), 30, 0.4, 0.6, 0.4, 0.1);
+            }
+            case LIFESTEAL -> attacker.heal(4.0f);
         }
         return true;
     }

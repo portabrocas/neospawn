@@ -62,6 +62,9 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.quake", "Knocks nearby monsters into the air");
         add("item.neospawn.boss_weapon.corrode", "Weakens and poisons the target");
         add("item.neospawn.boss_weapon.ascendant", "Lightning on every hit; cleaves nearby monsters");
+        add("item.neospawn.boss_weapon.inferno", "Sets the target and nearby monsters ablaze");
+        add("item.neospawn.boss_weapon.drown", "Steals the target's breath");
+        add("item.neospawn.boss_weapon.lifesteal", "Heals you on every hit");
         add("item.neospawn.royal_sigil.tooltip", "Use on the ground, in open sky, to summon The Ascended King");
         add("message.neospawn.ascended_king", "The sky darkens. The Ascended King has come.");
 

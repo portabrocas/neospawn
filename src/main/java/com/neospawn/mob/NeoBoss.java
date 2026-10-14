@@ -51,6 +51,7 @@ import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -101,6 +102,9 @@ public class NeoBoss extends Monster implements NeoMob {
     private int swoopTicks;
     private int biteCooldown;
     private int volleyCount;
+
+    // Burrowing (Molelord): hidden and untouchable underground, then erupts under the target.
+    private int burrowTicks;
     @Nullable private Vec3 idleGoal;
 
     public NeoBoss(EntityType<? extends NeoBoss> type, Level level) {
@@ -236,6 +240,7 @@ public class NeoBoss extends Monster implements NeoMob {
         tickBeam();
         tickWhirlpool();
         tickGrab();
+        tickBurrow();
 
         cooldowns.replaceAll((attack, ticks) -> Math.max(0, ticks - 1));
         LivingEntity target = getTarget();
@@ -268,7 +273,8 @@ public class NeoBoss extends Monster implements NeoMob {
     }
 
     private boolean isBusy() {
-        return chargeTicks > 0 || leapTicks > 0 || beamTicks > 0 || whirlpoolTicks > 0 || grabTicks > 0 || swoopTicks > 0;
+        return chargeTicks > 0 || leapTicks > 0 || beamTicks > 0 || whirlpoolTicks > 0 || grabTicks > 0 || swoopTicks > 0
+                || burrowTicks > 0;
     }
 
     private void perform(BossAttack attack, LivingEntity target) {
@@ -329,6 +335,15 @@ public class NeoBoss extends Monster implements NeoMob {
             case STING -> sting(target);
             case TOSS -> toss(target);
             case ACID_SPRAY -> acidSpray(target);
+            case GAZE -> gaze();
+            case BURROW -> {
+                burrowTicks = 50;
+                setInvisible(true);
+                getNavigation().stop();
+                playSound(SoundEvents.ROOTED_DIRT_BREAK, 4.0f, 0.5f);
+            }
+            case BLINK -> blink(target);
+            case SNIPE -> snipe(target);
         }
     }
 
@@ -641,6 +656,88 @@ public class NeoBoss extends Monster implements NeoMob {
         }
     }
 
+    // ------------------------------------------------------------------ specialist attacks
+
+    /** Anyone looking straight at the boss is turned (briefly) to stone. Look away to dodge it. */
+    private void gaze() {
+        playSound(SoundEvents.ELDER_GUARDIAN_CURSE, 4.0f, 0.6f);
+        Vec3 eyes = new Vec3(getX(), getEyeY(), getZ());
+        for (LivingEntity victim : victims(24)) {
+            Vec3 toBoss = eyes.subtract(victim.getEyePosition()).normalize();
+            if (victim.getLookAngle().dot(toBoss) > 0.85 && victim.hasLineOfSight(this)) {
+                victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 9), this);
+                victim.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 3), this);
+                victim.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0), this);
+                victim.hurt(damageSources().indirectMagic(this, this), damage() * 0.5f);
+                ((ServerLevel) level()).sendParticles(ParticleTypes.ASH, victim.getX(), victim.getY() + 1, victim.getZ(),
+                        30, 0.4, 0.8, 0.4, 0.02);
+            }
+        }
+    }
+
+    private void tickBurrow() {
+        if (burrowTicks <= 0) {
+            return;
+        }
+        burrowTicks--;
+        getNavigation().stop();
+        setDeltaMovement(0, getDeltaMovement().y, 0);
+        LivingEntity target = getTarget();
+        ServerLevel level = (ServerLevel) level();
+        if (target != null) {
+            // A trail of churned earth creeping toward the target gives you a moment to dodge.
+            double t = 1 - burrowTicks / 50.0;
+            level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, Mth.lerp(t, getX(), target.getX()), target.getY(),
+                    Mth.lerp(t, getZ(), target.getZ()), 3, 0.5, 0.1, 0.5, 0.01);
+        }
+        if (burrowTicks == 0) {
+            setInvisible(false);
+            if (target != null && target.isAlive()) {
+                moveTo(target.getX(), target.getY(), target.getZ(), getYRot(), getXRot());
+                stomp(5 + getBbWidth() / 2, 0.8f, false);
+                target.setDeltaMovement(target.getDeltaMovement().x, 1.4, target.getDeltaMovement().z);
+                target.hurtMarked = true;
+            }
+            playSound(SoundEvents.GENERIC_EXPLODE.value(), 3.0f, 0.5f);
+        }
+    }
+
+    /** Vanishes and reappears behind the target, slashing as it lands. */
+    private void blink(LivingEntity target) {
+        Vec3 behind = target.position().subtract(target.getLookAngle().multiply(1, 0, 1).normalize().scale(3 + getBbWidth() / 2));
+        ServerLevel level = (ServerLevel) level();
+        level.sendParticles(ParticleTypes.PORTAL, getX(), getY() + 1, getZ(), 60, 1, 1, 1, 0.5);
+        moveTo(behind.x, target.getY(), behind.z, getYRot(), getXRot());
+        faceTowards(target);
+        level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY() + 1, getZ(), 40, 1, 1, 1, 0.05);
+        playSound(SoundEvents.ENDERMAN_TELEPORT, 4.0f, 0.6f);
+        scythe();
+    }
+
+    /** A volley of fast, heavy arrows from long range. The target glows, so you know you're marked. */
+    private void snipe(LivingEntity target) {
+        target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60, 0), this);
+        Vec3 from = new Vec3(getX(), getEyeY(), getZ());
+        for (int i = 0; i < (enraged ? 5 : 3); i++) {
+            Arrow arrow = new Arrow(level(), this, new ItemStack(Items.ARROW), null);
+            arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
+            arrow.setBaseDamage(damage() * 0.25);
+            arrow.setCritArrow(true);
+            arrow.setPos(from);
+            Vec3 aim = target.getEyePosition().subtract(from);
+            arrow.shoot(aim.x, aim.y + aim.horizontalDistance() * 0.02, aim.z, 3.5f, 2.0f);
+            level().addFreshEntity(arrow);
+        }
+        playSound(SoundEvents.CROSSBOW_SHOOT, 4.0f, 0.5f);
+    }
+
+    private void faceTowards(LivingEntity target) {
+        float yaw = (float) (Mth.atan2(target.getZ() - getZ(), target.getX() - getX()) * Mth.RAD_TO_DEG) - 90.0f;
+        setYRot(yaw);
+        yBodyRot = yaw;
+        yHeadRot = yaw;
+    }
+
     // ------------------------------------------------------------------ sea attacks
 
     /** Drags everything nearby into a spiral toward the boss, chewing on whatever gets close. */
@@ -781,7 +878,7 @@ public class NeoBoss extends Monster implements NeoMob {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (source.getEntity() == this || source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FALL)
+        if (burrowTicks > 0 || source.getEntity() == this || source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FALL)
                 || (spec().isSeaBoss() && source.is(DamageTypes.DROWN))) {
             return false;
         }

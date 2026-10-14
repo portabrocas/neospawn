@@ -169,7 +169,15 @@ public final class Shapes {
                 body.box(Role.ACCENT, -0.5f, -H / 2 - 2, z, 1, 2, 1);
             }
         }
-        if (l.tail > 0) {
+        if (l.tail > 0 && l.has(Extra.NINE_TAILS)) {
+            // Nine tails fanned out behind and above, like a kitsune.
+            float tw = Math.max(2, Math.round(Math.min(W, H) / 2.5f));
+            for (int i = 0; i < 9; i++) {
+                float yaw = (i - 4) * 0.22f;
+                Part fan = body.child("tail_fan", 0, -H / 2 + tw / 2, L / 2).rot(0, yaw, 0);
+                tailChain(fan, 0, 0, 0, l.tail, tw, 0.5f + Math.abs(i - 4) * 0.08f);
+            }
+        } else if (l.tail > 0) {
             float tw = Math.max(1, Math.round(Math.min(W, H) / 3));
             tailChain(body, 0, -H / 2 + tw / 2 + 0.5f, L / 2, l.tail, tw, -0.5f);
             if (l.has(Extra.PLATES) && l.has(Extra.SPIKES)) {

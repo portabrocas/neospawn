@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_spooky",
+  "spawners": {
+    "type": "neospawn:dread_steed",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

@@ -162,6 +162,12 @@ public final class ModMobs {
                 .drop(v(Items.COD), 1, 2)
                 .egg(0xC83A2A, 0xF2E8D8).spawn("c:is_beach", 8, 1, 2);
 
+        animal("ember_hatchling", "Ember Hatchling", look(Family.QUADRUPED).body(8, 5, 5).leg(4).neck(3).head(5).snout(2).tail(8).wing(7)
+                .with(Extra.HORNS).colors(0xD84A2A, 0x7A1A0A, 0xFFC83A).eye(0xFFE84A).pattern(Pattern.SCALES))
+                .size(0.7f, 0.8f).stats(30, 5, 0.3).temper(Temper.NEUTRAL).voice(Voice.BEAST)
+                .abilities(Ability.FIRE, Ability.FIREPROOF).tameWith(v(Items.BLAZE_POWDER))
+                .egg(0xD84A2A, 0xFFC83A).spawn("c:is_badlands", 1, 1, 1).spawn("c:is_nether", 2, 1, 1);
+
         // ---------------------------------------------------------------- flyers (passive)
         flyer("songbird", "Songbird", look(Family.BIRD).body(4, 4, 3).leg(2).head(3).tail(3).wing(6)
                 .colors(0xE04848, 0x8A2020, 0xF2B134).scale(0.8f))
@@ -488,6 +494,74 @@ public final class ModMobs {
                 .drop(ModItems.MOTHWING_GLAIVE, 1, 1).drop(v(Items.GLOWSTONE_DUST), 16, 32).drop(v(Items.STRING), 16, 32)
                 .egg(0x6A4A2A, 0x5AE8F8).spawn("c:is_forest", 1, 1, 1);
 
+        skyBoss("ember_dragon", "Ember Dragon", look(Family.QUADRUPED).body(22, 11, 11).leg(9).neck(12).head(8).snout(5).tail(26).wing(34)
+                .with(Extra.HORNS, Extra.SPIKES).colors(0xB82A1A, 0x5A1008, 0xFFB83A).eye(0xFFE84A).pattern(Pattern.SCALES)
+                .glow().scale(2.4f))
+                .size(4.5f, 3.5f).stats(600, 22, 0.3).flySpeed(0.7).armor(12).voice(Voice.DRAGON).xp(700)
+                .attacks(BossAttack.FIRE_BREATH, BossAttack.FIREBALL_VOLLEY, BossAttack.SWOOP, BossAttack.ROAR)
+                .drop(ModItems.weapon("ember_greatsword"), 1, 1).drop(v(Items.BLAZE_ROD), 8, 16).drop(v(Items.MAGMA_CREAM), 8, 16)
+                .egg(0xB82A1A, 0xFFB83A).spawn("c:is_badlands", 1, 1, 1).spawn("c:is_nether", 1, 1, 1);
+        skyBoss("brute_fly", "Brute Fly", look(Family.FLYING_BUG).body(20, 9, 9).head(9).wing(22)
+                .with(Extra.LONG_LEGS, Extra.SNOUT).colors(0x2A3A2A, 0x8AA8B8, 0x5AE83A).eye(0xE83A2A).scale(2.4f))
+                .size(4.0f, 3.0f).stats(500, 18, 0.3).flySpeed(0.6).armor(10).voice(Voice.BUZZ).xp(500).minion("mosquito")
+                .attacks(BossAttack.ACID_SPRAY, BossAttack.SWOOP, BossAttack.WIND_GUST, BossAttack.SUMMON)
+                .drop(ModItems.weapon("plague_lance"), 1, 1).drop(v(Items.SLIME_BALL), 12, 24).drop(v(Items.SPIDER_EYE), 6, 12)
+                .egg(0x2A3A2A, 0x5AE83A).spawn("c:is_swamp", 1, 1, 1);
+        skyBoss("maelstrom", "Maelstrom", look(Family.SPHERE).body(0, 14, 14).leg(0)
+                .with(Extra.BLADES).colors(0x8A9AAA, 0x5A6A7A, 0xD8F2FF).eye(0xF2F2FF).translucent().glow().scale(3.0f))
+                .size(5.0f, 4.0f).stats(700, 20, 0.3).flySpeed(0.55).armor(8).voice(Voice.GHOST).xp(700)
+                .bar(BossEvent.BossBarColor.WHITE)
+                .attacks(BossAttack.WHIRLPOOL, BossAttack.WIND_GUST, BossAttack.LIGHTNING, BossAttack.METEOR_SHOWER)
+                .drop(ModItems.weapon("stormcaller"), 1, 1).drop(v(Items.BREEZE_ROD), 4, 8).drop(v(Items.PHANTOM_MEMBRANE), 6, 12)
+                .egg(0x8A9AAA, 0xD8F2FF).spawn("c:is_windswept", 1, 1, 1).spawn("c:is_mountain", 1, 1, 1);
+
+        // ---------------------------------------------------------------- specialist land bosses
+        boss("basilisk", "Basilisk", look(Family.SERPENT).body(100, 10, 10).head(14).segments(12)
+                .with(Extra.SPIKES, Extra.MANDIBLES).colors(0x3A5A2A, 0x1A2A12, 0xE8D83A).eye(0xFFE83A).pattern(Pattern.SCALES)
+                .glow().scale(1.8f))
+                .size(2.6f, 2.2f).stats(700, 24, 0.3).armor(16).voice(Voice.GUARDIAN).xp(700)
+                .attacks(BossAttack.GAZE, BossAttack.CHARGE, BossAttack.TAIL_SWIPE, BossAttack.STING)
+                .drop(ModItems.weapon("basilisk_fang"), 1, 1).drop(v(Items.EMERALD), 8, 16).drop(v(Items.ENDER_EYE), 2, 4)
+                .egg(0x3A5A2A, 0xFFE83A).spawn("c:is_swamp", 1, 1, 1).spawn("c:is_jungle", 1, 1, 1);
+        boss("molelord", "Molelord", look(Family.QUADRUPED).body(18, 12, 16).leg(5).head(10).snout(5).tail(4)
+                .with(Extra.TUSKS).colors(0x4A3A3A, 0x2A1E1E, 0xF2C8C8).eye(0x1A1A1A).scale(2.2f))
+                .size(3.5f, 2.5f).stats(650, 22, 0.3).armor(14).voice(Voice.BEAST).xp(650).smashesBlocks()
+                .attacks(BossAttack.BURROW, BossAttack.STOMP, BossAttack.CHARGE, BossAttack.TOSS)
+                .drop(ModItems.weapon("molelord_claw"), 1, 1).drop(v(Items.DIAMOND), 3, 6).drop(v(Items.RAW_GOLD), 8, 16)
+                .egg(0x4A3A3A, 0xF2C8C8).dayActive().spawn("c:is_plains", 1, 1, 1).spawn("c:is_cave", 1, 1, 1);
+        boss("dread_steed", "Dread Steed", look(Family.QUADRUPED).body(18, 10, 8).leg(16).neck(10).head(6).snout(5).tail(14)
+                .with(Extra.EARS, Extra.CREST, Extra.HORNS).colors(0x141018, 0x2A1A2A, 0xFF5A1A).eye(0xFF3A1A).glow().scale(2.0f))
+                .size(2.2f, 3.6f).stats(550, 20, 0.36).armor(12).voice(Voice.HORSE).xp(550)
+                .attacks(BossAttack.CHARGE, BossAttack.STOMP, BossAttack.FIRE_BREATH, BossAttack.LIGHTNING)
+                .drop(ModItems.weapon("dread_lance"), 1, 1).drop(v(Items.LEATHER), 12, 24).drop(v(Items.GOLDEN_CARROT), 8, 16)
+                .egg(0x141018, 0xFF5A1A).spawn("c:is_spooky", 1, 1, 1).spawn("c:is_plains", 1, 1, 1);
+        boss("ninetail", "Ninetail", look(Family.QUADRUPED).body(16, 9, 8).leg(10).neck(4).head(7).snout(4).tail(16)
+                .with(Extra.EARS, Extra.NINE_TAILS).colors(0xF2E8D8, 0xE87A2A, 0x5AB8FF).eye(0x5AB8FF).glow().scale(2.2f))
+                .size(2.4f, 2.8f).stats(600, 20, 0.38).armor(10).voice(Voice.FOX).xp(650)
+                .attacks(BossAttack.BLINK, BossAttack.FIREBALL_VOLLEY, BossAttack.LEAP_SLAM, BossAttack.ROAR)
+                .drop(ModItems.weapon("ninetail_blade"), 1, 1).drop(v(Items.GLOWSTONE_DUST), 12, 24).drop(v(Items.SWEET_BERRIES), 16, 32)
+                .egg(0xF2E8D8, 0x5AB8FF).spawn("c:is_taiga", 1, 1, 1).spawn("c:is_snowy", 1, 1, 1);
+
+        // ---------------------------------------------------------------- robot bosses
+        boss("siege_bot", "Siege Bot", look(Family.HUMANOID).body(0, 18, 16).leg(12).head(8)
+                .with(Extra.HORNS).colors(0x8A8A92, 0x4A4A52, 0xE8C83A).eye(0x3AE8FF).glow().scale(2.4f))
+                .size(3.5f, 5.4f).stats(800, 30, 0.26).armor(24).voice(Voice.ROBOT).xp(800).smashesBlocks()
+                .attacks(BossAttack.STOMP, BossAttack.CHARGE, BossAttack.TOSS, BossAttack.ROAR)
+                .drop(ModItems.weapon("siege_hammer"), 1, 1).drop(v(Items.IRON_BLOCK), 4, 8).drop(v(Items.REDSTONE_BLOCK), 2, 4)
+                .egg(0x8A8A92, 0x3AE8FF);
+        boss("sniper_bot", "Sniper Bot", look(Family.HUMANOID).body(0, 8, 14).leg(18).head(6)
+                .with(Extra.ANTENNAE).colors(0x5A6A5A, 0x2A3A2A, 0xFF3A3A).eye(0xFF3A3A).glow().scale(2.0f))
+                .size(1.4f, 4.6f).stats(450, 16, 0.3).armor(14).voice(Voice.ROBOT).xp(500)
+                .attacks(BossAttack.SNIPE, BossAttack.FIREBALL_VOLLEY, BossAttack.ROAR)
+                .drop(ModItems.weapon("sniper_lance"), 1, 1).drop(v(Items.IRON_INGOT), 12, 24).drop(v(Items.REDSTONE), 16, 32)
+                .egg(0x5A6A5A, 0xFF3A3A);
+        boss("war_bot", "War Bot", look(Family.HUMANOID).body(0, 12, 14).leg(14).head(7)
+                .with(Extra.HORNS).colors(0x6A2A2A, 0x3A3A42, 0xE8E8F2).eye(0xFFB83A).glow().scale(2.2f))
+                .size(2.4f, 4.6f).stats(650, 26, 0.32).armor(20).voice(Voice.ROBOT).xp(650)
+                .attacks(BossAttack.SCYTHE, BossAttack.CHARGE, BossAttack.LEAP_SLAM, BossAttack.STOMP)
+                .drop(ModItems.weapon("war_blade"), 1, 1).drop(v(Items.IRON_BLOCK), 3, 6).drop(v(Items.DIAMOND), 2, 4)
+                .egg(0x6A2A2A, 0xFFB83A);
+
         // ---------------------------------------------------------------- sea bosses
         seaBoss("kraken", "Kraken", look(Family.JELLY).body(0, 16, 24).tail(36).segments(10)
                 .colors(0x6A1A2A, 0x4A0E1A, 0xF2C83A).eye(0xF2E84A).pattern(Pattern.SPOTS).scale(2.5f))
@@ -505,6 +579,13 @@ public final class ModMobs {
                 .drop(ModItems.TIDEBREAKER, 1, 1).drop(v(Items.HEART_OF_THE_SEA), 1, 1).drop(v(Items.PRISMARINE_CRYSTALS), 8, 16)
                 .drop(v(Items.COD), 10, 20)
                 .egg(0x1E3A4A, 0x5AF2E8).spawn("c:is_deep_ocean", 1, 1, 1);
+        seaBoss("tide_dragon", "Tide Dragon", look(Family.QUADRUPED).body(24, 10, 12).leg(6).neck(14).head(8).snout(5).tail(28)
+                .with(Extra.HORNS, Extra.CREST).colors(0x1A6A8A, 0x0E3A4A, 0x8AF2E8).eye(0xF2F2FF).belly(0xA8D8E8)
+                .pattern(Pattern.SCALES).glow().scale(2.4f))
+                .size(4.0f, 3.0f).stats(750, 24, 1.2).armor(14).voice(Voice.DRAGON).xp(750).bar(BossEvent.BossBarColor.BLUE)
+                .attacks(BossAttack.WAVE, BossAttack.GEYSER, BossAttack.WHIRLPOOL, BossAttack.LEAP_SLAM)
+                .drop(ModItems.weapon("tidecaller"), 1, 1).drop(v(Items.HEART_OF_THE_SEA), 1, 1, 0.5f).drop(v(Items.PRISMARINE_CRYSTALS), 8, 16)
+                .egg(0x1A6A8A, 0x8AF2E8).spawn("c:is_ocean", 1, 1, 1);
         seaBoss("sea_serpent", "Sea Serpent", look(Family.SERPENT).body(96, 9, 9).head(13).segments(12)
                 .with(Extra.SPIKES, Extra.MANDIBLES).colors(0x2A6A4A, 0x1A4A30, 0xF2E84A).eye(0xFF4A2A)
                 .pattern(Pattern.SCALES).scale(1.8f))

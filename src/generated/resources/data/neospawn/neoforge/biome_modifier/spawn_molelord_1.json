@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_cave",
+  "spawners": {
+    "type": "neospawn:molelord",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

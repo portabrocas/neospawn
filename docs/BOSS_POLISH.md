@@ -29,8 +29,5 @@ share `NeoBoss`, so each item here improves every boss at once.
    the beam carves a visible trench toward you instead of exploding unpredictably.
 5. **Recovery windows.** A short vulnerable pause after big attacks (head down after
    a beam, stuck after a missed charge) so there's a moment to deal damage.
-6. **Attack variety for the biggest bosses.** In tests, The Ascended King used only 2 of its
-   7 attacks in 20 seconds; long cooldowns plus random picks leave its best moves unused.
-   The rotation system in item 2 should fix this.
-7. **Balance pass** across all bosses once the roster is complete: health, damage,
+6. **Balance pass** across all bosses once the roster is complete: health, damage,
    armor and drops relative to each other and to the gear players have at that point.

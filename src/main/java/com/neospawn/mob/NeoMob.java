@@ -136,6 +136,9 @@ public interface NeoMob {
             case SPRITE -> SoundEvents.ALLAY_AMBIENT_WITHOUT_ITEM;
             case GUARDIAN -> SoundEvents.GUARDIAN_AMBIENT;
             case DRAGON -> SoundEvents.ENDER_DRAGON_AMBIENT;
+            case ROBOT -> null;
+            case HORSE -> SoundEvents.SKELETON_HORSE_AMBIENT;
+            case FOX -> SoundEvents.FOX_AGGRO;
         };
     }
 
@@ -165,6 +168,9 @@ public interface NeoMob {
             case SPRITE -> SoundEvents.ALLAY_HURT;
             case GUARDIAN -> SoundEvents.GUARDIAN_HURT;
             case DRAGON -> SoundEvents.ENDER_DRAGON_HURT;
+            case ROBOT -> SoundEvents.IRON_GOLEM_HURT;
+            case HORSE -> SoundEvents.SKELETON_HORSE_HURT;
+            case FOX -> SoundEvents.FOX_HURT;
         };
     }
 
@@ -194,6 +200,9 @@ public interface NeoMob {
             case SPRITE -> SoundEvents.ALLAY_DEATH;
             case GUARDIAN -> SoundEvents.GUARDIAN_DEATH;
             case DRAGON -> SoundEvents.ENDER_DRAGON_DEATH;
+            case ROBOT -> SoundEvents.IRON_GOLEM_DEATH;
+            case HORSE -> SoundEvents.SKELETON_HORSE_DEATH;
+            case FOX -> SoundEvents.FOX_DEATH;
         };
     }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_mountain",
+  "spawners": {
+    "type": "neospawn:maelstrom",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

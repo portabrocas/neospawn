@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_nether",
+  "spawners": {
+    "type": "neospawn:ember_hatchling",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 2
+  }
+}

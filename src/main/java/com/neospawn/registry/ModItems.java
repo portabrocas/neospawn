@@ -130,7 +130,23 @@ public final class ModItems {
     public static final List<DeferredItem<BossWeapon>> BOSS_WEAPONS = List.of(KINGS_FANG, TYRANT_TOOTH, BONE_CRUSHER,
             PREDATOR_CLAW, TITAN_CLEAVER, KRAKEN_HOOK, TIDEBREAKER, SERPENT_FANG,
             EMPRESS_BATTLEAXE, SKYCLAW_TALON, AZURE_FANG, MOTHWING_GLAIVE,
-            MANTIS_SCYTHE, SOVEREIGN_STINGER, HERCULES_HORN, CENTIPEDE_WHIP, ASCENDED_BLADE);
+            MANTIS_SCYTHE, SOVEREIGN_STINGER, HERCULES_HORN, CENTIPEDE_WHIP, ASCENDED_BLADE,
+            weapon("ember_greatsword", BossWeapon.Effect.INFERNO, 36, -3.0f, 1),
+            weapon("tidecaller", BossWeapon.Effect.DROWN, 26, -2.4f, 2),
+            weapon("basilisk_fang", BossWeapon.Effect.PARALYZE, 24, -2.2f, 0),
+            weapon("plague_lance", BossWeapon.Effect.CORRODE, 22, -2.6f, 3),
+            weapon("stormcaller", BossWeapon.Effect.UPDRAFT, 30, -2.6f, 2),
+            weapon("molelord_claw", BossWeapon.Effect.QUAKE, 24, -2.0f, 0),
+            weapon("dread_lance", BossWeapon.Effect.BLEED, 30, -2.8f, 3),
+            weapon("ninetail_blade", BossWeapon.Effect.LIFESTEAL, 26, -1.8f, 1),
+            weapon("siege_hammer", BossWeapon.Effect.CRUSH, 44, -3.4f, 1),
+            weapon("sniper_lance", BossWeapon.Effect.SEVER, 20, -2.4f, 5),
+            weapon("war_blade", BossWeapon.Effect.CLEAVE, 34, -2.6f, 1));
+
+    public static DeferredItem<? extends Item> weapon(String name) {
+        return BOSS_WEAPONS.stream().filter(w -> w.getId().getPath().equals(name)).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown boss weapon " + name));
+    }
 
     /** Summons The Ascended King. */
     public static final DeferredItem<RoyalSigilItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",

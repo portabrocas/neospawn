@@ -67,7 +67,12 @@ public final class MobSpec {
         SCYTHE(60, 0, 6),
         STING(120, 0, 8),
         TOSS(100, 0, 5),
-        ACID_SPRAY(90, 3, 20);
+        ACID_SPRAY(90, 3, 20),
+        // Specialist attacks
+        GAZE(160, 0, 24),
+        BURROW(240, 3, 30),
+        BLINK(140, 4, 30),
+        SNIPE(70, 8, 48);
 
         public final int cooldown;
         public final double minRange, maxRange;
@@ -89,7 +94,7 @@ public final class MobSpec {
 
     public enum Voice {
         CRITTER, BIRD, BUG, BUZZ, REPTILE, BEAST, DINO, BIG_DINO, FISH, WHALE, SQUID, GHOST, ENDER, UNDEAD,
-        HUMAN, ALIEN, PLANT, FROG, COW, CREEPER, SPIDER, SPRITE, GUARDIAN, DRAGON
+        HUMAN, ALIEN, PLANT, FROG, COW, CREEPER, SPIDER, SPRITE, GUARDIAN, DRAGON, ROBOT, HORSE, FOX
     }
 
     public record Spawn(TagKey<Biome> biomes, int weight, int min, int max) {}

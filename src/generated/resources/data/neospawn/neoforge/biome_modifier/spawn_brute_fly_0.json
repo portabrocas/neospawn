@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_swamp",
+  "spawners": {
+    "type": "neospawn:brute_fly",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

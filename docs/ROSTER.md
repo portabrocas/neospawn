@@ -92,21 +92,21 @@ Status: ✅ in game · 🔜 next phase
 | Mothra | Moth Titan | ✅ |
 | Leonopteryx | Skyclaw | ✅ |
 | Cephadrome | Azure Drake | ✅ |
-| Dragon / Baby Dragon | Ember Dragon / Ember Hatchling | 🔜 |
-| Water Dragon | Tide Dragon | 🔜 |
-| Basilisk | Basilisk | 🔜 |
+| Dragon / Baby Dragon | Ember Dragon / Ember Hatchling (a tameable baby dragon pet) | ✅ |
+| Water Dragon | Tide Dragon | ✅ |
+| Basilisk | Basilisk | ✅ |
 | Caterkiller | Centipillar | ✅ |
-| Brutalfly | Brute Fly | 🔜 |
+| Brutalfly | Brute Fly | ✅ |
 | Mantis | Giant Mantis | ✅ |
 | Emperor Scorpion | Sovereign Scorpion | ✅ |
 | Hercules Beetle | Hercules Beetle | ✅ |
-| Vortex | Maelstrom | 🔜 |
-| Molenoid | Molelord | 🔜 |
+| Vortex | Maelstrom | ✅ |
+| Molenoid | Molelord | ✅ |
 | Sea Viper | Sea Serpent | ✅ |
 | Sea Monster | Leviathan | ✅ |
-| Nightmare | Dread Steed | 🔜 |
-| Robo Pounder / Sniper / Warrior | Siege Bot / Sniper Bot / War Bot | 🔜 |
-| Kyuubi | Ninetail | 🔜 |
+| Nightmare | Dread Steed | ✅ |
+| Robo Pounder / Sniper / Warrior | Siege Bot / Sniper Bot / War Bot | ✅ |
+| Kyuubi | Ninetail | ✅ |
 
 ## Ores and gear
 
@@ -121,4 +121,4 @@ Status: ✅ in game · 🔜 next phase
 | Ultimate tools | Paragon tools | crafted from Titanium, Uranium and Ruby; come pre-enchanted; the Paragon Pickaxe mines 3×3 | ✅ |
 | Miner's Dream | Tunnel Charge | blasts a tunnel and keeps the ores | ✅ |
 | Ultimate armor / Royal Guardian gear | Paragon armor / King's Scale armor | full-set potion bonuses | ✅ |
-| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang, Empress Battleaxe, Skyclaw Talon, Azure Fang, Mothwing Glaive, Mantis Scythe, Sovereign Stinger, Hercules Horn, Centipede Whip, Ascended Blade | dropped by bosses | ✅ (first 17) |
+| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang, Empress Battleaxe, Skyclaw Talon, Azure Fang, Mothwing Glaive, Mantis Scythe, Sovereign Stinger, Hercules Horn, Centipede Whip, Ascended Blade, and one for each of the last 10 bosses | dropped by bosses | ✅ (27) |

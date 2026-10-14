@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_taiga",
+  "spawners": {
+    "type": "neospawn:ninetail",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}
