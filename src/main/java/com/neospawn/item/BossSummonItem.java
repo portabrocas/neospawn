@@ -17,12 +17,17 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 /**
- * Summons The Ascended King: a ring of lightning, then the King descends. The NeoSpawn take
- * on OreSpawn's "grow The King into The Ultimate King" progression.
+ * Summons a boss where it's used: a ring of lightning, then the boss. The Royal Sigil (The Ascended
+ * King) and the rehydrated Gorgantua Egg (OreSpawn's Mobzilla egg quest) are both this item.
  */
-public class RoyalSigilItem extends Item {
-    public RoyalSigilItem(Properties props) {
+public class BossSummonItem extends Item {
+    private final String bossId;
+    private final String messageKey;
+
+    public BossSummonItem(String bossId, String messageKey, Properties props) {
         super(props);
+        this.bossId = bossId;
+        this.messageKey = messageKey;
     }
 
     @Override
@@ -30,7 +35,13 @@ public class RoyalSigilItem extends Item {
         if (!(context.getLevel() instanceof ServerLevel level)) {
             return InteractionResult.SUCCESS;
         }
-        BlockPos ground = context.getClickedPos().above();
+        summon(level, context.getClickedPos().above(), bossId, messageKey);
+        context.getItemInHand().consume(1, context.getPlayer());
+        return InteractionResult.CONSUME;
+    }
+
+    /** A ring of harmless lightning around {@code ground}, then the boss appears above it. */
+    public static void summon(ServerLevel level, BlockPos ground, String bossId, String messageKey) {
         for (int i = 0; i < 8; i++) {
             double angle = i * Math.PI / 4;
             LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
@@ -40,15 +51,14 @@ public class RoyalSigilItem extends Item {
                 level.addFreshEntity(bolt);
             }
         }
-        ModMobs.byId("the_ascended_king").type.get().spawn(level, ground.above(12), MobSpawnType.TRIGGERED);
+        boolean flying = ModMobs.byId(bossId).isSkyBoss();
+        ModMobs.byId(bossId).type.get().spawn(level, flying ? ground.above(12) : ground.above(), MobSpawnType.TRIGGERED);
         level.getServer().getPlayerList().broadcastSystemMessage(
-                Component.translatable("message.neospawn.ascended_king"), false);
-        context.getItemInHand().consume(1, context.getPlayer());
-        return InteractionResult.CONSUME;
+                Component.translatable(messageKey, ModMobs.byId(bossId).name), false);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("item.neospawn.royal_sigil.tooltip"));
+        tooltip.add(Component.translatable(getDescriptionId() + ".tooltip"));
     }
 }

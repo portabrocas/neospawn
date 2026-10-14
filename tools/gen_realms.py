@@ -276,7 +276,7 @@ LOOT = {
     "boss_dungeon": table(
         pool(2, item("minecraft:diamond", 3, 6), item("paragon_ingot", 1, 3), item("minecraft:golden_apple", 1, 2),
              item("minecraft:iron_ingot", 4, 10, 2)),
-        pool(1, ENCHANTED_BOOK), chance(item("chaos_charm"), 0.2)),
+        pool(1, ENCHANTED_BOOK), chance(item("chaos_charm"), 0.2), chance(item("gorgantua_egg_fragment", 1, 2), 0.3)),
     "prison_tower": table(
         pool(3, item("minecraft:emerald", 4, 10, 2), item("minecraft:iron_ingot", 3, 8, 2), item("minecraft:gold_ingot", 2, 6),
              item("minecraft:iron_nugget", 6, 18)),

@@ -139,6 +139,17 @@ public class ModRecipes extends RecipeProvider {
                 .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get()))
                 .save(out, NeoSpawn.id("spider_mech_kit"));
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DRIED_GORGANTUA_EGG.get())
+                .requires(ModItems.GORGANTUA_EGG_FRAGMENT.get(), 9)
+                .unlockedBy("has_fragment", has(ModItems.GORGANTUA_EGG_FRAGMENT.get())).save(out, NeoSpawn.id("dried_gorgantua_egg"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.GORGANTUA_EGG.get())
+                .requires(ModItems.DRIED_GORGANTUA_EGG.get()).requires(Items.WATER_BUCKET)
+                .unlockedBy("has_dried_egg", has(ModItems.DRIED_GORGANTUA_EGG.get())).save(out, NeoSpawn.id("gorgantua_egg"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SUMMONING_ALTAR.get())
+                .pattern("GEG").pattern("ODO").pattern("OOO")
+                .define('G', Items.GOLD_BLOCK).define('E', Items.ENDER_EYE).define('O', Items.OBSIDIAN).define('D', Items.DIAMOND_BLOCK)
+                .unlockedBy("has_ender_eye", has(Items.ENDER_EYE)).save(out, NeoSpawn.id("summoning_altar"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ROYAL_SIGIL.get())
                 .pattern("SSS").pattern("SNS").pattern("SPS")
                 .define('S', ModItems.KING_SCALE.get())

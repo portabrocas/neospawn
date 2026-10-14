@@ -1,6 +1,7 @@
 package com.neospawn.registry;
 
 import com.neospawn.NeoSpawn;
+import com.neospawn.item.BossSummonItem;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
 import com.neospawn.item.Gadgets;
@@ -8,7 +9,6 @@ import com.neospawn.item.MountItem;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ParagonFishingRod;
 import com.neospawn.item.ParagonTools;
-import com.neospawn.item.RoyalSigilItem;
 import com.neospawn.item.SetArmorItem;
 import com.neospawn.item.TunnelChargeItem;
 import com.neospawn.item.ZooCageItem;
@@ -217,8 +217,16 @@ public final class ModItems {
     public static final DeferredItem<BossWeapon> BEHEMOTH_BLADE = weapon("behemoth_blade", BossWeapon.Effect.BEHEMOTH, 250, -3.4f, 4);
 
     /** Summons The Ascended King. */
-    public static final DeferredItem<RoyalSigilItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",
-            () -> new RoyalSigilItem(paragonProps().stacksTo(1)));
+    public static final DeferredItem<BossSummonItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",
+            () -> new BossSummonItem("the_ascended_king", "message.neospawn.ascended_king", paragonProps().stacksTo(1)));
+
+    // ---------------------------------------------------------------- the Gorgantua egg quest (OreSpawn's Mobzilla egg)
+    public static final DeferredItem<Item> GORGANTUA_EGG_FRAGMENT = ITEMS.registerSimpleItem("gorgantua_egg_fragment",
+            new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> DRIED_GORGANTUA_EGG = ITEMS.registerSimpleItem("dried_gorgantua_egg",
+            new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+    public static final DeferredItem<BossSummonItem> GORGANTUA_EGG = ITEMS.register("gorgantua_egg",
+            () -> new BossSummonItem("gorgantua", "message.neospawn.gorgantua_hatched", paragonProps().stacksTo(1)));
 
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()

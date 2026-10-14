@@ -95,6 +95,32 @@
           "weight": 1
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.3
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "neospawn:gorgantua_egg_fragment",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -29,6 +29,8 @@ public final class ModTags {
             ModBlocks.METAL_ORES.forEach(b -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(b.get()));
             tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.RUBY_BLOCK.get(), ModBlocks.TANZANITE_BLOCK.get(),
                     ModBlocks.TITANIUM_BLOCK.get(), ModBlocks.URANIUM_BLOCK.get(), ModBlocks.SALT_BLOCK.get(), ModBlocks.PARAGON_BLOCK.get());
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.SUMMONING_ALTAR.get());
+            tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ModBlocks.SUMMONING_ALTAR.get());
             tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.DUPLICATOR_LOG.get(), ModBlocks.DUPLICATOR_CORE.get());
             tag(BlockTags.LOGS).add(ModBlocks.DUPLICATOR_LOG.get(), ModBlocks.DUPLICATOR_CORE.get());
             tag(BlockTags.LOGS_THAT_BURN).add(ModBlocks.DUPLICATOR_LOG.get());

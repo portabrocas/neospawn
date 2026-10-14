@@ -32,7 +32,8 @@ public class ModLanguage extends LanguageProvider {
             Map.entry("king_scale_leggings", "King's Scale Leggings"),
             Map.entry("king_scale_boots", "King's Scale Boots"),
             Map.entry("kings_fang", "King's Fang"),
-            Map.entry("prospectors_charm", "Prospector's Charm"));
+            Map.entry("prospectors_charm", "Prospector's Charm"),
+            Map.entry("gorgantua_egg_fragment", "Gorgantua Egg Fragment"));
 
     public ModLanguage(PackOutput output) {
         super(output, NeoSpawn.MODID, "en_us");
@@ -72,6 +73,11 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.lifesteal", "Heals you on every hit");
         add("item.neospawn.boss_weapon.behemoth", "Every swing strikes and launches the monsters around your target");
         add("item.neospawn.royal_sigil.tooltip", "Use on the ground, in open sky, to summon The Ascended King");
+        add("item.neospawn.gorgantua_egg.tooltip", "Use on the ground, far from home, to hatch Gorgantua");
+        add("item.neospawn.dried_gorgantua_egg.tooltip", "Rehydrate it: craft it with a water bucket");
+        add("message.neospawn.gorgantua_hatched", "The ground shakes. %s has hatched.");
+        add("message.neospawn.altar.summoned", "The altar answers. %s has come.");
+        add("message.neospawn.altar.offerings", "Summoning Altar offerings:");
         add("message.neospawn.ascended_king", "The sky darkens. The Ascended King has come.");
         add("item.neospawn.charm.tooltip", "Carry it and right-click the realm's ant to travel to %s");
         add("item.neospawn.charm.tooltip_direct", "Use it to travel to %s, and use it again to come home");

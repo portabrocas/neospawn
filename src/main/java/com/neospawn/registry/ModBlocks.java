@@ -3,6 +3,7 @@ package com.neospawn.registry;
 import com.neospawn.NeoSpawn;
 import com.neospawn.block.DuplicatorCoreBlock;
 import com.neospawn.block.ExperienceLeavesBlock;
+import com.neospawn.block.SummoningAltarBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -68,6 +69,9 @@ public final class ModBlocks {
     public static final DeferredBlock<SaplingBlock> RUBY_ORE_SAPLING = sapling("ruby_ore_sapling", "ruby_ore_tree");
     public static final List<DeferredBlock<SaplingBlock>> SAPLINGS = List.of(DUPLICATOR_SAPLING, EXPERIENCE_SAPLING,
             IRON_ORE_SAPLING, GOLD_ORE_SAPLING, DIAMOND_ORE_SAPLING, EMERALD_ORE_SAPLING, RUBY_ORE_SAPLING);
+
+    public static final DeferredBlock<SummoningAltarBlock> SUMMONING_ALTAR = BLOCKS.register("summoning_altar",
+            () -> new SummoningAltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).lightLevel(state -> 10)));
 
     public static final List<DeferredBlock<DropExperienceBlock>> GEM_ORES = List.of(RUBY_ORE, DEEPSLATE_RUBY_ORE,
             TANZANITE_ORE, DEEPSLATE_TANZANITE_ORE, SALT_ORE, FOSSIL_ORE, DEEPSLATE_FOSSIL_ORE);

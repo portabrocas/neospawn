@@ -10,6 +10,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+
 import java.util.List;
 import java.util.Set;
 
@@ -29,8 +34,9 @@ public class ModBlockLoot extends BlockLootSubProvider {
         ore(ModBlocks.URANIUM_ORE, ModItems.RAW_URANIUM.get());
         ore(ModBlocks.DEEPSLATE_URANIUM_ORE, ModItems.RAW_URANIUM.get());
         ore(ModBlocks.SALT_ORE, ModItems.SALT.get());
-        ore(ModBlocks.FOSSIL_ORE, ModItems.FOSSILIZED_EGG.get());
-        ore(ModBlocks.DEEPSLATE_FOSSIL_ORE, ModItems.FOSSILIZED_EGG.get());
+        fossilOre(ModBlocks.FOSSIL_ORE);
+        fossilOre(ModBlocks.DEEPSLATE_FOSSIL_ORE);
+        dropSelf(ModBlocks.SUMMONING_ALTAR.get());
 
         dropSelf(ModBlocks.DUPLICATOR_LOG.get());
         dropSelf(ModBlocks.DUPLICATOR_CORE.get());
@@ -44,6 +50,15 @@ public class ModBlockLoot extends BlockLootSubProvider {
                 ModBlocks.TITANIUM_BLOCK, ModBlocks.URANIUM_BLOCK, ModBlocks.SALT_BLOCK, ModBlocks.PARAGON_BLOCK)) {
             dropSelf(storage.get());
         }
+    }
+
+    /** Fossil Ore: a Fossilized Egg, plus a 4% chance of a Gorgantua Egg Fragment (unless silk-touched). */
+    private void fossilOre(DeferredBlock<? extends Block> block) {
+        add(block.get(), createOreDrop(block.get(), ModItems.FOSSILIZED_EGG.get())
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .when(doesNotHaveSilkTouch())
+                        .when(LootItemRandomChanceCondition.randomChance(0.04f))
+                        .add(LootItem.lootTableItem(ModItems.GORGANTUA_EGG_FRAGMENT.get()))));
     }
 
     private void ore(DeferredBlock<? extends Block> block, Item drop) {

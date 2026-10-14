@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "GEG",
+    "ODO",
+    "OOO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:summoning_altar"
+  }
+}

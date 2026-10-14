@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fragment": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neospawn:gorgantua_egg_fragment"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neospawn:dried_gorgantua_egg"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_fragment"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neospawn:dried_gorgantua_egg"
+    ]
+  }
+}

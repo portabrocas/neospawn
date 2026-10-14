@@ -634,6 +634,32 @@ for name, fruit in SAPLINGS.items():
         sp.putpixel((x, y), fruit + (255,))
     save(sp, f"block/{name}.png")
 
+# Gorgantua egg quest and the Summoning Altar.
+frag = Sprite()
+for x, y in ((6, 6), (7, 6), (8, 7), (5, 7), (6, 7), (7, 7), (6, 8), (7, 8), (8, 8), (9, 8), (7, 9), (8, 9), (8, 10)):
+    frag.set(x, y, jitter((120, 140, 110), 12))
+frag.set(7, 7, (160, 230, 240))
+save(frag.image((40, 50, 40)), "item/gorgantua_egg_fragment.png")
+for name, base, glow in (("dried_gorgantua_egg", (120, 125, 110), None), ("gorgantua_egg", (60, 110, 80), (140, 230, 240))):
+    e = Sprite()
+    for x in range(16):
+        for y in range(16):
+            if (x - 7.5) ** 2 / 22 + (y - 8.5) ** 2 / 38 <= 1:
+                crack = (x + y) % 5 == 0 and glow is None
+                e.set(x, y, shade(base, -40) if crack else jitter(base, 10))
+    if glow:
+        for x, y in ((7, 5), (8, 7), (7, 9), (8, 11)):
+            e.set(x, y, glow)
+    save(e.image((30, 35, 30)), f"item/{name}.png")
+altar = Image.new("RGBA", (16, 16))
+for x in range(16):
+    for y in range(16):
+        edge = x in (0, 15) or y in (0, 15)
+        rune = (x in (4, 11) and 4 <= y <= 11) or (y in (4, 11) and 4 <= x <= 11) or (x == y and 5 <= x <= 10)
+        c = (212, 175, 55) if edge else (180, 80, 230) if rune else (25, 15, 35)
+        altar.putpixel((x, y), jitter(c, 6) + (255,))
+save(altar, "block/summoning_altar.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):
