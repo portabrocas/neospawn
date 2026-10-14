@@ -65,6 +65,16 @@ neoForge {
             programArguments.addAll '--quickPlaySingleplayer', 'neospawn_realmcheck'
         }
 
+        // Photographs every mob for model review (see PhotoBooth). Needs run/saves/neospawn_photos.
+        photos {
+            client()
+            systemProperty 'neospawn.photos', 'true'
+            if (project.hasProperty('only')) {
+                systemProperty 'neospawn.photos.only', project.property('only')
+            }
+            programArguments.addAll '--quickPlaySingleplayer', 'neospawn_photos', '--width', '1280', '--height', '720'
+        }
+
         server {
             server()
             programArgument '--nogui'
