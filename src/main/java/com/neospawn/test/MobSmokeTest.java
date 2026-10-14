@@ -5,12 +5,15 @@ import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.mob.NeoBoss;
 import com.neospawn.registry.ModEntities;
+import com.neospawn.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -44,6 +47,28 @@ public class MobSmokeTest {
             NeoSpawn.LOGGER.info("Smoke test: {} mob types spawned, ticked 200 ticks and killed", count);
             helper.succeed();
         });
+    }
+
+    /**
+     * Touches every item's stats and components the way an inventory screen does, which
+     * catches unregistered materials and similar lookups that only fail when shown.
+     */
+    @GameTest(template = "arena")
+    public static void allItemsLoad(GameTestHelper helper) {
+        int count = 0;
+        for (var holder : ModItems.ITEMS.getEntries()) {
+            ItemStack stack = new ItemStack(holder.get());
+            stack.getAttributeModifiers();
+            stack.getMaxDamage();
+            stack.getRarity();
+            if (stack.getItem() instanceof ArmorItem armor) {
+                armor.getMaterial().value();
+                armor.getDefense();
+            }
+            count++;
+        }
+        NeoSpawn.LOGGER.info("Item test: {} items load their stats", count);
+        helper.succeed();
     }
 
     /**

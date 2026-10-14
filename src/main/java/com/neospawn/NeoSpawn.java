@@ -3,6 +3,7 @@ package com.neospawn;
 import com.mojang.logging.LogUtils;
 import com.neospawn.entity.TheKing;
 import com.neospawn.mob.ModMobs;
+import com.neospawn.registry.ModArmor;
 import com.neospawn.registry.ModBlocks;
 import com.neospawn.registry.ModCreativeTabs;
 import com.neospawn.registry.ModEntities;
@@ -23,6 +24,7 @@ public class NeoSpawn {
         ModMobs.register(ModEntities.ENTITY_TYPES, ModItems.ITEMS);
 
         ModBlocks.BLOCKS.register(modEventBus);
+        ModArmor.MATERIALS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModCreativeTabs.TABS.register(modEventBus);
