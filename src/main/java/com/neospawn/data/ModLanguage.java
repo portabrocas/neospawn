@@ -76,6 +76,9 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.gorgantua_egg.tooltip", "Use on the ground, far from home, to hatch Gorgantua");
         add("item.neospawn.dried_gorgantua_egg.tooltip", "Rehydrate it: craft it with a water bucket");
         add("message.neospawn.gorgantua_hatched", "The ground shakes. %s has hatched.");
+        add("message.neospawn.growth.fed", "%s ate it (%s/%s)");
+        add("message.neospawn.growth.grew", "%s grew into a %s!");
+        add("message.neospawn.growth.ascended", "It's no pet anymore. %s has awakened!");
         add("message.neospawn.altar.summoned", "The altar answers. %s has come.");
         add("message.neospawn.altar.offerings", "Summoning Altar offerings:");
         add("message.neospawn.ascended_king", "The sky darkens. The Ascended King has come.");
@@ -92,6 +95,8 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.mount_item.tooltip_climbing", "Walks up walls");
         add("item.neospawn.mount_item.tooltip_mech", "Repair it with iron ingots");
         add("message.neospawn.mount_item.hatched", "Your %s is ready to ride.");
+        add("message.neospawn.mount_item.hatched_pet", "Your %s has hatched. Feed it to help it grow.");
+        add("item.neospawn.mount_item.tooltip_grows", "Hatches your own %s. Feed it %s (%s) to grow it, then keep going: it becomes a dragon you can ride");
         add("item.neospawn.paragon_fishing_rod.tooltip", "Aim at lava or water and hold to reel in a catch");
         add("block.neospawn.duplicator_core.tooltip", "Blocks placed against it are copied into the ground around it");
         add("item.neospawn.instant_shelter.tooltip", "Builds a cobblestone hut around you, doorway facing where you look");

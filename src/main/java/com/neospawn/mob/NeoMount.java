@@ -49,7 +49,8 @@ public class NeoMount extends NeoAnimal {
                 return InteractionResult.sidedSuccess(level().isClientSide);
             }
         }
-        if (isTame() && isOwnedBy(player) && !player.isSecondaryUseActive() && !isFood(stack) && !isVehicle()) {
+        boolean growthItem = spec().growItem != null && stack.is(spec().growItem.get());
+        if (isTame() && isOwnedBy(player) && !player.isSecondaryUseActive() && !isFood(stack) && !growthItem && !isVehicle()) {
             if (!level().isClientSide) {
                 setOrderedToSit(false);
                 setInSittingPose(false);

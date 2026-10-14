@@ -147,6 +147,9 @@ public final class MobSpec {
     public final Set<String> prey = new HashSet<>();
 
     public MountType mount = MountType.NONE;
+    @Nullable public String growsInto;
+    @Nullable public Supplier<? extends Item> growItem;
+    public int growCount;
     /** Mechs: never fed or bred; repaired with iron ingots. */
     public boolean mechanical;
 
@@ -264,6 +267,14 @@ public final class MobSpec {
 
     public MobSpec breed(Supplier<? extends Item> item) {
         this.breedItem = item;
+        return this;
+    }
+
+    /** Feeding {@code count} of {@code item} turns a tamed one into {@code nextId} (Royal Hatchling → Drakeling → Drake). */
+    public MobSpec growsInto(String nextId, Supplier<? extends Item> item, int count) {
+        this.growsInto = nextId;
+        this.growItem = item;
+        this.growCount = count;
         return this;
     }
 

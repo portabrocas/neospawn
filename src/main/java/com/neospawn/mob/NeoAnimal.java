@@ -104,6 +104,13 @@ public class NeoAnimal extends TamableAnimal implements NeoMob {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        if (spec().growsInto != null && isTame() && isOwnedBy(player) && stack.is(spec().growItem.get())) {
+            if (!level().isClientSide) {
+                stack.consume(1, player);
+                Growth.feed(this, player);
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
         if (spec().tameable) {
             boolean client = level().isClientSide;
             if (!isTame() && isFood(stack)) {

@@ -474,7 +474,7 @@ for name, gem in CHARMS.items():
 
 # Mount eggs (speckled, in the boss's colors) and mech kits (a riveted crate with a glowing core).
 EGGS = {"skyclaw_egg": ((230, 200, 140), (140, 90, 40)), "azure_drake_egg": ((110, 160, 240), (30, 60, 140)),
-        "tide_dragon_egg": ((90, 200, 210), (20, 90, 110))}
+        "tide_dragon_egg": ((90, 200, 210), (20, 90, 110)), "royal_egg": ((220, 180, 60), (140, 10, 10))}
 for name, (shell, spots) in EGGS.items():
     e = Sprite()
     for x in range(16):

@@ -169,6 +169,24 @@ public final class ModMobs {
                 .abilities(Ability.FIRE, Ability.FIREPROOF).tameWith(v(Items.BLAZE_POWDER))
                 .egg(0xD84A2A, 0xFFC83A).spawn("c:is_badlands", 1, 1, 1).spawn("c:is_nether", 2, 1, 1);
 
+        // ---------------------------------------------------------------- the Royal line (The King's egg grows up)
+        // Royal Egg → Hatchling (feed gold) → Drakeling (feed diamonds) → Royal Drake, rideable. A Nether Star wakes The King.
+        animal("royal_hatchling", "Royal Hatchling", look(Family.QUADRUPED).body(8, 5, 5).leg(4).neck(3).head(6).snout(2).tail(8).wing(8)
+                .with(Extra.HORNS).colors(0xD4AF37, 0x8B0000, 0xFFF0B0).eye(0xFF3A1A).pattern(Pattern.SCALES))
+                .size(0.8f, 0.9f).stats(40, 4, 0.3).temper(Temper.NEUTRAL).voice(Voice.DRAGON)
+                .abilities(Ability.FIREPROOF).tameWith(v(Items.BEEF)).growsInto("royal_drakeling", v(Items.GOLD_INGOT), 8)
+                .egg(0xD4AF37, 0x8B0000);
+        animal("royal_drakeling", "Royal Drakeling", look(Family.QUADRUPED).body(14, 8, 8).leg(7).neck(6).head(7).snout(3).tail(16).wing(18)
+                .with(Extra.HORNS, Extra.SPIKES).colors(0xD4AF37, 0x8B0000, 0xFFF0B0).eye(0xFF3A1A).pattern(Pattern.SCALES))
+                .size(1.3f, 1.3f).stats(90, 9, 0.3).temper(Temper.NEUTRAL).voice(Voice.DRAGON)
+                .abilities(Ability.FIRE, Ability.FIREPROOF).tameWith(v(Items.BEEF)).growsInto("royal_drake", v(Items.DIAMOND), 8)
+                .egg(0xD4AF37, 0xFFF0B0);
+        animal("royal_drake", "Royal Drake", look(Family.QUADRUPED).body(22, 11, 11).leg(10).neck(10).head(9).snout(4).tail(26).wing(34)
+                .with(Extra.HORNS, Extra.SPIKES).colors(0xD4AF37, 0x8B0000, 0xFFF0B0).eye(0xFF3A1A).pattern(Pattern.SCALES).scale(1.5f))
+                .size(2.2f, 2.0f).stats(160, 14, 0.32).flySpeed(1.1).temper(Temper.NEUTRAL).voice(Voice.DRAGON)
+                .abilities(Ability.FIRE, Ability.FIREPROOF).tameWith(v(Items.BEEF)).mount(MobSpec.MountType.FLYING)
+                .growsInto("the_king", v(Items.NETHER_STAR), 1).egg(0x8B0000, 0xD4AF37);
+
         // ---------------------------------------------------------------- mounts (hatched from boss eggs or built)
         animal("tamed_skyclaw", "Tamed Skyclaw", look(Family.QUADRUPED).body(18, 10, 10).leg(10).neck(4).head(8).snout(3).tail(14).wing(28)
                 .with(Extra.EARS, Extra.CREST).colors(0xC89A4A, 0x8A5A2A, 0xF2E8C8).eye(0x3AB8E8).scale(1.3f))

@@ -217,6 +217,8 @@ public final class ModItems {
     public static final DeferredItem<MountItem> SKYCLAW_EGG = mountItem("skyclaw_egg", "tamed_skyclaw");
     public static final DeferredItem<MountItem> AZURE_DRAKE_EGG = mountItem("azure_drake_egg", "tamed_azure_drake");
     public static final DeferredItem<MountItem> TIDE_DRAGON_EGG = mountItem("tide_dragon_egg", "tamed_tide_dragon");
+    public static final DeferredItem<MountItem> ROYAL_EGG = ITEMS.register("royal_egg",
+            () -> new MountItem("royal_hatchling", new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
     public static final DeferredItem<MountItem> ANT_MECH_KIT = mountItem("ant_mech_kit", "ant_mech");
     public static final DeferredItem<MountItem> SPIDER_MECH_KIT = mountItem("spider_mech_kit", "spider_mech");
 

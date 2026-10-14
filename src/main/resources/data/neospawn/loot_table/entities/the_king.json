@@ -47,6 +47,15 @@
           "name": "neospawn:kings_fang"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "neospawn:royal_egg"
+        }
+      ]
     }
   ],
   "random_sequence": "neospawn:entities/the_king"
