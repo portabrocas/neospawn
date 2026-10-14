@@ -6,6 +6,7 @@ import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
 import com.neospawn.item.Gadgets;
 import com.neospawn.item.MountItem;
+import com.neospawn.item.RepellentItem;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ParagonFishingRod;
 import com.neospawn.item.ParagonTools;
@@ -107,6 +108,10 @@ public final class ModItems {
             () -> new UtilityItems.XpSiphon(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<UtilityItems.Sifter> SIFTER = ITEMS.register("sifter",
             () -> new UtilityItems.Sifter(new Item.Properties().durability(256)));
+
+    public static final DeferredItem<RepellentItem> CREEPER_REPELLENT = repellent("creeper_repellent", RepellentItem.Kind.CREEPER);
+    public static final DeferredItem<RepellentItem> KRAKEN_REPELLENT = repellent("kraken_repellent", RepellentItem.Kind.KRAKEN);
+    public static final DeferredItem<RepellentItem> BUG_REPELLENT = repellent("bug_repellent", RepellentItem.Kind.BUG);
 
     // ---------------------------------------------------------------- gadgets
     public static final DeferredItem<Gadgets.SquidZooka> SQUID_ZOOKA = ITEMS.register("squid_zooka",
@@ -278,6 +283,10 @@ public final class ModItems {
 
     private static DeferredItem<BossWeapon> weapon(String name, BossWeapon.Effect effect, float damage, float speed, float reach) {
         return ITEMS.register(name, () -> new BossWeapon(PARAGON_TIER, effect, damage, speed, reach, paragonProps()));
+    }
+
+    private static DeferredItem<RepellentItem> repellent(String name, RepellentItem.Kind kind) {
+        return ITEMS.register(name, () -> new RepellentItem(kind, new Item.Properties().durability(400)));
     }
 
     private static DeferredItem<MountItem> mountItem(String name, String mobId) {

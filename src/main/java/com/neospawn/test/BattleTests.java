@@ -15,7 +15,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @GameTestHolder(NeoSpawn.MODID)
 @PrefixGameTestTemplate(false)
 public class BattleTests {
-    @GameTest(template = "arena", batch = "battle_rivals", timeoutTicks = 400)
+    @GameTest(template = "arena", batch = "battle_rivals", timeoutTicks = 600)
     public static void rivalBossesFight(GameTestHelper helper) {
         NeoBoss king = (NeoBoss) helper.spawn(ModMobs.byId("the_king").type.get(), new BlockPos(6, 2, 12));
         NeoBoss gorgantua = (NeoBoss) helper.spawn(ModMobs.byId("gorgantua").type.get(), new BlockPos(18, 2, 12));

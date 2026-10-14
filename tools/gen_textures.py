@@ -767,3 +767,15 @@ save(ascended, "entity/the_ascended_king.png")
 save(ascended_eyes, "entity/the_ascended_king_eyes.png")
 
 print("textures written to", TEX)
+
+# Repellents: a spray bottle with a colored label.
+for name, label in (("creeper_repellent", (90, 200, 70)), ("kraken_repellent", (60, 90, 200)), ("bug_repellent", (210, 90, 40))):
+    r = Sprite()
+    for x in range(5, 11):
+        for y in range(6, 15):
+            r.set(x, y, label if 9 <= y <= 12 else (225, 230, 235))
+    for x in range(6, 10):
+        r.set(x, 5, (120, 120, 130))
+    for x, y in ((7, 3), (7, 4), (8, 4), (9, 3), (10, 3)):
+        r.set(x, y, (60, 60, 70))
+    save(r.image((40, 40, 50)), f"item/{name}.png")

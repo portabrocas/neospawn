@@ -74,7 +74,7 @@ Status: ✅ in game · 🔜 next phase
 | Attack Squid | Ambush Squid | water hostile | oceans | blinding ink | ✅ |
 | Crystal Urchin | Spike Urchin | water hostile | oceans | spiky, slow | ✅ |
 | Red Ant Robot / Spider Robot | Ant Mech, Spider Mech | rideable | crafted from kits | rideable mechs; the Spider Mech climbs walls; repair with iron | ✅ |
-| Prince / Princess / Young Prince line | Royal Hatchling line | tameable | hatched | grows up into The King | 🔜 |
+| Prince / Princess / Young Prince line | Royal Hatchling line | tameable | hatched | Hatchling → Drakeling → rideable Royal Drake; a Nether Star wakes The King | ✅ |
 | Girlfriend / Boyfriend | Companion | tameable | villages | follows and fights for you | 🔜 |
 
 ## Bosses

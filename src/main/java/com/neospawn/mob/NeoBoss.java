@@ -203,7 +203,7 @@ public class NeoBoss extends Monster implements NeoMob {
         }
         targetSelector.addGoal(3, new HuntPlayerGoal(this));
         if (!spec().prey.isEmpty()) {
-            targetSelector.addGoal(4, new RivalGoal(this, spec().prey, true));
+            targetSelector.addGoal(4, new RivalGoal(this, spec().prey, true, true));
         }
     }
 

@@ -79,7 +79,7 @@ public class NeoMonster extends Monster implements NeoMob, RangedAttackMob {
             targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         }
         if (!s.prey.isEmpty()) {
-            targetSelector.addGoal(3, new RivalGoal(this, s.prey, false));
+            targetSelector.addGoal(3, new RivalGoal(this, s.prey, false, true));
         }
     }
 

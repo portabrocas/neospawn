@@ -14,7 +14,7 @@ from OreSpawn's code or assets.
 Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
 change or remove that line on other machines.
 
-## What's in so far (v0.9)
+## What's in so far (v0.14)
 
 See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
 
@@ -60,6 +60,11 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   Experience Tree; the Gorgantua egg quest and the Summoning Altar; Instant Shelter, Ultimate Torch,
   XP Siphon and Sifter; and more dungeons (Ruined Crypts and Sunken Vaults in the overworld, the
   Golden Spire, Challenge Dungeon and Empress Tree in the realms).
+- **Mob battles**: rival bosses fight on sight, even with you nearby (The King vs Gorgantua,
+  T. rex vs Brutosaurus, the Ember Dragon vs the Kraken, and more), and predators hunt prey.
+- **The Royal line**: The King drops a Royal Egg. Hatch it, feed it gold to grow a Drakeling,
+  then diamonds for a rideable flying Royal Drake. Feed the Drake a Nether Star and The King wakes up.
+- **Repellents**: Creeper, Kraken and Bug Repellents keep those mobs off you while carried.
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.
 - **Tools**: full sets in Ruby, Tanzanite and Titanium, plus **Paragon** gear made from
@@ -100,6 +105,5 @@ python3 tools/gen_textures.py   # regenerate block/item placeholder art
 
 ## Roadmap
 
-1. Your picks from docs/FAN_FAVORITES.md
-2. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
-3. Hand-drawn art and Blockbench models for the most important mobs
+1. The NeoSpawn modpack (Crazy Craft-style, see docs/MODPACK.md once it exists)
+2. Hand-drawn art and Blockbench models for the most important mobs

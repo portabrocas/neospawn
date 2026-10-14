@@ -103,6 +103,10 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.ultimate_torch.tooltip", "Lights every dark spot within 12 blocks");
         add("item.neospawn.xp_siphon.tooltip", "Keep it in your inventory: nearby experience flies to you");
         add("item.neospawn.sifter.tooltip", "Use on sand, gravel or dirt to sift out treasure");
+        add("item.neospawn.repellent.tooltip", "Keep it in your inventory. Wears down as it turns mobs away");
+        add("item.neospawn.repellent.tooltip_creeper", "Creepers and other exploding mobs leave you alone");
+        add("item.neospawn.repellent.tooltip_kraken", "Hostile sea creatures, and The Kraken itself, leave you alone");
+        add("item.neospawn.repellent.tooltip_bug", "Spiders, scorpions and other bugs leave you alone (not bosses)");
         add("message.neospawn.ultimate_torch.placed", "Placed %s torches");
         add("item.neospawn.squid_zooka.tooltip", "Fires ink bombs that blind and blast mobs. Ammo: ink sacs");
         add("item.neospawn.ray_gun.tooltip", "An instant beam at whatever you aim at, up to 48 blocks. Ammo: redstone");

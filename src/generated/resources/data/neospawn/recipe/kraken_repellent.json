@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:glass_bottle"
+    },
+    "S": {
+      "item": "neospawn:salt"
+    },
+    "X": {
+      "item": "minecraft:ink_sac"
+    }
+  },
+  "pattern": [
+    " S ",
+    "XBX",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:kraken_repellent"
+  }
+}

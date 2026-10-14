@@ -6,6 +6,7 @@ import com.neospawn.registry.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -96,6 +97,10 @@ public class ModRecipes extends RecipeProvider {
                 .pattern("SSS").pattern("S#S").pattern("SSS")
                 .define('S', Items.STICK).define('#', Items.STRING)
                 .unlockedBy("has_string", has(Items.STRING)).save(out, NeoSpawn.id("sifter"));
+
+        repellent(out, ModItems.CREEPER_REPELLENT.get(), Items.GUNPOWDER);
+        repellent(out, ModItems.KRAKEN_REPELLENT.get(), Items.INK_SAC);
+        repellent(out, ModItems.BUG_REPELLENT.get(), Items.SPIDER_EYE);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEHEMOTH_BLADE.get())
                 .pattern(" F ").pattern("CPE").pattern(" K ")
@@ -270,5 +275,13 @@ public class ModRecipes extends RecipeProvider {
         }
         builder.unlockedBy(has, has(material))
                 .save(out, NeoSpawn.id(getItemName(result)));
+    }
+
+    /** Salt, the mob's own leftovers and a bottle. */
+    private static void repellent(RecipeOutput out, Item result, Item ingredient) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+                .pattern(" S ").pattern("XBX").pattern(" S ")
+                .define('S', ModItems.SALT.get()).define('X', ingredient).define('B', Items.GLASS_BOTTLE)
+                .unlockedBy("has_salt", has(ModItems.SALT.get())).save(out, NeoSpawn.id(BuiltInRegistries.ITEM.getKey(result).getPath()));
     }
 }
