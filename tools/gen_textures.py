@@ -660,6 +660,37 @@ for x in range(16):
         altar.putpixel((x, y), jitter(c, 6) + (255,))
 save(altar, "block/summoning_altar.png")
 
+# Utility items
+sh = Sprite()
+for x in range(3, 13):
+    for y in range(6, 14):
+        sh.set(x, y, jitter((130, 130, 130), 15))
+for x in range(2, 14):
+    sh.set(x, 5, (100, 100, 100))
+for y in range(10, 14):
+    sh.set(7, y, (60, 40, 20)); sh.set(8, y, (60, 40, 20))
+save(sh.image((50, 50, 50)), "item/instant_shelter.png")
+ut = Sprite()
+ut.line(8, 14, 8, 6, MATERIALS["titanium"][1])
+for x, y in ((7, 5), (8, 5), (9, 5), (8, 4), (7, 3), (8, 3), (9, 3), (8, 2)):
+    ut.set(x, y, (255, 230, 90) if y > 3 else (255, 255, 200))
+ut.set(8, 7, MATERIALS["ruby"][1])
+save(ut.image((60, 50, 20)), "item/ultimate_torch.png")
+xs = Sprite()
+for x in range(16):
+    for y in range(16):
+        d = math.hypot(x - 7.5, y - 7.5)
+        if d <= 5:
+            xs.set(x, y, (150, 240, 70) if d < 2.5 else (105, 75, 225))
+save(xs.image((30, 20, 60)), "item/xp_siphon.png")
+sf = Sprite()
+for x in range(2, 14):
+    for y in range(4, 12):
+        edge = x in (2, 13) or y in (4, 11)
+        if edge or (x + y) % 2 == 0:
+            sf.set(x, y, (150, 105, 55) if edge else (210, 200, 170))
+save(sf.image((60, 40, 20)), "item/sifter.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

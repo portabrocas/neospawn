@@ -94,6 +94,11 @@ public class ModLanguage extends LanguageProvider {
         add("message.neospawn.mount_item.hatched", "Your %s is ready to ride.");
         add("item.neospawn.paragon_fishing_rod.tooltip", "Aim at lava or water and hold to reel in a catch");
         add("block.neospawn.duplicator_core.tooltip", "Blocks placed against it are copied into the ground around it");
+        add("item.neospawn.instant_shelter.tooltip", "Builds a cobblestone hut around you, doorway facing where you look");
+        add("item.neospawn.ultimate_torch.tooltip", "Lights every dark spot within 12 blocks");
+        add("item.neospawn.xp_siphon.tooltip", "Keep it in your inventory: nearby experience flies to you");
+        add("item.neospawn.sifter.tooltip", "Use on sand, gravel or dirt to sift out treasure");
+        add("message.neospawn.ultimate_torch.placed", "Placed %s torches");
         add("item.neospawn.squid_zooka.tooltip", "Fires ink bombs that blind and blast mobs. Ammo: ink sacs");
         add("item.neospawn.ray_gun.tooltip", "An instant beam at whatever you aim at, up to 48 blocks. Ammo: redstone");
         add("item.neospawn.chainsaw.tooltip", "Fells a whole tree from one log. Sneak to cut a single log");

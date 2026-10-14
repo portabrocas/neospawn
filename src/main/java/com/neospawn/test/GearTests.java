@@ -2,9 +2,11 @@ package com.neospawn.test;
 
 import com.neospawn.NeoSpawn;
 import com.neospawn.item.Gadgets;
+import com.neospawn.item.UtilityItems;
 import com.neospawn.registry.ModItems;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -158,6 +162,66 @@ public class GearTests {
         bystander.setNoAi(true);
         ModItems.BEHEMOTH_BLADE.get().hurtEnemy(new ItemStack(ModItems.BEHEMOTH_BLADE.get()), target, player);
         helper.assertTrue(!bystander.isAlive() || bystander.getHealth() < bystander.getMaxHealth(), "the cleave missed a nearby zombie");
+        player.discard();
+        helper.killAllEntities();
+        helper.succeed();
+    }
+
+    /** Instant Shelter builds walls and a roof around you, leaving a doorway where you face. */
+    @GameTest(template = "tall_arena", batch = "util_shelter", timeoutTicks = 100)
+    public static void instantShelterBuildsHut(GameTestHelper helper) {
+        BlockPos feet = new BlockPos(12, 2, 12);
+        UtilityItems.InstantShelter.build(helper.getLevel(), helper.absolutePos(feet), Direction.NORTH);
+        helper.assertBlockPresent(Blocks.COBBLESTONE, feet.offset(3, 1, 0));
+        helper.assertBlockPresent(Blocks.COBBLESTONE, feet.offset(0, 4, 0));
+        helper.assertBlockPresent(Blocks.AIR, feet.north(3));
+        helper.assertBlockPresent(Blocks.AIR, feet);
+        helper.succeed();
+    }
+
+    /** The Ultimate Torch lights a dark, covered room. */
+    @GameTest(template = "tall_arena", batch = "util_torch", timeoutTicks = 100)
+    public static void ultimateTorchLightsDarkness(GameTestHelper helper) {
+        BlockPos center = new BlockPos(12, 2, 12);
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-11, 3, -11), center.offset(11, 3, 11))) {
+            helper.setBlock(pos.immutable(), Blocks.STONE);
+        }
+        // Lighting updates a tick or two after blocks change; wait before reading it.
+        helper.runAfterDelay(20, () -> {
+            int placed = UtilityItems.UltimateTorch.lightUp(helper.getLevel(), helper.absolutePos(center));
+            helper.assertTrue(placed >= 5, "expected the torch to light the covered room, placed " + placed);
+            helper.succeed();
+        });
+    }
+
+    /** The Sifter turns sand into loot. */
+    @GameTest(template = "arena", batch = "util_sifter", timeoutTicks = 100)
+    public static void sifterSiftsSand(GameTestHelper helper) {
+        ServerPlayer player = player(helper, new Vec3(4, 2, 4));
+        BlockPos sand = new BlockPos(6, 2, 6);
+        helper.setBlock(sand, Blocks.SAND);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.SIFTER.get()));
+        BlockPos abs = helper.absolutePos(sand);
+        ModItems.SIFTER.get().useOn(new UseOnContext(player, InteractionHand.MAIN_HAND,
+                new BlockHitResult(Vec3.atCenterOf(abs), Direction.UP, abs, false)));
+        helper.assertBlockPresent(Blocks.AIR, sand);
+        helper.assertTrue(player.getInventory().items.stream().anyMatch(s -> !s.isEmpty() && !s.is(ModItems.SIFTER.get())),
+                "sifting gave nothing");
+        player.discard();
+        helper.succeed();
+    }
+
+    /** The XP Siphon pulls nearby experience orbs toward its holder. */
+    @GameTest(template = "arena", batch = "util_siphon", timeoutTicks = 100)
+    public static void xpSiphonPullsOrbs(GameTestHelper helper) {
+        ServerPlayer player = player(helper, new Vec3(4, 2, 4));
+        // Inventory.add moves the stack out of the original, so tick the stack that's actually in the inventory.
+        player.getInventory().add(new ItemStack(ModItems.XP_SIPHON.get()));
+        ItemStack siphon = player.getInventory().items.stream().filter(st -> st.is(ModItems.XP_SIPHON.get())).findFirst().orElseThrow();
+        ExperienceOrb orb = new ExperienceOrb(helper.getLevel(), player.getX() + 8, player.getY(), player.getZ(), 5);
+        helper.getLevel().addFreshEntity(orb);
+        siphon.inventoryTick(helper.getLevel(), player, 0, false);
+        helper.assertTrue(orb.getDeltaMovement().x < -0.1, "the orb is not flying toward the player");
         player.discard();
         helper.killAllEntities();
         helper.succeed();

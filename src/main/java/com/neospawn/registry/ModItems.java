@@ -11,6 +11,7 @@ import com.neospawn.item.ParagonFishingRod;
 import com.neospawn.item.ParagonTools;
 import com.neospawn.item.SetArmorItem;
 import com.neospawn.item.TunnelChargeItem;
+import com.neospawn.item.UtilityItems;
 import com.neospawn.item.ZooCageItem;
 import com.neospawn.realm.CharmItem;
 import com.neospawn.realm.Realm;
@@ -97,6 +98,16 @@ public final class ModItems {
             ITEMS.register("paragon_hoe", () -> new ParagonTools.Hoe(PARAGON_TIER, paragonProps()
                     .attributes(HoeItem.createAttributes(PARAGON_TIER, -5.0f, 0.0f)))));
     public static final List<ToolSet> TOOL_SETS = List.of(RUBY_TOOLS, TANZANITE_TOOLS, TITANIUM_TOOLS, PARAGON_TOOLS);
+    // ---------------------------------------------------------------- utility items
+    public static final DeferredItem<UtilityItems.InstantShelter> INSTANT_SHELTER = ITEMS.register("instant_shelter",
+            () -> new UtilityItems.InstantShelter(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<UtilityItems.UltimateTorch> ULTIMATE_TORCH = ITEMS.register("ultimate_torch",
+            () -> new UtilityItems.UltimateTorch(new Item.Properties().durability(256).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<UtilityItems.XpSiphon> XP_SIPHON = ITEMS.register("xp_siphon",
+            () -> new UtilityItems.XpSiphon(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<UtilityItems.Sifter> SIFTER = ITEMS.register("sifter",
+            () -> new UtilityItems.Sifter(new Item.Properties().durability(256)));
+
     // ---------------------------------------------------------------- gadgets
     public static final DeferredItem<Gadgets.SquidZooka> SQUID_ZOOKA = ITEMS.register("squid_zooka",
             () -> new Gadgets.SquidZooka(new Item.Properties().durability(250).rarity(Rarity.RARE)));

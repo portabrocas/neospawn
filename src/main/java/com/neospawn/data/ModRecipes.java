@@ -80,6 +80,23 @@ public class ModRecipes extends RecipeProvider {
                 .define('D', Items.DIAMOND).define('S', Items.OAK_SAPLING).define('P', ModItems.PARAGON_INGOT.get())
                 .unlockedBy("has_paragon", has(ModItems.PARAGON_INGOT.get())).save(out, NeoSpawn.id("duplicator_sapling"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.INSTANT_SHELTER.get())
+                .pattern("CCC").pattern("CTC").pattern("CCC")
+                .define('C', Items.COBBLESTONE).define('T', Items.TORCH)
+                .unlockedBy("has_cobblestone", has(Items.COBBLESTONE)).save(out, NeoSpawn.id("instant_shelter"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.ULTIMATE_TORCH.get())
+                .pattern(" G ").pattern(" T ").pattern(" R ")
+                .define('G', Items.GLOWSTONE).define('T', ModItems.TITANIUM_INGOT.get()).define('R', ModItems.RUBY.get())
+                .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get())).save(out, NeoSpawn.id("ultimate_torch"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.XP_SIPHON.get())
+                .pattern("TET").pattern("EBE").pattern("TET")
+                .define('T', ModItems.TANZANITE.get()).define('E', Items.EXPERIENCE_BOTTLE).define('B', Items.ENDER_EYE)
+                .unlockedBy("has_tanzanite", has(ModItems.TANZANITE.get())).save(out, NeoSpawn.id("xp_siphon"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SIFTER.get())
+                .pattern("SSS").pattern("S#S").pattern("SSS")
+                .define('S', Items.STICK).define('#', Items.STRING)
+                .unlockedBy("has_string", has(Items.STRING)).save(out, NeoSpawn.id("sifter"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEHEMOTH_BLADE.get())
                 .pattern(" F ").pattern("CPE").pattern(" K ")
                 .define('F', ModItems.KINGS_FANG.get()).define('C', ModItems.TITAN_CLEAVER.get())
