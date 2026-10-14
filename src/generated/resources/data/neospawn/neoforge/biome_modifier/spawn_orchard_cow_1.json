@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_forest",
+  "spawners": {
+    "type": "neospawn:orchard_cow",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 2
+  }
+}

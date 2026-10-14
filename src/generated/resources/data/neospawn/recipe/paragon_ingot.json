@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "neospawn:ruby"
+    },
+    "T": {
+      "item": "neospawn:titanium_ingot"
+    },
+    "U": {
+      "item": "neospawn:uranium_ingot"
+    }
+  },
+  "pattern": [
+    "TUT",
+    "URU",
+    "TUT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:paragon_ingot"
+  }
+}

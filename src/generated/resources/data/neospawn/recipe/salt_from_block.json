@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "neospawn:salt_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "neospawn:salt"
+  }
+}

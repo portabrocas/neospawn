@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_swamp",
+  "spawners": {
+    "type": "neospawn:spitter_beetle",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 12
+  }
+}

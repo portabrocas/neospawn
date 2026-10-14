@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_mountain",
+  "spawners": {
+    "type": "neospawn:sky_shark",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 6
+  }
+}

@@ -1,0 +1,348 @@
+"""Generates NeoSpawn's placeholder block, item and boss textures.
+
+Run from the project root:  python3 tools/gen_textures.py
+Regular mob textures are painted at runtime (see ShapeTextures.java); drop a PNG at
+textures/entity/<mob_id>.png to override one. Replace any PNG here with hand-drawn art
+whenever it's ready.
+"""
+import math
+import os
+import random
+import sys
+
+from PIL import Image
+
+ROOT = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
+TEX = os.path.join(ROOT, "src/main/resources/assets/neospawn/textures")
+rng = random.Random(1337)
+
+
+def clamp(c):
+    return tuple(max(0, min(255, int(v))) for v in c)
+
+
+def shade(color, amount):
+    return clamp((color[0] + amount, color[1] + amount, color[2] + amount))
+
+
+def jitter(color, amount):
+    return shade(color, rng.randint(-amount, amount))
+
+
+def save(img, path):
+    full = os.path.join(TEX, path)
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    img.save(full)
+
+
+# Material palettes: (highlight, mid, dark, outline)
+MATERIALS = {
+    "ruby": ((255, 120, 140), (210, 25, 55), (130, 5, 30), (70, 0, 15)),
+    "tanzanite": ((185, 165, 255), (105, 75, 225), (60, 38, 150), (30, 15, 80)),
+    "titanium": ((240, 244, 248), (175, 185, 198), (110, 120, 136), (50, 55, 66)),
+    "uranium": ((200, 255, 130), (105, 222, 62), (42, 140, 32), (15, 60, 10)),
+    "paragon": ((255, 246, 185), (236, 184, 60), (165, 70, 190), (62, 20, 72)),
+    "salt": ((255, 255, 255), (232, 230, 225), (190, 186, 178), (120, 116, 110)),
+}
+STICK = ((150, 105, 55), (105, 72, 35), (60, 40, 20))
+
+
+# ---------------------------------------------------------------- sprite canvas
+class Sprite:
+    def __init__(self):
+        self.px = {}
+
+    def set(self, x, y, color):
+        if 0 <= x < 16 and 0 <= y < 16:
+            self.px[(x, y)] = color
+
+    def line(self, x0, y0, x1, y1, color):
+        steps = max(abs(x1 - x0), abs(y1 - y0))
+        for i in range(steps + 1):
+            t = i / steps if steps else 0
+            self.set(round(x0 + (x1 - x0) * t), round(y0 + (y1 - y0) * t), color)
+
+    def image(self, outline):
+        img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+        for (x, y), c in self.px.items():
+            img.putpixel((x, y), c + (255,))
+        for (x, y) in list(self.px):
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < 16 and 0 <= ny < 16 and (nx, ny) not in self.px:
+                    img.putpixel((nx, ny), outline + (255,))
+        return img
+
+
+def handle(s, x0, y0, x1, y1):
+    s.line(x0, y0, x1, y1, STICK[0])
+    s.line(x0, y0 + 1, x1 - 1, y1 + 1 if y1 + 1 <= y0 else y1, STICK[1])
+
+
+def shaded(mat, x, y):
+    """Diagonal shading: top-left highlight, bottom-right dark."""
+    hi, mid, dark, _ = mat
+    t = (x - y + 16) / 32
+    return hi if t < 0.42 else mid if t < 0.62 else dark
+
+
+def tool(kind, mat):
+    s = Sprite()
+    if kind == "sword":
+        s.line(3, 12, 13, 2, mat[1])
+        s.line(4, 12, 14, 2, mat[2])
+        s.line(3, 11, 12, 2, mat[0])
+        s.line(2, 9, 6, 13, (212, 175, 55))
+        s.line(1, 14, 3, 12, STICK[1])
+    elif kind == "pickaxe":
+        handle(s, 2, 13, 10, 5)
+        for x in range(3, 14):
+            y = round(3 + (x - 8) ** 2 / 9)
+            s.set(x, y, shaded(mat, x, y))
+            s.set(x, y - 1, mat[0] if x < 9 else mat[1])
+    elif kind == "axe":
+        handle(s, 2, 13, 11, 4)
+        for x in range(7, 14):
+            for y in range(1, 9):
+                if (x - 11) ** 2 + (y - 4) ** 2 <= 10 and x + y >= 12:
+                    s.set(x, y, shaded(mat, x, y))
+    elif kind == "shovel":
+        handle(s, 2, 13, 8, 7)
+        for x in range(7, 15):
+            for y in range(1, 9):
+                if abs(x - 11) + abs(y - 4) <= 3:
+                    s.set(x, y, shaded(mat, x, y))
+    elif kind == "hoe":
+        handle(s, 2, 13, 11, 4)
+        for x in range(7, 14):
+            s.set(x, 3, mat[1])
+            s.set(x, 2, mat[0])
+        s.set(7, 4, mat[2])
+        s.set(7, 5, mat[2])
+    return s.image(mat[3])
+
+
+for material in ("ruby", "tanzanite", "titanium", "paragon"):
+    for kind in ("sword", "pickaxe", "axe", "shovel", "hoe"):
+        save(tool(kind, MATERIALS[material]), f"item/{material}_{kind}.png")
+
+
+# ---------------------------------------------------------------- materials
+def gem(mat, shape):
+    s = Sprite()
+    for x in range(16):
+        for y in range(16):
+            dx, dy = x - 7.5, y - 7.5
+            inside = (abs(dx) + abs(dy) <= 5.5) if shape == "diamond" else (abs(dx) <= 5 and -3.5 <= dy <= 1.5 or abs(dx) + (dy - 1.5) <= 5.5 and dy > 1.5)
+            if inside:
+                s.set(x, y, shaded(mat, x, y))
+    s.set(5, 5, (255, 255, 255))
+    s.set(6, 5, mat[0])
+    return s.image(mat[3])
+
+
+def ingot(mat):
+    s = Sprite()
+    for y in range(6, 11):
+        for x in range(2 + (10 - y), 14 - (y - 6) // 2):
+            s.set(x, y, mat[0] if y == 6 else mat[2] if y == 10 else mat[1])
+    return s.image(mat[3])
+
+
+def raw_chunk(mat):
+    s = Sprite()
+    for cx, cy, r in ((7, 8, 4), (10, 6, 3), (5, 10, 3)):
+        for x in range(16):
+            for y in range(16):
+                if (x - cx) ** 2 + (y - cy) ** 2 <= r * r:
+                    s.set(x, y, jitter(shaded(mat, x, y), 12))
+    return s.image(mat[3])
+
+
+save(gem(MATERIALS["ruby"], "cut"), "item/ruby.png")
+save(gem(MATERIALS["tanzanite"], "diamond"), "item/tanzanite.png")
+for metal in ("titanium", "uranium", "paragon"):
+    save(ingot(MATERIALS[metal]), f"item/{metal}_ingot.png")
+save(raw_chunk(MATERIALS["titanium"]), "item/raw_titanium.png")
+save(raw_chunk(MATERIALS["uranium"]), "item/raw_uranium.png")
+
+salt = Sprite()
+for x in range(3, 13):
+    for y in range(8, 14):
+        if (x - 8) ** 2 / 25 + (y - 13) ** 2 / 25 <= 1:
+            salt.set(x, y, jitter(MATERIALS["salt"][1], 20))
+save(salt.image(MATERIALS["salt"][3]), "item/salt.png")
+
+jerky = Sprite()
+for i in range(10):
+    for w in range(3):
+        jerky.set(3 + i, 11 - i + w, jitter((140, 70, 40) if w else (175, 95, 55), 10))
+for x, y in ((5, 9), (8, 7), (11, 4)):
+    jerky.set(x, y, (245, 245, 240))
+save(jerky.image((70, 30, 15)), "item/salted_jerky.png")
+
+egg = Sprite()
+for x in range(16):
+    for y in range(16):
+        if (x - 7.5) ** 2 / 20 + (y - 8.5) ** 2 / 36 <= 1:
+            egg.set(x, y, jitter((205, 185, 145) if x < 8 else (170, 150, 110), 8))
+for x, y in ((6, 5), (7, 6), (7, 7), (8, 8), (9, 9), (8, 10)):
+    egg.set(x, y, (95, 80, 55))
+save(egg.image((80, 65, 40)), "item/fossilized_egg.png")
+
+charge = Sprite()
+for i in range(9):
+    for w in range(4):
+        x, y = 3 + i + w, 12 - i + w - 2
+        color = (200, 40, 35) if i not in (2, 6) else MATERIALS["titanium"][1]
+        charge.set(x, y, jitter(color, 8))
+charge.set(13, 2, (105, 222, 62))
+charge.set(14, 1, (255, 230, 80))
+save(charge.image((60, 15, 15)), "item/tunnel_charge.png")
+
+scale_sprite = Sprite()
+for x in range(16):
+    for y in range(16):
+        if (x - 7.5) ** 2 / 36 + (y - 6.5) ** 2 / 30 <= 1 and y < 13:
+            ridge = (y + abs(x - 7.5) // 2) % 4 == 0
+            scale_sprite.set(x, y, (160, 110, 20) if ridge else shaded(((255, 225, 110), (212, 175, 55), (160, 110, 20), 0), x, y))
+save(scale_sprite.image((80, 50, 0)), "item/king_scale.png")
+
+
+# ---------------------------------------------------------------- blocks
+STONE, DEEPSLATE = (125, 125, 125), (72, 72, 80)
+
+
+def base_block(color, amount):
+    img = Image.new("RGBA", (16, 16))
+    for x in range(16):
+        for y in range(16):
+            img.putpixel((x, y), jitter(color, amount) + (255,))
+    return img
+
+
+def gem_ore(base, mat, seed):
+    img = base_block(base, 12 if base == STONE else 8)
+    r = random.Random(seed)
+    for _ in range(4):
+        cx, cy = r.randint(2, 13), r.randint(2, 13)
+        for dx, dy, c in ((0, 0, mat[1]), (1, 0, mat[2]), (0, 1, mat[2]), (1, 1, mat[3]), (-1, 0, mat[0]), (0, -1, mat[0])):
+            if 0 <= cx + dx < 16 and 0 <= cy + dy < 16:
+                img.putpixel((cx + dx, cy + dy), c + (255,))
+    return img
+
+
+def metal_ore(base, mat, seed):
+    img = base_block(base, 12 if base == STONE else 8)
+    r = random.Random(seed)
+    for _ in range(5):
+        cx, cy = r.randint(1, 13), r.randint(1, 13)
+        for dx in range(2):
+            for dy in range(2):
+                img.putpixel((cx + dx, cy + dy), (mat[0] if dx + dy == 0 else mat[1] if dx + dy == 1 else mat[2]) + (255,))
+    return img
+
+
+def fossil_ore(base, seed):
+    img = base_block(base, 12 if base == STONE else 8)
+    r = random.Random(seed)
+    bone = (230, 222, 196)
+    for _ in range(3):
+        cx, cy = r.randint(3, 12), r.randint(3, 12)
+        for i in range(-2, 3):
+            img.putpixel((cx + i, cy), bone + (255,))
+        for dx, dy in ((-3, -1), (-3, 1), (3, -1), (3, 1)):
+            if 0 <= cx + dx < 16 and 0 <= cy + dy < 16:
+                img.putpixel((cx + dx, cy + dy), bone + (255,))
+    return img
+
+
+def salt_ore():
+    img = base_block(STONE, 12)
+    for _ in range(22):
+        img.putpixel((rng.randint(0, 15), rng.randint(0, 15)), jitter((245, 243, 238), 10) + (255,))
+    return img
+
+
+def storage(mat, rivets=False, inlay=None):
+    img = Image.new("RGBA", (16, 16))
+    for x in range(16):
+        for y in range(16):
+            edge = x in (0, 15) or y in (0, 15)
+            c = mat[3] if edge else shaded(mat, x, y)
+            if inlay and not edge and (x + y) % 6 == 0:
+                c = inlay
+            img.putpixel((x, y), jitter(c, 5) + (255,))
+    if rivets:
+        for x, y in ((2, 2), (13, 2), (2, 13), (13, 13)):
+            img.putpixel((x, y), mat[0] + (255,))
+    return img
+
+
+save(gem_ore(STONE, MATERIALS["ruby"], 1), "block/ruby_ore.png")
+save(gem_ore(DEEPSLATE, MATERIALS["ruby"], 2), "block/deepslate_ruby_ore.png")
+save(gem_ore(STONE, MATERIALS["tanzanite"], 3), "block/tanzanite_ore.png")
+save(gem_ore(DEEPSLATE, MATERIALS["tanzanite"], 4), "block/deepslate_tanzanite_ore.png")
+save(metal_ore(STONE, MATERIALS["titanium"], 5), "block/titanium_ore.png")
+save(metal_ore(DEEPSLATE, MATERIALS["titanium"], 6), "block/deepslate_titanium_ore.png")
+save(metal_ore(STONE, MATERIALS["uranium"], 7), "block/uranium_ore.png")
+save(metal_ore(DEEPSLATE, MATERIALS["uranium"], 8), "block/deepslate_uranium_ore.png")
+save(salt_ore(), "block/salt_ore.png")
+save(fossil_ore(STONE, 9), "block/fossil_ore.png")
+save(fossil_ore(DEEPSLATE, 10), "block/deepslate_fossil_ore.png")
+save(storage(MATERIALS["ruby"]), "block/ruby_block.png")
+save(storage(MATERIALS["tanzanite"]), "block/tanzanite_block.png")
+save(storage(MATERIALS["titanium"], rivets=True), "block/titanium_block.png")
+save(storage(MATERIALS["uranium"], rivets=True), "block/uranium_block.png")
+save(storage(MATERIALS["salt"]), "block/salt_block.png")
+save(storage(MATERIALS["paragon"], inlay=(150, 60, 190)), "block/paragon_block.png")
+
+
+# ---------------------------------------------------------------- The King
+# Regions mirror the texOffs in TheKingModel.createBodyLayer().
+king = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
+eyes = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
+
+
+def scales(x0, y0, w, h, base, dark):
+    for x in range(x0, x0 + w):
+        for y in range(y0, y0 + h):
+            lx, ly = x - x0, y - y0
+            sx = (lx + (2 if (ly // 4) % 2 else 0)) % 4
+            rim = ly % 4 == 3 or (ly % 4 == 2 and sx in (0, 3))
+            king.putpixel((x, y), jitter(dark if rim else base, 8) + (255,))
+
+
+def fill(x0, y0, w, h, color, amount=6):
+    for x in range(x0, x0 + w):
+        for y in range(y0, y0 + h):
+            king.putpixel((x, y), jitter(color, amount) + (255,))
+
+
+GOLD, GOLD_DARK = (205, 160, 40), (140, 95, 15)
+BRONZE, BRONZE_DARK = (150, 95, 30), (95, 55, 10)
+CRIMSON = (150, 15, 30)
+
+scales(0, 0, 80, 40, GOLD, GOLD_DARK)              # body
+fill(40, 0, 12, 28, (235, 215, 160), 10)           # belly (bottom face)
+scales(0, 40, 32, 16, GOLD, GOLD_DARK)             # neck
+scales(32, 40, 40, 17, (190, 140, 30), BRONZE)     # head
+scales(72, 40, 34, 12, BRONZE, BRONZE_DARK)        # jaw
+fill(0, 60, 16, 7, (255, 215, 60), 15)             # crown points / spines
+fill(16, 60, 6, 4, (255, 230, 40), 0)              # eyes
+fill(0, 72, 52, 4, BRONZE_DARK, 8)                 # wing arm
+fill(0, 104, 42, 2, BRONZE_DARK, 8)                # wing tip arm
+for (x0, y0, w, h) in [(0, 80, 88, 20), (0, 108, 80, 20)]:   # wing membranes, with veins
+    fill(x0, y0, w, h, CRIMSON, 12)
+    for x in range(x0, x0 + w, 7):
+        for y in range(y0, y0 + h):
+            king.putpixel((x, y), (90, 5, 15, 255))
+scales(100, 72, 28, 14, GOLD, GOLD_DARK)           # tail
+scales(100, 90, 16, 14, BRONZE, BRONZE_DARK)       # legs
+for x in range(16, 22):
+    for y in range(60, 64):
+        eyes.putpixel((x, y), (255, 240, 80, 255))
+save(king, "entity/the_king.png")
+save(eyes, "entity/the_king_eyes.png")
+
+print("textures written to", TEX)

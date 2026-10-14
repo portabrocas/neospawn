@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_swamp",
+  "spawners": {
+    "type": "neospawn:stink_beetle",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 8
+  }
+}

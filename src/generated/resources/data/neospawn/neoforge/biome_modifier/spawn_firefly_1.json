@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_forest",
+  "spawners": {
+    "type": "neospawn:firefly",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 4
+  }
+}

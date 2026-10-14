@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_overworld",
+  "spawners": {
+    "type": "neospawn:kaboomba",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 15
+  }
+}

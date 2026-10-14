@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_flower_forest",
+  "spawners": {
+    "type": "neospawn:warbee",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 12
+  }
+}

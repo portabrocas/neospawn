@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_swamp",
+  "spawners": {
+    "type": "neospawn:snapvine",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 8
+  }
+}

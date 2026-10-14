@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_plains",
+  "spawners": {
+    "type": "neospawn:hammerhorn",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 2
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_river",
+  "spawners": {
+    "type": "neospawn:bath_duck",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 6
+  }
+}

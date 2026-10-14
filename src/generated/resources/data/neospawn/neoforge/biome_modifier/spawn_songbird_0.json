@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_forest",
+  "spawners": {
+    "type": "neospawn:songbird",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 8
+  }
+}

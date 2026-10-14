@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_savanna",
+  "spawners": {
+    "type": "neospawn:gilded_cow",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

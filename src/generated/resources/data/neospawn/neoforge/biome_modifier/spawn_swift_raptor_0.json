@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_plains",
+  "spawners": {
+    "type": "neospawn:swift_raptor",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 12
+  }
+}

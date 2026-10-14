@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_swamp",
+  "spawners": {
+    "type": "neospawn:mosquito",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 25
+  }
+}

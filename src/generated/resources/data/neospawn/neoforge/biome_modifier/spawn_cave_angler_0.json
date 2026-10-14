@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_cave",
+  "spawners": {
+    "type": "neospawn:cave_angler",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 20
+  }
+}

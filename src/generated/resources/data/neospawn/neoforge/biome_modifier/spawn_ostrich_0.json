@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_savanna",
+  "spawners": {
+    "type": "neospawn:ostrich",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 6
+  }
+}

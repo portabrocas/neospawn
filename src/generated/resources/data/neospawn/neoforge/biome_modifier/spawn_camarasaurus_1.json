@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_savanna",
+  "spawners": {
+    "type": "neospawn:camarasaurus",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 2
+  }
+}

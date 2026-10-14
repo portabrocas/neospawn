@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_forest",
+  "spawners": {
+    "type": "neospawn:burrow_lurker",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 10
+  }
+}

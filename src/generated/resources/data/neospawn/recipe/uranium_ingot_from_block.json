@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "neospawn:uranium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "neospawn:uranium_ingot"
+  }
+}

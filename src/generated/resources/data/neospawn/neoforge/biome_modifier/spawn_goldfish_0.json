@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_river",
+  "spawners": {
+    "type": "neospawn:goldfish",
+    "maxCount": 5,
+    "minCount": 2,
+    "weight": 10
+  }
+}

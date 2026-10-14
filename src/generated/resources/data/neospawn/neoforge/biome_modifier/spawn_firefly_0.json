@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_swamp",
+  "spawners": {
+    "type": "neospawn:firefly",
+    "maxCount": 6,
+    "minCount": 3,
+    "weight": 10
+  }
+}

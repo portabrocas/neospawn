@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": [
+    {
+      "item": "neospawn:raw_uranium"
+    },
+    {
+      "item": "neospawn:uranium_ore"
+    },
+    {
+      "item": "neospawn:deepslate_uranium_ore"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:uranium_ingot"
+  }
+}

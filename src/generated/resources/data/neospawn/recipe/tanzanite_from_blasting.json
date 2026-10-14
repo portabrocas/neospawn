@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": [
+    {
+      "item": "neospawn:tanzanite_ore"
+    },
+    {
+      "item": "neospawn:deepslate_tanzanite_ore"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:tanzanite"
+  }
+}

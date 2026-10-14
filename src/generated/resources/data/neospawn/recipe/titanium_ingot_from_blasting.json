@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": [
+    {
+      "item": "neospawn:raw_titanium"
+    },
+    {
+      "item": "neospawn:titanium_ore"
+    },
+    {
+      "item": "neospawn:deepslate_titanium_ore"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:titanium_ingot"
+  }
+}

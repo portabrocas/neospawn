@@ -1,0 +1,63 @@
+# NeoSpawn
+
+An original monster-and-ore mega mod for **Minecraft 1.21.1 (NeoForge)**, inspired by the
+classic 1.7.10 mega mods. All code and art here is written from scratch. Nothing is copied
+from OreSpawn's code or assets.
+
+## Running
+
+```bash
+./gradlew runClient     # launch Minecraft with the mod
+./gradlew build         # produce build/libs/neospawn-<version>.jar
+```
+
+Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
+change or remove that line on other machines.
+
+## What's in so far (v0.2)
+
+See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
+
+- **67 regular mobs**: land animals, dinosaurs, bugs, birds, fish, ghosts, End mobs and more,
+  each with natural spawns, drops, sounds and abilities (poison, fire, leaping, teleporting,
+  exploding, ranged spit, reeling players in, and others).
+- **The King**: giant flying dragon boss (1000 HP), with fireball volleys, lightning,
+  swooping bites and an enraged phase below half health.
+- **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
+  Fossilized Egg hatches a random creature.
+- **Tools**: full sets in Ruby, Tanzanite and Titanium, plus **Paragon** gear made from
+  Titanium, Uranium and Ruby. Paragon tools come pre-enchanted, and the Paragon Pickaxe
+  mines 3×3 (sneak for 1×1).
+- **Tunnel Charge**: blasts a 3×3 tunnel 32 blocks deep and keeps the ores.
+
+`/neospawn gallery` (op only) lines up every mob, frozen and labeled, for a quick look.
+
+## How mobs are built
+
+Each mob is a single `MobSpec` entry in `mob/ModMobs.java`: body plan, proportions, colors,
+stats, temperament, abilities, drops and spawn biomes. Shared code turns that into:
+
+- the entity (`NeoAnimal`, `NeoMonster`, `NeoFlyer`, `NeoSwimmer` and hostile variants)
+- a 3D model from one of 11 body plans (`client/shape/Shapes.java`), animated by `ShapeModel`
+- a texture painted at runtime (`ShapeTextures`). To replace it, drop a PNG at
+  `assets/neospawn/textures/entity/<mob_id>.png`.
+- a spawn egg, language entries and spawn rules, made by datagen
+
+Adding a mob means adding one entry, then running `./gradlew runData`.
+
+## Development commands
+
+```bash
+python3 tools/gen_textures.py   # regenerate block/item placeholder art
+./gradlew runData               # regenerate models, lang, recipes, loot, tags, spawn rules
+./gradlew runGameTestServer     # headless smoke test: spawns and ticks every mob
+./gradlew runClient             # play
+```
+
+## Roadmap
+
+1. Bosses: every 🔜 boss in docs/ROSTER.md
+2. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
+3. Paragon and King's Scale armor, and boss weapons
+4. A custom dimension with its own mobs
+5. Hand-drawn art and Blockbench models for the most important mobs

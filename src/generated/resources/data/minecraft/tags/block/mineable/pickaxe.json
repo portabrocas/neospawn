@@ -1,0 +1,21 @@
+{
+  "values": [
+    "neospawn:ruby_ore",
+    "neospawn:deepslate_ruby_ore",
+    "neospawn:tanzanite_ore",
+    "neospawn:deepslate_tanzanite_ore",
+    "neospawn:salt_ore",
+    "neospawn:fossil_ore",
+    "neospawn:deepslate_fossil_ore",
+    "neospawn:titanium_ore",
+    "neospawn:deepslate_titanium_ore",
+    "neospawn:uranium_ore",
+    "neospawn:deepslate_uranium_ore",
+    "neospawn:ruby_block",
+    "neospawn:tanzanite_block",
+    "neospawn:titanium_block",
+    "neospawn:uranium_block",
+    "neospawn:salt_block",
+    "neospawn:paragon_block"
+  ]
+}

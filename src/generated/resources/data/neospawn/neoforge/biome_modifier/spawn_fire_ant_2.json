@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_nether",
+  "spawners": {
+    "type": "neospawn:fire_ant",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 10
+  }
+}

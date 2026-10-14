@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_river",
+  "spawners": {
+    "type": "neospawn:baryonyx",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 4
+  }
+}
