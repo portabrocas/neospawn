@@ -130,6 +130,24 @@ the same with its ant mobs: right-click one to travel, right-click the same kind
 come home. The ants become harmless travel tokens (Fire Ant and Volatile Ant keep a
 hostile cousin in the overworld).
 
+**Realm charms (your idea, 2026-10-14).** In OreSpawn an ant at spawn could drop you into a
+dimension full of diamonds and skip all progression. In NeoSpawn an ant only takes you if you
+carry that realm's **charm**. The charm isn't used up; it's your pass. Each charm can be **crafted**
+or, rarely, **found** in loot chests. Each one is made from what the previous realm gives you, so the
+charms form the mod's progression:
+
+| Realm | Charm | Made from |
+|---|---|---|
+| Utopia | Verdant Charm | Emeralds, golden apple |
+| Mining Realm | Prospector's Charm | Titanium, rubies, diamond |
+| Crystal Realm | Crystal Charm | Tanzanite, amethyst, ender pearl |
+| Village Realm | Sovereign Charm | King's Scales (The King lives in Utopia) |
+| Danger Realm | Paragon Charm | Paragon ingot, Nether Star (from the Empress) |
+| Chaos Isles | Chaos Charm | Found only, in Danger Realm dungeons |
+
+Path through the mod: Overworld bosses → Utopia → The King → Village Realm → Empress →
+Danger Realm → Chaos Isles → The Ascended King. The Nether and the End are unchanged.
+
 | OreSpawn | NeoSpawn | Reached by | What's there | Status |
 |---|---|---|---|---|
 | Utopia (brown ant) | Utopia | Worker Ant | Peaceful, no hostile mobs. The Tree of Goodness with The King on top | 🔜 |

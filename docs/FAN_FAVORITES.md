@@ -74,7 +74,7 @@ these belong in the **modpack**, not in NeoSpawn. Tick the ones that are part of
 | Complaint | Where | NeoSpawn |
 |---|---|---|
 | **Wildly overpowered**: ~1000-damage swords one-shot every boss in every other mod; "you run out of things to do fast" | FTB forum | Partly addressed: weapons top out at 80 damage, bosses need real gear. Keep an eye on it |
-| An ant at spawn teleports you to a dimension full of diamonds, which skips all progression | FTB forum | Plan the dimensions so the best loot needs gear and bosses |
+| An ant at spawn teleports you to a dimension full of diamonds, which skips all progression | FTB forum | **Decided:** realm charms gate every ant dimension (docs/ROSTER.md) |
 | Breaks modpacks: plays badly with other mods | FTB forum | Keep vanilla-style tags and recipes, and test alongside the pack |
 | Bosses with thousands of health feel tedious (fans asked for The King to go from 7000 to 3000) | wiki Suggestions | Health caps at 1024; the polish pass tunes how long fights take |
 | Performance: per-tick costs from huge numbers of mobs | remake notes | Keep spawn weights sane; profile once dimensions exist |
