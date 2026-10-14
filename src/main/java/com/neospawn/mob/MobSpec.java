@@ -37,50 +37,60 @@ public final class MobSpec {
     }
 
     /**
-     * Special boss attacks. Ranges are measured from the boss's edge, so they work for any size.
+     * Special boss attacks: cooldown, range (measured from the boss's edge, so it works for any
+     * size), wind-up, recovery, and whether it lands on a locked spot.
      */
     public enum BossAttack {
-        STOMP(100, 0, 8),
-        ROAR(260, 0, 18),
-        CHARGE(160, 6, 24),
-        FIRE_BREATH(90, 3, 24),
-        LIGHTNING(140, 0, 30),
-        SUMMON(400, 0, 32),
-        BEAM(220, 4, 40),
-        LEAP_SLAM(180, 5, 18),
-        TAIL_SWIPE(70, 0, 5),
+        STOMP(100, 0, 8, 20, 10, false),
+        ROAR(260, 0, 18, 25, 15, false),
+        CHARGE(160, 6, 24, 20, 20, false),
+        FIRE_BREATH(90, 3, 24, 15, 0, false),
+        LIGHTNING(140, 0, 30, 30, 0, true),
+        SUMMON(400, 0, 32, 25, 15, false),
+        BEAM(220, 4, 40, 40, 50, true),
+        LEAP_SLAM(180, 5, 18, 20, 30, false),
+        TAIL_SWIPE(70, 0, 5, 12, 0, false),
         // Sea attacks
-        WHIRLPOOL(200, 0, 20),
-        GRAB(140, 3, 20),
-        INK(220, 0, 16),
-        TENTACLE_SLAM(90, 0, 8),
-        WAVE(120, 0, 14),
-        GEYSER(110, 0, 24),
-        TRIDENT_VOLLEY(80, 4, 28),
+        WHIRLPOOL(200, 0, 20, 25, 20, false),
+        GRAB(140, 3, 20, 15, 0, false),
+        INK(220, 0, 16, 15, 0, false),
+        TENTACLE_SLAM(90, 0, 8, 20, 10, false),
+        WAVE(120, 0, 14, 20, 10, false),
+        GEYSER(110, 0, 24, 25, 0, true),
+        TRIDENT_VOLLEY(80, 4, 28, 15, 0, false),
         // Sky attacks
-        SWOOP(140, 4, 40),
-        FIREBALL_VOLLEY(50, 0, 40),
-        WIND_GUST(160, 0, 24),
-        METEOR_SHOWER(260, 0, 40),
-        SPORE_CLOUD(180, 0, 30),
+        SWOOP(140, 4, 40, 15, 25, false),
+        FIREBALL_VOLLEY(50, 0, 40, 10, 0, false),
+        WIND_GUST(160, 0, 24, 20, 10, false),
+        METEOR_SHOWER(260, 0, 40, 35, 30, true),
+        SPORE_CLOUD(180, 0, 30, 25, 0, true),
         // Bug attacks
-        SCYTHE(60, 0, 6),
-        STING(120, 0, 8),
-        TOSS(100, 0, 5),
-        ACID_SPRAY(90, 3, 20),
+        SCYTHE(60, 0, 6, 12, 0, false),
+        STING(120, 0, 8, 15, 0, false),
+        TOSS(100, 0, 5, 15, 0, false),
+        ACID_SPRAY(90, 3, 20, 15, 0, false),
         // Specialist attacks
-        GAZE(160, 0, 24),
-        BURROW(240, 3, 30),
-        BLINK(140, 4, 30),
-        SNIPE(70, 8, 48);
+        GAZE(160, 0, 24, 30, 0, false),
+        BURROW(240, 3, 30, 15, 30, false),
+        BLINK(140, 4, 30, 10, 10, false),
+        SNIPE(70, 8, 48, 30, 0, false);
 
         public final int cooldown;
         public final double minRange, maxRange;
+        /** Ticks of visible, audible warning before the attack lands. */
+        public final int windup;
+        /** Ticks the boss stands stunned afterwards, taking extra damage. */
+        public final int recovery;
+        /** Locks onto where the target stood when the wind-up began, so it can be dodged. */
+        public final boolean aimed;
 
-        BossAttack(int cooldown, double minRange, double maxRange) {
+        BossAttack(int cooldown, double minRange, double maxRange, int windup, int recovery, boolean aimed) {
             this.cooldown = cooldown;
             this.minRange = minRange;
             this.maxRange = maxRange;
+            this.windup = windup;
+            this.recovery = recovery;
+            this.aimed = aimed;
         }
     }
 

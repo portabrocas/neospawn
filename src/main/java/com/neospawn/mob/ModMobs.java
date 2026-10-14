@@ -417,7 +417,7 @@ public final class ModMobs {
                 .egg(0xB86A2A, 0xF2E8D8).dayActive().spawn("c:is_savanna", 1, 1, 1).spawn("c:is_badlands", 1, 1, 1);
         boss("gorgantua", "Gorgantua", look(Family.HUMANOID).body(0, 16, 20).leg(16).head(10).snout(6).tail(28)
                 .with(Extra.PLATES).colors(0x3A4A3A, 0x23302A, 0x8AE8F8).eye(0xFFE84A).pattern(Pattern.SCALES).glow().scale(4.0f))
-                .size(5.0f, 11.5f).stats(1024, 34, 0.26).armor(20).damageTaken(0.5f).voice(Voice.BIG_DINO).xp(2000)
+                .size(5.0f, 11.5f).stats(1024, 34, 0.26).armor(20).damageTaken(0.6f).voice(Voice.BIG_DINO).xp(2000)
                 .smashesBlocks().stepHeight(3.0).bar(BossEvent.BossBarColor.BLUE)
                 .attacks(BossAttack.BEAM, BossAttack.STOMP, BossAttack.TAIL_SWIPE, BossAttack.ROAR, BossAttack.FIRE_BREATH)
                 .drop(ModItems.TITAN_CLEAVER, 1, 1).drop(ModItems.PARAGON_INGOT, 2, 4).drop(v(Items.DIAMOND), 6, 12)
@@ -425,7 +425,7 @@ public final class ModMobs {
 
         // The final boss, summoned with a Royal Sigil. A bigger, platinum King (same hand-built model).
         skyBoss("the_ascended_king", "The Ascended King", look(Family.QUADRUPED))
-                .customRenderer().size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.25f)
+                .customRenderer().size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.5f)
                 .voice(Voice.DRAGON).xp(5000).minion("snapwyrm").bar(BossEvent.BossBarColor.PURPLE)
                 .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.METEOR_SHOWER,
                         BossAttack.BEAM, BossAttack.WIND_GUST, BossAttack.SUMMON)
@@ -466,7 +466,7 @@ public final class ModMobs {
         skyBoss("empress", "The Empress", look(Family.QUADRUPED).body(28, 14, 14).leg(10).neck(16).head(9).snout(5).tail(34).wing(44)
                 .with(Extra.HORNS, Extra.CREST, Extra.SPIKES).colors(0x7A3AB8, 0x3AB8C8, 0xF2A8E8).eye(0xFFF2A8)
                 .pattern(Pattern.SCALES).glow().scale(3.0f))
-                .size(7.0f, 6.0f).stats(1024, 30, 0.3).flySpeed(0.65).armor(18).damageTaken(0.5f).voice(Voice.DRAGON).xp(2500)
+                .size(7.0f, 6.0f).stats(1024, 30, 0.3).flySpeed(0.65).armor(18).damageTaken(0.6f).voice(Voice.DRAGON).xp(2500)
                 .bar(BossEvent.BossBarColor.PINK)
                 .attacks(BossAttack.BEAM, BossAttack.METEOR_SHOWER, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.FIREBALL_VOLLEY)
                 .drop(ModItems.EMPRESS_BATTLEAXE, 1, 1).drop(ModItems.PARAGON_INGOT, 3, 6).drop(v(Items.NETHER_STAR), 1, 1)
@@ -573,7 +573,7 @@ public final class ModMobs {
         seaBoss("leviathan", "Leviathan", look(Family.FISH).body(48, 16, 18).tail(14)
                 .with(Extra.DORSAL, Extra.FLAT).colors(0x1E3A4A, 0x0E1E2A, 0x5AF2E8).eye(0x5AF2E8).belly(0x8AB8C8)
                 .pattern(Pattern.SCALES).glow().scale(3.0f))
-                .size(5.0f, 3.5f).stats(1024, 28, 1.1).armor(16).damageTaken(0.6f).voice(Voice.WHALE).xp(1200)
+                .size(5.0f, 3.5f).stats(1024, 28, 1.1).armor(16).damageTaken(0.7f).voice(Voice.WHALE).xp(1200)
                 .bar(BossEvent.BossBarColor.BLUE)
                 .attacks(BossAttack.LEAP_SLAM, BossAttack.WAVE, BossAttack.LIGHTNING, BossAttack.WHIRLPOOL)
                 .drop(ModItems.TIDEBREAKER, 1, 1).drop(v(Items.HEART_OF_THE_SEA), 1, 1).drop(v(Items.PRISMARINE_CRYSTALS), 8, 16)

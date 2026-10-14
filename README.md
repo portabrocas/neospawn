@@ -14,7 +14,7 @@ from OreSpawn's code or assets.
 Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
 change or remove that line on other machines.
 
-## What's in so far (v0.7)
+## What's in so far (v0.8)
 
 See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
 
@@ -41,6 +41,9 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
 - **The Ascended King**: the final boss, a giant platinum King with seven attacks. Summon it
   with a Royal Sigil (King's Scales, a Nether Star and a Block of Paragon).
 - **Armor**: King's Scale and Paragon sets, with full-set potion bonuses.
+- **Readable boss fights**: every attack is telegraphed first; attacks that land on a spot lock onto
+  where you stood, so you can dodge; bosses follow attack patterns, change phase at 50% and 25%
+  health, and are stunned (taking extra damage) after big attacks. See docs/BOSS_POLISH.md.
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.
 - **Tools**: full sets in Ruby, Tanzanite and Titanium, plus **Paragon** gear made from
@@ -74,13 +77,13 @@ way: give the spec `Kind.BOSS` and a list of attacks (`STOMP`, `ROAR`, `CHARGE`,
 ```bash
 python3 tools/gen_textures.py   # regenerate block/item placeholder art
 ./gradlew runData               # regenerate models, lang, recipes, loot, tags, spawn rules
-./gradlew runGameTestServer     # 58 headless tests: every mob, every item, and each boss hunts and fights
+./gradlew runGameTestServer     # 62 headless tests: every mob, every item, each boss, and the combat rules
 ./gradlew runClient             # play
 ```
 
 ## Roadmap
 
-1. The combat polish pass in docs/BOSS_POLISH.md
-2. The six dimensions (docs/ROSTER.md): Utopia, Mining, Village, Danger and Crystal Realms, Chaos Isles
+1. The six dimensions (docs/ROSTER.md): Utopia, Mining, Village, Danger and Crystal Realms, Chaos Isles
+2. Your picks from docs/FAN_FAVORITES.md
 3. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
 4. Hand-drawn art and Blockbench models for the most important mobs

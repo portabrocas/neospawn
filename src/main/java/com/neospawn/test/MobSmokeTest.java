@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
@@ -74,6 +75,64 @@ public class MobSmokeTest {
         }
         NeoSpawn.LOGGER.info("Item test: {} items load their stats", count);
         helper.succeed();
+    }
+
+    /** An aimed attack lands where the target stood when the wind-up began: standing still gets you hit. */
+    @GameTest(template = "arena", timeoutTicks = 100, batch = "rules_aim_hit")
+    public static void aimedAttackHitsTargetThatStays(GameTestHelper helper) {
+        aimTest(helper, false);
+    }
+
+    /** ...and moving away during the wind-up dodges it. */
+    @GameTest(template = "arena", timeoutTicks = 100, batch = "rules_aim_dodge")
+    public static void aimedAttackMissesTargetThatMoves(GameTestHelper helper) {
+        aimTest(helper, true);
+    }
+
+    private static void aimTest(GameTestHelper helper, boolean dodge) {
+        NeoBoss boss = (NeoBoss) helper.spawn(ModMobs.byId("dread_steed").type.get(), new BlockPos(4, 2, 20));
+        Pig pig = helper.spawn(EntityType.PIG, new BlockPos(12, 2, 8));
+        boss.forceWindup(MobSpec.BossAttack.LIGHTNING, pig);
+        if (dodge) {
+            pig.moveTo(helper.absoluteVec(new Vec3(20.5, 2, 20.5)));
+        }
+        helper.runAfterDelay(36, () -> {
+            helper.assertTrue(boss.usedAttacks().contains(MobSpec.BossAttack.LIGHTNING), "lightning never fired");
+            boolean hurt = pig.getHealth() < pig.getMaxHealth() || pig.isOnFire() || !pig.isAlive();
+            helper.assertTrue(hurt != dodge, dodge ? "the pig moved away but was still hit" : "the pig stood still but was not hit");
+            helper.killAllEntities();
+            helper.succeed();
+        });
+    }
+
+    /** Big attacks leave the boss stunned (and taking extra damage) right after they land. */
+    @GameTest(template = "arena", timeoutTicks = 100, batch = "rules_recovery")
+    public static void bossIsStunnedAfterBeam(GameTestHelper helper) {
+        NeoBoss boss = (NeoBoss) helper.spawn(ModMobs.byId("gorgantua").type.get(), new BlockPos(12, 2, 18));
+        IronGolem golem = helper.spawn(EntityType.IRON_GOLEM, new BlockPos(12, 2, 3));
+        golem.setInvulnerable(true);
+        boss.forceWindup(MobSpec.BossAttack.BEAM, golem);
+        helper.runAfterDelay(44, () -> {
+            helper.assertTrue(boss.usedAttacks().contains(MobSpec.BossAttack.BEAM), "beam never fired");
+            helper.assertTrue(boss.isRecovering(), "gorgantua is not stunned after its beam");
+            helper.killAllEntities();
+            helper.succeed();
+        });
+    }
+
+    /** Dropping below 25% health triggers the last phase: a brief invulnerable roar. */
+    @GameTest(template = "arena", timeoutTicks = 100, batch = "rules_phase")
+    public static void lowHealthTriggersFinalPhase(GameTestHelper helper) {
+        NeoBoss boss = (NeoBoss) helper.spawn(ModMobs.byId("tyrannosaurus").type.get(), new BlockPos(12, 2, 12));
+        boss.setHealth(boss.getMaxHealth() * 0.2f);
+        helper.runAfterDelay(3, () -> {
+            helper.assertTrue(boss.phase() == 3, "expected phase 3, got " + boss.phase());
+            float before = boss.getHealth();
+            boss.hurt(helper.getLevel().damageSources().generic(), 20);
+            helper.assertTrue(boss.getHealth() == before, "boss took damage during its phase-change roar");
+            helper.killAllEntities();
+            helper.succeed();
+        });
     }
 
     /**

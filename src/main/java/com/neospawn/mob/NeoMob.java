@@ -24,16 +24,21 @@ import java.util.List;
 public interface NeoMob {
     MobSpec spec();
 
+    double BOSS_ARMOR_CAP = 12;
+
     static AttributeSupplier.Builder attributes(MobSpec spec) {
         boolean big = spec.hitboxWidth >= 1.5f || spec.isBoss();
+        // Boss armor is capped: vanilla armor scales badly against big hits and made bosses near-immune to
+        // ordinary swords. A boss's toughness comes from health and damageTaken instead (see docs/BOSS_POLISH.md).
+        double armor = spec.isBoss() ? Math.min(spec.armor, BOSS_ARMOR_CAP) : spec.armor;
         return Mob.createMobAttributes()
                 .add(Attributes.STEP_HEIGHT, spec.stepHeight)
-                .add(Attributes.ARMOR_TOUGHNESS, spec.isBoss() ? spec.armor / 2 : 0)
+                .add(Attributes.ARMOR_TOUGHNESS, spec.isBoss() ? 2 : 0)
                 .add(Attributes.MAX_HEALTH, spec.health)
                 .add(Attributes.MOVEMENT_SPEED, spec.speed)
                 .add(Attributes.ATTACK_DAMAGE, Math.max(spec.damage, 0.5))
                 .add(Attributes.ATTACK_KNOCKBACK, spec.damage >= 10 ? 2.0 : 0.0)
-                .add(Attributes.ARMOR, spec.armor)
+                .add(Attributes.ARMOR, armor)
                 .add(Attributes.FOLLOW_RANGE, spec.followRange)
                 .add(Attributes.FLYING_SPEED, spec.flySpeed)
                 .add(Attributes.KNOCKBACK_RESISTANCE, big || spec.has(Ability.ROOTED) ? 1.0 : 0.0);

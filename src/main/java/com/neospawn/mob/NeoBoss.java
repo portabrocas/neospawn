@@ -3,6 +3,7 @@ package com.neospawn.mob;
 import com.neospawn.mob.MobSpec.BossAttack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -71,10 +72,19 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * A boss. Its spec lists which special attacks it knows; this class schedules them (one
- * at a time, with cooldowns) on top of normal melee. Below half health it enrages and
- * everything recharges twice as fast. Sea bosses swim and breathe water; sky bosses
- * circle their target from above, swoop in to bite, and phase through terrain.
+ * A boss. Its spec lists which special attacks it knows. The fight follows readable rules:
+ * <ul>
+ *   <li><b>Rotation.</b> Attacks come in the order the spec lists them, skipping any that are
+ *       out of range or recharging; a tail swipe interrupts if you get behind it.</li>
+ *   <li><b>Wind-up.</b> Every attack is telegraphed with sound and particles first. Attacks that
+ *       land on a spot lock onto where you stood when the wind-up began, so you can dodge.</li>
+ *   <li><b>Recovery.</b> Big attacks leave it stunned for a moment, taking 50% extra damage. Flying
+ *       bosses sink within sword reach.</li>
+ *   <li><b>Phases.</b> At 50% and 25% health it roars, blasts everyone back, and speeds up. In the
+ *       last phase it sometimes chains attacks.</li>
+ * </ul>
+ * Sea bosses swim and breathe water; sky bosses circle their target from above, swoop in to
+ * bite, and phase through terrain.
  */
 public class NeoBoss extends Monster implements NeoMob {
     private static final EntityDataAccessor<Boolean> ENRAGED =
@@ -86,6 +96,14 @@ public class NeoBoss extends Monster implements NeoMob {
     private final Map<BossAttack, Integer> cooldowns = new EnumMap<>(BossAttack.class);
     private int globalCooldown = 60;
     private boolean enraged;
+    private int phase = 1;
+    private int transitionTicks;
+    private int rotation;
+    @Nullable private BossAttack pendingAttack;
+    private int windupTicks;
+    private Vec3 aimPos = Vec3.ZERO;
+    private int recoverTicks;
+    private boolean chargeHit;
 
     private int chargeTicks;
     private Vec3 chargeDirection = Vec3.ZERO;
@@ -226,12 +244,7 @@ public class NeoBoss extends Monster implements NeoMob {
             setAirSupply(getMaxAirSupply());
         }
 
-        if (!enraged && getHealth() < getMaxHealth() / 2) {
-            setEnraged(true);
-            playSound(SoundEvents.RAVAGER_ROAR, 6.0f, 0.5f);
-            bossEvent.setColor(BossEvent.BossBarColor.RED);
-            globalCooldown = 0;
-        }
+        updatePhase();
         if (spec().smashesBlocks && horizontalCollision && tickCount % 5 == 0) {
             smashBlocks();
         }
@@ -251,33 +264,241 @@ public class NeoBoss extends Monster implements NeoMob {
         if (spec().isSkyBoss()) {
             skyMovement(target);
         }
-        if (target == null || !target.isAlive() || --globalCooldown > 0 || isBusy()) {
+        if (transitionTicks > 0) {
+            transitionTicks--;
+            holdStill();
             return;
         }
+        if (windupTicks > 0) {
+            windupTicks--;
+            telegraph(pendingAttack);
+            if (pendingAttack != BossAttack.SWOOP || !spec().isSkyBoss()) {
+                holdStill();
+            }
+            if (target != null) {
+                faceTowards(target);
+            }
+            if (windupTicks == 0) {
+                release(target);
+            }
+            return;
+        }
+        if (recoverTicks > 0) {
+            recoverTicks--;
+            holdStill();
+            if (recoverTicks % 4 == 0) {
+                ((ServerLevel) level()).sendParticles(ParticleTypes.CRIT, getX(), getY() + getBbHeight(), getZ(),
+                        6, getBbWidth() / 3, 0.3, getBbWidth() / 3, 0.1);
+            }
+            return;
+        }
+        if (target == null || --globalCooldown > 0 || isBusy()) {
+            return;
+        }
+        BossAttack attack = chooseAttack(target);
+        if (attack != null) {
+            startWindup(attack, target);
+        }
+    }
+
+    // ------------------------------------------------------------------ fight structure
+
+    public int phase() {
+        return phase;
+    }
+
+    /** Starts a specific attack's wind-up right now. Used by the GameTests. */
+    public void forceWindup(BossAttack attack, LivingEntity target) {
+        setTarget(target);
+        startWindup(attack, target);
+    }
+
+    public boolean isRecovering() {
+        return recoverTicks > 0;
+    }
+
+    @Nullable
+    public BossAttack windingUp() {
+        return windupTicks > 0 ? pendingAttack : null;
+    }
+
+    /** 50% and 25% health are phase changes: a roar, a shockwave, a moment of invulnerability, then faster. */
+    private void updatePhase() {
+        float fraction = getHealth() / getMaxHealth();
+        int newPhase = fraction < 0.25f ? 3 : fraction < 0.5f ? 2 : 1;
+        if (newPhase <= phase) {
+            return;
+        }
+        phase = newPhase;
+        setEnraged(true);
+        bossEvent.setColor(BossEvent.BossBarColor.RED);
+        windupTicks = 0;
+        pendingAttack = null;
+        recoverTicks = 0;
+        transitionTicks = 30;
+        globalCooldown = 10;
+        playSound(SoundEvents.RAVAGER_ROAR, 8.0f, phase == 3 ? 0.4f : 0.5f);
+        ServerLevel level = (ServerLevel) level();
+        level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, getX(), getY() + getBbHeight() / 2, getZ(), 1, 0, 0, 0, 0);
+        level.sendParticles(ParticleTypes.SONIC_BOOM, getX(), getEyeY(), getZ(), 1, 0, 0, 0, 0);
+        for (LivingEntity victim : victims(16)) {
+            Vec3 away = victim.position().subtract(position()).normalize();
+            victim.push(away.x * 2.0, 0.5, away.z * 2.0);
+            victim.hurtMarked = true;
+        }
+    }
+
+    private float windupScale() {
+        return phase == 3 ? 0.55f : phase == 2 ? 0.75f : 1.0f;
+    }
+
+    /** The next attack in the spec's order that is in range and recharged. A tail swipe cuts in if you're behind it. */
+    @Nullable
+    private BossAttack chooseAttack(LivingEntity target) {
         double distance = Math.max(0, distanceTo(target) - getBbWidth() / 2);
-        List<BossAttack> ready = new ArrayList<>();
-        for (BossAttack attack : spec().attacks) {
-            if (cooldowns.getOrDefault(attack, 0) == 0 && distance >= attack.minRange && distance <= attack.maxRange) {
-                ready.add(attack);
+        List<BossAttack> attacks = spec().attacks;
+        if (attacks.contains(BossAttack.TAIL_SWIPE) && canUse(BossAttack.TAIL_SWIPE, target, distance) && isBehind(target)) {
+            return BossAttack.TAIL_SWIPE;
+        }
+        for (int i = 0; i < attacks.size(); i++) {
+            BossAttack attack = attacks.get((rotation + i) % attacks.size());
+            if (canUse(attack, target, distance)) {
+                rotation = (rotation + i + 1) % attacks.size();
+                return attack;
             }
         }
-        if (ready.isEmpty()) {
+        return null;
+    }
+
+    private boolean canUse(BossAttack attack, LivingEntity target, double distance) {
+        if (cooldowns.getOrDefault(attack, 0) > 0 || distance < attack.minRange || distance > attack.maxRange) {
+            return false;
+        }
+        return switch (attack) {
+            case LEAP_SLAM -> onGround() || isInWater();
+            case SUMMON -> minionsNearby() < 6;
+            default -> true;
+        };
+    }
+
+    private boolean isBehind(LivingEntity target) {
+        Vec3 forward = Vec3.directionFromRotation(0, getYRot());
+        Vec3 to = target.position().subtract(position()).normalize();
+        return forward.x * to.x + forward.z * to.z < -0.3;
+    }
+
+    private void startWindup(BossAttack attack, LivingEntity target) {
+        pendingAttack = attack;
+        windupTicks = Math.max(4, (int) (attack.windup * windupScale()));
+        aimPos = target.position();
+        swing(InteractionHand.MAIN_HAND);
+        cue(attack, target);
+    }
+
+    private void release(@Nullable LivingEntity target) {
+        BossAttack attack = pendingAttack;
+        pendingAttack = null;
+        if (attack == null || target == null || !target.isAlive()) {
             return;
         }
-        BossAttack attack = ready.get(random.nextInt(ready.size()));
-        perform(attack, target);
+        chargeHit = false;
+        perform(attack, target, attack.aimed ? aimPos : target.position());
         usedAttacks.add(attack);
-        cooldowns.put(attack, enraged ? attack.cooldown / 2 : attack.cooldown);
-        globalCooldown = enraged ? 25 : 45;
         swing(InteractionHand.MAIN_HAND);
+        int cooldown = phase == 3 ? attack.cooldown / 3 : phase == 2 ? attack.cooldown / 2 : attack.cooldown;
+        cooldowns.put(attack, cooldown);
+        recoverTicks = attack == BossAttack.CHARGE ? 0 : attack.recovery;
+        // Last phase: sometimes chains straight into the next attack.
+        globalCooldown = phase == 3 ? (random.nextFloat() < 0.4f ? 4 : 18) : phase == 2 ? 25 : 45;
+    }
+
+    /** Stands its ground while winding up or recovering. Sky bosses keep flying. */
+    private void holdStill() {
+        if (spec().isSkyBoss()) {
+            return;
+        }
+        getNavigation().stop();
+        setDeltaMovement(0, getDeltaMovement().y, 0);
+    }
+
+    private int minionsNearby() {
+        MobSpec minion = spec().minion == null ? null : ModMobs.byId(spec().minion);
+        if (minion == null) {
+            return Integer.MAX_VALUE;
+        }
+        return level().getEntities(minion.type.get(), getBoundingBox().inflate(32), Entity::isAlive).size();
+    }
+
+    // ------------------------------------------------------------------ telegraphs
+
+    /** The sound at the start of a wind-up, so you hear what's coming. */
+    private void cue(BossAttack attack, LivingEntity target) {
+        switch (attack) {
+            case BEAM -> playSound(SoundEvents.WARDEN_SONIC_CHARGE, 6.0f, 0.6f);
+            case GAZE -> playSound(SoundEvents.ELDER_GUARDIAN_CURSE, 4.0f, 1.2f);
+            case LIGHTNING -> playSound(SoundEvents.BEACON_POWER_SELECT, 4.0f, 0.5f);
+            case METEOR_SHOWER -> playSound(SoundEvents.FIRECHARGE_USE, 6.0f, 0.4f);
+            case SNIPE -> {
+                playSound(SoundEvents.CROSSBOW_LOADING_START.value(), 4.0f, 0.5f);
+                target.addEffect(new MobEffectInstance(MobEffects.GLOWING, windupTicks + 20, 0), this);
+            }
+            case GEYSER, WHIRLPOOL, WAVE -> playSound(SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, 4.0f, 0.5f);
+            case SPORE_CLOUD -> playSound(SoundEvents.SPORE_BLOSSOM_BREAK, 4.0f, 0.5f);
+            default -> playSound(spec().isSkyBoss() ? SoundEvents.ENDER_DRAGON_GROWL : SoundEvents.RAVAGER_ROAR,
+                    2.5f, 1.3f + random.nextFloat() * 0.2f);
+        }
+    }
+
+    /** Particles every other tick of the wind-up: on the target spot for aimed attacks, around the boss otherwise. */
+    private void telegraph(@Nullable BossAttack attack) {
+        if (attack == null || windupTicks % 2 != 0) {
+            return;
+        }
+        ServerLevel level = (ServerLevel) level();
+        switch (attack) {
+            case LIGHTNING -> ring(aimPos, 3, ParticleTypes.ELECTRIC_SPARK);
+            case METEOR_SHOWER -> {
+                ring(aimPos, 8, ParticleTypes.FLAME);
+                ring(aimPos, 4, ParticleTypes.FLAME);
+            }
+            case GEYSER -> {
+                ring(aimPos, 2.5, ParticleTypes.SPLASH);
+                level.sendParticles(ParticleTypes.BUBBLE_COLUMN_UP, aimPos.x, aimPos.y + 0.2, aimPos.z, 8, 0.5, 0.1, 0.5, 0.05);
+            }
+            case SPORE_CLOUD -> ring(aimPos, 5, ParticleTypes.SPORE_BLOSSOM_AIR);
+            case BEAM -> {
+                Vec3 mouth = mouth();
+                Vec3 to = aimPos.subtract(mouth);
+                for (double t = 0; t < 1; t += 0.1) {
+                    Vec3 p = mouth.add(to.scale(t));
+                    level.sendParticles(ParticleTypes.SOUL, p.x, p.y, p.z, 1, 0.05, 0.05, 0.05, 0);
+                }
+                level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, mouth.x, mouth.y, mouth.z, 10, 0.5, 0.5, 0.5, 0.02);
+            }
+            case GAZE -> level.sendParticles(ParticleTypes.END_ROD, getX(), getEyeY(), getZ(), 8, 0.4, 0.2, 0.4, 0.05);
+            case STOMP, LEAP_SLAM, CHARGE, TAIL_SWIPE, TOSS, BURROW, TENTACLE_SLAM ->
+                    ring(position(), getBbWidth() / 2 + 1, ParticleTypes.POOF);
+            default -> level.sendParticles(ParticleTypes.LARGE_SMOKE, getX(), getY() + getBbHeight() * 0.7, getZ(),
+                    3, getBbWidth() / 3, 0.3, getBbWidth() / 3, 0.01);
+        }
+    }
+
+    private void ring(Vec3 center, double radius, SimpleParticleType particle) {
+        ServerLevel level = (ServerLevel) level();
+        for (int i = 0; i < 16; i++) {
+            double angle = i * Math.PI / 8;
+            level.sendParticles(particle, center.x + Math.cos(angle) * radius, center.y + 0.2, center.z + Math.sin(angle) * radius,
+                    1, 0, 0.05, 0, 0);
+        }
     }
 
     private boolean isBusy() {
         return chargeTicks > 0 || leapTicks > 0 || beamTicks > 0 || whirlpoolTicks > 0 || grabTicks > 0 || swoopTicks > 0
-                || burrowTicks > 0;
+                || burrowTicks > 0 || windupTicks > 0 || recoverTicks > 0 || transitionTicks > 0;
     }
 
-    private void perform(BossAttack attack, LivingEntity target) {
+    /** Fires an attack. {@code aim} is the locked spot for aimed attacks, otherwise where the target is now. */
+    private void perform(BossAttack attack, LivingEntity target, Vec3 aim) {
         switch (attack) {
             case STOMP -> stomp(6 + getBbWidth() / 2, 0.6f, true);
             case ROAR -> roar();
@@ -288,15 +509,16 @@ public class NeoBoss extends Monster implements NeoMob {
             }
             case FIRE_BREATH -> fireBreath(target);
             case LIGHTNING -> {
-                for (int i = 0; i < (enraged ? 3 : 1); i++) {
-                    lightning(target.blockPosition().offset(random.nextInt(7) - 3, 0, random.nextInt(7) - 3));
+                lightning(BlockPos.containing(aim));
+                for (int i = 1; i < (enraged ? 3 : 1); i++) {
+                    lightning(BlockPos.containing(aim).offset(random.nextInt(7) - 3, 0, random.nextInt(7) - 3));
                 }
             }
             case SUMMON -> summon(target);
             case BEAM -> {
                 beamTicks = 40;
-                beamTarget = target.position();
-                playSound(SoundEvents.WARDEN_SONIC_CHARGE, 6.0f, 0.6f);
+                beamTarget = aim;
+                playSound(SoundEvents.WARDEN_SONIC_BOOM, 6.0f, 0.6f);
             }
             case LEAP_SLAM -> {
                 // Sea bosses breach out of the water instead of jumping off the ground.
@@ -321,7 +543,7 @@ public class NeoBoss extends Monster implements NeoMob {
             case INK -> ink();
             case TENTACLE_SLAM -> stomp(8 + getBbWidth() / 2, 0.8f, false);
             case WAVE -> wave();
-            case GEYSER -> geyser(target);
+            case GEYSER -> geyser(aim);
             case TRIDENT_VOLLEY -> tridentVolley(target);
             case SWOOP -> {
                 swoopTicks = 50;
@@ -329,8 +551,8 @@ public class NeoBoss extends Monster implements NeoMob {
             }
             case FIREBALL_VOLLEY -> fireballVolley(target);
             case WIND_GUST -> windGust();
-            case METEOR_SHOWER -> meteorShower(target);
-            case SPORE_CLOUD -> sporeCloud(target);
+            case METEOR_SHOWER -> meteorShower(aim);
+            case SPORE_CLOUD -> sporeCloud(aim);
             case SCYTHE -> scythe();
             case STING -> sting(target);
             case TOSS -> toss(target);
@@ -401,9 +623,15 @@ public class NeoBoss extends Monster implements NeoMob {
             victim.push(chargeDirection.x * 2, 0.6, chargeDirection.z * 2);
             victim.hurtMarked = true;
             chargeTicks = 0;
+            chargeHit = true;
         }
         if (horizontalCollision && !spec().smashesBlocks) {
             chargeTicks = 0;
+        }
+        if (chargeTicks == 0 && !chargeHit) {
+            // Missed, or ran into a wall: dazed for two seconds.
+            recoverTicks = 40;
+            playSound(SoundEvents.RAVAGER_STUNNED, 4.0f, 0.8f);
         }
     }
 
@@ -502,6 +730,13 @@ public class NeoBoss extends Monster implements NeoMob {
             faceDirection(getDeltaMovement());
             return;
         }
+        if (recoverTicks > 0) {
+            // Stunned: sinks to just above the ground near the target, within sword reach.
+            Vec3 low = new Vec3(getX(), target.getY() + 1.5, getZ());
+            steerTowards(low, flySpeed * 0.4);
+            faceDirection(target.position().subtract(position()));
+            return;
+        }
         Vec3 goal;
         if (swoopTicks > 0) {
             swoopTicks--;
@@ -576,27 +811,27 @@ public class NeoBoss extends Monster implements NeoMob {
     }
 
     /** Rains explosive fireballs down around the target. */
-    private void meteorShower(LivingEntity target) {
+    private void meteorShower(Vec3 aim) {
         playSound(SoundEvents.ENDER_DRAGON_GROWL, 6.0f, 0.6f);
         for (int i = 0; i < (enraged ? 10 : 6); i++) {
-            double x = target.getX() + (random.nextDouble() - 0.5) * 16;
-            double z = target.getZ() + (random.nextDouble() - 0.5) * 16;
+            double x = aim.x + (random.nextDouble() - 0.5) * 16;
+            double z = aim.z + (random.nextDouble() - 0.5) * 16;
             Vec3 down = new Vec3(random.nextGaussian() * 0.05, -1, random.nextGaussian() * 0.05);
             LargeFireball meteor = new LargeFireball(level(), this, down, 1);
-            meteor.setPos(x, target.getY() + 24 + random.nextInt(8), z);
+            meteor.setPos(x, aim.y + 24 + random.nextInt(8), z);
             level().addFreshEntity(meteor);
         }
     }
 
     /** Drops lingering clouds of poisonous, dizzying spores on the target. */
-    private void sporeCloud(LivingEntity target) {
+    private void sporeCloud(Vec3 aim) {
         playSound(SoundEvents.SPORE_BLOSSOM_PLACE, 4.0f, 0.5f);
         int clouds = enraged ? 3 : 1;
         for (int i = 0; i < clouds; i++) {
             double offset = i == 0 ? 0 : 6;
             double angle = random.nextDouble() * Math.PI * 2;
-            AreaEffectCloud cloud = new AreaEffectCloud(level(), target.getX() + Math.cos(angle) * offset, target.getY(),
-                    target.getZ() + Math.sin(angle) * offset);
+            AreaEffectCloud cloud = new AreaEffectCloud(level(), aim.x + Math.cos(angle) * offset, aim.y,
+                    aim.z + Math.sin(angle) * offset);
             cloud.setOwner(this);
             cloud.setRadius(5.0f);
             cloud.setRadiusPerTick(-0.01f);
@@ -817,19 +1052,24 @@ public class NeoBoss extends Monster implements NeoMob {
         }
     }
 
-    /** Erupts a column of water under the target and every other nearby player when enraged. */
-    private void geyser(LivingEntity target) {
-        List<LivingEntity> hits = new ArrayList<>(List.of(target));
+    /** Erupts a column of water at the locked spot (and two more nearby when enraged), launching anyone standing on one. */
+    private void geyser(Vec3 aim) {
+        List<Vec3> spots = new ArrayList<>(List.of(aim));
         if (enraged) {
-            hits.addAll(level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(24), p -> p != target && p.isAlive()));
+            for (int i = 0; i < 2; i++) {
+                spots.add(aim.add((random.nextDouble() - 0.5) * 10, 0, (random.nextDouble() - 0.5) * 10));
+            }
         }
         ServerLevel level = (ServerLevel) level();
-        for (LivingEntity victim : hits) {
-            level.sendParticles(ParticleTypes.CLOUD, victim.getX(), victim.getY(), victim.getZ(), 40, 0.4, 2.5, 0.4, 0.05);
-            level.sendParticles(ParticleTypes.SPLASH, victim.getX(), victim.getY() + 1, victim.getZ(), 60, 0.6, 2.0, 0.6, 0.3);
-            victim.hurt(damageSources().mobAttack(this), damage() * 0.5f);
-            victim.setDeltaMovement(victim.getDeltaMovement().x, 1.6, victim.getDeltaMovement().z);
-            victim.hurtMarked = true;
+        for (Vec3 spot : spots) {
+            level.sendParticles(ParticleTypes.CLOUD, spot.x, spot.y, spot.z, 40, 0.4, 2.5, 0.4, 0.05);
+            level.sendParticles(ParticleTypes.SPLASH, spot.x, spot.y + 1, spot.z, 60, 0.6, 2.0, 0.6, 0.3);
+            AABB column = new AABB(spot.x - 2.5, spot.y - 1, spot.z - 2.5, spot.x + 2.5, spot.y + 4, spot.z + 2.5);
+            for (LivingEntity victim : level.getEntitiesOfClass(LivingEntity.class, column, e -> e != this && !(e instanceof NeoBoss))) {
+                victim.hurt(damageSources().mobAttack(this), damage() * 0.5f);
+                victim.setDeltaMovement(victim.getDeltaMovement().x, 1.6, victim.getDeltaMovement().z);
+                victim.hurtMarked = true;
+            }
         }
         playSound(SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, 5.0f, 0.6f);
     }
@@ -882,7 +1122,10 @@ public class NeoBoss extends Monster implements NeoMob {
                 || (spec().isSeaBoss() && source.is(DamageTypes.DROWN))) {
             return false;
         }
-        return super.hurt(source, amount * spec().damageTaken);
+        if (transitionTicks > 0) {
+            return false;
+        }
+        return super.hurt(source, amount * spec().damageTaken * (recoverTicks > 0 ? 1.5f : 1.0f));
     }
 
     @Override
@@ -939,7 +1182,9 @@ public class NeoBoss extends Monster implements NeoMob {
         if (hasCustomName()) {
             bossEvent.setName(getDisplayName());
         }
-        setEnraged(getHealth() < getMaxHealth() / 2);
+        float fraction = getHealth() / getMaxHealth();
+        phase = fraction < 0.25f ? 3 : fraction < 0.5f ? 2 : 1;
+        setEnraged(phase > 1);
     }
 
     @Override
