@@ -59,13 +59,13 @@ NEOSPAWN_ORES = ns("ruby_ore", "tanzanite_ore", "titanium_ore", "uranium_ore", "
 
 
 def biome(effects, vegetation, spawners, ores=None, extra_local=(), underground=mc("monster_room", "monster_room_deep"),
-          temperature=0.8, downfall=0.4, precipitation=True):
+          surface=(), temperature=0.8, downfall=0.4, precipitation=True):
     features = [
         [],                                                    # raw generation
         mc("lake_lava_underground", "lake_lava_surface"),       # lakes
         list(extra_local) + mc("amethyst_geode"),               # local modifications
         list(underground),                                     # underground structures
-        [],                                                    # surface structures
+        list(surface),                                         # surface structures
         [],                                                    # strongholds
         ores if ores is not None else BASE_ORES + NEOSPAWN_ORES,  # underground ores
         [],                                                    # underground decoration
@@ -111,7 +111,7 @@ REALMS = {
              "ambient": [spawn("butterfly", 12, 2, 4), spawn("glimmer_sprite", 6, 1, 2), spawn("songbird", 8, 1, 3),
                          spawn("firefly", 4, 2, 4)],
              "monster": []},
-            underground=[], temperature=0.9, downfall=0.5)),
+            underground=[], surface=ns("tree_of_goodness"), temperature=0.9, downfall=0.5)),
 
     # Ore-rich and dangerous: every ore, extra rich veins, and dinosaurs.
     "mining_realm": dict(
@@ -127,7 +127,8 @@ REALMS = {
                          spawn("minecraft:creeper", 40, 1, 2), spawn("minecraft:spider", 40, 1, 2)],
              "creature": [spawn("camarasaurus", 6, 1, 2), spawn("spikeback", 5, 1, 2), spawn("hammerhorn", 4, 1, 1),
                           spawn("gazelle", 8, 2, 4)]},
-            ores=BASE_ORES + mc("ore_emerald", "ore_gold_extra", "ore_copper_large") + NEOSPAWN_ORES)),
+            ores=BASE_ORES + mc("ore_emerald", "ore_gold_extra", "ore_copper_large") + NEOSPAWN_ORES,
+            surface=ns("skyclaw_nest"))),
 
     # Crystal landscape at dusk: geodes, gems, glowing creatures. Nothing but the charm may enter.
     "crystal_realm": dict(
@@ -170,8 +171,9 @@ REALMS = {
                          spawn("ninetail", 1, 1, 1), spawn("dread_steed", 1, 1, 1), spawn("sovereign_scorpion", 1, 1, 1),
                          spawn("hercules_beetle", 1, 1, 1), spawn("giant_mantis", 1, 1, 1),
                          spawn("minecraft:zombie", 80, 2, 4), spawn("minecraft:skeleton", 80, 2, 4),
-                         spawn("minecraft:creeper", 50, 1, 2), spawn("minecraft:witch", 10, 1, 1)],
-             "ambient": [spawn("specter", 10, 1, 1)]},
+                         spawn("minecraft:creeper", 50, 1, 2), spawn("minecraft:witch", 10, 1, 1),
+                         spawn("specter", 10, 1, 1)]},
+            underground=mc("monster_room", "monster_room_deep") + ns("boss_dungeon"), surface=ns("prison_tower"),
             temperature=0.6, downfall=0.8)),
 
     # Floating islands over the void, under a stormy sky.
@@ -194,6 +196,64 @@ for name, realm in REALMS.items():
         "type": f"neospawn:{name}",
         "generator": {"type": "minecraft:noise", "settings": realm["noise"],
                       "biome_source": {"type": "minecraft:fixed", "biome": f"neospawn:{name}"}}})
+
+# Realm structures (procedural features in com.neospawn.worldgen): how rare, and where.
+SURFACE = [{"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": "WORLD_SURFACE_WG"},
+           {"type": "minecraft:biome"}]
+STRUCTURES = {
+    "tree_of_goodness": [{"type": "minecraft:rarity_filter", "chance": 90}] + SURFACE,
+    "skyclaw_nest": [{"type": "minecraft:rarity_filter", "chance": 30}] + SURFACE,
+    "prison_tower": [{"type": "minecraft:rarity_filter", "chance": 45}] + SURFACE,
+    "boss_dungeon": [{"type": "minecraft:rarity_filter", "chance": 20}, {"type": "minecraft:in_square"},
+                     {"type": "minecraft:height_range", "height": {"type": "minecraft:uniform",
+                      "min_inclusive": {"absolute": -40}, "max_inclusive": {"absolute": 30}}},
+                     {"type": "minecraft:biome"}],
+}
+for name, placement in STRUCTURES.items():
+    write(f"worldgen/configured_feature/{name}.json", {"type": f"neospawn:{name}", "config": {}})
+    write(f"worldgen/placed_feature/{name}.json", {"feature": f"neospawn:{name}", "placement": placement})
+
+
+def item(name, lo=1, hi=1, weight=1):
+    entry = {"type": "minecraft:item", "name": name if ":" in name else "neospawn:" + name, "weight": weight}
+    if (lo, hi) != (1, 1):
+        entry["functions"] = [{"function": "minecraft:set_count", "count": {"type": "minecraft:uniform", "min": lo, "max": hi}}]
+    return entry
+
+
+def chance(entry, p):
+    return {"rolls": 1, "conditions": [{"condition": "minecraft:random_chance", "chance": p}], "entries": [entry]}
+
+
+def table(*pools):
+    return {"type": "minecraft:chest", "pools": list(pools)}
+
+
+def pool(rolls, *entries):
+    return {"rolls": rolls, "entries": list(entries)}
+
+
+ENCHANTED_BOOK = {"type": "minecraft:item", "name": "minecraft:book",
+                  "functions": [{"function": "minecraft:enchant_randomly"}]}
+LOOT = {
+    "tree_of_goodness": table(
+        pool(1, item("minecraft:golden_apple", 2, 5)), pool(1, item("king_scale", 4, 8)), pool(1, item("minecraft:diamond", 4, 8)),
+        pool(1, item("minecraft:emerald", 8, 16)),
+        chance(item("sovereign_charm"), 0.5), chance(item("minecraft:enchanted_golden_apple"), 0.3)),
+    "skyclaw_nest": table(
+        pool(1, item("minecraft:feather", 8, 16)), pool(1, item("raw_titanium", 2, 6)), pool(1, item("minecraft:gold_nugget", 6, 18)),
+        pool(1, item("minecraft:diamond", 1, 3)), chance(item("skyclaw_talon"), 0.1)),
+    "boss_dungeon": table(
+        pool(2, item("minecraft:diamond", 3, 6), item("paragon_ingot", 1, 3), item("minecraft:golden_apple", 1, 2),
+             item("minecraft:iron_ingot", 4, 10, 2)),
+        pool(1, ENCHANTED_BOOK), chance(item("chaos_charm"), 0.2)),
+    "prison_tower": table(
+        pool(3, item("minecraft:emerald", 4, 10, 2), item("minecraft:iron_ingot", 3, 8, 2), item("minecraft:gold_ingot", 2, 6),
+             item("minecraft:iron_nugget", 6, 18)),
+        chance(item("chaos_charm"), 0.1)),
+}
+for name, loot in LOOT.items():
+    write(f"loot_table/chests/{name}.json", loot)
 
 # The Village Realm: plains villages, packed about three times denser than the overworld.
 write("tags/worldgen/biome/has_realm_village.json", {"values": ["neospawn:village_realm"]})

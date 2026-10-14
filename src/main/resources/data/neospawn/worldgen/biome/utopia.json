@@ -39,7 +39,9 @@
       "minecraft:amethyst_geode"
     ],
     [],
-    [],
+    [
+      "neospawn:tree_of_goodness"
+    ],
     [],
     [
       "minecraft:ore_dirt",

@@ -47,7 +47,8 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
 - **Six realms** (OreSpawn's ant dimensions): Utopia, the Mining, Crystal, Village and Danger
   Realms, and the Chaos Isles. Right-click a realm's ant while carrying its **charm** to travel, and
   right-click it again to come home. Charms are crafted from the previous realm's rewards, or
-  rarely found in vanilla chests, so realms follow progression instead of skipping it.
+  rarely found in vanilla chests, so realms follow progression instead of skipping it. Realm
+  structures: the Tree of Goodness (The King on top), Skyclaw nests, boss dungeons and Bandit prison towers.
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.
 - **Tools**: full sets in Ruby, Tanzanite and Titanium, plus **Paragon** gear made from
@@ -81,14 +82,13 @@ way: give the spec `Kind.BOSS` and a list of attacks (`STOMP`, `ROAR`, `CHARGE`,
 ```bash
 python3 tools/gen_textures.py   # regenerate block/item placeholder art
 ./gradlew runData               # regenerate models, lang, recipes, loot, tags, spawn rules
-./gradlew runGameTestServer     # 65 headless tests: mobs, items, each boss, combat rules, realm gating
-./gradlew runRealmCheck         # opens a copy of run/saves/neospawn_realmcheck and travels to every realm
+./gradlew runGameTestServer     # 69 headless tests: mobs, items, each boss, combat rules, realms, structures
+./gradlew runRealmCheck         # copy a world to run/saves/neospawn_realmcheck first; visits every realm, counts structures, quits
 ./gradlew runClient             # play
 ```
 
 ## Roadmap
 
-1. Realm structures: the Tree of Goodness, Skyclaw nests, Danger Realm boss dungeons and prison towers
-2. Your picks from docs/FAN_FAVORITES.md
-3. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
-4. Hand-drawn art and Blockbench models for the most important mobs
+1. Your picks from docs/FAN_FAVORITES.md
+2. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
+3. Hand-drawn art and Blockbench models for the most important mobs

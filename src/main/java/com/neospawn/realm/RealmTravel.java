@@ -149,7 +149,7 @@ public final class RealmTravel {
      * for the nearest land within 1024 blocks, then generates just that chunk and lands on its
      * surface. Failing that (all ocean), a small raft on the water; failing that (void), a sky platform.
      */
-    static Vec3 safeLanding(ServerLevel level, BlockPos near) {
+    public static Vec3 safeLanding(ServerLevel level, BlockPos near) {
         ChunkGenerator generator = level.getChunkSource().getGenerator();
         RandomState noise = level.getChunkSource().randomState();
         int seaLevel = generator.getSeaLevel();

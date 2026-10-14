@@ -150,9 +150,9 @@ Danger Realm → Chaos Isles → The Ascended King. The Nether and the End are u
 
 | OreSpawn | NeoSpawn | Reached by | What's there | Status |
 |---|---|---|---|---|
-| Utopia (brown ant) | Utopia | Worker Ant | Eternal day, no monsters, flowers and friendly creatures. *Tree of Goodness with The King on top: 🔜* | ✅ |
-| Mining Dimension (red ant) | Mining Realm | Fire Ant | Amplified mountains, every ore plus rich veins, dinosaurs, dragons, Skyclaw. *Nests: 🔜* | ✅ |
+| Utopia (brown ant) | Utopia | Worker Ant | Eternal day, no monsters, flowers and friendly creatures. The **Tree of Goodness**: a giant oak with The King guarding a golden platform and chest on top | ✅ |
+| Mining Dimension (red ant) | Mining Realm | Fire Ant | Amplified mountains, every ore plus rich veins, dinosaurs, dragons, Skyclaw. **Skyclaw nests** on the peaks | ✅ |
 | Village Dimension (rainbow ant) | Village Realm | Prism Ant | Villages about 3× denser than the overworld, robots at night, Gorgantua roaming | ✅ |
-| Danger Dimension (unstable ant) | Danger Realm | Volatile Ant | Eternal night, monsters spawn even in light, bosses roam; bosses here can drop the Chaos Charm. *Boss dungeons and Bandit prison towers: 🔜* | ✅ |
+| Danger Dimension (unstable ant) | Danger Realm | Volatile Ant | Eternal night, monsters spawn even in light, bosses roam; bosses here can drop the Chaos Charm. Buried **boss dungeons** (spawners, a boss, Chaos Charm chance) and **Bandit prison towers** | ✅ |
 | Crystal Dimension (termite) | Crystal Realm | Termite | Purple dusk, geodes, gems, glowing creatures; you can't bring anything but the charm | ✅ |
 | Chaos Dimension | Chaos Isles | Use the Chaos Charm | Floating islands over the void under a stormy sky; Dread Steeds, Sky Sharks, the Maelstrom | ✅ |

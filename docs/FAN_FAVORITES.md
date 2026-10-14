@@ -23,23 +23,24 @@ Status: ✅ in NeoSpawn · 🟡 partly · ❌ missing · 🔜 already planned
 |---|---|---|---|---|
 | 1 | Giant bosses | The King, Queen, Mobzilla, Kraken, Ultimate King: huge, absurd, memorable | ✅ 27 bosses | |
 | 2 | **Mobs fighting each other** | OreSpawn had "battle mobs": dragons hunt the Kraken and Mothra, bosses brawl. Watching Mobzilla fight The King was a YouTube staple | ❌ bosses ignore each other | |
-| 3 | **Absurd mega-weapons** | Big Bertha, The Slice, Royal Guardian Sword, Queen Battle Axe: huge, long reach, hundreds of damage. Big Bertha's recipe needed parts from several bosses | 🟡 27 boss weapons, but no multi-boss "trophy" mega-weapon | |
+| 3 | **Absurd mega-weapons** | Big Bertha, The Slice, Royal Guardian Sword, Queen Battle Axe: huge, long reach, hundreds of damage. Big Bertha's recipe needed parts from several bosses |Must
+🟡 27 boss weapons, but no multi-boss "trophy" mega-weapon | |Must
 | 4 | Ultimate gear | Pre-enchanted Ultimate armor, tools, **Ultimate Bow**, **Ultimate Fishing Rod** (fishes in lava) | 🟡 Paragon armor and tools; no bow or rod | |
 | 5 | Mob-scale armors | Armor sets made from boss parts: Mobzilla Scale, Queen Scale, Emerald, Experience (XP boost) | 🟡 King's Scale and Paragon only | |
 | 6 | Wacky weapons and gadgets | Squid Zooka, Ray Gun, Chainsaw, Attitude Adjuster (explodes when swung), Nether Sword | ❌ | |
-| 7 | **Girlfriends/Boyfriends** | Tameable companions that follow you, fight, and change outfits. *Divisive*: one remake dropped them, another expanded them to dozens | 🔜 Companion | |
-| 8 | **Pets that grow up** | The Prince → Young Prince → Young Adult → The King. Raising your own King was a highlight | 🔜 Royal Hatchling line | |
-| 9 | **Rideable creatures** | Flying on a Cephadrome or Leonopteryx, riding the Water Dragon, piloting the Spider Robot | ❌ nothing rideable yet | |
-| 10 | **Zoo / critter cages** | Catch a mob in an item, carry it home, release it. Fans built zoos | ❌ | |
-| 11 | Dried spawn eggs | The namesake: ores drop dried eggs; add water to hatch. Collect 9 parts to build Mobzilla's egg | 🟡 Fossil Ore hatches a random mob; no egg-parts quest | |
+| 7 | **Girlfriends/Boyfriends** | Tameable companions that follow you, fight, and change outfits. *Divisive*: one remake dropped them, another expanded them to dozens | 🔜 Companion | Skip |
+| 8 | **Pets that grow up** | The Prince → Young Prince → Young Adult → The King. Raising your own King was a highlight | 🔜 Royal Hatchling line | Nice|
+| 9 | **Rideable creatures** | Flying on a Cephadrome or Leonopteryx, riding the Water Dragon, piloting the Spider Robot | ❌ nothing rideable yet |Must |
+| 10 | **Zoo / critter cages** | Catch a mob in an item, carry it home, release it. Fans built zoos | ❌ |Must |
+| 11 | Dried spawn eggs | The namesake: ores drop dried eggs; add water to hatch. Collect 9 parts to build Mobzilla's egg | 🟡 Fossil Ore hatches a random mob; no egg-parts quest | Must|
 | 12 | **Ant dimensions** | Click an ant to teleport: Utopia, Mining, Village, Danger, Crystal | 🔜 planned next | |
-| 13 | **Structures and dungeons** | Tiered dungeons, Challenge Dungeon, Golden Ore Tree tower, Tree of Goodness (The King on top), Queen Tree, Bandit prison towers, Skyclaw nests | ❌ no structures yet | |
-| 14 | Ore trees and special trees | Trees that grow ores, Experience Tree, crystal trees, fruit trees | ❌ | |
-| 15 | **Huge food list** | Strawberries, corn, tomatoes, lettuce, butter, cheese, hot dogs, popcorn, salads, crab meat… | ❌ only Salted Jerky | |
-| 16 | Repellents | Kraken Repellent, Creeper Repellent: items that keep a mob type away | ❌ | |
-| 17 | Utility items | Miner's Dream, Instant Shelter, Extreme/Ultimate Torch, Experience Orb Catcher, Sifter | 🟡 Tunnel Charge only | |
-| 18 | Boss summoning altar | A structure for summoning bosses on purpose | 🟡 Royal Sigil only | |
-| 19 | Silly stuff | Rocket boots, a jumping castle, hot dogs, T-shirt "ads" floating around | ❌ | |
+| 13 | **Structures and dungeons** | Tiered dungeons, Challenge Dungeon, Golden Ore Tree tower, Tree of Goodness (The King on top), Queen Tree, Bandit prison towers, Skyclaw nests | ❌ no structures yet | Must |
+| 14 | Ore trees and special trees | Trees that grow ores, Experience Tree, crystal trees, fruit trees | ❌ |Must |
+| 15 | **Huge food list** | Strawberries, corn, tomatoes, lettuce, butter, cheese, hot dogs, popcorn, salads, crab meat… | ❌ only Salted Jerky | Can get from other mods |
+| 16 | Repellents | Kraken Repellent, Creeper Repellent: items that keep a mob type away | ❌ | Nice |
+| 17 | Utility items | Miner's Dream, Instant Shelter, Extreme/Ultimate Torch, Experience Orb Catcher, Sifter | 🟡 Tunnel Charge only |Must |
+| 18 | Boss summoning altar | A structure for summoning bosses on purpose | 🟡 Royal Sigil only | Must|
+| 19 | Silly stuff | Rocket boots, a jumping castle, hot dogs, T-shirt "ads" floating around | ❌ | Meh|
 
 ## Crazy Craft: the rest of the pack
 
@@ -67,7 +68,7 @@ these belong in the **modpack**, not in NeoSpawn. Tick the ones that are part of
 | Soul Shards | Make mob spawners from kills | modern spawner mods | |
 | SecurityCraft | Cameras, lasers, keycards | SecurityCraft (modern) | |
 | Armourer's Workshop | Design your own armor | Armourer's Workshop (modern) | |
-| Adventure Backpack, Iron Chest, Baubles, Damage Indicators | Quality of life | Sophisticated Backpacks, Iron Chests, Curios, Jade | |
+| Adventure Backpack, Iron Chest, Baubles, Damage Indicators | Quality of life | Sophisticated Backpacks, Iron Chests, Curios, Jade | | Add all thats possible. make sure they integrate decently.
 
 ## What players complained about (avoid these)
 
@@ -98,4 +99,4 @@ fun lasts longer.
 
 Anything you remember that isn't listed:
 
--
+- INtegrate with modern terrain mods like distant horizons and other cool temples and shit. Figure out where that giant pacman that ate wood came from and lets either add it or remake. I want there to be alot of options for building blocks so same thing lets find mods that integrate good. Can we get transformers or superheroes? Also The duplicator tree is a must. 

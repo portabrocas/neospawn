@@ -8,6 +8,7 @@ import com.neospawn.registry.ModBlocks;
 import com.neospawn.registry.ModCreativeTabs;
 import com.neospawn.registry.ModEntities;
 import com.neospawn.registry.ModItems;
+import com.neospawn.worldgen.ModFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -28,6 +29,7 @@ public class NeoSpawn {
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModCreativeTabs.TABS.register(modEventBus);
         AddItemLootModifier.SERIALIZERS.register(modEventBus);
+        ModFeatures.FEATURES.register(modEventBus);
 
         modEventBus.addListener(ModMobs::registerAttributes);
         modEventBus.addListener(ModMobs::registerSpawnPlacements);

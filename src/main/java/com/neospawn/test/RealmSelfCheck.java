@@ -11,27 +11,45 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.LevelResource;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
+import com.neospawn.client.ClientShutdown;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * End-to-end realm check that needs a real world (the GameTest server leaves out mod dimensions).
- * Only runs with -Dneospawn.realmcheck=true: ./gradlew runRealmCheck. When the player joins, it
- * generates every realm, then walks the player through charm-gated travel, logs a report and quits.
+ * Only runs with -Dneospawn.realmcheck=true (./gradlew runRealmCheck), only in the throwaway world
+ * {@value #WORLD}, and only once. It generates every realm, walks the player through charm-gated
+ * travel, counts naturally generated structures, logs a report, then closes the game entirely.
  */
 @EventBusSubscriber(modid = NeoSpawn.MODID)
 public final class RealmSelfCheck {
+    public static final String WORLD = "neospawn_realmcheck";
+    private static boolean done;
+
     @SubscribeEvent
     static void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (!Boolean.getBoolean("neospawn.realmcheck") || !(event.getEntity() instanceof ServerPlayer player)) {
+        if (!Boolean.getBoolean("neospawn.realmcheck") || done || !(event.getEntity() instanceof ServerPlayer player)) {
             return;
         }
         MinecraftServer server = player.server;
+        // Never touch a real world: only the throwaway copy made for this check.
+        if (!WORLD.equals(server.getWorldData().getLevelName()) && !server.getWorldPath(LevelResource.ROOT)
+                .normalize().getFileName().toString().equals(WORLD)) {
+            NeoSpawn.LOGGER.warn("REALMCHECK skipped: {} is not the throwaway world {}", server.getWorldData().getLevelName(), WORLD);
+            return;
+        }
+        done = true;
         // Run a tick later, once the player is fully in the world.
         server.execute(() -> {
             List<String> failures = new ArrayList<>();
@@ -69,9 +87,39 @@ public final class RealmSelfCheck {
                 RealmTravel.goHome(player);
             }
 
+            // Structures appear naturally: generate a patch of each realm and count their loot chests.
+            census(server, Realm.UTOPIA, 24, failures, "tree_of_goodness");
+            census(server, Realm.MINING_REALM, 16, failures, "skyclaw_nest");
+            census(server, Realm.DANGER_REALM, 12, failures, "boss_dungeon", "prison_tower");
+
             NeoSpawn.LOGGER.info(failures.isEmpty() ? "REALMCHECK PASSED" : "REALMCHECK FAILED: " + failures);
             server.halt(false);
+            if (FMLEnvironment.dist == Dist.CLIENT) {
+                ClientShutdown.stop();
+            }
         });
+    }
+
+    /** Generates a square of chunks far from spawn and counts chests from each structure's loot table. */
+    private static void census(MinecraftServer server, Realm realm, int chunks, List<String> failures, String... structures) {
+        ServerLevel level = server.getLevel(realm.dimension);
+        Map<String, Integer> counts = new TreeMap<>();
+        BlockPos land = BlockPos.containing(RealmTravel.safeLanding(level, new BlockPos(5000, 0, 5000)));
+        int startX = (land.getX() >> 4) - chunks / 2, startZ = (land.getZ() >> 4) - chunks / 2;
+        for (int cx = startX; cx < startX + chunks; cx++) {
+            for (int cz = startZ; cz < startZ + chunks; cz++) {
+                for (var blockEntity : level.getChunk(cx, cz).getBlockEntities().values()) {
+                    if (blockEntity instanceof ChestBlockEntity chest && chest.getLootTable() != null) {
+                        counts.merge(chest.getLootTable().location().getPath(), 1, Integer::sum);
+                    }
+                }
+            }
+        }
+        NeoSpawn.LOGGER.info("REALMCHECK {} structures in {}x{} chunks: {}", realm.id, chunks, chunks, counts);
+        for (String structure : structures) {
+            int chests = counts.getOrDefault("chests/" + structure, 0);
+            check(failures, chests > 0, "no " + structure + " generated in " + realm.id);
+        }
     }
 
     private static void check(List<String> failures, boolean ok, String message) {
