@@ -54,6 +54,12 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   Mounts go where you look: walk forward to move, look up to climb.
 - **Zoo Cages**: right-click a mob to catch it (hostile mobs below half health; no bosses; only your
   own pets), carry it anywhere, use the cage on the ground to release it, name and all.
+- **Fan favorites**: the Behemoth Blade (four bosses' weapons in one); the Paragon Bow and lava
+  fishing rod; Gorgantua Scale, Empress Scale, Emerald and Experience armor; gadgets (Squid Zooka,
+  Ray Gun, Chainsaw, Attitude Adjuster, Nether Sword); the Duplicator Tree, ore trees and the
+  Experience Tree; the Gorgantua egg quest and the Summoning Altar; Instant Shelter, Ultimate Torch,
+  XP Siphon and Sifter; and more dungeons (Ruined Crypts and Sunken Vaults in the overworld, the
+  Golden Spire, Challenge Dungeon and Empress Tree in the realms).
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.
 - **Tools**: full sets in Ruby, Tanzanite and Titanium, plus **Paragon** gear made from
@@ -87,7 +93,7 @@ way: give the spec `Kind.BOSS` and a list of attacks (`STOMP`, `ROAR`, `CHARGE`,
 ```bash
 python3 tools/gen_textures.py   # regenerate block/item placeholder art
 ./gradlew runData               # regenerate models, lang, recipes, loot, tags, spawn rules
-./gradlew runGameTestServer     # 74 headless tests: mobs, items, bosses, combat, realms, structures, mounts, cages
+./gradlew runGameTestServer     # 96 headless tests: mobs, items, bosses, combat, realms, structures, gear, trees
 ./gradlew runRealmCheck         # copy a world to run/saves/neospawn_realmcheck first; visits every realm, counts structures, quits
 ./gradlew runClient             # play
 ```

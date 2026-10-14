@@ -24,22 +24,22 @@ Status: ✅ in NeoSpawn · 🟡 partly · ❌ missing · 🔜 already planned
 | 1 | Giant bosses | The King, Queen, Mobzilla, Kraken, Ultimate King: huge, absurd, memorable | ✅ 27 bosses | |
 | 2 | **Mobs fighting each other** | OreSpawn had "battle mobs": dragons hunt the Kraken and Mothra, bosses brawl. Watching Mobzilla fight The King was a YouTube staple | ❌ bosses ignore each other | Nice (wanted, not imperative) |
 | 3 | **Absurd mega-weapons** | Big Bertha, The Slice, Royal Guardian Sword, Queen Battle Axe: huge, long reach, hundreds of damage. Big Bertha's recipe needed parts from several bosses |Must
-🟡 27 boss weapons, but no multi-boss "trophy" mega-weapon | |Must
-| 4 | Ultimate gear | Pre-enchanted Ultimate armor, tools, **Ultimate Bow**, **Ultimate Fishing Rod** (fishes in lava) | 🟡 Paragon armor and tools; no bow or rod | Must |
-| 5 | Mob-scale armors | Armor sets made from boss parts: Mobzilla Scale, Queen Scale, Emerald, Experience (XP boost) | 🟡 King's Scale and Paragon only | Must |
-| 6 | Wacky weapons and gadgets | Squid Zooka, Ray Gun, Chainsaw, Attitude Adjuster (explodes when swung), Nether Sword | ❌ | Must |
+✅ Behemoth Blade, crafted from four bosses' weapons | |Must
+| 4 | Ultimate gear | Pre-enchanted Ultimate armor, tools, **Ultimate Bow**, **Ultimate Fishing Rod** (fishes in lava) | ✅ Paragon Bow (4× draw speed) and Paragon Fishing Rod (fishes in lava) | Must |
+| 5 | Mob-scale armors | Armor sets made from boss parts: Mobzilla Scale, Queen Scale, Emerald, Experience (XP boost) | ✅ King's Scale, Paragon, Gorgantua Scale, Empress Scale, Emerald, Experience | Must |
+| 6 | Wacky weapons and gadgets | Squid Zooka, Ray Gun, Chainsaw, Attitude Adjuster (explodes when swung), Nether Sword | ✅ all five | Must |
 | 7 | **Girlfriends/Boyfriends** | Tameable companions that follow you, fight, and change outfits. *Divisive*: one remake dropped them, another expanded them to dozens | 🔜 Companion | Skip |
 | 8 | **Pets that grow up** | The Prince → Young Prince → Young Adult → The King. Raising your own King was a highlight | 🔜 Royal Hatchling line | Nice|
 | 9 | **Rideable creatures** | Flying on a Cephadrome or Leonopteryx, riding the Water Dragon, piloting the Spider Robot | ✅ Gazelle, Ostrich, tamed Skyclaw/Azure Drake (fly), Tide Dragon (swim), Ant Mech, Spider Mech (climbs walls) |Must |
 | 10 | **Zoo / critter cages** | Catch a mob in an item, carry it home, release it. Fans built zoos | ✅ Zoo Cage |Must |
-| 11 | Dried spawn eggs | The namesake: ores drop dried eggs; add water to hatch. Collect 9 parts to build Mobzilla's egg | 🟡 Fossil Ore hatches a random mob; no egg-parts quest | Must|
-| 12 | **Ant dimensions** | Click an ant to teleport: Utopia, Mining, Village, Danger, Crystal | 🔜 planned next | |
-| 13 | **Structures and dungeons** | Tiered dungeons, Challenge Dungeon, Golden Ore Tree tower, Tree of Goodness (The King on top), Queen Tree, Bandit prison towers, Skyclaw nests | ❌ no structures yet | Must |
-| 14 | Ore trees and special trees | Trees that grow ores, Experience Tree, crystal trees, fruit trees | ❌ |Must |
+| 11 | Dried spawn eggs | The namesake: ores drop dried eggs; add water to hatch. Collect 9 parts to build Mobzilla's egg | ✅ Fossilized Egg, plus the 9-fragment Gorgantua egg quest | Must|
+| 12 | **Ant dimensions** | Click an ant to teleport: Utopia, Mining, Village, Danger, Crystal | ✅ six realms, charm-gated | |
+| 13 | **Structures and dungeons** | Tiered dungeons, Challenge Dungeon, Golden Ore Tree tower, Tree of Goodness (The King on top), Queen Tree, Bandit prison towers, Skyclaw nests | ✅ Tree of Goodness, Empress Tree, Golden Spire, Challenge Dungeon, boss dungeons, prison towers, Skyclaw nests, Ruined Crypts, Sunken Vaults | Must |
+| 14 | Ore trees and special trees | Trees that grow ores, Experience Tree, crystal trees, fruit trees | ✅ Duplicator Tree, iron/gold/diamond/emerald/ruby ore trees, Experience Tree |Must |
 | 15 | **Huge food list** | Strawberries, corn, tomatoes, lettuce, butter, cheese, hot dogs, popcorn, salads, crab meat… | ❌ only Salted Jerky | Can get from other mods |
 | 16 | Repellents | Kraken Repellent, Creeper Repellent: items that keep a mob type away | ❌ | Nice |
-| 17 | Utility items | Miner's Dream, Instant Shelter, Extreme/Ultimate Torch, Experience Orb Catcher, Sifter | 🟡 Tunnel Charge only |Must |
-| 18 | Boss summoning altar | A structure for summoning bosses on purpose | 🟡 Royal Sigil only | Must|
+| 17 | Utility items | Miner's Dream, Instant Shelter, Extreme/Ultimate Torch, Experience Orb Catcher, Sifter | ✅ Tunnel Charge, Instant Shelter, Ultimate Torch, XP Siphon, Sifter |Must |
+| 18 | Boss summoning altar | A structure for summoning bosses on purpose | ✅ Summoning Altar (an offering per boss), Royal Sigil, Gorgantua Egg | Must|
 | 19 | Silly stuff | Rocket boots, a jumping castle, hot dogs, T-shirt "ads" floating around | ❌ | Meh|
 
 ## Crazy Craft: the rest of the pack
