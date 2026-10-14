@@ -115,8 +115,11 @@ public final class ModItems {
     public static final DeferredItem<BossWeapon> BONE_CRUSHER = weapon("bone_crusher", BossWeapon.Effect.CRUSH, 28, -3.2f, 1);
     public static final DeferredItem<BossWeapon> PREDATOR_CLAW = weapon("predator_claw", BossWeapon.Effect.VENOM, 14, -1.6f, 0);
     public static final DeferredItem<BossWeapon> TITAN_CLEAVER = weapon("titan_cleaver", BossWeapon.Effect.CLEAVE, 60, -3.4f, 3);
+    public static final DeferredItem<BossWeapon> KRAKEN_HOOK = weapon("kraken_hook", BossWeapon.Effect.HOOK, 20, -2.6f, 2);
+    public static final DeferredItem<BossWeapon> TIDEBREAKER = weapon("tidebreaker", BossWeapon.Effect.TIDAL, 34, -3.0f, 1);
+    public static final DeferredItem<BossWeapon> SERPENT_FANG = weapon("serpent_fang", BossWeapon.Effect.VENOM, 18, -1.8f, 0);
     public static final List<DeferredItem<BossWeapon>> BOSS_WEAPONS = List.of(KINGS_FANG, TYRANT_TOOTH, BONE_CRUSHER,
-            PREDATOR_CLAW, TITAN_CLEAVER);
+            PREDATOR_CLAW, TITAN_CLEAVER, KRAKEN_HOOK, TIDEBREAKER, SERPENT_FANG);
 
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()

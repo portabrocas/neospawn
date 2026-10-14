@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_deep_ocean",
+  "spawners": {
+    "type": "neospawn:kraken",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

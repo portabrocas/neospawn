@@ -11,6 +11,7 @@ import com.neospawn.mob.MobSpec.Voice;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.BossEvent;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -409,7 +410,34 @@ public final class ModMobs {
                 .attacks(BossAttack.BEAM, BossAttack.STOMP, BossAttack.TAIL_SWIPE, BossAttack.ROAR, BossAttack.FIRE_BREATH)
                 .drop(ModItems.TITAN_CLEAVER, 1, 1).drop(ModItems.PARAGON_INGOT, 2, 4).drop(v(Items.DIAMOND), 6, 12)
                 .egg(0x3A4A3A, 0x8AE8F8);
+
+        // ---------------------------------------------------------------- sea bosses
+        seaBoss("kraken", "Kraken", look(Family.JELLY).body(0, 16, 24).tail(36).segments(10)
+                .colors(0x6A1A2A, 0x4A0E1A, 0xF2C83A).eye(0xF2E84A).pattern(Pattern.SPOTS).scale(2.5f))
+                .size(4.0f, 9.0f).stats(800, 22, 1.0).armor(12).voice(Voice.SQUID).xp(800).bar(BossEvent.BossBarColor.PURPLE)
+                .attacks(BossAttack.GRAB, BossAttack.INK, BossAttack.WHIRLPOOL, BossAttack.TENTACLE_SLAM)
+                .drop(ModItems.KRAKEN_HOOK, 1, 1).drop(v(Items.INK_SAC), 16, 32).drop(v(Items.NAUTILUS_SHELL), 2, 4)
+                .drop(v(Items.HEART_OF_THE_SEA), 1, 1, 0.5f)
+                .egg(0x6A1A2A, 0xF2C83A).spawn("c:is_deep_ocean", 1, 1, 1);
+        seaBoss("leviathan", "Leviathan", look(Family.FISH).body(48, 16, 18).tail(14)
+                .with(Extra.DORSAL, Extra.FLAT).colors(0x1E3A4A, 0x0E1E2A, 0x5AF2E8).eye(0x5AF2E8).belly(0x8AB8C8)
+                .pattern(Pattern.SCALES).glow().scale(3.0f))
+                .size(5.0f, 3.5f).stats(1024, 28, 1.1).armor(16).damageTaken(0.6f).voice(Voice.WHALE).xp(1200)
+                .bar(BossEvent.BossBarColor.BLUE)
+                .attacks(BossAttack.LEAP_SLAM, BossAttack.WAVE, BossAttack.LIGHTNING, BossAttack.WHIRLPOOL)
+                .drop(ModItems.TIDEBREAKER, 1, 1).drop(v(Items.HEART_OF_THE_SEA), 1, 1).drop(v(Items.PRISMARINE_CRYSTALS), 8, 16)
+                .drop(v(Items.COD), 10, 20)
+                .egg(0x1E3A4A, 0x5AF2E8).spawn("c:is_deep_ocean", 1, 1, 1);
+        seaBoss("sea_serpent", "Sea Serpent", look(Family.SERPENT).body(96, 9, 9).head(13).segments(12)
+                .with(Extra.SPIKES, Extra.MANDIBLES).colors(0x2A6A4A, 0x1A4A30, 0xF2E84A).eye(0xFF4A2A)
+                .pattern(Pattern.SCALES).scale(1.8f))
+                .size(2.4f, 2.0f).stats(600, 18, 1.3).armor(10).voice(Voice.GUARDIAN).xp(600).bar(BossEvent.BossBarColor.GREEN)
+                .attacks(BossAttack.TRIDENT_VOLLEY, BossAttack.GEYSER, BossAttack.GRAB, BossAttack.TAIL_SWIPE)
+                .drop(ModItems.SERPENT_FANG, 1, 1).drop(v(Items.TRIDENT), 1, 1, 0.3f).drop(v(Items.PRISMARINE_SHARD), 6, 12)
+                .egg(0x2A6A4A, 0xF2E84A).spawn("c:is_ocean", 1, 1, 1);
     }
+
+    private static MobSpec seaBoss(String id, String name, Look look) { return add(new MobSpec(id, name, Kind.SEA_BOSS, look)); }
 
     private static MobSpec boss(String id, String name, Look look) { return add(new MobSpec(id, name, Kind.BOSS, look)); }
 
@@ -464,7 +492,7 @@ public final class ModMobs {
             case HOSTILE_FLYER -> NeoHostileFlyer::new;
             case SWIMMER -> NeoSwimmer::new;
             case HOSTILE_SWIMMER -> NeoHostileSwimmer::new;
-            case BOSS -> NeoBoss::new;
+            case BOSS, SEA_BOSS -> NeoBoss::new;
         };
         EntityType.Builder<?> builder = EntityType.Builder.of(factory, category(spec))
                 .sized(spec.hitboxWidth, spec.hitboxHeight)
@@ -483,7 +511,7 @@ public final class ModMobs {
     private static MobCategory category(MobSpec spec) {
         return switch (spec.kind) {
             case ANIMAL -> MobCategory.CREATURE;
-            case MONSTER, HOSTILE_FLYER, BOSS -> MobCategory.MONSTER;
+            case MONSTER, HOSTILE_FLYER, BOSS, SEA_BOSS -> MobCategory.MONSTER;
             case FLYER -> MobCategory.AMBIENT;
             case SWIMMER -> spec.hitboxWidth > 1.0f ? MobCategory.WATER_CREATURE : MobCategory.WATER_AMBIENT;
             case HOSTILE_SWIMMER -> MobCategory.WATER_CREATURE;
@@ -516,6 +544,13 @@ public final class ModMobs {
                                 level.getDifficulty() != Difficulty.PEACEFUL
                                         && (day || Monster.isDarkEnoughToSpawn(level, pos, random))
                                         && Mob.checkMobSpawnRules((EntityType) t, level, reason, pos, random),
+                        RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                case SEA_BOSS -> event.register(type, SpawnPlacementTypes.IN_WATER,
+                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) ->
+                                level.getDifficulty() != Difficulty.PEACEFUL
+                                        && level.getFluidState(pos).is(FluidTags.WATER)
+                                        && level.getFluidState(pos.above(4)).is(FluidTags.WATER),
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
                 case SWIMMER, HOSTILE_SWIMMER -> event.register(type, SpawnPlacementTypes.IN_WATER,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WaterAnimal::checkSurfaceWaterAnimalSpawnRules,

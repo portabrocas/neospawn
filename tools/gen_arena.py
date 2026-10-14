@@ -1,4 +1,8 @@
-"""Writes the GameTest arena structure: a 24x8x24 box with a stone floor and a water pool."""
+"""Writes the GameTest arena structures.
+
+  python3 tools/gen_arena.py <out.nbt>         land arena: 24x8x24, stone floor, small water pool
+  python3 tools/gen_arena.py <out.nbt> sea     sea arena: 32x20x32 stone tank full of water
+"""
 import gzip
 import struct
 import sys
@@ -20,25 +24,37 @@ def int_list(values):
 def compound_list(compounds):
     return bytes([10]) + struct.pack(">i", len(compounds)) + b"".join(compounds)
 
-SIZE = 24
+SEA = len(sys.argv) > 2 and sys.argv[2] == "sea"
+SIZE, HEIGHT = (32, 20) if SEA else (24, 8)
 palette = [
     compound([tag(8, "Name", string("minecraft:stone"))]),
     compound([tag(8, "Name", string("minecraft:water")),
               tag(10, "Properties", compound([tag(8, "level", string("0"))]))]),
 ]
 blocks = []
+
+def put(x, y, z, state):
+    blocks.append(compound([tag(9, "pos", int_list([x, y, z])), tag(3, "state", struct.pack(">i", state))]))
+
 for x in range(SIZE):
     for z in range(SIZE):
-        blocks.append(compound([tag(9, "pos", int_list([x, 0, z])), tag(3, "state", struct.pack(">i", 0))]))
-# A 6x3x6 water pool in one corner, walled by the floor.
-for x in range(16, 22):
-    for z in range(16, 22):
-        for y in range(1, 4):
-            blocks.append(compound([tag(9, "pos", int_list([x, y, z])), tag(3, "state", struct.pack(">i", 1))]))
+        put(x, 0, z, 0)
+if SEA:
+    for x in range(SIZE):
+        for z in range(SIZE):
+            wall = x in (0, SIZE - 1) or z in (0, SIZE - 1)
+            for y in range(1, HEIGHT - 1):
+                put(x, y, z, 0 if wall else 1)
+else:
+    # A 6x3x6 water pool in one corner, walled by the floor.
+    for x in range(16, 22):
+        for z in range(16, 22):
+            for y in range(1, 4):
+                put(x, y, z, 1)
 
 root = tag(10, "", compound([
     tag(3, "DataVersion", struct.pack(">i", 3955)),
-    tag(9, "size", int_list([SIZE, 8, SIZE])),
+    tag(9, "size", int_list([SIZE, HEIGHT, SIZE])),
     tag(9, "palette", compound_list(palette)),
     tag(9, "blocks", compound_list(blocks)),
     tag(9, "entities", bytes([0]) + struct.pack(">i", 0)),

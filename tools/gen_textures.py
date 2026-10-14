@@ -372,6 +372,17 @@ for x, y in ((2, 14), (3, 13)):
 save(claw.image((20, 50, 25)), "item/predator_claw.png")
 
 
+save(big_blade((110, 50, 90), (200, 140, 190), (60, 20, 40), (40, 10, 30), guard=(240, 200, 60)), "item/serpent_fang.png")
+save(big_blade((40, 140, 170), (170, 240, 250), (20, 50, 70), (10, 35, 50), width=2, guard=(90, 230, 220)), "item/tidebreaker.png")
+
+hook = Sprite()
+hook.line(2, 13, 11, 4, STICK[0])
+for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):
+    hook.set(x, y, (120, 40, 70))
+hook.set(13, 3, (240, 200, 90))
+save(hook.image((50, 15, 30)), "item/kraken_hook.png")
+
+
 # ---------------------------------------------------------------- The King
 # Regions mirror the texOffs in TheKingModel.createBodyLayer().
 king = Image.new("RGBA", (256, 256), (0, 0, 0, 0))

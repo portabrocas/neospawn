@@ -35,6 +35,17 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.SmallFireball;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -44,13 +55,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
- * A walking boss. Its spec lists which special attacks it knows; this class schedules
- * them (one at a time, with cooldowns) on top of normal melee. Below half health it
- * enrages and everything recharges twice as fast.
+ * A boss. Its spec lists which special attacks it knows; this class schedules them (one
+ * at a time, with cooldowns) on top of normal melee. Below half health it enrages and
+ * everything recharges twice as fast. Sea bosses swim and breathe water.
  */
 public class NeoBoss extends Monster implements NeoMob {
     // No initializer: registerGoals() runs inside the super constructor and fills this first.
@@ -65,9 +78,17 @@ public class NeoBoss extends Monster implements NeoMob {
     private int leapTicks;
     private int beamTicks;
     @Nullable private Vec3 beamTarget;
+    private int whirlpoolTicks;
+    private int grabTicks;
+    @Nullable private LivingEntity grabbed;
+    private final Set<BossAttack> usedAttacks = EnumSet.noneOf(BossAttack.class);
 
     public NeoBoss(EntityType<? extends NeoBoss> type, Level level) {
         super(type, level);
+        if (spec().isSeaBoss()) {
+            moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02f, 0.1f, true);
+            lookControl = new SmoothSwimmingLookControl(this, 10);
+        }
         xpReward = spec().xp;
         bossEvent = new ServerBossEvent(getDisplayName(), spec().barColor, BossEvent.BossBarOverlay.NOTCHED_10);
         bossEvent.setDarkenScreen(true);
@@ -82,11 +103,27 @@ public class NeoBoss extends Monster implements NeoMob {
         return spec;
     }
 
+    /** Which special attacks this boss has used; read by the GameTests. */
+    public Set<BossAttack> usedAttacks() {
+        return usedAttacks;
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return spec().isSeaBoss() ? new WaterBoundPathNavigation(this, level) : super.createNavigation(level);
+    }
+
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true));
-        goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.7));
+        if (spec().isSeaBoss()) {
+            goalSelector.addGoal(0, new TryFindWaterGoal(this));
+            goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true));
+            goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0, 40));
+        } else {
+            goalSelector.addGoal(0, new FloatGoal(this));
+            goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true));
+            goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.7));
+        }
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 16.0f));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         targetSelector.addGoal(1, new HurtByTargetGoal(this));
@@ -110,6 +147,9 @@ public class NeoBoss extends Monster implements NeoMob {
     protected void customServerAiStep() {
         super.customServerAiStep();
         bossEvent.setProgress(getHealth() / getMaxHealth());
+        if (spec().isSeaBoss()) {
+            setAirSupply(getMaxAirSupply());
+        }
 
         if (!enraged && getHealth() < getMaxHealth() / 2) {
             enraged = true;
@@ -123,6 +163,8 @@ public class NeoBoss extends Monster implements NeoMob {
         tickCharge();
         tickLeap();
         tickBeam();
+        tickWhirlpool();
+        tickGrab();
 
         cooldowns.replaceAll((attack, ticks) -> Math.max(0, ticks - 1));
         LivingEntity target = getTarget();
@@ -141,18 +183,19 @@ public class NeoBoss extends Monster implements NeoMob {
         }
         BossAttack attack = ready.get(random.nextInt(ready.size()));
         perform(attack, target);
+        usedAttacks.add(attack);
         cooldowns.put(attack, enraged ? attack.cooldown / 2 : attack.cooldown);
         globalCooldown = enraged ? 25 : 45;
         swing(InteractionHand.MAIN_HAND);
     }
 
     private boolean isBusy() {
-        return chargeTicks > 0 || leapTicks > 0 || beamTicks > 0;
+        return chargeTicks > 0 || leapTicks > 0 || beamTicks > 0 || whirlpoolTicks > 0 || grabTicks > 0;
     }
 
     private void perform(BossAttack attack, LivingEntity target) {
         switch (attack) {
-            case STOMP -> stomp(6 + getBbWidth() / 2, 0.6f);
+            case STOMP -> stomp(6 + getBbWidth() / 2, 0.6f, true);
             case ROAR -> roar();
             case CHARGE -> {
                 chargeTicks = 25;
@@ -172,15 +215,30 @@ public class NeoBoss extends Monster implements NeoMob {
                 playSound(SoundEvents.WARDEN_SONIC_CHARGE, 6.0f, 0.6f);
             }
             case LEAP_SLAM -> {
-                if (onGround()) {
+                // Sea bosses breach out of the water instead of jumping off the ground.
+                if (onGround() || isInWater()) {
                     Vec3 dir = horizontalTo(target);
                     double reach = Math.min(1.6, distanceTo(target) / 12);
-                    setDeltaMovement(dir.x * reach, 1.0, dir.z * reach);
+                    setDeltaMovement(dir.x * reach, isInWater() ? 1.8 : 1.0, dir.z * reach);
                     hasImpulse = true;
                     leapTicks = 1;
                 }
             }
             case TAIL_SWIPE -> tailSwipe();
+            case WHIRLPOOL -> {
+                whirlpoolTicks = 80;
+                playSound(SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, 4.0f, 0.5f);
+            }
+            case GRAB -> {
+                grabTicks = 40;
+                grabbed = target;
+                playSound(SoundEvents.FISHING_BOBBER_RETRIEVE, 4.0f, 0.5f);
+            }
+            case INK -> ink();
+            case TENTACLE_SLAM -> stomp(8 + getBbWidth() / 2, 0.8f, false);
+            case WAVE -> wave();
+            case GEYSER -> geyser(target);
+            case TRIDENT_VOLLEY -> tridentVolley(target);
         }
     }
 
@@ -196,13 +254,13 @@ public class NeoBoss extends Monster implements NeoMob {
                 e -> e != this && e.isAlive() && !(e instanceof NeoBoss) && !isAlliedTo(e));
     }
 
-    private void stomp(double radius, float damageScale) {
+    private void stomp(double radius, float damageScale, boolean groundOnly) {
         ServerLevel level = (ServerLevel) level();
         level.sendParticles(ParticleTypes.EXPLOSION, getX(), getY() + 0.5, getZ(), 8, radius / 2, 0.2, radius / 2, 0);
         level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, getX(), getY() + 0.2, getZ(), 20, radius / 2, 0.1, radius / 2, 0.02);
         playSound(SoundEvents.GENERIC_EXPLODE.value(), 3.0f, 0.6f);
         for (LivingEntity victim : victims(radius)) {
-            if (victim.onGround() && victim.distanceTo(this) <= radius + getBbWidth() / 2) {
+            if ((victim.onGround() || !groundOnly) && victim.distanceTo(this) <= radius + getBbWidth() / 2) {
                 victim.hurt(damageSources().mobAttack(this), damage() * damageScale);
                 Vec3 away = victim.position().subtract(position()).normalize();
                 victim.push(away.x * 0.8, 0.7, away.z * 0.8);
@@ -249,9 +307,9 @@ public class NeoBoss extends Monster implements NeoMob {
             return;
         }
         leapTicks++;
-        if (leapTicks > 5 && onGround()) {
+        if (leapTicks > 5 && (onGround() || (leapTicks > 15 && isInWater()))) {
             leapTicks = 0;
-            stomp(8 + getBbWidth() / 2, 0.9f);
+            stomp(8 + getBbWidth() / 2, 0.9f, !spec().isSeaBoss());
         } else if (leapTicks > 100) {
             leapTicks = 0;
         }
@@ -323,6 +381,115 @@ public class NeoBoss extends Monster implements NeoMob {
         }
     }
 
+    // ------------------------------------------------------------------ sea attacks
+
+    /** Drags everything nearby into a spiral toward the boss, chewing on whatever gets close. */
+    private void tickWhirlpool() {
+        if (whirlpoolTicks <= 0) {
+            return;
+        }
+        whirlpoolTicks--;
+        ServerLevel level = (ServerLevel) level();
+        for (int i = 0; i < 6; i++) {
+            double angle = (tickCount * 0.3 + i * Math.PI / 3);
+            double r = 3 + (tickCount + i * 7) % 12;
+            level.sendParticles(ParticleTypes.BUBBLE, getX() + Math.cos(angle) * r, getY() + 1, getZ() + Math.sin(angle) * r,
+                    2, 0.2, 0.5, 0.2, 0.05);
+        }
+        for (LivingEntity victim : victims(18)) {
+            Vec3 in = position().subtract(victim.position()).normalize();
+            Vec3 swirl = new Vec3(-in.z, 0, in.x);
+            victim.push(in.x * 0.08 + swirl.x * 0.08, victim.isInWater() ? -0.03 : 0, in.z * 0.08 + swirl.z * 0.08);
+            victim.hurtMarked = true;
+            if (whirlpoolTicks % 20 == 0 && victim.distanceTo(this) < getBbWidth() / 2 + 4) {
+                victim.hurt(damageSources().mobAttack(this), damage() * 0.3f);
+            }
+        }
+    }
+
+    /** Reels the target in, then crushes it and steals its air. */
+    private void tickGrab() {
+        if (grabTicks <= 0) {
+            return;
+        }
+        grabTicks--;
+        if (grabbed == null || !grabbed.isAlive()) {
+            grabTicks = 0;
+            return;
+        }
+        Vec3 pull = position().add(0, getBbHeight() / 2, 0).subtract(grabbed.position());
+        if (pull.length() < getBbWidth() / 2 + 2.5) {
+            grabbed.hurt(damageSources().mobAttack(this), damage());
+            grabbed.setAirSupply(Math.max(-20, grabbed.getAirSupply() - 120));
+            grabbed.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 3), this);
+            playSound(SoundEvents.SLIME_ATTACK, 3.0f, 0.4f);
+            grabTicks = 0;
+            grabbed = null;
+            return;
+        }
+        Vec3 v = pull.normalize().scale(0.45);
+        grabbed.setDeltaMovement(v);
+        grabbed.hurtMarked = true;
+        ((ServerLevel) level()).sendParticles(ParticleTypes.SQUID_INK, grabbed.getX(), grabbed.getY() + 1, grabbed.getZ(),
+                2, 0.2, 0.2, 0.2, 0.01);
+    }
+
+    private void ink() {
+        playSound(SoundEvents.SQUID_SQUIRT, 5.0f, 0.4f);
+        ((ServerLevel) level()).sendParticles(ParticleTypes.SQUID_INK, getX(), getY() + getBbHeight() / 2, getZ(),
+                200, 8, 3, 8, 0.05);
+        for (LivingEntity victim : victims(16)) {
+            victim.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 120, 0), this);
+            victim.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 160, 0), this);
+        }
+    }
+
+    private void wave() {
+        playSound(SoundEvents.GENERIC_SPLASH, 6.0f, 0.5f);
+        ServerLevel level = (ServerLevel) level();
+        for (int i = 0; i < 48; i++) {
+            double angle = i * Math.PI / 24;
+            level.sendParticles(ParticleTypes.SPLASH, getX() + Math.cos(angle) * 8, getY() + 1, getZ() + Math.sin(angle) * 8,
+                    6, 0.5, 0.5, 0.5, 0.2);
+        }
+        for (LivingEntity victim : victims(14)) {
+            victim.hurt(damageSources().mobAttack(this), damage() * 0.5f);
+            Vec3 away = victim.position().subtract(position()).normalize();
+            victim.push(away.x * 2.0, 0.5, away.z * 2.0);
+            victim.hurtMarked = true;
+        }
+    }
+
+    /** Erupts a column of water under the target and every other nearby player when enraged. */
+    private void geyser(LivingEntity target) {
+        List<LivingEntity> hits = new ArrayList<>(List.of(target));
+        if (enraged) {
+            hits.addAll(level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(24), p -> p != target && p.isAlive()));
+        }
+        ServerLevel level = (ServerLevel) level();
+        for (LivingEntity victim : hits) {
+            level.sendParticles(ParticleTypes.CLOUD, victim.getX(), victim.getY(), victim.getZ(), 40, 0.4, 2.5, 0.4, 0.05);
+            level.sendParticles(ParticleTypes.SPLASH, victim.getX(), victim.getY() + 1, victim.getZ(), 60, 0.6, 2.0, 0.6, 0.3);
+            victim.hurt(damageSources().mobAttack(this), damage() * 0.5f);
+            victim.setDeltaMovement(victim.getDeltaMovement().x, 1.6, victim.getDeltaMovement().z);
+            victim.hurtMarked = true;
+        }
+        playSound(SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, 5.0f, 0.6f);
+    }
+
+    private void tridentVolley(LivingEntity target) {
+        Vec3 mouth = mouth();
+        for (int i = 0; i < (enraged ? 5 : 3); i++) {
+            ThrownTrident trident = new ThrownTrident(level(), this, new ItemStack(Items.TRIDENT));
+            trident.pickup = AbstractArrow.Pickup.DISALLOWED;
+            trident.setPos(mouth);
+            Vec3 aim = target.getEyePosition().subtract(mouth);
+            trident.shoot(aim.x, aim.y + aim.horizontalDistance() * 0.1, aim.z, 2.2f, 8.0f);
+            level().addFreshEntity(trident);
+        }
+        playSound(SoundEvents.DROWNED_SHOOT, 4.0f, 0.6f);
+    }
+
     /** Knocks out soft blocks in its path, like a kaiju walking through a forest. */
     private void smashBlocks() {
         if (!(level() instanceof ServerLevel level) || !EventHooks.canEntityGrief(level, this)) {
@@ -354,10 +521,27 @@ public class NeoBoss extends Monster implements NeoMob {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (source.getEntity() == this || source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FALL)) {
+        if (source.getEntity() == this || source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FALL)
+                || (spec().isSeaBoss() && source.is(DamageTypes.DROWN))) {
             return false;
         }
         return super.hurt(source, amount * spec().damageTaken);
+    }
+
+    @Override
+    public void travel(Vec3 input) {
+        if (spec().isSeaBoss() && isControlledByLocalInstance() && isInWater()) {
+            moveRelative(getSpeed(), input);
+            move(MoverType.SELF, getDeltaMovement());
+            setDeltaMovement(getDeltaMovement().scale(0.9));
+        } else {
+            super.travel(input);
+        }
+    }
+
+    @Override
+    public boolean isPushedByFluid() {
+        return !spec().isSeaBoss();
     }
 
     @Override

@@ -29,7 +29,9 @@ public final class MobSpec {
         SWIMMER,
         HOSTILE_SWIMMER,
         /** Walking boss with a boss bar and special attacks. */
-        BOSS
+        BOSS,
+        /** Swimming boss: breathes water, swims, flops when beached. */
+        SEA_BOSS
     }
 
     /**
@@ -44,7 +46,15 @@ public final class MobSpec {
         SUMMON(400, 0, 32),
         BEAM(220, 4, 40),
         LEAP_SLAM(180, 5, 18),
-        TAIL_SWIPE(70, 0, 5);
+        TAIL_SWIPE(70, 0, 5),
+        // Sea attacks
+        WHIRLPOOL(200, 0, 20),
+        GRAB(140, 3, 20),
+        INK(220, 0, 16),
+        TENTACLE_SLAM(90, 0, 8),
+        WAVE(120, 0, 14),
+        GEYSER(110, 0, 24),
+        TRIDENT_VOLLEY(80, 4, 28);
 
         public final int cooldown;
         public final double minRange, maxRange;
@@ -66,7 +76,7 @@ public final class MobSpec {
 
     public enum Voice {
         CRITTER, BIRD, BUG, BUZZ, REPTILE, BEAST, DINO, BIG_DINO, FISH, WHALE, SQUID, GHOST, ENDER, UNDEAD,
-        HUMAN, ALIEN, PLANT, FROG, COW, CREEPER, SPIDER, SPRITE
+        HUMAN, ALIEN, PLANT, FROG, COW, CREEPER, SPIDER, SPRITE, GUARDIAN
     }
 
     public record Spawn(TagKey<Biome> biomes, int weight, int min, int max) {}
@@ -108,17 +118,21 @@ public final class MobSpec {
         this.name = name;
         this.kind = kind;
         this.look = look;
-        if (kind == Kind.MONSTER || kind == Kind.HOSTILE_FLYER || kind == Kind.HOSTILE_SWIMMER || kind == Kind.BOSS) {
+        if (kind == Kind.MONSTER || kind == Kind.HOSTILE_FLYER || kind == Kind.HOSTILE_SWIMMER || isBoss()) {
             temper = Temper.HOSTILE;
         }
-        if (kind == Kind.BOSS) {
+        if (isBoss()) {
             followRange = 64;
             stepHeight = 2.0;
         }
     }
 
     public boolean isBoss() {
-        return kind == Kind.BOSS;
+        return kind == Kind.BOSS || kind == Kind.SEA_BOSS;
+    }
+
+    public boolean isSeaBoss() {
+        return kind == Kind.SEA_BOSS;
     }
 
     public MobSpec attacks(BossAttack... attacks) {

@@ -88,7 +88,7 @@ Status: ✅ in game · 🔜 next phase
 | T-Rex | Tyrannosaurus | ✅ |
 | Nastysaurus | Brutosaurus | ✅ |
 | Alosaurus | Allosaurus | ✅ |
-| The Kraken | Kraken | 🔜 |
+| The Kraken | Kraken | ✅ |
 | Mothra | Moth Titan | 🔜 |
 | Leonopteryx | Skyclaw | 🔜 |
 | Cephadrome | Azure Drake | 🔜 |
@@ -102,8 +102,8 @@ Status: ✅ in game · 🔜 next phase
 | Hercules Beetle | Hercules Beetle | 🔜 |
 | Vortex | Maelstrom | 🔜 |
 | Molenoid | Molelord | 🔜 |
-| Sea Viper | Sea Serpent | 🔜 |
-| Sea Monster | Leviathan | 🔜 |
+| Sea Viper | Sea Serpent | ✅ |
+| Sea Monster | Leviathan | ✅ |
 | Nightmare | Dread Steed | 🔜 |
 | Robo Pounder / Sniper / Warrior | Siege Bot / Sniper Bot / War Bot | 🔜 |
 | Kyuubi | Ninetail | 🔜 |
@@ -121,4 +121,4 @@ Status: ✅ in game · 🔜 next phase
 | Ultimate tools | Paragon tools | crafted from Titanium, Uranium and Ruby; come pre-enchanted; the Paragon Pickaxe mines 3×3 | ✅ |
 | Miner's Dream | Tunnel Charge | blasts a tunnel and keeps the ores | ✅ |
 | Ultimate armor / Royal Guardian gear | Paragon armor / King's Scale armor | full-set potion bonuses | ✅ |
-| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver | dropped by bosses | ✅ (first 5) |
+| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang | dropped by bosses | ✅ (first 8) |

@@ -52,6 +52,8 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.crush", "Launches and slows the target");
         add("item.neospawn.boss_weapon.venom", "Strong poison");
         add("item.neospawn.boss_weapon.cleave", "Also cleaves every monster near the target");
+        add("item.neospawn.boss_weapon.hook", "Reels the target in and pins it");
+        add("item.neospawn.boss_weapon.tidal", "Hurls the target and nearby monsters away");
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();

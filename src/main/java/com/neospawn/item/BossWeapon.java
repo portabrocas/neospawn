@@ -1,6 +1,7 @@
 package com.neospawn.item;
 
 import com.neospawn.NeoSpawn;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -33,7 +34,11 @@ public class BossWeapon extends SwordItem {
         /** Poisons the target. */
         VENOM,
         /** Also hits every hostile mob near the target. */
-        CLEAVE
+        CLEAVE,
+        /** Reels the target toward you and pins it in place. */
+        HOOK,
+        /** A wave that hurls the target and every monster around it away. */
+        TIDAL
     }
 
     private final Effect effect;
@@ -85,6 +90,22 @@ public class BossWeapon extends SwordItem {
                     other.hurt(level.damageSources().mobAttack(attacker), 20);
                     Vec3 away = other.position().subtract(attacker.position()).normalize();
                     other.push(away.x, 0.3, away.z);
+                }
+            }
+            case HOOK -> {
+                Vec3 in = attacker.position().subtract(target.position()).normalize();
+                target.push(in.x * 0.8, 0.2, in.z * 0.8);
+                target.hurtMarked = true;
+                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 3), attacker);
+            }
+            case TIDAL -> {
+                level.sendParticles(ParticleTypes.SPLASH, target.getX(), target.getY() + 1, target.getZ(),
+                        60, 1.5, 0.5, 1.5, 0.3);
+                for (LivingEntity other : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(4),
+                        e -> e != attacker && (e == target || e instanceof Enemy))) {
+                    Vec3 away = other.position().subtract(attacker.position()).normalize();
+                    other.push(away.x * 2.0, 0.5, away.z * 2.0);
+                    other.hurtMarked = true;
                 }
             }
         }

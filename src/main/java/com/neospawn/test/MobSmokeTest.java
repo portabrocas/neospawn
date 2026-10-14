@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -23,6 +22,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntFunction;
 
 /**
  * Headless smoke tests. Run: ./gradlew runGameTestServer
@@ -75,57 +75,76 @@ public class MobSmokeTest {
         helper.succeed();
     }
 
-    /** Every boss notices a survival player 10 blocks away and attacks without being provoked. */
-    @GameTest(template = "arena", timeoutTicks = 200)
-    public static void bossesHuntSurvivalPlayers(GameTestHelper helper) {
-        ServerPlayer player = helper.makeMockServerPlayerInLevel();
-        player.setGameMode(GameType.SURVIVAL);
-        // Tough enough to survive four bosses for the length of the test (invulnerable players can't be targeted).
-        player.getAttribute(Attributes.MAX_HEALTH).setBaseValue(100000);
-        player.setHealth(100000);
-        player.moveTo(helper.absoluteVec(new Vec3(12, 2, 2)));
+    /** Every land boss notices a survival player 12 blocks away and attacks without being provoked. */
+    @GameTest(template = "arena", timeoutTicks = 200, batch = "hunt")
+    public static void landBossesHuntPlayers(GameTestHelper helper) {
+        huntTest(helper, MobSpec.Kind.BOSS, new Vec3(12, 2, 2), new BlockPos(12, 2, 14));
+    }
+
+    @GameTest(template = "sea_arena", timeoutTicks = 200, batch = "hunt")
+    public static void seaBossesHuntPlayers(GameTestHelper helper) {
+        huntTest(helper, MobSpec.Kind.SEA_BOSS, new Vec3(16, 10, 4), new BlockPos(16, 6, 20));
+    }
+
+    /** Land bosses each fight an iron golem for 20 seconds; each must use at least two special attacks. */
+    @GameTest(template = "arena", timeoutTicks = 500, batch = "fight")
+    public static void landBossesFight(GameTestHelper helper) {
+        fightTest(helper, MobSpec.Kind.BOSS, new BlockPos(12, 2, 12), i -> new BlockPos(4 + i * 4, 2, 3));
+    }
+
+    @GameTest(template = "sea_arena", timeoutTicks = 500, batch = "fight")
+    public static void seaBossesFight(GameTestHelper helper) {
+        fightTest(helper, MobSpec.Kind.SEA_BOSS, new BlockPos(16, 6, 16), i -> new BlockPos(6 + i * 8, 3, 4));
+    }
+
+    private static List<NeoBoss> spawnBosses(GameTestHelper helper, MobSpec.Kind kind, BlockPos pos) {
         List<NeoBoss> bosses = new ArrayList<>();
         for (MobSpec spec : ModMobs.ALL) {
-            if (spec.isBoss() && helper.spawn(spec.type.get(), new BlockPos(12, 2, 14)) instanceof NeoBoss boss) {
+            if (spec.kind != kind) {
+                continue;
+            }
+            if (helper.spawn(spec.type.get(), pos) instanceof NeoBoss boss) {
                 bosses.add(boss);
+            } else {
+                helper.fail("Could not spawn boss " + spec.id);
             }
         }
+        return bosses;
+    }
+
+    private static void huntTest(GameTestHelper helper, MobSpec.Kind kind, Vec3 playerPos, BlockPos bossPos) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        player.setGameMode(GameType.SURVIVAL);
+        // Tough enough to survive several bosses for the length of the test (invulnerable players can't be targeted).
+        player.getAttribute(Attributes.MAX_HEALTH).setBaseValue(100000);
+        player.setHealth(100000);
+        player.moveTo(helper.absoluteVec(playerPos));
+        List<NeoBoss> bosses = spawnBosses(helper, kind, bossPos);
         helper.succeedWhen(() -> {
             for (NeoBoss boss : bosses) {
                 helper.assertTrue(boss.getTarget() == player, boss.spec().id + " has not targeted the player");
             }
+            // Clean up so this player and these bosses can't distract tests in later batches.
+            player.discard();
+            bosses.forEach(NeoBoss::discard);
         });
     }
 
-    /**
-     * Each boss gets an iron golem to fight for 20 seconds, which drives every special
-     * attack it knows. Then it is killed so its drops run too.
-     */
-    @GameTest(template = "arena", timeoutTicks = 500)
-    public static void bossesFight(GameTestHelper helper) {
-        List<NeoBoss> bosses = new ArrayList<>();
-        for (MobSpec spec : ModMobs.ALL) {
-            if (!spec.isBoss()) {
-                continue;
-            }
-            Entity entity = helper.spawn(spec.type.get(), new BlockPos(12, 2, 12));
-            if (!(entity instanceof NeoBoss boss)) {
-                helper.fail("Could not spawn boss " + spec.id);
-                return;
-            }
-            IronGolem golem = helper.spawn(EntityType.IRON_GOLEM, new BlockPos(4 + bosses.size() * 4, 2, 3));
+    private static void fightTest(GameTestHelper helper, MobSpec.Kind kind, BlockPos bossPos, IntFunction<BlockPos> golemPos) {
+        List<NeoBoss> bosses = spawnBosses(helper, kind, bossPos);
+        for (int i = 0; i < bosses.size(); i++) {
+            IronGolem golem = helper.spawn(EntityType.IRON_GOLEM, golemPos.apply(i));
             golem.setInvulnerable(true);
-            boss.setTarget(golem);
-            bosses.add(boss);
+            bosses.get(i).setTarget(golem);
         }
         helper.runAfterDelay(400, () -> {
             for (NeoBoss boss : bosses) {
-                if (!boss.isAlive()) {
-                    helper.fail(boss.spec().id + " died during the fight");
-                }
+                helper.assertTrue(boss.isAlive(), boss.spec().id + " died during the fight");
+                helper.assertTrue(boss.usedAttacks().size() >= 2,
+                        boss.spec().id + " only used " + boss.usedAttacks() + " in 20 seconds");
+                NeoSpawn.LOGGER.info("Boss test: {} used {}", boss.spec().id, boss.usedAttacks());
             }
             helper.killAllEntities();
-            NeoSpawn.LOGGER.info("Boss test: {} bosses fought for 400 ticks and were killed", bosses.size());
             helper.succeed();
         });
     }
