@@ -32,6 +32,14 @@ public class ModBlockLoot extends BlockLootSubProvider {
         ore(ModBlocks.FOSSIL_ORE, ModItems.FOSSILIZED_EGG.get());
         ore(ModBlocks.DEEPSLATE_FOSSIL_ORE, ModItems.FOSSILIZED_EGG.get());
 
+        dropSelf(ModBlocks.DUPLICATOR_LOG.get());
+        dropSelf(ModBlocks.DUPLICATOR_CORE.get());
+        ModBlocks.SAPLINGS.forEach(sapling -> dropSelf(sapling.get()));
+        add(ModBlocks.DUPLICATOR_LEAVES.get(), createLeavesDrops(ModBlocks.DUPLICATOR_LEAVES.get(), ModBlocks.DUPLICATOR_SAPLING.get(),
+                0.01f, 0.0125f, 0.015f, 0.02f, 0.03f));
+        add(ModBlocks.EXPERIENCE_LEAVES.get(), createLeavesDrops(ModBlocks.EXPERIENCE_LEAVES.get(), ModBlocks.EXPERIENCE_SAPLING.get(),
+                0.05f, 0.0625f, 0.083f, 0.1f));
+
         for (DeferredBlock<Block> storage : List.of(ModBlocks.RUBY_BLOCK, ModBlocks.TANZANITE_BLOCK,
                 ModBlocks.TITANIUM_BLOCK, ModBlocks.URANIUM_BLOCK, ModBlocks.SALT_BLOCK, ModBlocks.PARAGON_BLOCK)) {
             dropSelf(storage.get());

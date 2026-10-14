@@ -585,6 +585,55 @@ save(big_blade((80, 20, 20), (255, 120, 40), (40, 20, 20), (25, 5, 5), guard=(70
 
 save(big_blade((236, 184, 60), (255, 246, 185), (120, 40, 140), (62, 20, 72), width=4, guard=(165, 70, 190)), "item/behemoth_blade.png")
 
+# Trees: Duplicator log/core/leaves, Experience leaves, and saplings with fruit in the ore's color.
+def bark(main, dark, glow=None):
+    img = Image.new("RGBA", (16, 16))
+    for x in range(16):
+        for y in range(16):
+            c = dark if (x % 4 == 0 or (x + y // 3) % 7 == 0) else main
+            img.putpixel((x, y), jitter(c, 8) + (255,))
+    if glow:
+        for x, y in ((7, 4), (8, 4), (7, 5), (8, 6), (7, 7), (8, 8), (7, 9), (8, 10), (7, 11), (8, 11)):
+            img.putpixel((x, y), glow + (255,))
+    return img
+def rings(main, dark, center):
+    img = Image.new("RGBA", (16, 16))
+    for x in range(16):
+        for y in range(16):
+            d = max(abs(x - 7.5), abs(y - 7.5))
+            c = dark if d > 6.5 else center if d < 2 else (main if int(d) % 2 else shade(main, -15))
+            img.putpixel((x, y), jitter(c, 5) + (255,))
+    return img
+def leaves(color, sparkle=None):
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for x in range(16):
+        for y in range(16):
+            if rng.random() < 0.82:
+                c = sparkle if sparkle and rng.random() < 0.08 else jitter(color, 20)
+                img.putpixel((x, y), c + (255,))
+    return img
+DUP_BARK, DUP_DARK, DUP_GLOW = (110, 80, 150), (70, 45, 100), (120, 240, 255)
+save(bark(DUP_BARK, DUP_DARK), "block/duplicator_log.png")
+save(rings((180, 150, 210), DUP_DARK, (200, 170, 230)), "block/duplicator_log_top.png")
+save(bark(DUP_BARK, DUP_DARK, DUP_GLOW), "block/duplicator_core.png")
+save(rings((180, 150, 210), DUP_DARK, DUP_GLOW), "block/duplicator_core_top.png")
+save(leaves((170, 110, 220), (230, 200, 255)), "block/duplicator_leaves.png")
+save(leaves((120, 220, 60), (240, 255, 120)), "block/experience_leaves.png")
+SAPLINGS = {"duplicator_sapling": (170, 110, 220), "experience_sapling": (150, 240, 70),
+            "iron_ore_sapling": (216, 175, 147), "gold_ore_sapling": (250, 220, 60), "diamond_ore_sapling": (90, 230, 230),
+            "emerald_ore_sapling": (40, 200, 90), "ruby_ore_sapling": (220, 30, 60)}
+for name, fruit in SAPLINGS.items():
+    sp = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y in range(9, 16):
+        sp.putpixel((8, y), (110, 75, 40, 255))
+    for x in range(16):
+        for y in range(16):
+            if (x - 8) ** 2 + (y - 6) ** 2 <= 20 and rng.random() < 0.85:
+                sp.putpixel((x, y), jitter((60, 140, 40), 15) + (255,))
+    for x, y in ((6, 4), (10, 5), (8, 8), (5, 7)):
+        sp.putpixel((x, y), fruit + (255,))
+    save(sp, f"block/{name}.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

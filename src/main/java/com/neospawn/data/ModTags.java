@@ -1,6 +1,7 @@
 package com.neospawn.data;
 
 import com.neospawn.NeoSpawn;
+import com.neospawn.block.DuplicatorCoreBlock;
 import com.neospawn.registry.ModBlocks;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.HolderLookup;
@@ -24,7 +25,21 @@ public final class ModTags {
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
-            ModBlocks.BLOCKS.getEntries().forEach(b -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(b.get()));
+            ModBlocks.GEM_ORES.forEach(b -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(b.get()));
+            ModBlocks.METAL_ORES.forEach(b -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(b.get()));
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.RUBY_BLOCK.get(), ModBlocks.TANZANITE_BLOCK.get(),
+                    ModBlocks.TITANIUM_BLOCK.get(), ModBlocks.URANIUM_BLOCK.get(), ModBlocks.SALT_BLOCK.get(), ModBlocks.PARAGON_BLOCK.get());
+            tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.DUPLICATOR_LOG.get(), ModBlocks.DUPLICATOR_CORE.get());
+            tag(BlockTags.LOGS).add(ModBlocks.DUPLICATOR_LOG.get(), ModBlocks.DUPLICATOR_CORE.get());
+            tag(BlockTags.LOGS_THAT_BURN).add(ModBlocks.DUPLICATOR_LOG.get());
+            tag(BlockTags.LEAVES).add(ModBlocks.DUPLICATOR_LEAVES.get(), ModBlocks.EXPERIENCE_LEAVES.get());
+            tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.DUPLICATOR_LEAVES.get(), ModBlocks.EXPERIENCE_LEAVES.get());
+            ModBlocks.SAPLINGS.forEach(b -> tag(BlockTags.SAPLINGS).add(b.get()));
+            // Never duplicated: bedrock-likes, portals and other things that would break the game.
+            // (Fully qualified: this class is itself named Blocks.)
+            tag(DuplicatorCoreBlock.BLACKLIST).add(net.minecraft.world.level.block.Blocks.BEDROCK, net.minecraft.world.level.block.Blocks.BARRIER, net.minecraft.world.level.block.Blocks.END_PORTAL_FRAME, net.minecraft.world.level.block.Blocks.DRAGON_EGG,
+                    net.minecraft.world.level.block.Blocks.BUDDING_AMETHYST, net.minecraft.world.level.block.Blocks.REINFORCED_DEEPSLATE, net.minecraft.world.level.block.Blocks.NETHER_PORTAL, net.minecraft.world.level.block.Blocks.END_PORTAL,
+                    net.minecraft.world.level.block.Blocks.END_GATEWAY, net.minecraft.world.level.block.Blocks.COMMAND_BLOCK, net.minecraft.world.level.block.Blocks.STRUCTURE_BLOCK);
             ModBlocks.GEM_ORES.forEach(b -> tag(Tags.Blocks.ORES).add(b.get()));
             ModBlocks.METAL_ORES.forEach(b -> tag(Tags.Blocks.ORES).add(b.get()));
 

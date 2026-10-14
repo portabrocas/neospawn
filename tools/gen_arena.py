@@ -2,6 +2,7 @@
 
   python3 tools/gen_arena.py <out.nbt>         land arena: 24x8x24, stone floor, small water pool
   python3 tools/gen_arena.py <out.nbt> sea     sea arena: 32x20x32 stone tank full of water
+  python3 tools/gen_arena.py <out.nbt> tall    tall arena: 24x24x24 stone floor, open air (for trees and structures)
 """
 import gzip
 import struct
@@ -24,8 +25,9 @@ def int_list(values):
 def compound_list(compounds):
     return bytes([10]) + struct.pack(">i", len(compounds)) + b"".join(compounds)
 
-SEA = len(sys.argv) > 2 and sys.argv[2] == "sea"
-SIZE, HEIGHT = (32, 20) if SEA else (24, 8)
+MODE = sys.argv[2] if len(sys.argv) > 2 else "land"
+SEA = MODE == "sea"
+SIZE, HEIGHT = {"sea": (32, 20), "tall": (24, 24)}.get(MODE, (24, 8))
 palette = [
     compound([tag(8, "Name", string("minecraft:stone"))]),
     compound([tag(8, "Name", string("minecraft:water")),
@@ -45,7 +47,7 @@ if SEA:
             wall = x in (0, SIZE - 1) or z in (0, SIZE - 1)
             for y in range(1, HEIGHT - 1):
                 put(x, y, z, 0 if wall else 1)
-else:
+elif MODE == "land":
     # A 6x3x6 water pool in one corner, walled by the floor.
     for x in range(16, 22):
         for z in range(16, 22):

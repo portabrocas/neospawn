@@ -3,10 +3,14 @@ package com.neospawn.data;
 import com.neospawn.NeoSpawn;
 import com.neospawn.registry.ModBlocks;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-/** Every NeoSpawn block is a plain cube with one texture: textures/block/<name>.png. */
+/** Blocks are plain cubes with one texture (textures/block/<name>.png), except trees: saplings, logs and leaves. */
 public class ModBlockStates extends BlockStateProvider {
     public ModBlockStates(PackOutput output, ExistingFileHelper files) {
         super(output, NeoSpawn.MODID, files);
@@ -14,6 +18,19 @@ public class ModBlockStates extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        ModBlocks.BLOCKS.getEntries().forEach(holder -> simpleBlockWithItem(holder.get(), cubeAll(holder.get())));
+        for (var holder : ModBlocks.BLOCKS.getEntries()) {
+            Block block = holder.get();
+            String name = holder.getId().getPath();
+            if (block instanceof SaplingBlock) {
+                simpleBlock(block, models().cross(name, blockTexture(block)).renderType("cutout"));
+            } else if (block instanceof RotatedPillarBlock pillar) {
+                logBlock(pillar);
+                simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name)));
+            } else if (block instanceof LeavesBlock) {
+                simpleBlockWithItem(block, models().cubeAll(name, blockTexture(block)).renderType("cutout_mipped"));
+            } else {
+                simpleBlockWithItem(block, cubeAll(block));
+            }
+        }
     }
 }

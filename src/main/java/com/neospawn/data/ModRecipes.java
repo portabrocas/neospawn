@@ -68,6 +68,18 @@ public class ModRecipes extends RecipeProvider {
         charm(out, ModItems.SOVEREIGN_CHARM.get(), ModItems.KING_SCALE.get(), Items.GOLD_BLOCK, null, "SSS", "SGS", "SSS");
         charm(out, ModItems.PARAGON_CHARM.get(), ModItems.PARAGON_INGOT.get(), Items.NETHER_STAR, null, " P ", "PNP", " P ");
 
+        // Ore trees: an oak sapling ringed by the ore's ingots and bone meal.
+        oreSapling(out, ModBlocks.IRON_ORE_SAPLING.get(), Items.IRON_INGOT);
+        oreSapling(out, ModBlocks.GOLD_ORE_SAPLING.get(), Items.GOLD_INGOT);
+        oreSapling(out, ModBlocks.DIAMOND_ORE_SAPLING.get(), Items.DIAMOND);
+        oreSapling(out, ModBlocks.EMERALD_ORE_SAPLING.get(), Items.EMERALD);
+        oreSapling(out, ModBlocks.RUBY_ORE_SAPLING.get(), ModItems.RUBY.get());
+        oreSapling(out, ModBlocks.EXPERIENCE_SAPLING.get(), Items.EXPERIENCE_BOTTLE);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.DUPLICATOR_SAPLING.get())
+                .pattern("DSD").pattern("SPS").pattern("DSD")
+                .define('D', Items.DIAMOND).define('S', Items.OAK_SAPLING).define('P', ModItems.PARAGON_INGOT.get())
+                .unlockedBy("has_paragon", has(ModItems.PARAGON_INGOT.get())).save(out, NeoSpawn.id("duplicator_sapling"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEHEMOTH_BLADE.get())
                 .pattern(" F ").pattern("CPE").pattern(" K ")
                 .define('F', ModItems.KINGS_FANG.get()).define('C', ModItems.TITAN_CLEAVER.get())
@@ -172,6 +184,13 @@ public class ModRecipes extends RecipeProvider {
             }
         }
         builder.unlockedBy("has_" + getItemName(center), has(center)).save(out, NeoSpawn.id(getItemName(charm)));
+    }
+
+    private void oreSapling(RecipeOutput out, ItemLike sapling, Item ingot) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, sapling)
+                .pattern("IBI").pattern("BSB").pattern("IBI")
+                .define('I', ingot).define('B', Items.BONE_MEAL).define('S', Items.OAK_SAPLING)
+                .unlockedBy("has_" + getItemName(ingot), has(ingot)).save(out, NeoSpawn.id(getItemName(sapling)));
     }
 
     private void storage(RecipeOutput out, Item item, ItemLike block, String name) {

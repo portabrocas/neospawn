@@ -104,7 +104,7 @@ REALMS = {
             effects(0x8FD8FF, 0xE0F6FF, 0x3FE0D0, 0x1A6A6A, grass=0x7CFC7C, foliage=0x5AE05A,
                     particle=("minecraft:white_ash", 0.002)),
             mc("flower_flower_forest", "forest_flowers", "trees_flower_forest", "patch_grass_plain",
-               "patch_sugar_cane", "patch_pumpkin"),
+               "patch_sugar_cane", "patch_pumpkin") + ns("duplicator_tree"),
             {"creature": [spawn("egg_bunny", 10, 2, 3), spawn("peacock", 8, 1, 3), spawn("chipmunk", 8, 1, 3),
                           spawn("orchard_cow", 6, 1, 3), spawn("gilded_cow", 3, 1, 2), spawn("minecraft:sheep", 8, 2, 4),
                           spawn("minecraft:rabbit", 6, 2, 3), spawn("minecraft:horse", 3, 2, 4)],
@@ -119,7 +119,7 @@ REALMS = {
         noise="minecraft:amplified",
         biome=biome(
             effects(0xC8A878, 0xD8B888, 0x4A7AB8, 0x2A3A5A, grass=0x9AB860, foliage=0x7A9A40),
-            mc("trees_plains", "patch_grass_plain", "flower_default"),
+            mc("trees_plains", "patch_grass_plain", "flower_default") + ns("duplicator_tree"),
             {"monster": [spawn("swift_raptor", 30, 2, 4), spawn("baryonyx", 10, 1, 1), spawn("cryolophosaurus", 10, 1, 2),
                          spawn("allosaurus", 2, 1, 1), spawn("tyrannosaurus", 2, 1, 1), spawn("brutosaurus", 1, 1, 1),
                          spawn("ember_dragon", 1, 1, 1), spawn("skyclaw", 1, 1, 1),
@@ -196,6 +196,36 @@ for name, realm in REALMS.items():
         "type": f"neospawn:{name}",
         "generator": {"type": "minecraft:noise", "settings": realm["noise"],
                       "biome_source": {"type": "minecraft:fixed", "biome": f"neospawn:{name}"}}})
+
+# Trees grown from NeoSpawn saplings. Ore trees: oak trunks whose leaves hold ore blocks.
+def ore_tree(ore, ore_weight=15):
+    return {"type": "minecraft:tree", "config": {
+        "ignore_vines": True, "force_dirt": False,
+        "dirt_provider": {"type": "minecraft:simple_state_provider", "state": {"Name": "minecraft:dirt"}},
+        "trunk_provider": {"type": "minecraft:simple_state_provider",
+                           "state": {"Name": "minecraft:oak_log", "Properties": {"axis": "y"}}},
+        "trunk_placer": {"type": "minecraft:straight_trunk_placer", "base_height": 5, "height_rand_a": 2, "height_rand_b": 0},
+        "foliage_provider": {"type": "minecraft:weighted_state_provider", "entries": [
+            {"data": {"Name": "minecraft:oak_leaves",
+                      "Properties": {"distance": "7", "persistent": "false", "waterlogged": "false"}}, "weight": 100 - ore_weight},
+            {"data": {"Name": ore}, "weight": ore_weight}]},
+        "foliage_placer": {"type": "minecraft:blob_foliage_placer", "radius": 3, "offset": 0, "height": 4},
+        "minimum_size": {"type": "minecraft:two_layers_feature_size", "limit": 1, "lower_size": 0, "upper_size": 2},
+        "decorators": []}}
+
+
+for name, ore in {"iron_ore_tree": "minecraft:iron_ore", "gold_ore_tree": "minecraft:gold_ore",
+                  "diamond_ore_tree": "minecraft:diamond_ore", "emerald_ore_tree": "minecraft:emerald_ore",
+                  "ruby_ore_tree": "neospawn:ruby_ore"}.items():
+    write(f"worldgen/configured_feature/{name}.json", ore_tree(ore))
+experience_tree = ore_tree("neospawn:experience_leaves", 100)
+experience_tree["config"]["foliage_provider"] = {"type": "minecraft:simple_state_provider", "state": {
+    "Name": "neospawn:experience_leaves", "Properties": {"distance": "7", "persistent": "false", "waterlogged": "false"}}}
+write("worldgen/configured_feature/experience_tree.json", experience_tree)
+write("worldgen/configured_feature/duplicator_tree.json", {"type": "neospawn:duplicator_tree", "config": {}})
+write("worldgen/placed_feature/duplicator_tree.json", {"feature": "neospawn:duplicator_tree", "placement": [
+    {"type": "minecraft:rarity_filter", "chance": 300}, {"type": "minecraft:in_square"},
+    {"type": "minecraft:heightmap", "heightmap": "WORLD_SURFACE_WG"}, {"type": "minecraft:biome"}]})
 
 # Realm structures (procedural features in com.neospawn.worldgen): how rare, and where.
 SURFACE = [{"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": "WORLD_SURFACE_WG"},

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "neospawn:block/gold_ore_sapling"
+  }
+}

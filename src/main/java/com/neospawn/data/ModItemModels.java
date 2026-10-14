@@ -11,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -26,8 +27,11 @@ public class ModItemModels extends ItemModelProvider {
         for (var holder : ModItems.ITEMS.getEntries()) {
             Item item = holder.get();
             String name = BuiltInRegistries.ITEM.getKey(item).getPath();
-            if (item instanceof BlockItem) {
-                continue; // made by ModBlockStates
+            if (item instanceof BlockItem blockItem) {
+                if (blockItem.getBlock() instanceof SaplingBlock) {
+                    withExistingParent(name, mcLoc("item/generated")).texture("layer0", modLoc("block/" + name));
+                }
+                continue; // other block items are made by ModBlockStates
             }
             if (item instanceof ParagonBow) {
                 // Like the vanilla bow: three drawing frames picked by the "pull" property.

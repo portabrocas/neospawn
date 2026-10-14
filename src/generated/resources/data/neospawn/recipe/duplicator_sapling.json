@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "neospawn:paragon_ingot"
+    },
+    "S": {
+      "item": "minecraft:oak_sapling"
+    }
+  },
+  "pattern": [
+    "DSD",
+    "SPS",
+    "DSD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:duplicator_sapling"
+  }
+}

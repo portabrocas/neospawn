@@ -89,7 +89,8 @@
       "minecraft:glow_lichen",
       "minecraft:trees_plains",
       "minecraft:patch_grass_plain",
-      "minecraft:flower_default"
+      "minecraft:flower_default",
+      "neospawn:duplicator_tree"
     ],
     [
       "minecraft:freeze_top_layer"

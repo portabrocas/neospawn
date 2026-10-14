@@ -20,5 +20,8 @@ public final class ModFeatures {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PRISON_TOWER =
             FEATURES.register("prison_tower", PrisonTowerFeature::new);
 
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DUPLICATOR_TREE =
+            FEATURES.register("duplicator_tree", DuplicatorTreeFeature::new);
+
     private ModFeatures() {}
 }
