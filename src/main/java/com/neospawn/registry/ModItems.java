@@ -4,6 +4,8 @@ import com.neospawn.NeoSpawn;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
 import com.neospawn.item.MountItem;
+import com.neospawn.item.ParagonBow;
+import com.neospawn.item.ParagonFishingRod;
 import com.neospawn.item.ParagonTools;
 import com.neospawn.item.RoyalSigilItem;
 import com.neospawn.item.SetArmorItem;
@@ -93,6 +95,10 @@ public final class ModItems {
             ITEMS.register("paragon_hoe", () -> new ParagonTools.Hoe(PARAGON_TIER, paragonProps()
                     .attributes(HoeItem.createAttributes(PARAGON_TIER, -5.0f, 0.0f)))));
     public static final List<ToolSet> TOOL_SETS = List.of(RUBY_TOOLS, TANZANITE_TOOLS, TITANIUM_TOOLS, PARAGON_TOOLS);
+    public static final DeferredItem<ParagonBow> PARAGON_BOW = ITEMS.register("paragon_bow",
+            () -> new ParagonBow(paragonProps().durability(2000)));
+    public static final DeferredItem<ParagonFishingRod> PARAGON_FISHING_ROD = ITEMS.register("paragon_fishing_rod",
+            () -> new ParagonFishingRod(paragonProps().durability(1000)));
 
     // ---------------------------------------------------------------- armor
     public record ArmorSet(String name, DeferredItem<SetArmorItem> helmet, DeferredItem<SetArmorItem> chestplate,

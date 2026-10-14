@@ -30,7 +30,8 @@ import java.util.Map;
  * first time it sits in an inventory, and the pickaxe mines a 3x3 area (sneak for 1x1).
  */
 public final class ParagonTools {
-    private static void enchantOnce(ItemStack stack, Level level, Map<ResourceKey<Enchantment>, Integer> enchants) {
+    /** Enchants a stack the first time it ticks in an inventory (server side), so every way of getting one is covered. */
+    public static void enchantOnce(ItemStack stack, Level level, Map<ResourceKey<Enchantment>, Integer> enchants) {
         if (level.isClientSide || stack.isEnchanted()) {
             return;
         }

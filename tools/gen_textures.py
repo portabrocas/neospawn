@@ -510,6 +510,32 @@ for name, inside in (("zoo_cage", None), ("zoo_cage_filled", (120, 200, 90))):
         c.set(6, 9, (20, 20, 20)); c.set(8, 9, (20, 20, 20))
     save(c.image((60, 50, 30)), f"item/{name}.png")
 
+# Paragon Bow (and its three drawing frames) and Paragon Fishing Rod.
+def bow(pull):
+    b = Sprite()
+    bend = [0, 1, 2, 3][pull]
+    for t in range(13):
+        x = 2 + t
+        y = 13 - t
+        # The limbs bow outward; the more it's pulled, the deeper the curve.
+        off = round((1 - abs(t - 6) / 6) * (2 + bend))
+        b.set(x - off, y - off, MATERIALS["paragon"][1] if 2 < t < 10 else MATERIALS["paragon"][0])
+    sx, sy = 3 + bend, 12 - 0 + 0
+    b.line(2, 13, 14, 1, (230, 230, 230)) if pull == 0 else (b.line(2, 13, 8 - bend, 7 + bend, (230, 230, 230)), b.line(8 - bend, 7 + bend, 14, 1, (230, 230, 230)))
+    if pull:
+        b.line(9 - bend, 6 + bend, 12 - bend, 3 + bend, (180, 140, 90))
+        b.set(12 - bend, 3 + bend, (220, 220, 230))
+    return b.image(MATERIALS["paragon"][3])
+save(bow(0), "item/paragon_bow.png")
+for i in range(3):
+    save(bow(i + 1), f"item/paragon_bow_pulling_{i}.png")
+rod = Sprite()
+rod.line(2, 14, 12, 4, MATERIALS["paragon"][1])
+rod.line(13, 3, 14, 3, MATERIALS["paragon"][0])
+rod.line(14, 4, 14, 11, (230, 230, 230))
+rod.set(14, 12, (255, 120, 40)); rod.set(13, 12, (255, 200, 60))
+save(rod.image(MATERIALS["paragon"][3]), "item/paragon_fishing_rod.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

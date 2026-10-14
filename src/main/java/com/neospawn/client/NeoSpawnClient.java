@@ -5,12 +5,14 @@ import com.neospawn.client.model.TheKingModel;
 import com.neospawn.client.renderer.NeoMobRenderer;
 import com.neospawn.client.renderer.TheKingRenderer;
 import com.neospawn.client.shape.Shapes;
+import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ZooCageItem;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.mob.NeoBoss;
 import com.neospawn.registry.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.neoforged.api.distmarker.Dist;
@@ -40,8 +42,16 @@ public final class NeoSpawnClient {
 
     @SubscribeEvent
     static void clientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> ItemProperties.register(ModItems.ZOO_CAGE.get(), NeoSpawn.id("filled"),
-                (stack, level, entity, seed) -> ZooCageItem.isFilled(stack) ? 1 : 0));
+        event.enqueueWork(() -> {
+            ItemProperties.register(ModItems.ZOO_CAGE.get(), NeoSpawn.id("filled"),
+                    (stack, level, entity, seed) -> ZooCageItem.isFilled(stack) ? 1 : 0);
+            // The vanilla bow's draw properties, sped up to match the Paragon Bow's faster draw.
+            ItemProperties.register(ModItems.PARAGON_BOW.get(), ResourceLocation.withDefaultNamespace("pull"),
+                    (stack, level, entity, seed) -> entity == null || entity.getUseItem() != stack ? 0
+                            : (stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) * ParagonBow.DRAW_SPEEDUP / 20.0f);
+            ItemProperties.register(ModItems.PARAGON_BOW.get(), ResourceLocation.withDefaultNamespace("pulling"),
+                    (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+        });
     }
 
     @SubscribeEvent

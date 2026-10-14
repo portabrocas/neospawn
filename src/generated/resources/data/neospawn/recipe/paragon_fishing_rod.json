@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": {
+      "item": "neospawn:paragon_ingot"
+    },
+    "R": {
+      "item": "minecraft:fishing_rod"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "  P",
+    " PS",
+    "R S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:paragon_fishing_rod"
+  }
+}

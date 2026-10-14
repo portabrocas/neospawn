@@ -1,6 +1,8 @@
 package com.neospawn.data;
 
 import com.neospawn.NeoSpawn;
+import com.neospawn.item.ParagonBow;
+import com.neospawn.item.ParagonFishingRod;
 import com.neospawn.item.ZooCageItem;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -26,7 +29,19 @@ public class ModItemModels extends ItemModelProvider {
             if (item instanceof BlockItem) {
                 continue; // made by ModBlockStates
             }
-            if (item instanceof ZooCageItem) {
+            if (item instanceof ParagonBow) {
+                // Like the vanilla bow: three drawing frames picked by the "pull" property.
+                ItemModelBuilder bow = withExistingParent(name, mcLoc("item/bow")).texture("layer0", modLoc("item/" + name));
+                float[] pulls = {0, 0.65f, 0.9f};
+                for (int i = 0; i < 3; i++) {
+                    String frame = name + "_pulling_" + i;
+                    withExistingParent(frame, mcLoc("item/bow")).texture("layer0", modLoc("item/" + frame));
+                    bow.override().predicate(mcLoc("pulling"), 1).predicate(mcLoc("pull"), pulls[i])
+                            .model(new ModelFile.UncheckedModelFile(modLoc("item/" + frame))).end();
+                }
+            } else if (item instanceof ParagonFishingRod) {
+                withExistingParent(name, mcLoc("item/handheld_rod")).texture("layer0", modLoc("item/" + name));
+            } else if (item instanceof ZooCageItem) {
                 withExistingParent(name + "_filled", mcLoc("item/generated")).texture("layer0", modLoc("item/" + name + "_filled"));
                 withExistingParent(name, mcLoc("item/generated")).texture("layer0", modLoc("item/" + name))
                         .override().predicate(modLoc("filled"), 1)

@@ -64,6 +64,17 @@ public class ModRecipes extends RecipeProvider {
         charm(out, ModItems.SOVEREIGN_CHARM.get(), ModItems.KING_SCALE.get(), Items.GOLD_BLOCK, null, "SSS", "SGS", "SSS");
         charm(out, ModItems.PARAGON_CHARM.get(), ModItems.PARAGON_INGOT.get(), Items.NETHER_STAR, null, " P ", "PNP", " P ");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.PARAGON_BOW.get())
+                .pattern(" PS").pattern("B S").pattern(" PS")
+                .define('P', ModItems.PARAGON_INGOT.get()).define('S', Items.STRING).define('B', Items.BOW)
+                .unlockedBy("has_paragon", has(ModItems.PARAGON_INGOT.get()))
+                .save(out, NeoSpawn.id("paragon_bow"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.PARAGON_FISHING_ROD.get())
+                .pattern("  P").pattern(" PS").pattern("R S")
+                .define('P', ModItems.PARAGON_INGOT.get()).define('S', Items.STRING).define('R', Items.FISHING_ROD)
+                .unlockedBy("has_paragon", has(ModItems.PARAGON_INGOT.get()))
+                .save(out, NeoSpawn.id("paragon_fishing_rod"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.ZOO_CAGE.get(), 2)
                 .pattern("IBI").pattern("BGB").pattern("IBI")
                 .define('I', Items.IRON_INGOT).define('B', Items.IRON_BARS).define('G', Items.GOLD_INGOT)

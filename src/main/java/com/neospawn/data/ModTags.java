@@ -66,6 +66,9 @@ public final class ModTags {
                 tag(ItemTags.FOOT_ARMOR).add(set.boots().get());
             }
             ModItems.BOSS_WEAPONS.forEach(weapon -> tag(ItemTags.SWORDS).add(weapon.get()));
+            tag(ItemTags.BOW_ENCHANTABLE).add(ModItems.PARAGON_BOW.get());
+            tag(ItemTags.FISHING_ENCHANTABLE).add(ModItems.PARAGON_FISHING_ROD.get());
+            tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.PARAGON_BOW.get(), ModItems.PARAGON_FISHING_ROD.get());
             tag(ItemTags.BEACON_PAYMENT_ITEMS).add(ModItems.RUBY.get(), ModItems.TANZANITE.get(),
                     ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get(), ModItems.PARAGON_INGOT.get());
         }

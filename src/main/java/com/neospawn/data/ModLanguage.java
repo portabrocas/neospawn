@@ -81,6 +81,7 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.mount_item.tooltip_climbing", "Walks up walls");
         add("item.neospawn.mount_item.tooltip_mech", "Repair it with iron ingots");
         add("message.neospawn.mount_item.hatched", "Your %s is ready to ride.");
+        add("item.neospawn.paragon_fishing_rod.tooltip", "Aim at lava or water and hold to reel in a catch");
         add("item.neospawn.zoo_cage.empty", "Right-click a mob to catch it. Hostile mobs must be below half health");
         add("item.neospawn.zoo_cage.holds", "Holds: %s (%s health)");
         add("item.neospawn.zoo_cage.release", "Use on the ground to release it");
