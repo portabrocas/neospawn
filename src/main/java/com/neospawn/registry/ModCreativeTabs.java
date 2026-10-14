@@ -1,6 +1,7 @@
 package com.neospawn.registry;
 
 import com.neospawn.NeoSpawn;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,7 +28,7 @@ public final class ModCreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATURES = TABS.register("creatures",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.neospawn.creatures"))
-                    .icon(() -> new ItemStack(ModItems.THE_KING_SPAWN_EGG.get()))
+                    .icon(() -> new ItemStack(BuiltInRegistries.ITEM.get(NeoSpawn.id("the_king_spawn_egg"))))
                     .withTabsBefore(MAIN.getKey())
                     .displayItems((params, output) -> ModItems.ITEMS.getEntries().stream()
                             .map(holder -> holder.get())

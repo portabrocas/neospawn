@@ -7,7 +7,7 @@ import com.neospawn.client.renderer.TheKingRenderer;
 import com.neospawn.client.shape.Shapes;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
-import com.neospawn.registry.ModEntities;
+import com.neospawn.mob.NeoBoss;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.neoforged.api.distmarker.Dist;
@@ -21,9 +21,12 @@ public final class NeoSpawnClient {
     @SubscribeEvent
     @SuppressWarnings("unchecked")
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.THE_KING.get(), TheKingRenderer::new);
         for (MobSpec spec : ModMobs.ALL) {
-            event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
+            if (spec.id.equals("the_king")) {
+                event.registerEntityRenderer((EntityType<NeoBoss>) spec.type.get(), TheKingRenderer::new);
+            } else {
+                event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
+            }
         }
     }
 
@@ -31,7 +34,9 @@ public final class NeoSpawnClient {
     static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(TheKingModel.LAYER, TheKingModel::createBodyLayer);
         for (MobSpec spec : ModMobs.ALL) {
-            event.registerLayerDefinition(NeoMobRenderer.layer(spec), () -> Shapes.get(spec).toLayer());
+            if (!spec.customRenderer) {
+                event.registerLayerDefinition(NeoMobRenderer.layer(spec), () -> Shapes.get(spec).toLayer());
+            }
         }
     }
 

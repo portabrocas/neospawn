@@ -1,7 +1,7 @@
 package com.neospawn.client.model;
 
 import com.neospawn.NeoSpawn;
-import com.neospawn.entity.TheKing;
+import com.neospawn.mob.NeoBoss;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
  * Crowned dragon model. Built at 1/4 size; the renderer scales it up 4x.
  * Texture offsets match the layout painted by tools/gen_textures.py.
  */
-public class TheKingModel extends HierarchicalModel<TheKing> {
+public class TheKingModel extends HierarchicalModel<NeoBoss> {
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(NeoSpawn.id("the_king"), "main");
     private static final int TAIL_SEGMENTS = 4;
 
@@ -122,7 +122,7 @@ public class TheKingModel extends HierarchicalModel<TheKing> {
     }
 
     @Override
-    public void setupAnim(TheKing entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+    public void setupAnim(NeoBoss entity, float limbSwing, float limbSwingAmount, float ageInTicks,
                           float netHeadYaw, float headPitch) {
         boolean enraged = entity.isEnraged();
         float flap = ageInTicks * (enraged ? 0.33f : 0.2f);

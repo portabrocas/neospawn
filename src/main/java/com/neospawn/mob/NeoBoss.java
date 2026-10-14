@@ -5,6 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,6 +21,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -34,6 +38,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -48,6 +53,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
@@ -63,9 +69,13 @@ import java.util.Set;
 /**
  * A boss. Its spec lists which special attacks it knows; this class schedules them (one
  * at a time, with cooldowns) on top of normal melee. Below half health it enrages and
- * everything recharges twice as fast. Sea bosses swim and breathe water.
+ * everything recharges twice as fast. Sea bosses swim and breathe water; sky bosses
+ * circle their target from above, swoop in to bite, and phase through terrain.
  */
 public class NeoBoss extends Monster implements NeoMob {
+    private static final EntityDataAccessor<Boolean> ENRAGED =
+            SynchedEntityData.defineId(NeoBoss.class, EntityDataSerializers.BOOLEAN);
+
     // No initializer: registerGoals() runs inside the super constructor and fills this first.
     private MobSpec spec;
     private final ServerBossEvent bossEvent;
@@ -83,11 +93,21 @@ public class NeoBoss extends Monster implements NeoMob {
     @Nullable private LivingEntity grabbed;
     private final Set<BossAttack> usedAttacks = EnumSet.noneOf(BossAttack.class);
 
+    // Sky bosses
+    private float orbitAngle;
+    private int swoopTicks;
+    private int biteCooldown;
+    private int volleyCount;
+    @Nullable private Vec3 idleGoal;
+
     public NeoBoss(EntityType<? extends NeoBoss> type, Level level) {
         super(type, level);
         if (spec().isSeaBoss()) {
             moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02f, 0.1f, true);
             lookControl = new SmoothSwimmingLookControl(this, 10);
+        }
+        if (spec().isSkyBoss()) {
+            setNoGravity(true);
         }
         xpReward = spec().xp;
         bossEvent = new ServerBossEvent(getDisplayName(), spec().barColor, BossEvent.BossBarOverlay.NOTCHED_10);
@@ -103,6 +123,22 @@ public class NeoBoss extends Monster implements NeoMob {
         return spec;
     }
 
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ENRAGED, false);
+    }
+
+    /** Synced to clients, so renderers can react (The King flaps faster). */
+    public boolean isEnraged() {
+        return entityData.get(ENRAGED);
+    }
+
+    private void setEnraged(boolean value) {
+        enraged = value;
+        entityData.set(ENRAGED, value);
+    }
+
     /** Which special attacks this boss has used; read by the GameTests. */
     public Set<BossAttack> usedAttacks() {
         return usedAttacks;
@@ -115,6 +151,12 @@ public class NeoBoss extends Monster implements NeoMob {
 
     @Override
     protected void registerGoals() {
+        if (spec().isSkyBoss()) {
+            // Sky bosses steer themselves in customServerAiStep; they only need targeting.
+            targetSelector.addGoal(1, new HurtByTargetGoal(this));
+            targetSelector.addGoal(2, new HuntPlayerGoal(this));
+            return;
+        }
         if (spec().isSeaBoss()) {
             goalSelector.addGoal(0, new TryFindWaterGoal(this));
             goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true));
@@ -144,6 +186,32 @@ public class NeoBoss extends Monster implements NeoMob {
     // ------------------------------------------------------------------ main loop
 
     @Override
+    public void tick() {
+        if (!spec().isSkyBoss()) {
+            super.tick();
+            return;
+        }
+        // Too big to path around terrain; flies through it like the Ender Dragon.
+        noPhysics = true;
+        super.tick();
+        noPhysics = false;
+        setNoGravity(true);
+        if (level().isClientSide) {
+            if (tickCount % (isEnraged() ? 12 : 20) == 0) {
+                level().playLocalSound(getX(), getY(), getZ(), SoundEvents.ENDER_DRAGON_FLAP, getSoundSource(),
+                        4.0f, 0.7f + random.nextFloat() * 0.2f, false);
+            }
+            if (isEnraged()) {
+                Vec3 mouth = mouth();
+                for (int i = 0; i < 3; i++) {
+                    level().addParticle(ParticleTypes.FLAME, mouth.x + random.nextGaussian() * 0.5,
+                            mouth.y + random.nextGaussian() * 0.5, mouth.z + random.nextGaussian() * 0.5, 0, 0.05, 0);
+                }
+            }
+        }
+    }
+
+    @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
         bossEvent.setProgress(getHealth() / getMaxHealth());
@@ -152,7 +220,7 @@ public class NeoBoss extends Monster implements NeoMob {
         }
 
         if (!enraged && getHealth() < getMaxHealth() / 2) {
-            enraged = true;
+            setEnraged(true);
             playSound(SoundEvents.RAVAGER_ROAR, 6.0f, 0.5f);
             bossEvent.setColor(BossEvent.BossBarColor.RED);
             globalCooldown = 0;
@@ -168,6 +236,13 @@ public class NeoBoss extends Monster implements NeoMob {
 
         cooldowns.replaceAll((attack, ticks) -> Math.max(0, ticks - 1));
         LivingEntity target = getTarget();
+        if (target != null && !target.isAlive()) {
+            setTarget(null);
+            target = null;
+        }
+        if (spec().isSkyBoss()) {
+            skyMovement(target);
+        }
         if (target == null || !target.isAlive() || --globalCooldown > 0 || isBusy()) {
             return;
         }
@@ -190,7 +265,7 @@ public class NeoBoss extends Monster implements NeoMob {
     }
 
     private boolean isBusy() {
-        return chargeTicks > 0 || leapTicks > 0 || beamTicks > 0 || whirlpoolTicks > 0 || grabTicks > 0;
+        return chargeTicks > 0 || leapTicks > 0 || beamTicks > 0 || whirlpoolTicks > 0 || grabTicks > 0 || swoopTicks > 0;
     }
 
     private void perform(BossAttack attack, LivingEntity target) {
@@ -239,6 +314,14 @@ public class NeoBoss extends Monster implements NeoMob {
             case WAVE -> wave();
             case GEYSER -> geyser(target);
             case TRIDENT_VOLLEY -> tridentVolley(target);
+            case SWOOP -> {
+                swoopTicks = 50;
+                playSound(SoundEvents.ENDER_DRAGON_GROWL, 6.0f, 1.0f);
+            }
+            case FIREBALL_VOLLEY -> fireballVolley(target);
+            case WIND_GUST -> windGust();
+            case METEOR_SHOWER -> meteorShower(target);
+            case SPORE_CLOUD -> sporeCloud(target);
         }
     }
 
@@ -378,6 +461,129 @@ public class NeoBoss extends Monster implements NeoMob {
             Vec3 away = victim.position().subtract(position()).normalize();
             victim.push(away.x * 2.2, 0.4, away.z * 2.2);
             victim.hurtMarked = true;
+        }
+    }
+
+    // ------------------------------------------------------------------ sky movement and attacks
+
+    /** Circles above the target, or swoops straight at it, biting when close. Wanders when idle. */
+    private void skyMovement(@Nullable LivingEntity target) {
+        double flySpeed = getAttributeValue(Attributes.FLYING_SPEED);
+        if (target == null) {
+            if (idleGoal == null || position().distanceToSqr(idleGoal) < 9.0 || random.nextInt(200) == 0) {
+                double x = getX() + (random.nextDouble() - 0.5) * 64;
+                double z = getZ() + (random.nextDouble() - 0.5) * 64;
+                int ground = level().getHeight(Heightmap.Types.MOTION_BLOCKING, Mth.floor(x), Mth.floor(z));
+                idleGoal = new Vec3(x, ground + 15 + random.nextInt(10), z);
+            }
+            steerTowards(idleGoal, flySpeed * 0.5);
+            faceDirection(getDeltaMovement());
+            return;
+        }
+        Vec3 goal;
+        if (swoopTicks > 0) {
+            swoopTicks--;
+            goal = target.getEyePosition();
+        } else {
+            orbitAngle += enraged ? 0.035f : 0.02f;
+            double radius = Math.max(14, getBbWidth() * 2.5);
+            goal = new Vec3(target.getX() + Mth.cos(orbitAngle) * radius, target.getY() + 8 + getBbHeight(),
+                    target.getZ() + Mth.sin(orbitAngle) * radius);
+        }
+        double speed = flySpeed * (enraged ? 1.4 : 1.0) * (swoopTicks > 0 ? 1.6 : 1.0);
+        steerTowards(goal, speed);
+        faceDirection(swoopTicks > 0 ? getDeltaMovement() : target.position().subtract(position()));
+
+        if (biteCooldown > 0) {
+            biteCooldown--;
+        }
+        double reach = getBbWidth() / 2 + 3;
+        if (biteCooldown == 0 && distanceToSqr(target) < reach * reach) {
+            doHurtTarget(target);
+            playSound(SoundEvents.EVOKER_FANGS_ATTACK, 4.0f, 0.5f);
+            biteCooldown = 20;
+            swoopTicks = 0; // pull back up after landing a bite
+        }
+    }
+
+    private void steerTowards(Vec3 goal, double speed) {
+        Vec3 diff = goal.subtract(position());
+        Vec3 desired = diff.lengthSqr() > 1.0 ? diff.normalize().scale(speed) : Vec3.ZERO;
+        Vec3 current = getDeltaMovement();
+        setDeltaMovement(current.add(desired.subtract(current).scale(0.1)));
+    }
+
+    private void faceDirection(Vec3 dir) {
+        if (dir.horizontalDistanceSqr() < 1.0E-4) {
+            return;
+        }
+        float yaw = (float) (Mth.atan2(dir.z, dir.x) * Mth.RAD_TO_DEG) - 90.0f;
+        setYRot(Mth.approachDegrees(getYRot(), yaw, 6.0f));
+        yBodyRot = getYRot();
+        yHeadRot = getYRot();
+    }
+
+    private void fireballVolley(LivingEntity target) {
+        Vec3 mouth = mouth();
+        Vec3 aim = target.getEyePosition().subtract(mouth);
+        for (int i = 0; i < (enraged ? 5 : 3); i++) {
+            Vec3 dir = aim.add(random.nextGaussian() * 2, random.nextGaussian(), random.nextGaussian() * 2).normalize();
+            SmallFireball fireball = new SmallFireball(level(), this, dir);
+            fireball.setPos(mouth);
+            level().addFreshEntity(fireball);
+        }
+        // Every third volley adds one big explosive fireball (respects the mobGriefing gamerule).
+        if (++volleyCount % 3 == 0) {
+            LargeFireball big = new LargeFireball(level(), this, aim.normalize(), 2);
+            big.setPos(mouth);
+            level().addFreshEntity(big);
+        }
+        playSound(SoundEvents.BLAZE_SHOOT, 4.0f, 0.6f);
+    }
+
+    private void windGust() {
+        playSound(SoundEvents.ENDER_DRAGON_FLAP, 8.0f, 0.5f);
+        ((ServerLevel) level()).sendParticles(ParticleTypes.CLOUD, getX(), getY() + getBbHeight() / 2, getZ(),
+                120, 6, 2, 6, 0.4);
+        for (LivingEntity victim : victims(24)) {
+            Vec3 away = victim.position().subtract(position()).normalize();
+            victim.push(away.x * 2.5, 0.6, away.z * 2.5);
+            victim.hurtMarked = true;
+            victim.hurt(damageSources().mobAttack(this), damage() * 0.3f);
+        }
+    }
+
+    /** Rains explosive fireballs down around the target. */
+    private void meteorShower(LivingEntity target) {
+        playSound(SoundEvents.ENDER_DRAGON_GROWL, 6.0f, 0.6f);
+        for (int i = 0; i < (enraged ? 10 : 6); i++) {
+            double x = target.getX() + (random.nextDouble() - 0.5) * 16;
+            double z = target.getZ() + (random.nextDouble() - 0.5) * 16;
+            Vec3 down = new Vec3(random.nextGaussian() * 0.05, -1, random.nextGaussian() * 0.05);
+            LargeFireball meteor = new LargeFireball(level(), this, down, 1);
+            meteor.setPos(x, target.getY() + 24 + random.nextInt(8), z);
+            level().addFreshEntity(meteor);
+        }
+    }
+
+    /** Drops lingering clouds of poisonous, dizzying spores on the target. */
+    private void sporeCloud(LivingEntity target) {
+        playSound(SoundEvents.SPORE_BLOSSOM_PLACE, 4.0f, 0.5f);
+        int clouds = enraged ? 3 : 1;
+        for (int i = 0; i < clouds; i++) {
+            double offset = i == 0 ? 0 : 6;
+            double angle = random.nextDouble() * Math.PI * 2;
+            AreaEffectCloud cloud = new AreaEffectCloud(level(), target.getX() + Math.cos(angle) * offset, target.getY(),
+                    target.getZ() + Math.sin(angle) * offset);
+            cloud.setOwner(this);
+            cloud.setRadius(5.0f);
+            cloud.setRadiusPerTick(-0.01f);
+            cloud.setDuration(160);
+            cloud.setParticle(ParticleTypes.SPORE_BLOSSOM_AIR);
+            cloud.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1));
+            cloud.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 160, 0));
+            cloud.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 160, 0));
+            level().addFreshEntity(cloud);
         }
     }
 
@@ -582,7 +788,7 @@ public class NeoBoss extends Monster implements NeoMob {
         if (hasCustomName()) {
             bossEvent.setName(getDisplayName());
         }
-        enraged = getHealth() < getMaxHealth() / 2;
+        setEnraged(getHealth() < getMaxHealth() / 2);
     }
 
     @Override

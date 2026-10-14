@@ -31,7 +31,9 @@ public final class MobSpec {
         /** Walking boss with a boss bar and special attacks. */
         BOSS,
         /** Swimming boss: breathes water, swims, flops when beached. */
-        SEA_BOSS
+        SEA_BOSS,
+        /** Flying boss: circles its target from above and phases through terrain. */
+        SKY_BOSS
     }
 
     /**
@@ -41,7 +43,7 @@ public final class MobSpec {
         STOMP(100, 0, 8),
         ROAR(260, 0, 18),
         CHARGE(160, 6, 24),
-        FIRE_BREATH(90, 3, 16),
+        FIRE_BREATH(90, 3, 24),
         LIGHTNING(140, 0, 30),
         SUMMON(400, 0, 32),
         BEAM(220, 4, 40),
@@ -54,7 +56,13 @@ public final class MobSpec {
         TENTACLE_SLAM(90, 0, 8),
         WAVE(120, 0, 14),
         GEYSER(110, 0, 24),
-        TRIDENT_VOLLEY(80, 4, 28);
+        TRIDENT_VOLLEY(80, 4, 28),
+        // Sky attacks
+        SWOOP(140, 4, 40),
+        FIREBALL_VOLLEY(50, 0, 40),
+        WIND_GUST(160, 0, 24),
+        METEOR_SHOWER(260, 0, 40),
+        SPORE_CLOUD(180, 0, 30);
 
         public final int cooldown;
         public final double minRange, maxRange;
@@ -76,7 +84,7 @@ public final class MobSpec {
 
     public enum Voice {
         CRITTER, BIRD, BUG, BUZZ, REPTILE, BEAST, DINO, BIG_DINO, FISH, WHALE, SQUID, GHOST, ENDER, UNDEAD,
-        HUMAN, ALIEN, PLANT, FROG, COW, CREEPER, SPIDER, SPRITE, GUARDIAN
+        HUMAN, ALIEN, PLANT, FROG, COW, CREEPER, SPIDER, SPRITE, GUARDIAN, DRAGON
     }
 
     public record Spawn(TagKey<Biome> biomes, int weight, int min, int max) {}
@@ -109,6 +117,8 @@ public final class MobSpec {
     public double stepHeight = 0.6;
     @Nullable public String minion;
     public BossEvent.BossBarColor barColor = BossEvent.BossBarColor.RED;
+    /** Skip the generated model; the client registers a hand-built renderer instead (The King). */
+    public boolean customRenderer;
 
     /** Filled in at registration. */
     public Supplier<EntityType<? extends Mob>> type;
@@ -128,7 +138,11 @@ public final class MobSpec {
     }
 
     public boolean isBoss() {
-        return kind == Kind.BOSS || kind == Kind.SEA_BOSS;
+        return kind == Kind.BOSS || kind == Kind.SEA_BOSS || kind == Kind.SKY_BOSS;
+    }
+
+    public boolean isSkyBoss() {
+        return kind == Kind.SKY_BOSS;
     }
 
     public boolean isSeaBoss() {
@@ -145,6 +159,7 @@ public final class MobSpec {
     public MobSpec stepHeight(double stepHeight) { this.stepHeight = stepHeight; return this; }
     public MobSpec minion(String minion) { this.minion = minion; return this; }
     public MobSpec bar(BossEvent.BossBarColor barColor) { this.barColor = barColor; return this; }
+    public MobSpec customRenderer() { this.customRenderer = true; return this; }
 
     public MobSpec size(float width, float height) {
         this.hitboxWidth = width;

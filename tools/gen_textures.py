@@ -375,6 +375,31 @@ save(claw.image((20, 50, 25)), "item/predator_claw.png")
 save(big_blade((110, 50, 90), (200, 140, 190), (60, 20, 40), (40, 10, 30), guard=(240, 200, 60)), "item/serpent_fang.png")
 save(big_blade((40, 140, 170), (170, 240, 250), (20, 50, 70), (10, 35, 50), width=2, guard=(90, 230, 220)), "item/tidebreaker.png")
 
+save(big_blade((60, 170, 200), (190, 240, 255), (40, 30, 80), (20, 30, 60), guard=(240, 140, 60)), "item/azure_fang.png")
+
+axe = Sprite()
+axe.line(2, 13, 11, 4, (90, 60, 120))
+for x in range(7, 15):
+    for y in range(0, 10):
+        if (x - 12) ** 2 + (y - 4) ** 2 <= 14 and x >= 9:
+            axe.set(x, y, jitter((235, 170, 230) if (x + y) % 4 else (150, 90, 210), 6))
+save(axe.image((60, 20, 80)), "item/empress_battleaxe.png")
+
+talon = Sprite()
+for i, (x, y) in enumerate(((3, 13), (5, 11), (7, 9), (9, 7), (11, 5), (12, 3), (13, 2))):
+    talon.set(x, y, (230, 215, 170))
+    talon.set(x + 1, y, (200, 160, 90))
+talon.line(1, 14, 2, 13, STICK[1])
+save(talon.image((80, 60, 30)), "item/skyclaw_talon.png")
+
+glaive = Sprite()
+glaive.line(2, 13, 10, 5, (110, 80, 50))
+for x in range(8, 15):
+    for y in range(0, 8):
+        if abs(x - 11) + abs(y - 3) <= 3:
+            glaive.set(x, y, (90, 230, 245) if (x + y) % 3 == 0 else (220, 175, 80))
+save(glaive.image((60, 40, 20)), "item/mothwing_glaive.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

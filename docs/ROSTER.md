@@ -82,16 +82,16 @@ Status: ✅ in game · 🔜 next phase
 | OreSpawn | NeoSpawn | Status |
 |---|---|---|
 | The King | The King | ✅ |
-| The Queen | The Empress | 🔜 |
+| The Queen | The Empress | ✅ |
 | The Ultimate King | The Ascended King | 🔜 |
 | Mobzilla | Gorgantua | ✅ |
 | T-Rex | Tyrannosaurus | ✅ |
 | Nastysaurus | Brutosaurus | ✅ |
 | Alosaurus | Allosaurus | ✅ |
 | The Kraken | Kraken | ✅ |
-| Mothra | Moth Titan | 🔜 |
-| Leonopteryx | Skyclaw | 🔜 |
-| Cephadrome | Azure Drake | 🔜 |
+| Mothra | Moth Titan | ✅ |
+| Leonopteryx | Skyclaw | ✅ |
+| Cephadrome | Azure Drake | ✅ |
 | Dragon / Baby Dragon | Ember Dragon / Ember Hatchling | 🔜 |
 | Water Dragon | Tide Dragon | 🔜 |
 | Basilisk | Basilisk | 🔜 |
@@ -121,4 +121,4 @@ Status: ✅ in game · 🔜 next phase
 | Ultimate tools | Paragon tools | crafted from Titanium, Uranium and Ruby; come pre-enchanted; the Paragon Pickaxe mines 3×3 | ✅ |
 | Miner's Dream | Tunnel Charge | blasts a tunnel and keeps the ores | ✅ |
 | Ultimate armor / Royal Guardian gear | Paragon armor / King's Scale armor | full-set potion bonuses | ✅ |
-| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang | dropped by bosses | ✅ (first 8) |
+| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang, Empress Battleaxe, Skyclaw Talon, Azure Fang, Mothwing Glaive | dropped by bosses | ✅ (first 12) |

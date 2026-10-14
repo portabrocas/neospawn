@@ -385,6 +385,12 @@ public final class ModMobs {
                 .egg(0x5A2A6A, 0xE8A8F8).spawn("c:is_ocean", 6, 1, 2);
 
         // ---------------------------------------------------------------- bosses
+        // The King keeps its hand-built model (TheKingModel); its drops come from loot_table/entities/the_king.json.
+        skyBoss("the_king", "The King", look(Family.QUADRUPED))
+                .customRenderer().size(7.0f, 5.0f).stats(1000, 24, 0.3).flySpeed(0.6).armor(12).voice(Voice.DRAGON).xp(500)
+                .bar(BossEvent.BossBarColor.YELLOW)
+                .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP)
+                .egg(0xD4AF37, 0x8B0000);
         boss("tyrannosaurus", "Tyrannosaurus", look(Family.THEROPOD).body(22, 14, 12).leg(16).neck(6).head(10).snout(6).tail(26)
                 .colors(0x5A4A32, 0x3A2E1E, 0xD8C8A0).pattern(Pattern.STRIPES).scale(2.4f))
                 .size(3.0f, 5.5f).stats(600, 20, 0.3).armor(10).voice(Voice.BIG_DINO).xp(400)
@@ -411,6 +417,38 @@ public final class ModMobs {
                 .drop(ModItems.TITAN_CLEAVER, 1, 1).drop(ModItems.PARAGON_INGOT, 2, 4).drop(v(Items.DIAMOND), 6, 12)
                 .egg(0x3A4A3A, 0x8AE8F8);
 
+        // ---------------------------------------------------------------- sky bosses
+        skyBoss("empress", "The Empress", look(Family.QUADRUPED).body(28, 14, 14).leg(10).neck(16).head(9).snout(5).tail(34).wing(44)
+                .with(Extra.HORNS, Extra.CREST, Extra.SPIKES).colors(0x7A3AB8, 0x3AB8C8, 0xF2A8E8).eye(0xFFF2A8)
+                .pattern(Pattern.SCALES).glow().scale(3.0f))
+                .size(7.0f, 6.0f).stats(1024, 30, 0.3).flySpeed(0.65).armor(18).damageTaken(0.5f).voice(Voice.DRAGON).xp(2500)
+                .bar(BossEvent.BossBarColor.PINK)
+                .attacks(BossAttack.BEAM, BossAttack.METEOR_SHOWER, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.FIREBALL_VOLLEY)
+                .drop(ModItems.EMPRESS_BATTLEAXE, 1, 1).drop(ModItems.PARAGON_INGOT, 3, 6).drop(v(Items.NETHER_STAR), 1, 1)
+                .drop(v(Items.DIAMOND), 8, 16)
+                .egg(0x7A3AB8, 0xF2A8E8);
+        skyBoss("skyclaw", "Skyclaw", look(Family.QUADRUPED).body(18, 10, 10).leg(10).neck(4).head(8).snout(3).tail(14).wing(28)
+                .with(Extra.EARS, Extra.CREST).colors(0xC89A4A, 0x8A5A2A, 0xF2E8C8).eye(0x3AB8E8).scale(2.0f))
+                .size(3.5f, 3.0f).stats(500, 18, 0.3).flySpeed(0.75).armor(10).voice(Voice.BEAST).xp(500)
+                .bar(BossEvent.BossBarColor.YELLOW)
+                .attacks(BossAttack.SWOOP, BossAttack.WIND_GUST, BossAttack.ROAR, BossAttack.LIGHTNING)
+                .drop(ModItems.SKYCLAW_TALON, 1, 1).drop(v(Items.FEATHER), 16, 32).drop(v(Items.LEATHER), 8, 16)
+                .egg(0xC89A4A, 0x3AB8E8).dayActive().spawn("c:is_mountain", 1, 1, 1);
+        skyBoss("azure_drake", "Azure Drake", look(Family.QUADRUPED).body(18, 9, 9).leg(8).neck(10).head(7).snout(4).tail(22).wing(30)
+                .with(Extra.HORNS, Extra.SPIKES).colors(0x2A6AD8, 0x1A3A8A, 0xBFE8FF).eye(0xFF8A2A).pattern(Pattern.SCALES).scale(2.0f))
+                .size(3.5f, 2.8f).stats(400, 16, 0.3).flySpeed(0.7).armor(10).voice(Voice.DRAGON).xp(450)
+                .bar(BossEvent.BossBarColor.BLUE)
+                .attacks(BossAttack.FIRE_BREATH, BossAttack.SWOOP, BossAttack.FIREBALL_VOLLEY, BossAttack.WIND_GUST)
+                .drop(ModItems.AZURE_FANG, 1, 1).drop(v(Items.BLAZE_ROD), 4, 8).drop(v(Items.LAPIS_LAZULI), 8, 16)
+                .egg(0x2A6AD8, 0xBFE8FF).dayActive().spawn("c:is_mountain", 1, 1, 1).spawn("c:is_plateau", 1, 1, 1);
+        skyBoss("moth_titan", "Moth Titan", look(Family.FLYING_BUG).body(18, 6, 6).head(7).wing(40)
+                .with(Extra.ANTENNAE).colors(0x6A4A2A, 0xD8A84A, 0x5AE8F8).eye(0x5AE8F8).pattern(Pattern.SPOTS).glow().scale(2.5f))
+                .size(6.0f, 3.0f).stats(700, 14, 0.3).flySpeed(0.5).armor(8).voice(Voice.BUZZ).xp(700).minion("warbee")
+                .bar(BossEvent.BossBarColor.WHITE)
+                .attacks(BossAttack.SPORE_CLOUD, BossAttack.WIND_GUST, BossAttack.SUMMON, BossAttack.BEAM)
+                .drop(ModItems.MOTHWING_GLAIVE, 1, 1).drop(v(Items.GLOWSTONE_DUST), 16, 32).drop(v(Items.STRING), 16, 32)
+                .egg(0x6A4A2A, 0x5AE8F8).spawn("c:is_forest", 1, 1, 1);
+
         // ---------------------------------------------------------------- sea bosses
         seaBoss("kraken", "Kraken", look(Family.JELLY).body(0, 16, 24).tail(36).segments(10)
                 .colors(0x6A1A2A, 0x4A0E1A, 0xF2C83A).eye(0xF2E84A).pattern(Pattern.SPOTS).scale(2.5f))
@@ -436,6 +474,8 @@ public final class ModMobs {
                 .drop(ModItems.SERPENT_FANG, 1, 1).drop(v(Items.TRIDENT), 1, 1, 0.3f).drop(v(Items.PRISMARINE_SHARD), 6, 12)
                 .egg(0x2A6A4A, 0xF2E84A).spawn("c:is_ocean", 1, 1, 1);
     }
+
+    private static MobSpec skyBoss(String id, String name, Look look) { return add(new MobSpec(id, name, Kind.SKY_BOSS, look)); }
 
     private static MobSpec seaBoss(String id, String name, Look look) { return add(new MobSpec(id, name, Kind.SEA_BOSS, look)); }
 
@@ -492,7 +532,7 @@ public final class ModMobs {
             case HOSTILE_FLYER -> NeoHostileFlyer::new;
             case SWIMMER -> NeoSwimmer::new;
             case HOSTILE_SWIMMER -> NeoHostileSwimmer::new;
-            case BOSS, SEA_BOSS -> NeoBoss::new;
+            case BOSS, SEA_BOSS, SKY_BOSS -> NeoBoss::new;
         };
         EntityType.Builder<?> builder = EntityType.Builder.of(factory, category(spec))
                 .sized(spec.hitboxWidth, spec.hitboxHeight)
@@ -511,7 +551,7 @@ public final class ModMobs {
     private static MobCategory category(MobSpec spec) {
         return switch (spec.kind) {
             case ANIMAL -> MobCategory.CREATURE;
-            case MONSTER, HOSTILE_FLYER, BOSS, SEA_BOSS -> MobCategory.MONSTER;
+            case MONSTER, HOSTILE_FLYER, BOSS, SEA_BOSS, SKY_BOSS -> MobCategory.MONSTER;
             case FLYER -> MobCategory.AMBIENT;
             case SWIMMER -> spec.hitboxWidth > 1.0f ? MobCategory.WATER_CREATURE : MobCategory.WATER_AMBIENT;
             case HOSTILE_SWIMMER -> MobCategory.WATER_CREATURE;
@@ -534,7 +574,7 @@ public final class ModMobs {
                 case ANIMAL, FLYER -> event.register(type, SpawnPlacementTypes.ON_GROUND,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules,
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
-                case MONSTER, BOSS -> event.register(type, SpawnPlacementTypes.ON_GROUND,
+                case MONSTER, BOSS, SKY_BOSS -> event.register(type, SpawnPlacementTypes.ON_GROUND,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                         day ? Monster::checkAnyLightMonsterSpawnRules : Monster::checkMonsterSpawnRules,
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_forest",
+  "spawners": {
+    "type": "neospawn:moth_titan",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

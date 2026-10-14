@@ -4,7 +4,6 @@ import com.neospawn.NeoSpawn;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.mob.NeoBoss;
-import com.neospawn.registry.ModEntities;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -44,8 +43,7 @@ public class MobSmokeTest {
             }
             index++;
         }
-        helper.spawn(ModEntities.THE_KING.get(), new BlockPos(12, 5, 12));
-        int count = index + 1;
+        int count = index;
         helper.runAfterDelay(200, () -> {
             helper.killAllEntities();
             NeoSpawn.LOGGER.info("Smoke test: {} mob types spawned, ticked 200 ticks and killed", count);
@@ -84,6 +82,16 @@ public class MobSmokeTest {
     @GameTest(template = "sea_arena", timeoutTicks = 200, batch = "hunt")
     public static void seaBossesHuntPlayers(GameTestHelper helper) {
         huntTest(helper, MobSpec.Kind.SEA_BOSS, new Vec3(16, 10, 4), new BlockPos(16, 6, 20));
+    }
+
+    @GameTest(template = "arena", timeoutTicks = 200, batch = "hunt")
+    public static void skyBossesHuntPlayers(GameTestHelper helper) {
+        huntTest(helper, MobSpec.Kind.SKY_BOSS, new Vec3(12, 2, 2), new BlockPos(12, 8, 18));
+    }
+
+    @GameTest(template = "arena", timeoutTicks = 500, batch = "fight")
+    public static void skyBossesFight(GameTestHelper helper) {
+        fightTest(helper, MobSpec.Kind.SKY_BOSS, new BlockPos(12, 8, 12), i -> new BlockPos(3 + i * 4, 2, 3));
     }
 
     /** Land bosses each fight an iron golem for 20 seconds; each must use at least two special attacks. */

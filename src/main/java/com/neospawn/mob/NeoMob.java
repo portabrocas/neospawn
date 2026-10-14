@@ -135,6 +135,7 @@ public interface NeoMob {
             case SPIDER -> SoundEvents.SPIDER_AMBIENT;
             case SPRITE -> SoundEvents.ALLAY_AMBIENT_WITHOUT_ITEM;
             case GUARDIAN -> SoundEvents.GUARDIAN_AMBIENT;
+            case DRAGON -> SoundEvents.ENDER_DRAGON_AMBIENT;
         };
     }
 
@@ -163,6 +164,7 @@ public interface NeoMob {
             case SPIDER -> SoundEvents.SPIDER_HURT;
             case SPRITE -> SoundEvents.ALLAY_HURT;
             case GUARDIAN -> SoundEvents.GUARDIAN_HURT;
+            case DRAGON -> SoundEvents.ENDER_DRAGON_HURT;
         };
     }
 
@@ -191,6 +193,7 @@ public interface NeoMob {
             case SPIDER -> SoundEvents.SPIDER_DEATH;
             case SPRITE -> SoundEvents.ALLAY_DEATH;
             case GUARDIAN -> SoundEvents.GUARDIAN_DEATH;
+            case DRAGON -> SoundEvents.ENDER_DRAGON_DEATH;
         };
     }
 }

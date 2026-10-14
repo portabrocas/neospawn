@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LightningBolt;
@@ -38,7 +39,15 @@ public class BossWeapon extends SwordItem {
         /** Reels the target toward you and pins it in place. */
         HOOK,
         /** A wave that hurls the target and every monster around it away. */
-        TIDAL
+        TIDAL,
+        /** Sets the target ablaze, makes it glow, and deals bonus magic damage. */
+        RADIANT,
+        /** Launches the target high into the air. */
+        UPDRAFT,
+        /** Long burn, and extra damage against targets already on fire. */
+        BURN,
+        /** Leaves a lingering cloud of poisonous spores where the target stands. */
+        SPORE
     }
 
     private final Effect effect;
@@ -107,6 +116,31 @@ public class BossWeapon extends SwordItem {
                     other.push(away.x * 2.0, 0.5, away.z * 2.0);
                     other.hurtMarked = true;
                 }
+            }
+            case RADIANT -> {
+                target.igniteForSeconds(5);
+                target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0), attacker);
+                target.hurt(level.damageSources().indirectMagic(attacker, attacker), 6);
+            }
+            case UPDRAFT -> {
+                target.setDeltaMovement(target.getDeltaMovement().x, 1.4, target.getDeltaMovement().z);
+                target.hurtMarked = true;
+                level.sendParticles(ParticleTypes.CLOUD, target.getX(), target.getY(), target.getZ(), 20, 0.4, 0.2, 0.4, 0.1);
+            }
+            case BURN -> {
+                if (target.isOnFire()) {
+                    target.hurt(level.damageSources().onFire(), 8);
+                }
+                target.igniteForSeconds(8);
+            }
+            case SPORE -> {
+                AreaEffectCloud cloud = new AreaEffectCloud(level, target.getX(), target.getY(), target.getZ());
+                cloud.setOwner(attacker);
+                cloud.setRadius(3.0f);
+                cloud.setDuration(100);
+                cloud.setParticle(ParticleTypes.SPORE_BLOSSOM_AIR);
+                cloud.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 1));
+                level.addFreshEntity(cloud);
             }
         }
         return true;

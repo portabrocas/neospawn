@@ -4,7 +4,6 @@ import com.neospawn.NeoSpawn;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.registry.ModBlocks;
-import com.neospawn.registry.ModEntities;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -54,6 +53,10 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.cleave", "Also cleaves every monster near the target");
         add("item.neospawn.boss_weapon.hook", "Reels the target in and pins it");
         add("item.neospawn.boss_weapon.tidal", "Hurls the target and nearby monsters away");
+        add("item.neospawn.boss_weapon.radiant", "Sets the target ablaze and makes it glow");
+        add("item.neospawn.boss_weapon.updraft", "Launches the target into the sky");
+        add("item.neospawn.boss_weapon.burn", "Long burn; extra damage to burning targets");
+        add("item.neospawn.boss_weapon.spore", "Leaves a cloud of poisonous spores");
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();
@@ -67,8 +70,6 @@ public class ModLanguage extends LanguageProvider {
             add(item, name(BuiltInRegistries.ITEM.getKey(item).getPath()));
         }
 
-        add(ModEntities.THE_KING.get(), "The King");
-        add(ModItems.THE_KING_SPAWN_EGG.get(), "The King Spawn Egg");
         for (MobSpec spec : ModMobs.ALL) {
             add(spec.type.get(), spec.name);
             add("item.neospawn." + spec.id + "_spawn_egg", spec.name + " Spawn Egg");

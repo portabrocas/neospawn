@@ -22,7 +22,6 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -118,16 +117,19 @@ public final class ModItems {
     public static final DeferredItem<BossWeapon> KRAKEN_HOOK = weapon("kraken_hook", BossWeapon.Effect.HOOK, 20, -2.6f, 2);
     public static final DeferredItem<BossWeapon> TIDEBREAKER = weapon("tidebreaker", BossWeapon.Effect.TIDAL, 34, -3.0f, 1);
     public static final DeferredItem<BossWeapon> SERPENT_FANG = weapon("serpent_fang", BossWeapon.Effect.VENOM, 18, -1.8f, 0);
+    public static final DeferredItem<BossWeapon> EMPRESS_BATTLEAXE = weapon("empress_battleaxe", BossWeapon.Effect.RADIANT, 48, -3.2f, 2);
+    public static final DeferredItem<BossWeapon> SKYCLAW_TALON = weapon("skyclaw_talon", BossWeapon.Effect.UPDRAFT, 16, -1.8f, 0);
+    public static final DeferredItem<BossWeapon> AZURE_FANG = weapon("azure_fang", BossWeapon.Effect.BURN, 17, -2.2f, 0);
+    public static final DeferredItem<BossWeapon> MOTHWING_GLAIVE = weapon("mothwing_glaive", BossWeapon.Effect.SPORE, 20, -2.6f, 2);
     public static final List<DeferredItem<BossWeapon>> BOSS_WEAPONS = List.of(KINGS_FANG, TYRANT_TOOTH, BONE_CRUSHER,
-            PREDATOR_CLAW, TITAN_CLEAVER, KRAKEN_HOOK, TIDEBREAKER, SERPENT_FANG);
+            PREDATOR_CLAW, TITAN_CLEAVER, KRAKEN_HOOK, TIDEBREAKER, SERPENT_FANG,
+            EMPRESS_BATTLEAXE, SKYCLAW_TALON, AZURE_FANG, MOTHWING_GLAIVE);
 
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()
             .map(block -> ITEMS.registerSimpleBlockItem((DeferredBlock<?>) block))
             .toList();
 
-    public static final DeferredItem<DeferredSpawnEggItem> THE_KING_SPAWN_EGG = ITEMS.register("the_king_spawn_egg",
-            () -> new DeferredSpawnEggItem(ModEntities.THE_KING, 0xD4AF37, 0x8B0000, new Item.Properties()));
 
     private static ToolSet toolSet(String material, Tier tier) {
         return new ToolSet(material,
