@@ -107,7 +107,7 @@ public final class PhotoBooth {
     private static double size(MobSpec spec) {
         Look l = spec.look;
         double model = l.scale * Math.max(Math.max(l.length + l.tail * 0.6, l.wing * 2 + l.width), l.height + l.leg + l.neck) / 16.0;
-        double hitbox = Math.max(spec.hitboxHeight, spec.hitboxWidth) * (spec.customRenderer ? 2.2 : 1);
+        double hitbox = Math.max(spec.hitboxHeight, spec.hitboxWidth);
         return Math.max(hitbox, model);
     }
 
@@ -135,7 +135,7 @@ public final class PhotoBooth {
             level.addFreshEntity(entity);
         }
         double size = size(spec);
-        double dist = size * 1.6 + 1.8;
+        double dist = size * 1.25 + 1.6;
         Vec3 target = new Vec3(STAGE.getX() + 0.5, STAGE.getY() + Math.min(spec.hitboxHeight, size) * 0.5, STAGE.getZ() + 0.5);
         // Mobs face +z (south). Angle a: front three-quarter, slightly above. Angle b: left side profile.
         Vec3 dir = angle == 1 ? new Vec3(0.6, 0.35, 0.75).normalize() : new Vec3(1, 0.12, 0).normalize();

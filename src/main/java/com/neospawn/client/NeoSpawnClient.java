@@ -1,15 +1,12 @@
 package com.neospawn.client;
 
 import com.neospawn.NeoSpawn;
-import com.neospawn.client.model.TheKingModel;
 import com.neospawn.client.renderer.NeoMobRenderer;
-import com.neospawn.client.renderer.TheKingRenderer;
 import com.neospawn.client.shape.Shapes;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ZooCageItem;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
-import com.neospawn.mob.NeoBoss;
 import com.neospawn.registry.ModItems;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -31,15 +28,7 @@ public final class NeoSpawnClient {
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.INK_BOMB.get(), ThrownItemRenderer::new);
         for (MobSpec spec : ModMobs.ALL) {
-            if (spec.id.equals("the_king")) {
-                event.registerEntityRenderer((EntityType<NeoBoss>) spec.type.get(),
-                        context -> new TheKingRenderer(context, "the_king", 4.0f));
-            } else if (spec.id.equals("the_ascended_king")) {
-                event.registerEntityRenderer((EntityType<NeoBoss>) spec.type.get(),
-                        context -> new TheKingRenderer(context, "the_ascended_king", 6.0f));
-            } else {
-                event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
-            }
+            event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
         }
     }
 
@@ -59,11 +48,8 @@ public final class NeoSpawnClient {
 
     @SubscribeEvent
     static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(TheKingModel.LAYER, TheKingModel::createBodyLayer);
         for (MobSpec spec : ModMobs.ALL) {
-            if (!spec.customRenderer) {
-                event.registerLayerDefinition(NeoMobRenderer.layer(spec), () -> Shapes.get(spec).toLayer());
-            }
+            event.registerLayerDefinition(NeoMobRenderer.layer(spec), () -> Shapes.get(spec).toLayer());
         }
     }
 

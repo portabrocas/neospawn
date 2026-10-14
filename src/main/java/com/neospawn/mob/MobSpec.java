@@ -154,7 +154,6 @@ public final class MobSpec {
     public boolean mechanical;
 
     /** Skip the generated model; the client registers a hand-built renderer instead (The King). */
-    public boolean customRenderer;
 
     /** Filled in at registration. */
     public Supplier<EntityType<? extends Mob>> type;
@@ -195,7 +194,6 @@ public final class MobSpec {
     public MobSpec stepHeight(double stepHeight) { this.stepHeight = stepHeight; return this; }
     public MobSpec minion(String minion) { this.minion = minion; return this; }
     public MobSpec bar(BossEvent.BossBarColor barColor) { this.barColor = barColor; return this; }
-    public MobSpec customRenderer() { this.customRenderer = true; return this; }
 
     /** Its owner can ride it once tamed. */
     public MobSpec mount(MountType mount) {

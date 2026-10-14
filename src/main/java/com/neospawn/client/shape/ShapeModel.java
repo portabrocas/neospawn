@@ -44,7 +44,9 @@ public class ShapeModel<T extends Entity> extends HierarchicalModel<T> {
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float age, float netHeadYaw, float headPitch) {
         root.getAllParts().forEach(ModelPart::resetPose);
-        boolean airborne = shape.alwaysFlap || entity instanceof NeoFlyer || (!entity.onGround() && !entity.isInWater());
+        // Off the ground and actually moving: standing still (or frozen) counts as perched, so wings fold.
+        boolean airborne = shape.alwaysFlap || entity instanceof NeoFlyer
+                || (!entity.onGround() && !entity.isInWater() && entity.getDeltaMovement().lengthSqr() > 1.0E-4);
         float attack = Mth.sin(attackTime * Mth.PI);
 
         for (Bound bound : animated) {
@@ -64,6 +66,11 @@ public class ShapeModel<T extends Entity> extends HierarchicalModel<T> {
                 case WING -> {
                     if (airborne) {
                         p.zRot += d.side * Mth.cos(age * shape.wingSpeed + d.phase) * shape.wingAmp;
+                    } else if (shape.foldWings) {
+                        // Tuck the wing up and back along the body, with a slow breathing sway.
+                        // Swept back along the flank and lifted a little, like a resting bat or dragon.
+                        p.yRot += -d.side * 1.3f;
+                        p.zRot += -d.side * (0.35f + Mth.sin(age * 0.05f) * 0.03f);
                     }
                 }
                 case WING_BACK -> p.yRot += d.side * Mth.cos(age * shape.wingSpeed + d.phase) * shape.wingAmp;

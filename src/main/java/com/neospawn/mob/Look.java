@@ -16,7 +16,7 @@ public final class Look {
     public enum Extra {
         EARS, LONG_EARS, HORNS, ANTLERS, CREST, PLATES, SPIKES, PINCERS, STINGER, ANTENNAE, MANDIBLES,
         TAIL_FAN, DORSAL, BEAK, TUSKS, HAMMER, FOUR_WINGS, LONG_HIND_LEGS, LONG_LEGS, FLAT, FUSE, PETALS,
-        LURE, BLADES, HOOD, WALKER, SNOUT, NINE_TAILS
+        LURE, BLADES, HOOD, WALKER, SNOUT, NINE_TAILS, CROWN
     }
 
     public final Family family;
@@ -24,6 +24,8 @@ public final class Look {
     public float leg = 6, neck = 0, head = 6, snout = 0, tail = 6, wing = 0;
     public int segments = 3, legPairs = 3;
     public float scale = 1.0f;
+    /** Whether tail() was called; humanoids only grow a tail when asked. */
+    public boolean tailSet;
 
     public int base = 0x808080, second = 0x404040, accent = 0xFFFFFF, eye = 0x101010, belly = -1;
     public Pattern pattern = Pattern.PLAIN;
@@ -49,7 +51,7 @@ public final class Look {
     public Look neck(float neck) { this.neck = neck; return this; }
     public Look head(float head) { this.head = head; return this; }
     public Look snout(float snout) { this.snout = snout; return this; }
-    public Look tail(float tail) { this.tail = tail; return this; }
+    public Look tail(float tail) { this.tail = tail; this.tailSet = true; return this; }
     public Look wing(float wing) { this.wing = wing; return this; }
     public Look segments(int segments) { this.segments = segments; return this; }
     public Look legPairs(int legPairs) { this.legPairs = legPairs; return this; }

@@ -100,10 +100,12 @@ python3 tools/gen_textures.py   # regenerate block/item placeholder art
 ./gradlew runData               # regenerate models, lang, recipes, loot, tags, spawn rules
 ./gradlew runGameTestServer     # 96 headless tests: mobs, items, bosses, combat, realms, structures, gear, trees
 ./gradlew runRealmCheck         # copy a world to run/saves/neospawn_realmcheck first; visits every realm, counts structures, quits
+./gradlew runPhotos            # photographs every mob into run/screenshots/neospawn (needs run/saves/neospawn_photos); -Ponly=id1,id2 for a few
+python3 tools/contact_sheet.py  # tiles those photos into labeled sheets in run/screenshots/sheets
 ./gradlew runClient             # play
 ```
 
 ## Roadmap
 
 1. The NeoSpawn modpack (Crazy Craft-style, see docs/MODPACK.md once it exists)
-2. Hand-drawn art and Blockbench models for the most important mobs
+2. Model polish continues (see docs/models_before_after.jpg); hand-drawn art and Blockbench models for the most important mobs
