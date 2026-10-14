@@ -1,6 +1,10 @@
 {
   "values": [
     "neospawn:king_scale_helmet",
-    "neospawn:paragon_helmet"
+    "neospawn:paragon_helmet",
+    "neospawn:gorgantua_scale_helmet",
+    "neospawn:empress_scale_helmet",
+    "neospawn:emerald_helmet",
+    "neospawn:experience_helmet"
   ]
 }

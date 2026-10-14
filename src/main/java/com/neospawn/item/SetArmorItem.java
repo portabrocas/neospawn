@@ -46,8 +46,12 @@ public class SetArmorItem extends ArmorItem {
     }
 
     private boolean wearingFullSet(Player player) {
+        return isWearingFullSet(player, getMaterial());
+    }
+
+    public static boolean isWearingFullSet(Player player, Holder<ArmorMaterial> material) {
         for (EquipmentSlot slot : SLOTS) {
-            if (!(player.getItemBySlot(slot).getItem() instanceof SetArmorItem armor) || !armor.getMaterial().equals(getMaterial())) {
+            if (!(player.getItemBySlot(slot).getItem() instanceof SetArmorItem armor) || !armor.getMaterial().equals(material)) {
                 return false;
             }
         }

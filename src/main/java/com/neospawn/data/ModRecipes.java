@@ -48,6 +48,10 @@ public class ModRecipes extends RecipeProvider {
 
         armor(out, ModItems.KING_SCALE_ARMOR, ModItems.KING_SCALE.get());
         armor(out, ModItems.PARAGON_ARMOR, ModItems.PARAGON_INGOT.get());
+        armor(out, ModItems.GORGANTUA_SCALE_ARMOR, ModItems.GORGANTUA_SCALE.get());
+        armor(out, ModItems.EMPRESS_SCALE_ARMOR, ModItems.EMPRESS_SCALE.get());
+        armor(out, ModItems.EMERALD_ARMOR, Items.EMERALD);
+        armor(out, ModItems.EXPERIENCE_ARMOR, Items.EXPERIENCE_BOTTLE);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PARAGON_INGOT.get())
                 .pattern("TUT").pattern("URU").pattern("TUT")

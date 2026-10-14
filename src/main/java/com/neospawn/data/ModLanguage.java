@@ -47,6 +47,10 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.tunnel_charge.tooltip", "Use on a wall to blast a 3x3 tunnel. Ores are kept.");
         add("item.neospawn.king_scale.set_bonus", "Full set: Fire Resistance, Strength, Jump Boost II");
         add("item.neospawn.paragon.set_bonus", "Full set: Resistance, Regeneration, Night Vision, Water Breathing");
+        add("item.neospawn.gorgantua_scale.set_bonus", "Full set: Strength II, Resistance, Fire Resistance");
+        add("item.neospawn.empress_scale.set_bonus", "Full set: Speed II, Jump Boost II, Slow Falling, Regeneration");
+        add("item.neospawn.emerald.set_bonus", "Full set: Hero of the Village, Luck");
+        add("item.neospawn.experience.set_bonus", "Full set: double experience from orbs");
         add("item.neospawn.boss_weapon.lightning", "Sometimes calls lightning on the target");
         add("item.neospawn.boss_weapon.bleed", "Makes the target bleed (Wither)");
         add("item.neospawn.boss_weapon.crush", "Launches and slows the target");

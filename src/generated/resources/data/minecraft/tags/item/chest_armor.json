@@ -1,6 +1,10 @@
 {
   "values": [
     "neospawn:king_scale_chestplate",
-    "neospawn:paragon_chestplate"
+    "neospawn:paragon_chestplate",
+    "neospawn:gorgantua_scale_chestplate",
+    "neospawn:empress_scale_chestplate",
+    "neospawn:emerald_chestplate",
+    "neospawn:experience_chestplate"
   ]
 }

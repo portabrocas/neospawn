@@ -300,7 +300,11 @@ save(storage(MATERIALS["paragon"], inlay=(150, 60, 190)), "block/paragon_block.p
 
 # ---------------------------------------------------------------- armor
 KING_GOLD = ((255, 225, 110), (212, 175, 55), (150, 100, 20), (80, 45, 5))
-ARMOR = {"king_scale": KING_GOLD, "paragon": MATERIALS["paragon"]}
+ARMOR = {"king_scale": KING_GOLD, "paragon": MATERIALS["paragon"],
+         "gorgantua_scale": ((140, 230, 240), (60, 120, 90), (30, 60, 45), (10, 30, 20)),
+         "empress_scale": ((250, 180, 240), (150, 80, 200), (70, 170, 190), (40, 20, 60)),
+         "emerald": ((150, 255, 170), (40, 200, 90), (15, 120, 50), (5, 50, 20)),
+         "experience": ((240, 255, 140), (150, 230, 60), (90, 160, 30), (40, 70, 10))}
 
 ARMOR_ICONS = {
     "helmet": ["................", "................", "....oooooooo....", "...ohhhhHHHHo...", "...ohHHHHHHdo...",
@@ -535,6 +539,17 @@ rod.line(13, 3, 14, 3, MATERIALS["paragon"][0])
 rod.line(14, 4, 14, 11, (230, 230, 230))
 rod.set(14, 12, (255, 120, 40)); rod.set(13, 12, (255, 200, 60))
 save(rod.image(MATERIALS["paragon"][3]), "item/paragon_fishing_rod.png")
+
+# Boss scales for the scale armors (same shape as King's Scale, recolored).
+for name, (hi, mid, dark) in {"gorgantua_scale": ((140, 230, 240), (60, 120, 90), (30, 60, 45)),
+                              "empress_scale": ((250, 180, 240), (150, 80, 200), (70, 40, 120))}.items():
+    sc = Sprite()
+    for x in range(16):
+        for y in range(16):
+            if (x - 7.5) ** 2 / 36 + (y - 6.5) ** 2 / 30 <= 1 and y < 13:
+                ridge = (y + abs(x - 7.5) // 2) % 4 == 0
+                sc.set(x, y, dark if ridge else shaded((hi, mid, dark, 0), x, y))
+    save(sc.image(shade(dark, -30)), f"item/{name}.png")
 
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])

@@ -7,6 +7,8 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -45,6 +47,30 @@ public class GearTests {
         helper.assertTrue(speed > 2.5, "a 5-tick draw should fire at full power, arrow speed was " + speed);
         player.discard();
         helper.killAllEntities();
+        helper.succeed();
+    }
+
+    /** A full Experience set doubles experience from orbs; without it, orbs give their normal amount. */
+    @GameTest(template = "arena", batch = "gear_xp_armor", timeoutTicks = 100)
+    public static void experienceArmorDoublesOrbs(GameTestHelper helper) {
+        for (boolean wearing : new boolean[]{false, true}) {
+            ServerPlayer player = player(helper, new Vec3(wearing ? 16 : 6, 2, 6));
+            if (wearing) {
+                var set = ModItems.EXPERIENCE_ARMOR;
+                player.setItemSlot(EquipmentSlot.HEAD, new ItemStack(set.helmet().get()));
+                player.setItemSlot(EquipmentSlot.CHEST, new ItemStack(set.chestplate().get()));
+                player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(set.leggings().get()));
+                player.setItemSlot(EquipmentSlot.FEET, new ItemStack(set.boots().get()));
+            }
+            ExperienceOrb orb = new ExperienceOrb(helper.getLevel(), player.getX(), player.getY(), player.getZ(), 10);
+            helper.getLevel().addFreshEntity(orb);
+            player.takeXpDelay = 0;
+            orb.playerTouch(player);
+            int expected = wearing ? 20 : 10;
+            helper.assertTrue(player.totalExperience == expected,
+                    (wearing ? "with" : "without") + " the set, expected " + expected + " XP, got " + player.totalExperience);
+            player.discard();
+        }
         helper.succeed();
     }
 

@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -25,6 +26,22 @@ public final class ModArmor {
     /** The ultimate set, matching the Paragon tools. */
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> PARAGON = register("paragon",
             5, 8, 10, 5, 25, 5.0f, 0.2f, () -> Ingredient.of(ModItems.PARAGON_INGOT.get()));
+
+    /** Dropped by Gorgantua (OreSpawn's Mobzilla Scale armor). The toughest set. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> GORGANTUA_SCALE = register("gorgantua_scale",
+            5, 8, 10, 5, 20, 5.0f, 0.3f, () -> Ingredient.of(ModItems.GORGANTUA_SCALE.get()));
+
+    /** Dropped by the Empress (OreSpawn's Queen Scale armor). Light and fast. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> EMPRESS_SCALE = register("empress_scale",
+            4, 8, 10, 4, 30, 4.5f, 0.1f, () -> Ingredient.of(ModItems.EMPRESS_SCALE.get()));
+
+    /** Mid-game, very enchantable; the villagers' favorite. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> EMERALD = register("emerald",
+            3, 6, 8, 3, 25, 2.0f, 0.0f, () -> Ingredient.of(Items.EMERALD));
+
+    /** Doubles the experience you pick up. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> EXPERIENCE = register("experience",
+            3, 6, 8, 3, 40, 1.0f, 0.0f, () -> Ingredient.of(Items.EXPERIENCE_BOTTLE));
 
     private static DeferredHolder<ArmorMaterial, ArmorMaterial> register(String name, int boots, int legs, int chest, int helmet,
                                                                           int enchantability, float toughness, float knockbackResistance,

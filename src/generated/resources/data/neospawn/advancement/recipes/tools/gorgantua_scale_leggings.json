@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gorgantua_scale": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neospawn:gorgantua_scale"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neospawn:gorgantua_scale_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gorgantua_scale"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neospawn:gorgantua_scale_leggings"
+    ]
+  }
+}

@@ -117,7 +117,26 @@ public final class ModItems {
             new SetArmorItem.Bonus(MobEffects.REGENERATION, 0),
             new SetArmorItem.Bonus(MobEffects.NIGHT_VISION, 0),
             new SetArmorItem.Bonus(MobEffects.WATER_BREATHING, 0)));
-    public static final List<ArmorSet> ARMOR_SETS = List.of(KING_SCALE_ARMOR, PARAGON_ARMOR);
+    public static final DeferredItem<Item> GORGANTUA_SCALE = ITEMS.registerSimpleItem("gorgantua_scale",
+            new Item.Properties().rarity(Rarity.EPIC).fireResistant());
+    public static final DeferredItem<Item> EMPRESS_SCALE = ITEMS.registerSimpleItem("empress_scale",
+            new Item.Properties().rarity(Rarity.EPIC).fireResistant());
+    public static final ArmorSet GORGANTUA_SCALE_ARMOR = armorSet("gorgantua_scale", ModArmor.GORGANTUA_SCALE, 60, List.of(
+            new SetArmorItem.Bonus(MobEffects.DAMAGE_BOOST, 1),
+            new SetArmorItem.Bonus(MobEffects.DAMAGE_RESISTANCE, 0),
+            new SetArmorItem.Bonus(MobEffects.FIRE_RESISTANCE, 0)));
+    public static final ArmorSet EMPRESS_SCALE_ARMOR = armorSet("empress_scale", ModArmor.EMPRESS_SCALE, 50, List.of(
+            new SetArmorItem.Bonus(MobEffects.MOVEMENT_SPEED, 1),
+            new SetArmorItem.Bonus(MobEffects.JUMP, 1),
+            new SetArmorItem.Bonus(MobEffects.SLOW_FALLING, 0),
+            new SetArmorItem.Bonus(MobEffects.REGENERATION, 0)));
+    public static final ArmorSet EMERALD_ARMOR = armorSet("emerald", ModArmor.EMERALD, 30, List.of(
+            new SetArmorItem.Bonus(MobEffects.HERO_OF_THE_VILLAGE, 0),
+            new SetArmorItem.Bonus(MobEffects.LUCK, 0)));
+    /** No potion bonus: doubles picked-up experience instead (see SetArmorItem). */
+    public static final ArmorSet EXPERIENCE_ARMOR = armorSet("experience", ModArmor.EXPERIENCE, 25, List.of());
+    public static final List<ArmorSet> ARMOR_SETS = List.of(KING_SCALE_ARMOR, PARAGON_ARMOR, GORGANTUA_SCALE_ARMOR,
+            EMPRESS_SCALE_ARMOR, EMERALD_ARMOR, EXPERIENCE_ARMOR);
 
     // ---------------------------------------------------------------- boss weapons (dropped, not crafted)
     public static final DeferredItem<BossWeapon> KINGS_FANG = weapon("kings_fang", BossWeapon.Effect.LIGHTNING, 22, -2.4f, 1);

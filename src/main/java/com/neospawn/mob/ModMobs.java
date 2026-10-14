@@ -445,7 +445,8 @@ public final class ModMobs {
                 .size(5.0f, 11.5f).stats(1024, 34, 0.26).armor(20).damageTaken(0.6f).voice(Voice.BIG_DINO).xp(2000)
                 .smashesBlocks().stepHeight(3.0).bar(BossEvent.BossBarColor.BLUE)
                 .attacks(BossAttack.BEAM, BossAttack.STOMP, BossAttack.TAIL_SWIPE, BossAttack.ROAR, BossAttack.FIRE_BREATH)
-                .drop(ModItems.TITAN_CLEAVER, 1, 1).drop(ModItems.PARAGON_INGOT, 2, 4).drop(v(Items.DIAMOND), 6, 12)
+                .drop(ModItems.TITAN_CLEAVER, 1, 1).drop(ModItems.GORGANTUA_SCALE, 12, 18).drop(ModItems.PARAGON_INGOT, 2, 4)
+                .drop(v(Items.DIAMOND), 6, 12)
                 .egg(0x3A4A3A, 0x8AE8F8);
 
         // The final boss, summoned with a Royal Sigil. A bigger, platinum King (same hand-built model).
@@ -494,7 +495,8 @@ public final class ModMobs {
                 .size(7.0f, 6.0f).stats(1024, 30, 0.3).flySpeed(0.65).armor(18).damageTaken(0.6f).voice(Voice.DRAGON).xp(2500)
                 .bar(BossEvent.BossBarColor.PINK)
                 .attacks(BossAttack.BEAM, BossAttack.METEOR_SHOWER, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.FIREBALL_VOLLEY)
-                .drop(ModItems.EMPRESS_BATTLEAXE, 1, 1).drop(ModItems.PARAGON_INGOT, 3, 6).drop(v(Items.NETHER_STAR), 1, 1)
+                .drop(ModItems.EMPRESS_BATTLEAXE, 1, 1).drop(ModItems.EMPRESS_SCALE, 12, 18).drop(ModItems.PARAGON_INGOT, 3, 6)
+                .drop(v(Items.NETHER_STAR), 1, 1)
                 .drop(v(Items.DIAMOND), 8, 16)
                 .egg(0x7A3AB8, 0xF2A8E8);
         skyBoss("skyclaw", "Skyclaw", look(Family.QUADRUPED).body(18, 10, 10).leg(10).neck(4).head(8).snout(3).tail(14).wing(28)
