@@ -81,6 +81,6 @@ python3 tools/gen_textures.py   # regenerate block/item placeholder art
 ## Roadmap
 
 1. The combat polish pass in docs/BOSS_POLISH.md
-2. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
-3. A custom dimension with its own mobs
+2. The six dimensions (docs/ROSTER.md): Utopia, Mining, Village, Danger and Crystal Realms, Chaos Isles
+3. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
 4. Hand-drawn art and Blockbench models for the most important mobs

@@ -122,3 +122,19 @@ Status: ✅ in game · 🔜 next phase
 | Miner's Dream | Tunnel Charge | blasts a tunnel and keeps the ores | ✅ |
 | Ultimate armor / Royal Guardian gear | Paragon armor / King's Scale armor | full-set potion bonuses | ✅ |
 | Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang, Empress Battleaxe, Skyclaw Talon, Azure Fang, Mothwing Glaive, Mantis Scythe, Sovereign Stinger, Hercules Horn, Centipede Whip, Ascended Blade, and one for each of the last 10 bosses | dropped by bosses | ✅ (27) |
+
+## Dimensions
+
+OreSpawn reached most of its dimensions by right-clicking a kind of ant. NeoSpawn will do
+the same with its ant mobs: right-click one to travel, right-click the same kind again to
+come home. The ants become harmless travel tokens (Fire Ant and Volatile Ant keep a
+hostile cousin in the overworld).
+
+| OreSpawn | NeoSpawn | Reached by | What's there | Status |
+|---|---|---|---|---|
+| Utopia (brown ant) | Utopia | Worker Ant | Peaceful, no hostile mobs. The Tree of Goodness with The King on top | 🔜 |
+| Mining Dimension (red ant) | Mining Realm | Fire Ant | Ore-rich and dangerous: dinosaurs, Brutosaurus, dragons, Skyclaw nests | 🔜 |
+| Village Dimension (rainbow ant) | Village Realm | Prism Ant | Villages under attack by robots, and Gorgantua | 🔜 |
+| Danger Dimension (unstable ant) | Danger Realm | Volatile Ant | Boss dungeons, prison towers full of Bandits, the best loot | 🔜 |
+| Crystal Dimension (termite) | Crystal Realm | Termite | Crystal landscape and crystal ores; you can't bring items in | 🔜 |
+| Chaos Dimension | Chaos Isles | (portal TBD) | Floating islands over the void, Dread Steeds | 🔜 |
