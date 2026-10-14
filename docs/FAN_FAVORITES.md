@@ -22,12 +22,12 @@ Status: ✅ in NeoSpawn · 🟡 partly · ❌ missing · 🔜 already planned
 | # | Feature | What fans liked | NeoSpawn | Your call |
 |---|---|---|---|---|
 | 1 | Giant bosses | The King, Queen, Mobzilla, Kraken, Ultimate King: huge, absurd, memorable | ✅ 27 bosses | |
-| 2 | **Mobs fighting each other** | OreSpawn had "battle mobs": dragons hunt the Kraken and Mothra, bosses brawl. Watching Mobzilla fight The King was a YouTube staple | ❌ bosses ignore each other | |
+| 2 | **Mobs fighting each other** | OreSpawn had "battle mobs": dragons hunt the Kraken and Mothra, bosses brawl. Watching Mobzilla fight The King was a YouTube staple | ❌ bosses ignore each other | Nice (wanted, not imperative) |
 | 3 | **Absurd mega-weapons** | Big Bertha, The Slice, Royal Guardian Sword, Queen Battle Axe: huge, long reach, hundreds of damage. Big Bertha's recipe needed parts from several bosses |Must
 🟡 27 boss weapons, but no multi-boss "trophy" mega-weapon | |Must
-| 4 | Ultimate gear | Pre-enchanted Ultimate armor, tools, **Ultimate Bow**, **Ultimate Fishing Rod** (fishes in lava) | 🟡 Paragon armor and tools; no bow or rod | |
-| 5 | Mob-scale armors | Armor sets made from boss parts: Mobzilla Scale, Queen Scale, Emerald, Experience (XP boost) | 🟡 King's Scale and Paragon only | |
-| 6 | Wacky weapons and gadgets | Squid Zooka, Ray Gun, Chainsaw, Attitude Adjuster (explodes when swung), Nether Sword | ❌ | |
+| 4 | Ultimate gear | Pre-enchanted Ultimate armor, tools, **Ultimate Bow**, **Ultimate Fishing Rod** (fishes in lava) | 🟡 Paragon armor and tools; no bow or rod | Must |
+| 5 | Mob-scale armors | Armor sets made from boss parts: Mobzilla Scale, Queen Scale, Emerald, Experience (XP boost) | 🟡 King's Scale and Paragon only | Must |
+| 6 | Wacky weapons and gadgets | Squid Zooka, Ray Gun, Chainsaw, Attitude Adjuster (explodes when swung), Nether Sword | ❌ | Must |
 | 7 | **Girlfriends/Boyfriends** | Tameable companions that follow you, fight, and change outfits. *Divisive*: one remake dropped them, another expanded them to dozens | 🔜 Companion | Skip |
 | 8 | **Pets that grow up** | The Prince → Young Prince → Young Adult → The King. Raising your own King was a highlight | 🔜 Royal Hatchling line | Nice|
 | 9 | **Rideable creatures** | Flying on a Cephadrome or Leonopteryx, riding the Water Dragon, piloting the Spider Robot | ❌ nothing rideable yet |Must |
@@ -94,6 +94,12 @@ from them:
 
 What sets NeoSpawn apart: original and publishable, modern design, tested, and balanced so the absurd
 fun lasts longer.
+
+## Decisions (2026-10-14)
+
+- **Build order:** rideable creatures, then zoo cages, then the other Musts.
+- **Modpack:** include everything from Crazy Craft that has a modern version; close substitutes are fine
+  where the original has no 1.21.1 version.
 
 ## Your additions
 
