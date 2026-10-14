@@ -14,7 +14,7 @@ from OreSpawn's code or assets.
 Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
 change or remove that line on other machines.
 
-## What's in so far (v0.2)
+## What's in so far (v0.3)
 
 See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
 
@@ -22,7 +22,11 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   each with natural spawns, drops, sounds and abilities (poison, fire, leaping, teleporting,
   exploding, ranged spit, reeling players in, and others).
 - **The King**: giant flying dragon boss (1000 HP), with fireball volleys, lightning,
-  swooping bites and an enraged phase below half health.
+  swooping bites and an enraged phase below half health. Drops King's Scales and King's Fang.
+- **Land bosses**: Tyrannosaurus, Brutosaurus, Allosaurus (calls raptor packs) and the kaiju
+  Gorgantua (blue beam breath, smashes through terrain). All bosses have a boss bar, special
+  attacks, and enrage below half health. Each drops a signature weapon.
+- **Armor**: King's Scale and Paragon sets, with full-set potion bonuses.
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.
 - **Tools**: full sets in Ruby, Tanzanite and Titanium, plus **Paragon** gear made from
@@ -43,7 +47,9 @@ stats, temperament, abilities, drops and spawn biomes. Shared code turns that in
   `assets/neospawn/textures/entity/<mob_id>.png`.
 - a spawn egg, language entries and spawn rules, made by datagen
 
-Adding a mob means adding one entry, then running `./gradlew runData`.
+Adding a mob means adding one entry, then running `./gradlew runData`. Bosses work the same
+way: give the spec `Kind.BOSS` and a list of attacks (`STOMP`, `ROAR`, `CHARGE`, `FIRE_BREATH`,
+`LIGHTNING`, `SUMMON`, `BEAM`, `LEAP_SLAM`, `TAIL_SWIPE`), and `NeoBoss` schedules them.
 
 ## Development commands
 
@@ -56,8 +62,8 @@ python3 tools/gen_textures.py   # regenerate block/item placeholder art
 
 ## Roadmap
 
-1. Bosses: every 🔜 boss in docs/ROSTER.md
+1. More bosses: sea (Kraken, Leviathan, Sea Serpent), sky (Empress, Skyclaw, Azure Drake,
+   Moth Titan), bugs (Mantis, Scorpion, Hercules Beetle, Centipillar), then the Ascended King
 2. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
-3. Paragon and King's Scale armor, and boss weapons
-4. A custom dimension with its own mobs
-5. Hand-drawn art and Blockbench models for the most important mobs
+3. A custom dimension with its own mobs
+4. Hand-drawn art and Blockbench models for the most important mobs

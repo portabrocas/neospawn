@@ -25,8 +25,10 @@ public interface NeoMob {
     MobSpec spec();
 
     static AttributeSupplier.Builder attributes(MobSpec spec) {
-        boolean big = spec.hitboxWidth >= 1.5f;
+        boolean big = spec.hitboxWidth >= 1.5f || spec.isBoss();
         return Mob.createMobAttributes()
+                .add(Attributes.STEP_HEIGHT, spec.stepHeight)
+                .add(Attributes.ARMOR_TOUGHNESS, spec.isBoss() ? spec.armor / 2 : 0)
                 .add(Attributes.MAX_HEALTH, spec.health)
                 .add(Attributes.MOVEMENT_SPEED, spec.speed)
                 .add(Attributes.ATTACK_DAMAGE, Math.max(spec.damage, 0.5))

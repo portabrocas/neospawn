@@ -46,6 +46,9 @@ public class ModRecipes extends RecipeProvider {
         tools(out, ModItems.TITANIUM_TOOLS, ModItems.TITANIUM_INGOT.get());
         tools(out, ModItems.PARAGON_TOOLS, ModItems.PARAGON_INGOT.get());
 
+        armor(out, ModItems.KING_SCALE_ARMOR, ModItems.KING_SCALE.get());
+        armor(out, ModItems.PARAGON_ARMOR, ModItems.PARAGON_INGOT.get());
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PARAGON_INGOT.get())
                 .pattern("TUT").pattern("URU").pattern("TUT")
                 .define('T', ModItems.TITANIUM_INGOT.get())
@@ -100,13 +103,24 @@ public class ModRecipes extends RecipeProvider {
         tool(out, set.hoe().get(), material, has, "##", " S", " S");
     }
 
+    private void armor(RecipeOutput out, ModItems.ArmorSet set, Item material) {
+        String has = "has_" + set.name();
+        tool(out, set.helmet().get(), material, has, "###", "# #");
+        tool(out, set.chestplate().get(), material, has, "# #", "###", "###");
+        tool(out, set.leggings().get(), material, has, "###", "# #", "# #");
+        tool(out, set.boots().get(), material, has, "# #", "# #");
+    }
+
     private void tool(RecipeOutput out, Item result, Item material, String has, String... pattern) {
         ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result);
         for (String row : pattern) {
             builder.pattern(row);
         }
-        builder.define('#', material).define('S', Items.STICK)
-                .unlockedBy(has, has(material))
+        builder.define('#', material);
+        if (String.join("", pattern).contains("S")) {
+            builder.define('S', Items.STICK);
+        }
+        builder.unlockedBy(has, has(material))
                 .save(out, NeoSpawn.id(getItemName(result)));
     }
 }

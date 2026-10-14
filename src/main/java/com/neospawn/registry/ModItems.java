@@ -1,11 +1,17 @@
 package com.neospawn.registry;
 
 import com.neospawn.NeoSpawn;
+import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
 import com.neospawn.item.ParagonTools;
+import com.neospawn.item.SetArmorItem;
 import com.neospawn.item.TunnelChargeItem;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.HoeItem;
@@ -84,6 +90,34 @@ public final class ModItems {
                     .attributes(HoeItem.createAttributes(PARAGON_TIER, -5.0f, 0.0f)))));
     public static final List<ToolSet> TOOL_SETS = List.of(RUBY_TOOLS, TANZANITE_TOOLS, TITANIUM_TOOLS, PARAGON_TOOLS);
 
+    // ---------------------------------------------------------------- armor
+    public record ArmorSet(String name, DeferredItem<SetArmorItem> helmet, DeferredItem<SetArmorItem> chestplate,
+                           DeferredItem<SetArmorItem> leggings, DeferredItem<SetArmorItem> boots) {
+        public List<DeferredItem<SetArmorItem>> all() {
+            return List.of(helmet, chestplate, leggings, boots);
+        }
+    }
+
+    public static final ArmorSet KING_SCALE_ARMOR = armorSet("king_scale", ModArmor.KING_SCALE, 45, List.of(
+            new SetArmorItem.Bonus(MobEffects.FIRE_RESISTANCE, 0),
+            new SetArmorItem.Bonus(MobEffects.DAMAGE_BOOST, 0),
+            new SetArmorItem.Bonus(MobEffects.JUMP, 1)));
+    public static final ArmorSet PARAGON_ARMOR = armorSet("paragon", ModArmor.PARAGON, 60, List.of(
+            new SetArmorItem.Bonus(MobEffects.DAMAGE_RESISTANCE, 0),
+            new SetArmorItem.Bonus(MobEffects.REGENERATION, 0),
+            new SetArmorItem.Bonus(MobEffects.NIGHT_VISION, 0),
+            new SetArmorItem.Bonus(MobEffects.WATER_BREATHING, 0)));
+    public static final List<ArmorSet> ARMOR_SETS = List.of(KING_SCALE_ARMOR, PARAGON_ARMOR);
+
+    // ---------------------------------------------------------------- boss weapons (dropped, not crafted)
+    public static final DeferredItem<BossWeapon> KINGS_FANG = weapon("kings_fang", BossWeapon.Effect.LIGHTNING, 22, -2.4f, 1);
+    public static final DeferredItem<BossWeapon> TYRANT_TOOTH = weapon("tyrant_tooth", BossWeapon.Effect.BLEED, 18, -2.2f, 0);
+    public static final DeferredItem<BossWeapon> BONE_CRUSHER = weapon("bone_crusher", BossWeapon.Effect.CRUSH, 28, -3.2f, 1);
+    public static final DeferredItem<BossWeapon> PREDATOR_CLAW = weapon("predator_claw", BossWeapon.Effect.VENOM, 14, -1.6f, 0);
+    public static final DeferredItem<BossWeapon> TITAN_CLEAVER = weapon("titan_cleaver", BossWeapon.Effect.CLEAVE, 60, -3.4f, 3);
+    public static final List<DeferredItem<BossWeapon>> BOSS_WEAPONS = List.of(KINGS_FANG, TYRANT_TOOTH, BONE_CRUSHER,
+            PREDATOR_CLAW, TITAN_CLEAVER);
+
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()
             .map(block -> ITEMS.registerSimpleBlockItem((DeferredBlock<?>) block))
@@ -104,6 +138,25 @@ public final class ModItems {
                         .attributes(ShovelItem.createAttributes(tier, 1.5f, -3.0f)))),
                 ITEMS.register(material + "_hoe", () -> new HoeItem(tier, new Item.Properties()
                         .attributes(HoeItem.createAttributes(tier, -3.0f, 0.0f)))));
+    }
+
+    private static ArmorSet armorSet(String name, Holder<ArmorMaterial> material, int durability, List<SetArmorItem.Bonus> bonuses) {
+        return new ArmorSet(name,
+                armorPiece(name, "helmet", ArmorItem.Type.HELMET, material, durability, bonuses),
+                armorPiece(name, "chestplate", ArmorItem.Type.CHESTPLATE, material, durability, bonuses),
+                armorPiece(name, "leggings", ArmorItem.Type.LEGGINGS, material, durability, bonuses),
+                armorPiece(name, "boots", ArmorItem.Type.BOOTS, material, durability, bonuses));
+    }
+
+    private static DeferredItem<SetArmorItem> armorPiece(String set, String piece, ArmorItem.Type type,
+                                                         Holder<ArmorMaterial> material, int durability,
+                                                         List<SetArmorItem.Bonus> bonuses) {
+        return ITEMS.register(set + "_" + piece, () -> new SetArmorItem(material, type, set, bonuses,
+                paragonProps().durability(type.getDurability(durability))));
+    }
+
+    private static DeferredItem<BossWeapon> weapon(String name, BossWeapon.Effect effect, float damage, float speed, float reach) {
+        return ITEMS.register(name, () -> new BossWeapon(PARAGON_TIER, effect, damage, speed, reach, paragonProps()));
     }
 
     private static Item.Properties paragonProps() {

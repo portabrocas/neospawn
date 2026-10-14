@@ -215,6 +215,11 @@ public final class Shapes {
             head.box(Role.ACCENT, -0.5f, -hs / 2 - 2.5f, -hl * 0.8f, 1, 2.5f, hl * 0.6f);
         }
         horns(head, hs, -hs / 2, -hs * 0.6f, l);
+        if (l.has(Extra.SPIKES)) {
+            for (float z = -L / 2 + 2; z < L / 2 - 1; z += 3) {
+                body.box(Role.ACCENT, -0.5f, -H / 2 - 3, z, 1, 3, 2);
+            }
+        }
         tailChain(body, 0, -H / 4, L / 2, l.tail, Math.max(2, Math.round(Math.min(W, H) * 0.7f)), 0.05f);
         return s;
     }
@@ -481,7 +486,25 @@ public final class Shapes {
             }
         }
         Part head = body.child("head", 0, -H, 0).anim(Anim.HEAD).box(Role.BASE, -hs / 2, -hs, -hs / 2, hs, hs, hs);
-        faceEyes(head, hs / 4, -hs * 0.6f, -hs / 2);
+        if (l.snout > 0) {
+            // Reptile muzzle with a working jaw, and eyes moved to the sides of the skull.
+            float sw = Math.max(2, Math.round(hs * 0.7f));
+            head.box(Role.BASE, -sw / 2, -hs * 0.75f, -hs / 2 - l.snout, sw, hs * 0.4f, l.snout);
+            head.child("jaw", 0, -hs * 0.35f, -hs / 2).anim(Anim.JAW)
+                    .box(Role.SECOND, -sw / 2 + 0.5f, 0, -l.snout, sw - 1, hs * 0.25f, l.snout);
+            eyes(head, hs / 2, -hs * 0.75f, -hs / 2 + 1);
+        } else {
+            faceEyes(head, hs / 4, -hs * 0.6f, -hs / 2);
+        }
+        if (l.tail > 0) {
+            tailChain(body, 0, -2, D / 2, l.tail, Math.max(2, Math.round(W * 0.5f)), -0.6f);
+        }
+        if (l.has(Extra.PLATES)) {
+            for (int i = 0; i < 5; i++) {
+                float ph = i % 2 == 0 ? 5 : 4;
+                body.box(Role.ACCENT, -1, -H + 2 + i * (H - 3) / 5, D / 2, 2, ph, ph);
+            }
+        }
         if (l.has(Extra.HOOD)) {
             head.box(Role.SECOND, -hs / 2 - 0.5f, -hs - 0.5f, -hs / 2 + 1, hs + 1, hs + 1, hs - 0.5f);
         }

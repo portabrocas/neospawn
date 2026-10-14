@@ -29,7 +29,7 @@ public class FossilEggItem extends Item {
             return InteractionResult.SUCCESS;
         }
         BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
-        List<MobSpec> mobs = ModMobs.ALL;
+        List<MobSpec> mobs = ModMobs.regular();
         MobSpec spec = mobs.get(level.random.nextInt(mobs.size()));
         if (spec.type.get().spawn(level, pos, MobSpawnType.SPAWN_EGG) != null) {
             level.sendParticles(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);

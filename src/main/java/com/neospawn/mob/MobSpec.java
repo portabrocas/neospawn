@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
@@ -26,7 +27,33 @@ public final class MobSpec {
         FLYER,
         HOSTILE_FLYER,
         SWIMMER,
-        HOSTILE_SWIMMER
+        HOSTILE_SWIMMER,
+        /** Walking boss with a boss bar and special attacks. */
+        BOSS
+    }
+
+    /**
+     * Special boss attacks. Ranges are measured from the boss's edge, so they work for any size.
+     */
+    public enum BossAttack {
+        STOMP(100, 0, 8),
+        ROAR(260, 0, 18),
+        CHARGE(160, 6, 24),
+        FIRE_BREATH(90, 3, 16),
+        LIGHTNING(140, 0, 30),
+        SUMMON(400, 0, 32),
+        BEAM(220, 4, 40),
+        LEAP_SLAM(180, 5, 18),
+        TAIL_SWIPE(70, 0, 5);
+
+        public final int cooldown;
+        public final double minRange, maxRange;
+
+        BossAttack(int cooldown, double minRange, double maxRange) {
+            this.cooldown = cooldown;
+            this.minRange = minRange;
+            this.maxRange = maxRange;
+        }
     }
 
     /** How a mob treats players. */
@@ -64,6 +91,15 @@ public final class MobSpec {
     public boolean tameable;
     public int xp = 5;
 
+    // Bosses only.
+    public final List<BossAttack> attacks = new ArrayList<>();
+    /** Multiplier on incoming damage; vanilla caps health at 1024, so this stretches tougher bosses. */
+    public float damageTaken = 1.0f;
+    public boolean smashesBlocks;
+    public double stepHeight = 0.6;
+    @Nullable public String minion;
+    public BossEvent.BossBarColor barColor = BossEvent.BossBarColor.RED;
+
     /** Filled in at registration. */
     public Supplier<EntityType<? extends Mob>> type;
 
@@ -72,10 +108,29 @@ public final class MobSpec {
         this.name = name;
         this.kind = kind;
         this.look = look;
-        if (kind == Kind.MONSTER || kind == Kind.HOSTILE_FLYER || kind == Kind.HOSTILE_SWIMMER) {
+        if (kind == Kind.MONSTER || kind == Kind.HOSTILE_FLYER || kind == Kind.HOSTILE_SWIMMER || kind == Kind.BOSS) {
             temper = Temper.HOSTILE;
         }
+        if (kind == Kind.BOSS) {
+            followRange = 64;
+            stepHeight = 2.0;
+        }
     }
+
+    public boolean isBoss() {
+        return kind == Kind.BOSS;
+    }
+
+    public MobSpec attacks(BossAttack... attacks) {
+        this.attacks.addAll(List.of(attacks));
+        return this;
+    }
+
+    public MobSpec damageTaken(float damageTaken) { this.damageTaken = damageTaken; return this; }
+    public MobSpec smashesBlocks() { this.smashesBlocks = true; return this; }
+    public MobSpec stepHeight(double stepHeight) { this.stepHeight = stepHeight; return this; }
+    public MobSpec minion(String minion) { this.minion = minion; return this; }
+    public MobSpec bar(BossEvent.BossBarColor barColor) { this.barColor = barColor; return this; }
 
     public MobSpec size(float width, float height) {
         this.hitboxWidth = width;

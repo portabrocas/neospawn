@@ -84,10 +84,10 @@ Status: ✅ in game · 🔜 next phase
 | The King | The King | ✅ |
 | The Queen | The Empress | 🔜 |
 | The Ultimate King | The Ascended King | 🔜 |
-| Mobzilla | Gorgantua | 🔜 |
-| T-Rex | Tyrannosaurus | 🔜 |
-| Nastysaurus | Brutosaurus | 🔜 |
-| Alosaurus | Allosaurus | 🔜 |
+| Mobzilla | Gorgantua | ✅ |
+| T-Rex | Tyrannosaurus | ✅ |
+| Nastysaurus | Brutosaurus | ✅ |
+| Alosaurus | Allosaurus | ✅ |
 | The Kraken | Kraken | 🔜 |
 | Mothra | Moth Titan | 🔜 |
 | Leonopteryx | Skyclaw | 🔜 |
@@ -120,5 +120,5 @@ Status: ✅ in game · 🔜 next phase
 | Mob ores / Ancient Dried Spawn Egg | Fossil Ore → Fossilized Egg | hatches a random NeoSpawn creature | ✅ |
 | Ultimate tools | Paragon tools | crafted from Titanium, Uranium and Ruby; come pre-enchanted; the Paragon Pickaxe mines 3×3 | ✅ |
 | Miner's Dream | Tunnel Charge | blasts a tunnel and keeps the ores | ✅ |
-| Ultimate armor / Royal Guardian gear | Paragon armor / King's Scale armor | | 🔜 |
-| Big Bertha, Queen Battle Axe, etc. | boss weapons | | 🔜 |
+| Ultimate armor / Royal Guardian gear | Paragon armor / King's Scale armor | full-set potion bonuses | ✅ |
+| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver | dropped by bosses | ✅ (first 5) |

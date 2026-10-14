@@ -59,6 +59,13 @@ public final class ModTags {
                 tag(ItemTags.SHOVELS).add(set.shovel().get());
                 tag(ItemTags.HOES).add(set.hoe().get());
             }
+            for (ModItems.ArmorSet set : ModItems.ARMOR_SETS) {
+                tag(ItemTags.HEAD_ARMOR).add(set.helmet().get());
+                tag(ItemTags.CHEST_ARMOR).add(set.chestplate().get());
+                tag(ItemTags.LEG_ARMOR).add(set.leggings().get());
+                tag(ItemTags.FOOT_ARMOR).add(set.boots().get());
+            }
+            ModItems.BOSS_WEAPONS.forEach(weapon -> tag(ItemTags.SWORDS).add(weapon.get()));
             tag(ItemTags.BEACON_PAYMENT_ITEMS).add(ModItems.RUBY.get(), ModItems.TANZANITE.get(),
                     ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get(), ModItems.PARAGON_INGOT.get());
         }

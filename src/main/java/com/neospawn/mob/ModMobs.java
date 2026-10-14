@@ -4,11 +4,13 @@ import com.neospawn.mob.Look.Extra;
 import com.neospawn.mob.Look.Family;
 import com.neospawn.mob.Look.Pattern;
 import com.neospawn.mob.MobSpec.Ability;
+import com.neospawn.mob.MobSpec.BossAttack;
 import com.neospawn.mob.MobSpec.Kind;
 import com.neospawn.mob.MobSpec.Temper;
 import com.neospawn.mob.MobSpec.Voice;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -380,6 +382,45 @@ public final class ModMobs {
                 .size(0.6f, 0.6f).stats(10, 4, 0.3).voice(Voice.FISH)
                 .drop(v(Items.PRISMARINE_SHARD), 0, 2)
                 .egg(0x5A2A6A, 0xE8A8F8).spawn("c:is_ocean", 6, 1, 2);
+
+        // ---------------------------------------------------------------- bosses
+        boss("tyrannosaurus", "Tyrannosaurus", look(Family.THEROPOD).body(22, 14, 12).leg(16).neck(6).head(10).snout(6).tail(26)
+                .colors(0x5A4A32, 0x3A2E1E, 0xD8C8A0).pattern(Pattern.STRIPES).scale(2.4f))
+                .size(3.0f, 5.5f).stats(600, 20, 0.3).armor(10).voice(Voice.BIG_DINO).xp(400)
+                .attacks(BossAttack.ROAR, BossAttack.CHARGE, BossAttack.STOMP, BossAttack.TAIL_SWIPE)
+                .drop(ModItems.TYRANT_TOOTH, 1, 1).drop(v(Items.BEEF), 10, 20).drop(v(Items.BONE), 8, 16)
+                .egg(0x5A4A32, 0xD8C8A0).dayActive().spawn("c:is_savanna", 1, 1, 1).spawn("c:is_jungle", 1, 1, 1);
+        boss("brutosaurus", "Brutosaurus", look(Family.THEROPOD).body(26, 16, 14).leg(18).neck(5).head(12).snout(6).tail(30)
+                .with(Extra.SPIKES, Extra.HORNS).colors(0x6A2A2A, 0x3A1414, 0xE8C83A).pattern(Pattern.SCALES).scale(3.0f))
+                .size(4.0f, 7.5f).stats(900, 26, 0.28).armor(14).voice(Voice.BIG_DINO).xp(700).smashesBlocks()
+                .attacks(BossAttack.STOMP, BossAttack.LEAP_SLAM, BossAttack.ROAR, BossAttack.TAIL_SWIPE)
+                .drop(ModItems.BONE_CRUSHER, 1, 1).drop(v(Items.BEEF), 16, 28).drop(v(Items.BONE_BLOCK), 4, 8)
+                .egg(0x6A2A2A, 0xE8C83A).dayActive().spawn("c:is_jungle", 1, 1, 1);
+        boss("allosaurus", "Allosaurus", look(Family.THEROPOD).body(18, 10, 9).leg(15).neck(6).head(8).snout(5).tail(22)
+                .with(Extra.CREST).colors(0xB86A2A, 0x6A3A14, 0xF2E8D8).pattern(Pattern.STRIPES).scale(2.0f))
+                .size(2.2f, 4.0f).stats(450, 16, 0.34).armor(8).voice(Voice.BIG_DINO).xp(300).minion("swift_raptor")
+                .attacks(BossAttack.CHARGE, BossAttack.SUMMON, BossAttack.ROAR, BossAttack.LEAP_SLAM)
+                .drop(ModItems.PREDATOR_CLAW, 1, 1).drop(v(Items.BEEF), 8, 14).drop(v(Items.BONE), 6, 12)
+                .egg(0xB86A2A, 0xF2E8D8).dayActive().spawn("c:is_savanna", 1, 1, 1).spawn("c:is_badlands", 1, 1, 1);
+        boss("gorgantua", "Gorgantua", look(Family.HUMANOID).body(0, 16, 20).leg(16).head(10).snout(6).tail(28)
+                .with(Extra.PLATES).colors(0x3A4A3A, 0x23302A, 0x8AE8F8).eye(0xFFE84A).pattern(Pattern.SCALES).glow().scale(4.0f))
+                .size(5.0f, 11.5f).stats(1024, 34, 0.26).armor(20).damageTaken(0.5f).voice(Voice.BIG_DINO).xp(2000)
+                .smashesBlocks().stepHeight(3.0).bar(BossEvent.BossBarColor.BLUE)
+                .attacks(BossAttack.BEAM, BossAttack.STOMP, BossAttack.TAIL_SWIPE, BossAttack.ROAR, BossAttack.FIRE_BREATH)
+                .drop(ModItems.TITAN_CLEAVER, 1, 1).drop(ModItems.PARAGON_INGOT, 2, 4).drop(v(Items.DIAMOND), 6, 12)
+                .egg(0x3A4A3A, 0x8AE8F8);
+    }
+
+    private static MobSpec boss(String id, String name, Look look) { return add(new MobSpec(id, name, Kind.BOSS, look)); }
+
+    /** Everything that isn't a boss: used by the Fossilized Egg and the gallery. */
+    public static List<MobSpec> regular() {
+        return SPECS.stream().filter(spec -> !spec.isBoss()).toList();
+    }
+
+    public static MobSpec byId(String id) {
+        return SPECS.stream().filter(spec -> spec.id.equals(id)).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown NeoSpawn mob " + id));
     }
 
     private static Look cow(int base, int second, int accent, Pattern pattern) {
@@ -423,10 +464,14 @@ public final class ModMobs {
             case HOSTILE_FLYER -> NeoHostileFlyer::new;
             case SWIMMER -> NeoSwimmer::new;
             case HOSTILE_SWIMMER -> NeoHostileSwimmer::new;
+            case BOSS -> NeoBoss::new;
         };
         EntityType.Builder<?> builder = EntityType.Builder.of(factory, category(spec))
                 .sized(spec.hitboxWidth, spec.hitboxHeight)
-                .clientTrackingRange(spec.hitboxWidth > 2 ? 12 : 8);
+                .clientTrackingRange(spec.isBoss() ? 16 : spec.hitboxWidth > 2 ? 12 : 8);
+        if (spec.isBoss()) {
+            builder.fireImmune();
+        }
         if (spec.has(Ability.FIREPROOF)) {
             builder.fireImmune();
         }
@@ -438,7 +483,7 @@ public final class ModMobs {
     private static MobCategory category(MobSpec spec) {
         return switch (spec.kind) {
             case ANIMAL -> MobCategory.CREATURE;
-            case MONSTER, HOSTILE_FLYER -> MobCategory.MONSTER;
+            case MONSTER, HOSTILE_FLYER, BOSS -> MobCategory.MONSTER;
             case FLYER -> MobCategory.AMBIENT;
             case SWIMMER -> spec.hitboxWidth > 1.0f ? MobCategory.WATER_CREATURE : MobCategory.WATER_AMBIENT;
             case HOSTILE_SWIMMER -> MobCategory.WATER_CREATURE;
@@ -461,7 +506,7 @@ public final class ModMobs {
                 case ANIMAL, FLYER -> event.register(type, SpawnPlacementTypes.ON_GROUND,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules,
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
-                case MONSTER -> event.register(type, SpawnPlacementTypes.ON_GROUND,
+                case MONSTER, BOSS -> event.register(type, SpawnPlacementTypes.ON_GROUND,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                         day ? Monster::checkAnyLightMonsterSpawnRules : Monster::checkMonsterSpawnRules,
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);

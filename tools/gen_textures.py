@@ -298,6 +298,80 @@ save(storage(MATERIALS["salt"]), "block/salt_block.png")
 save(storage(MATERIALS["paragon"], inlay=(150, 60, 190)), "block/paragon_block.png")
 
 
+# ---------------------------------------------------------------- armor
+KING_GOLD = ((255, 225, 110), (212, 175, 55), (150, 100, 20), (80, 45, 5))
+ARMOR = {"king_scale": KING_GOLD, "paragon": MATERIALS["paragon"]}
+
+ARMOR_ICONS = {
+    "helmet": ["................", "................", "....oooooooo....", "...ohhhhHHHHo...", "...ohHHHHHHdo...",
+               "...oHHooooHdo...", "...oHHo..oHdo...", "...oddo..oddo...", "....oo....oo....", "................",
+               "................", "................", "................", "................", "................", "................"],
+    "chestplate": ["................", "..ooo......ooo..", ".ohhHo....oHHdo.", ".ohHHHooooHHHdo.", ".oHHHHHHHHHHHdo.",
+                   "..ooHHHHHHHHoo..", "...oHHHHHHHHo...", "...ohHHHHHHdo...", "...oHHHHHHHdo...", "...oHHHHHHHdo...",
+                   "...oHHHHHHHdo...", "...odddddddoo...", "....ooooooo.....", "................", "................", "................"],
+    "leggings": ["................", "................", "...oooooooooo...", "...ohhHHHHHdo...", "...oHHHHHHHdo...",
+                 "...oHHHooHHdo...", "...oHHo..oHdo...", "...oHHo..oHdo...", "...oHHo..oHdo...", "...oHHo..oHdo...",
+                 "...oHdo..oHdo...", "...oddo..oddo...", "....oo....oo....", "................", "................", "................"],
+    "boots": ["................", "................", "................", "................", "................",
+              "................", "...ooo....ooo...", "...oHo....oHo...", "...oHo....oHo...", "..ohHo....oHdo..",
+              ".ohHHo....oHHdo.", ".oddoo....ooddo.", "..oo........oo..", "................", "................", "................"],
+}
+
+for set_name, mat in ARMOR.items():
+    palette = {"h": mat[0], "H": mat[1], "d": mat[2], "o": mat[3]}
+    for piece, rows in ARMOR_ICONS.items():
+        img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+        for y, row in enumerate(rows):
+            for x, ch in enumerate(row):
+                if ch in palette:
+                    img.putpixel((x, y), jitter(palette[ch], 6) + (255,))
+        save(img, f"item/{set_name}_{piece}.png")
+
+    # Worn texture (64x32 humanoid layout). Layer 1: helmet, chestplate, boots. Layer 2: leggings.
+    for layer in (1, 2):
+        img = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+        regions = [(0, 0, 32, 16), (0, 16, 56, 32)] if layer == 1 else [(0, 16, 40, 32)]
+        for x0, y0, x1, y1 in regions:
+            for x in range(x0, x1):
+                for y in range(y0, y1):
+                    ridge = (x + y // 2) % 4 == 0
+                    c = mat[2] if ridge else mat[1] if (x // 4 + y // 4) % 2 else mat[0]
+                    img.putpixel((x, y), jitter(c, 8) + (255,))
+        save(img, f"models/armor/{set_name}_layer_{layer}.png")
+
+
+# ---------------------------------------------------------------- boss weapons
+def big_blade(blade, edge, hilt, outline, width=1, guard=(212, 175, 55)):
+    s = Sprite()
+    for w in range(width + 1):
+        s.line(4 + w, 11, 14, 1 + w, blade)
+    s.line(4, 10, 13, 1, edge)
+    s.line(2, 9, 6, 13, guard)
+    s.line(1, 14, 3, 12, hilt)
+    return s.image(outline)
+
+
+save(big_blade((230, 190, 70), (255, 245, 180), (120, 20, 30), (70, 40, 0)), "item/kings_fang.png")
+save(big_blade((235, 225, 200), (255, 255, 245), (90, 60, 30), (70, 55, 35), guard=(120, 70, 40)), "item/tyrant_tooth.png")
+save(big_blade((90, 220, 210), (200, 255, 250), (40, 50, 60), (20, 40, 45), width=3, guard=(60, 70, 80)), "item/titan_cleaver.png")
+
+crusher = Sprite()
+crusher.line(2, 13, 9, 6, STICK[0])
+for x in range(7, 15):
+    for y in range(0, 8):
+        if abs(x - 11) <= 3 and abs(y - 3) <= 2 or abs(x - 11) + abs(y - 3) <= 3:
+            crusher.set(x, y, jitter((225, 215, 190) if (x + y) % 3 else (180, 165, 140), 6))
+save(crusher.image((80, 70, 55)), "item/bone_crusher.png")
+
+claw = Sprite()
+for i, (x, y) in enumerate(((4, 12), (6, 10), (8, 8), (10, 6), (12, 4), (13, 2))):
+    for dx in range(3):
+        claw.set(x + dx - 1, y, (60, 180, 70) if dx == 1 else (40, 120, 50))
+for x, y in ((2, 14), (3, 13)):
+    claw.set(x, y, STICK[1])
+save(claw.image((20, 50, 25)), "item/predator_claw.png")
+
+
 # ---------------------------------------------------------------- The King
 # Regions mirror the texOffs in TheKingModel.createBodyLayer().
 king = Image.new("RGBA", (256, 256), (0, 0, 0, 0))

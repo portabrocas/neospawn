@@ -31,7 +31,7 @@ public final class GalleryCommand {
         BlockPos origin = BlockPos.containing(source.getPosition()).offset(4, 0, 4);
         int perRow = 8, x = 0, z = 0, count = 0;
         float rowDepth = 0;
-        for (MobSpec spec : ModMobs.ALL) {
+        for (MobSpec spec : ModMobs.regular()) {
             float spacing = Math.max(3, spec.hitboxWidth + 2);
             BlockPos column = origin.offset(x, 0, z);
             BlockPos ground = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column);

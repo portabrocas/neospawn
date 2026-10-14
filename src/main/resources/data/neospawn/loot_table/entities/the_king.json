@@ -1,4 +1,53 @@
-{"type":"minecraft:entity","pools":[
- {"rolls":1,"entries":[{"type":"minecraft:item","name":"neospawn:king_scale","functions":[{"function":"minecraft:set_count","count":{"type":"minecraft:uniform","min":8,"max":12}}]}]},
- {"rolls":1,"entries":[{"type":"minecraft:item","name":"neospawn:ruby_block","functions":[{"function":"minecraft:set_count","count":{"type":"minecraft:uniform","min":2,"max":4}}]}]}
-],"random_sequence":"neospawn:entities/the_king"}
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "neospawn:king_scale",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 14,
+                "max": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "neospawn:ruby_block",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "neospawn:kings_fang"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "neospawn:entities/the_king"
+}
