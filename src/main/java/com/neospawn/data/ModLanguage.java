@@ -75,6 +75,12 @@ public class ModLanguage extends LanguageProvider {
         add("message.neospawn.realm.leave_first", "Return home before traveling to another realm.");
         add("message.neospawn.realm.empty_handed", "Nothing but the charm may enter %s. Empty your inventory first.");
         add("message.neospawn.realm.arrive", "You arrive in %s.");
+        add("item.neospawn.mount_item.tooltip", "Use on the ground for your own %s. Right-click it to ride; sneak-click to make it sit");
+        add("item.neospawn.mount_item.tooltip_flying", "Flies where you look: walk forward to go, look up to climb");
+        add("item.neospawn.mount_item.tooltip_swimming", "Swims where you look underwater");
+        add("item.neospawn.mount_item.tooltip_climbing", "Walks up walls");
+        add("item.neospawn.mount_item.tooltip_mech", "Repair it with iron ingots");
+        add("message.neospawn.mount_item.hatched", "Your %s is ready to ride.");
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();

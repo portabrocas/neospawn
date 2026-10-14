@@ -94,6 +94,9 @@ public final class MobSpec {
         }
     }
 
+    /** How a tamed mount is steered when ridden. NONE means it can't be ridden. */
+    public enum MountType { NONE, GROUND, FLYING, SWIMMING, CLIMBING }
+
     /** How a mob treats players. */
     public enum Temper { PASSIVE, NEUTRAL, HOSTILE }
 
@@ -137,6 +140,10 @@ public final class MobSpec {
     public double stepHeight = 0.6;
     @Nullable public String minion;
     public BossEvent.BossBarColor barColor = BossEvent.BossBarColor.RED;
+    public MountType mount = MountType.NONE;
+    /** Mechs: never fed or bred; repaired with iron ingots. */
+    public boolean mechanical;
+
     /** Skip the generated model; the client registers a hand-built renderer instead (The King). */
     public boolean customRenderer;
 
@@ -180,6 +187,20 @@ public final class MobSpec {
     public MobSpec minion(String minion) { this.minion = minion; return this; }
     public MobSpec bar(BossEvent.BossBarColor barColor) { this.barColor = barColor; return this; }
     public MobSpec customRenderer() { this.customRenderer = true; return this; }
+
+    /** Its owner can ride it once tamed. */
+    public MobSpec mount(MountType mount) {
+        this.mount = mount;
+        this.tameable = true;
+        this.stepHeight = Math.max(stepHeight, 1.1);
+        return this;
+    }
+
+    public MobSpec mechanical() { this.mechanical = true; return this; }
+
+    public boolean isMount() {
+        return mount != MountType.NONE;
+    }
 
     public MobSpec size(float width, float height) {
         this.hitboxWidth = width;

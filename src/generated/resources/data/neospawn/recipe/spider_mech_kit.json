@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "item": "neospawn:titanium_ingot"
+    }
+  },
+  "pattern": [
+    "TST",
+    "IRI",
+    "S S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:spider_mech_kit"
+  }
+}

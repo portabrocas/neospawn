@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "T": {
+      "item": "neospawn:titanium_ingot"
+    }
+  },
+  "pattern": [
+    "TIT",
+    "IRI",
+    "T T"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:ant_mech_kit"
+  }
+}

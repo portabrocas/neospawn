@@ -74,12 +74,13 @@ public final class ModMobs {
                 .egg(0x6B4226, 0x3E2614).spawn("c:is_river", 6, 1, 2);
         animal("gazelle", "Gazelle", look(Family.QUADRUPED).body(12, 7, 6).leg(10).neck(5).head(4).snout(2).tail(3)
                 .with(Extra.HORNS, Extra.EARS).colors(0xC8945A, 0xFFFFFF, 0x2A1A0A).belly(0xF5EBDD))
-                .size(0.8f, 1.4f).stats(14, 0, 0.38).breed(v(Items.WHEAT))
+                .size(0.8f, 1.4f).stats(14, 0, 0.38).tameWith(v(Items.WHEAT)).mount(MobSpec.MountType.GROUND)
                 .drop(v(Items.MUTTON), 1, 2).drop(v(Items.LEATHER), 0, 1)
                 .egg(0xC8945A, 0xF5EBDD).spawn("c:is_savanna", 10, 2, 5);
         animal("ostrich", "Ostrich", look(Family.BIRD).body(10, 9, 8).leg(14).neck(12).head(4).snout(2).tail(3)
                 .colors(0x2B2B2B, 0xF2F2F2, 0xE89F71))
-                .size(0.9f, 2.2f).stats(20, 5, 0.33).temper(Temper.NEUTRAL).voice(Voice.BIRD).breed(v(Items.WHEAT_SEEDS))
+                .size(0.9f, 2.2f).stats(20, 5, 0.33).temper(Temper.NEUTRAL).voice(Voice.BIRD).tameWith(v(Items.WHEAT_SEEDS))
+                .mount(MobSpec.MountType.GROUND)
                 .drop(v(Items.FEATHER), 1, 3).drop(v(Items.CHICKEN), 1, 2)
                 .egg(0x2B2B2B, 0xE89F71).spawn("c:is_savanna", 6, 1, 3).spawn("c:is_desert", 3, 1, 2);
         animal("cassowary", "Cassowary", look(Family.BIRD).body(10, 10, 8).leg(10).neck(8).head(4).tail(3)
@@ -167,6 +168,30 @@ public final class ModMobs {
                 .size(0.7f, 0.8f).stats(30, 5, 0.3).temper(Temper.NEUTRAL).voice(Voice.BEAST)
                 .abilities(Ability.FIRE, Ability.FIREPROOF).tameWith(v(Items.BLAZE_POWDER))
                 .egg(0xD84A2A, 0xFFC83A).spawn("c:is_badlands", 1, 1, 1).spawn("c:is_nether", 2, 1, 1);
+
+        // ---------------------------------------------------------------- mounts (hatched from boss eggs or built)
+        animal("tamed_skyclaw", "Tamed Skyclaw", look(Family.QUADRUPED).body(18, 10, 10).leg(10).neck(4).head(8).snout(3).tail(14).wing(28)
+                .with(Extra.EARS, Extra.CREST).colors(0xC89A4A, 0x8A5A2A, 0xF2E8C8).eye(0x3AB8E8).scale(1.3f))
+                .size(1.8f, 1.8f).stats(80, 8, 0.3).flySpeed(0.9).temper(Temper.NEUTRAL).voice(Voice.BEAST)
+                .tameWith(v(Items.BEEF)).mount(MobSpec.MountType.FLYING).egg(0xC89A4A, 0x3AB8E8);
+        animal("tamed_azure_drake", "Tamed Azure Drake", look(Family.QUADRUPED).body(18, 9, 9).leg(8).neck(10).head(7).snout(4).tail(22).wing(30)
+                .with(Extra.HORNS, Extra.SPIKES).colors(0x2A6AD8, 0x1A3A8A, 0xBFE8FF).eye(0xFF8A2A).pattern(Pattern.SCALES).scale(1.3f))
+                .size(1.8f, 1.6f).stats(70, 8, 0.3).flySpeed(1.0).temper(Temper.NEUTRAL).voice(Voice.DRAGON)
+                .abilities(Ability.FIRE, Ability.FIREPROOF).tameWith(v(Items.BLAZE_POWDER)).mount(MobSpec.MountType.FLYING)
+                .egg(0x2A6AD8, 0xBFE8FF);
+        animal("tamed_tide_dragon", "Tamed Tide Dragon", look(Family.QUADRUPED).body(24, 10, 12).leg(6).neck(14).head(8).snout(5).tail(28)
+                .with(Extra.HORNS, Extra.CREST).colors(0x1A6A8A, 0x0E3A4A, 0x8AF2E8).eye(0xF2F2FF).belly(0xA8D8E8)
+                .pattern(Pattern.SCALES).glow().scale(1.3f))
+                .size(1.8f, 1.6f).stats(80, 8, 0.3).flySpeed(1.0).temper(Temper.NEUTRAL).voice(Voice.DRAGON)
+                .tameWith(v(Items.COD)).mount(MobSpec.MountType.SWIMMING).egg(0x1A6A8A, 0x8AF2E8);
+        animal("ant_mech", "Ant Mech", look(Family.INSECT).body(16, 8, 8).leg(12).with(Extra.ANTENNAE, Extra.MANDIBLES)
+                .colors(0x8A8A92, 0x4A4A52, 0xE83A2A).eye(0x3AE8FF).glow().scale(1.4f))
+                .size(1.6f, 1.6f).stats(120, 10, 0.32).armor(10).temper(Temper.NEUTRAL).voice(Voice.ROBOT)
+                .mechanical().mount(MobSpec.MountType.GROUND).egg(0x8A8A92, 0xE83A2A);
+        animal("spider_mech", "Spider Mech", look(Family.INSECT).body(14, 7, 10).leg(16).legPairs(4).with(Extra.MANDIBLES)
+                .colors(0x5A5A62, 0x2A2A32, 0xE8C83A).eye(0xFF3A3A).glow().scale(1.4f))
+                .size(1.8f, 1.4f).stats(100, 8, 0.3).armor(8).temper(Temper.NEUTRAL).voice(Voice.ROBOT)
+                .mechanical().mount(MobSpec.MountType.CLIMBING).egg(0x5A5A62, 0xE8C83A);
 
         // ---------------------------------------------------------------- flyers (passive)
         flyer("songbird", "Songbird", look(Family.BIRD).body(4, 4, 3).leg(2).head(3).tail(3).wing(6)
@@ -477,14 +502,16 @@ public final class ModMobs {
                 .size(3.5f, 3.0f).stats(500, 18, 0.3).flySpeed(0.75).armor(10).voice(Voice.BEAST).xp(500)
                 .bar(BossEvent.BossBarColor.YELLOW)
                 .attacks(BossAttack.SWOOP, BossAttack.WIND_GUST, BossAttack.ROAR, BossAttack.LIGHTNING)
-                .drop(ModItems.SKYCLAW_TALON, 1, 1).drop(v(Items.FEATHER), 16, 32).drop(v(Items.LEATHER), 8, 16)
+                .drop(ModItems.SKYCLAW_TALON, 1, 1).drop(ModItems.SKYCLAW_EGG, 1, 1).drop(v(Items.FEATHER), 16, 32)
+                .drop(v(Items.LEATHER), 8, 16)
                 .egg(0xC89A4A, 0x3AB8E8).dayActive().spawn("c:is_mountain", 1, 1, 1);
         skyBoss("azure_drake", "Azure Drake", look(Family.QUADRUPED).body(18, 9, 9).leg(8).neck(10).head(7).snout(4).tail(22).wing(30)
                 .with(Extra.HORNS, Extra.SPIKES).colors(0x2A6AD8, 0x1A3A8A, 0xBFE8FF).eye(0xFF8A2A).pattern(Pattern.SCALES).scale(2.0f))
                 .size(3.5f, 2.8f).stats(400, 16, 0.3).flySpeed(0.7).armor(10).voice(Voice.DRAGON).xp(450)
                 .bar(BossEvent.BossBarColor.BLUE)
                 .attacks(BossAttack.FIRE_BREATH, BossAttack.SWOOP, BossAttack.FIREBALL_VOLLEY, BossAttack.WIND_GUST)
-                .drop(ModItems.AZURE_FANG, 1, 1).drop(v(Items.BLAZE_ROD), 4, 8).drop(v(Items.LAPIS_LAZULI), 8, 16)
+                .drop(ModItems.AZURE_FANG, 1, 1).drop(ModItems.AZURE_DRAKE_EGG, 1, 1).drop(v(Items.BLAZE_ROD), 4, 8)
+                .drop(v(Items.LAPIS_LAZULI), 8, 16)
                 .egg(0x2A6AD8, 0xBFE8FF).dayActive().spawn("c:is_mountain", 1, 1, 1).spawn("c:is_plateau", 1, 1, 1);
         skyBoss("moth_titan", "Moth Titan", look(Family.FLYING_BUG).body(18, 6, 6).head(7).wing(40)
                 .with(Extra.ANTENNAE).colors(0x6A4A2A, 0xD8A84A, 0x5AE8F8).eye(0x5AE8F8).pattern(Pattern.SPOTS).glow().scale(2.5f))
@@ -584,7 +611,7 @@ public final class ModMobs {
                 .pattern(Pattern.SCALES).glow().scale(2.4f))
                 .size(4.0f, 3.0f).stats(750, 24, 1.2).armor(14).voice(Voice.DRAGON).xp(750).bar(BossEvent.BossBarColor.BLUE)
                 .attacks(BossAttack.WAVE, BossAttack.GEYSER, BossAttack.WHIRLPOOL, BossAttack.LEAP_SLAM)
-                .drop(ModItems.weapon("tidecaller"), 1, 1).drop(v(Items.HEART_OF_THE_SEA), 1, 1, 0.5f).drop(v(Items.PRISMARINE_CRYSTALS), 8, 16)
+                .drop(ModItems.weapon("tidecaller"), 1, 1).drop(ModItems.TIDE_DRAGON_EGG, 1, 1).drop(v(Items.HEART_OF_THE_SEA), 1, 1, 0.5f).drop(v(Items.PRISMARINE_CRYSTALS), 8, 16)
                 .egg(0x1A6A8A, 0x8AF2E8).spawn("c:is_ocean", 1, 1, 1);
         seaBoss("sea_serpent", "Sea Serpent", look(Family.SERPENT).body(96, 9, 9).head(13).segments(12)
                 .with(Extra.SPIKES, Extra.MANDIBLES).colors(0x2A6A4A, 0x1A4A30, 0xF2E84A).eye(0xFF4A2A)
@@ -647,7 +674,7 @@ public final class ModMobs {
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static EntityType<?> build(MobSpec spec) {
         EntityType.EntityFactory factory = switch (spec.kind) {
-            case ANIMAL -> NeoAnimal::new;
+            case ANIMAL -> spec.isMount() ? NeoMount::new : NeoAnimal::new;
             case MONSTER -> NeoMonster::new;
             case FLYER -> NeoFlyer::new;
             case HOSTILE_FLYER -> NeoHostileFlyer::new;

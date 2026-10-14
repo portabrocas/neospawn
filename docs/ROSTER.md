@@ -73,7 +73,7 @@ Status: ✅ in game · 🔜 next phase
 | Irukandji | Stinger Jelly | water hostile | oceans | deadly poison | ✅ |
 | Attack Squid | Ambush Squid | water hostile | oceans | blinding ink | ✅ |
 | Crystal Urchin | Spike Urchin | water hostile | oceans | spiky, slow | ✅ |
-| Red Ant Robot / Spider Robot | Ant Mech, Spider Mech | rideable | crafted | rideable mechs | 🔜 |
+| Red Ant Robot / Spider Robot | Ant Mech, Spider Mech | rideable | crafted from kits | rideable mechs; the Spider Mech climbs walls; repair with iron | ✅ |
 | Prince / Princess / Young Prince line | Royal Hatchling line | tameable | hatched | grows up into The King | 🔜 |
 | Girlfriend / Boyfriend | Companion | tameable | villages | follows and fights for you | 🔜 |
 

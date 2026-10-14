@@ -3,6 +3,7 @@ package com.neospawn.registry;
 import com.neospawn.NeoSpawn;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
+import com.neospawn.item.MountItem;
 import com.neospawn.item.ParagonTools;
 import com.neospawn.item.RoyalSigilItem;
 import com.neospawn.item.SetArmorItem;
@@ -158,6 +159,13 @@ public final class ModItems {
     public static final DeferredItem<CharmItem> PARAGON_CHARM = charm("paragon_charm", Realm.DANGER_REALM, Rarity.EPIC);
     public static final DeferredItem<CharmItem> CHAOS_CHARM = charm("chaos_charm", Realm.CHAOS_ISLES, Rarity.EPIC);
 
+    // ---------------------------------------------------------------- mounts: eggs from bosses, mechs you build
+    public static final DeferredItem<MountItem> SKYCLAW_EGG = mountItem("skyclaw_egg", "tamed_skyclaw");
+    public static final DeferredItem<MountItem> AZURE_DRAKE_EGG = mountItem("azure_drake_egg", "tamed_azure_drake");
+    public static final DeferredItem<MountItem> TIDE_DRAGON_EGG = mountItem("tide_dragon_egg", "tamed_tide_dragon");
+    public static final DeferredItem<MountItem> ANT_MECH_KIT = mountItem("ant_mech_kit", "ant_mech");
+    public static final DeferredItem<MountItem> SPIDER_MECH_KIT = mountItem("spider_mech_kit", "spider_mech");
+
     /** Summons The Ascended King. */
     public static final DeferredItem<RoyalSigilItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",
             () -> new RoyalSigilItem(paragonProps().stacksTo(1)));
@@ -199,6 +207,10 @@ public final class ModItems {
 
     private static DeferredItem<BossWeapon> weapon(String name, BossWeapon.Effect effect, float damage, float speed, float reach) {
         return ITEMS.register(name, () -> new BossWeapon(PARAGON_TIER, effect, damage, speed, reach, paragonProps()));
+    }
+
+    private static DeferredItem<MountItem> mountItem(String name, String mobId) {
+        return ITEMS.register(name, () -> new MountItem(mobId, new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     }
 
     private static DeferredItem<CharmItem> charm(String name, Realm realm, Rarity rarity) {

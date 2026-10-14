@@ -49,6 +49,9 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   right-click it again to come home. Charms are crafted from the previous realm's rewards, or
   rarely found in vanilla chests, so realms follow progression instead of skipping it. Realm
   structures: the Tree of Goodness (The King on top), Skyclaw nests, boss dungeons and Bandit prison towers.
+- **Mounts**: tame and ride Gazelles and Ostriches; hatch a flying Skyclaw or Azure Drake, or a
+  swimming Tide Dragon, from the egg its boss drops; build an Ant Mech or a wall-climbing Spider Mech.
+  Mounts go where you look: walk forward to move, look up to climb.
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.
 - **Tools**: full sets in Ruby, Tanzanite and Titanium, plus **Paragon** gear made from
@@ -82,7 +85,7 @@ way: give the spec `Kind.BOSS` and a list of attacks (`STOMP`, `ROAR`, `CHARGE`,
 ```bash
 python3 tools/gen_textures.py   # regenerate block/item placeholder art
 ./gradlew runData               # regenerate models, lang, recipes, loot, tags, spawn rules
-./gradlew runGameTestServer     # 69 headless tests: mobs, items, each boss, combat rules, realms, structures
+./gradlew runGameTestServer     # 72 headless tests: mobs, items, bosses, combat rules, realms, structures, mounts
 ./gradlew runRealmCheck         # copy a world to run/saves/neospawn_realmcheck first; visits every realm, counts structures, quits
 ./gradlew runClient             # play
 ```

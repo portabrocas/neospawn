@@ -64,6 +64,18 @@ public class ModRecipes extends RecipeProvider {
         charm(out, ModItems.SOVEREIGN_CHARM.get(), ModItems.KING_SCALE.get(), Items.GOLD_BLOCK, null, "SSS", "SGS", "SSS");
         charm(out, ModItems.PARAGON_CHARM.get(), ModItems.PARAGON_INGOT.get(), Items.NETHER_STAR, null, " P ", "PNP", " P ");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModItems.ANT_MECH_KIT.get())
+                .pattern("TIT").pattern("IRI").pattern("T T")
+                .define('T', ModItems.TITANIUM_INGOT.get()).define('I', Items.IRON_BLOCK).define('R', Items.REDSTONE_BLOCK)
+                .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get()))
+                .save(out, NeoSpawn.id("ant_mech_kit"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModItems.SPIDER_MECH_KIT.get())
+                .pattern("TST").pattern("IRI").pattern("S S")
+                .define('T', ModItems.TITANIUM_INGOT.get()).define('S', Items.STRING).define('I', Items.IRON_BLOCK)
+                .define('R', Items.REDSTONE_BLOCK)
+                .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get()))
+                .save(out, NeoSpawn.id("spider_mech_kit"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ROYAL_SIGIL.get())
                 .pattern("SSS").pattern("SNS").pattern("SPS")
                 .define('S', ModItems.KING_SCALE.get())

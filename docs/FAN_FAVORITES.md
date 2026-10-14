@@ -30,7 +30,7 @@ Status: ✅ in NeoSpawn · 🟡 partly · ❌ missing · 🔜 already planned
 | 6 | Wacky weapons and gadgets | Squid Zooka, Ray Gun, Chainsaw, Attitude Adjuster (explodes when swung), Nether Sword | ❌ | Must |
 | 7 | **Girlfriends/Boyfriends** | Tameable companions that follow you, fight, and change outfits. *Divisive*: one remake dropped them, another expanded them to dozens | 🔜 Companion | Skip |
 | 8 | **Pets that grow up** | The Prince → Young Prince → Young Adult → The King. Raising your own King was a highlight | 🔜 Royal Hatchling line | Nice|
-| 9 | **Rideable creatures** | Flying on a Cephadrome or Leonopteryx, riding the Water Dragon, piloting the Spider Robot | ❌ nothing rideable yet |Must |
+| 9 | **Rideable creatures** | Flying on a Cephadrome or Leonopteryx, riding the Water Dragon, piloting the Spider Robot | ✅ Gazelle, Ostrich, tamed Skyclaw/Azure Drake (fly), Tide Dragon (swim), Ant Mech, Spider Mech (climbs walls) |Must |
 | 10 | **Zoo / critter cages** | Catch a mob in an item, carry it home, release it. Fans built zoos | ❌ |Must |
 | 11 | Dried spawn eggs | The namesake: ores drop dried eggs; add water to hatch. Collect 9 parts to build Mobzilla's egg | 🟡 Fossil Ore hatches a random mob; no egg-parts quest | Must|
 | 12 | **Ant dimensions** | Click an ant to teleport: Utopia, Mining, Village, Danger, Crystal | 🔜 planned next | |

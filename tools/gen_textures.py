@@ -468,6 +468,29 @@ for name, gem in CHARMS.items():
             c.set(x, y, (255, 60, 200))
     save(c.image((70, 50, 20)), f"item/{name}.png")
 
+# Mount eggs (speckled, in the boss's colors) and mech kits (a riveted crate with a glowing core).
+EGGS = {"skyclaw_egg": ((230, 200, 140), (140, 90, 40)), "azure_drake_egg": ((110, 160, 240), (30, 60, 140)),
+        "tide_dragon_egg": ((90, 200, 210), (20, 90, 110))}
+for name, (shell, spots) in EGGS.items():
+    e = Sprite()
+    for x in range(16):
+        for y in range(16):
+            if (x - 7.5) ** 2 / 22 + (y - 8.5) ** 2 / 38 <= 1:
+                e.set(x, y, spots if rng.random() < 0.18 else shade(shell, 25 if x < 7 else -10))
+    e.set(5, 5, (255, 255, 255))
+    save(e.image(shade(spots, -40)), f"item/{name}.png")
+for name, core in (("ant_mech_kit", (230, 60, 40)), ("spider_mech_kit", (240, 200, 60))):
+    k = Sprite()
+    for x in range(2, 14):
+        for y in range(4, 14):
+            k.set(x, y, (150, 150, 160) if (x in (2, 13) or y in (4, 13)) else (110, 110, 120))
+    for x, y in ((3, 5), (12, 5), (3, 12), (12, 12)):
+        k.set(x, y, (210, 210, 220))
+    for x in range(6, 10):
+        for y in range(7, 11):
+            k.set(x, y, core)
+    save(k.image((40, 40, 50)), f"item/{name}.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):
