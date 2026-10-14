@@ -83,7 +83,7 @@ Status: ✅ in game · 🔜 next phase
 |---|---|---|
 | The King | The King | ✅ |
 | The Queen | The Empress | ✅ |
-| The Ultimate King | The Ascended King | 🔜 |
+| The Ultimate King | The Ascended King | ✅ |
 | Mobzilla | Gorgantua | ✅ |
 | T-Rex | Tyrannosaurus | ✅ |
 | Nastysaurus | Brutosaurus | ✅ |
@@ -95,11 +95,11 @@ Status: ✅ in game · 🔜 next phase
 | Dragon / Baby Dragon | Ember Dragon / Ember Hatchling | 🔜 |
 | Water Dragon | Tide Dragon | 🔜 |
 | Basilisk | Basilisk | 🔜 |
-| Caterkiller | Centipillar | 🔜 |
+| Caterkiller | Centipillar | ✅ |
 | Brutalfly | Brute Fly | 🔜 |
-| Mantis | Giant Mantis | 🔜 |
-| Emperor Scorpion | Sovereign Scorpion | 🔜 |
-| Hercules Beetle | Hercules Beetle | 🔜 |
+| Mantis | Giant Mantis | ✅ |
+| Emperor Scorpion | Sovereign Scorpion | ✅ |
+| Hercules Beetle | Hercules Beetle | ✅ |
 | Vortex | Maelstrom | 🔜 |
 | Molenoid | Molelord | 🔜 |
 | Sea Viper | Sea Serpent | ✅ |
@@ -121,4 +121,4 @@ Status: ✅ in game · 🔜 next phase
 | Ultimate tools | Paragon tools | crafted from Titanium, Uranium and Ruby; come pre-enchanted; the Paragon Pickaxe mines 3×3 | ✅ |
 | Miner's Dream | Tunnel Charge | blasts a tunnel and keeps the ores | ✅ |
 | Ultimate armor / Royal Guardian gear | Paragon armor / King's Scale armor | full-set potion bonuses | ✅ |
-| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang, Empress Battleaxe, Skyclaw Talon, Azure Fang, Mothwing Glaive | dropped by bosses | ✅ (first 12) |
+| Big Bertha, Queen Battle Axe, etc. | boss weapons: King's Fang, Tyrant Tooth, Bone Crusher, Predator Claw, Titan Cleaver, Kraken Hook, Tidebreaker, Serpent Fang, Empress Battleaxe, Skyclaw Talon, Azure Fang, Mothwing Glaive, Mantis Scythe, Sovereign Stinger, Hercules Horn, Centipede Whip, Ascended Blade | dropped by bosses | ✅ (first 17) |

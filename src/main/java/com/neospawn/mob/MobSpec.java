@@ -62,7 +62,12 @@ public final class MobSpec {
         FIREBALL_VOLLEY(50, 0, 40),
         WIND_GUST(160, 0, 24),
         METEOR_SHOWER(260, 0, 40),
-        SPORE_CLOUD(180, 0, 30);
+        SPORE_CLOUD(180, 0, 30),
+        // Bug attacks
+        SCYTHE(60, 0, 6),
+        STING(120, 0, 8),
+        TOSS(100, 0, 5),
+        ACID_SPRAY(90, 3, 20);
 
         public final int cooldown;
         public final double minRange, maxRange;

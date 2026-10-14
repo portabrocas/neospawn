@@ -40,6 +40,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
+import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
@@ -322,6 +325,10 @@ public class NeoBoss extends Monster implements NeoMob {
             case WIND_GUST -> windGust();
             case METEOR_SHOWER -> meteorShower(target);
             case SPORE_CLOUD -> sporeCloud(target);
+            case SCYTHE -> scythe();
+            case STING -> sting(target);
+            case TOSS -> toss(target);
+            case ACID_SPRAY -> acidSpray(target);
         }
     }
 
@@ -584,6 +591,53 @@ public class NeoBoss extends Monster implements NeoMob {
             cloud.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 160, 0));
             cloud.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 160, 0));
             level().addFreshEntity(cloud);
+        }
+    }
+
+    // ------------------------------------------------------------------ bug attacks
+
+    /** A wide slash at everything in front of the boss. */
+    private void scythe() {
+        playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 4.0f, 0.6f);
+        Vec3 forward = Vec3.directionFromRotation(0, getYRot());
+        ((ServerLevel) level()).sendParticles(ParticleTypes.SWEEP_ATTACK, getX() + forward.x * 3, getY() + 1, getZ() + forward.z * 3,
+                5, 1.5, 0.3, 1.5, 0);
+        for (LivingEntity victim : victims(5)) {
+            Vec3 to = victim.position().subtract(position()).normalize();
+            if (to.x * forward.x + to.z * forward.z > 0.3) {
+                victim.hurt(damageSources().mobAttack(this), damage() * 1.3f);
+                victim.addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 1), this);
+            }
+        }
+    }
+
+    private void sting(LivingEntity target) {
+        playSound(SoundEvents.BEE_STING, 4.0f, 0.4f);
+        target.hurt(damageSources().mobAttack(this), damage());
+        target.addEffect(new MobEffectInstance(MobEffects.POISON, 140, 2), this);
+        target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 1), this);
+        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 2), this);
+    }
+
+    /** Scoops the target up on a horn and flings it skyward. */
+    private void toss(LivingEntity target) {
+        playSound(SoundEvents.RAVAGER_ATTACK, 4.0f, 0.6f);
+        Vec3 away = horizontalTo(target);
+        target.hurt(damageSources().mobAttack(this), damage() * 0.8f);
+        target.setDeltaMovement(away.x * 0.6, 1.8, away.z * 0.6);
+        target.hurtMarked = true;
+    }
+
+    private void acidSpray(LivingEntity target) {
+        playSound(SoundEvents.LLAMA_SPIT, 4.0f, 0.5f);
+        Vec3 from = new Vec3(getX(), getEyeY(), getZ());
+        for (int i = 0; i < (enraged ? 6 : 4); i++) {
+            ThrownPotion acid = new ThrownPotion(level(), this);
+            acid.setItem(PotionContents.createItemStack(Items.SPLASH_POTION, i % 2 == 0 ? Potions.POISON : Potions.WEAKNESS));
+            acid.setPos(from);
+            Vec3 aim = target.position().add(random.nextGaussian() * 2.5, 0, random.nextGaussian() * 2.5).subtract(from);
+            acid.shoot(aim.x, aim.y + aim.horizontalDistance() * 0.25, aim.z, 0.9f, 4.0f);
+            level().addFreshEntity(acid);
         }
     }
 

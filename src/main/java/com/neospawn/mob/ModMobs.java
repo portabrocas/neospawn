@@ -417,6 +417,45 @@ public final class ModMobs {
                 .drop(ModItems.TITAN_CLEAVER, 1, 1).drop(ModItems.PARAGON_INGOT, 2, 4).drop(v(Items.DIAMOND), 6, 12)
                 .egg(0x3A4A3A, 0x8AE8F8);
 
+        // The final boss, summoned with a Royal Sigil. A bigger, platinum King (same hand-built model).
+        skyBoss("the_ascended_king", "The Ascended King", look(Family.QUADRUPED))
+                .customRenderer().size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.25f)
+                .voice(Voice.DRAGON).xp(5000).minion("snapwyrm").bar(BossEvent.BossBarColor.PURPLE)
+                .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.METEOR_SHOWER,
+                        BossAttack.BEAM, BossAttack.WIND_GUST, BossAttack.SUMMON)
+                .drop(ModItems.ASCENDED_BLADE, 1, 1).drop(ModItems.PARAGON_INGOT, 9, 18).drop(ModItems.KING_SCALE, 20, 30)
+                .drop(v(Items.NETHER_STAR), 2, 2)
+                .egg(0xE8E8F2, 0x7A3AB8);
+
+        // ---------------------------------------------------------------- bug bosses
+        boss("giant_mantis", "Giant Mantis", look(Family.INSECT).body(20, 5, 5).leg(12).legPairs(2)
+                .with(Extra.PINCERS, Extra.ANTENNAE, Extra.LONG_HIND_LEGS).colors(0x5AA83A, 0x2A6A1A, 0xD8F28A).eye(0xF2E84A)
+                .scale(2.5f))
+                .size(2.5f, 3.5f).stats(450, 18, 0.36).armor(8).voice(Voice.BUG).xp(450)
+                .attacks(BossAttack.SCYTHE, BossAttack.LEAP_SLAM, BossAttack.CHARGE, BossAttack.TAIL_SWIPE)
+                .drop(ModItems.MANTIS_SCYTHE, 1, 1).drop(v(Items.SLIME_BALL), 8, 16).drop(v(Items.EMERALD), 4, 8)
+                .egg(0x5AA83A, 0xD8F28A).dayActive().spawn("c:is_jungle", 1, 1, 1);
+        boss("sovereign_scorpion", "Sovereign Scorpion", look(Family.INSECT).body(22, 7, 14).leg(14).legPairs(4)
+                .with(Extra.PINCERS, Extra.STINGER).colors(0x1A1A2A, 0x3A2A4A, 0xC83A5A).eye(0xFF3A3A).pattern(Pattern.SCALES)
+                .glow().scale(2.5f))
+                .size(4.0f, 3.0f).stats(650, 22, 0.3).armor(16).voice(Voice.SPIDER).xp(650).minion("desert_scorpion")
+                .attacks(BossAttack.STING, BossAttack.SUMMON, BossAttack.TAIL_SWIPE, BossAttack.STOMP)
+                .drop(ModItems.SOVEREIGN_STINGER, 1, 1).drop(v(Items.SPIDER_EYE), 8, 16).drop(v(Items.GOLD_INGOT), 6, 12)
+                .egg(0x1A1A2A, 0xC83A5A).dayActive().spawn("c:is_desert", 1, 1, 1).spawn("c:is_badlands", 1, 1, 1);
+        boss("hercules_beetle", "Hercules Beetle", look(Family.INSECT).body(20, 10, 14).leg(10)
+                .with(Extra.HORNS, Extra.FLAT).colors(0x3A2A1A, 0x1A120A, 0xC8A85A).eye(0xF2E8C8).scale(2.6f))
+                .size(4.0f, 3.2f).stats(800, 24, 0.26).armor(22).voice(Voice.SPIDER).xp(700).smashesBlocks()
+                .attacks(BossAttack.TOSS, BossAttack.CHARGE, BossAttack.STOMP, BossAttack.ROAR)
+                .drop(ModItems.HERCULES_HORN, 1, 1).drop(v(Items.IRON_BLOCK), 2, 4).drop(v(Items.ARMADILLO_SCUTE), 2, 4)
+                .egg(0x3A2A1A, 0xC8A85A).dayActive().spawn("c:is_jungle", 1, 1, 1).spawn("c:is_forest", 1, 1, 1);
+        boss("centipillar", "Centipillar", look(Family.SERPENT).body(110, 9, 9).head(11).segments(14)
+                .with(Extra.LONG_LEGS, Extra.MANDIBLES, Extra.SPIKES).colors(0x8A3A1A, 0x2A1A0A, 0xF2C83A).eye(0x5AF25A)
+                .pattern(Pattern.BANDS).scale(1.6f))
+                .size(2.4f, 1.8f).stats(550, 18, 0.32).armor(14).voice(Voice.BUG).xp(550)
+                .attacks(BossAttack.ACID_SPRAY, BossAttack.CHARGE, BossAttack.TAIL_SWIPE, BossAttack.STING)
+                .drop(ModItems.CENTIPEDE_WHIP, 1, 1).drop(v(Items.STRING), 16, 32).drop(v(Items.FERMENTED_SPIDER_EYE), 4, 8)
+                .egg(0x8A3A1A, 0xF2C83A).spawn("c:is_swamp", 1, 1, 1);
+
         // ---------------------------------------------------------------- sky bosses
         skyBoss("empress", "The Empress", look(Family.QUADRUPED).body(28, 14, 14).leg(10).neck(16).head(9).snout(5).tail(34).wing(44)
                 .with(Extra.HORNS, Extra.CREST, Extra.SPIKES).colors(0x7A3AB8, 0x3AB8C8, 0xF2A8E8).eye(0xFFF2A8)

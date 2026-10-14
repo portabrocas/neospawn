@@ -23,7 +23,11 @@ public final class NeoSpawnClient {
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         for (MobSpec spec : ModMobs.ALL) {
             if (spec.id.equals("the_king")) {
-                event.registerEntityRenderer((EntityType<NeoBoss>) spec.type.get(), TheKingRenderer::new);
+                event.registerEntityRenderer((EntityType<NeoBoss>) spec.type.get(),
+                        context -> new TheKingRenderer(context, "the_king", 4.0f));
+            } else if (spec.id.equals("the_ascended_king")) {
+                event.registerEntityRenderer((EntityType<NeoBoss>) spec.type.get(),
+                        context -> new TheKingRenderer(context, "the_ascended_king", 6.0f));
             } else {
                 event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
             }

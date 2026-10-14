@@ -400,6 +400,37 @@ for x in range(8, 15):
             glaive.set(x, y, (90, 230, 245) if (x + y) % 3 == 0 else (220, 175, 80))
 save(glaive.image((60, 40, 20)), "item/mothwing_glaive.png")
 
+save(big_blade((110, 200, 70), (210, 255, 150), (40, 80, 30), (20, 50, 15), width=2, guard=(60, 120, 40)), "item/mantis_scythe.png")
+save(big_blade((60, 40, 80), (200, 70, 100), (30, 20, 40), (15, 10, 25), guard=(200, 60, 90)), "item/sovereign_stinger.png")
+save(big_blade((235, 235, 250), (255, 255, 255), (120, 60, 200), (60, 40, 90), width=3, guard=(170, 90, 230)), "item/ascended_blade.png")
+
+horn = Sprite()
+horn.line(2, 13, 8, 7, (90, 60, 30))
+for i in range(7):
+    for w in range(3 - i // 3):
+        horn.set(8 + i, 6 - i + w, (60, 40, 20) if w else (200, 170, 100))
+save(horn.image((30, 20, 10)), "item/hercules_horn.png")
+
+whip = Sprite()
+for i in range(12):
+    x = 2 + i
+    y = 13 - i + (1 if i % 4 < 2 else 0)
+    whip.set(x, y, (140, 60, 30) if i % 2 else (240, 200, 60))
+whip.set(1, 14, STICK[1])
+save(whip.image((40, 20, 10)), "item/centipede_whip.png")
+
+sigil = Sprite()
+for x in range(16):
+    for y in range(16):
+        d = math.hypot(x - 7.5, y - 7.5)
+        if 3.5 <= d <= 6:
+            sigil.set(x, y, jitter((235, 235, 250) if (x + y) % 3 else (212, 175, 55), 6))
+        elif d < 2.5:
+            sigil.set(x, y, (150, 70, 220))
+for x, y in ((6, 1), (7, 0), (8, 1), (9, 0), (10, 1)):
+    sigil.set(x, y, (255, 215, 60))
+save(sigil.image((50, 30, 70)), "item/royal_sigil.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):
@@ -454,5 +485,25 @@ for x in range(16, 22):
         eyes.putpixel((x, y), (255, 240, 80, 255))
 save(king, "entity/the_king.png")
 save(eyes, "entity/the_king_eyes.png")
+
+# The Ascended King: the same layout recolored. Gold becomes platinum, crimson wings become violet.
+ascended = Image.new("RGBA", king.size, (0, 0, 0, 0))
+for x in range(king.width):
+    for y in range(king.height):
+        r, g, b, a = king.getpixel((x, y))
+        if a == 0:
+            continue
+        if r > g + 60:   # crimson membrane
+            c = (int(r * 0.75), int(r * 0.25), int(r * 1.1))
+        else:            # gold scales
+            v = (r + g + b) / 3
+            c = (int(v * 1.15), int(v * 1.15), int(v * 1.35))
+        ascended.putpixel((x, y), clamp(c) + (255,))
+ascended_eyes = Image.new("RGBA", eyes.size, (0, 0, 0, 0))
+for x in range(16, 22):
+    for y in range(60, 64):
+        ascended_eyes.putpixel((x, y), (255, 70, 90, 255))
+save(ascended, "entity/the_ascended_king.png")
+save(ascended_eyes, "entity/the_ascended_king_eyes.png")
 
 print("textures written to", TEX)

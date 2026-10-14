@@ -14,7 +14,7 @@ from OreSpawn's code or assets.
 Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
 change or remove that line on other machines.
 
-## What's in so far (v0.5)
+## What's in so far (v0.6)
 
 See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
 
@@ -32,6 +32,10 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
 - **Sky bosses**: The Empress (beam, meteor showers, lightning; drops a Nether Star),
   Skyclaw (a griffin: swoops and wind gusts), the Azure Drake (fire breath and fireballs) and
   the Moth Titan (spore clouds, summons Warbees). The King now runs on the same boss system.
+- **Bug bosses**: Giant Mantis (scythe slashes), Sovereign Scorpion (paralyzing sting, scorpion
+  swarms), Hercules Beetle (horn tosses, smashes terrain) and the Centipillar (acid spray).
+- **The Ascended King**: the final boss, a giant platinum King with seven attacks. Summon it
+  with a Royal Sigil (King's Scales, a Nether Star and a Block of Paragon).
 - **Armor**: King's Scale and Paragon sets, with full-set potion bonuses.
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.
@@ -58,7 +62,8 @@ way: give the spec `Kind.BOSS` and a list of attacks (`STOMP`, `ROAR`, `CHARGE`,
 `LIGHTNING`, `SUMMON`, `BEAM`, `LEAP_SLAM`, `TAIL_SWIPE`), and `NeoBoss` schedules them.
 `Kind.SEA_BOSS` swims instead and adds `WHIRLPOOL`, `GRAB`, `INK`, `TENTACLE_SLAM`, `WAVE`,
 `GEYSER` and `TRIDENT_VOLLEY`. `Kind.SKY_BOSS` flies, circling its target, and adds `SWOOP`,
-`FIREBALL_VOLLEY`, `WIND_GUST`, `METEOR_SHOWER` and `SPORE_CLOUD`.
+`FIREBALL_VOLLEY`, `WIND_GUST`, `METEOR_SHOWER` and `SPORE_CLOUD`. Bug attacks: `SCYTHE`,
+`STING`, `TOSS` and `ACID_SPRAY`.
 
 ## Development commands
 
@@ -71,8 +76,9 @@ python3 tools/gen_textures.py   # regenerate block/item placeholder art
 
 ## Roadmap
 
-1. More bosses: bugs (Mantis, Scorpion, Hercules Beetle, Centipillar), then the Ascended
-   King. Then the combat polish pass in docs/BOSS_POLISH.md
+1. The remaining bosses: Ember Dragon, Tide Dragon, Basilisk, Brute Fly, Maelstrom, Molelord,
+   Dread Steed, Ninetail, and the Siege, Sniper and War Bots. Then the combat polish pass in
+   docs/BOSS_POLISH.md
 2. Rideable and tameable specials: mechs, the Royal Hatchling line, Companion
 3. A custom dimension with its own mobs
 4. Hand-drawn art and Blockbench models for the most important mobs

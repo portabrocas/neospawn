@@ -4,6 +4,7 @@ import com.neospawn.NeoSpawn;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
 import com.neospawn.item.ParagonTools;
+import com.neospawn.item.RoyalSigilItem;
 import com.neospawn.item.SetArmorItem;
 import com.neospawn.item.TunnelChargeItem;
 import net.minecraft.core.Holder;
@@ -121,9 +122,19 @@ public final class ModItems {
     public static final DeferredItem<BossWeapon> SKYCLAW_TALON = weapon("skyclaw_talon", BossWeapon.Effect.UPDRAFT, 16, -1.8f, 0);
     public static final DeferredItem<BossWeapon> AZURE_FANG = weapon("azure_fang", BossWeapon.Effect.BURN, 17, -2.2f, 0);
     public static final DeferredItem<BossWeapon> MOTHWING_GLAIVE = weapon("mothwing_glaive", BossWeapon.Effect.SPORE, 20, -2.6f, 2);
+    public static final DeferredItem<BossWeapon> MANTIS_SCYTHE = weapon("mantis_scythe", BossWeapon.Effect.SEVER, 22, -2.4f, 1);
+    public static final DeferredItem<BossWeapon> SOVEREIGN_STINGER = weapon("sovereign_stinger", BossWeapon.Effect.PARALYZE, 19, -2.0f, 0);
+    public static final DeferredItem<BossWeapon> HERCULES_HORN = weapon("hercules_horn", BossWeapon.Effect.QUAKE, 30, -3.2f, 1);
+    public static final DeferredItem<BossWeapon> CENTIPEDE_WHIP = weapon("centipede_whip", BossWeapon.Effect.CORRODE, 15, -1.8f, 3);
+    public static final DeferredItem<BossWeapon> ASCENDED_BLADE = weapon("ascended_blade", BossWeapon.Effect.ASCENDANT, 80, -2.6f, 3);
     public static final List<DeferredItem<BossWeapon>> BOSS_WEAPONS = List.of(KINGS_FANG, TYRANT_TOOTH, BONE_CRUSHER,
             PREDATOR_CLAW, TITAN_CLEAVER, KRAKEN_HOOK, TIDEBREAKER, SERPENT_FANG,
-            EMPRESS_BATTLEAXE, SKYCLAW_TALON, AZURE_FANG, MOTHWING_GLAIVE);
+            EMPRESS_BATTLEAXE, SKYCLAW_TALON, AZURE_FANG, MOTHWING_GLAIVE,
+            MANTIS_SCYTHE, SOVEREIGN_STINGER, HERCULES_HORN, CENTIPEDE_WHIP, ASCENDED_BLADE);
+
+    /** Summons The Ascended King. */
+    public static final DeferredItem<RoyalSigilItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",
+            () -> new RoyalSigilItem(paragonProps().stacksTo(1)));
 
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()

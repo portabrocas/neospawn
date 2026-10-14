@@ -57,6 +57,13 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.updraft", "Launches the target into the sky");
         add("item.neospawn.boss_weapon.burn", "Long burn; extra damage to burning targets");
         add("item.neospawn.boss_weapon.spore", "Leaves a cloud of poisonous spores");
+        add("item.neospawn.boss_weapon.sever", "Bonus damage: a tenth of the target's max health");
+        add("item.neospawn.boss_weapon.paralyze", "Freezes the target in place");
+        add("item.neospawn.boss_weapon.quake", "Knocks nearby monsters into the air");
+        add("item.neospawn.boss_weapon.corrode", "Weakens and poisons the target");
+        add("item.neospawn.boss_weapon.ascendant", "Lightning on every hit; cleaves nearby monsters");
+        add("item.neospawn.royal_sigil.tooltip", "Use on the ground, in open sky, to summon The Ascended King");
+        add("message.neospawn.ascended_king", "The sky darkens. The Ascended King has come.");
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();

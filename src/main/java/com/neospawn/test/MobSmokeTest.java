@@ -97,7 +97,7 @@ public class MobSmokeTest {
     /** Land bosses each fight an iron golem for 20 seconds; each must use at least two special attacks. */
     @GameTest(template = "arena", timeoutTicks = 500, batch = "fight")
     public static void landBossesFight(GameTestHelper helper) {
-        fightTest(helper, MobSpec.Kind.BOSS, new BlockPos(12, 2, 12), i -> new BlockPos(4 + i * 4, 2, 3));
+        fightTest(helper, MobSpec.Kind.BOSS, new BlockPos(12, 2, 12), i -> new BlockPos(3 + (i % 5) * 4, 2, i < 5 ? 3 : 21));
     }
 
     @GameTest(template = "sea_arena", timeoutTicks = 500, batch = "fight")

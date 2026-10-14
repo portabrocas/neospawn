@@ -47,7 +47,17 @@ public class BossWeapon extends SwordItem {
         /** Long burn, and extra damage against targets already on fire. */
         BURN,
         /** Leaves a lingering cloud of poisonous spores where the target stands. */
-        SPORE
+        SPORE,
+        /** Bonus damage equal to a tenth of the target's max health. Great against bosses. */
+        SEVER,
+        /** Freezes the target in place for two seconds. */
+        PARALYZE,
+        /** A small quake that knocks every monster around you into the air. */
+        QUAKE,
+        /** Weakens the target and eats away at it with acid. */
+        CORRODE,
+        /** Lightning on every hit, and it cleaves the monsters around the target. */
+        ASCENDANT
     }
 
     private final Effect effect;
@@ -141,6 +151,35 @@ public class BossWeapon extends SwordItem {
                 cloud.setParticle(ParticleTypes.SPORE_BLOSSOM_AIR);
                 cloud.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 1));
                 level.addFreshEntity(cloud);
+            }
+            case SEVER -> target.hurt(level.damageSources().mobAttack(attacker), Math.min(100, target.getMaxHealth() * 0.1f));
+            case PARALYZE -> {
+                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 9), attacker);
+                target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 2), attacker);
+            }
+            case QUAKE -> {
+                level.sendParticles(ParticleTypes.EXPLOSION, attacker.getX(), attacker.getY(), attacker.getZ(), 4, 1.5, 0.1, 1.5, 0);
+                for (LivingEntity other : level.getEntitiesOfClass(LivingEntity.class, attacker.getBoundingBox().inflate(4),
+                        e -> e != attacker && (e == target || e instanceof Enemy))) {
+                    other.push(0, 0.7, 0);
+                    other.hurtMarked = true;
+                    other.hurt(level.damageSources().mobAttack(attacker), 6);
+                }
+            }
+            case CORRODE -> {
+                target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 120, 1), attacker);
+                target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1), attacker);
+            }
+            case ASCENDANT -> {
+                LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
+                if (bolt != null) {
+                    bolt.moveTo(target.position());
+                    level.addFreshEntity(bolt);
+                }
+                for (LivingEntity other : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(4),
+                        e -> e != target && e != attacker && e instanceof Enemy)) {
+                    other.hurt(level.damageSources().mobAttack(attacker), 30);
+                }
             }
         }
         return true;

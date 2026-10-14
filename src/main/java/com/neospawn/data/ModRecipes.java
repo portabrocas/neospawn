@@ -57,6 +57,14 @@ public class ModRecipes extends RecipeProvider {
                 .unlockedBy("has_uranium", has(ModItems.URANIUM_INGOT.get()))
                 .save(out, NeoSpawn.id("paragon_ingot"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ROYAL_SIGIL.get())
+                .pattern("SSS").pattern("SNS").pattern("SPS")
+                .define('S', ModItems.KING_SCALE.get())
+                .define('N', Items.NETHER_STAR)
+                .define('P', ModBlocks.PARAGON_BLOCK.get())
+                .unlockedBy("has_king_scale", has(ModItems.KING_SCALE.get()))
+                .save(out, NeoSpawn.id("royal_sigil"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TUNNEL_CHARGE.get(), 2)
                 .pattern("TXT").pattern(" U ")
                 .define('T', ModItems.TITANIUM_INGOT.get())

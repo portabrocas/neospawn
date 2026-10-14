@@ -257,6 +257,15 @@ public final class Shapes {
             head.box(Role.ACCENT, -hw / 2 + 0.5f, hh / 4, -hd - 2, 1, 1, 2);
             head.box(Role.ACCENT, hw / 2 - 1.5f, hh / 4, -hd - 2, 1, 1, 2);
         }
+        if (l.has(Extra.HORNS)) {
+            // Rhino-beetle horns: one sweeping up from the head, one curving down from the thorax.
+            float horn = Math.max(4, L * 0.5f);
+            float hornW = Math.max(1, Math.round(W / 4));
+            head.child("horn", 0, 0, -hd).rot(-0.5f, 0, 0)
+                    .box(Role.ACCENT, -hornW / 2, -hornW / 2, -horn, hornW, hornW, horn);
+            thorax.child("horn", 0, -H / 2, -tl / 2).rot(0.35f, 0, 0)
+                    .box(Role.ACCENT, -hornW / 2, -hornW / 2, -horn * 1.3f, hornW, hornW, horn * 1.3f);
+        }
         if (l.has(Extra.LURE)) {
             head.child("lure", 0, -hh / 2, -hd + 1).rot(-1.0f, 0, 0).anim(Anim.ANTENNA)
                     .box(Role.SECOND, -0.5f, -0.5f, -6, 1, 1, 6)
@@ -461,6 +470,15 @@ public final class Shapes {
                     .box(i % 2 == 0 ? Role.BASE : Role.SECOND, -w / 2, -w / 2, 0, w, w, segLen);
             if (l.has(Extra.SPIKES)) {
                 seg.box(Role.ACCENT, -0.5f, -w / 2 - 2, segLen / 2 - 0.5f, 1, 2, 1);
+            }
+            if (l.has(Extra.LONG_LEGS)) {
+                // A pair of scuttling legs per segment, centipede style.
+                float legLen = Math.max(3, w * 0.9f);
+                float phase = i % 2 == 0 ? 0 : PI;
+                seg.child("leg", w / 2, w / 4, segLen / 2).rot(0, 0, 0.6f).anim(Anim.SCUTTLE).phase(phase).side(1)
+                        .box(Role.SECOND, 0, -0.5f, -0.5f, legLen, 1, 1);
+                seg.child("leg", -w / 2, w / 4, segLen / 2).rot(0, 0, -0.6f).anim(Anim.SCUTTLE).phase(phase + PI).side(-1)
+                        .box(Role.SECOND, -legLen, -0.5f, -0.5f, legLen, 1, 1);
             }
             prev = seg;
             prevSize = w;

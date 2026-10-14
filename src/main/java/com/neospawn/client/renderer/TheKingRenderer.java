@@ -10,28 +10,31 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
 
+/** The King's hand-built dragon model. Also used, bigger and recolored, for The Ascended King. */
 public class TheKingRenderer extends MobRenderer<NeoBoss, TheKingModel> {
-    private static final ResourceLocation TEXTURE = NeoSpawn.id("textures/entity/the_king.png");
-    private static final RenderType EYES = RenderType.eyes(NeoSpawn.id("textures/entity/the_king_eyes.png"));
-    private static final float SCALE = 4.0f;
+    private final ResourceLocation texture;
+    private final float scale;
 
-    public TheKingRenderer(EntityRendererProvider.Context context) {
-        super(context, new TheKingModel(context.bakeLayer(TheKingModel.LAYER)), 5.0f);
+    public TheKingRenderer(EntityRendererProvider.Context context, String textureName, float scale) {
+        super(context, new TheKingModel(context.bakeLayer(TheKingModel.LAYER)), scale * 1.25f);
+        this.texture = NeoSpawn.id("textures/entity/" + textureName + ".png");
+        this.scale = scale;
+        RenderType eyes = RenderType.eyes(NeoSpawn.id("textures/entity/" + textureName + "_eyes.png"));
         addLayer(new EyesLayer<>(this) {
             @Override
             public RenderType renderType() {
-                return EYES;
+                return eyes;
             }
         });
     }
 
     @Override
     protected void scale(NeoBoss entity, PoseStack poseStack, float partialTick) {
-        poseStack.scale(SCALE, SCALE, SCALE);
+        poseStack.scale(scale, scale, scale);
     }
 
     @Override
     public ResourceLocation getTextureLocation(NeoBoss entity) {
-        return TEXTURE;
+        return texture;
     }
 }
