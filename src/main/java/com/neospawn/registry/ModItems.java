@@ -213,6 +213,9 @@ public final class ModItems {
     public static final DeferredItem<ZooCageItem> ZOO_CAGE = ITEMS.register("zoo_cage",
             () -> new ZooCageItem(new Item.Properties().stacksTo(16)));
 
+    /** OreSpawn's Big Bertha: crafted from four bosses' weapons around a Block of Paragon. */
+    public static final DeferredItem<BossWeapon> BEHEMOTH_BLADE = weapon("behemoth_blade", BossWeapon.Effect.BEHEMOTH, 250, -3.4f, 4);
+
     /** Summons The Ascended King. */
     public static final DeferredItem<RoyalSigilItem> ROYAL_SIGIL = ITEMS.register("royal_sigil",
             () -> new RoyalSigilItem(paragonProps().stacksTo(1)));

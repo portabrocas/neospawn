@@ -68,6 +68,13 @@ public class ModRecipes extends RecipeProvider {
         charm(out, ModItems.SOVEREIGN_CHARM.get(), ModItems.KING_SCALE.get(), Items.GOLD_BLOCK, null, "SSS", "SGS", "SSS");
         charm(out, ModItems.PARAGON_CHARM.get(), ModItems.PARAGON_INGOT.get(), Items.NETHER_STAR, null, " P ", "PNP", " P ");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEHEMOTH_BLADE.get())
+                .pattern(" F ").pattern("CPE").pattern(" K ")
+                .define('F', ModItems.KINGS_FANG.get()).define('C', ModItems.TITAN_CLEAVER.get())
+                .define('E', ModItems.EMPRESS_BATTLEAXE.get()).define('K', ModItems.KRAKEN_HOOK.get())
+                .define('P', ModBlocks.PARAGON_BLOCK.get())
+                .unlockedBy("has_kings_fang", has(ModItems.KINGS_FANG.get())).save(out, NeoSpawn.id("behemoth_blade"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SQUID_ZOOKA.get())
                 .pattern("TIT").pattern("IDI").pattern("TIT")
                 .define('T', ModItems.TITANIUM_INGOT.get()).define('I', Items.INK_SAC).define('D', Items.DISPENSER)

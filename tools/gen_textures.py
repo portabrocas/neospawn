@@ -583,6 +583,8 @@ save(c.image((40, 30, 20)), "item/chainsaw.png")
 save(big_blade((200, 90, 40), (255, 200, 80), (60, 30, 20), (40, 15, 5), width=2, guard=(200, 40, 40)), "item/attitude_adjuster.png")
 save(big_blade((80, 20, 20), (255, 120, 40), (40, 20, 20), (25, 5, 5), guard=(70, 40, 40)), "item/nether_sword.png")
 
+save(big_blade((236, 184, 60), (255, 246, 185), (120, 40, 140), (62, 20, 72), width=4, guard=(165, 70, 190)), "item/behemoth_blade.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

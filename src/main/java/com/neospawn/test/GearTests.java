@@ -148,6 +148,21 @@ public class GearTests {
         helper.succeed();
     }
 
+    /** The Behemoth Blade also strikes every monster around its target. */
+    @GameTest(template = "arena", batch = "gear_behemoth", timeoutTicks = 100)
+    public static void behemothBladeCleaves(GameTestHelper helper) {
+        ServerPlayer player = player(helper, new Vec3(12.5, 2, 6.5));
+        Zombie target = helper.spawn(EntityType.ZOMBIE, new BlockPos(12, 2, 9));
+        Zombie bystander = helper.spawn(EntityType.ZOMBIE, new BlockPos(15, 2, 11));
+        target.setNoAi(true);
+        bystander.setNoAi(true);
+        ModItems.BEHEMOTH_BLADE.get().hurtEnemy(new ItemStack(ModItems.BEHEMOTH_BLADE.get()), target, player);
+        helper.assertTrue(!bystander.isAlive() || bystander.getHealth() < bystander.getMaxHealth(), "the cleave missed a nearby zombie");
+        player.discard();
+        helper.killAllEntities();
+        helper.succeed();
+    }
+
     /** The Paragon Fishing Rod catches from lava and from water. */
     @GameTest(template = "arena", batch = "gear_rod", timeoutTicks = 100)
     public static void paragonRodFishesLavaAndWater(GameTestHelper helper) {

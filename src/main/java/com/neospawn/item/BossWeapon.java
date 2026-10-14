@@ -63,7 +63,9 @@ public class BossWeapon extends SwordItem {
         /** Steals the target's breath and slows it. */
         DROWN,
         /** Heals you for part of every hit. */
-        LIFESTEAL
+        LIFESTEAL,
+        /** The Behemoth Blade: every swing also strikes and launches every monster around the target. */
+        BEHEMOTH
     }
 
     private final Effect effect;
@@ -200,6 +202,16 @@ public class BossWeapon extends SwordItem {
                 level.sendParticles(ParticleTypes.BUBBLE, target.getX(), target.getY() + 1, target.getZ(), 30, 0.4, 0.6, 0.4, 0.1);
             }
             case LIFESTEAL -> attacker.heal(4.0f);
+            case BEHEMOTH -> {
+                level.sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY() + 1, target.getZ(), 8, 2.5, 0.5, 2.5, 0);
+                for (LivingEntity other : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5),
+                        e -> e != target && e != attacker && e instanceof Enemy)) {
+                    other.hurt(level.damageSources().mobAttack(attacker), 120);
+                    Vec3 away = other.position().subtract(attacker.position()).normalize();
+                    other.push(away.x * 1.5, 0.8, away.z * 1.5);
+                    other.hurtMarked = true;
+                }
+            }
         }
         return true;
     }

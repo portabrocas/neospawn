@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "neospawn:titan_cleaver"
+    },
+    "E": {
+      "item": "neospawn:empress_battleaxe"
+    },
+    "F": {
+      "item": "neospawn:kings_fang"
+    },
+    "K": {
+      "item": "neospawn:kraken_hook"
+    },
+    "P": {
+      "item": "neospawn:paragon_block"
+    }
+  },
+  "pattern": [
+    " F ",
+    "CPE",
+    " K "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:behemoth_blade"
+  }
+}

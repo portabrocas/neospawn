@@ -70,6 +70,7 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.inferno", "Sets the target and nearby monsters ablaze");
         add("item.neospawn.boss_weapon.drown", "Steals the target's breath");
         add("item.neospawn.boss_weapon.lifesteal", "Heals you on every hit");
+        add("item.neospawn.boss_weapon.behemoth", "Every swing strikes and launches the monsters around your target");
         add("item.neospawn.royal_sigil.tooltip", "Use on the ground, in open sky, to summon The Ascended King");
         add("message.neospawn.ascended_king", "The sky darkens. The Ascended King has come.");
         add("item.neospawn.charm.tooltip", "Carry it and right-click the realm's ant to travel to %s");
