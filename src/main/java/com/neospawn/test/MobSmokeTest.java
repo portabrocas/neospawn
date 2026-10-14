@@ -7,13 +7,17 @@ import com.neospawn.mob.NeoBoss;
 import com.neospawn.registry.ModEntities;
 import com.neospawn.registry.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -69,6 +73,28 @@ public class MobSmokeTest {
         }
         NeoSpawn.LOGGER.info("Item test: {} items load their stats", count);
         helper.succeed();
+    }
+
+    /** Every boss notices a survival player 10 blocks away and attacks without being provoked. */
+    @GameTest(template = "arena", timeoutTicks = 200)
+    public static void bossesHuntSurvivalPlayers(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        player.setGameMode(GameType.SURVIVAL);
+        // Tough enough to survive four bosses for the length of the test (invulnerable players can't be targeted).
+        player.getAttribute(Attributes.MAX_HEALTH).setBaseValue(100000);
+        player.setHealth(100000);
+        player.moveTo(helper.absoluteVec(new Vec3(12, 2, 2)));
+        List<NeoBoss> bosses = new ArrayList<>();
+        for (MobSpec spec : ModMobs.ALL) {
+            if (spec.isBoss() && helper.spawn(spec.type.get(), new BlockPos(12, 2, 14)) instanceof NeoBoss boss) {
+                bosses.add(boss);
+            }
+        }
+        helper.succeedWhen(() -> {
+            for (NeoBoss boss : bosses) {
+                helper.assertTrue(boss.getTarget() == player, boss.spec().id + " has not targeted the player");
+            }
+        });
     }
 
     /**

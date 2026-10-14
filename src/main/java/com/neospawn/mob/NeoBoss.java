@@ -90,7 +90,18 @@ public class NeoBoss extends Monster implements NeoMob {
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 16.0f));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, null));
+        targetSelector.addGoal(2, new HuntPlayerGoal(this));
+    }
+
+    /**
+     * Vanilla target goals only lock onto players the mob can see. A boss's eyes can be ten
+     * blocks up, behind trees, so bosses sense any player within follow range instead.
+     */
+    private static class HuntPlayerGoal extends NearestAttackableTargetGoal<Player> {
+        HuntPlayerGoal(NeoBoss boss) {
+            super(boss, Player.class, 0, false, false, null);
+            targetConditions = targetConditions.ignoreLineOfSight();
+        }
     }
 
     // ------------------------------------------------------------------ main loop
