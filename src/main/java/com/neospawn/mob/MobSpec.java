@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -140,6 +141,11 @@ public final class MobSpec {
     public double stepHeight = 0.6;
     @Nullable public String minion;
     public BossEvent.BossBarColor barColor = BossEvent.BossBarColor.RED;
+    /** Bosses this one fights on sight, ahead of players (OreSpawn's boss brawls). Always mutual. */
+    public final Set<String> rivals = new HashSet<>();
+    /** Mobs this one hunts when there's no player to chase. */
+    public final Set<String> prey = new HashSet<>();
+
     public MountType mount = MountType.NONE;
     /** Mechs: never fed or bred; repaired with iron ingots. */
     public boolean mechanical;
@@ -197,6 +203,11 @@ public final class MobSpec {
     }
 
     public MobSpec mechanical() { this.mechanical = true; return this; }
+
+    public MobSpec hunts(String... preyIds) {
+        prey.addAll(List.of(preyIds));
+        return this;
+    }
 
     public boolean isMount() {
         return mount != MountType.NONE;

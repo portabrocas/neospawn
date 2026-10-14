@@ -624,6 +624,36 @@ public final class ModMobs {
                 .egg(0x2A6A4A, 0xF2E84A).spawn("c:is_ocean", 1, 1, 1);
     }
 
+    // ---------------------------------------------------------------- who fights whom
+    static {
+        // Boss rivalries: they brawl on sight, players or no. The robots defend their realm from Gorgantua.
+        rivals("the_king", "gorgantua");
+        rivals("empress", "gorgantua");
+        rivals("tyrannosaurus", "brutosaurus");
+        rivals("ember_dragon", "kraken");
+        rivals("ember_dragon", "moth_titan");
+        rivals("azure_drake", "moth_titan");
+        rivals("kraken", "leviathan");
+        rivals("basilisk", "ninetail");
+        for (String robot : List.of("siege_bot", "sniper_bot", "war_bot")) {
+            rivals(robot, "gorgantua");
+        }
+        // Predators hunt prey when no player is around.
+        byId("tyrannosaurus").hunts("camarasaurus", "gazelle", "hammerhorn");
+        byId("allosaurus").hunts("gazelle", "spikeback", "ostrich");
+        byId("swift_raptor").hunts("gazelle", "chipmunk", "egg_bunny");
+        byId("cryolophosaurus").hunts("gazelle", "chipmunk");
+        byId("baryonyx").hunts("bath_duck", "beaver");
+        byId("skyclaw").hunts("gazelle", "ostrich");
+        byId("sky_shark").hunts("songbird");
+        byId("snapwyrm").hunts("songbird", "butterfly");
+    }
+
+    private static void rivals(String a, String b) {
+        byId(a).rivals.add(b);
+        byId(b).rivals.add(a);
+    }
+
     private static MobSpec skyBoss(String id, String name, Look look) { return add(new MobSpec(id, name, Kind.SKY_BOSS, look)); }
 
     private static MobSpec seaBoss(String id, String name, Look look) { return add(new MobSpec(id, name, Kind.SEA_BOSS, look)); }

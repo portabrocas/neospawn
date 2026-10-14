@@ -178,8 +178,7 @@ public class NeoBoss extends Monster implements NeoMob {
     protected void registerGoals() {
         if (spec().isSkyBoss()) {
             // Sky bosses steer themselves in customServerAiStep; they only need targeting.
-            targetSelector.addGoal(1, new HurtByTargetGoal(this));
-            targetSelector.addGoal(2, new HuntPlayerGoal(this));
+            addTargetGoals();
             return;
         }
         if (spec().isSeaBoss()) {
@@ -193,8 +192,19 @@ public class NeoBoss extends Monster implements NeoMob {
         }
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 16.0f));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        addTargetGoals();
+    }
+
+    /** Revenge first, then rival bosses (so rivals brawl even with players nearby), then players, then prey. */
+    private void addTargetGoals() {
         targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        targetSelector.addGoal(2, new HuntPlayerGoal(this));
+        if (!spec().rivals.isEmpty()) {
+            targetSelector.addGoal(2, new RivalGoal(this, spec().rivals, true));
+        }
+        targetSelector.addGoal(3, new HuntPlayerGoal(this));
+        if (!spec().prey.isEmpty()) {
+            targetSelector.addGoal(4, new RivalGoal(this, spec().prey, true));
+        }
     }
 
     /**
@@ -567,6 +577,21 @@ public class NeoBoss extends Monster implements NeoMob {
             case BLINK -> blink(target);
             case SNIPE -> snipe(target);
         }
+        fireHitsRival(attack, target, aim);
+    }
+
+    /**
+     * Every boss is fire-immune, which would make fire attacks useless in a boss brawl (The King's whole kit is fire).
+     * So fire attacks aimed at another boss land as plain damage if it's still near the aim spot.
+     */
+    private void fireHitsRival(BossAttack attack, LivingEntity target, Vec3 aim) {
+        boolean fire = attack == BossAttack.FIRE_BREATH || attack == BossAttack.FIREBALL_VOLLEY
+                || attack == BossAttack.METEOR_SHOWER || attack == BossAttack.LIGHTNING;
+        double reach = attack == BossAttack.FIRE_BREATH ? 12 : 32;
+        if (fire && target instanceof NeoBoss && target.distanceToSqr(attack.aimed ? aim : target.position()) < 36
+                && distanceTo(target) < reach + target.getBbWidth()) {
+            target.hurt(damageSources().mobAttack(this), damage() * 0.75f);
+        }
     }
 
     // ------------------------------------------------------------------ attacks
@@ -578,7 +603,8 @@ public class NeoBoss extends Monster implements NeoMob {
     private List<LivingEntity> victims(double radius) {
         AABB area = getBoundingBox().inflate(radius, 3, radius);
         return level().getEntitiesOfClass(LivingEntity.class, area,
-                e -> e != this && e.isAlive() && !(e instanceof NeoBoss) && !isAlliedTo(e));
+                e -> e != this && e.isAlive() && !isAlliedTo(e)
+                        && (!(e instanceof NeoBoss boss) || boss == getTarget() || spec().rivals.contains(boss.spec().id)));
     }
 
     private void stomp(double radius, float damageScale, boolean groundOnly) {

@@ -190,11 +190,11 @@ public class GearTests {
                 helper.setBlock(pos.immutable(), Blocks.STONE);
             }
         }
-        // Lighting updates a tick or two after blocks change; wait before reading it.
-        helper.runAfterDelay(20, () -> {
-            int placed = UtilityItems.UltimateTorch.lightUp(helper.getLevel(), helper.absolutePos(center));
-            helper.assertTrue(placed >= 5, "expected the torch to light the covered room, placed " + placed);
-            helper.succeed();
+        // Lighting updates lag behind block changes (more so with many tests running), so retry until the room reads dark.
+        int[] placed = {0};
+        helper.succeedWhen(() -> {
+            placed[0] += UtilityItems.UltimateTorch.lightUp(helper.getLevel(), helper.absolutePos(center));
+            helper.assertTrue(placed[0] >= 5, "expected the torch to light the covered room, placed " + placed[0]);
         });
     }
 

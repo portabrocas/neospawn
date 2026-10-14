@@ -61,6 +61,12 @@ public class NeoFlyer extends PathfinderMob implements NeoMob {
         if (s.temper == Temper.HOSTILE) {
             targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         }
+        if (!s.prey.isEmpty()) {
+            if (s.temper == Temper.PASSIVE) {
+                goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, true));
+            }
+            targetSelector.addGoal(3, new RivalGoal(this, s.prey, false));
+        }
         goalSelector.addGoal(5, new WaterAvoidingRandomFlyingGoal(this, 1.0));
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0f));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
