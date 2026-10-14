@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "M": {
+      "item": "minecraft:magma_block"
+    },
+    "S": {
+      "item": "minecraft:netherite_sword"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MSM",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:nether_sword"
+  }
+}

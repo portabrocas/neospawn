@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "item": "minecraft:dispenser"
+    },
+    "I": {
+      "item": "minecraft:ink_sac"
+    },
+    "T": {
+      "item": "neospawn:titanium_ingot"
+    }
+  },
+  "pattern": [
+    "TIT",
+    "IDI",
+    "TIT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:squid_zooka"
+  }
+}

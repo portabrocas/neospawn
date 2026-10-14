@@ -68,6 +68,29 @@ public class ModRecipes extends RecipeProvider {
         charm(out, ModItems.SOVEREIGN_CHARM.get(), ModItems.KING_SCALE.get(), Items.GOLD_BLOCK, null, "SSS", "SGS", "SSS");
         charm(out, ModItems.PARAGON_CHARM.get(), ModItems.PARAGON_INGOT.get(), Items.NETHER_STAR, null, " P ", "PNP", " P ");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SQUID_ZOOKA.get())
+                .pattern("TIT").pattern("IDI").pattern("TIT")
+                .define('T', ModItems.TITANIUM_INGOT.get()).define('I', Items.INK_SAC).define('D', Items.DISPENSER)
+                .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get())).save(out, NeoSpawn.id("squid_zooka"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.RAY_GUN.get())
+                .pattern(" GU").pattern("TRT").pattern("T  ")
+                .define('G', Items.GLASS).define('U', ModItems.URANIUM_INGOT.get()).define('T', ModItems.TITANIUM_INGOT.get())
+                .define('R', Items.REDSTONE_BLOCK)
+                .unlockedBy("has_uranium", has(ModItems.URANIUM_INGOT.get())).save(out, NeoSpawn.id("ray_gun"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.CHAINSAW.get())
+                .pattern("TTT").pattern("TAR").pattern(" I ")
+                .define('T', ModItems.TITANIUM_INGOT.get()).define('A', Items.IRON_AXE).define('R', Items.REDSTONE_BLOCK)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get())).save(out, NeoSpawn.id("chainsaw"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.ATTITUDE_ADJUSTER.get())
+                .pattern(" T ").pattern("TST").pattern(" B ")
+                .define('T', Items.TNT).define('S', Items.DIAMOND_SWORD).define('B', Items.BLAZE_ROD)
+                .unlockedBy("has_tnt", has(Items.TNT)).save(out, NeoSpawn.id("attitude_adjuster"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.NETHER_SWORD.get())
+                .pattern(" M ").pattern("MSM").pattern(" B ")
+                .define('M', Items.MAGMA_BLOCK).define('S', Items.NETHERITE_SWORD).define('B', Items.BLAZE_ROD)
+                .unlockedBy("has_netherite_sword", has(Items.NETHERITE_SWORD)).save(out, NeoSpawn.id("nether_sword"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.PARAGON_BOW.get())
                 .pattern(" PS").pattern("B S").pattern(" PS")
                 .define('P', ModItems.PARAGON_INGOT.get()).define('S', Items.STRING).define('B', Items.BOW)

@@ -3,6 +3,7 @@ package com.neospawn.registry;
 import com.neospawn.NeoSpawn;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
+import com.neospawn.item.Gadgets;
 import com.neospawn.item.MountItem;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ParagonFishingRod;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -95,6 +97,21 @@ public final class ModItems {
             ITEMS.register("paragon_hoe", () -> new ParagonTools.Hoe(PARAGON_TIER, paragonProps()
                     .attributes(HoeItem.createAttributes(PARAGON_TIER, -5.0f, 0.0f)))));
     public static final List<ToolSet> TOOL_SETS = List.of(RUBY_TOOLS, TANZANITE_TOOLS, TITANIUM_TOOLS, PARAGON_TOOLS);
+    // ---------------------------------------------------------------- gadgets
+    public static final DeferredItem<Gadgets.SquidZooka> SQUID_ZOOKA = ITEMS.register("squid_zooka",
+            () -> new Gadgets.SquidZooka(new Item.Properties().durability(250).rarity(Rarity.RARE)));
+    public static final DeferredItem<Gadgets.RayGun> RAY_GUN = ITEMS.register("ray_gun",
+            () -> new Gadgets.RayGun(new Item.Properties().durability(400).rarity(Rarity.RARE)));
+    public static final DeferredItem<Gadgets.Chainsaw> CHAINSAW = ITEMS.register("chainsaw",
+            () -> new Gadgets.Chainsaw(TITANIUM_TIER, new Item.Properties().rarity(Rarity.RARE)
+                    .attributes(AxeItem.createAttributes(TITANIUM_TIER, 6.0f, -1.0f))));
+    public static final DeferredItem<Gadgets.AttitudeAdjuster> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster",
+            () -> new Gadgets.AttitudeAdjuster(Tiers.DIAMOND, new Item.Properties().rarity(Rarity.RARE)
+                    .attributes(SwordItem.createAttributes(Tiers.DIAMOND, 6, -2.6f))));
+    public static final DeferredItem<Gadgets.NetherSword> NETHER_SWORD = ITEMS.register("nether_sword",
+            () -> new Gadgets.NetherSword(Tiers.NETHERITE, new Item.Properties().fireResistant()
+                    .attributes(SwordItem.createAttributes(Tiers.NETHERITE, 4, -2.4f))));
+
     public static final DeferredItem<ParagonBow> PARAGON_BOW = ITEMS.register("paragon_bow",
             () -> new ParagonBow(paragonProps().durability(2000)));
     public static final DeferredItem<ParagonFishingRod> PARAGON_FISHING_ROD = ITEMS.register("paragon_fishing_rod",

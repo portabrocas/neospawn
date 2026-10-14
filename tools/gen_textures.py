@@ -551,6 +551,38 @@ for name, (hi, mid, dark) in {"gorgantua_scale": ((140, 230, 240), (60, 120, 90)
                 sc.set(x, y, dark if ridge else shaded((hi, mid, dark, 0), x, y))
     save(sc.image(shade(dark, -30)), f"item/{name}.png")
 
+# Gadgets
+z = Sprite()
+for x in range(1, 14):
+    for y in range(6, 10):
+        z.set(x, y, (60, 60, 70) if y in (6, 9) else (120, 70, 140))
+for x, y in ((4, 10), (4, 11), (5, 11), (9, 10), (9, 11)):
+    z.set(x, y, (60, 60, 70))
+z.set(14, 7, (20, 20, 30)); z.set(14, 8, (20, 20, 30))
+save(z.image((20, 15, 25)), "item/squid_zooka.png")
+g = Sprite()
+for x in range(4, 12):
+    for y in range(5, 9):
+        g.set(x, y, (200, 200, 210) if y == 5 else (150, 150, 165))
+for x, y in ((12, 6), (13, 6), (14, 6)):
+    g.set(x, y, (120, 230, 90))
+g.line(5, 9, 4, 13, (90, 90, 100)); g.line(6, 9, 5, 13, (90, 90, 100))
+g.set(8, 7, (255, 60, 60))
+save(g.image((40, 40, 50)), "item/ray_gun.png")
+c = Sprite()
+for x in range(6, 15):
+    for y in range(3, 7):
+        c.set(x, y, (200, 200, 210) if y in (3, 6) else (170, 170, 180))
+for x in range(6, 15, 2):
+    c.set(x, 2, (230, 230, 240)); c.set(x, 7, (230, 230, 240))
+for x in range(2, 7):
+    for y in range(5, 10):
+        c.set(x, y, (230, 120, 30))
+c.line(1, 10, 3, 12, (40, 40, 40))
+save(c.image((40, 30, 20)), "item/chainsaw.png")
+save(big_blade((200, 90, 40), (255, 200, 80), (60, 30, 20), (40, 15, 5), width=2, guard=(200, 40, 40)), "item/attitude_adjuster.png")
+save(big_blade((80, 20, 20), (255, 120, 40), (40, 20, 20), (25, 5, 5), guard=(70, 40, 40)), "item/nether_sword.png")
+
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):

@@ -86,6 +86,13 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.mount_item.tooltip_mech", "Repair it with iron ingots");
         add("message.neospawn.mount_item.hatched", "Your %s is ready to ride.");
         add("item.neospawn.paragon_fishing_rod.tooltip", "Aim at lava or water and hold to reel in a catch");
+        add("item.neospawn.squid_zooka.tooltip", "Fires ink bombs that blind and blast mobs. Ammo: ink sacs");
+        add("item.neospawn.ray_gun.tooltip", "An instant beam at whatever you aim at, up to 48 blocks. Ammo: redstone");
+        add("item.neospawn.chainsaw.tooltip", "Fells a whole tree from one log. Sneak to cut a single log");
+        add("item.neospawn.attitude_adjuster.tooltip", "Every hit explodes. The blast spares you and the terrain");
+        add("item.neospawn.nether_sword.tooltip", "Sets whatever it hits ablaze. Survives lava");
+        add("message.neospawn.gadget.no_ammo", "Out of ammo: needs %s");
+        add("entity.neospawn.ink_bomb", "Ink Bomb");
         add("item.neospawn.zoo_cage.empty", "Right-click a mob to catch it. Hostile mobs must be below half health");
         add("item.neospawn.zoo_cage.holds", "Holds: %s (%s health)");
         add("item.neospawn.zoo_cage.release", "Use on the ground to release it");

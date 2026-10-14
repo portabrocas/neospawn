@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "S": {
+      "item": "minecraft:diamond_sword"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "pattern": [
+    " T ",
+    "TST",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:attitude_adjuster"
+  }
+}

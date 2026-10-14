@@ -11,7 +11,9 @@ import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.mob.NeoBoss;
 import com.neospawn.registry.ModItems;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import com.neospawn.registry.ModEntities;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -27,6 +29,7 @@ public final class NeoSpawnClient {
     @SubscribeEvent
     @SuppressWarnings("unchecked")
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.INK_BOMB.get(), ThrownItemRenderer::new);
         for (MobSpec spec : ModMobs.ALL) {
             if (spec.id.equals("the_king")) {
                 event.registerEntityRenderer((EntityType<NeoBoss>) spec.type.get(),

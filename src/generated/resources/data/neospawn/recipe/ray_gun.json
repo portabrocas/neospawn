@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "T": {
+      "item": "neospawn:titanium_ingot"
+    },
+    "U": {
+      "item": "neospawn:uranium_ingot"
+    }
+  },
+  "pattern": [
+    " GU",
+    "TRT",
+    "T  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:ray_gun"
+  }
+}
