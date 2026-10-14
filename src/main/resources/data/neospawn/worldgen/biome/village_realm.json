@@ -36,7 +36,9 @@
       "minecraft:monster_room",
       "minecraft:monster_room_deep"
     ],
-    [],
+    [
+      "neospawn:challenge_dungeon"
+    ],
     [],
     [
       "minecraft:ore_dirt",

@@ -105,4 +105,55 @@ public class StructureTests {
         helper.assertTrue(helper.getLevel().getBlockState(base.offset(0, 10, 0)).is(Blocks.LADDER), "no ladder up the tower");
         helper.succeed();
     }
+
+    @GameTest(template = "tall_arena", batch = "structure_empress_tree", timeoutTicks = 100)
+    public static void empressTree(GameTestHelper helper) {
+        BlockPos base = helper.absolutePos(new BlockPos(12, 2, 12));
+        helper.assertTrue(place(helper, "empress_tree", base), "the Empress Tree refused to grow");
+        helper.assertTrue(helper.getLevel().getBlockState(base.above(10)).is(Blocks.CHERRY_LOG), "no cherry trunk");
+        helper.assertTrue(helper.getLevel().getBlockState(base.above(34)).is(Blocks.AMETHYST_BLOCK), "no amethyst platform");
+        helper.assertTrue(bossesNear(helper, base.above(37), 8).stream().anyMatch(b -> b.spec().id.equals("empress")),
+                "The Empress is not guarding her tree");
+        helper.killAllEntities();
+        helper.succeed();
+    }
+
+    /** Builds a dungeon at {@code origin} and checks its spawner and chest counts and that every chest has loot. */
+    private static void dungeon(GameTestHelper helper, String feature, BlockPos origin, int radius, int down, int up,
+                                int spawners, int chests) {
+        BlockPos abs = helper.absolutePos(origin);
+        helper.assertTrue(place(helper, feature, abs), feature + " was not built");
+        BlockPos from = abs.offset(-radius, -down, -radius), to = abs.offset(radius, up, radius);
+        int foundSpawners = count(helper, from, to, SpawnerBlockEntity.class);
+        int foundChests = count(helper, from, to, ChestBlockEntity.class);
+        helper.assertTrue(foundSpawners == spawners, feature + ": expected " + spawners + " spawners, found " + foundSpawners);
+        helper.assertTrue(foundChests == chests, feature + ": expected " + chests + " chests, found " + foundChests);
+        helper.assertTrue(chestsHaveLoot(helper, from, to), feature + ": a chest has no loot table");
+        helper.succeed();
+    }
+
+    @GameTest(template = "tall_arena", batch = "structure_crypt", timeoutTicks = 100)
+    public static void ruinedCrypt(GameTestHelper helper) {
+        dungeon(helper, "ruined_crypt", new BlockPos(12, 10, 12), 5, 2, 5, 1, 1);
+    }
+
+    @GameTest(template = "tall_arena", batch = "structure_vault", timeoutTicks = 100)
+    public static void sunkenVault(GameTestHelper helper) {
+        dungeon(helper, "sunken_vault", new BlockPos(12, 10, 12), 8, 2, 7, 2, 2);
+    }
+
+    @GameTest(template = "tall_arena", batch = "structure_challenge", timeoutTicks = 100)
+    public static void challengeDungeon(GameTestHelper helper) {
+        // Builds downward from the surface: 2 + 3 + 4 spawners and a chest per floor. Start high in the
+        // tall arena: the test world's floor is near the bottom of the world.
+        BlockPos top = new BlockPos(12, 23, 12);
+        helper.setBlock(top.below(), Blocks.STONE);
+        dungeon(helper, "challenge_dungeon", top, 7, 23, 4, 9, 3);
+    }
+
+    @GameTest(template = "tall_arena", batch = "structure_spire", timeoutTicks = 100)
+    public static void goldenSpire(GameTestHelper helper) {
+        // Eight floors of three spawners, two chests on the roof.
+        dungeon(helper, "golden_spire", new BlockPos(12, 2, 12), 6, 3, 52, 24, 2);
+    }
 }

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "neospawn:ruined_crypt",
+  "step": "underground_structures"
+}

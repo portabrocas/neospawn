@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -13,12 +14,27 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 /**
- * Utopia's Tree of Goodness: a giant oak with a ladder up its trunk and a golden platform at the
- * top, where The King guards a treasure chest. (OreSpawn's Tree of Goodness, rebuilt.)
+ * A giant guardian tree: a huge trunk with a ladder, branches, a crown, and a platform at the top where
+ * a boss guards a treasure chest. Utopia's Tree of Goodness (The King) and Empress Tree (The Empress) are
+ * both this feature, OreSpawn's Tree of Goodness and Queen Tree rebuilt.
  */
 public class TreeOfGoodnessFeature extends StructureFeature {
     private static final int TRUNK_RADIUS = 3;
     private static final int HEIGHT = 34;
+
+    private final Block logBlock;
+    private final Block leavesBlock;
+    private final Block platformBlock;
+    private final String guardian;
+    private final String lootTable;
+
+    public TreeOfGoodnessFeature(Block log, Block leaves, Block platform, String guardian, String lootTable) {
+        this.logBlock = log;
+        this.leavesBlock = leaves;
+        this.platformBlock = platform;
+        this.guardian = guardian;
+        this.lootTable = lootTable;
+    }
 
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
@@ -28,8 +44,8 @@ public class TreeOfGoodnessFeature extends StructureFeature {
         if (!level.getBlockState(base.below()).isSolid()) {
             return false;
         }
-        BlockState log = Blocks.OAK_LOG.defaultBlockState();
-        BlockState leaves = Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
+        BlockState log = logBlock.defaultBlockState();
+        BlockState leaves = leavesBlock.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
 
         // Trunk, sunk a few blocks into the ground.
         for (int y = -3; y < HEIGHT; y++) {
@@ -67,10 +83,10 @@ public class TreeOfGoodnessFeature extends StructureFeature {
             disk(level, top.above(y), 5, Blocks.AIR.defaultBlockState());
         }
         disk(level, top, 5, Blocks.STRIPPED_OAK_WOOD.defaultBlockState());
-        disk(level, top, 2, Blocks.GOLD_BLOCK.defaultBlockState());
+        disk(level, top, 2, platformBlock.defaultBlockState());
         set(level, top.north(TRUNK_RADIUS + 1), Blocks.AIR.defaultBlockState());
-        chest(level, top.above(), "tree_of_goodness");
-        guardian(level, top.above(3), "the_king");
+        chest(level, top.above(), lootTable);
+        guardian(level, top.above(3), guardian);
         return true;
     }
 

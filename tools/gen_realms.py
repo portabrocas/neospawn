@@ -111,7 +111,7 @@ REALMS = {
              "ambient": [spawn("butterfly", 12, 2, 4), spawn("glimmer_sprite", 6, 1, 2), spawn("songbird", 8, 1, 3),
                          spawn("firefly", 4, 2, 4)],
              "monster": []},
-            underground=[], surface=ns("tree_of_goodness"), temperature=0.9, downfall=0.5)),
+            underground=[], surface=ns("tree_of_goodness", "empress_tree"), temperature=0.9, downfall=0.5)),
 
     # Ore-rich and dangerous: every ore, extra rich veins, and dinosaurs.
     "mining_realm": dict(
@@ -128,7 +128,7 @@ REALMS = {
              "creature": [spawn("camarasaurus", 6, 1, 2), spawn("spikeback", 5, 1, 2), spawn("hammerhorn", 4, 1, 1),
                           spawn("gazelle", 8, 2, 4)]},
             ores=BASE_ORES + mc("ore_emerald", "ore_gold_extra", "ore_copper_large") + NEOSPAWN_ORES,
-            surface=ns("skyclaw_nest"))),
+            surface=ns("skyclaw_nest", "golden_spire"))),
 
     # Crystal landscape at dusk: geodes, gems, glowing creatures. Nothing but the charm may enter.
     "crystal_realm": dict(
@@ -154,7 +154,8 @@ REALMS = {
                          spawn("gorgantua", 1, 1, 1), spawn("minecraft:zombie", 60, 2, 4),
                          spawn("minecraft:pillager", 10, 1, 2)],
              "creature": [spawn("minecraft:cow", 8, 2, 4), spawn("minecraft:sheep", 8, 2, 4),
-                          spawn("minecraft:pig", 8, 2, 4), spawn("minecraft:chicken", 8, 2, 4)]})),
+                          spawn("minecraft:pig", 8, 2, 4), spawn("minecraft:chicken", 8, 2, 4)]},
+            surface=ns("challenge_dungeon"))),
 
     # Eternal night, monsters spawn even in light, bosses everywhere. Bosses here can drop the Chaos Charm.
     "danger_realm": dict(
@@ -234,6 +235,15 @@ STRUCTURES = {
     "tree_of_goodness": [{"type": "minecraft:rarity_filter", "chance": 90}] + SURFACE,
     "skyclaw_nest": [{"type": "minecraft:rarity_filter", "chance": 30}] + SURFACE,
     "prison_tower": [{"type": "minecraft:rarity_filter", "chance": 45}] + SURFACE,
+    "empress_tree": [{"type": "minecraft:rarity_filter", "chance": 400}] + SURFACE,
+    "golden_spire": [{"type": "minecraft:rarity_filter", "chance": 150}] + SURFACE,
+    "challenge_dungeon": [{"type": "minecraft:rarity_filter", "chance": 120}] + SURFACE,
+    "ruined_crypt": [{"type": "minecraft:rarity_filter", "chance": 40}, {"type": "minecraft:in_square"},
+                     {"type": "minecraft:height_range", "height": {"type": "minecraft:uniform",
+                      "min_inclusive": {"absolute": 0}, "max_inclusive": {"absolute": 50}}}, {"type": "minecraft:biome"}],
+    "sunken_vault": [{"type": "minecraft:rarity_filter", "chance": 80}, {"type": "minecraft:in_square"},
+                     {"type": "minecraft:height_range", "height": {"type": "minecraft:uniform",
+                      "min_inclusive": {"absolute": -48}, "max_inclusive": {"absolute": 0}}}, {"type": "minecraft:biome"}],
     "boss_dungeon": [{"type": "minecraft:rarity_filter", "chance": 20}, {"type": "minecraft:in_square"},
                      {"type": "minecraft:height_range", "height": {"type": "minecraft:uniform",
                       "min_inclusive": {"absolute": -40}, "max_inclusive": {"absolute": 30}}},
@@ -282,8 +292,35 @@ LOOT = {
              item("minecraft:iron_nugget", 6, 18)),
         chance(item("chaos_charm"), 0.1)),
 }
+LOOT.update({
+    "empress_tree": table(
+        pool(1, item("empress_scale", 4, 8)), pool(1, item("minecraft:diamond", 6, 12)), pool(1, item("minecraft:amethyst_block", 4, 8)),
+        chance(item("paragon_charm"), 0.4), chance(item("minecraft:enchanted_golden_apple"), 0.5)),
+    "ruined_crypt": table(
+        pool(3, item("minecraft:bone", 2, 6, 3), item("minecraft:rotten_flesh", 2, 6, 3), item("minecraft:iron_ingot", 1, 4, 2),
+             item("minecraft:bread", 1, 3, 2), item("ruby", 1, 2)),
+        chance(item("verdant_charm"), 0.08), chance(item("fossilized_egg"), 0.3)),
+    "sunken_vault": table(
+        pool(3, item("minecraft:gold_ingot", 2, 6, 2), item("titanium_ingot", 1, 3, 2), item("tanzanite", 1, 3, 2),
+             item("minecraft:diamond", 1, 2)),
+        pool(1, ENCHANTED_BOOK), chance(item("prospectors_charm"), 0.15), chance(item("gorgantua_egg_fragment"), 0.1)),
+    "challenge_dungeon": table(
+        pool(3, item("minecraft:diamond", 1, 3), item("minecraft:emerald", 3, 8, 2), item("uranium_ingot", 1, 3),
+             item("minecraft:golden_apple", 1, 2)), pool(1, ENCHANTED_BOOK)),
+    "challenge_dungeon_final": table(
+        pool(1, item("paragon_helmet"), item("paragon_chestplate"), item("paragon_leggings"), item("paragon_boots")),
+        pool(2, item("paragon_ingot", 1, 3), item("minecraft:diamond_block", 1, 2)), chance(item("chaos_charm"), 0.15)),
+    "golden_spire": table(
+        pool(4, item("minecraft:gold_block", 1, 3, 3), item("minecraft:diamond", 2, 5, 2), item("ruby", 3, 6, 2),
+             item("minecraft:golden_apple", 1, 3))),
+})
 for name, loot in LOOT.items():
     write(f"loot_table/chests/{name}.json", loot)
+
+# Overworld dungeons: added to every overworld biome by NeoForge biome modifiers.
+for name in ("ruined_crypt", "sunken_vault"):
+    write(f"neoforge/biome_modifier/add_{name}.json", {"type": "neoforge:add_features", "biomes": "#minecraft:is_overworld",
+                                                       "features": f"neospawn:{name}", "step": "underground_structures"})
 
 # The Village Realm: plains villages, packed about three times denser than the overworld.
 write("tags/worldgen/biome/has_realm_village.json", {"values": ["neospawn:village_realm"]})

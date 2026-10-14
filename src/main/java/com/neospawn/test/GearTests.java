@@ -182,9 +182,13 @@ public class GearTests {
     /** The Ultimate Torch lights a dark, covered room. */
     @GameTest(template = "tall_arena", batch = "util_torch", timeoutTicks = 100)
     public static void ultimateTorchLightsDarkness(GameTestHelper helper) {
+        // A sealed stone room, so no skylight leaks in from the sides.
         BlockPos center = new BlockPos(12, 2, 12);
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-11, 3, -11), center.offset(11, 3, 11))) {
-            helper.setBlock(pos.immutable(), Blocks.STONE);
+        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-6, 0, -6), center.offset(6, 3, 6))) {
+            int dx = Math.abs(pos.getX() - center.getX()), dz = Math.abs(pos.getZ() - center.getZ());
+            if (dx == 6 || dz == 6 || pos.getY() == center.getY() + 3) {
+                helper.setBlock(pos.immutable(), Blocks.STONE);
+            }
         }
         // Lighting updates a tick or two after blocks change; wait before reading it.
         helper.runAfterDelay(20, () -> {
