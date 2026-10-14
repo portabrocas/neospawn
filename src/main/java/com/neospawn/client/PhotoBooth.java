@@ -107,6 +107,9 @@ public final class PhotoBooth {
     private static double size(MobSpec spec) {
         Look l = spec.look;
         double model = l.scale * Math.max(Math.max(l.length + l.tail * 0.6, l.wing * 2 + l.width), l.height + l.leg + l.neck) / 16.0;
+        if (spec.geo) {
+            return spec.hitboxWidth * 1.6;
+        }
         double hitbox = Math.max(spec.hitboxHeight, spec.hitboxWidth);
         return Math.max(hitbox, model);
     }

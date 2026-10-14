@@ -438,7 +438,7 @@ public final class ModMobs {
         skyBoss("the_king", "The King", look(Family.QUADRUPED).body(28, 12, 12).leg(10).neck(10).head(10).snout(6).tail(32)
                 .wing(40).with(Extra.HORNS, Extra.SPIKES, Extra.CROWN).colors(0xDDB443, 0x9A1424, 0xFFE066).eye(0xFFF07A)
                 .belly(0xF0DFA8).pattern(Pattern.SCALES).glow().scale(4.0f))
-                .size(7.0f, 5.0f).stats(1000, 24, 0.3).flySpeed(0.6).armor(12).voice(Voice.DRAGON).xp(500)
+                .geo().size(7.0f, 5.0f).stats(1000, 24, 0.3).flySpeed(0.6).armor(12).voice(Voice.DRAGON).xp(500)
                 .bar(BossEvent.BossBarColor.YELLOW)
                 .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP)
                 .egg(0xD4AF37, 0x8B0000);
@@ -473,7 +473,7 @@ public final class ModMobs {
         skyBoss("the_ascended_king", "The Ascended King", look(Family.QUADRUPED).body(28, 12, 12).leg(10).neck(12).head(10).snout(6)
                 .tail(36).wing(44).with(Extra.HORNS, Extra.SPIKES, Extra.CROWN).colors(0xD8DCE6, 0x4A2378, 0xC79BFF).eye(0xFF465A)
                 .belly(0xF4F2FA).pattern(Pattern.SCALES).glow().scale(5.5f))
-                .size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.5f)
+                .geo().size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.5f)
                 .voice(Voice.DRAGON).xp(5000).minion("snapwyrm").bar(BossEvent.BossBarColor.PURPLE)
                 .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.METEOR_SHOWER,
                         BossAttack.BEAM, BossAttack.WIND_GUST, BossAttack.SUMMON)
@@ -734,7 +734,7 @@ public final class ModMobs {
             case HOSTILE_FLYER -> NeoHostileFlyer::new;
             case SWIMMER -> NeoSwimmer::new;
             case HOSTILE_SWIMMER -> NeoHostileSwimmer::new;
-            case BOSS, SEA_BOSS, SKY_BOSS -> NeoBoss::new;
+            case BOSS, SEA_BOSS, SKY_BOSS -> spec.geo ? KingBoss::new : NeoBoss::new;
         };
         EntityType.Builder<?> builder = EntityType.Builder.of(factory, category(spec))
                 .sized(spec.hitboxWidth, spec.hitboxHeight)

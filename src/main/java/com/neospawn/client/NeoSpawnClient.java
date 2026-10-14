@@ -1,10 +1,12 @@
 package com.neospawn.client;
 
 import com.neospawn.NeoSpawn;
+import com.neospawn.client.renderer.KingRenderer;
 import com.neospawn.client.renderer.NeoMobRenderer;
 import com.neospawn.client.shape.Shapes;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ZooCageItem;
+import com.neospawn.mob.KingBoss;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.registry.ModItems;
@@ -28,7 +30,12 @@ public final class NeoSpawnClient {
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.INK_BOMB.get(), ThrownItemRenderer::new);
         for (MobSpec spec : ModMobs.ALL) {
-            event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
+            if (spec.geo) {
+                float scale = spec.id.equals("the_ascended_king") ? 2.4f : 1.7f;
+                event.registerEntityRenderer((EntityType<KingBoss>) spec.type.get(), context -> new KingRenderer(context, spec.id, scale));
+            } else {
+                event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
+            }
         }
     }
 
@@ -49,7 +56,9 @@ public final class NeoSpawnClient {
     @SubscribeEvent
     static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         for (MobSpec spec : ModMobs.ALL) {
-            event.registerLayerDefinition(NeoMobRenderer.layer(spec), () -> Shapes.get(spec).toLayer());
+            if (!spec.geo) {
+                event.registerLayerDefinition(NeoMobRenderer.layer(spec), () -> Shapes.get(spec).toLayer());
+            }
         }
     }
 

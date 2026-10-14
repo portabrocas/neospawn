@@ -93,6 +93,14 @@ way: give the spec `Kind.BOSS` and a list of attacks (`STOMP`, `ROAR`, `CHARGE`,
 `FIREBALL_VOLLEY`, `WIND_GUST`, `METEOR_SHOWER` and `SPORE_CLOUD`. Bug attacks: `SCYTHE`,
 `STING`, `TOSS` and `ACID_SPRAY`. Specialists: `GAZE`, `BURROW`, `BLINK` and `SNIPE`.
 
+## The King's model
+
+The King and The Ascended King use a hand-made GeckoLib model (GeckoLib is a required dependency).
+Files: `assets/neospawn/geo/entity/the_king.geo.json`, `animations/entity/the_king.animation.json`,
+`textures/entity/the_king.png` (+ `_glowmask.png` for the glowing cracks, eyes, horn tips and mouth).
+To edit by hand, open the `.geo.json` in Blockbench (File > Open Model), then import the animation file
+in the Animate tab. `tools/gen_king.py` generated the first version; re-running it overwrites hand edits.
+
 ## Development commands
 
 ```bash
@@ -102,6 +110,7 @@ python3 tools/gen_textures.py   # regenerate block/item placeholder art
 ./gradlew runRealmCheck         # copy a world to run/saves/neospawn_realmcheck first; visits every realm, counts structures, quits
 ./gradlew runPhotos            # photographs every mob into run/screenshots/neospawn (needs run/saves/neospawn_photos); -Ponly=id1,id2 for a few
 python3 tools/contact_sheet.py  # tiles those photos into labeled sheets in run/screenshots/sheets
+./gradlew runPhotos -Ponly=the_king -Panim=fly   # pin The King's animation (idle, walk, fly, roar, breath) for photos
 ./gradlew runClient             # play
 ```
 

@@ -346,6 +346,7 @@ public class NeoBoss extends Monster implements NeoMob {
         pendingAttack = null;
         recoverTicks = 0;
         transitionTicks = 30;
+        onPhaseChange(phase);
         globalCooldown = 10;
         playSound(SoundEvents.RAVAGER_ROAR, 8.0f, phase == 3 ? 0.4f : 0.5f);
         ServerLevel level = (ServerLevel) level();
@@ -403,6 +404,15 @@ public class NeoBoss extends Monster implements NeoMob {
         aimPos = target.position();
         swing(InteractionHand.MAIN_HAND);
         cue(attack, target);
+        onWindup(attack);
+    }
+
+    /** Hook for animated bosses: an attack has started winding up. Server side. */
+    protected void onWindup(BossAttack attack) {
+    }
+
+    /** Hook for animated bosses: a phase change (50%, 25% health) has begun. Server side. */
+    protected void onPhaseChange(int newPhase) {
     }
 
     private void release(@Nullable LivingEntity target) {

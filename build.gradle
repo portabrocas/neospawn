@@ -27,7 +27,13 @@ sourceSets.main.resources {
 }
 
 repositories {
-    // Add here additional repositories if required by some of the dependencies below.
+    // GeckoLib: Blockbench models and animations for the big hand-made bosses (The King).
+    maven {
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup 'software.bernie.geckolib'
+        }
+    }
 }
 
 base {
@@ -71,6 +77,9 @@ neoForge {
             systemProperty 'neospawn.photos', 'true'
             if (project.hasProperty('only')) {
                 systemProperty 'neospawn.photos.only', project.property('only')
+            }
+            if (project.hasProperty('anim')) {
+                systemProperty 'neospawn.king.anim', project.property('anim')
             }
             programArguments.addAll '--quickPlaySingleplayer', 'neospawn_photos', '--width', '1280', '--height', '720'
         }
@@ -133,6 +142,7 @@ configurations {
 }
 
 dependencies {
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"

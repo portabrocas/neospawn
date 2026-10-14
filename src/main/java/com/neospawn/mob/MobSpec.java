@@ -205,6 +205,11 @@ public final class MobSpec {
 
     public MobSpec mechanical() { this.mechanical = true; return this; }
 
+    /** Uses a hand-made GeckoLib model (assets/neospawn/geo/entity/<id>.geo.json) instead of a generated one. */
+    public boolean geo;
+
+    public MobSpec geo() { this.geo = true; return this; }
+
     public MobSpec hunts(String... preyIds) {
         prey.addAll(List.of(preyIds));
         return this;

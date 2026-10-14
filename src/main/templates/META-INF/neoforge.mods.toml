@@ -79,6 +79,14 @@ A fresh, original take on the classic monster-and-ore mega mods: huge bosses lik
 
 # Here's another dependency
 [[dependencies.${mod_id}]]
+    modId="geckolib"
+    type="required"
+    reason="The King and other hand-made bosses use GeckoLib models and animations"
+    versionRange="[4.9,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
     modId="minecraft"
     type="required"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
