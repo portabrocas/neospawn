@@ -69,6 +69,8 @@ public final class ModItems {
             () -> new PaintedEggItem(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<FieldGuideItem> FIELD_GUIDE = ITEMS.register("field_guide",
             () -> new FieldGuideItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<com.neospawn.item.CristianPhone> CRISTIAN_PHONE = ITEMS.register("cristian_phone",
+            () -> new com.neospawn.item.CristianPhone(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final DeferredItem<TunnelChargeItem> TUNNEL_CHARGE = ITEMS.register("tunnel_charge",
             () -> new TunnelChargeItem(new Item.Properties().stacksTo(16)));
 

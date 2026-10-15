@@ -122,6 +122,12 @@ public class ModLanguage extends LanguageProvider {
         add("message.neospawn.zoo_cage.not_yours", "That's someone else's pet.");
         add("message.neospawn.zoo_cage.too_strong", "It's too strong to catch. Weaken it below half health first.");
         add("item.neospawn.dried_egg.mystery", "Mystery Dried Egg");
+        add("entity.neospawn.cristian", "Cristian");
+        add("item.neospawn.cristian_phone.tooltip", "A rare find. Call Cristian: he'll follow you, fight for you and pick up your stuff for 15 minutes");
+        add("message.neospawn.cristian.arrives", "Cristian: \"On my way! What do you need?\"");
+        add("message.neospawn.cristian.already_here", "Cristian's already helping you (%s min left)");
+        add("message.neospawn.cristian.one_minute", "Cristian: \"One more minute, then I gotta go.\"");
+        add("message.neospawn.cristian.leaves", "Cristian: \"Alright, I'm out. Call me anytime!\"");
         add("item.neospawn.dried_egg.named", "Dried %s Egg");
         add("item.neospawn.dried_egg.tooltip", "Just add water: drop it in water or use it on water to hatch it");
         add("item.neospawn.painted_egg.tooltip", "Laid by the Easter Bunny. Use it to crack it open: usually a spawn egg");

@@ -195,6 +195,11 @@ LOOT = {
         chance(item("prospectors_charm"), 0.3), chance(item("minecraft:enchanted_golden_apple"), 0.15)),
 }
 
+# Cristian's Phone: a rare find in the hardest vaults.
+for vault, p in (("mine_vault", 0.05), ("spire_treasure", 0.08), ("fortress_vault", 0.06), ("arena_vault", 0.10),
+                 ("sanctum_relic", 0.06), ("shrine_chaos", 0.08), ("crypt_treasure", 0.04), ("vault_treasure", 0.05)):
+    LOOT[vault]["pools"].append(chance(item("cristian_phone"), p))
+
 for name, loot in LOOT.items():
     write(f"loot_table/chests/{name}.json", loot)
 print(f"{len(STRUCTURES)} structures, {len(LOOT)} loot tables")

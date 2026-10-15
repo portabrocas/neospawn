@@ -18,5 +18,10 @@ public final class ModEntities {
             () -> EntityType.Builder.<Gadgets.InkBomb>of(Gadgets.InkBomb::new, MobCategory.MISC)
                     .sized(0.4f, 0.4f).clientTrackingRange(4).updateInterval(10).build("ink_bomb"));
 
+    /** Cristian, called with his phone to help for 15 minutes. */
+    public static final DeferredHolder<EntityType<?>, EntityType<com.neospawn.mob.Cristian>> CRISTIAN = ENTITY_TYPES.register("cristian",
+            () -> EntityType.Builder.<com.neospawn.mob.Cristian>of(com.neospawn.mob.Cristian::new, MobCategory.MISC)
+                    .sized(0.6f, 1.8f).clientTrackingRange(10).build("cristian"));
+
     private ModEntities() {}
 }

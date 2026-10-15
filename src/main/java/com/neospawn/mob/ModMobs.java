@@ -772,6 +772,7 @@ public final class ModMobs {
 
     @SuppressWarnings("unchecked")
     public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(com.neospawn.registry.ModEntities.CRISTIAN.get(), Cristian.attributes().build());
         for (MobSpec spec : SPECS) {
             event.put((EntityType<? extends LivingEntity>) spec.type.get(), NeoMob.attributes(spec).build());
         }

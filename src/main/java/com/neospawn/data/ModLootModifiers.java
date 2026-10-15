@@ -29,6 +29,11 @@ public class ModLootModifiers extends GlobalLootModifierProvider {
         chest("crystal_charm_buried_treasure", ModItems.CRYSTAL_CHARM.get(), "chests/buried_treasure", 0.10f);
         chest("sovereign_charm_mansion", ModItems.SOVEREIGN_CHARM.get(), "chests/woodland_mansion", 0.25f);
         chest("paragon_charm_end_city", ModItems.PARAGON_CHARM.get(), "chests/end_city_treasure", 0.08f);
+        // Cristian's Phone: a lucky find, never crafted.
+        chest("cristian_phone_dungeon", ModItems.CRISTIAN_PHONE.get(), "chests/simple_dungeon", 0.025f);
+        chest("cristian_phone_mineshaft", ModItems.CRISTIAN_PHONE.get(), "chests/abandoned_mineshaft", 0.015f);
+        chest("cristian_phone_stronghold", ModItems.CRISTIAN_PHONE.get(), "chests/stronghold_corridor", 0.03f);
+        chest("cristian_phone_ancient_city", ModItems.CRISTIAN_PHONE.get(), "chests/ancient_city", 0.04f);
     }
 
     private void chest(String name, Item charm, String lootTable, float chance) {
