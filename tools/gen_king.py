@@ -586,7 +586,9 @@ class Anim:
         self.key(bone_name, channel, 0, value)
 
     def json(self):
-        out = {"animation_length": self.length, "bones": self.bones}
+        # GeckoLib rejects a channel whose keyframes are out of time order.
+        bones = {b: {c: dict(sorted(k.items(), key=lambda kv: float(kv[0]))) for c, k in ch.items()} for b, ch in self.bones.items()}
+        out = {"animation_length": self.length, "bones": bones}
         if self.loop:
             out["loop"] = True
         return out
