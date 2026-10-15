@@ -1,0 +1,8 @@
+{
+  "type": "neospawn:blueprint",
+  "blueprint": "sunken_vault",
+  "biomes": "#neospawn:has_structure/sunken_vault",
+  "step": "underground_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

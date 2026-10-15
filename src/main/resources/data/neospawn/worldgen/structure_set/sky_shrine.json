@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "neospawn:sky_shrine",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 14,
+    "separation": 5,
+    "salt": 51627
+  }
+}

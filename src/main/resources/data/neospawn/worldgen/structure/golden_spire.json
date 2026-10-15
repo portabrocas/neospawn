@@ -1,0 +1,8 @@
+{
+  "type": "neospawn:blueprint",
+  "blueprint": "golden_spire",
+  "biomes": "#neospawn:has_structure/golden_spire",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "spawn_overrides": {}
+}

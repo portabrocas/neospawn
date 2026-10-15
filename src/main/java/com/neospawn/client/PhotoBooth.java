@@ -53,6 +53,14 @@ public final class PhotoBooth {
             NeoSpawn.LOGGER.warn("PHOTOS skipped: not the throwaway world {}", WORLD);
             return;
         }
+        if (System.getProperty("neospawn.photos.locate") != null) {
+            located(mc, server);
+            return;
+        }
+        if (System.getProperty("neospawn.photos.structure") != null) {
+            structures(mc, server);
+            return;
+        }
         if (Boolean.getBoolean("neospawn.photos.weapons")) {
             weapons(mc, server);
             return;
@@ -93,6 +101,154 @@ public final class PhotoBooth {
         int angle = shot;
         server.execute(() -> pose(server, spec, first, angle));
         wait = first ? SETTLE : 12;
+    }
+
+    // ------------------------------------------------------------------ structures
+
+    private static List<String> structureQueue;
+    private static int structureIndex, structureShot, structureWait = 60;
+    /** Camera offsets from the structure's centre, as fractions of its size: high three-quarter, opposite, top-down, under. */
+    private static final double[][] VIEWS = {{0.6, 0.42, 0.75}, {-0.7, 0.35, -0.55}, {0.75, 0.12, -0.2}};
+
+    private static void structures(Minecraft mc, MinecraftServer server) {
+        if (structureQueue == null) {
+            String names = System.getProperty("neospawn.photos.structure");
+            structureQueue = names.equals("all") ? List.copyOf(com.neospawn.worldgen.build.Blueprints.ALL.keySet()) : List.of(names.split(","));
+            mc.options.hideGui = true;
+            new java.io.File(mc.gameDirectory, "screenshots/neospawn").mkdirs();
+            server.execute(() -> setUpStage(server));
+        }
+        mc.options.pauseOnLostFocus = false;
+        if (mc.screen != null) {
+            mc.setScreen(null);
+        }
+        if (--structureWait > 0) {
+            return;
+        }
+        if (structureShot > 0) {
+            Screenshot.grab(mc.gameDirectory, "neospawn/" + structureQueue.get(structureIndex) + "_" + structureShot + ".png",
+                    mc.getMainRenderTarget(), message -> {});
+            if (structureShot == VIEWS.length + com.neospawn.worldgen.build.Blueprints.get(structureQueue.get(structureIndex)).interiorViews().length) {
+                structureIndex++;
+                structureShot = 0;
+            }
+        }
+        if (structureIndex >= structureQueue.size()) {
+            finished = true;
+            ClientShutdown.stop();
+            return;
+        }
+        String name = structureQueue.get(structureIndex);
+        boolean first = structureShot == 0;
+        int view = structureShot++;
+        server.execute(() -> {
+            ServerLevel level = server.overworld();
+            var bp = com.neospawn.worldgen.build.Blueprints.get(name);
+            BlockPos origin = STAGE.offset(-bp.sizeX() / 2, 0, -bp.sizeZ() / 2);
+            if (first) {
+                // Wipe the last build, then draw this one with no clipping.
+                var area = new net.minecraft.world.level.levelgen.structure.BoundingBox(STAGE.getX() - 60, STAGE.getY() - 60, STAGE.getZ() - 60,
+                        STAGE.getX() + 60, STAGE.getY() + 50, STAGE.getZ() + 60);
+                for (BlockPos pos : BlockPos.betweenClosed(STAGE.offset(-40, -50, -40), STAGE.offset(40, 45, 40))) {
+                    if (!level.getBlockState(pos).isAir()) {
+                        level.setBlock(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2 | 16);
+                    }
+                }
+                for (BlockPos pos : BlockPos.betweenClosed(STAGE.offset(-40, -1, -40), STAGE.offset(40, -1, 40))) {
+                    level.setBlock(pos, net.minecraft.world.level.block.Blocks.GRASS_BLOCK.defaultBlockState(), 2 | 16);
+                }
+                for (Entity old : level.getEntitiesOfClass(Entity.class, new AABB(STAGE).inflate(60), e -> !(e instanceof ServerPlayer))) {
+                    old.discard();
+                }
+                bp.build(new com.neospawn.worldgen.build.Build(level, area, origin, net.minecraft.world.level.block.Rotation.NONE,
+                        net.minecraft.util.RandomSource.create(42), bp.sizeX(), bp.sizeZ()));
+            }
+            double span = Math.max(bp.sizeX(), bp.sizeZ());
+            Vec3 center = new Vec3(origin.getX() + bp.sizeX() / 2.0, STAGE.getY() + bp.above() * 0.25, origin.getZ() + bp.sizeZ() / 2.0);
+            Vec3 cam;
+            if (view < VIEWS.length) {
+                double[] v = VIEWS[view];
+                cam = center.add(v[0] * span, v[1] * span, v[2] * span);
+            } else {
+                // Interior shot: local camera and target points (rotation NONE, so local = offset from origin).
+                double[] v = bp.interiorViews()[view - VIEWS.length];
+                cam = new Vec3(origin.getX() + v[0] + 0.5, origin.getY() + v[1], origin.getZ() + v[2] + 0.5);
+                center = new Vec3(origin.getX() + v[3] + 0.5, origin.getY() + v[4], origin.getZ() + v[5] + 0.5);
+            }
+            Vec3 look = center.subtract(cam);
+            ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+            player.setGameMode(GameType.SPECTATOR);
+            player.teleportTo(level, cam.x, cam.y - player.getEyeHeight(), cam.z,
+                    (float) (Math.atan2(-look.x, look.z) * 180 / Math.PI), (float) (-Math.atan2(look.y, look.horizontalDistance()) * 180 / Math.PI));
+        });
+        structureWait = first ? 80 : 25;
+    }
+
+    // ------------------------------------------------------------------ structures in the real world
+
+    private static List<String> locateQueue;
+    private static int locateIndex, locateShot, locateWait = 60;
+
+    /** -Plocate=dimension:structure,... : flies to the nearest generated copy and photographs it in its terrain. */
+    private static void located(Minecraft mc, MinecraftServer server) {
+        if (locateQueue == null) {
+            locateQueue = List.of(System.getProperty("neospawn.photos.locate").split(","));
+            mc.options.hideGui = true;
+            new java.io.File(mc.gameDirectory, "screenshots/neospawn").mkdirs();
+        }
+        mc.options.pauseOnLostFocus = false;
+        if (mc.screen != null) {
+            mc.setScreen(null);
+        }
+        if (--locateWait > 0) {
+            return;
+        }
+        if (locateShot > 0) {
+            Screenshot.grab(mc.gameDirectory, "neospawn/world_" + locateQueue.get(locateIndex).split(":")[1] + "_" + locateShot + ".png",
+                    mc.getMainRenderTarget(), message -> {});
+            if (locateShot == 3) {
+                locateIndex++;
+                locateShot = 0;
+            }
+        }
+        if (locateIndex >= locateQueue.size()) {
+            finished = true;
+            ClientShutdown.stop();
+            return;
+        }
+        String[] spec = locateQueue.get(locateIndex).split(":");
+        int shot = locateShot++;
+        server.execute(() -> {
+            var dimKey = net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION,
+                    spec[0].equals("overworld") ? net.minecraft.resources.ResourceLocation.withDefaultNamespace("overworld") : NeoSpawn.id(spec[0]));
+            ServerLevel level = server.getLevel(dimKey);
+            var registry = level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.STRUCTURE);
+            var holder = registry.getHolderOrThrow(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.STRUCTURE, NeoSpawn.id(spec[1])));
+            var found = level.getChunkSource().getGenerator().findNearestMapStructure(level, net.minecraft.core.HolderSet.direct(holder),
+                    new BlockPos(2000, 64, 2000), 64, false);
+            if (found == null) {
+                return;
+            }
+            var bp = com.neospawn.worldgen.build.Blueprints.get(spec[1]);
+            BlockPos at = found.getFirst();
+            for (int cx = -1; cx <= 3; cx++) {
+                for (int cz = -1; cz <= 3; cz++) {
+                    level.getChunk((at.getX() >> 4) + cx, (at.getZ() >> 4) + cz);
+                }
+            }
+            double cx = at.getX() + bp.sizeX() / 2.0, cz = at.getZ() + bp.sizeZ() / 2.0;
+            int ground = level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, (int) cx, (int) cz);
+            Vec3 center = new Vec3(cx, ground + 4, cz);
+            double span = Math.max(bp.sizeX(), bp.sizeZ());
+            double[][] views = {{0.8, 0.55, 0.9}, {-0.9, 0.45, -0.6}, {0.9, 0.2, -0.5}};
+            Vec3 cam = center.add(views[shot][0] * span, views[shot][1] * span, views[shot][2] * span);
+            Vec3 look = center.subtract(cam);
+            ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+            player.setGameMode(GameType.SPECTATOR);
+            player.teleportTo(level, cam.x, cam.y - player.getEyeHeight(), cam.z,
+                    (float) (Math.atan2(-look.x, look.z) * 180 / Math.PI), (float) (-Math.atan2(look.y, look.horizontalDistance()) * 180 / Math.PI));
+        });
+        locateWait = shot == 0 ? 160 : 40;
     }
 
     // ------------------------------------------------------------------ weapons in hand

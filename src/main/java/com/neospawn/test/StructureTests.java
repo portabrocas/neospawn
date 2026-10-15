@@ -80,32 +80,6 @@ public class StructureTests {
         helper.succeed();
     }
 
-    @GameTest(template = "arena", batch = "structure_dungeon", timeoutTicks = 100)
-    public static void bossDungeon(GameTestHelper helper) {
-        BlockPos center = helper.absolutePos(new BlockPos(12, 20, 12));
-        helper.assertTrue(place(helper, "boss_dungeon", center), "the dungeon was not built");
-        helper.assertTrue(count(helper, center.offset(-8, 0, -8), center.offset(8, 0, 8), SpawnerBlockEntity.class) == 4,
-                "expected 4 spawners");
-        helper.assertTrue(count(helper, center.offset(-8, 0, -8), center.offset(8, 0, 8), ChestBlockEntity.class) == 2,
-                "expected 2 chests");
-        helper.assertTrue(chestsHaveLoot(helper, center.offset(-8, 0, -8), center.offset(8, 0, 8)), "a chest has no loot table");
-        helper.assertTrue(!bossesNear(helper, center, 8).isEmpty(), "no boss in the dungeon");
-        helper.killAllEntities();
-        helper.succeed();
-    }
-
-    @GameTest(template = "arena", batch = "structure_tower", timeoutTicks = 100)
-    public static void prisonTower(GameTestHelper helper) {
-        BlockPos base = helper.absolutePos(new BlockPos(12, 2, 12));
-        helper.assertTrue(place(helper, "prison_tower", base), "the tower was not built");
-        helper.assertTrue(count(helper, base.offset(-5, 0, -5), base.offset(5, 24, 5), SpawnerBlockEntity.class) == 4,
-                "expected a Bandit spawner on each of 4 floors");
-        helper.assertTrue(count(helper, base.offset(-5, 24, -5), base.offset(5, 26, 5), ChestBlockEntity.class) == 1,
-                "no chest on the roof");
-        helper.assertTrue(helper.getLevel().getBlockState(base.offset(0, 10, 0)).is(Blocks.LADDER), "no ladder up the tower");
-        helper.succeed();
-    }
-
     @GameTest(template = "tall_arena", batch = "structure_empress_tree", timeoutTicks = 100)
     public static void empressTree(GameTestHelper helper) {
         BlockPos base = helper.absolutePos(new BlockPos(12, 2, 12));
@@ -132,16 +106,6 @@ public class StructureTests {
         helper.succeed();
     }
 
-    @GameTest(template = "tall_arena", batch = "structure_crypt", timeoutTicks = 100)
-    public static void ruinedCrypt(GameTestHelper helper) {
-        dungeon(helper, "ruined_crypt", new BlockPos(12, 10, 12), 5, 2, 5, 1, 1);
-    }
-
-    @GameTest(template = "tall_arena", batch = "structure_vault", timeoutTicks = 100)
-    public static void sunkenVault(GameTestHelper helper) {
-        dungeon(helper, "sunken_vault", new BlockPos(12, 10, 12), 8, 2, 7, 2, 2);
-    }
-
     @GameTest(template = "tall_arena", batch = "structure_challenge", timeoutTicks = 100)
     public static void challengeDungeon(GameTestHelper helper) {
         // Builds downward from the surface: 2 + 3 + 4 spawners and a chest per floor. Start high in the
@@ -151,9 +115,4 @@ public class StructureTests {
         dungeon(helper, "challenge_dungeon", top, 7, 23, 4, 9, 3);
     }
 
-    @GameTest(template = "tall_arena", batch = "structure_spire", timeoutTicks = 100)
-    public static void goldenSpire(GameTestHelper helper) {
-        // Eight floors of three spawners, two chests on the roof.
-        dungeon(helper, "golden_spire", new BlockPos(12, 2, 12), 6, 3, 52, 24, 2);
-    }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_floral",
+  "spawners": {
+    "type": "neospawn:butterfly",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 8
+  }
+}

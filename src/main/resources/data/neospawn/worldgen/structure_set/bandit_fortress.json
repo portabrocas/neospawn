@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "neospawn:bandit_fortress",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 22,
+    "separation": 8,
+    "salt": 51624
+  }
+}

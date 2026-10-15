@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "neospawn:excavation_site",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 17,
+    "separation": 6,
+    "salt": 51622
+  }
+}

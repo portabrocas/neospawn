@@ -18,20 +18,10 @@ public final class ModFeatures {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> EMPRESS_TREE =
             FEATURES.register("empress_tree", () -> new TreeOfGoodnessFeature(Blocks.CHERRY_LOG, Blocks.CHERRY_LEAVES,
                     Blocks.AMETHYST_BLOCK, "empress", "empress_tree"));
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> RUINED_CRYPT =
-            FEATURES.register("ruined_crypt", DungeonFeatures.RuinedCrypt::new);
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SUNKEN_VAULT =
-            FEATURES.register("sunken_vault", DungeonFeatures.SunkenVault::new);
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> CHALLENGE_DUNGEON =
             FEATURES.register("challenge_dungeon", DungeonFeatures.ChallengeDungeon::new);
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GOLDEN_SPIRE =
-            FEATURES.register("golden_spire", DungeonFeatures.GoldenSpire::new);
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SKYCLAW_NEST =
             FEATURES.register("skyclaw_nest", SkyclawNestFeature::new);
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BOSS_DUNGEON =
-            FEATURES.register("boss_dungeon", BossDungeonFeature::new);
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PRISON_TOWER =
-            FEATURES.register("prison_tower", PrisonTowerFeature::new);
 
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DUPLICATOR_TREE =
             FEATURES.register("duplicator_tree", DuplicatorTreeFeature::new);

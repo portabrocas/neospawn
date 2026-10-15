@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "neospawn:ruined_crypt",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 36,
+    "separation": 12,
+    "salt": 51628
+  }
+}

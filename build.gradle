@@ -78,6 +78,12 @@ neoForge {
             if (project.hasProperty('only')) {
                 systemProperty 'neospawn.photos.only', project.property('only')
             }
+            if (project.hasProperty('locate')) {
+                systemProperty 'neospawn.photos.locate', project.property('locate')
+            }
+            if (project.hasProperty('structure')) {
+                systemProperty 'neospawn.photos.structure', project.property('structure')
+            }
             if (project.hasProperty('weapons')) {
                 systemProperty 'neospawn.photos.weapons', 'true'
             }

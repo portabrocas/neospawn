@@ -1,0 +1,8 @@
+{
+  "type": "neospawn:blueprint",
+  "blueprint": "boss_arena",
+  "biomes": "#neospawn:has_structure/boss_arena",
+  "step": "underground_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

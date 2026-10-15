@@ -1,0 +1,8 @@
+{
+  "type": "neospawn:blueprint",
+  "blueprint": "sky_shrine",
+  "biomes": "#neospawn:has_structure/sky_shrine",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

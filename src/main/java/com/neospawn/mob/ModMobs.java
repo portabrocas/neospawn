@@ -107,7 +107,7 @@ public final class ModMobs {
                 .belly(0xFFFFFF).eye(0x3A2440))
                 .size(0.55f, 0.7f).stats(10, 0, 0.32).breed(v(Items.CARROT)).laysEggs()
                 .drop(ModItems.PAINTED_EGG, 1, 2).drop(v(Items.RABBIT_HIDE), 0, 1)
-                .egg(0xF2E6D8, 0xF4A6C8).spawn("c:is_flower_forest", 6, 1, 3).spawn("c:is_plains", 3, 1, 2);
+                .egg(0xF2E6D8, 0xF4A6C8).spawn("c:is_flower_forest", 6, 1, 3).spawn("c:is_plains", 3, 1, 2).spawn("c:is_floral", 4, 1, 2);
         animal("bullfrog", "Bullfrog", look(Family.QUADRUPED).body(8, 5, 7).leg(3).head(6).tail(0)
                 .with(Extra.LONG_HIND_LEGS).colors(0x4F7A28, 0x2C4A14, 0xE8E2A0).belly(0xE8E2A0).pattern(Pattern.SPOTS))
                 .size(0.6f, 0.5f).stats(12, 3, 0.25).temper(Temper.NEUTRAL).voice(Voice.FROG).breed(v(Items.SLIME_BALL))
@@ -229,7 +229,7 @@ public final class ModMobs {
         flyer("butterfly", "Butterfly", look(Family.FLYING_BUG).body(4, 1, 1).head(2).wing(6)
                 .with(Extra.ANTENNAE).colors(0x222222, 0xF28C28, 0x111111).pattern(Pattern.SPOTS))
                 .size(0.4f, 0.3f).stats(2, 0, 0.2).flySpeed(0.35).voice(Voice.BUG).xp(1)
-                .egg(0xF28C28, 0x222222).spawn("c:is_flower_forest", 12, 2, 4).spawn("c:is_plains", 4, 1, 3);
+                .egg(0xF28C28, 0x222222).spawn("c:is_flower_forest", 12, 2, 4).spawn("c:is_plains", 4, 1, 3).spawn("c:is_floral", 8, 2, 3);
         flyer("moth", "Moth", look(Family.FLYING_BUG).body(5, 2, 2).head(2).wing(6)
                 .with(Extra.ANTENNAE).colors(0x8A7A62, 0xB8A88A, 0x5A4A3A).pattern(Pattern.SPECKLE))
                 .size(0.4f, 0.3f).stats(3, 0, 0.2).flySpeed(0.35).voice(Voice.BUG).xp(1)
@@ -246,7 +246,7 @@ public final class ModMobs {
                 .colors(0xF7C6E0, 0xB0E0FF, 0xFFF6A8).glow())
                 .size(0.35f, 0.7f).stats(6, 0, 0.2).flySpeed(0.45).voice(Voice.SPRITE).xp(2)
                 .abilities(Ability.GLOW_PARTICLES).drop(v(Items.GLOWSTONE_DUST), 0, 2)
-                .egg(0xF7C6E0, 0xFFF6A8).spawn("c:is_flower_forest", 4, 1, 2);
+                .egg(0xF7C6E0, 0xFFF6A8).spawn("c:is_flower_forest", 4, 1, 2).spawn("c:is_floral", 3, 1, 2);
 
         // ---------------------------------------------------------------- swimmers (passive)
         swimmer("goldfish", "Goldfish", look(Family.FISH).body(6, 2, 4).tail(3)

@@ -1,0 +1,8 @@
+{
+  "type": "neospawn:blueprint",
+  "blueprint": "bandit_fortress",
+  "biomes": "#neospawn:has_structure/bandit_fortress",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "spawn_overrides": {}
+}

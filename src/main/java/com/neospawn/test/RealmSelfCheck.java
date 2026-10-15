@@ -90,7 +90,12 @@ public final class RealmSelfCheck {
             // Structures appear naturally: generate a patch of each realm and count their loot chests.
             census(server, Realm.UTOPIA, 24, failures, "tree_of_goodness");
             census(server, Realm.MINING_REALM, 16, failures, "skyclaw_nest");
-            census(server, Realm.DANGER_REALM, 12, failures, "boss_dungeon", "prison_tower");
+            // Hand-written structures: locate each in its dimension, generate it, check its loot.
+            locate(server, net.minecraft.world.level.Level.OVERWORLD, failures, "ruined_crypt", "sunken_vault");
+            locate(server, Realm.MINING_REALM.dimension, failures, "mine_outpost", "excavation_site", "golden_spire");
+            locate(server, Realm.DANGER_REALM.dimension, failures, "bandit_fortress", "boss_arena");
+            locate(server, Realm.CRYSTAL_REALM.dimension, failures, "crystal_sanctum");
+            locate(server, Realm.CHAOS_ISLES.dimension, failures, "sky_shrine");
 
             NeoSpawn.LOGGER.info(failures.isEmpty() ? "REALMCHECK PASSED" : "REALMCHECK FAILED: " + failures);
             server.halt(false);
@@ -119,6 +124,41 @@ public final class RealmSelfCheck {
         for (String structure : structures) {
             int chests = counts.getOrDefault("chests/" + structure, 0);
             check(failures, chests > 0, "no " + structure + " generated in " + realm.id);
+        }
+    }
+
+    /** Finds the nearest of each structure, generates the chunks it covers, and counts its loot containers. */
+    private static void locate(MinecraftServer server, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dim,
+                               List<String> failures, String... names) {
+        ServerLevel level = server.getLevel(dim);
+        var registry = level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.STRUCTURE);
+        for (String name : names) {
+            var holder = registry.getHolder(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.STRUCTURE,
+                    NeoSpawn.id(name)));
+            if (holder.isEmpty()) {
+                failures.add("structure " + name + " is not registered");
+                continue;
+            }
+            var found = level.getChunkSource().getGenerator().findNearestMapStructure(level,
+                    net.minecraft.core.HolderSet.direct(holder.get()), new BlockPos(0, 64, 0), 64, false);
+            if (found == null) {
+                failures.add("could not locate " + name + " in " + dim.location());
+                continue;
+            }
+            BlockPos at = found.getFirst();
+            int containers = 0;
+            for (int cx = (at.getX() >> 4) - 1; cx <= (at.getX() >> 4) + 3; cx++) {
+                for (int cz = (at.getZ() >> 4) - 1; cz <= (at.getZ() >> 4) + 3; cz++) {
+                    for (var be : level.getChunk(cx, cz).getBlockEntities().values()) {
+                        if (be instanceof net.minecraft.world.RandomizableContainer c && c.getLootTable() != null
+                                && c.getLootTable().location().getNamespace().equals(NeoSpawn.MODID)) {
+                            containers++;
+                        }
+                    }
+                }
+            }
+            NeoSpawn.LOGGER.info("REALMCHECK {} found at {} in {} with {} loot containers", name, at, dim.location(), containers);
+            check(failures, containers > 0, name + " generated without loot at " + at);
         }
     }
 

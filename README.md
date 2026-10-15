@@ -14,7 +14,7 @@ from OreSpawn's code or assets.
 Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
 change or remove that line on other machines.
 
-## What's in so far (v0.15)
+## What's in so far (v0.17)
 
 See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
 
@@ -64,6 +64,12 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   T. rex vs Brutosaurus, the Ember Dragon vs the Kraken, and more), and predators hunt prey.
 - **The Royal line**: The King drops a Royal Egg. Hatch it, feed it gold to grow a Drakeling,
   then diamonds for a rideable flying Royal Drake. Feed the Drake a Nether Star and The King wakes up.
+- **Structures**: nine hand-built structures that generate as real structures (findable with /locate and
+  Explorer's Compass), each with tiered loot that leads to the next realm's charm. Mining Realm: Mine Outpost
+  (with a 30-block mine below), Excavation Site (brushable fossil gravel), Golden Spire. Danger Realm: Bandit
+  Fortress, buried Boss Arena with a resident boss. Crystal Sanctum, Sky Shrine, and in the overworld the Ruined
+  Crypt and Sunken Vault. With Lootr installed, every chest is per-player. Blueprints live in
+  `worldgen/build/`; preview with `./gradlew runPhotos -Pstructure=name` or `-Plocate=dimension:name`.
 - **Field Guide**: every player gets a NeoSpawn Field Guide the first time they join (book + egg crafts another).
   Pages live in `assets/neospawn/books/field_guide.json`.
 - **Easter Bunny and dried eggs**: the Easter Bunny lays painted eggs that crack open into dried spawn eggs, gems
