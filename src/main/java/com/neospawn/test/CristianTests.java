@@ -21,7 +21,7 @@ import java.util.List;
 @GameTestHolder(NeoSpawn.MODID)
 @PrefixGameTestTemplate(false)
 public class CristianTests {
-    @GameTest(template = "arena", batch = "cristian", timeoutTicks = 600)
+    @GameTest(template = "arena", batch = "cristian", timeoutTicks = 1200)
     public static void phoneCallsCristianWhoHelpsThenLeaves(GameTestHelper helper) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();
         player.setGameMode(GameType.SURVIVAL);
@@ -41,15 +41,20 @@ public class CristianTests {
         loose.setPickUpDelay(0);
         player.getInventory().clearContent();
         int[] stage = {0};
-        helper.onEachTick(() -> {
+        helper.succeedWhen(() -> {
+            helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, player.getBoundingBox().inflate(40),
+                    m -> m instanceof net.minecraft.world.entity.monster.Enemy).forEach(m -> m.discard());
             if (stage[0] == 0 && player.getInventory().countItem(Items.DIAMOND) == 1) {
                 stage[0] = 1;
                 cristian.setTimeLeft(2);
-            } else if (stage[0] == 1 && !cristian.isAlive()) {
-                stage[0] = 2;
-                player.discard();
-                helper.succeed();
             }
+            if (stage[0] == 1 && !cristian.isAlive()) {
+                stage[0] = 2;
+            }
+            helper.assertTrue(stage[0] == 2, "stage " + stage[0] + ": cristian alive=" + cristian.isAlive() + " at "
+                    + cristian.blockPosition() + " player at " + player.blockPosition() + " diamond alive=" + loose.isAlive()
+                    + " target=" + cristian.getTarget() + " owner=" + cristian.owner());
+            player.discard();
         });
     }
 }

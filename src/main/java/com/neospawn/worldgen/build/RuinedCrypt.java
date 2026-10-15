@@ -157,5 +157,9 @@ public final class RuinedCrypt implements Blueprint {
             b.set(x, y, 5, Blocks.CANDLE.defaultBlockState().setValue(CandleBlock.CANDLES, 4).setValue(CandleBlock.LIT, true));
         }
         b.guardian(12, y, 8, "crypt_beast");
+        // More of the dead stir in the corridor and around the tomb.
+        b.spawner(9, y, 16, "bone_specter");
+        b.spawner(15, y, 20, EntityType.ZOMBIE);
+        b.spawner(13, y, 6, EntityType.SKELETON);
     }
 }

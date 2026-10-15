@@ -213,8 +213,32 @@ public final class Build {
         }
         level.setBlock(pos, Blocks.SPAWNER.defaultBlockState(), 2);
         if (level.getBlockEntity(pos) instanceof SpawnerBlockEntity spawner) {
-            spawner.setEntityId(type, level.getRandom());
+            spawner.getSpawner().load(level.getLevel(), pos, spawnerTag(type));
         }
+    }
+
+    /**
+     * Structure spawners work in lit rooms (vanilla monster spawners only fire in near-darkness, which the
+     * lanterns and candles in our dungeons prevent) and spawn faster, in bigger groups.
+     */
+    static net.minecraft.nbt.CompoundTag spawnerTag(EntityType<?> type) {
+        net.minecraft.nbt.CompoundTag entity = new net.minecraft.nbt.CompoundTag();
+        entity.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(type).toString());
+        var rules = new net.minecraft.world.level.SpawnData.CustomSpawnRules(
+                new net.minecraft.util.InclusiveRange<>(0, 15), new net.minecraft.util.InclusiveRange<>(0, 15));
+        var data = new net.minecraft.world.level.SpawnData(entity, java.util.Optional.of(rules), java.util.Optional.empty());
+        net.minecraft.nbt.CompoundTag tag = new net.minecraft.nbt.CompoundTag();
+        tag.put("SpawnData", net.minecraft.world.level.SpawnData.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, data).getOrThrow());
+        tag.put("SpawnPotentials", net.minecraft.world.level.SpawnData.LIST_CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE,
+                net.minecraft.util.random.SimpleWeightedRandomList.single(data)).getOrThrow());
+        tag.putShort("Delay", (short) 20);
+        tag.putShort("MinSpawnDelay", (short) 140);
+        tag.putShort("MaxSpawnDelay", (short) 380);
+        tag.putShort("SpawnCount", (short) 3);
+        tag.putShort("MaxNearbyEntities", (short) 6);
+        tag.putShort("RequiredPlayerRange", (short) 20);
+        tag.putShort("SpawnRange", (short) 4);
+        return tag;
     }
 
     public void spawner(int x, int y, int z, String neospawnMob) {
@@ -246,7 +270,40 @@ public final class Build {
             mob.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, yaw, 0);
             mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.STRUCTURE, null);
             mob.setPersistenceRequired();
+            if (!ModMobs.byId(mobId).isBoss()) {
+                champion(mob);
+            }
             level.addFreshEntityWithPassengers(mob);
+        }
+    }
+
+    /** A structure's guardian: four times the health, harder hits, heavier armor, and a name to match. */
+    public static void champion(Mob mob) {
+        var attrs = mob.getAttributes();
+        scale(mob, net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH, 4.0);
+        scale(mob, net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, 1.7);
+        add(mob, net.minecraft.world.entity.ai.attributes.Attributes.ARMOR, 8);
+        add(mob, net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS, 4);
+        add(mob, net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE, 0.6);
+        add(mob, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, 0.03);
+        mob.setHealth(mob.getMaxHealth());
+        mob.setCustomName(net.minecraft.network.chat.Component.translatable("entity.neospawn.champion", mob.getType().getDescription())
+                .withStyle(net.minecraft.ChatFormatting.GOLD));
+        mob.setCustomNameVisible(true);
+        mob.getPersistentData().putBoolean("neospawn_champion", true);
+    }
+
+    private static void scale(Mob mob, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attr, double factor) {
+        var inst = mob.getAttribute(attr);
+        if (inst != null) {
+            inst.setBaseValue(inst.getBaseValue() * factor);
+        }
+    }
+
+    private static void add(Mob mob, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attr, double amount) {
+        var inst = mob.getAttribute(attr);
+        if (inst != null) {
+            inst.setBaseValue(inst.getBaseValue() + amount);
         }
     }
 

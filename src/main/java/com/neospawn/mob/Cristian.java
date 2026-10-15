@@ -44,6 +44,7 @@ public class Cristian extends PathfinderMob {
     @Nullable private UUID owner;
     private int timeLeft = HELP_TICKS;
     private final SimpleContainer pockets = new SimpleContainer(27);
+    @Nullable private ItemEntity fetching;
 
     public Cristian(EntityType<? extends Cristian> type, Level level) {
         super(type, level);
@@ -81,7 +82,6 @@ public class Cristian extends PathfinderMob {
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.25, true));
-        goalSelector.addGoal(3, new GatherItemsGoal());
         goalSelector.addGoal(4, new FollowOwnerGoal());
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -99,6 +99,7 @@ public class Cristian extends PathfinderMob {
                 heal(1);
             }
             Player player = owner();
+            fetch(player);
             if (player != null && distanceToSqr(player) < 25 && !pockets.isEmpty()) {
                 handOver(player);
             }
@@ -108,6 +109,35 @@ public class Cristian extends PathfinderMob {
             if (timeLeft <= 0 || (owner != null && player == null && tickCount > 200)) {
                 leave(server, player);
             }
+        }
+    }
+
+    /** Walks to loose items near you (drops, broken blocks, things you threw) and pockets them. */
+    private void fetch(@Nullable Player player) {
+        if (player == null || getTarget() != null) {
+            fetching = null;
+            return;
+        }
+        if ((fetching == null || !fetching.isAlive()) && tickCount % 10 == 0) {
+            fetching = level().getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(10),
+                            e -> e.isAlive() && !e.hasPickUpDelay())
+                    .stream().min((a, b) -> Double.compare(distanceToSqr(a), distanceToSqr(b))).orElse(null);
+        }
+        if (fetching == null || !fetching.isAlive()) {
+            fetching = null;
+            return;
+        }
+        if (distanceToSqr(fetching) < 3.0) {
+            ItemStack left = pockets.addItem(fetching.getItem().copy());
+            if (left.isEmpty()) {
+                fetching.discard();
+            } else {
+                fetching.setItem(left);
+            }
+            playSound(SoundEvents.ITEM_PICKUP, 0.4f, 1.3f);
+            fetching = null;
+        } else if (tickCount % 5 == 0) {
+            getNavigation().moveTo(fetching.getX(), fetching.getY(), fetching.getZ(), 1.2);
         }
     }
 
@@ -176,7 +206,7 @@ public class Cristian extends PathfinderMob {
         @Override
         public boolean canUse() {
             Player p = owner();
-            return p != null && getTarget() == null && distanceToSqr(p) > 16;
+            return p != null && getTarget() == null && fetching == null && distanceToSqr(p) > 16;
         }
 
         @Override
@@ -191,51 +221,6 @@ public class Cristian extends PathfinderMob {
                 getNavigation().stop();
             } else if (tickCount % 10 == 0) {
                 getNavigation().moveTo(p, 1.15);
-            }
-        }
-    }
-
-    /** Picks up loose items within 10 blocks of you (things you dropped, mob drops, broken blocks). */
-    private class GatherItemsGoal extends Goal {
-        @Nullable private ItemEntity goal;
-
-        GatherItemsGoal() {
-            setFlags(EnumSet.of(Flag.MOVE));
-        }
-
-        @Override
-        public boolean canUse() {
-            Player p = owner();
-            if (p == null || getTarget() != null || tickCount % 10 != 0) {
-                return false;
-            }
-            List<ItemEntity> items = level().getEntitiesOfClass(ItemEntity.class, p.getBoundingBox().inflate(10),
-                    e -> e.isAlive() && !e.hasPickUpDelay() && e.getAge() > 40);
-            goal = items.stream().min((a, b) -> Double.compare(distanceToSqr(a), distanceToSqr(b))).orElse(null);
-            return goal != null;
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return goal != null && goal.isAlive() && getTarget() == null;
-        }
-
-        @Override
-        public void tick() {
-            if (goal == null) {
-                return;
-            }
-            if (distanceToSqr(goal) < 2.5) {
-                ItemStack left = pockets.addItem(goal.getItem().copy());
-                if (left.isEmpty()) {
-                    goal.discard();
-                } else {
-                    goal.setItem(left);
-                }
-                playSound(SoundEvents.ITEM_PICKUP, 0.4f, 1.3f);
-                goal = null;
-            } else if (tickCount % 5 == 0) {
-                getNavigation().moveTo(goal, 1.2);
             }
         }
     }

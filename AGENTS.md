@@ -31,7 +31,7 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   (`compat/CuriosCompat` + `tools/gen_compat.py`), Better Combat presets and Lootr (`tools/gen_compat.py`, `Build`).
 
 ## Commands
-- `./gradlew runGameTestServer`: 115 headless GameTests; must all pass before handing work back.
+- `./gradlew runGameTestServer`: 117 headless GameTests; must all pass before handing work back.
 - `./gradlew runData`: regenerate data (lang, recipes, models, tags).
 - `./gradlew runPhotos [-Ponly=id1,id2] [-Panim=fly]` + `python3 tools/contact_sheet.py`: photograph mobs.
   `-Pweapons=true` (armor stands holding weapons), `-Pstructure=name|all` (build a blueprint on a stage),
