@@ -64,6 +64,11 @@ public class RepellentItem extends Item {
                 return stack;
             }
         }
+        for (ItemStack stack : com.neospawn.compat.CuriosCompat.equipped(player)) {
+            if (stack.getItem() instanceof RepellentItem repellent && repellent.repels(mob)) {
+                return stack;
+            }
+        }
         for (ItemStack stack : player.getInventory().offhand) {
             if (stack.getItem() instanceof RepellentItem repellent && repellent.repels(mob)) {
                 return stack;

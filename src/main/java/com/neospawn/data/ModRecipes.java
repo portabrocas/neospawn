@@ -161,6 +161,14 @@ public class ModRecipes extends RecipeProvider {
                 .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get()))
                 .save(out, NeoSpawn.id("spider_mech_kit"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.REDSTONE_SNEAKERS.get())
+                .pattern("I I").pattern("R R")
+                .define('I', Items.IRON_INGOT).define('R', Items.REDSTONE_BLOCK)
+                .unlockedBy("has_redstone", has(Items.REDSTONE)).save(out, NeoSpawn.id("redstone_sneakers"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModItems.BUTTERFLY_WINGS.get())
+                .pattern("EPE").pattern("ENE").pattern("E E")
+                .define('E', ModItems.EMPRESS_SCALE.get()).define('P', Items.PHANTOM_MEMBRANE).define('N', Items.NETHER_STAR)
+                .unlockedBy("has_empress_scale", has(ModItems.EMPRESS_SCALE.get())).save(out, NeoSpawn.id("butterfly_wings"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.FIELD_GUIDE.get())
                 .requires(Items.BOOK).requires(Items.EGG)
                 .unlockedBy("has_book", has(Items.BOOK)).save(out, NeoSpawn.id("field_guide"));

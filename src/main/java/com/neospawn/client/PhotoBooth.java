@@ -299,7 +299,23 @@ public final class PhotoBooth {
                 for (Entity old : level.getEntitiesOfClass(Entity.class, new AABB(STAGE).inflate(40), e -> !(e instanceof ServerPlayer))) {
                     old.discard();
                 }
-                for (int i = 0; i < PER_ROW && row * PER_ROW + i < weaponQueue.size(); i++) {
+                if (Boolean.getBoolean("neospawn.photos.gear")) {
+                    // Gear check: emerald armor + Redstone Sneakers on one stand, Butterfly Wings on the next.
+                    var a = new net.minecraft.world.entity.decoration.ArmorStand(level, STAGE.getX() - 0.5, STAGE.getY(), STAGE.getZ() + 0.5);
+                    a.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, new net.minecraft.world.item.ItemStack(com.neospawn.registry.ModItems.EMERALD_ARMOR.helmet().get()));
+                    a.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, new net.minecraft.world.item.ItemStack(com.neospawn.registry.ModItems.EMERALD_ARMOR.chestplate().get()));
+                    a.setItemSlot(net.minecraft.world.entity.EquipmentSlot.LEGS, new net.minecraft.world.item.ItemStack(com.neospawn.registry.ModItems.EMERALD_ARMOR.leggings().get()));
+                    a.setItemSlot(net.minecraft.world.entity.EquipmentSlot.FEET, new net.minecraft.world.item.ItemStack(com.neospawn.registry.ModItems.REDSTONE_SNEAKERS.get()));
+                    a.setShowArms(true);
+                    level.addFreshEntity(a);
+                    var w = new net.minecraft.world.entity.decoration.ArmorStand(level, STAGE.getX() + 2.5, STAGE.getY(), STAGE.getZ() + 0.5);
+                    w.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, new net.minecraft.world.item.ItemStack(com.neospawn.registry.ModItems.BUTTERFLY_WINGS.get()));
+                    w.setYRot(180);
+                    w.setYBodyRot(180);
+                    level.addFreshEntity(w);
+                    weaponQueue = weaponQueue.subList(0, 1);
+                }
+                for (int i = 0; !Boolean.getBoolean("neospawn.photos.gear") && i < PER_ROW && row * PER_ROW + i < weaponQueue.size(); i++) {
                     var stand = new net.minecraft.world.entity.decoration.ArmorStand(level, STAGE.getX() + 0.5 + i * 1.6 - 4, STAGE.getY(), STAGE.getZ() + 0.5);
                     stand.setYRot(0);
                     stand.setYBodyRot(0);

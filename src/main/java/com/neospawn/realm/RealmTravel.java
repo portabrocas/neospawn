@@ -78,7 +78,8 @@ public final class RealmTravel {
             player.displayClientMessage(Component.translatable("message.neospawn.realm.leave_first"), true);
             return false;
         }
-        if (!player.isCreative() && !player.getInventory().hasAnyMatching(stack -> stack.is(realm.charm.get()))) {
+        if (!player.isCreative() && !player.getInventory().hasAnyMatching(stack -> stack.is(realm.charm.get()))
+                && !com.neospawn.compat.CuriosCompat.wearing(player, stack -> stack.is(realm.charm.get()))) {
             player.displayClientMessage(Component.translatable("message.neospawn.realm.need_charm",
                     realm.charm.get().getDescription(), realm.displayName), true);
             player.playNotifySound(SoundEvents.SILVERFISH_AMBIENT, SoundSource.NEUTRAL, 1.0f, 1.5f);

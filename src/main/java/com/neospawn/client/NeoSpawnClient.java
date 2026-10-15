@@ -83,8 +83,26 @@ public final class NeoSpawnClient {
         });
     }
 
+    /** Butterfly Wings render on both player skin models. */
+    @SubscribeEvent
+    @SuppressWarnings("unchecked")
+    static void addLayers(EntityRenderersEvent.AddLayers event) {
+        for (var skin : event.getSkins()) {
+            var renderer = event.getSkin(skin);
+            if (renderer instanceof net.minecraft.client.renderer.entity.player.PlayerRenderer player) {
+                player.addLayer(new com.neospawn.client.renderer.WingsLayer<>(player,
+                        event.getEntityModels().bakeLayer(com.neospawn.client.renderer.WingsLayer.LAYER)));
+            }
+        }
+        if (event.getRenderer(EntityType.ARMOR_STAND) instanceof net.minecraft.client.renderer.entity.ArmorStandRenderer stand) {
+            stand.addLayer(new com.neospawn.client.renderer.WingsLayer<>(stand,
+                    event.getEntityModels().bakeLayer(com.neospawn.client.renderer.WingsLayer.LAYER)));
+        }
+    }
+
     @SubscribeEvent
     static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(com.neospawn.client.renderer.WingsLayer.LAYER, com.neospawn.client.renderer.WingsLayer::createLayer);
         for (MobSpec spec : ModMobs.ALL) {
             if (!spec.geo) {
                 event.registerLayerDefinition(NeoMobRenderer.layer(spec), () -> Shapes.get(spec).toLayer());

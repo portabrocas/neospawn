@@ -123,6 +123,8 @@ public class ModLanguage extends LanguageProvider {
         add("message.neospawn.zoo_cage.too_strong", "It's too strong to catch. Weaken it below half health first.");
         add("item.neospawn.dried_egg.mystery", "Mystery Dried Egg");
         add("entity.neospawn.cristian", "Cristian");
+        add("item.neospawn.redstone_sneakers.tooltip", "Run faster. Every step jolts what you step on: TNT lights, lamps flash, doors open, dispensers fire");
+        add("item.neospawn.butterfly_wings.tooltip", "Wear them (chest or Curios back slot) to fly freely: double-jump to take off");
         add("item.neospawn.cristian_phone.tooltip", "A rare find. Call Cristian: he'll follow you, fight for you and pick up your stuff for 15 minutes");
         add("message.neospawn.cristian.arrives", "Cristian: \"On my way! What do you need?\"");
         add("message.neospawn.cristian.already_here", "Cristian's already helping you (%s min left)");

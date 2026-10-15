@@ -43,6 +43,10 @@ public final class ModArmor {
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> EXPERIENCE = register("experience",
             3, 6, 8, 3, 40, 1.0f, 0.0f, () -> Ingredient.of(Items.EXPERIENCE_BOTTLE));
 
+    /** Redstone Sneakers: iron-strong boots with a redstone kick. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> REDSTONE = register("redstone",
+            2, 5, 6, 2, 15, 0.0f, 0.0f, () -> Ingredient.of(Items.REDSTONE));
+
     private static DeferredHolder<ArmorMaterial, ArmorMaterial> register(String name, int boots, int legs, int chest, int helmet,
                                                                           int enchantability, float toughness, float knockbackResistance,
                                                                           Supplier<Ingredient> repair) {

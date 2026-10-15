@@ -99,7 +99,7 @@ public class Cristian extends PathfinderMob {
                 heal(1);
             }
             Player player = owner();
-            if (player != null && distanceToSqr(player) < 9 && !pockets.isEmpty()) {
+            if (player != null && distanceToSqr(player) < 25 && !pockets.isEmpty()) {
                 handOver(player);
             }
             if (--timeLeft == 1200 && player != null) {

@@ -372,10 +372,13 @@ def armor_layer(layer, main, trim, pattern):
     """Worn texture in the 64x32 humanoid layout: each box face shaded and trimmed on its own."""
     img = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
 
-    def face(x0, y0, w, h, kind=""):
+    def face(x0, y0, w, h, kind="", keep=None):
+        """keep(lx, ly) decides which texels the armor covers; the rest stay clear so the body shows through."""
         for x in range(x0, x0 + w):
             for y in range(y0, y0 + h):
                 lx, ly = x - x0, y - y0
+                if keep is not None and not keep(lx, ly):
+                    continue
                 k = 2
                 if pattern == "scales" and (lx + (ly // 2) * 2) % 4 == 0 and ly % 2 == 1:
                     k = 1
@@ -398,22 +401,35 @@ def armor_layer(layer, main, trim, pattern):
                     c = ramp(trim, 3)
                 img.putpixel((x, y), c + (255,))
 
-    def box(u, v, w, h, d, kinds):
-        face(u + d, v, w, d)                 # top
-        face(u + d + w, v, w, d)             # bottom
-        face(u, v + d, d, h, kinds.get("side", ""))
-        face(u + d, v + d, w, h, kinds.get("front", ""))
-        face(u + d + w, v + d, d, h, kinds.get("side", ""))
-        face(u + 2 * d + w, v + d, w, h, kinds.get("back", ""))
+    def box(u, v, w, h, d, kinds, cover=None):
+        """cover(face_name) returns a keep(lx, ly) mask for that face, or None to cover it all."""
+        c = cover or (lambda f: None)
+        face(u + d, v, w, d, keep=c("top"))
+        face(u + d + w, v, w, d, keep=c("bottom"))
+        face(u, v + d, d, h, kinds.get("side", ""), keep=c("side"))
+        face(u + d, v + d, w, h, kinds.get("front", ""), keep=c("front"))
+        face(u + d + w, v + d, d, h, kinds.get("side", ""), keep=c("side"))
+        face(u + 2 * d + w, v + d, w, h, kinds.get("back", ""), keep=c("back"))
 
+    none = lambda lx, ly: False
     if layer == 1:
-        box(0, 0, 8, 8, 8, {"front": "visor", "side": "visor", "back": "visor"})
-        box(16, 16, 8, 12, 4, {"front": "chest"})
-        box(40, 16, 4, 12, 4, {"front": "cuff", "side": "cuff", "back": "cuff"})
-        box(0, 16, 4, 12, 4, {"front": "sole", "side": "sole", "back": "sole"})
+        # Helmet: crown, brow band and cheek guards; the face stays visible.
+        box(0, 0, 8, 8, 8, {"front": "visor", "side": "visor", "back": "visor"}, lambda f: {
+            "front": lambda lx, ly: ly <= 1 or (lx in (0, 7) and ly <= 5),
+            "side": lambda lx, ly: ly <= 5 or lx >= 5,
+            "back": lambda lx, ly: ly <= 6,
+            "bottom": none}.get(f))
+        # Chestplate covers the torso; on the arms only the shoulders and upper arm.
+        box(16, 16, 8, 12, 4, {"front": "chest"}, lambda f: {"bottom": none}.get(f))
+        box(40, 16, 4, 12, 4, {}, lambda f: none if f == "bottom" else (lambda lx, ly: ly <= 5))
+        # Boots: just the feet.
+        box(0, 16, 4, 12, 4, {"front": "sole", "side": "sole", "back": "sole"},
+            lambda f: none if f == "top" else (None if f == "bottom" else (lambda lx, ly: ly >= 8)))
     else:
-        box(16, 16, 8, 12, 4, {"front": "belt", "side": "belt", "back": "belt"})
-        box(0, 16, 4, 12, 4, {})
+        # Leggings: a belt around the waist and the legs down to the ankle.
+        box(16, 16, 8, 12, 4, {"front": "belt", "side": "belt", "back": "belt"},
+            lambda f: none if f in ("top", "bottom") else (lambda lx, ly: ly >= 8))
+        box(0, 16, 4, 12, 4, {}, lambda f: none if f in ("top", "bottom") else (lambda lx, ly: ly <= 9))
     return img
 
 
@@ -498,5 +514,33 @@ for name in ("ruby_ore", "deepslate_ruby_ore", "tanzanite_ore", "deepslate_tanza
     path = os.path.join(TEX, "block", name + ".png")
     if os.path.exists(path):
         os.remove(path)
+
+# Redstone Sneakers: red high-tops with white soles and laces.
+RAMPS["sneaker_red"] = [(60, 6, 6), (130, 18, 18), (190, 34, 30), (225, 70, 60), (255, 150, 140)]
+RAMPS["sneaker_white"] = [(90, 90, 96), (180, 180, 186), (226, 226, 230), (244, 244, 246), (255, 255, 255)]
+sn = Sprite()
+for side in (0, 1):
+    ox = 1 if side == 0 else 9
+    sn.part(poly_mask([(ox, 6), (ox + 3, 6), (ox + 3, 11), (ox + 6, 11.5), (ox + 6, 13), (ox, 13)]), "sneaker_red")
+    sn.part(poly_mask([(ox - 0.2, 12.6), (ox + 6.4, 12.6), (ox + 6.4, 14.2), (ox - 0.2, 14.2)]), "sneaker_white")
+    for y in (7, 9):
+        sn.put(ox + 1, y, ramp("sneaker_white", 4))
+        sn.put(ox + 2, y, ramp("sneaker_white", 3))
+    sn.put(ox + 1, 11, ramp("redstone_glow" if "redstone_glow" in RAMPS else "sneaker_red", 4))
+save(sn.image(), "item/redstone_sneakers.png")
+worn = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+for u, v in ((0, 16),):
+    for fx0, fw in ((u, 4), (u + 4, 4), (u + 8, 4), (u + 12, 4)):
+        for x in range(fx0, fx0 + fw):
+            for y in range(v + 4 + 8, v + 16):
+                ly = y - (v + 4)
+                c = ramp("sneaker_white", 2 if ly == 11 else 3) if ly >= 11 else ramp("sneaker_red", 2 if (x - fx0) % 3 else 1)
+                if ly == 9 and fx0 == u + 4 and 1 <= x - fx0 <= 2:
+                    c = ramp("sneaker_white", 4)
+                worn.putpixel((x, y), c + (255,))
+    for x in range(u + 8, u + 12):
+        for y in range(v, v + 4):
+            worn.putpixel((x, y), ramp("sneaker_white", 1) + (255,))
+save(worn, "models/armor/redstone_layer_1.png")
 
 print("item art written")

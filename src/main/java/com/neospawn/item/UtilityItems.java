@@ -147,6 +147,11 @@ public final class UtilityItems {
             if (level.isClientSide || !(entity instanceof Player player) || player.isSpectator()) {
                 return;
             }
+            pull(level, player);
+        }
+
+        /** Draws nearby experience orbs to the player. Also run for a siphon worn in a Curios slot. */
+        public static void pull(Level level, Player player) {
             for (ExperienceOrb orb : level.getEntitiesOfClass(ExperienceOrb.class, player.getBoundingBox().inflate(12))) {
                 Vec3 pull = player.position().add(0, 1, 0).subtract(orb.position());
                 orb.setDeltaMovement(pull.normalize().scale(0.4));

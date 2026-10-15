@@ -71,6 +71,11 @@ public final class ModItems {
             () -> new FieldGuideItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<com.neospawn.item.CristianPhone> CRISTIAN_PHONE = ITEMS.register("cristian_phone",
             () -> new com.neospawn.item.CristianPhone(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final DeferredItem<com.neospawn.item.RedstoneSneakers> REDSTONE_SNEAKERS = ITEMS.register("redstone_sneakers",
+            () -> new com.neospawn.item.RedstoneSneakers(ModArmor.REDSTONE, new Item.Properties()
+                    .durability(net.minecraft.world.item.ArmorItem.Type.BOOTS.getDurability(18))));
+    public static final DeferredItem<com.neospawn.item.ButterflyWings> BUTTERFLY_WINGS = ITEMS.register("butterfly_wings",
+            () -> new com.neospawn.item.ButterflyWings(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
     public static final DeferredItem<TunnelChargeItem> TUNNEL_CHARGE = ITEMS.register("tunnel_charge",
             () -> new TunnelChargeItem(new Item.Properties().stacksTo(16)));
 
