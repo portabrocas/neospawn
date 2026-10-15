@@ -121,6 +121,22 @@ public class ModLanguage extends LanguageProvider {
         add("message.neospawn.zoo_cage.boss", "Bosses can't be caged.");
         add("message.neospawn.zoo_cage.not_yours", "That's someone else's pet.");
         add("message.neospawn.zoo_cage.too_strong", "It's too strong to catch. Weaken it below half health first.");
+        add("item.neospawn.dried_egg.mystery", "Mystery Dried Egg");
+        add("item.neospawn.dried_egg.named", "Dried %s Egg");
+        add("item.neospawn.dried_egg.tooltip", "Just add water: drop it in water or use it on water to hatch it");
+        add("item.neospawn.painted_egg.tooltip", "Laid by the Easter Bunny. Use it to crack it open for a surprise");
+        add("item.neospawn.field_guide.tooltip", "Everything you need to know about NeoSpawn. Right-click to read");
+        // EMI info pages.
+        add("emi.info.neospawn.easter_bunny", "The Easter Bunny wanders flower forests and plains with a basket of eggs, laying a painted egg every few minutes. Breed them with carrots.\n\nCrack a painted egg open for a surprise: usually a dried spawn egg, sometimes gems, emeralds or experience.");
+        add("emi.info.neospawn.dried_egg", "Dried spawn eggs come from Fossil Ore, sifting, and the Easter Bunny's painted eggs. Just add water: drop one in water or use it on water and the creature inside hatches. A Mystery Dried Egg hatches a random creature.");
+        add("emi.info.neospawn.charms", "Charms open the realms. Carry a realm's charm and right-click that realm's ant to travel; right-click it again there to come home. Charms are never used up. Bosses in the Danger Realm can drop the Chaos Charm.");
+        add("emi.info.neospawn.altar", "Place an offering on the Summoning Altar to call a boss. Right-click the altar with an empty hand to see every offering.");
+        add("emi.info.neospawn.zoo_cage", "Right-click a mob to catch it, then use the cage on the ground to let it out, name and all. Hostile mobs must be below half health. Bosses can't be caged.");
+        add("emi.info.neospawn.duplicator", "The Duplicator Tree's glowing core copies the block above it every so often. Grow one from a Duplicator Sapling.");
+        add("emi.info.neospawn.royal_egg", "The King drops a Royal Egg. Hatch it, feed the hatchling 8 gold ingots to grow a Drakeling, then 8 diamonds for a rideable Royal Drake. A Nether Star wakes The King.");
+        add("emi.info.neospawn.gorgantua_egg", "Gorgantua Egg Fragments turn up in boss dungeons, sunken vaults and sifting. Combine 9 into a Dried Gorgantua Egg, rehydrate it with a water bucket in the crafting grid, then use the egg on the ground to hatch Gorgantua. It will not be friendly.");
+        add("emi.info.neospawn.repellents", "Keep a repellent anywhere in your inventory and its mobs won't target you. It wears down as it turns them away.");
+        add("emi.info.neospawn.ores", "NeoSpawn ores generate underground in every overworld biome: Ruby and Tanzanite deep down, Titanium and glowing Uranium near the bottom of the world, Salt and Fossil Ore higher up.");
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();
@@ -131,7 +147,8 @@ public class ModLanguage extends LanguageProvider {
             if (item instanceof BlockItem || item instanceof SpawnEggItem) {
                 continue;
             }
-            add(item, name(BuiltInRegistries.ITEM.getKey(item).getPath()));
+            add(item, item == ModItems.FIELD_GUIDE.get() ? "NeoSpawn Field Guide"
+                    : name(BuiltInRegistries.ITEM.getKey(item).getPath()));
         }
 
         for (MobSpec spec : ModMobs.ALL) {

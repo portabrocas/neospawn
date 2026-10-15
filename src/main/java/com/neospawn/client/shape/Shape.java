@@ -16,7 +16,7 @@ import java.util.List;
  * so the same Shape builds both the model layer and its procedurally painted texture.
  */
 public final class Shape {
-    public enum Role { BASE, SECOND, ACCENT, EYE, DARK, MEMBRANE, TOOTH }
+    public enum Role { BASE, SECOND, ACCENT, EYE, DARK, MEMBRANE, TOOTH, WICKER, CANDY }
 
     public enum Anim { NONE, HEAD, LEG, ARM, SCUTTLE, WING, WING_BACK, TAIL, SWIM, SWIM_X, SEGMENT, JAW, ANTENNA, SPIN, TENTACLE, SWAY, BOB }
 

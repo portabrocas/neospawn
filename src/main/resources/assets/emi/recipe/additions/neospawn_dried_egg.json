@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:dried_egg",
+    "item:neospawn:fossil_ore",
+    "item:neospawn:sifter"
+  ],
+  "text": "emi.info.neospawn.dried_egg"
+}

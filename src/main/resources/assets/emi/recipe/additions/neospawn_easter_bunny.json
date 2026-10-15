@@ -1,0 +1,8 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:egg_bunny_spawn_egg",
+    "item:neospawn:painted_egg"
+  ],
+  "text": "emi.info.neospawn.easter_bunny"
+}

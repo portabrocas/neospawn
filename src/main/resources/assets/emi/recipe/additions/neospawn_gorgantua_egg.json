@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:gorgantua_egg_fragment",
+    "item:neospawn:dried_gorgantua_egg",
+    "item:neospawn:gorgantua_egg"
+  ],
+  "text": "emi.info.neospawn.gorgantua_egg"
+}

@@ -161,6 +161,9 @@ public class ModRecipes extends RecipeProvider {
                 .unlockedBy("has_titanium", has(ModItems.TITANIUM_INGOT.get()))
                 .save(out, NeoSpawn.id("spider_mech_kit"));
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.FIELD_GUIDE.get())
+                .requires(Items.BOOK).requires(Items.EGG)
+                .unlockedBy("has_book", has(Items.BOOK)).save(out, NeoSpawn.id("field_guide"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DRIED_GORGANTUA_EGG.get())
                 .requires(ModItems.GORGANTUA_EGG_FRAGMENT.get(), 9)
                 .unlockedBy("has_fragment", has(ModItems.GORGANTUA_EGG_FRAGMENT.get())).save(out, NeoSpawn.id("dried_gorgantua_egg"));

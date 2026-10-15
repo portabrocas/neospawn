@@ -205,6 +205,16 @@ public final class MobSpec {
 
     public MobSpec mechanical() { this.mechanical = true; return this; }
 
+    /** Only spawns in the dark below y=50 out of sight of the sky (caves). */
+    public boolean underground;
+
+    public MobSpec underground() { this.underground = true; return this; }
+
+    /** Lays a Painted Egg every few minutes (the Easter Bunny). */
+    public boolean laysEggs;
+
+    public MobSpec laysEggs() { this.laysEggs = true; return this; }
+
     /** Uses a hand-made GeckoLib model (assets/neospawn/geo/entity/<id>.geo.json) instead of a generated one. */
     public boolean geo;
 

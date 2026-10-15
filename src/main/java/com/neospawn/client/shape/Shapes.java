@@ -220,8 +220,10 @@ public final class Shapes {
                         .box(Role.SECOND, -1, -2.5f, -0.5f, 2, 2.5f, 1);
             }
             if (l.has(Extra.LONG_EARS)) {
+                // Furry back, pink inside.
                 head.child("ear", side * (hs / 2 - 1), -hs / 2, front + hs * 0.65f).rot(-0.25f, 0, side * 0.2f)
-                        .box(Role.SECOND, -1, -5, -0.5f, 2, 5, 1);
+                        .box(Role.BASE, -1, -5, -0.5f, 2, 5, 1)
+                        .box(Role.SECOND, -0.6f, -4.5f, -0.75f, 1.2f, 4, 0.25f);
             }
         }
         horns(head, hs, -hs / 2, front + hs * 0.55f, l);
@@ -268,6 +270,16 @@ public final class Shapes {
             tailChain(body, 0, -H / 2 + tw / 2 + 0.5f, L / 2, l.tail, tw, -0.5f);
             if (l.has(Extra.PLATES) && l.has(Extra.SPIKES)) {
                 body.box(Role.ACCENT, -3, -H / 2, L / 2 + l.tail * 0.3f, 6, 1, 1);
+            }
+        }
+        if (l.has(Extra.BASKET)) {
+            // A woven basket on its back, heaped with painted eggs.
+            float bw = W - 1, bl = Math.max(3, L * 0.5f);
+            body.box(Role.WICKER, -bw / 2, -H / 2 - 3, -bl / 2 + 0.5f, bw, 3, bl);
+            body.box(Role.WICKER, -0.5f, -H / 2 - 6, -0.5f, 1, 3, 1);
+            float[][] eggs = {{-1.6f, -1.2f}, {0.6f, -1.0f}, {-0.6f, 0.9f}, {1.4f, 1.2f}};
+            for (float[] e : eggs) {
+                body.box(Role.CANDY, e[0] - 0.75f, -H / 2 - 4.25f, e[1] - 0.75f, 1.5f, 2, 1.5f);
             }
         }
         if (l.wing > 0) {

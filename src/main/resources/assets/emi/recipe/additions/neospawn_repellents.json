@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:creeper_repellent",
+    "item:neospawn:kraken_repellent",
+    "item:neospawn:bug_repellent"
+  ],
+  "text": "emi.info.neospawn.repellents"
+}

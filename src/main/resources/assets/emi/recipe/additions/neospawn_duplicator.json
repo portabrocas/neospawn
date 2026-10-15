@@ -1,0 +1,8 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:duplicator_sapling",
+    "item:neospawn:duplicator_core"
+  ],
+  "text": "emi.info.neospawn.duplicator"
+}

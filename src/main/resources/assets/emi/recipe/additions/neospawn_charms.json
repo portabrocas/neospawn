@@ -1,0 +1,12 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:verdant_charm",
+    "item:neospawn:prospectors_charm",
+    "item:neospawn:crystal_charm",
+    "item:neospawn:sovereign_charm",
+    "item:neospawn:paragon_charm",
+    "item:neospawn:chaos_charm"
+  ],
+  "text": "emi.info.neospawn.charms"
+}

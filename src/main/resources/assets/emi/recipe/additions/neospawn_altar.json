@@ -1,0 +1,7 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:summoning_altar"
+  ],
+  "text": "emi.info.neospawn.altar"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:royal_egg"
+  ],
+  "text": "emi.info.neospawn.royal_egg"
+}

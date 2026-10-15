@@ -9,7 +9,15 @@ import com.neospawn.mob.MobSpec.Kind;
 import com.neospawn.mob.MobSpec.Temper;
 import com.neospawn.mob.MobSpec.Voice;
 import com.neospawn.registry.ModItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.BossEvent;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.Difficulty;
@@ -93,10 +101,12 @@ public final class ModMobs {
                 .size(0.6f, 1.0f).stats(10, 0, 0.25).voice(Voice.BIRD).breed(v(Items.WHEAT_SEEDS))
                 .drop(v(Items.FEATHER), 2, 4).drop(v(Items.CHICKEN), 1, 1)
                 .egg(0x1E4FC4, 0xE0C341).spawn("c:is_jungle", 6, 1, 3).spawn("c:is_forest", 2, 1, 2);
-        animal("egg_bunny", "Egg Bunny", look(Family.QUADRUPED).body(6, 5, 5).leg(3).head(4).tail(2)
-                .with(Extra.LONG_EARS).colors(0xF2E6D8, 0xF4A6C8, 0x8FD3F4).pattern(Pattern.SPOTS))
-                .size(0.5f, 0.6f).stats(8, 0, 0.3).breed(v(Items.CARROT))
-                .drop(v(Items.EGG), 1, 3).drop(v(Items.RABBIT_HIDE), 0, 1)
+        // The Easter Bunny: carries a basket and lays painted eggs that crack open into dried spawn eggs.
+        animal("egg_bunny", "Easter Bunny", look(Family.QUADRUPED).body(7, 6, 6).leg(3).head(5).tail(2)
+                .with(Extra.LONG_EARS, Extra.LONG_HIND_LEGS, Extra.BASKET).colors(0xF7F0E6, 0xF6B5CF, 0x8FD3F4)
+                .belly(0xFFFFFF).eye(0x3A2440))
+                .size(0.55f, 0.7f).stats(10, 0, 0.32).breed(v(Items.CARROT)).laysEggs()
+                .drop(ModItems.PAINTED_EGG, 1, 2).drop(v(Items.RABBIT_HIDE), 0, 1)
                 .egg(0xF2E6D8, 0xF4A6C8).spawn("c:is_flower_forest", 6, 1, 3).spawn("c:is_plains", 3, 1, 2);
         animal("bullfrog", "Bullfrog", look(Family.QUADRUPED).body(8, 5, 7).leg(3).head(6).tail(0)
                 .with(Extra.LONG_HIND_LEGS).colors(0x4F7A28, 0x2C4A14, 0xE8E2A0).belly(0xE8E2A0).pattern(Pattern.SPOTS))
@@ -263,12 +273,12 @@ public final class ModMobs {
                 .with(Extra.EARS).colors(0x6A6A6A, 0x3A3A3A, 0xF2A6A6).scale(0.9f))
                 .size(0.5f, 0.35f).stats(8, 2, 0.32).abilities(Ability.PACK).voice(Voice.CRITTER)
                 .drop(v(Items.ROTTEN_FLESH), 0, 1)
-                .egg(0x6A6A6A, 0xF2A6A6).spawn("c:is_overworld", 30, 2, 5);
+                .egg(0x6A6A6A, 0xF2A6A6).spawn("c:is_overworld", 12, 1, 3);
         monster("desert_scorpion", "Desert Scorpion", look(Family.INSECT).body(10, 4, 8).leg(7).legPairs(4)
                 .with(Extra.PINCERS, Extra.STINGER).colors(0x8B5A2B, 0x5A3A1A, 0x2A1A0A))
                 .size(1.0f, 0.6f).stats(18, 4, 0.3).abilities(Ability.POISON).dayActive().voice(Voice.SPIDER)
                 .drop(v(Items.SPIDER_EYE), 0, 1).drop(v(Items.STRING), 0, 2)
-                .egg(0x8B5A2B, 0x2A1A0A).spawn("c:is_desert", 30, 1, 2).spawn("c:is_badlands", 20, 1, 2);
+                .egg(0x8B5A2B, 0x2A1A0A).spawn("c:is_desert", 20, 1, 2).spawn("c:is_badlands", 20, 1, 2);
         monster("termite", "Termite", look(Family.INSECT).body(6, 3, 3).leg(4)
                 .with(Extra.MANDIBLES, Extra.ANTENNAE).colors(0xE8D5B0, 0x8B5A2B, 0x5A3A1A).pattern(Pattern.BANDS))
                 .size(0.5f, 0.3f).stats(6, 2, 0.3).temper(Temper.NEUTRAL).abilities(Ability.PACK).voice(Voice.BUG)
@@ -306,12 +316,12 @@ public final class ModMobs {
                 .egg(0x4A3A2A, 0xE8E8C8).spawn("c:is_plains", 10, 1, 1).spawn("c:is_forest", 10, 1, 1);
         monster("night_crawler", "Night Crawler", look(Family.SERPENT).body(32, 5, 5).head(6).segments(8)
                 .with(Extra.SPIKES).colors(0x2A1E3A, 0x140E1E, 0x9A4AE8).eye(0xE84AE8).glow())
-                .size(0.8f, 0.5f).stats(32, 6, 0.25).abilities(Ability.WITHER).voice(Voice.BUG).xp(10)
+                .size(0.8f, 0.5f).stats(32, 6, 0.25).abilities(Ability.WITHER).underground().voice(Voice.BUG).xp(10)
                 .drop(v(Items.STRING), 1, 2).drop(v(Items.ENDER_PEARL), 0, 1, 0.2f)
                 .egg(0x2A1E3A, 0x9A4AE8).spawn("c:is_spooky", 15, 1, 1).spawn("c:is_cave", 10, 1, 1).spawn("c:is_overworld", 5, 1, 1);
         monster("cave_angler", "Cave Angler", look(Family.INSECT).body(10, 6, 8).leg(10).legPairs(4)
                 .with(Extra.LURE, Extra.MANDIBLES).colors(0x3A3A4A, 0x1A1A2A, 0x7AF2E8).glow())
-                .size(1.0f, 0.8f).stats(24, 5, 0.22).abilities(Ability.PULL).voice(Voice.SPIDER).xp(8)
+                .size(1.0f, 0.8f).stats(24, 5, 0.22).abilities(Ability.PULL).underground().voice(Voice.SPIDER).xp(8)
                 .drop(v(Items.STRING), 1, 3)
                 .egg(0x3A3A4A, 0x7AF2E8).spawn("c:is_cave", 20, 1, 1).spawn("c:is_overworld", 10, 1, 1);
         monster("shrubling", "Shrubling", look(Family.PLANT).body(10, 10, 10).leg(4)
@@ -321,7 +331,7 @@ public final class ModMobs {
                 .egg(0x3A7A2A, 0xE8C83A).spawn("c:is_forest", 12, 1, 2).spawn("c:is_jungle", 10, 1, 2);
         monster("crypt_beast", "Crypt Beast", look(Family.HUMANOID).body(0, 12, 14).leg(10).head(7)
                 .with(Extra.HORNS).colors(0x4A4A3A, 0x2A2A1E, 0xC8C8A8).scale(1.3f))
-                .size(1.2f, 3.0f).stats(50, 10, 0.23).armor(6).voice(Voice.BEAST).xp(15)
+                .size(1.2f, 3.0f).stats(50, 10, 0.23).armor(6).underground().voice(Voice.BEAST).xp(15)
                 .drop(v(Items.BONE), 2, 4).drop(v(Items.IRON_INGOT), 0, 2)
                 .egg(0x4A4A3A, 0xC8C8A8).spawn("c:is_cave", 8, 1, 1).spawn("c:is_overworld", 4, 1, 1);
         monster("void_knight", "Void Knight", look(Family.HUMANOID).body(0, 8, 14).leg(14).head(7)
@@ -338,12 +348,12 @@ public final class ModMobs {
                 .colors(0xE8E8D8, 0x9A9A8A, 0x5AF2E8).eye(0x5AF2E8).translucent().glow())
                 .size(0.6f, 1.99f).stats(22, 5, 0.27).abilities(Ability.WEAKNESS, Ability.SUN_BURN).voice(Voice.UNDEAD)
                 .drop(v(Items.BONE), 1, 3)
-                .egg(0xE8E8D8, 0x5AF2E8).spawn("c:is_overworld", 20, 1, 2);
+                .egg(0xE8E8D8, 0x5AF2E8).spawn("c:is_overworld", 12, 1, 2);
         monster("kaboomba", "Kaboomba", look(Family.SPHERE).body(0, 10, 10).leg(3)
                 .with(Extra.FUSE).colors(0x1A1A1A, 0x3A3A3A, 0xF2C83A).eye(0xFFFFFF))
                 .size(0.7f, 0.9f).stats(12, 1, 0.28).abilities(Ability.EXPLODE).voice(Voice.CREEPER)
                 .drop(v(Items.GUNPOWDER), 1, 3)
-                .egg(0x1A1A1A, 0xF2C83A).spawn("c:is_overworld", 15, 1, 1);
+                .egg(0x1A1A1A, 0xF2C83A).spawn("c:is_overworld", 10, 1, 1);
         monster("oddity", "Oddity", look(Family.SPHERE).body(0, 10, 10).leg(4)
                 .with(Extra.ANTENNAE).colors(0xE84AE8, 0x4AE84A, 0x4A4AE8).eye(0xFFFF00).pattern(Pattern.SPOTS).glow())
                 .size(0.8f, 0.9f).stats(30, 4, 0.3).temper(Temper.NEUTRAL)
@@ -385,7 +395,7 @@ public final class ModMobs {
                 .with(Extra.HOOD).colors(0xE8F0F8, 0xB8C8D8, 0x8AE8F8).eye(0x1A1A3A).translucent().glow())
                 .size(0.6f, 1.9f).stats(20, 5, 0.3).flySpeed(0.5).abilities(Ability.WEAKNESS).voice(Voice.GHOST)
                 .drop(v(Items.PHANTOM_MEMBRANE), 0, 1).drop(v(Items.GLOWSTONE_DUST), 0, 2)
-                .egg(0xE8F0F8, 0x8AE8F8).spawn("c:is_overworld", 10, 1, 1);
+                .egg(0xE8F0F8, 0x8AE8F8).spawn("c:is_overworld", 6, 1, 1);
         hostileFlyer("gyre", "Gyre", look(Family.SPHERE).body(0, 8, 8).leg(0)
                 .with(Extra.BLADES).colors(0x8A8A9A, 0x5A5A6A, 0xE8E8F8).eye(0xFF3A3A))
                 .size(1.0f, 0.6f).stats(16, 6, 0.3).flySpeed(0.55).voice(Voice.BUZZ)
@@ -394,7 +404,7 @@ public final class ModMobs {
         hostileFlyer("mosquito", "Mosquito", look(Family.FLYING_BUG).body(6, 1, 1).head(2).wing(4)
                 .with(Extra.LONG_LEGS, Extra.SNOUT, Extra.ANTENNAE).colors(0x3A3A3A, 0xC8D8E8, 0xC83A3A).scale(0.8f))
                 .size(0.4f, 0.3f).stats(4, 1, 0.3).flySpeed(0.5).abilities(Ability.HUNGER).voice(Voice.BUZZ).xp(2)
-                .egg(0x3A3A3A, 0xC83A3A).spawn("c:is_swamp", 25, 2, 4);
+                .egg(0x3A3A3A, 0xC83A3A).spawn("c:is_swamp", 15, 2, 3);
         hostileFlyer("warbee", "Warbee", look(Family.FLYING_BUG).body(10, 6, 6).head(5).wing(8)
                 .with(Extra.STINGER, Extra.ANTENNAE).colors(0xF2C83A, 0x1A1A1A, 0xE8E8F8).pattern(Pattern.BANDS))
                 .size(0.9f, 0.7f).stats(20, 5, 0.3).flySpeed(0.5).abilities(Ability.POISON).dayActive().voice(Voice.BUZZ)
@@ -768,29 +778,64 @@ public final class ModMobs {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
+    private static final TagKey<Biome> MUSHROOM = TagKey.create(Registries.BIOME, ResourceLocation.parse("c:is_mushroom"));
+    /** A natural boss spawn succeeds only 1 time in this many, so bosses stay rare encounters. */
+    public static final int BOSS_RARITY = 40;
+    /** And never within this many blocks of another boss. */
+    private static final double BOSS_SPACING = 160;
+
+    private static boolean wildOk(ServerLevelAccessor level, BlockPos pos) {
+        return !level.getBiome(pos).is(MUSHROOM);
+    }
+
+    private static boolean bossOk(ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        if (reason != MobSpawnType.NATURAL && reason != MobSpawnType.CHUNK_GENERATION) {
+            return true;
+        }
+        return random.nextInt(BOSS_RARITY) == 0 && wildOk(level, pos)
+                && level.getEntitiesOfClass(NeoBoss.class, new AABB(pos).inflate(BOSS_SPACING)).isEmpty();
+    }
+
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
         for (MobSpec spec : SPECS) {
             EntityType type = spec.type.get();
             boolean day = spec.dayActive;
+            if (spec.underground) {
+                event.register(type, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) ->
+                                pos.getY() < 50 && !level.canSeeSky(pos)
+                                        && Monster.checkMonsterSpawnRules((EntityType) t, level, reason, pos, random),
+                        RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                continue;
+            }
             switch (spec.kind) {
                 case ANIMAL, FLYER -> event.register(type, SpawnPlacementTypes.ON_GROUND,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules,
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
-                case MONSTER, BOSS, SKY_BOSS -> event.register(type, SpawnPlacementTypes.ON_GROUND,
+                case MONSTER -> event.register(type, SpawnPlacementTypes.ON_GROUND,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                        day ? Monster::checkAnyLightMonsterSpawnRules : Monster::checkMonsterSpawnRules,
+                        (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) -> wildOk(level, pos)
+                                && (day ? Monster.checkAnyLightMonsterSpawnRules((EntityType) t, level, reason, pos, random)
+                                        : Monster.checkMonsterSpawnRules((EntityType) t, level, reason, pos, random)),
+                        RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                case BOSS, SKY_BOSS -> event.register(type, SpawnPlacementTypes.ON_GROUND,
+                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) -> bossOk(level, reason, pos, random)
+                                && level.canSeeSky(pos)
+                                && (day ? Monster.checkAnyLightMonsterSpawnRules((EntityType) t, level, reason, pos, random)
+                                        : Monster.checkMonsterSpawnRules((EntityType) t, level, reason, pos, random)),
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
                 case HOSTILE_FLYER -> event.register(type, SpawnPlacementTypes.ON_GROUND,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                         (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) ->
-                                level.getDifficulty() != Difficulty.PEACEFUL
+                                level.getDifficulty() != Difficulty.PEACEFUL && wildOk(level, pos)
                                         && (day || Monster.isDarkEnoughToSpawn(level, pos, random))
                                         && Mob.checkMobSpawnRules((EntityType) t, level, reason, pos, random),
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
                 case SEA_BOSS -> event.register(type, SpawnPlacementTypes.IN_WATER,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                         (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) ->
-                                level.getDifficulty() != Difficulty.PEACEFUL
+                                level.getDifficulty() != Difficulty.PEACEFUL && bossOk(level, reason, pos, random)
                                         && level.getFluidState(pos).is(FluidTags.WATER)
                                         && level.getFluidState(pos.above(4)).is(FluidTags.WATER),
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);

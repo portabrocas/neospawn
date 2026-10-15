@@ -28,6 +28,14 @@ public class ModBlockStates extends BlockStateProvider {
                 simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name)));
             } else if (block instanceof LeavesBlock) {
                 simpleBlockWithItem(block, models().cubeAll(name, blockTexture(block)).renderType("cutout_mipped"));
+            } else if (name.endsWith("_ore")) {
+                // Ores draw a transparent overlay on the real vanilla stone or deepslate, so they blend into the world.
+                boolean deep = name.startsWith("deepslate_");
+                String overlay = name.replace("deepslate_", "") + "_overlay";
+                simpleBlockWithItem(block, models().withExistingParent(name, modLoc("block/ore_overlay"))
+                        .texture("side", mcLoc(deep ? "block/deepslate" : "block/stone"))
+                        .texture("end", mcLoc(deep ? "block/deepslate_top" : "block/stone"))
+                        .texture("overlay", modLoc("block/" + overlay)));
             } else {
                 simpleBlockWithItem(block, cubeAll(block));
             }

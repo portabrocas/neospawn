@@ -1,0 +1,7 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:zoo_cage"
+  ],
+  "text": "emi.info.neospawn.zoo_cage"
+}

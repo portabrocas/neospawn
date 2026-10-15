@@ -50,6 +50,10 @@ public class ModItemModels extends ItemModelProvider {
                 withExistingParent(name, mcLoc("item/generated")).texture("layer0", modLoc("item/" + name))
                         .override().predicate(modLoc("filled"), 1)
                         .model(new ModelFile.UncheckedModelFile(modLoc("item/" + name + "_filled"))).end();
+            } else if (item instanceof com.neospawn.item.PaintedEggItem || item instanceof com.neospawn.item.DriedEggItem) {
+                // Two tinted layers (shell, pattern) and an untinted shine/crack layer.
+                withExistingParent(name, mcLoc("item/generated")).texture("layer0", modLoc("item/" + name + "_shell"))
+                        .texture("layer1", modLoc("item/" + name + "_pattern")).texture("layer2", modLoc("item/" + name + "_detail"));
             } else if (item instanceof SpawnEggItem) {
                 withExistingParent(name, mcLoc("item/template_spawn_egg"));
             } else if (item instanceof TieredItem) {

@@ -54,7 +54,7 @@ public class ModBlockLoot extends BlockLootSubProvider {
 
     /** Fossil Ore: a Fossilized Egg, plus a 4% chance of a Gorgantua Egg Fragment (unless silk-touched). */
     private void fossilOre(DeferredBlock<? extends Block> block) {
-        add(block.get(), createOreDrop(block.get(), ModItems.FOSSILIZED_EGG.get())
+        add(block.get(), createOreDrop(block.get(), ModItems.DRIED_EGG.get())
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .when(doesNotHaveSilkTouch())
                         .when(LootItemRandomChanceCondition.randomChance(0.04f))

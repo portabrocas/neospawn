@@ -5,7 +5,10 @@ import com.neospawn.item.BossSummonItem;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
 import com.neospawn.item.Gadgets;
+import com.neospawn.item.DriedEggItem;
+import com.neospawn.item.FieldGuideItem;
 import com.neospawn.item.MountItem;
+import com.neospawn.item.PaintedEggItem;
 import com.neospawn.item.RepellentItem;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ParagonFishingRod;
@@ -60,6 +63,12 @@ public final class ModItems {
 
     public static final DeferredItem<FossilEggItem> FOSSILIZED_EGG = ITEMS.register("fossilized_egg",
             () -> new FossilEggItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<DriedEggItem> DRIED_EGG = ITEMS.register("dried_egg",
+            () -> new DriedEggItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<PaintedEggItem> PAINTED_EGG = ITEMS.register("painted_egg",
+            () -> new PaintedEggItem(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<FieldGuideItem> FIELD_GUIDE = ITEMS.register("field_guide",
+            () -> new FieldGuideItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<TunnelChargeItem> TUNNEL_CHARGE = ITEMS.register("tunnel_charge",
             () -> new TunnelChargeItem(new Item.Properties().stacksTo(16)));
 

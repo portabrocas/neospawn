@@ -3,8 +3,8 @@
   "biomes": "#c:is_swamp",
   "spawners": {
     "type": "neospawn:mosquito",
-    "maxCount": 4,
+    "maxCount": 3,
     "minCount": 2,
-    "weight": 25
+    "weight": 15
   }
 }

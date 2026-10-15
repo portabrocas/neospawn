@@ -35,6 +35,8 @@ import org.jetbrains.annotations.Nullable;
 public class NeoAnimal extends TamableAnimal implements NeoMob {
     // No initializer: registerGoals() runs inside the super constructor and fills this first.
     private MobSpec spec;
+    /** Ticks until the next painted egg, for mobs that lay them. */
+    private int eggTimer = 1200;
 
     public NeoAnimal(EntityType<? extends NeoAnimal> type, Level level) {
         super(type, level);
@@ -150,6 +152,13 @@ public class NeoAnimal extends TamableAnimal implements NeoMob {
     public void aiStep() {
         super.aiStep();
         NeoMob.tick(this, spec());
+        if (spec().laysEggs && !level().isClientSide && !isBaby() && --eggTimer <= 0) {
+            eggTimer = 3600 + random.nextInt(4800);
+            spawnAtLocation(com.neospawn.item.PaintedEggItem.random(random));
+            playSound(net.minecraft.sounds.SoundEvents.CHICKEN_EGG, 1.0f, 1.3f);
+            ((net.minecraft.server.level.ServerLevel) level()).sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
+                    getX(), getY() + 0.4, getZ(), 6, 0.3, 0.2, 0.3, 0);
+        }
         if (spec().has(Ability.SUN_BURN) && isSunBurnTick()) {
             igniteForSeconds(8);
         }

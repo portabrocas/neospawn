@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "neospawn:item/painted_egg_shell",
+    "layer1": "neospawn:item/painted_egg_pattern",
+    "layer2": "neospawn:item/painted_egg_detail"
+  }
+}

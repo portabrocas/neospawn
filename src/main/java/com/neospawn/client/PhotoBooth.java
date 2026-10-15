@@ -96,6 +96,13 @@ public final class PhotoBooth {
         for (BlockPos pos : BlockPos.betweenClosed(STAGE.offset(-24, -1, -24), STAGE.offset(24, -1, 24))) {
             level.setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
         }
+        // A row of NeoSpawn ores and storage blocks behind the subject, to check block art in world light.
+        String[] blocks = {"ruby_ore", "deepslate_tanzanite_ore", "titanium_ore", "deepslate_uranium_ore", "salt_ore",
+                "fossil_ore", "ruby_block", "titanium_block", "paragon_block"};
+        for (int i = 0; i < blocks.length; i++) {
+            var block = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(com.neospawn.NeoSpawn.id(blocks[i]));
+            level.setBlockAndUpdate(STAGE.offset(i - 4, 0, -3), block.defaultBlockState());
+        }
         level.setDayTime(6000);
         level.setWeatherParameters(100000, 0, false, false);
         server.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, server);

@@ -3,8 +3,8 @@
   "biomes": "#c:is_overworld",
   "spawners": {
     "type": "neospawn:sewer_rat",
-    "maxCount": 5,
-    "minCount": 2,
-    "weight": 30
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 12
   }
 }

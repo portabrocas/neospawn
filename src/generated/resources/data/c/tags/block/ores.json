@@ -10,6 +10,11 @@
     "neospawn:titanium_ore",
     "neospawn:deepslate_titanium_ore",
     "neospawn:uranium_ore",
-    "neospawn:deepslate_uranium_ore"
+    "neospawn:deepslate_uranium_ore",
+    "#c:ores/ruby",
+    "#c:ores/tanzanite",
+    "#c:ores/titanium",
+    "#c:ores/uranium",
+    "#c:ores/salt"
   ]
 }

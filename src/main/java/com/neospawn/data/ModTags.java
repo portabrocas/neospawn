@@ -1,5 +1,9 @@
 package com.neospawn.data;
 
+import java.util.List;
+import net.minecraft.world.item.Item;
+import net.minecraft.tags.TagKey;
+import net.minecraft.resources.ResourceLocation;
 import com.neospawn.NeoSpawn;
 import com.neospawn.block.DuplicatorCoreBlock;
 import com.neospawn.registry.ModBlocks;
@@ -57,6 +61,36 @@ public final class ModTags {
             tag(BlockTags.BEACON_BASE_BLOCKS).add(
                     ModBlocks.RUBY_BLOCK.get(), ModBlocks.TANZANITE_BLOCK.get(), ModBlocks.TITANIUM_BLOCK.get(),
                     ModBlocks.URANIUM_BLOCK.get(), ModBlocks.PARAGON_BLOCK.get());
+            // Common (c:) tags so other mods recognize our ores and blocks: Veinminer, AE2, Iron Furnaces, EMI/JEI...
+            tag(oreTag("ruby")).add(ModBlocks.RUBY_ORE.get(), ModBlocks.DEEPSLATE_RUBY_ORE.get());
+            tag(oreTag("tanzanite")).add(ModBlocks.TANZANITE_ORE.get(), ModBlocks.DEEPSLATE_TANZANITE_ORE.get());
+            tag(oreTag("titanium")).add(ModBlocks.TITANIUM_ORE.get(), ModBlocks.DEEPSLATE_TITANIUM_ORE.get());
+            tag(oreTag("uranium")).add(ModBlocks.URANIUM_ORE.get(), ModBlocks.DEEPSLATE_URANIUM_ORE.get());
+            tag(oreTag("salt")).add(ModBlocks.SALT_ORE.get());
+            for (String ore : List.of("ruby", "tanzanite", "titanium", "uranium", "salt")) {
+                tag(Tags.Blocks.ORES).addTag(oreTag(ore));
+            }
+            tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(ModBlocks.RUBY_ORE.get(), ModBlocks.TANZANITE_ORE.get(), ModBlocks.TITANIUM_ORE.get(),
+                    ModBlocks.URANIUM_ORE.get(), ModBlocks.SALT_ORE.get(), ModBlocks.FOSSIL_ORE.get());
+            tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(ModBlocks.DEEPSLATE_RUBY_ORE.get(), ModBlocks.DEEPSLATE_TANZANITE_ORE.get(),
+                    ModBlocks.DEEPSLATE_TITANIUM_ORE.get(), ModBlocks.DEEPSLATE_URANIUM_ORE.get(), ModBlocks.DEEPSLATE_FOSSIL_ORE.get());
+            tag(storageTag("ruby")).add(ModBlocks.RUBY_BLOCK.get());
+            tag(storageTag("tanzanite")).add(ModBlocks.TANZANITE_BLOCK.get());
+            tag(storageTag("titanium")).add(ModBlocks.TITANIUM_BLOCK.get());
+            tag(storageTag("uranium")).add(ModBlocks.URANIUM_BLOCK.get());
+            tag(storageTag("paragon")).add(ModBlocks.PARAGON_BLOCK.get());
+            tag(storageTag("salt")).add(ModBlocks.SALT_BLOCK.get());
+            for (String m : List.of("ruby", "tanzanite", "titanium", "uranium", "paragon", "salt")) {
+                tag(Tags.Blocks.STORAGE_BLOCKS).addTag(storageTag(m));
+            }
+        }
+
+        public static TagKey<Block> oreTag(String name) {
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "ores/" + name));
+        }
+
+        public static TagKey<Block> storageTag(String name) {
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/" + name));
         }
     }
 
@@ -91,7 +125,41 @@ public final class ModTags {
             tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.PARAGON_BOW.get(), ModItems.PARAGON_FISHING_ROD.get());
             tag(ItemTags.BEACON_PAYMENT_ITEMS).add(ModItems.RUBY.get(), ModItems.TANZANITE.get(),
                     ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get(), ModItems.PARAGON_INGOT.get());
+
+            // Common (c:) tags: ores and storage blocks mirror the block tags; gems, ingots, raw ores, salt.
+            for (String ore : List.of("ruby", "tanzanite", "titanium", "uranium", "salt")) {
+                copy(Blocks.oreTag(ore), itemTag("ores/" + ore));
+                tag(Tags.Items.ORES).addTag(itemTag("ores/" + ore));
+            }
+            copy(Tags.Blocks.ORES_IN_GROUND_STONE, Tags.Items.ORES_IN_GROUND_STONE);
+            copy(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE, Tags.Items.ORES_IN_GROUND_DEEPSLATE);
+            for (String m : List.of("ruby", "tanzanite", "titanium", "uranium", "paragon", "salt")) {
+                copy(Blocks.storageTag(m), itemTag("storage_blocks/" + m));
+                tag(Tags.Items.STORAGE_BLOCKS).addTag(itemTag("storage_blocks/" + m));
+            }
+            tag(itemTag("gems/ruby")).add(ModItems.RUBY.get());
+            tag(itemTag("gems/tanzanite")).add(ModItems.TANZANITE.get());
+            tag(Tags.Items.GEMS).addTag(itemTag("gems/ruby")).addTag(itemTag("gems/tanzanite"));
+            tag(itemTag("ingots/titanium")).add(ModItems.TITANIUM_INGOT.get());
+            tag(itemTag("ingots/uranium")).add(ModItems.URANIUM_INGOT.get());
+            tag(itemTag("ingots/paragon")).add(ModItems.PARAGON_INGOT.get());
+            tag(Tags.Items.INGOTS).addTag(itemTag("ingots/titanium")).addTag(itemTag("ingots/uranium")).addTag(itemTag("ingots/paragon"));
+            tag(itemTag("raw_materials/titanium")).add(ModItems.RAW_TITANIUM.get());
+            tag(itemTag("raw_materials/uranium")).add(ModItems.RAW_URANIUM.get());
+            tag(Tags.Items.RAW_MATERIALS).addTag(itemTag("raw_materials/titanium")).addTag(itemTag("raw_materials/uranium"));
+            tag(itemTag("dusts/salt")).add(ModItems.SALT.get());
+            tag(Tags.Items.DUSTS).addTag(itemTag("dusts/salt"));
+            tag(itemTag("salt")).add(ModItems.SALT.get());
+            // Boss weapons count as melee weapons for other mods; our armor takes vanilla armor trims.
+            ModItems.BOSS_WEAPONS.forEach(weapon -> tag(Tags.Items.MELEE_WEAPON_TOOLS).add(weapon.get()));
+            for (var set : ModItems.ARMOR_SETS) {
+                tag(ItemTags.TRIMMABLE_ARMOR).add(set.helmet().get(), set.chestplate().get(), set.leggings().get(), set.boots().get());
+            }
         }
+    }
+
+    static TagKey<Item> itemTag(String path) {
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", path));
     }
 
     private ModTags() {}

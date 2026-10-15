@@ -1,0 +1,12 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:ruby_ore",
+    "item:neospawn:tanzanite_ore",
+    "item:neospawn:titanium_ore",
+    "item:neospawn:uranium_ore",
+    "item:neospawn:salt_ore",
+    "item:neospawn:fossil_ore"
+  ],
+  "text": "emi.info.neospawn.ores"
+}

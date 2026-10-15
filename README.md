@@ -14,7 +14,7 @@ from OreSpawn's code or assets.
 Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
 change or remove that line on other machines.
 
-## What's in so far (v0.14)
+## What's in so far (v0.15)
 
 See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
 
@@ -64,6 +64,12 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   T. rex vs Brutosaurus, the Ember Dragon vs the Kraken, and more), and predators hunt prey.
 - **The Royal line**: The King drops a Royal Egg. Hatch it, feed it gold to grow a Drakeling,
   then diamonds for a rideable flying Royal Drake. Feed the Drake a Nether Star and The King wakes up.
+- **Field Guide**: every player gets a NeoSpawn Field Guide the first time they join (book + egg crafts another).
+  Pages live in `assets/neospawn/books/field_guide.json`.
+- **Easter Bunny and dried eggs**: the Easter Bunny lays painted eggs that crack open into dried spawn eggs, gems
+  or experience. Dried eggs (from Fossil Ore, sifting and painted eggs) hatch their creature when dropped in water.
+- **Integrations**: common `c:` tags for ores, ingots, gems, raw ores and storage blocks; EMI info pages; armor
+  takes vanilla armor trims.
 - **Repellents**: Creeper, Kraken and Bug Repellents keep those mobs off you while carried.
 - **Ores**: Ruby, Tanzanite, Titanium, Uranium (glows), Salt, and Fossil Ore, whose
   Fossilized Egg hatches a random creature.

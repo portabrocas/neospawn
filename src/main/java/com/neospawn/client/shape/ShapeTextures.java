@@ -55,6 +55,9 @@ public final class ShapeTextures {
 
     private enum Face { TOP, BOTTOM, SIDE, FRONT, BACK }
 
+    /** Easter-egg colors for the bunny's basket. */
+    private static final int[] CANDY = {0xF27BA6, 0x6FB7F2, 0xF7D046, 0x7CD67A, 0xB08AF0, 0xF59A55};
+
     /**
      * Paints one box face by face (vanilla box-UV layout), so every face knows which way it points:
      * backs are a shade darker and bellies lighter (countershading), sides fade into the belly, legs
@@ -124,6 +127,8 @@ public final class ShapeTextures {
                     face == Face.TOP ? 6 : face == Face.BOTTOM ? -14 : Math.round(6 - 14 * t));
             case DARK -> shade(look.base, -62 + (face == Face.TOP ? 8 : 0));
             case TOOTH -> shade(0xEDE6D2, face == Face.BOTTOM ? -20 : Math.round(6 - 16 * t));
+            case WICKER -> shade(0xC08A4A, ((lx + ly) % 2 == 0 ? 8 : -14) + (ly == 0 ? 10 : 0));
+            case CANDY -> shade(CANDY[(int) (Math.abs(seed) % CANDY.length)], face == Face.TOP ? 12 : (lx + ly) % 3 == 0 ? -18 : 0);
             case MEMBRANE -> membrane(look, face, lx, ly, fw, fh, seed);
             case BASE -> base(look, face, along, across, t, fh, leg, seed);
         };

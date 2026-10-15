@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "neospawn:block/ore_overlay",
   "textures": {
-    "all": "neospawn:block/deepslate_uranium_ore"
+    "end": "minecraft:block/deepslate_top",
+    "overlay": "neospawn:block/uranium_ore_overlay",
+    "side": "minecraft:block/deepslate"
   }
 }
