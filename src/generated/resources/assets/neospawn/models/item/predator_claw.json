@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "neospawn:item/weapon_dagger",
   "textures": {
     "layer0": "neospawn:item/predator_claw"
   }

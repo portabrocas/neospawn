@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "neospawn:item/weapon_large",
   "textures": {
     "layer0": "neospawn:item/hercules_horn"
   }

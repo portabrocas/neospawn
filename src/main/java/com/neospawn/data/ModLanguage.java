@@ -124,11 +124,11 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.dried_egg.mystery", "Mystery Dried Egg");
         add("item.neospawn.dried_egg.named", "Dried %s Egg");
         add("item.neospawn.dried_egg.tooltip", "Just add water: drop it in water or use it on water to hatch it");
-        add("item.neospawn.painted_egg.tooltip", "Laid by the Easter Bunny. Use it to crack it open for a surprise");
+        add("item.neospawn.painted_egg.tooltip", "Laid by the Easter Bunny. Use it to crack it open: usually a spawn egg");
         add("item.neospawn.field_guide.tooltip", "Everything you need to know about NeoSpawn. Right-click to read");
         // EMI info pages.
-        add("emi.info.neospawn.easter_bunny", "The Easter Bunny wanders flower forests and plains with a basket of eggs, laying a painted egg every few minutes. Breed them with carrots.\n\nCrack a painted egg open for a surprise: usually a dried spawn egg, sometimes gems, emeralds or experience.");
-        add("emi.info.neospawn.dried_egg", "Dried spawn eggs come from Fossil Ore, sifting, and the Easter Bunny's painted eggs. Just add water: drop one in water or use it on water and the creature inside hatches. A Mystery Dried Egg hatches a random creature.");
+        add("emi.info.neospawn.easter_bunny", "The Easter Bunny wanders flower forests and plains with a basket of eggs, laying an egg every few minutes: usually a spawn egg for any creature in the game (never a boss), sometimes a painted surprise egg. Breed them with carrots.\n\nCrack a painted egg open for a surprise: usually another spawn egg, sometimes gems, emeralds or experience.");
+        add("emi.info.neospawn.dried_egg", "Dried spawn eggs come from Fossil Ore and sifting. Just add water: drop one in water or use it on water and the creature inside hatches. A Mystery Dried Egg hatches a random creature.");
         add("emi.info.neospawn.charms", "Charms open the realms. Carry a realm's charm and right-click that realm's ant to travel; right-click it again there to come home. Charms are never used up. Bosses in the Danger Realm can drop the Chaos Charm.");
         add("emi.info.neospawn.altar", "Place an offering on the Summoning Altar to call a boss. Right-click the altar with an empty hand to see every offering.");
         add("emi.info.neospawn.zoo_cage", "Right-click a mob to catch it, then use the cage on the ground to let it out, name and all. Hostile mobs must be below half health. Bosses can't be caged.");

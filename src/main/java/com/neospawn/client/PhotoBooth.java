@@ -53,6 +53,10 @@ public final class PhotoBooth {
             NeoSpawn.LOGGER.warn("PHOTOS skipped: not the throwaway world {}", WORLD);
             return;
         }
+        if (Boolean.getBoolean("neospawn.photos.weapons")) {
+            weapons(mc, server);
+            return;
+        }
         if (queue == null) {
             queue = System.getProperty("neospawn.photos.only") == null ? ModMobs.ALL
                     : ModMobs.ALL.stream().filter(s -> List.of(System.getProperty("neospawn.photos.only").split(",")).contains(s.id)).toList();
@@ -89,6 +93,78 @@ public final class PhotoBooth {
         int angle = shot;
         server.execute(() -> pose(server, spec, first, angle));
         wait = first ? SETTLE : 12;
+    }
+
+    // ------------------------------------------------------------------ weapons in hand
+
+    private static List<net.minecraft.world.item.Item> weaponQueue;
+    private static int weaponRow, weaponShot, weaponWait = 60;
+    private static final int PER_ROW = 6;
+
+    /** Lines up armor stands holding each weapon, a row at a time, and photographs them from the side and front. */
+    private static void weapons(Minecraft mc, MinecraftServer server) {
+        if (weaponQueue == null) {
+            weaponQueue = new java.util.ArrayList<>();
+            com.neospawn.registry.ModItems.BOSS_WEAPONS.forEach(w -> weaponQueue.add(w.get()));
+            weaponQueue.addAll(List.of(com.neospawn.registry.ModItems.BEHEMOTH_BLADE.get(), com.neospawn.registry.ModItems.ATTITUDE_ADJUSTER.get(),
+                    com.neospawn.registry.ModItems.NETHER_SWORD.get(), com.neospawn.registry.ModItems.CHAINSAW.get(),
+                    com.neospawn.registry.ModItems.RAY_GUN.get(), com.neospawn.registry.ModItems.SQUID_ZOOKA.get(),
+                    com.neospawn.registry.ModItems.RUBY_TOOLS.sword().get(), net.minecraft.world.item.Items.DIAMOND_SWORD));
+            mc.options.hideGui = true;
+            new java.io.File(mc.gameDirectory, "screenshots/neospawn").mkdirs();
+            server.execute(() -> setUpStage(server));
+        }
+        mc.options.pauseOnLostFocus = false;
+        if (mc.screen != null) {
+            mc.setScreen(null);
+        }
+        if (--weaponWait > 0) {
+            return;
+        }
+        if (weaponShot > 0) {
+            Screenshot.grab(mc.gameDirectory, "neospawn/weapons_row" + weaponRow + (weaponShot == 1 ? "_a" : "_b") + ".png",
+                    mc.getMainRenderTarget(), message -> {});
+            if (weaponShot == 2) {
+                weaponRow++;
+                weaponShot = 0;
+            }
+        }
+        if (weaponRow * PER_ROW >= weaponQueue.size()) {
+            finished = true;
+            ClientShutdown.stop();
+            return;
+        }
+        boolean first = weaponShot == 0;
+        weaponShot++;
+        int row = weaponRow, angle = weaponShot;
+        server.execute(() -> {
+            ServerLevel level = server.overworld();
+            if (first) {
+                for (Entity old : level.getEntitiesOfClass(Entity.class, new AABB(STAGE).inflate(40), e -> !(e instanceof ServerPlayer))) {
+                    old.discard();
+                }
+                for (int i = 0; i < PER_ROW && row * PER_ROW + i < weaponQueue.size(); i++) {
+                    var stand = new net.minecraft.world.entity.decoration.ArmorStand(level, STAGE.getX() + 0.5 + i * 1.6 - 4, STAGE.getY(), STAGE.getZ() + 0.5);
+                    stand.setYRot(0);
+                    stand.setYBodyRot(0);
+                    stand.setNoGravity(true);
+                    stand.setShowArms(true);
+                    var item = weaponQueue.get(row * PER_ROW + i);
+                    stand.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND, new net.minecraft.world.item.ItemStack(item));
+                    stand.setCustomName(item.getDescription());
+                    stand.setCustomNameVisible(true);
+                    level.addFreshEntity(stand);
+                }
+            }
+            ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+            player.setGameMode(GameType.SPECTATOR);
+            Vec3 target = new Vec3(STAGE.getX() + 0.5, STAGE.getY() + 1.0, STAGE.getZ() + 0.5);
+            Vec3 cam = angle == 1 ? target.add(1.5, 0.6, 5.2) : target.add(7.0, 0.4, 2.2);
+            Vec3 look = target.subtract(cam);
+            player.teleportTo(level, cam.x, cam.y - player.getEyeHeight(), cam.z,
+                    (float) (Math.atan2(-look.x, look.z) * 180 / Math.PI), (float) (-Math.atan2(look.y, look.horizontalDistance()) * 180 / Math.PI));
+        });
+        weaponWait = first ? 30 : 15;
     }
 
     private static void setUpStage(MinecraftServer server) {

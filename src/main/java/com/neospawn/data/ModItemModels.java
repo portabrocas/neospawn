@@ -1,5 +1,7 @@
 package com.neospawn.data;
 
+import java.util.Map;
+
 import com.neospawn.NeoSpawn;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ParagonFishingRod;
@@ -21,6 +23,43 @@ public class ModItemModels extends ItemModelProvider {
     public ModItemModels(PackOutput output, ExistingFileHelper files) {
         super(output, NeoSpawn.MODID, files);
     }
+
+    /** How each weapon is held (from tools/gen_weapons.py): large, polearm, dagger, gun, or a normal sword. */
+    private static final Map<String, String> WEAPON_STYLES = Map.ofEntries(
+            Map.entry("ascended_blade", "large"),
+            Map.entry("attitude_adjuster", "sword"),
+            Map.entry("azure_fang", "sword"),
+            Map.entry("basilisk_fang", "dagger"),
+            Map.entry("behemoth_blade", "large"),
+            Map.entry("bone_crusher", "large"),
+            Map.entry("centipede_whip", "sword"),
+            Map.entry("chainsaw", "sword"),
+            Map.entry("dread_lance", "polearm"),
+            Map.entry("ember_greatsword", "large"),
+            Map.entry("empress_battleaxe", "large"),
+            Map.entry("hercules_horn", "large"),
+            Map.entry("kings_fang", "sword"),
+            Map.entry("kraken_hook", "polearm"),
+            Map.entry("mantis_scythe", "polearm"),
+            Map.entry("molelord_claw", "dagger"),
+            Map.entry("mothwing_glaive", "polearm"),
+            Map.entry("nether_sword", "sword"),
+            Map.entry("ninetail_blade", "sword"),
+            Map.entry("plague_lance", "polearm"),
+            Map.entry("predator_claw", "dagger"),
+            Map.entry("ray_gun", "gun"),
+            Map.entry("serpent_fang", "dagger"),
+            Map.entry("siege_hammer", "large"),
+            Map.entry("skyclaw_talon", "dagger"),
+            Map.entry("sniper_lance", "polearm"),
+            Map.entry("sovereign_stinger", "dagger"),
+            Map.entry("squid_zooka", "gun"),
+            Map.entry("stormcaller", "polearm"),
+            Map.entry("tidebreaker", "polearm"),
+            Map.entry("tidecaller", "polearm"),
+            Map.entry("titan_cleaver", "large"),
+            Map.entry("tyrant_tooth", "dagger"),
+            Map.entry("war_blade", "large"));
 
     @Override
     protected void registerModels() {
@@ -56,6 +95,9 @@ public class ModItemModels extends ItemModelProvider {
                         .texture("layer1", modLoc("item/" + name + "_pattern")).texture("layer2", modLoc("item/" + name + "_detail"));
             } else if (item instanceof SpawnEggItem) {
                 withExistingParent(name, mcLoc("item/template_spawn_egg"));
+            } else if (WEAPON_STYLES.containsKey(name) && !WEAPON_STYLES.get(name).equals("sword")) {
+                // Hand-held pose per weapon shape: see models/item/weapon_*.json.
+                withExistingParent(name, modLoc("item/weapon_" + WEAPON_STYLES.get(name))).texture("layer0", modLoc("item/" + name));
             } else if (item instanceof TieredItem) {
                 withExistingParent(name, mcLoc("item/handheld")).texture("layer0", modLoc("item/" + name));
             } else {

@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * Laid by the Easter Bunny, each one painted in its own colors. Crack it open for a surprise:
- * usually a dried spawn egg, sometimes gems or experience.
+ * usually a spawn egg (never a boss), sometimes gems or experience.
  */
 public class PaintedEggItem extends Item {
     /** Pastel shells and bolder paints, picked at random when the egg is laid. */
@@ -61,8 +61,8 @@ public class PaintedEggItem extends Item {
             RandomSource random = server.random;
             float roll = random.nextFloat();
             ItemStack prize;
-            if (roll < 0.55f) {
-                prize = DriedEggItem.of(DriedEggItem.random(random));
+            if (roll < 0.6f) {
+                prize = EasterEggs.randomSpawnEgg(random);
             } else if (roll < 0.75f) {
                 prize = new ItemStack(random.nextBoolean() ? ModItems.RUBY.get() : ModItems.TANZANITE.get(), 1 + random.nextInt(2));
             } else if (roll < 0.9f) {

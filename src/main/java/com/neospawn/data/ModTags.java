@@ -158,6 +158,22 @@ public final class ModTags {
         }
     }
 
+    /** Our bosses join c:bosses, so other mods (and our own Easter Bunny) treat them as bosses. */
+    public static class Entities extends net.minecraft.data.tags.EntityTypeTagsProvider {
+        public Entities(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper files) {
+            super(output, lookup, NeoSpawn.MODID, files);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider provider) {
+            for (com.neospawn.mob.MobSpec spec : com.neospawn.mob.ModMobs.ALL) {
+                if (spec.isBoss()) {
+                    tag(Tags.EntityTypes.BOSSES).add(spec.type.get());
+                }
+            }
+        }
+    }
+
     static TagKey<Item> itemTag(String path) {
         return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", path));
     }

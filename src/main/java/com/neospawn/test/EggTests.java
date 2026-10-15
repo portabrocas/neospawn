@@ -50,6 +50,20 @@ public class EggTests {
                 "the soaked egg hasn't hatched"));
     }
 
+    @GameTest(template = "arena", batch = "eggs_easter")
+    public static void easterEggsAreNeverBossEggs(GameTestHelper helper) {
+        for (int i = 0; i < 400; i++) {
+            ItemStack egg = com.neospawn.item.EasterEggs.randomSpawnEgg(helper.getLevel().random);
+            helper.assertTrue(egg.getItem() instanceof net.minecraft.world.item.SpawnEggItem, "not a spawn egg: " + egg);
+            var type = ((net.minecraft.world.item.SpawnEggItem) egg.getItem()).getType(egg);
+            helper.assertTrue(com.neospawn.item.EasterEggs.allowed(type), "boss egg slipped through: " + type);
+        }
+        helper.assertTrue(!com.neospawn.item.EasterEggs.allowed(ModMobs.byId("the_king").type.get()), "The King must be excluded");
+        helper.assertTrue(!com.neospawn.item.EasterEggs.allowed(net.minecraft.world.entity.EntityType.WARDEN), "the Warden must be excluded");
+        helper.assertTrue(com.neospawn.item.EasterEggs.allowed(ModMobs.byId("gazelle").type.get()), "regular mobs are allowed");
+        helper.succeed();
+    }
+
     @GameTest(template = "arena", batch = "eggs_painted", timeoutTicks = 100)
     public static void paintedEggCracksIntoAPrize(GameTestHelper helper) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();

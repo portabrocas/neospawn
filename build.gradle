@@ -78,6 +78,9 @@ neoForge {
             if (project.hasProperty('only')) {
                 systemProperty 'neospawn.photos.only', project.property('only')
             }
+            if (project.hasProperty('weapons')) {
+                systemProperty 'neospawn.photos.weapons', 'true'
+            }
             if (project.hasProperty('anim')) {
                 systemProperty 'neospawn.king.anim', project.property('anim')
             }

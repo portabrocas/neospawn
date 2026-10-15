@@ -154,7 +154,9 @@ public class NeoAnimal extends TamableAnimal implements NeoMob {
         NeoMob.tick(this, spec());
         if (spec().laysEggs && !level().isClientSide && !isBaby() && --eggTimer <= 0) {
             eggTimer = 3600 + random.nextInt(4800);
-            spawnAtLocation(com.neospawn.item.PaintedEggItem.random(random));
+            // Mostly real spawn eggs (never a boss's), sometimes a painted surprise egg.
+            spawnAtLocation(random.nextFloat() < 0.75f ? com.neospawn.item.EasterEggs.randomSpawnEgg(random)
+                    : com.neospawn.item.PaintedEggItem.random(random));
             playSound(net.minecraft.sounds.SoundEvents.CHICKEN_EGG, 1.0f, 1.3f);
             ((net.minecraft.server.level.ServerLevel) level()).sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
                     getX(), getY() + 0.4, getZ(), 6, 0.3, 0.2, 0.3, 0);
