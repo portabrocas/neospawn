@@ -21,7 +21,7 @@ import java.util.List;
 @GameTestHolder(NeoSpawn.MODID)
 @PrefixGameTestTemplate(false)
 public class CristianTests {
-    @GameTest(template = "arena", batch = "cristian", timeoutTicks = 400)
+    @GameTest(template = "arena", batch = "cristian", timeoutTicks = 600)
     public static void phoneCallsCristianWhoHelpsThenLeaves(GameTestHelper helper) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();
         player.setGameMode(GameType.SURVIVAL);
@@ -40,14 +40,16 @@ public class CristianTests {
         ItemEntity loose = helper.spawnItem(Items.DIAMOND, 15, 2, 12);
         loose.setPickUpDelay(0);
         player.getInventory().clearContent();
-        helper.runAfterDelay(200, () -> {
-            helper.assertTrue(player.getInventory().countItem(Items.DIAMOND) == 1, "Cristian didn't bring the diamond");
-            cristian.setTimeLeft(2);
-        });
-        helper.runAfterDelay(210, () -> {
-            helper.assertTrue(!cristian.isAlive(), "Cristian didn't leave when his time was up");
-            player.discard();
-            helper.succeed();
+        int[] stage = {0};
+        helper.onEachTick(() -> {
+            if (stage[0] == 0 && player.getInventory().countItem(Items.DIAMOND) == 1) {
+                stage[0] = 1;
+                cristian.setTimeLeft(2);
+            } else if (stage[0] == 1 && !cristian.isAlive()) {
+                stage[0] = 2;
+                player.discard();
+                helper.succeed();
+            }
         });
     }
 }

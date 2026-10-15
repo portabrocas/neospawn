@@ -1,0 +1,39 @@
+package com.neospawn.test;
+
+import com.google.gson.JsonObject;
+import com.neospawn.NeoSpawn;
+import com.neospawn.compat.MorphCompat;
+import com.neospawn.mob.ModMobs;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+
+/** Morph traits match each mob's abilities (Morph itself isn't loaded in tests; this checks the data we give it). */
+@GameTestHolder(NeoSpawn.MODID)
+@PrefixGameTestTemplate(false)
+public class MorphCompatTests {
+    private static boolean has(String mob, String trait) {
+        JsonObject data = MorphCompat.mobData(ModMobs.byId(mob));
+        for (var t : data.getAsJsonArray("traits")) {
+            if (t.getAsJsonObject().get("type").getAsString().equals(trait)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @GameTest(template = "arena", batch = "morph")
+    public static void morphTraitsMatchAbilities(GameTestHelper helper) {
+        helper.assertTrue(has("songbird", "abilityFlight"), "birds should fly");
+        helper.assertTrue(has("the_king", "abilityFlight") && has("the_king", "abilityFireball"), "The King flies and breathes fire");
+        helper.assertTrue(has("goldfish", "traitWaterBreather"), "fish breathe water");
+        helper.assertTrue(has("desert_scorpion", "abilityEffectAttack") && has("desert_scorpion", "abilityClimb"), "scorpions poison and climb");
+        helper.assertTrue(!has("ostrich", "abilityFlight"), "ostriches can't fly");
+        helper.assertTrue(!has("gazelle", "abilityFlight") && !has("gazelle", "traitHostile"), "gazelles are plain");
+        for (var spec : ModMobs.ALL) {
+            MorphCompat.mobData(spec); // every mob produces data without errors
+        }
+        helper.succeed();
+    }
+}
