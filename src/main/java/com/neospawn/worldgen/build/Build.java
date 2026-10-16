@@ -213,7 +213,9 @@ public final class Build {
         }
         level.setBlock(pos, Blocks.SPAWNER.defaultBlockState(), 2);
         if (level.getBlockEntity(pos) instanceof SpawnerBlockEntity spawner) {
-            spawner.getSpawner().load(level.getLevel(), pos, spawnerTag(type));
+            // No level here: given one, the spawner looks up its own chunk, which during worldgen is the chunk
+            // still being generated, and the worldgen thread waits on itself forever.
+            spawner.getSpawner().load(null, pos, spawnerTag(type));
         }
     }
 
