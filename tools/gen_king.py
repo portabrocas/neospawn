@@ -451,7 +451,7 @@ geo = {"format_version": "1.12.0", "minecraft:geometry": [{
                     "visible_bounds_width": 14, "visible_bounds_height": 8, "visible_bounds_offset": [0, 3, 0]},
     "bones": out_bones}]}
 os.makedirs(os.path.join(ROOT, "geo/entity"), exist_ok=True)
-with open(os.path.join(ROOT, "geo/entity/the_king.geo.json"), "w") as f:
+with open(os.path.join(ROOT, "geo/entity/the_king.geo.json"), "w", encoding="utf-8", newline="\n") as f:
     json.dump(geo, f, indent=1)
 
 # ------------------------------------------------------------------ kinematics for the folded-wing stance
@@ -686,6 +686,6 @@ anims = {"format_version": "1.8.0", "animations": {
     "animation.the_king.fly": fly.json(), "animation.the_king.roar": roar.json(),
     "animation.the_king.breath": breath.json()}}
 os.makedirs(os.path.join(ROOT, "animations/entity"), exist_ok=True)
-with open(os.path.join(ROOT, "animations/entity/the_king.animation.json"), "w") as f:
+with open(os.path.join(ROOT, "animations/entity/the_king.animation.json"), "w", encoding="utf-8", newline="\n") as f:
     json.dump(anims, f, indent=1)
 print(f"{len(bones)} bones, {len(all_cubes)} cubes, texture {TEX_W}x{TEX_H}")

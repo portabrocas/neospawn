@@ -6,15 +6,31 @@ from OreSpawn's code or assets.
 
 ## Running
 
+Java 21 is required. If it isn't installed, Gradle downloads a JDK 21 for the build by itself.
+
+macOS / Linux:
+
 ```bash
 ./gradlew runClient     # launch Minecraft with the mod
 ./gradlew build         # produce build/libs/neospawn-<version>.jar
 ```
 
-Java 21 is required. `gradle.properties` points `org.gradle.java.home` at the Homebrew JDK;
-change or remove that line on other machines.
+Windows (PowerShell or Command Prompt, in the project folder):
 
-## What's in so far (v0.17)
+```bat
+.\gradlew.bat runClient
+.\gradlew.bat build
+```
+
+On Windows, type `.\gradlew.bat` wherever this README says `./gradlew`, and `py` (the Python
+launcher) wherever it says `python3`. The art tools need Pillow: `py -m pip install Pillow`.
+
+To install a build, close the game, copy `build/libs/neospawn-<version>.jar` (or the jar from a
+GitHub Release) into the instance's `mods` folder and delete the old `neospawn-*.jar`. GeckoLib
+for NeoForge 1.21.1 must be in `mods` too. Prism keeps instances in
+`%APPDATA%\PrismLauncher\instances` on Windows and `~/Library/Application Support/PrismLauncher/instances` on macOS.
+
+## What's in so far (v0.21)
 
 See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoSpawn equivalent.
 
@@ -83,6 +99,14 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   Titanium, Uranium and Ruby. Paragon tools come pre-enchanted, and the Paragon Pickaxe
   mines 3×3 (sneak for 1×1).
 - **Tunnel Charge**: blasts a 3×3 tunnel 32 blocks deep and keeps the ores.
+- **Cristian**: a helper you call with a rare phone (found only in the hardest vaults and deep vanilla chests).
+  For 15 minutes he follows you, fights hostiles and hands you loose items.
+- **Gear**: Redstone Sneakers (+30% speed; each step pokes the block underfoot) and Butterfly Wings
+  (creative-style flight). Worn armor shows the body underneath.
+- **Tougher dungeons**: structure spawners work in lit rooms and spawn in groups; guardians are Champions
+  (4× health, armor, gold name) with better drops.
+- **Optional mod support**: Morph (NeoSpawn mobs give their abilities), Curios (charm, back and necklace
+  slots), Better Combat (presets for every weapon and tool) and Lootr. None of them are required.
 
 `/neospawn gallery` (op only) lines up every mob, frozen and labeled, for a quick look.
 

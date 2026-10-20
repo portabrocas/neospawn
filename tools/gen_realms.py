@@ -15,7 +15,7 @@ DATA = os.path.join(ROOT, "src/main/resources/data/neospawn")
 def write(path, obj):
     full = os.path.join(DATA, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
-    with open(full, "w") as f:
+    with open(full, "w", encoding="utf-8", newline="\n") as f:
         json.dump(obj, f, indent=2)
 
 

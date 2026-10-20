@@ -25,13 +25,20 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   `tools/gen_structures.py` (structures, sets, tiered loot). Surface ones need dry, level land. Containers
   become Lootr chests/barrels when Lootr is installed. Realm charms in vault loot lead to the next realm.
 - Field Guide pages: `assets/neospawn/books/field_guide.json` (given on first join).
-- The owner plays in Prism: `~/Library/Application Support/PrismLauncher/instances/NeoSpawnPack-Prism/minecraft/mods`.
+- The owner plays in Prism on a **Windows** gaming PC (moved from a MacBook at v0.21.3):
+  `%APPDATA%\PrismLauncher\instances\NeoSpawnPack-Prism\minecraft\mods` (the instance name may differ on the PC).
   Install new builds by replacing `neospawn-*.jar` there (game closed).
+- Cross-platform: on Windows use `.\gradlew.bat` and `py`. `.gitattributes` forces LF (CRLF for `.bat`), and the
+  Python tools write with `encoding="utf-8", newline="\n"`; keep it that way. Never commit machine paths
+  (a pinned `org.gradle.java.home` belongs in `~/.gradle/gradle.properties`).
+- Releases: bump `mod_version`, tag `vX.Y.Z`, attach `build/libs/neospawn-X.Y.Z.jar` to a GitHub Release.
 - Optional-mod support is reflection or data only (no compile deps): Morph (`compat/MorphCompat`), Curios
   (`compat/CuriosCompat` + `tools/gen_compat.py`), Better Combat presets and Lootr (`tools/gen_compat.py`, `Build`).
 
 ## Commands
 - `./gradlew runGameTestServer`: 117 headless GameTests; must all pass before handing work back.
+  GitHub Actions (`.github/workflows/build.yml`) builds and runs them on Windows for every push; a `v*` tag publishes a Release
+  (notes from `docs/releases/<tag>.md`).
 - `./gradlew runData`: regenerate data (lang, recipes, models, tags).
 - `./gradlew runPhotos [-Ponly=id1,id2] [-Panim=fly]` + `python3 tools/contact_sheet.py`: photograph mobs.
   `-Pweapons=true` (armor stands holding weapons), `-Pstructure=name|all` (build a blueprint on a stage),
@@ -45,6 +52,6 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 - Ask before downloading anything (mod jars, modpack files) or accepting a EULA.
 
 ## Next up
-1. Fix whatever the owner finds playtesting v0.17 (lighting in dark interiors, loot balance, weapon poses).
+1. Fix whatever the owner finds playtesting v0.21 (lighting in dark interiors, loot balance, weapon poses).
 2. Village Realm Challenge Dungeon and Utopia still use old-style features; give them blueprints.
 3. Optional: GeckoLib models for other flagship bosses (Gorgantua, Kraken, Empress).
