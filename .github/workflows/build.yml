@@ -46,7 +46,10 @@ jobs:
           jar="build/libs/neospawn-${version}.jar"
           test -f "$jar" || { echo "Tag $GITHUB_REF_NAME does not match mod_version in gradle.properties"; exit 1; }
           notes="docs/releases/${GITHUB_REF_NAME}.md"
-          if [ -f "$notes" ]; then
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            # Release already drafted or published on github.com: just attach the jar.
+            gh release upload "$GITHUB_REF_NAME" "$jar" --clobber
+          elif [ -f "$notes" ]; then
             gh release create "$GITHUB_REF_NAME" "$jar" --title "NeoSpawn $version" --notes-file "$notes"
           else
             gh release create "$GITHUB_REF_NAME" "$jar" --title "NeoSpawn $version" --generate-notes
