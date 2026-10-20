@@ -31,7 +31,8 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 - Cross-platform: on Windows use `.\gradlew.bat` and `py`. `.gitattributes` forces LF (CRLF for `.bat`), and the
   Python tools write with `encoding="utf-8", newline="\n"`; keep it that way. Never commit machine paths
   (a pinned `org.gradle.java.home` belongs in `~/.gradle/gradle.properties`).
-- Releases: bump `mod_version`, tag `vX.Y.Z`, attach `build/libs/neospawn-X.Y.Z.jar` to a GitHub Release.
+- Releases: bump `mod_version`, publish a `vX.Y.Z` release on github.com (this session can't create tags or releases);
+  the workflow attaches the jar. `tools/install-windows.ps1` installs the latest release into the owner's Prism instances.
 - Optional-mod support is reflection or data only (no compile deps): Morph (`compat/MorphCompat`), Curios
   (`compat/CuriosCompat` + `tools/gen_compat.py`), Better Combat presets and Lootr (`tools/gen_compat.py`, `Build`).
 
