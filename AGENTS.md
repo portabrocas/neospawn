@@ -6,7 +6,9 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 ## Key docs
 - `README.md`: features, commands. `docs/ROSTER.md`: every OreSpawn mob/ore/item and our equivalent.
 - `docs/FAN_FAVORITES.md`: the owner's Must/Nice/Skip picks (Skip = girlfriends/companions; food comes from other mods).
-- `docs/BOSS_POLISH.md`: boss balance. `docs/MODPACK.md`: draft Crazy Craft-style modpack list.
+- `docs/BOSS_POLISH.md`: boss balance. `docs/MODPACK.md`: the original modpack research list.
+- `docs/PACK.md`: **what is actually in the owner's pack now**: every jar, what was removed and why, what is
+  still to add, and how to read its logs. Keep it current when the pack changes.
 
 ## Decisions to respect
 - Six realms reached via ants, each gated by a per-realm **charm** (crafted or found) so they can't skip progression.
@@ -25,13 +27,25 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   `tools/gen_structures.py` (structures, sets, tiered loot). Surface ones need dry, level land. Containers
   become Lootr chests/barrels when Lootr is installed. Realm charms in vault loot lead to the next realm.
 - Field Guide pages: `assets/neospawn/books/field_guide.json` (given on first join).
-- The owner plays in Prism: `~/Library/Application Support/PrismLauncher/instances/NeoSpawnPack-Prism/minecraft/mods`.
-  Install new builds by replacing `neospawn-*.jar` there (game closed).
+- The owner plays in Prism, on a Mac and a Windows gaming PC (paths in `docs/PACK.md`). Install new builds by
+  replacing `neospawn-*.jar` in the instance's `minecraft/mods` (game closed). Check added jars with
+  `python3 tools/pack_check.py <mods dir>`: Minecraft 26.x builds (Java 25) sit next to 1.21.1 ones on mod sites.
+- Worldgen code (`Build`, blueprints) must never reach the real level through `level.getLevel()` for anything
+  that reads blocks or chunks: during generation that chunk is still being built and the worker deadlocks
+  (the 0.21.0 spawner freeze). Creating entities with it is fine. `DungeonTests.worldgenOnly` guards this.
+- GeckoLib rejects an animation whose keyframes are out of time order; `gen_king.py` sorts them.
 - Optional-mod support is reflection or data only (no compile deps): Morph (`compat/MorphCompat`), Curios
   (`compat/CuriosCompat` + `tools/gen_compat.py`), Better Combat presets and Lootr (`tools/gen_compat.py`, `Build`).
 
+## Setup on a new machine
+- Needs a full JDK 21 (e.g. Microsoft OpenJDK 21; Prism's bundled Java is not enough), Git, and Python 3 with
+  Pillow (`pip install pillow`) for the art tools. On Windows use `gradlew.bat` (or `.\gradlew` in PowerShell).
+- `run/` is not in git. The photo and realm-check tasks need a throwaway world copied into `run/saves/`
+  (create one with `./gradlew runClient`, then copy it to `neospawn_photos` / `neospawn_realmcheck`).
+
 ## Commands
-- `./gradlew runGameTestServer`: 117 headless GameTests; must all pass before handing work back.
+- `./gradlew runGameTestServer`: 117 headless GameTests; must all pass before handing work back. One fight test
+  (`fight_kraken`) is occasionally flaky; re-run before treating it as a real failure.
 - `./gradlew runData`: regenerate data (lang, recipes, models, tags).
 - `./gradlew runPhotos [-Ponly=id1,id2] [-Panim=fly]` + `python3 tools/contact_sheet.py`: photograph mobs.
   `-Pweapons=true` (armor stands holding weapons), `-Pstructure=name|all` (build a blueprint on a stage),
@@ -43,8 +57,11 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 ## Working rules
 - Work on a branch, commit, fast-forward merge to `main`.
 - Ask before downloading anything (mod jars, modpack files) or accepting a EULA.
+- The owner pushes to GitHub (`portabrocas/neospawn`) themselves, from the Claude desktop app or their terminal.
+  Never use a token they paste into chat; tell them to revoke it.
 
 ## Next up
-1. Fix whatever the owner finds playtesting v0.17 (lighting in dark interiors, loot balance, weapon poses).
+1. Fix whatever the owner finds playtesting 0.21.2. Not yet seen in real play: the worldgen spawner fix (fly into
+   new terrain and realms), the King's roar, Morph abilities, Curios trinkets, Butterfly Wings flight.
 2. Village Realm Challenge Dungeon and Utopia still use old-style features; give them blueprints.
 3. Optional: GeckoLib models for other flagship bosses (Gorgantua, Kraken, Empress).
