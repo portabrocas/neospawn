@@ -150,3 +150,27 @@ def save(img, rel):
 # Arcane Tanzanite armor (gen_items.py): a midnight-violet robe with pale starlit trim.
 RAMPS["arcane"] = [(20, 12, 54), (44, 30, 112), (76, 56, 176), (118, 96, 222), (190, 176, 252)]
 RAMPS["arcane_star"] = [(70, 54, 120), (128, 116, 196), (186, 196, 240), (220, 232, 255), (255, 255, 255)]
+
+# ------------------------------------------------------------------ appended for gen_icons.py (icons, blocks)
+
+def ellipse_mask(cx, cy, rx, ry, size=16):
+    """Pixels whose centres lie inside the ellipse."""
+    return {(x, y) for x in range(size) for y in range(size)
+            if ((x + 0.5 - cx) / rx) ** 2 + ((y + 0.5 - cy) / ry) ** 2 <= 1}
+
+
+def egg_mask(cx=8.0, cy=8.6, rx=5.2, ry=6.6, taper=0.22):
+    """An egg: an ellipse that narrows towards the top."""
+    out = set()
+    for x in range(16):
+        for y in range(16):
+            dy = (y + 0.5 - cy) / ry
+            r = rx * (1 - taper * max(0.0, -dy))
+            if ((x + 0.5 - cx) / r) ** 2 + dy * dy <= 1:
+                out.add((x, y))
+    return out
+
+
+def outline_of(mask):
+    """The ring of pixels just outside a mask (4-neighbourhood)."""
+    return {(x + dx, y + dy) for (x, y) in mask for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))} - mask

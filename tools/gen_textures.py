@@ -1,4 +1,5 @@
-"""Generates NeoSpawn's placeholder block, item and boss textures.
+"""Generates NeoSpawn's placeholder block, item and boss textures (most are redrawn by gen_items.py,
+gen_weapons.py, gen_drops.py and gen_icons.py, which run after this).
 
 Run from the project root:  python3 tools/gen_textures.py
 Regular mob textures are painted at runtime (see ShapeTextures.java); drop a PNG at
@@ -172,42 +173,6 @@ for x in range(3, 13):
         if (x - 8) ** 2 / 25 + (y - 13) ** 2 / 25 <= 1:
             salt.set(x, y, jitter(MATERIALS["salt"][1], 20))
 save(salt.image(MATERIALS["salt"][3]), "item/salt.png")
-
-jerky = Sprite()
-for i in range(10):
-    for w in range(3):
-        jerky.set(3 + i, 11 - i + w, jitter((140, 70, 40) if w else (175, 95, 55), 10))
-for x, y in ((5, 9), (8, 7), (11, 4)):
-    jerky.set(x, y, (245, 245, 240))
-save(jerky.image((70, 30, 15)), "item/salted_jerky.png")
-
-egg = Sprite()
-for x in range(16):
-    for y in range(16):
-        if (x - 7.5) ** 2 / 20 + (y - 8.5) ** 2 / 36 <= 1:
-            egg.set(x, y, jitter((205, 185, 145) if x < 8 else (170, 150, 110), 8))
-for x, y in ((6, 5), (7, 6), (7, 7), (8, 8), (9, 9), (8, 10)):
-    egg.set(x, y, (95, 80, 55))
-save(egg.image((80, 65, 40)), "item/fossilized_egg.png")
-
-charge = Sprite()
-for i in range(9):
-    for w in range(4):
-        x, y = 3 + i + w, 12 - i + w - 2
-        color = (200, 40, 35) if i not in (2, 6) else MATERIALS["titanium"][1]
-        charge.set(x, y, jitter(color, 8))
-charge.set(13, 2, (105, 222, 62))
-charge.set(14, 1, (255, 230, 80))
-save(charge.image((60, 15, 15)), "item/tunnel_charge.png")
-
-scale_sprite = Sprite()
-for x in range(16):
-    for y in range(16):
-        if (x - 7.5) ** 2 / 36 + (y - 6.5) ** 2 / 30 <= 1 and y < 13:
-            ridge = (y + abs(x - 7.5) // 2) % 4 == 0
-            scale_sprite.set(x, y, (160, 110, 20) if ridge else shaded(((255, 225, 110), (212, 175, 55), (160, 110, 20), 0), x, y))
-save(scale_sprite.image((80, 50, 0)), "item/king_scale.png")
-
 
 # ---------------------------------------------------------------- blocks
 STONE, DEEPSLATE = (125, 125, 125), (72, 72, 80)
@@ -423,18 +388,6 @@ for i in range(12):
 whip.set(1, 14, STICK[1])
 save(whip.image((40, 20, 10)), "item/centipede_whip.png")
 
-sigil = Sprite()
-for x in range(16):
-    for y in range(16):
-        d = math.hypot(x - 7.5, y - 7.5)
-        if 3.5 <= d <= 6:
-            sigil.set(x, y, jitter((235, 235, 250) if (x + y) % 3 else (212, 175, 55), 6))
-        elif d < 2.5:
-            sigil.set(x, y, (150, 70, 220))
-for x, y in ((6, 1), (7, 0), (8, 1), (9, 0), (10, 1)):
-    sigil.set(x, y, (255, 215, 60))
-save(sigil.image((50, 30, 70)), "item/royal_sigil.png")
-
 # The last batch of boss weapons: (blade, edge, hilt, outline, width, guard)
 LATE_WEAPONS = {
     "ember_greatsword": ((230, 90, 30), (255, 210, 90), (60, 20, 10), (50, 10, 0), 3, (255, 180, 40)),
@@ -451,105 +404,6 @@ LATE_WEAPONS = {
 }
 for name, (blade, edge, hilt, outline, width, guard) in LATE_WEAPONS.items():
     save(big_blade(blade, edge, hilt, outline, width=width, guard=guard), f"item/{name}.png")
-
-# Realm charms: a gold amulet on a cord with the realm's gem.
-CHARMS = {
-    "verdant_charm": (110, 220, 90), "prospectors_charm": (230, 60, 70), "crystal_charm": (150, 110, 255),
-    "sovereign_charm": (255, 210, 60), "paragon_charm": (200, 120, 255), "chaos_charm": (60, 20, 80),
-}
-for name, gem in CHARMS.items():
-    c = Sprite()
-    for x in range(16):
-        for y in range(16):
-            d = math.hypot(x - 7.5, y - 9.5)
-            if d <= 4.6:
-                c.set(x, y, (212, 175, 55) if d > 3.0 else shade(gem, 40 if (x + y) < 16 else -20))
-    c.set(6, 8, (255, 255, 255))
-    c.line(4, 5, 7, 1, (150, 120, 90))
-    c.line(11, 5, 8, 1, (150, 120, 90))
-    if name == "chaos_charm":
-        for x, y in ((7, 9), (8, 10), (9, 9)):
-            c.set(x, y, (255, 60, 200))
-    save(c.image((70, 50, 20)), f"item/{name}.png")
-
-# Mount eggs (speckled, in the boss's colors) and mech kits (a riveted crate with a glowing core).
-EGGS = {"skyclaw_egg": ((230, 200, 140), (140, 90, 40)), "azure_drake_egg": ((110, 160, 240), (30, 60, 140)),
-        "tide_dragon_egg": ((90, 200, 210), (20, 90, 110)), "royal_egg": ((220, 180, 60), (140, 10, 10))}
-for name, (shell, spots) in EGGS.items():
-    e = Sprite()
-    for x in range(16):
-        for y in range(16):
-            if (x - 7.5) ** 2 / 22 + (y - 8.5) ** 2 / 38 <= 1:
-                e.set(x, y, spots if rng.random() < 0.18 else shade(shell, 25 if x < 7 else -10))
-    e.set(5, 5, (255, 255, 255))
-    save(e.image(shade(spots, -40)), f"item/{name}.png")
-for name, core in (("ant_mech_kit", (230, 60, 40)), ("spider_mech_kit", (240, 200, 60))):
-    k = Sprite()
-    for x in range(2, 14):
-        for y in range(4, 14):
-            k.set(x, y, (150, 150, 160) if (x in (2, 13) or y in (4, 13)) else (110, 110, 120))
-    for x, y in ((3, 5), (12, 5), (3, 12), (12, 12)):
-        k.set(x, y, (210, 210, 220))
-    for x in range(6, 10):
-        for y in range(7, 11):
-            k.set(x, y, core)
-    save(k.image((40, 40, 50)), f"item/{name}.png")
-
-# Zoo cage: a gold-capped iron birdcage, empty and with a creature inside.
-for name, inside in (("zoo_cage", None), ("zoo_cage_filled", (120, 200, 90))):
-    c = Sprite()
-    for x in range(3, 13):
-        for y in range(4, 15):
-            if y in (4, 14):
-                c.set(x, y, (212, 175, 55))
-            elif x % 2 == 1:
-                c.set(x, y, (170, 170, 180))
-    c.line(6, 3, 9, 3, (212, 175, 55))
-    c.set(7, 1, (212, 175, 55)); c.set(8, 1, (212, 175, 55)); c.set(7, 2, (212, 175, 55))
-    if inside:
-        for x in range(5, 11):
-            for y in range(8, 14):
-                if (x - 7.5) ** 2 / 7 + (y - 11) ** 2 / 6 <= 1 and x % 2 == 0:
-                    c.set(x, y, inside)
-        c.set(6, 9, (20, 20, 20)); c.set(8, 9, (20, 20, 20))
-    save(c.image((60, 50, 30)), f"item/{name}.png")
-
-# Paragon Bow (and its three drawing frames) and Paragon Fishing Rod.
-def bow(pull):
-    b = Sprite()
-    bend = [0, 1, 2, 3][pull]
-    for t in range(13):
-        x = 2 + t
-        y = 13 - t
-        # The limbs bow outward; the more it's pulled, the deeper the curve.
-        off = round((1 - abs(t - 6) / 6) * (2 + bend))
-        b.set(x - off, y - off, MATERIALS["paragon"][1] if 2 < t < 10 else MATERIALS["paragon"][0])
-    sx, sy = 3 + bend, 12 - 0 + 0
-    b.line(2, 13, 14, 1, (230, 230, 230)) if pull == 0 else (b.line(2, 13, 8 - bend, 7 + bend, (230, 230, 230)), b.line(8 - bend, 7 + bend, 14, 1, (230, 230, 230)))
-    if pull:
-        b.line(9 - bend, 6 + bend, 12 - bend, 3 + bend, (180, 140, 90))
-        b.set(12 - bend, 3 + bend, (220, 220, 230))
-    return b.image(MATERIALS["paragon"][3])
-save(bow(0), "item/paragon_bow.png")
-for i in range(3):
-    save(bow(i + 1), f"item/paragon_bow_pulling_{i}.png")
-rod = Sprite()
-rod.line(2, 14, 12, 4, MATERIALS["paragon"][1])
-rod.line(13, 3, 14, 3, MATERIALS["paragon"][0])
-rod.line(14, 4, 14, 11, (230, 230, 230))
-rod.set(14, 12, (255, 120, 40)); rod.set(13, 12, (255, 200, 60))
-save(rod.image(MATERIALS["paragon"][3]), "item/paragon_fishing_rod.png")
-
-# Boss scales for the scale armors (same shape as King's Scale, recolored).
-for name, (hi, mid, dark) in {"gorgantua_scale": ((140, 230, 240), (60, 120, 90), (30, 60, 45)),
-                              "empress_scale": ((250, 180, 240), (150, 80, 200), (70, 40, 120))}.items():
-    sc = Sprite()
-    for x in range(16):
-        for y in range(16):
-            if (x - 7.5) ** 2 / 36 + (y - 6.5) ** 2 / 30 <= 1 and y < 13:
-                ridge = (y + abs(x - 7.5) // 2) % 4 == 0
-                sc.set(x, y, dark if ridge else shaded((hi, mid, dark, 0), x, y))
-    save(sc.image(shade(dark, -30)), f"item/{name}.png")
 
 # Gadgets
 z = Sprite()
@@ -585,112 +439,6 @@ save(big_blade((80, 20, 20), (255, 120, 40), (40, 20, 20), (25, 5, 5), guard=(70
 
 save(big_blade((236, 184, 60), (255, 246, 185), (120, 40, 140), (62, 20, 72), width=4, guard=(165, 70, 190)), "item/behemoth_blade.png")
 
-# Trees: Duplicator log/core/leaves, Experience leaves, and saplings with fruit in the ore's color.
-def bark(main, dark, glow=None):
-    img = Image.new("RGBA", (16, 16))
-    for x in range(16):
-        for y in range(16):
-            c = dark if (x % 4 == 0 or (x + y // 3) % 7 == 0) else main
-            img.putpixel((x, y), jitter(c, 8) + (255,))
-    if glow:
-        for x, y in ((7, 4), (8, 4), (7, 5), (8, 6), (7, 7), (8, 8), (7, 9), (8, 10), (7, 11), (8, 11)):
-            img.putpixel((x, y), glow + (255,))
-    return img
-def rings(main, dark, center):
-    img = Image.new("RGBA", (16, 16))
-    for x in range(16):
-        for y in range(16):
-            d = max(abs(x - 7.5), abs(y - 7.5))
-            c = dark if d > 6.5 else center if d < 2 else (main if int(d) % 2 else shade(main, -15))
-            img.putpixel((x, y), jitter(c, 5) + (255,))
-    return img
-def leaves(color, sparkle=None):
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for x in range(16):
-        for y in range(16):
-            if rng.random() < 0.82:
-                c = sparkle if sparkle and rng.random() < 0.08 else jitter(color, 20)
-                img.putpixel((x, y), c + (255,))
-    return img
-DUP_BARK, DUP_DARK, DUP_GLOW = (110, 80, 150), (70, 45, 100), (120, 240, 255)
-save(bark(DUP_BARK, DUP_DARK), "block/duplicator_log.png")
-save(rings((180, 150, 210), DUP_DARK, (200, 170, 230)), "block/duplicator_log_top.png")
-save(bark(DUP_BARK, DUP_DARK, DUP_GLOW), "block/duplicator_core.png")
-save(rings((180, 150, 210), DUP_DARK, DUP_GLOW), "block/duplicator_core_top.png")
-save(leaves((170, 110, 220), (230, 200, 255)), "block/duplicator_leaves.png")
-save(leaves((120, 220, 60), (240, 255, 120)), "block/experience_leaves.png")
-SAPLINGS = {"duplicator_sapling": (170, 110, 220), "experience_sapling": (150, 240, 70),
-            "iron_ore_sapling": (216, 175, 147), "gold_ore_sapling": (250, 220, 60), "diamond_ore_sapling": (90, 230, 230),
-            "emerald_ore_sapling": (40, 200, 90), "ruby_ore_sapling": (220, 30, 60)}
-for name, fruit in SAPLINGS.items():
-    sp = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for y in range(9, 16):
-        sp.putpixel((8, y), (110, 75, 40, 255))
-    for x in range(16):
-        for y in range(16):
-            if (x - 8) ** 2 + (y - 6) ** 2 <= 20 and rng.random() < 0.85:
-                sp.putpixel((x, y), jitter((60, 140, 40), 15) + (255,))
-    for x, y in ((6, 4), (10, 5), (8, 8), (5, 7)):
-        sp.putpixel((x, y), fruit + (255,))
-    save(sp, f"block/{name}.png")
-
-# Gorgantua egg quest and the Summoning Altar.
-frag = Sprite()
-for x, y in ((6, 6), (7, 6), (8, 7), (5, 7), (6, 7), (7, 7), (6, 8), (7, 8), (8, 8), (9, 8), (7, 9), (8, 9), (8, 10)):
-    frag.set(x, y, jitter((120, 140, 110), 12))
-frag.set(7, 7, (160, 230, 240))
-save(frag.image((40, 50, 40)), "item/gorgantua_egg_fragment.png")
-for name, base, glow in (("dried_gorgantua_egg", (120, 125, 110), None), ("gorgantua_egg", (60, 110, 80), (140, 230, 240))):
-    e = Sprite()
-    for x in range(16):
-        for y in range(16):
-            if (x - 7.5) ** 2 / 22 + (y - 8.5) ** 2 / 38 <= 1:
-                crack = (x + y) % 5 == 0 and glow is None
-                e.set(x, y, shade(base, -40) if crack else jitter(base, 10))
-    if glow:
-        for x, y in ((7, 5), (8, 7), (7, 9), (8, 11)):
-            e.set(x, y, glow)
-    save(e.image((30, 35, 30)), f"item/{name}.png")
-altar = Image.new("RGBA", (16, 16))
-for x in range(16):
-    for y in range(16):
-        edge = x in (0, 15) or y in (0, 15)
-        rune = (x in (4, 11) and 4 <= y <= 11) or (y in (4, 11) and 4 <= x <= 11) or (x == y and 5 <= x <= 10)
-        c = (212, 175, 55) if edge else (180, 80, 230) if rune else (25, 15, 35)
-        altar.putpixel((x, y), jitter(c, 6) + (255,))
-save(altar, "block/summoning_altar.png")
-
-# Utility items
-sh = Sprite()
-for x in range(3, 13):
-    for y in range(6, 14):
-        sh.set(x, y, jitter((130, 130, 130), 15))
-for x in range(2, 14):
-    sh.set(x, 5, (100, 100, 100))
-for y in range(10, 14):
-    sh.set(7, y, (60, 40, 20)); sh.set(8, y, (60, 40, 20))
-save(sh.image((50, 50, 50)), "item/instant_shelter.png")
-ut = Sprite()
-ut.line(8, 14, 8, 6, MATERIALS["titanium"][1])
-for x, y in ((7, 5), (8, 5), (9, 5), (8, 4), (7, 3), (8, 3), (9, 3), (8, 2)):
-    ut.set(x, y, (255, 230, 90) if y > 3 else (255, 255, 200))
-ut.set(8, 7, MATERIALS["ruby"][1])
-save(ut.image((60, 50, 20)), "item/ultimate_torch.png")
-xs = Sprite()
-for x in range(16):
-    for y in range(16):
-        d = math.hypot(x - 7.5, y - 7.5)
-        if d <= 5:
-            xs.set(x, y, (150, 240, 70) if d < 2.5 else (105, 75, 225))
-save(xs.image((30, 20, 60)), "item/xp_siphon.png")
-sf = Sprite()
-for x in range(2, 14):
-    for y in range(4, 12):
-        edge = x in (2, 13) or y in (4, 11)
-        if edge or (x + y) % 2 == 0:
-            sf.set(x, y, (150, 105, 55) if edge else (210, 200, 170))
-save(sf.image((60, 40, 20)), "item/sifter.png")
-
 hook = Sprite()
 hook.line(2, 13, 11, 4, STICK[0])
 for x, y in ((11, 3), (12, 2), (13, 2), (14, 3), (14, 4), (14, 5), (13, 6), (12, 6)):
@@ -701,15 +449,3 @@ save(hook.image((50, 15, 30)), "item/kraken_hook.png")
 
 
 print("textures written to", TEX)
-
-# Repellents: a spray bottle with a colored label.
-for name, label in (("creeper_repellent", (90, 200, 70)), ("kraken_repellent", (60, 90, 200)), ("bug_repellent", (210, 90, 40))):
-    r = Sprite()
-    for x in range(5, 11):
-        for y in range(6, 15):
-            r.set(x, y, label if 9 <= y <= 12 else (225, 230, 235))
-    for x in range(6, 10):
-        r.set(x, 5, (120, 120, 130))
-    for x, y in ((7, 3), (7, 4), (8, 4), (9, 3), (10, 3)):
-        r.set(x, y, (60, 60, 70))
-    save(r.image((40, 40, 50)), f"item/{name}.png")

@@ -5,6 +5,7 @@ crisp outline, light from the top left. Chitin and Dino Hide armor are drawn by 
 Run with plain python3 (needs Pillow), after gen_items.py.
 """
 from pixelart import *  # noqa: F401,F403  (Sprite, ramp, ascii_mask, seg_mask, poly_mask, save)
+import math
 import random
 
 from PIL import Image
@@ -231,63 +232,130 @@ def mining_charge():
 # ------------------------------------------------------------------ blocks
 
 def spectral_glass():
+    """Translucent: a faint ghostly fill, a bevelled frame with corner clasps, and drifting wisps."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    edge = ramp("ecto", 3)
+    for x in range(1, 15):
+        for y in range(1, 15):
+            img.putpixel((x, y), ramp("ecto", 2) + (34,))
     for i in range(16):
-        for (x, y) in ((i, 0), (i, 15), (0, i), (15, i)):
-            img.putpixel((x, y), edge + (150,))
-    for (x, y) in ((2, 2), (3, 3), (12, 5), (5, 12), (13, 13)):
-        img.putpixel((x, y), ramp("ecto", 4) + (110,))
+        for (x, y), k in (((i, 0), 4), ((0, i), 4), ((i, 15), 1), ((15, i), 1)):
+            img.putpixel((x, y), ramp("ecto", k) + (170,))
+    for (cx, cy) in ((1, 1), (14, 1), (1, 14), (14, 14)):
+        for dx, dy in ((0, 0), (1 if cx < 8 else -1, 0), (0, 1 if cy < 8 else -1)):
+            img.putpixel((cx + dx, cy + dy), ramp("ecto", 3) + (190,))
+    # Two soft wisps curling across the pane, brightest at their heads.
+    for i, (x, y) in enumerate(((3, 11), (4, 10), (5, 10), (6, 9), (7, 9), (8, 8), (9, 7), (9, 6))):
+        img.putpixel((x, y), ramp("ecto", 3 if i < 6 else 4) + (70 + 14 * i,))
+    for i, (x, y) in enumerate(((8, 13), (9, 12), (10, 12), (11, 11), (12, 10))):
+        img.putpixel((x, y), ramp("ecto", 3) + (60 + 16 * i,))
+    for (x, y) in ((4, 4), (11, 4), (12, 5)):
+        img.putpixel((x, y), ramp("ecto", 4) + (140,))
     return img
 
 
 def firefly_jar():
-    """Mapped onto the jar's sides (u 4..12, v 6..16) and top (4..12, 4..12): glass with fireflies inside."""
+    """Cutout, so every texel is opaque or clear. Sides use u 4..12, v 6..16 and the top 4..12, 4..12: a glass
+    outline with a glint, a mossy floor and fireflies with soft halos, seen through the clear glass."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y in range(4, 16):
+        img.putpixel((4, y), ramp("glass", 4) + (255,))
+        img.putpixel((11, y), ramp("glass", 1) + (255,))
     for x in range(4, 12):
-        for y in range(4, 16):
-            a = 200 if x in (4, 11) or y in (4, 15) else 60
-            img.putpixel((x, y), ramp("glass", 3 if x == 4 else 2) + (a,))
-    for (x, y) in ((6, 8), (9, 10), (7, 12), (10, 13), (8, 6), (5, 11)):
+        img.putpixel((x, 4), ramp("glass", 3) + (255,))
+        img.putpixel((x, 6), ramp("glass", 3) + (255,))   # rim of the sides
+        img.putpixel((x, 15), ramp("dirt", 1) + (255,))
+    for x in range(4, 12):
+        img.putpixel((x, 14), (ramp("chitin_sheen", 2) if x % 3 else ramp("dirt", 2)) + (255,))  # moss
+    for y in (8, 9, 10):
+        img.putpixel((5, y), ramp("glass", 4) + (255,))      # glint
+    for (x, y) in ((7, 8), (9, 11), (6, 12), (8, 5), (10, 9)):
         img.putpixel((x, y), ramp("glow", 4) + (255,))
-        if x + 1 < 11:
-            img.putpixel((x + 1, y), ramp("glow", 2) + (255,))
+        for dx, dy in ((1, 0), (0, 1)):
+            q = (x + dx, y + dy)
+            if 5 <= q[0] <= 10 and 5 <= q[1] <= 13 and img.getpixel(q)[3] == 0:
+                img.putpixel(q, ramp("glow", 2) + (255,))
     return img
 
 
-ANTS = {  # hill: accent color of its ants
-    "worker_ant_hill": ramp("stone", 0),
-    "fire_ant_hill": ramp("kaboom", 2),
-    "prism_ant_hill": ramp("venom", 3),
-    "volatile_ant_hill": ramp("venom_drop", 2),
+ANTS = {  # hill: (ant color, soil ramp, what else is in the soil)
+    "worker_ant_hill": (ramp("stone", 0), "dirt", "twigs"),
+    "fire_ant_hill": (ramp("kaboom", 2), "dirt", "embers"),
+    "prism_ant_hill": (ramp("venom", 3), "dirt", "crystals"),
+    "volatile_ant_hill": (ramp("venom_drop", 2), "dirt", "goo"),
 }
+RAMPS["ember_soil"] = [(46, 20, 12), (84, 40, 24), (118, 60, 36), (146, 80, 50), (176, 104, 70)]
 
 
 def ant_hill(name, accent):
+    accent, soil, extra = accent
+    if extra == "embers":
+        soil = "ember_soil"
     rng = random.Random(name)
     side = Image.new("RGBA", (16, 16))
     top = Image.new("RGBA", (16, 16))
+    # Side: crumbly packed crust on top, darker strata below, burrows with ants inside.
     for x in range(16):
         for y in range(16):
-            k = rng.choice((1, 2, 2, 2, 3))
-            side.putpixel((x, y), ramp("dirt", k) + (255,))
-            top.putpixel((x, y), ramp("dirt", rng.choice((2, 2, 3, 3, 4))) + (255,))
-    # Tunnels in the side, and the entrance hole on top with a raised rim.
-    for (x, y) in ((3, 4), (4, 4), (11, 7), (12, 7), (6, 11), (7, 11), (13, 12)):
-        side.putpixel((x, y), ramp("dirt", 0) + (255,))
+            band = 3 if y < 3 else (2 if y < 9 else 1)
+            k = band + rng.choice((-1, 0, 0, 0, 1)) if y > 0 else 4
+            side.putpixel((x, y), ramp(soil, max(0, min(4, k))) + (255,))
+    for x in range(16):
+        side.putpixel((x, 3), ramp(soil, 1 if x % 3 else 0) + (255,))
+    burrows = [[(1, 6), (2, 6), (3, 7), (4, 7), (5, 7), (6, 8)], [(9, 11), (10, 11), (11, 10), (12, 10), (13, 11), (14, 11)],
+               [(3, 13), (4, 13), (5, 12), (6, 12)]]
+    for path in burrows:
+        for (x, y) in path:
+            side.putpixel((x, y), (16, 10, 6, 255))
+            side.putpixel((x, y + 1), ramp(soil, 0) + (255,))
+            side.putpixel((x, y - 1), ramp(soil, 3) + (255,))
+        x, y = path[len(path) // 2]
+        side.putpixel((x, y), accent + (255,))
+    for (x, y) in ((8, 1), (12, 5), (2, 10), (11, 14)):  # pebbles
+        side.putpixel((x, y), ramp("stone", 3) + (255,))
+        side.putpixel((x + 1, y), ramp("stone", 1) + (255,))
+    # Top: a raised mound in rings around the entrance, an ant trail spiralling out.
     for x in range(16):
         for y in range(16):
             d = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
-            if d <= 2.2:
-                top.putpixel((x, y), (12, 8, 4, 255))
-            elif d <= 3.4:
-                top.putpixel((x, y), ramp("dirt", 4 if x + y < 15 else 1) + (255,))
-    # A few of its ants out and about.
-    for (x, y) in ((2, 12), (12, 3), (13, 11)):
-        top.putpixel((x, y), accent + (255,))
-        top.putpixel((x + 1, y), accent + (255,))
-    side.putpixel((9, 2), accent + (255,))
-    side.putpixel((10, 2), accent + (255,))
+            k = 2 + (1 if int(d) % 3 == 0 else 0) + rng.choice((-1, 0, 0, 1))
+            if d <= 1.6:
+                c = (10, 6, 3)
+            elif d <= 2.4:
+                c = (30, 18, 10)
+            elif d <= 3.6:
+                c = ramp(soil, 4 if x + y < 15 else 1)
+            else:
+                c = ramp(soil, max(0, min(4, k)))
+            top.putpixel((x, y), c + (255,))
+    for i in range(14):
+        a = i * 0.5
+        r = 4.2 + i * 0.32
+        top.putpixel((int(7.5 + r * math.cos(a)) % 16, int(7.5 + r * math.sin(a)) % 16), accent + (255,))
+    r2 = random.Random(name + "extra")
+    spots = [(2, 2), (12, 3), (3, 12), (13, 12), (11, 8)]
+    for (x, y) in spots:
+        if extra == "twigs":
+            top.putpixel((x, y), ramp("wood", 3) + (255,))
+            top.putpixel((x + 1, y + 1), ramp("wood", 1) + (255,))
+        elif extra == "embers":
+            top.putpixel((x, y), ramp("kaboom", 4) + (255,))
+            top.putpixel((x + 1, y), ramp("kaboom", 2) + (255,))
+        elif extra == "crystals":
+            top.putpixel((x, y), ramp("venom", 4) + (255,))
+            top.putpixel((x, y + 1), ramp("venom", 2) + (255,))
+            top.putpixel((x + 1, y + 1), ramp("ecto", 3) + (255,))
+        else:
+            top.putpixel((x, y), ramp("venom_drop", 4) + (255,))
+            top.putpixel((x + 1, y), ramp("venom_drop", 3) + (255,))
+            top.putpixel((x, y + 1), ramp("venom_drop", 2) + (255,))
+    for (x, y) in ((6, 1), (13, 6), (1, 9)) if extra != "twigs" else ():
+        if extra == "embers":
+            side.putpixel((x, y + 4), ramp("kaboom", 3) + (255,))
+        elif extra == "crystals":
+            side.putpixel((x, y + 4), ramp("venom", 4) + (255,))
+            side.putpixel((x, y + 5), ramp("venom", 2) + (255,))
+        else:
+            side.putpixel((x, y + 4), ramp("venom_drop", 3) + (255,))
     return side, top
 
 

@@ -14,9 +14,11 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 - The King and The Ascended King use a hand-made **GeckoLib** model (required dependency). The owner may edit
   `geo/entity/the_king.geo.json` in Blockbench: don't re-run `tools/gen_king.py` over their edits without asking.
 - Art direction: sleek, unique, still Minecraft-like. Check visuals with photos, not guesses.
-- Item/block art is generated: `tools/gen_items.py` (tools, armor, ores as overlays on vanilla stone, eggs),
-  `tools/gen_weapons.py` (boss weapons; hand poses in `models/item/weapon_*.json`, mapped in
-  `ModItemModels.WEAPON_STYLES`), shared toolkit `tools/pixelart.py`. Run after `tools/gen_textures.py`.
+- Item/block art is generated: `tools/gen_items.py` (tools, armor with icon masks and a worn-layer motif per set,
+  ores as overlays on vanilla stone, eggs), `tools/gen_weapons.py` (boss weapons, one design each; hand poses in
+  `models/item/weapon_*.json`, mapped in `ModItemModels.WEAPON_STYLES`), `tools/gen_drops.py` (mob drops),
+  `tools/gen_icons.py` (charms, mount eggs, gadgets, trees, altar), shared toolkit `tools/pixelart.py`. Run in that
+  order after `tools/gen_textures.py`, whose placeholders they overwrite.
 - Easter Bunny lays real spawn eggs for any non-boss mob (bosses excluded: NeoSpawn bosses, vanilla four,
   `c:bosses`); painted eggs crack into spawn eggs; dried eggs (Fossil Ore, sifting) hatch in water.
 - Spawns: bosses gated to 1-in-40 natural attempts, 160 blocks apart, open sky (`ModMobs.bossOk`).
