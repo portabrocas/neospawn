@@ -464,6 +464,7 @@ public class NeoBoss extends Monster implements NeoMob {
             }
             case GEYSER, WHIRLPOOL, WAVE -> playSound(SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, 4.0f, 0.5f);
             case SPORE_CLOUD -> playSound(SoundEvents.SPORE_BLOSSOM_BREAK, 4.0f, 0.5f);
+            case CRYSTAL_SHARD_RAIN -> playSound(SoundEvents.AMETHYST_BLOCK_RESONATE, 6.0f, 0.5f);
             default -> playSound(spec().isSkyBoss() ? SoundEvents.ENDER_DRAGON_GROWL : SoundEvents.RAVAGER_ROAR,
                     2.5f, 1.3f + random.nextFloat() * 0.2f);
         }
@@ -486,6 +487,10 @@ public class NeoBoss extends Monster implements NeoMob {
                 level.sendParticles(ParticleTypes.BUBBLE_COLUMN_UP, aimPos.x, aimPos.y + 0.2, aimPos.z, 8, 0.5, 0.1, 0.5, 0.05);
             }
             case SPORE_CLOUD -> ring(aimPos, 5, ParticleTypes.SPORE_BLOSSOM_AIR);
+            case CRYSTAL_SHARD_RAIN -> {
+                ring(aimPos, SHARD_RADIUS, ParticleTypes.END_ROD);
+                ring(aimPos, SHARD_RADIUS / 2, ParticleTypes.WAX_OFF);
+            }
             case BEAM -> {
                 Vec3 mouth = mouth();
                 Vec3 to = aimPos.subtract(mouth);
@@ -573,6 +578,7 @@ public class NeoBoss extends Monster implements NeoMob {
             case WIND_GUST -> windGust();
             case METEOR_SHOWER -> meteorShower(aim);
             case SPORE_CLOUD -> sporeCloud(aim);
+            case CRYSTAL_SHARD_RAIN -> crystalShardRain(aim);
             case SCYTHE -> scythe();
             case STING -> sting(target);
             case TOSS -> toss(target);
@@ -857,6 +863,35 @@ public class NeoBoss extends Monster implements NeoMob {
             meteor.setPos(x, aim.y + 24 + random.nextInt(8), z);
             level().addFreshEntity(meteor);
         }
+    }
+
+    private static final double SHARD_RADIUS = 6;
+
+    /**
+     * Amethyst shards hail down inside the warning ring around where the target stood: each strike hurts and slows
+     * everything within two blocks of it. No fire, no block damage. Public for the GameTests (returns strike points).
+     */
+    public java.util.List<Vec3> crystalShardRain(Vec3 aim) {
+        ServerLevel level = (ServerLevel) level();
+        playSound(SoundEvents.AMETHYST_CLUSTER_BREAK, 6.0f, 0.6f);
+        java.util.List<Vec3> strikes = new java.util.ArrayList<>();
+        strikes.add(aim); // always one dead centre, so standing still is never safe
+        for (int i = 1; i < (enraged ? 11 : 7); i++) {
+            double angle = random.nextDouble() * Math.PI * 2, r = Math.sqrt(random.nextDouble()) * SHARD_RADIUS;
+            strikes.add(aim.add(Math.cos(angle) * r, 0, Math.sin(angle) * r));
+        }
+        for (Vec3 at : strikes) {
+            level.sendParticles(ParticleTypes.END_ROD, at.x, at.y + 6, at.z, 6, 0.1, 3, 0.1, 0.0);
+            level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK,
+                    net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK.defaultBlockState()), at.x, at.y + 0.2, at.z, 20, 0.4, 0.2, 0.4, 0.1);
+            for (LivingEntity victim : level.getEntitiesOfClass(LivingEntity.class, new AABB(at, at).inflate(2, 3, 2),
+                    e -> e != this && !(e instanceof NeoBoss boss && boss.getType() == getType()))) {
+                if (victim.hurt(damageSources().mobAttack(this), damage() * 0.45f)) {
+                    victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), this);
+                }
+            }
+        }
+        return strikes;
     }
 
     /** Drops lingering clouds of poisonous, dizzying spores on the target. */

@@ -92,7 +92,7 @@ neoForge {
                 systemProperty 'neospawn.photos.gear', 'true'
             }
             if (project.hasProperty('anim')) {
-                systemProperty 'neospawn.king.anim', project.property('anim')
+                systemProperty 'neospawn.geo.anim', project.property('anim')
             }
             programArguments.addAll '--quickPlaySingleplayer', 'neospawn_photos', '--width', '1280', '--height', '720'
         }

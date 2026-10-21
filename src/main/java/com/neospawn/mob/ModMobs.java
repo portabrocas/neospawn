@@ -481,7 +481,7 @@ public final class ModMobs {
         skyBoss("the_king", "The King", look(Family.QUADRUPED).body(28, 12, 12).leg(10).neck(10).head(10).snout(6).tail(32)
                 .wing(40).with(Extra.HORNS, Extra.SPIKES, Extra.CROWN).colors(0xDDB443, 0x9A1424, 0xFFE066).eye(0xFFF07A)
                 .belly(0xF0DFA8).pattern(Pattern.SCALES).glow().scale(4.0f))
-                .geo().size(7.0f, 5.0f).stats(1000, 24, 0.3).flySpeed(0.6).armor(12).voice(Voice.DRAGON).xp(500)
+                .geo("the_king", 1.7f, KingBoss::new).size(7.0f, 5.0f).stats(1000, 24, 0.3).flySpeed(0.6).armor(12).voice(Voice.DRAGON).xp(500)
                 .bar(BossEvent.BossBarColor.YELLOW)
                 .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP)
                 .egg(0xD4AF37, 0x8B0000);
@@ -516,7 +516,7 @@ public final class ModMobs {
         skyBoss("the_ascended_king", "The Ascended King", look(Family.QUADRUPED).body(28, 12, 12).leg(10).neck(12).head(10).snout(6)
                 .tail(36).wing(44).with(Extra.HORNS, Extra.SPIKES, Extra.CROWN).colors(0xD8DCE6, 0x4A2378, 0xC79BFF).eye(0xFF465A)
                 .belly(0xF4F2FA).pattern(Pattern.SCALES).glow().scale(5.5f))
-                .geo().size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.5f)
+                .geo("the_king", 2.4f, KingBoss::new).size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.5f)
                 .voice(Voice.DRAGON).xp(5000).minion("snapwyrm").bar(BossEvent.BossBarColor.PURPLE)
                 .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.METEOR_SHOWER,
                         BossAttack.BEAM, BossAttack.WIND_GUST, BossAttack.SUMMON)
@@ -557,9 +557,11 @@ public final class ModMobs {
         skyBoss("empress", "The Empress", look(Family.QUADRUPED).body(28, 14, 14).leg(10).neck(16).head(9).snout(5).tail(34).wing(44)
                 .with(Extra.HORNS, Extra.CREST, Extra.SPIKES).colors(0x7A3AB8, 0x3AB8C8, 0xF2A8E8).eye(0xFFF2A8)
                 .pattern(Pattern.SCALES).glow().scale(3.0f))
+                .geo("empress", 1.6f, EmpressBoss::new)
                 .size(7.0f, 6.0f).stats(1024, 30, 0.3).flySpeed(0.65).armor(18).damageTaken(0.6f).voice(Voice.DRAGON).xp(2500)
                 .bar(BossEvent.BossBarColor.PINK)
-                .attacks(BossAttack.BEAM, BossAttack.METEOR_SHOWER, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.FIREBALL_VOLLEY)
+                .attacks(BossAttack.BEAM, BossAttack.CRYSTAL_SHARD_RAIN, BossAttack.LIGHTNING, BossAttack.SWOOP,
+                        BossAttack.WIND_GUST, BossAttack.METEOR_SHOWER)
                 .drop(ModItems.EMPRESS_BATTLEAXE, 1, 1).drop(ModItems.EMPRESS_SCALE, 12, 18).drop(ModItems.PARAGON_INGOT, 3, 6)
                 .drop(v(Items.NETHER_STAR), 1, 1)
                 .drop(v(Items.DIAMOND), 8, 16)
@@ -782,7 +784,7 @@ public final class ModMobs {
             case HOSTILE_FLYER -> NeoHostileFlyer::new;
             case SWIMMER -> NeoSwimmer::new;
             case HOSTILE_SWIMMER -> NeoHostileSwimmer::new;
-            case BOSS, SEA_BOSS, SKY_BOSS -> spec.geo ? KingBoss::new : NeoBoss::new;
+            case BOSS, SEA_BOSS, SKY_BOSS -> spec.geo ? spec.geoFactory : NeoBoss::new;
         };
         EntityType.Builder<?> builder = EntityType.Builder.of(factory, category(spec))
                 .sized(spec.hitboxWidth, spec.hitboxHeight)

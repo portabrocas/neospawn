@@ -1,14 +1,14 @@
 package com.neospawn.client;
 
 import com.neospawn.NeoSpawn;
-import com.neospawn.client.renderer.KingRenderer;
+import com.neospawn.client.renderer.GeoBossRenderer;
 import com.neospawn.client.renderer.NeoMobRenderer;
 import com.neospawn.client.shape.Shapes;
 import com.neospawn.item.DriedEggItem;
 import com.neospawn.item.PaintedEggItem;
 import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ZooCageItem;
-import com.neospawn.mob.KingBoss;
+import com.neospawn.mob.GeoBoss;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.registry.ModItems;
@@ -37,8 +37,7 @@ public final class NeoSpawnClient {
         event.registerEntityRenderer(ModEntities.CRISTIAN.get(), com.neospawn.client.renderer.CristianRenderer::new);
         for (MobSpec spec : ModMobs.ALL) {
             if (spec.geo) {
-                float scale = spec.id.equals("the_ascended_king") ? 2.4f : 1.7f;
-                event.registerEntityRenderer((EntityType<KingBoss>) spec.type.get(), context -> new KingRenderer(context, spec.id, scale));
+                event.registerEntityRenderer((EntityType<GeoBoss>) spec.type.get(), context -> new GeoBossRenderer(context, spec));
             } else {
                 event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
             }
