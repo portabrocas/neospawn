@@ -202,6 +202,7 @@ public class ModRecipes extends RecipeProvider {
                 .save(out, NeoSpawn.id("tunnel_charge"));
 
         mobDrops(out);
+        utopia(out);
 
         for (Item meat : new Item[]{Items.COOKED_BEEF, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON}) {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.SALTED_JERKY.get(), 2)
@@ -382,5 +383,39 @@ public class ModRecipes extends RecipeProvider {
                 .pattern(" S ").pattern("XBX").pattern(" S ")
                 .define('S', ModItems.SALT.get()).define('X', ingredient).define('B', Items.GLASS_BOTTLE)
                 .unlockedBy("has_salt", has(ModItems.SALT.get())).save(out, NeoSpawn.id(BuiltInRegistries.ITEM.getKey(result).getPath()));
+    }
+
+    // ---------------------------------------------------------------- Utopia (WS-E): aurelian wood set, dyes, clouds, turf
+    private void utopia(RecipeOutput out) {
+        Item planks = ModBlocks.AURELIAN_PLANKS.get().asItem();
+        String hasPlanks = "has_aurelian_planks";
+        planksFromLogs(out, planks, ModTags.Items.AURELIAN_LOGS, 4);
+        woodFromLogs(out, ModBlocks.AURELIAN_WOOD.get(), ModBlocks.AURELIAN_LOG.get());
+        woodFromLogs(out, ModBlocks.STRIPPED_AURELIAN_WOOD.get(), ModBlocks.STRIPPED_AURELIAN_LOG.get());
+        Ingredient p = Ingredient.of(planks);
+        stairBuilder(ModBlocks.AURELIAN_STAIRS.get(), p).group("wooden_stairs").unlockedBy(hasPlanks, has(planks)).save(out);
+        slab(out, RecipeCategory.BUILDING_BLOCKS, ModBlocks.AURELIAN_SLAB.get(), planks);
+        fenceBuilder(ModBlocks.AURELIAN_FENCE.get(), p).group("wooden_fence").unlockedBy(hasPlanks, has(planks)).save(out);
+        fenceGateBuilder(ModBlocks.AURELIAN_FENCE_GATE.get(), p).group("wooden_fence_gate").unlockedBy(hasPlanks, has(planks)).save(out);
+        doorBuilder(ModBlocks.AURELIAN_DOOR.get(), p).group("wooden_door").unlockedBy(hasPlanks, has(planks)).save(out);
+        trapdoorBuilder(ModBlocks.AURELIAN_TRAPDOOR.get(), p).group("wooden_trapdoor").unlockedBy(hasPlanks, has(planks)).save(out);
+        buttonBuilder(ModBlocks.AURELIAN_BUTTON.get(), p).group("wooden_button").unlockedBy(hasPlanks, has(planks)).save(out);
+        pressurePlate(out, ModBlocks.AURELIAN_PRESSURE_PLATE.get(), planks);
+
+        for (var dye : java.util.Map.of(ModBlocks.SUNBLOOM.get(), Items.YELLOW_DYE, ModBlocks.HONEYBELL.get(), Items.ORANGE_DYE,
+                ModBlocks.STARPETAL.get(), Items.LIGHT_BLUE_DYE).entrySet()) {
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, dye.getValue()).requires(dye.getKey()).group(getItemName(dye.getValue()))
+                    .unlockedBy("has_" + getItemName(dye.getKey()), has(dye.getKey()))
+                    .save(out, NeoSpawn.id(getItemName(dye.getValue()) + "_from_" + getItemName(dye.getKey())));
+        }
+
+        // Golden turf: a grass block dusted with gold. Sky fluff: wool and feathers, light as air.
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_GRASS.get())
+                .requires(Items.GRASS_BLOCK).requires(Items.GOLD_NUGGET).requires(Items.GOLD_NUGGET)
+                .unlockedBy("has_golden_grass", has(ModBlocks.GOLDEN_GRASS.get())).save(out, NeoSpawn.id("golden_grass"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SKY_FLUFF.get(), 4)
+                .pattern("WFW").pattern("F F").pattern("WFW")
+                .define('W', Items.WHITE_WOOL).define('F', Items.FEATHER)
+                .unlockedBy("has_feather", has(Items.FEATHER)).save(out, NeoSpawn.id("sky_fluff"));
     }
 }

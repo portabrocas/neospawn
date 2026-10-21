@@ -3,7 +3,21 @@ package com.neospawn.data;
 import com.neospawn.NeoSpawn;
 import com.neospawn.registry.ModBlocks;
 import net.minecraft.data.PackOutput;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -21,6 +35,9 @@ public class ModBlockStates extends BlockStateProvider {
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.get();
             String name = holder.getId().getPath();
+            if (utopia(block, name)) {
+                continue;
+            }
             if (block instanceof SaplingBlock) {
                 simpleBlock(block, models().cross(name, blockTexture(block)).renderType("cutout"));
             } else if (block instanceof RotatedPillarBlock pillar) {
@@ -54,5 +71,64 @@ public class ModBlockStates extends BlockStateProvider {
                 simpleBlockWithItem(block, cubeAll(block));
             }
         }
+    }
+
+    // ---------------------------------------------------------------- Utopia (textures: tools/gen_utopia.py)
+
+    /** Models for Utopia's grass, flowers, clouds and aurelian wood set. Returns false for every other block. */
+    private boolean utopia(Block block, String name) {
+        ResourceLocation planks = modLoc("block/aurelian_planks");
+        ResourceLocation log = modLoc("block/aurelian_log");
+        ResourceLocation strippedLog = modLoc("block/stripped_aurelian_log");
+        if (block instanceof GrassBlock) {
+            // Vanilla dirt with our own fringe on top (models/block/turf.json, from tools/gen_utopia.py): no biome tint.
+            var grass = models().withExistingParent(name, modLoc("block/turf")).texture("top", modLoc("block/" + name + "_top"))
+                    .texture("side", mcLoc("block/dirt")).texture("bottom", mcLoc("block/dirt"))
+                    .texture("overlay", modLoc("block/" + name + "_side_overlay"));
+            getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(grass)
+                    .nextModel().modelFile(grass).rotationY(90).nextModel().modelFile(grass).rotationY(180)
+                    .nextModel().modelFile(grass).rotationY(270).build());
+            simpleBlockItem(block, grass);
+        } else if (block instanceof FlowerPotBlock pot) {
+            String plant = BuiltInRegistries.BLOCK.getKey(pot.getPotted()).getPath();
+            simpleBlock(block, models().withExistingParent(name, mcLoc("block/flower_pot_cross"))
+                    .texture("plant", modLoc("block/" + plant)).renderType("cutout"));
+        } else if (block instanceof FlowerBlock) {
+            simpleBlock(block, models().cross(name, blockTexture(block)).renderType("cutout"));
+            itemModels().withExistingParent(name, mcLoc("item/generated")).texture("layer0", modLoc("block/" + name));
+        } else if (name.equals("sky_fluff")) {
+            simpleBlockWithItem(block, models().cubeAll(name, blockTexture(block)).renderType("translucent"));
+        } else if (name.equals("aurelian_wood") || name.equals("stripped_aurelian_wood")) {
+            ResourceLocation side = name.startsWith("stripped") ? strippedLog : log;
+            axisBlock((RotatedPillarBlock) block, side, side);
+            simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name)));
+        } else if (block instanceof StairBlock stairs) {
+            stairsBlock(stairs, planks);
+            simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name)));
+        } else if (block instanceof SlabBlock slab) {
+            slabBlock(slab, planks, planks);
+            simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name)));
+        } else if (block instanceof FenceBlock fence) {
+            fenceBlock(fence, planks);
+            itemModels().fenceInventory(name, planks);
+        } else if (block instanceof FenceGateBlock gate) {
+            fenceGateBlock(gate, planks);
+            simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name)));
+        } else if (block instanceof DoorBlock door) {
+            doorBlockWithRenderType(door, modLoc("block/" + name + "_bottom"), modLoc("block/" + name + "_top"), "cutout");
+            itemModels().withExistingParent(name, mcLoc("item/generated")).texture("layer0", modLoc("item/" + name));
+        } else if (block instanceof TrapDoorBlock trapdoor) {
+            trapdoorBlockWithRenderType(trapdoor, blockTexture(block), true, "cutout");
+            simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name + "_bottom")));
+        } else if (block instanceof ButtonBlock button) {
+            buttonBlock(button, planks);
+            itemModels().buttonInventory(name, planks);
+        } else if (block instanceof PressurePlateBlock plate) {
+            pressurePlateBlock(plate, planks);
+            simpleBlockItem(block, models().getExistingFile(modLoc("block/" + name)));
+        } else {
+            return false;
+        }
+        return true;
     }
 }

@@ -83,6 +83,45 @@ public final class ModTags {
             for (String m : List.of("ruby", "tanzanite", "titanium", "uranium", "paragon", "salt")) {
                 tag(Tags.Blocks.STORAGE_BLOCKS).addTag(storageTag(m));
             }
+            utopia();
+        }
+
+        // ---------------------------------------------------------------- Utopia
+        public static final TagKey<Block> AURELIAN_LOGS = BlockTags.create(NeoSpawn.id("aurelian_logs"));
+
+        private void utopia() {
+            var grass = ModBlocks.GOLDEN_GRASS.get();
+            tag(BlockTags.DIRT).add(grass);
+            tag(BlockTags.ANIMALS_SPAWNABLE_ON).add(grass);
+            tag(BlockTags.RABBITS_SPAWNABLE_ON).add(grass);
+            tag(BlockTags.VALID_SPAWN).add(grass);
+            tag(BlockTags.MINEABLE_WITH_SHOVEL).add(grass);
+            tag(BlockTags.SNIFFER_DIGGABLE_BLOCK).add(grass);
+            tag(BlockTags.BEE_GROWABLES).add(ModBlocks.AURELIAN_SAPLING.get());
+            tag(BlockTags.WOOL).add(ModBlocks.SKY_FLUFF.get());
+            tag(AURELIAN_LOGS).add(ModBlocks.AURELIAN_LOG.get(), ModBlocks.AURELIAN_WOOD.get(),
+                    ModBlocks.STRIPPED_AURELIAN_LOG.get(), ModBlocks.STRIPPED_AURELIAN_WOOD.get());
+            tag(BlockTags.LOGS_THAT_BURN).addTag(AURELIAN_LOGS);
+            tag(BlockTags.LOGS).addTag(AURELIAN_LOGS);
+            tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(ModBlocks.AURELIAN_LOG.get());
+            tag(Tags.Blocks.STRIPPED_LOGS).add(ModBlocks.STRIPPED_AURELIAN_LOG.get());
+            tag(Tags.Blocks.STRIPPED_WOODS).add(ModBlocks.STRIPPED_AURELIAN_WOOD.get());
+            tag(BlockTags.PLANKS).add(ModBlocks.AURELIAN_PLANKS.get());
+            tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.AURELIAN_STAIRS.get());
+            tag(BlockTags.WOODEN_SLABS).add(ModBlocks.AURELIAN_SLAB.get());
+            tag(BlockTags.WOODEN_FENCES).add(ModBlocks.AURELIAN_FENCE.get());
+            tag(Tags.Blocks.FENCES_WOODEN).add(ModBlocks.AURELIAN_FENCE.get());
+            tag(BlockTags.FENCE_GATES).add(ModBlocks.AURELIAN_FENCE_GATE.get());
+            tag(Tags.Blocks.FENCE_GATES_WOODEN).add(ModBlocks.AURELIAN_FENCE_GATE.get());
+            tag(BlockTags.WOODEN_DOORS).add(ModBlocks.AURELIAN_DOOR.get());
+            tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.AURELIAN_TRAPDOOR.get());
+            tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.AURELIAN_BUTTON.get());
+            tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.AURELIAN_PRESSURE_PLATE.get());
+            tag(BlockTags.LEAVES).add(ModBlocks.AURELIAN_LEAVES.get());
+            tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.AURELIAN_LEAVES.get());
+            tag(BlockTags.SAPLINGS).add(ModBlocks.AURELIAN_SAPLING.get());
+            ModBlocks.UTOPIA_FLOWERS.forEach(flower -> tag(BlockTags.SMALL_FLOWERS).add(flower.get()));
+            ModBlocks.UTOPIA_POTS.forEach(pot -> tag(BlockTags.FLOWER_POTS).add(pot.get()));
         }
 
         public static TagKey<Block> oreTag(String name) {
@@ -155,6 +194,33 @@ public final class ModTags {
             for (var set : ModItems.ARMOR_SETS) {
                 tag(ItemTags.TRIMMABLE_ARMOR).add(set.helmet().get(), set.chestplate().get(), set.leggings().get(), set.boots().get());
             }
+            utopia();
+        }
+
+        // ---------------------------------------------------------------- Utopia: block tags mirrored onto the items
+        public static final TagKey<Item> AURELIAN_LOGS = ItemTags.create(NeoSpawn.id("aurelian_logs"));
+
+        private void utopia() {
+            copy(Blocks.AURELIAN_LOGS, AURELIAN_LOGS);
+            copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+            copy(BlockTags.LOGS, ItemTags.LOGS);
+            copy(Tags.Blocks.STRIPPED_LOGS, Tags.Items.STRIPPED_LOGS);
+            copy(Tags.Blocks.STRIPPED_WOODS, Tags.Items.STRIPPED_WOODS);
+            copy(BlockTags.PLANKS, ItemTags.PLANKS);
+            copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
+            copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
+            copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
+            copy(Tags.Blocks.FENCES_WOODEN, Tags.Items.FENCES_WOODEN);
+            copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
+            copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
+            copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
+            copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
+            copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
+            copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
+            copy(BlockTags.LEAVES, ItemTags.LEAVES);
+            copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
+            copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
+            copy(BlockTags.DIRT, ItemTags.DIRT);
         }
     }
 

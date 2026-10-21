@@ -2,7 +2,7 @@
   "type": "neospawn:utopia",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "neospawn:utopia",
     "biome_source": {
       "type": "minecraft:fixed",
       "biome": "neospawn:utopia"

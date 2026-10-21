@@ -312,6 +312,7 @@ public final class ModItems {
 
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()
+            .filter(block -> !block.getId().getPath().startsWith("potted_")) // Utopia: flower pots hold the flower's own item
             .map(block -> ITEMS.registerSimpleBlockItem((DeferredBlock<?>) block))
             .toList();
 

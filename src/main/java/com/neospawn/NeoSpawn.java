@@ -36,6 +36,8 @@ public class NeoSpawn {
 
         modEventBus.addListener(ModMobs::registerAttributes);
         modEventBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent e) -> e.enqueueWork(com.neospawn.compat.MorphCompat::register));
+        modEventBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent e) -> e.enqueueWork(ModBlocks::registerPots));
+        com.neospawn.registry.ModParticles.PARTICLES.register(modEventBus);
         modEventBus.addListener(ModMobs::registerSpawnPlacements);
     }
 
