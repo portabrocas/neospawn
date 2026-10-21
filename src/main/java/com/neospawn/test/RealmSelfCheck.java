@@ -88,7 +88,8 @@ public final class RealmSelfCheck {
             }
 
             // Structures appear naturally: generate a patch of each realm and count their loot chests.
-            census(server, Realm.UTOPIA, 24, failures, "tree_of_goodness");
+            // Trees of Goodness are one per 24-chunk region (sitting in its first 14 chunks), so 38 chunks always span one.
+            census(server, Realm.UTOPIA, 38, failures, "tree_of_goodness");
             census(server, Realm.MINING_REALM, 16, failures, "skyclaw_nest");
             // Hand-written structures: locate each in its dimension, generate it, check its loot.
             locate(server, net.minecraft.world.level.Level.OVERWORLD, failures, "ruined_crypt", "sunken_vault");

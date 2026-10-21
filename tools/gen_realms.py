@@ -231,8 +231,17 @@ write("worldgen/placed_feature/duplicator_tree.json", {"feature": "neospawn:dupl
 # Realm structures (procedural features in com.neospawn.worldgen): how rare, and where.
 SURFACE = [{"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": "WORLD_SURFACE_WG"},
            {"type": "minecraft:biome"}]
+def spaced(spacing, separation, salt):
+    """At most one per spacing x spacing chunk region, at least `separation` chunks apart (RegionSpacingPlacement).
+    For boss-guarded trees: a rarity_filter alone let several Kings generate side by side."""
+    return {"type": "neospawn:region_spacing", "spacing": spacing, "separation": separation, "salt": salt}
+
+
 STRUCTURES = {
-    "tree_of_goodness": [{"type": "minecraft:rarity_filter", "chance": 90}] + SURFACE,
+    # One King per 384-block region, never closer than 160 blocks.
+    "tree_of_goodness": [spaced(24, 10, 14357621)] + SURFACE,
+    # Same average rarity as the old 1-in-400, but Empresses can't cluster.
+    "empress_tree": [spaced(20, 8, 14357622)] + SURFACE,
     "skyclaw_nest": [{"type": "minecraft:rarity_filter", "chance": 30}] + SURFACE,
 }
 for name, placement in STRUCTURES.items():

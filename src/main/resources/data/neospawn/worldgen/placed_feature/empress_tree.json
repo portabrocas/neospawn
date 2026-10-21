@@ -2,8 +2,10 @@
   "feature": "neospawn:empress_tree",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 400
+      "type": "neospawn:region_spacing",
+      "spacing": 20,
+      "separation": 8,
+      "salt": 14357622
     },
     {
       "type": "minecraft:in_square"

@@ -30,6 +30,7 @@ public class NeoSpawn {
         ModCreativeTabs.TABS.register(modEventBus);
         AddItemLootModifier.SERIALIZERS.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
+        ModFeatures.PLACEMENTS.register(modEventBus);
         com.neospawn.worldgen.build.ModStructures.TYPES.register(modEventBus);
         com.neospawn.worldgen.build.ModStructures.PIECES.register(modEventBus);
 

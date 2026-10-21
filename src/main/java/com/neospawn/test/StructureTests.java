@@ -2,12 +2,14 @@ package com.neospawn.test;
 
 import com.neospawn.NeoSpawn;
 import com.neospawn.mob.NeoBoss;
+import com.neospawn.worldgen.RegionSpacingPlacement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
@@ -89,6 +91,31 @@ public class StructureTests {
         helper.assertTrue(bossesNear(helper, base.above(37), 8).stream().anyMatch(b -> b.spec().id.equals("empress")),
                 "The Empress is not guarding her tree");
         helper.killAllEntities();
+        helper.succeed();
+    }
+
+    /** Realm trees are boss-guarded, so each must be spaced out: one per region, never next to a neighbour's. */
+    @GameTest(template = "arena", batch = "structure_tree_spacing", timeoutTicks = 20)
+    public static void realmTreesAreSpacedOut(GameTestHelper helper) {
+        var placed = helper.getLevel().registryAccess().registryOrThrow(Registries.PLACED_FEATURE);
+        long seed = helper.getLevel().getSeed();
+        for (String tree : List.of("tree_of_goodness", "empress_tree")) {
+            var modifiers = placed.getOrThrow(ResourceKey.create(Registries.PLACED_FEATURE, NeoSpawn.id(tree))).placement();
+            helper.assertTrue(modifiers.get(0) instanceof RegionSpacingPlacement, tree + " is not region-spaced");
+            RegionSpacingPlacement spacing = (RegionSpacingPlacement) modifiers.get(0);
+            int size = tree.equals("tree_of_goodness") ? 24 : 20, gap = tree.equals("tree_of_goodness") ? 10 : 8;
+            for (int rx = -4; rx <= 4; rx++) {
+                for (int rz = -4; rz <= 4; rz++) {
+                    ChunkPos here = spacing.chosen(seed, rx, rz);
+                    helper.assertTrue(Math.floorDiv(here.x, size) == rx && Math.floorDiv(here.z, size) == rz,
+                            tree + ": region " + rx + "," + rz + " picked a chunk outside itself: " + here);
+                    for (ChunkPos next : List.of(spacing.chosen(seed, rx + 1, rz), spacing.chosen(seed, rx, rz + 1))) {
+                        helper.assertTrue(Math.max(Math.abs(next.x - here.x), Math.abs(next.z - here.z)) >= gap,
+                                tree + ": trees at " + here + " and " + next + " are closer than " + gap + " chunks");
+                    }
+                }
+            }
+        }
         helper.succeed();
     }
 

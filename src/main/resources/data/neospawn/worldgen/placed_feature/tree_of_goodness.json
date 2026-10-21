@@ -2,8 +2,10 @@
   "feature": "neospawn:tree_of_goodness",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 90
+      "type": "neospawn:region_spacing",
+      "spacing": 24,
+      "separation": 10,
+      "salt": 14357621
     },
     {
       "type": "minecraft:in_square"

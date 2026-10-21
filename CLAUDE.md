@@ -24,6 +24,9 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 - Structures are hand-written blueprints (`worldgen/build/`, type `neospawn:blueprint`), data from
   `tools/gen_structures.py` (structures, sets, tiered loot). Surface ones need dry, level land. Containers
   become Lootr chests/barrels when Lootr is installed. Realm charms in vault loot lead to the next realm.
+- Utopia's boss trees (Tree of Goodness / The King, Empress Tree) use `neospawn:region_spacing`
+  (`worldgen/RegionSpacingPlacement`, set in `tools/gen_realms.py`): one per 24- / 20-chunk region, never
+  clustered. Don't go back to a bare rarity_filter for boss-guarded features.
 - Field Guide pages: `assets/neospawn/books/field_guide.json` (given on first join).
 - The owner plays in Prism on a **Windows** gaming PC (moved from a MacBook at v0.21.3):
   `%APPDATA%\PrismLauncher\instances\NeoSpawnPack-Prism\minecraft\mods` (the instance name may differ on the PC).
@@ -37,7 +40,7 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   (`compat/CuriosCompat` + `tools/gen_compat.py`), Better Combat presets and Lootr (`tools/gen_compat.py`, `Build`).
 
 ## Commands
-- `./gradlew runGameTestServer`: 117 headless GameTests; must all pass before handing work back.
+- `./gradlew runGameTestServer`: 118 headless GameTests; must all pass before handing work back.
   GitHub Actions (`.github/workflows/build.yml`) builds and runs them on Windows for every push; a `v*` tag publishes a Release
   (notes from `docs/releases/<tag>.md`).
 - `./gradlew runData`: regenerate data (lang, recipes, models, tags).
