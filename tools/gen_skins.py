@@ -1,6 +1,7 @@
 """Hand-painted mob skins: one painter per body plan plus small per-mob touches, all deterministic.
 
-    py tools/gen_skins.py              # every mob listed in MOBS
+    py tools/gen_skins.py              # every mob in BATCHES
+    py tools/gen_skins.py quadrupeds   # one batch
     py tools/gen_skins.py gazelle      # just these
 
 Reads tools/skin_base/ (from `gradlew runSkinDump`), writes textures/entity/<id>.png and records the UV
@@ -140,48 +141,149 @@ def ear(skin, box, coat_color, inner, seed):
 
 # ------------------------------------------------------------------ body plans
 
+def hide_texture(face, lx, ly, seed):
+    """Thick reptile or sauropod skin: broad mottling with a wrinkle every few rows."""
+    blot = (noise(lx // 3, ly // 2, seed) - 0.5) * 0.12
+    return blot - (0.07 if ly % 4 == 3 and noise(lx // 2, ly, seed + 9) > 0.35 else 0.0)
+
+
+def crystal(face, lx, ly, seed):
+    """Faceted crystal: diagonal facets catching light, the odd sparkle."""
+    k = 0.1 if ((lx + ly) // 3) % 2 == 0 else -0.08
+    if noise(lx, ly, seed + 17) > 0.95:
+        k += 0.35
+    return k
+
+
+TEXTURES = {"fur": fur, "scales": scales, "hide": hide_texture, "crystal": crystal, "smooth": None}
+
+
+def scutes(color, k=0.75):
+    """Ventral plates: pale bands across the belly and the lowest flank, each with a dark seam."""
+    def mark(t, c):
+        name = t.face.name
+        if name == "bottom" or (name in ("right", "left") and t.ry > 0.82):
+            seam = (t.ly if name == "bottom" else t.lx) % 3 == 2
+            return tone(mix(c, color, k), -0.3 if seam else 0.05)
+        return None
+    return mark
+
+
+def back_stripes(color, offsets=(0.0,), width=0.9, k=0.9, faces=("top", "back", "front")):
+    """Stripes running lengthwise along the back (chipmunk, skunk), placed by x in part space."""
+    def mark(t, c):
+        if t.face.name in faces or (t.face.name in ("right", "left") and t.ry < 0.12):
+            if any(abs(t.p[0] - o) < width / 2 + 1e-3 for o in offsets):
+                return mix(c, color, k)
+        return None
+    return mark
+
+
+def tail_tip(color, k=0.9, segments=1):
+    """The last tail segments take a different color (a fox's tip, a skunk's plume)."""
+    def mark(t, c):
+        part = t.box.part
+        if part.kind != "tail":
+            return None
+        last = max(p.index for p in t.box.skin.parts if p.kind == "tail")
+        return mix(c, color, k) if part.index > last - segments else None
+    return mark
+
+
+def paws(box, color):
+    """A paw or clawed foot: dark pad underneath, toes split on the front."""
+    def paint(f, lx, ly):
+        if f.name == "bottom":
+            return tone(color, -0.45)
+        if f.name == "front" and f.cols >= 3 and lx % 2 == 1:
+            return tone(color, -0.35)
+        return tone(color, 0.12 if f.name == "top" or ly == 0 else -0.05)
+    paint_box(box, paint)
+
+
+def dragon_claws(box, color, claw=(226, 216, 190)):
+    """Scaly foot with pale talons along its front edge."""
+    def paint(f, lx, ly):
+        if f.name == "front":
+            return tone(claw, 0.1 if lx % 2 == 0 else -0.45)
+        if f.name in ("right", "left") and f.along(lx, ly) < 0.25:
+            return tone(claw, -0.2)
+        return tone(color, scales(f, lx, ly, 3) + (0.1 if f.name == "top" else -0.1))
+    paint_box(box, paint)
+
+
+def wing_bone(skin, box, color):
+    """Wing arm and finger bones: a lit ridge on top, darker joints every few texels."""
+    def paint(f, lx, ly):
+        k = 0.18 if f.name == "top" else -0.12
+        if f.name in ("front", "back", "top", "bottom") and lx % 5 == 4:
+            k -= 0.25
+        return tone(color, k)
+    paint_box(box, paint)
+
+
 def quadruped(skin, cfg):
     hide = rgb(cfg.get("coat", skin.base_c))
-    texture = {"fur": fur, "scales": scales, "smooth": None}[cfg.get("texture", "fur")]
-    marks = cfg.get("marks") or pattern_marks(skin, cfg)
+    scaled = skin.pattern == "SCALES"
+    dragon = skin.dims["wing"] > 0 or (scaled and "HORNS" in skin.extras)
+    texture = TEXTURES[cfg.get("texture", "scales" if scaled else "fur")]
+    marks = list(cfg.get("marks") or pattern_marks(skin, cfg))
     belly = cfg.get("belly", skin.belly)
+    if cfg.get("scutes", scaled):
+        marks.append(scutes(belly))
     start = cfg.get("belly_start", 0.6)
+    feet = cfg.get("feet", "claw" if dragon or scaled else "cloven" if "HORNS" in skin.extras else "paw")
     hoof = rgb(cfg.get("hoof", tone(mix(skin.base_c, skin.second, 0.5), -0.75)))
     inner_ear = rgb(cfg.get("inner_ear", mix(skin.second, (232, 160, 150), 0.35)))
     muzzle = rgb(cfg.get("muzzle", tone(hide, 0.2)))
+    eye_style = cfg.get("eye_style", "reptile" if dragon or scaled else "mammal")
+    cfg = dict(cfg, eye_style=eye_style)
     body = skin.first("body").main()
     for box in skin.boxes:
         part = box.part
         head = head_of(skin, box)
-        if common(skin, box, cfg, "mammal", head):
+        if common(skin, box, cfg, eye_style, head):
             continue
         kind = part.kind
         if box.role == "DARK":
             if kind == "leg":
-                hooves(box, hoof, cloven=cfg.get("cloven", True))
+                if feet in ("cloven", "hoof"):
+                    hooves(box, hoof, cloven=feet == "cloven")
+                elif feet == "claw":
+                    dragon_claws(box, tone(hide, -0.35))
+                else:
+                    paws(box, rgb(cfg.get("paw", tone(hide, -0.45))))
             else:
                 nostrils([box])
         elif box.role == "ACCENT":
-            horn(box, skin.accent, rings=kind in ("horn", "tip"))
+            horn(box, rgb(cfg.get("horn", skin.accent)), rings=kind in ("horn", "tip"))
+        elif kind in ("wing_l", "wing_r"):
+            wing_bone(skin, box, rgb(cfg.get("bone", skin.second)))
         elif kind == "jaw":
-            coat(skin, box, mix(belly, skin.second, 0.3), texture=texture, marks=cfg.get("jaw_marks", ()))
+            coat(skin, box, rgb(cfg.get("jaw", mix(belly, skin.second, 0.3))), texture=texture,
+                 marks=cfg.get("jaw_marks", ()))
             mouth_inside(box, (150, 70, 70))
         elif kind == "ear":
-            ear(skin, box, hide, inner_ear, skin.seed + box.index)
+            ear(skin, box, rgb(cfg.get("ear", hide)), inner_ear, skin.seed + box.index)
         elif kind == "leg":
             sock = rgb(cfg.get("sock", tone(hide, -0.2)))
             coat(skin, box, hide, texture=texture, marks=cfg.get("leg_marks", ()), ref=part.boxes[0],
                  shading=lambda t: -0.25 * max(0.0, t.p[1] / 10) - (0.18 if t.p[1] < 0.6 else 0),
                  belly=sock, start=0.55)
-        elif kind == "head" and box is not part.main():
-            # Muzzle: lighter toward the nose, with a lip line.
+        elif kind == "head" and box.role == "BASE" and box is not part.main():
+            # Muzzle (or brow ridge): lighter toward the nose, with a lip line.
             coat(skin, box, muzzle, texture=texture, marks=cfg.get("muzzle_marks", ()))
-            mouth_line(box, tone(muzzle, -0.55))
-        elif kind == "head":
+            if box.h > 1.2:
+                mouth_line(box, tone(muzzle, -0.55))
+        elif kind == "head" and box.role == "BASE":
             coat(skin, box, hide, texture=texture, marks=cfg.get("head_marks", ()),
                  shading=lambda t: 0.08 if t.face.name == "front" else 0)
         elif box.role == "SECOND":
-            coat(skin, box, skin.second, texture=texture)
+            coat(skin, box, rgb(cfg.get("second", skin.second)), texture=texture)
+        elif kind == "tail":
+            tail_tex = TEXTURES[cfg.get("tail_texture", cfg.get("texture", "scales" if scaled else "fur"))]
+            coat(skin, box, rgb(cfg.get("tail", hide)), texture=tail_tex, marks=cfg.get("tail_marks", ()),
+                 belly=belly if scaled else None)
         else:
             coat(skin, box, hide, texture=texture, marks=marks, belly=belly, start=start,
                  ref=body if part.kind == "body" else None)
@@ -442,6 +544,7 @@ MOBS = {
         head_marks=[band((246, 236, 220), 0.0, 0.3, faces=("right", "left")),
                     lambda t, c: tone(c, -0.12) if t.face.name in ("front", "top") else None],
         muzzle=(214, 168, 112),
+        tail=(40, 26, 16),
         muzzle_marks=[band((46, 30, 20), 0.0, 0.5, faces=("right", "left"), k=0.7)],
         sock=(236, 222, 200),
         hoof=(44, 34, 30),
@@ -469,8 +572,60 @@ MOBS = {
 }
 
 
+# ---- quadrupeds (batch 2)
+WHITE, PINK = (244, 240, 232), (232, 150, 150)
+MOBS.update({
+    # Lengthwise dark stripes down the back, a creamy belly.
+    "chipmunk": dict(marks=[back_stripes((52, 32, 18), (0.0, -1.5, 1.5), width=0.7)], tail=(110, 72, 40)),
+    # Skunk: two white stripes from the crown down the back, a white plume at the tail tip.
+    "stinkpup": dict(marks=[back_stripes(WHITE, (-1.2, 1.2), width=1.0)],
+                     head_marks=[back_stripes(WHITE, (0.0,), width=1.0, faces=("top", "front"))],
+                     tail_marks=[tail_tip(WHITE, segments=1)], belly=(36, 34, 38), sock=(20, 20, 22)),
+    # Grey rat with a bare pink tail, pink ears and nose.
+    "sewer_rat": dict(tail=PINK, tail_texture="hide", inner_ear=PINK, muzzle=(150, 130, 130)),
+    # Glossy brown beaver, a flat dark scaly tail.
+    "beaver": dict(tail=(62, 44, 34), tail_texture="scales"),
+    # Smooth spotted frog with a gold eye.
+    "bullfrog": dict(texture="hide", marks=[spots((44, 72, 20), cell=3, chance=0.45)], iris=(214, 178, 60),
+                     eye_style="reptile", feet="paw"),
+    "sand_lizard": dict(texture="scales", eye_style="reptile", feet="claw", scutes=True, iris=(200, 150, 40)),
+    "camarasaurus": dict(texture="hide", eye_style="reptile", feet="paw", paw=(84, 92, 60)),
+    "spikeback": dict(texture="hide", eye_style="reptile", feet="paw", marks=[dorsal((70, 82, 36), k=0.5)]),
+    "hammerhorn": dict(texture="hide", eye_style="reptile", feet="paw"),
+    # Cows: hooves, pale muzzles.
+    "crystal_cow": dict(texture="crystal", feet="cloven", eye_style="mammal", scutes=False, muzzle=(200, 236, 242)),
+    "gilded_cow": dict(feet="cloven", muzzle=(250, 230, 170)),
+    "orchard_cow": dict(marks=[spots(WHITE, cell=5, chance=0.4, k=0.9)], muzzle=(236, 180, 170)),
+    "egg_bunny": dict(feet="paw", paw=(230, 214, 214), inner_ear=(246, 181, 207), muzzle=(250, 236, 236)),
+    # Mole: velvety dark fur, a pink star nose and pink digging hands.
+    "molelord": dict(muzzle=(242, 200, 200), paw=(236, 186, 186), feet="paw"),
+    # Black warhorse: solid hooves, a burning mane (the crest).
+    "dread_steed": dict(feet="hoof", hoof=(30, 22, 30), muzzle=(40, 32, 44)),
+    # Fox spirit: cream coat, orange tails with cream tips, orange ears.
+    "ninetail": dict(tail=(232, 122, 42), tail_marks=[tail_tip((246, 238, 226), segments=1)], ear=(232, 122, 42),
+                     inner_ear=(246, 238, 226), feet="paw", paw=(232, 122, 42)),
+    "tide_dragon": dict(belly=(168, 216, 232)),
+    "tamed_tide_dragon": dict(belly=(168, 216, 232)),
+})
+
+# Mobs each batch covers; a plain run paints every one of them (MOBS only adds touches).
+BATCHES = {
+    "pilot": ["gazelle", "swift_raptor", "fire_ant", "songbird", "goldfish", "bandit"],
+    # Every quadruped except the Empress, who is getting a GeckoLib model.
+    "quadrupeds": ["azure_drake", "beaver", "brookdrake", "bullfrog", "burrow_lurker", "camarasaurus", "chipmunk",
+                   "crystal_cow", "dread_steed", "egg_bunny", "ember_dragon", "ember_hatchling", "gilded_cow",
+                   "hammerhorn", "molelord", "ninetail", "orchard_cow", "royal_drake", "royal_drakeling",
+                   "royal_hatchling", "sand_lizard", "sewer_rat", "skyclaw", "snapwyrm", "spikeback", "stinkpup",
+                   "tamed_azure_drake", "tamed_skyclaw", "tamed_tide_dragon", "tide_dragon"],
+}
+
+
 def main(ids):
-    for mob in ids or MOBS:
+    if not ids:
+        ids = [mob for batch in BATCHES.values() for mob in batch]
+    elif ids[0] in BATCHES:
+        ids = [mob for name in ids for mob in BATCHES[name]]
+    for mob in ids:
         skin = Skin(mob)
         painter = PAINTERS.get(skin.family)
         if painter is None:
