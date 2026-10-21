@@ -34,14 +34,20 @@ def crystal(bone_name, x, y, z, w, h, lean_x=0.0, lean_z=0.0):
 # ---- body: chest, slim waist and a plump moth-like abdomen
 bone("root", None, (0, 0, 0))
 bone("body", "root", (0, 28, 0))
-cube("body", "SCALE", (-8, 22, -17), (16, 13, 14), part="chest")
-cube("body", "SCALE", (-6, 23, -4), (12, 11, 9), part="waist")
-cube("body", "SCALE", (-7.5, 22, 4), (15, 12, 12), part="abdomen")
-cube("body", "BELLY", (-7.5, 21, -16), (15, 1, 12))
-cube("body", "BELLY", (-5.5, 22, -4), (11, 1, 8))
-cube("body", "BELLY", (-7, 21, 5), (14, 1, 10))
+cube("body", "SCALE", (-9, 21, -18), (18, 14, 16), part="chest")
+cube("body", "SCALE", (-6.5, 22.5, -3), (13, 11, 8), part="waist")
+cube("body", "SCALE", (-8.5, 21, 4), (17, 13, 14), part="abdomen")
+cube("body", "BELLY", (-8, 20, -17), (16, 1, 14))
+cube("body", "BELLY", (-6, 21.5, -3), (12, 1, 7))
+cube("body", "BELLY", (-8, 20, 5), (16, 1, 12))
+# Shoulders and haunches round out the silhouette; gold bands ring the abdomen like a moth's.
+for s, _ in SIDES:
+    cube("body", "SCALE", (mirror_x(7, 5, s), 22, -16), (5, 10, 11), part="chest")
+    cube("body", "SCALE", (mirror_x(6.5, 4, s), 21.5, 6), (4, 10, 9), part="abdomen")
+for z in (8, 12, 16):
+    cube("body", "GOLD", (-9, 20.5, z), (18, 14, 1), part="band")
 # Fur collar: a fluffy ruff around the base of the neck, and tufts on the shoulders.
-cube("body", "FUR", (-9.5, 27, -19), (19, 10, 5), part="collar")
+cube("body", "FUR", (-10, 27, -20), (20, 10, 5), part="collar")
 for s, _ in SIDES:
     cube("body", "FUR", (mirror_x(7.5, 4, s), 26, -15), (4, 8, 8), part="collar")
 # The amethyst ridge: crystals of varying height leaning back along the spine.
@@ -98,14 +104,15 @@ for s, _ in SIDES:
     cube("jaw", "TOOTH", (mirror_x(2.0, 1, s), 42.5, -45.5), (1, 1, 6))
 
 # ---- four slender legs (crystal-armoured shins, gold-tipped claws)
-LEGS = (("fl", 1, -12), ("fr", -1, -12), ("bl", 1, 9), ("br", -1, 9))
+LEGS = (("fl", 1, -12), ("fr", -1, -12), ("bl", 1, 11), ("br", -1, 11))
 for name, s, z in LEGS:
-    x0 = 6.5 * s
+    x0 = 8.5 * s
     bone(f"leg_{name}", "body", (x0, 26, z))
-    cube(f"leg_{name}", "SCALE", (x0 - 2, 13, z - 2), (4, 15, 4), part="leg")
+    cube(f"leg_{name}", "SCALE", (x0 - 3, 13, z - 3), (6, 15, 6), part="leg")
+    crystal(f"leg_{name}", x0 + 1.5 * s, 22, z, 2, 4, lean_z=-40 * s)
     bone(f"shin_{name}", f"leg_{name}", (x0, 14, z))
-    cube(f"shin_{name}", "SCALE", (x0 - 1.5, 2, z - 1.5), (3, 13, 3), part="leg")
-    cube(f"shin_{name}", "CRYSTAL", (x0 - 2, 6, z - 2.5), (4, 7, 2))
+    cube(f"shin_{name}", "SCALE", (x0 - 2, 2, z - 2), (4, 13, 4), part="leg")
+    cube(f"shin_{name}", "CRYSTAL", (x0 - 2.5, 6, z - 3), (5, 7, 2))
     for dx in (-1.5, 0, 1.5):
         cube(f"shin_{name}", "CLAW", (x0 + dx - 0.5, 0, z - 4), (1, 2, 3))
     cube(f"shin_{name}", "SCALE", (x0 - 2, 0, z - 2), (4, 2, 4), part="foot")
@@ -127,7 +134,7 @@ for s, side in SIDES:
 # ---- tail: slender, ringed with crystals, ending in a crystal cluster
 tail_dims = [(8, 8), (7, 7), (6, 5), (5, 4), (4, 3), (3, 2)]
 tail_elev = [6, 0, -4, -6, -6, -4]
-y, z = 27.0, 15.0
+y, z = 27.0, 17.0
 parent = "body"
 for i, ((w, h), elev) in enumerate(zip(tail_dims, tail_elev)):
     name = bone(f"tail{i}", parent, (0, y, z))
@@ -146,8 +153,8 @@ TEX = M.pack_uv()
 
 # ------------------------------------------------------------------ painting
 
-P = dict(scale=(92, 52, 150), scale_hi=(156, 116, 214), belly=(222, 202, 238), crystal=(150, 92, 226),
-         crystal_hi=(232, 204, 255), crystal_dark=(84, 40, 150), fur=(246, 228, 240), fur_shadow=(206, 176, 214),
+P = dict(scale=(96, 50, 158), scale_hi=(156, 116, 214), belly=(196, 160, 226), crystal=(150, 92, 226),
+         crystal_hi=(232, 204, 255), crystal_dark=(84, 40, 150), fur=(244, 220, 246), fur_shadow=(188, 150, 210),
          gold=(240, 202, 110), gold_dark=(170, 120, 50), claw=(62, 40, 86), tooth=(240, 236, 250),
          eye=(120, 255, 236), pupil=(20, 40, 70), mouth=(110, 230, 226), mouth_core=(226, 255, 250),
          antenna=(54, 32, 74), feather=(232, 204, 244), dark=(14, 8, 22), wing_edge=(26, 14, 40))
@@ -239,8 +246,8 @@ def paint(c, tex, glow, ci):
                 base = shade(base, 10)
             elif face == "bottom":
                 base = mix(base, P["belly"], 0.7)
-            elif t > 0.65 and fh >= 5 and part not in ("leg",):
-                base = mix(base, P["belly"], (t - 0.65) / 0.35 * 0.55)
+            elif t > 0.82 and fh >= 6 and part not in ("leg",):
+                base = mix(base, P["belly"], (t - 0.82) / 0.18 * 0.35)
             col = shade(base, -14) if ly % 2 == 1 and sx != 2 else (shade(base, 12) if sx == 2 and ly % 2 == 0 else base)
             # Iridescent sheen: some scales catch the light in a different hue.
             if h2(lx // 4 + (row % 2), row, ci + 5) < 0.16:
@@ -381,8 +388,8 @@ for t, k in ((0, 0), (0.35, 1), (1.25, 1), (1.6, 0)):
     cast.key("head", "rotation", t, (-16 * k, 0, 0))
     cast.key("jaw", "rotation", t, (30 * k, 0, 0))
     for s, side in SIDES:
-        cast.key(f"fore_{side}", "rotation", t, (0, -14 * k * s, -(62 - 62 * k) * s))
-        cast.key(f"hind_{side}", "rotation", t, (0, -6 * k * s, -(50 - 44 * k) * s))
+        cast.key(f"fore_{side}", "rotation", t, (0, -14 * k * s, -(62 - 40 * k) * s))
+        cast.key(f"hind_{side}", "rotation", t, (0, -6 * k * s, -(50 - 32 * k) * s))
         cast.key(f"antenna_{side}", "rotation", t, (25 * k, 0, 0))
     for name, s, z in LEGS:
         if name.startswith("f"):
