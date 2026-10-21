@@ -1,7 +1,9 @@
 package com.neospawn.registry;
 
 import com.neospawn.NeoSpawn;
+import com.neospawn.block.AntHillBlock;
 import com.neospawn.block.DuplicatorCoreBlock;
+import com.neospawn.block.FireflyJarBlock;
 import com.neospawn.block.ExperienceLeavesBlock;
 import com.neospawn.block.SummoningAltarBlock;
 import net.minecraft.core.registries.Registries;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -73,6 +76,23 @@ public final class ModBlocks {
     public static final DeferredBlock<SummoningAltarBlock> SUMMONING_ALTAR = BLOCKS.register("summoning_altar",
             () -> new SummoningAltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).lightLevel(state -> 10)));
 
+    // ---------------------------------------------------------------- from mob drops
+    /** Glass fused with ectoplasm: you see straight through it, frame and all. */
+    public static final DeferredBlock<TransparentBlock> SPECTRAL_GLASS = BLOCKS.register("spectral_glass",
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.COLOR_LIGHT_BLUE)
+                    .lightLevel(state -> 3)));
+    public static final DeferredBlock<FireflyJarBlock> FIREFLY_JAR = BLOCKS.register("firefly_jar",
+            () -> new FireflyJarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(0.5f).noOcclusion()
+                    .lightLevel(state -> 15)));
+
+    // Ant hills: each lets out its own kind of ant, for ant farms and enclosures.
+    public static final DeferredBlock<AntHillBlock> WORKER_ANT_HILL = antHill("worker_ant_hill", "worker_ant", MapColor.DIRT);
+    public static final DeferredBlock<AntHillBlock> FIRE_ANT_HILL = antHill("fire_ant_hill", "fire_ant", MapColor.COLOR_RED);
+    public static final DeferredBlock<AntHillBlock> PRISM_ANT_HILL = antHill("prism_ant_hill", "prism_ant", MapColor.COLOR_MAGENTA);
+    public static final DeferredBlock<AntHillBlock> VOLATILE_ANT_HILL = antHill("volatile_ant_hill", "volatile_ant", MapColor.COLOR_GREEN);
+    public static final List<DeferredBlock<AntHillBlock>> ANT_HILLS = List.of(WORKER_ANT_HILL, FIRE_ANT_HILL, PRISM_ANT_HILL,
+            VOLATILE_ANT_HILL);
+
     public static final List<DeferredBlock<DropExperienceBlock>> GEM_ORES = List.of(RUBY_ORE, DEEPSLATE_RUBY_ORE,
             TANZANITE_ORE, DEEPSLATE_TANZANITE_ORE, SALT_ORE, FOSSIL_ORE, DEEPSLATE_FOSSIL_ORE);
     public static final List<DeferredBlock<DropExperienceBlock>> METAL_ORES = List.of(TITANIUM_ORE, DEEPSLATE_TITANIUM_ORE,
@@ -89,6 +109,11 @@ public final class ModBlocks {
         TreeGrower grower = new TreeGrower(NeoSpawn.MODID + ":" + tree, Optional.empty(),
                 Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, NeoSpawn.id(tree))), Optional.empty());
         return BLOCKS.register(name, () -> new SaplingBlock(grower, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+    }
+
+    private static DeferredBlock<AntHillBlock> antHill(String name, String antId, MapColor color) {
+        return BLOCKS.register(name, () -> new AntHillBlock(antId, BlockBehaviour.Properties.ofFullCopy(Blocks.COARSE_DIRT)
+                .mapColor(color).strength(1.0f)));
     }
 
     private static DeferredBlock<Block> storage(String name, Block copy, int light) {

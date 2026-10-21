@@ -199,6 +199,8 @@ public class ModRecipes extends RecipeProvider {
                 .unlockedBy("has_uranium", has(ModItems.URANIUM_INGOT.get()))
                 .save(out, NeoSpawn.id("tunnel_charge"));
 
+        mobDrops(out);
+
         for (Item meat : new Item[]{Items.COOKED_BEEF, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON}) {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.SALTED_JERKY.get(), 2)
                     .requires(ModItems.SALT.get()).requires(meat)
@@ -286,6 +288,90 @@ public class ModRecipes extends RecipeProvider {
         }
         builder.unlockedBy(has, has(material))
                 .save(out, NeoSpawn.id(getItemName(result)));
+    }
+
+    /**
+     * What regular mobs' drops make. The Venom Arrow recipe lives in data/neospawn/recipe/venom_arrows.json
+     * (its result is a tipped arrow, which needs item components). Alternatives to older recipes keep the
+     * originals: a new drop is a second way in, never a new requirement.
+     */
+    private void mobDrops(RecipeOutput out) {
+        Item chitin = ModItems.CHITIN_PLATE.get(), venom = ModItems.VENOM_GLAND.get(), ecto = ModItems.ECTOPLASM.get();
+        Item glow = ModItems.GLOW_SAC.get(), wing = ModItems.INSECT_WING.get(), hide = ModItems.DINO_HIDE.get();
+        Item claw = ModItems.RAPTOR_CLAW.get(), stink = ModItems.STINK_GLAND.get(), core = ModItems.KABOOM_CORE.get();
+
+        armor(out, ModItems.CHITIN_ARMOR, chitin);
+        armor(out, ModItems.DINO_HIDE_ARMOR, hide);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LEATHER, 2).requires(hide)
+                .unlockedBy("has_dino_hide", has(hide)).save(out, NeoSpawn.id("leather_from_dino_hide"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BREWING, ModItems.ANTIVENOM.get())
+                .requires(venom).requires(ModItems.SALT.get()).requires(Items.GLASS_BOTTLE)
+                .unlockedBy("has_venom_gland", has(venom)).save(out, NeoSpawn.id("antivenom"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.GHOST_LANTERN.get())
+                .pattern(" E ").pattern("ELE").pattern(" E ")
+                .define('E', ecto).define('L', Items.LANTERN)
+                .unlockedBy("has_ectoplasm", has(ecto)).save(out, NeoSpawn.id("ghost_lantern"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SPECTRAL_GLASS.get(), 8)
+                .pattern("GGG").pattern("GEG").pattern("GGG")
+                .define('G', Items.GLASS).define('E', ecto)
+                .unlockedBy("has_ectoplasm", has(ecto)).save(out, NeoSpawn.id("spectral_glass"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.FIREFLY_JAR.get())
+                .pattern(" W ").pattern("PSP").pattern(" P ")
+                .define('W', Items.OAK_SLAB).define('P', Items.GLASS_PANE).define('S', glow)
+                .unlockedBy("has_glow_sac", has(glow)).save(out, NeoSpawn.id("firefly_jar"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, Items.SPECTRAL_ARROW, 4)
+                .pattern(" A ").pattern("ASA").pattern(" A ")
+                .define('A', Items.ARROW).define('S', glow)
+                .unlockedBy("has_glow_sac", has(glow)).save(out, NeoSpawn.id("spectral_arrows_from_glow_sac"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.FEATHERFALL_CLOAK.get())
+                .pattern("WSW").pattern("WWW").pattern("W W")
+                .define('W', wing).define('S', Items.STRING)
+                .unlockedBy("has_insect_wing", has(wing)).save(out, NeoSpawn.id("featherfall_cloak"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.CLIMBING_CLAWS.get())
+                .pattern("C C").pattern("HSH")
+                .define('C', claw).define('H', hide).define('S', Items.STRING)
+                .unlockedBy("has_raptor_claw", has(claw)).save(out, NeoSpawn.id("climbing_claws"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ModItems.STINK_BOMB.get(), 2)
+                .requires(stink).requires(Items.SLIME_BALL)
+                .unlockedBy("has_stink_gland", has(stink)).save(out, NeoSpawn.id("stink_bomb"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.MINING_CHARGE.get(), 2)
+                .pattern("GKG")
+                .define('G', Items.GUNPOWDER).define('K', core)
+                .unlockedBy("has_kaboom_core", has(core)).save(out, NeoSpawn.id("mining_charge"));
+
+        // Second ways into older items.
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BUG_REPELLENT.get())
+                .pattern(" S ").pattern(" V ").pattern(" B ")
+                .define('S', ModItems.SALT.get()).define('V', venom).define('B', Items.GLASS_BOTTLE)
+                .unlockedBy("has_venom_gland", has(venom)).save(out, NeoSpawn.id("bug_repellent_from_venom_gland"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.CREEPER_REPELLENT.get())
+                .pattern(" S ").pattern(" X ").pattern(" B ")
+                .define('S', ModItems.SALT.get()).define('X', stink).define('B', Items.GLASS_BOTTLE)
+                .unlockedBy("has_stink_gland", has(stink)).save(out, NeoSpawn.id("creeper_repellent_from_stink_gland"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModItems.BUTTERFLY_WINGS.get())
+                .pattern("WPW").pattern("WNW").pattern("E E")
+                .define('W', wing).define('P', Items.PHANTOM_MEMBRANE).define('N', Items.NETHER_STAR)
+                .define('E', ModItems.EMPRESS_SCALE.get())
+                .unlockedBy("has_insect_wing", has(wing)).save(out, NeoSpawn.id("butterfly_wings_from_insect_wings"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TUNNEL_CHARGE.get(), 3)
+                .pattern("TKT").pattern(" U ")
+                .define('T', ModItems.TITANIUM_INGOT.get()).define('K', core).define('U', ModItems.URANIUM_INGOT.get())
+                .unlockedBy("has_kaboom_core", has(core)).save(out, NeoSpawn.id("tunnel_charge_from_kaboom_core"));
+
+        // Ant hills: coarse dirt around chitin and something of that ant's own.
+        antHill(out, ModBlocks.WORKER_ANT_HILL.get(), chitin);
+        antHill(out, ModBlocks.FIRE_ANT_HILL.get(), Items.BLAZE_POWDER);
+        antHill(out, ModBlocks.PRISM_ANT_HILL.get(), Items.AMETHYST_SHARD);
+        antHill(out, ModBlocks.VOLATILE_ANT_HILL.get(), core);
+    }
+
+    private void antHill(RecipeOutput out, ItemLike hill, Item ant) {
+        Item chitin = ModItems.CHITIN_PLATE.get();
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, hill)
+                .pattern("DXD").pattern("DCD").pattern("DDD")
+                .define('D', Items.COARSE_DIRT).define('X', ant).define('C', chitin)
+                .unlockedBy("has_chitin_plate", has(chitin)).save(out, NeoSpawn.id(getItemName(hill)));
     }
 
     /** Salt, the mob's own leftovers and a bottle. */

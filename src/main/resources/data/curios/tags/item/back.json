@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "neospawn:butterfly_wings"
+    "neospawn:butterfly_wings",
+    "neospawn:featherfall_cloak"
   ]
 }

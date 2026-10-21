@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "neospawn:empress_scale"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "W": {
+      "item": "neospawn:insect_wing"
+    }
+  },
+  "pattern": [
+    "WPW",
+    "WNW",
+    "E E"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:butterfly_wings"
+  }
+}

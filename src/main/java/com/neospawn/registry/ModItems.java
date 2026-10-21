@@ -4,6 +4,7 @@ import com.neospawn.NeoSpawn;
 import com.neospawn.item.BossSummonItem;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
+import com.neospawn.item.MobDropGear;
 import com.neospawn.item.Gadgets;
 import com.neospawn.item.DriedEggItem;
 import com.neospawn.item.FieldGuideItem;
@@ -184,8 +185,38 @@ public final class ModItems {
             new SetArmorItem.Bonus(MobEffects.LUCK, 0)));
     /** No potion bonus: doubles picked-up experience instead (see SetArmorItem). */
     public static final ArmorSet EXPERIENCE_ARMOR = armorSet("experience", ModArmor.EXPERIENCE, 25, List.of());
+    // ---------------------------------------------------------------- from regular mobs' drops
+    public static final DeferredItem<Item> CHITIN_PLATE = ITEMS.registerSimpleItem("chitin_plate");
+    public static final DeferredItem<Item> VENOM_GLAND = ITEMS.registerSimpleItem("venom_gland");
+    public static final DeferredItem<Item> ECTOPLASM = ITEMS.registerSimpleItem("ectoplasm");
+    public static final DeferredItem<Item> GLOW_SAC = ITEMS.registerSimpleItem("glow_sac");
+    public static final DeferredItem<Item> INSECT_WING = ITEMS.registerSimpleItem("insect_wing");
+    public static final DeferredItem<Item> DINO_HIDE = ITEMS.registerSimpleItem("dino_hide");
+    public static final DeferredItem<Item> RAPTOR_CLAW = ITEMS.registerSimpleItem("raptor_claw");
+    public static final DeferredItem<Item> STINK_GLAND = ITEMS.registerSimpleItem("stink_gland");
+    public static final DeferredItem<Item> KABOOM_CORE = ITEMS.registerSimpleItem("kaboom_core",
+            new Item.Properties().rarity(Rarity.UNCOMMON));
+
+    public static final ArmorSet CHITIN_ARMOR = armorSet("chitin", ModArmor.CHITIN, 18, List.of(
+            new SetArmorItem.Bonus(MobEffects.DIG_SPEED, 0)), Item.Properties::new);
+    public static final ArmorSet DINO_HIDE_ARMOR = armorSet("dino_hide", ModArmor.DINO_HIDE, 16, List.of(
+            new SetArmorItem.Bonus(MobEffects.MOVEMENT_SPEED, 0)), Item.Properties::new);
+
+    public static final DeferredItem<MobDropGear.Antivenom> ANTIVENOM = ITEMS.register("antivenom",
+            () -> new MobDropGear.Antivenom(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<MobDropGear.GhostLantern> GHOST_LANTERN = ITEMS.register("ghost_lantern",
+            () -> new MobDropGear.GhostLantern(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<MobDropGear.FeatherfallCloak> FEATHERFALL_CLOAK = ITEMS.register("featherfall_cloak",
+            () -> new MobDropGear.FeatherfallCloak(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<MobDropGear.ClimbingClaws> CLIMBING_CLAWS = ITEMS.register("climbing_claws",
+            () -> new MobDropGear.ClimbingClaws(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<MobDropGear.StinkBombItem> STINK_BOMB = ITEMS.register("stink_bomb",
+            () -> new MobDropGear.StinkBombItem(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<TunnelChargeItem> MINING_CHARGE = ITEMS.register("mining_charge",
+            () -> new TunnelChargeItem(new Item.Properties().stacksTo(16), 12, 0, true, "mining_charge"));
+
     public static final List<ArmorSet> ARMOR_SETS = List.of(KING_SCALE_ARMOR, PARAGON_ARMOR, GORGANTUA_SCALE_ARMOR,
-            EMPRESS_SCALE_ARMOR, EMERALD_ARMOR, EXPERIENCE_ARMOR);
+            EMPRESS_SCALE_ARMOR, EMERALD_ARMOR, EXPERIENCE_ARMOR, CHITIN_ARMOR, DINO_HIDE_ARMOR);
 
     // ---------------------------------------------------------------- boss weapons (dropped, not crafted)
     public static final DeferredItem<BossWeapon> KINGS_FANG = weapon("kings_fang", BossWeapon.Effect.LIGHTNING, 22, -2.4f, 1);
@@ -283,18 +314,24 @@ public final class ModItems {
     }
 
     private static ArmorSet armorSet(String name, Holder<ArmorMaterial> material, int durability, List<SetArmorItem.Bonus> bonuses) {
+        return armorSet(name, material, durability, bonuses, ModItems::paragonProps);
+    }
+
+    private static ArmorSet armorSet(String name, Holder<ArmorMaterial> material, int durability, List<SetArmorItem.Bonus> bonuses,
+                                     java.util.function.Supplier<Item.Properties> props) {
         return new ArmorSet(name,
-                armorPiece(name, "helmet", ArmorItem.Type.HELMET, material, durability, bonuses),
-                armorPiece(name, "chestplate", ArmorItem.Type.CHESTPLATE, material, durability, bonuses),
-                armorPiece(name, "leggings", ArmorItem.Type.LEGGINGS, material, durability, bonuses),
-                armorPiece(name, "boots", ArmorItem.Type.BOOTS, material, durability, bonuses));
+                armorPiece(name, "helmet", ArmorItem.Type.HELMET, material, durability, bonuses, props),
+                armorPiece(name, "chestplate", ArmorItem.Type.CHESTPLATE, material, durability, bonuses, props),
+                armorPiece(name, "leggings", ArmorItem.Type.LEGGINGS, material, durability, bonuses, props),
+                armorPiece(name, "boots", ArmorItem.Type.BOOTS, material, durability, bonuses, props));
     }
 
     private static DeferredItem<SetArmorItem> armorPiece(String set, String piece, ArmorItem.Type type,
                                                          Holder<ArmorMaterial> material, int durability,
-                                                         List<SetArmorItem.Bonus> bonuses) {
+                                                         List<SetArmorItem.Bonus> bonuses,
+                                                         java.util.function.Supplier<Item.Properties> props) {
         return ITEMS.register(set + "_" + piece, () -> new SetArmorItem(material, type, set, bonuses,
-                paragonProps().durability(type.getDurability(durability))));
+                props.get().durability(type.getDurability(durability))));
     }
 
     private static DeferredItem<BossWeapon> weapon(String name, BossWeapon.Effect effect, float damage, float speed, float reach) {

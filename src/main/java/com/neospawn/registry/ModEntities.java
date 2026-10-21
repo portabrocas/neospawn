@@ -18,6 +18,12 @@ public final class ModEntities {
             () -> EntityType.Builder.<Gadgets.InkBomb>of(Gadgets.InkBomb::new, MobCategory.MISC)
                     .sized(0.4f, 0.4f).clientTrackingRange(4).updateInterval(10).build("ink_bomb"));
 
+    /** A thrown Stink Bomb. */
+    public static final DeferredHolder<EntityType<?>, EntityType<com.neospawn.item.MobDropGear.StinkBomb>> STINK_BOMB =
+            ENTITY_TYPES.register("stink_bomb", () -> EntityType.Builder.<com.neospawn.item.MobDropGear.StinkBomb>of(
+                            com.neospawn.item.MobDropGear.StinkBomb::new, MobCategory.MISC)
+                    .sized(0.25f, 0.25f).clientTrackingRange(4).updateInterval(10).build("stink_bomb"));
+
     /** Cristian, called with his phone to help for 15 minutes. */
     public static final DeferredHolder<EntityType<?>, EntityType<com.neospawn.mob.Cristian>> CRISTIAN = ENTITY_TYPES.register("cristian",
             () -> EntityType.Builder.<com.neospawn.mob.Cristian>of(com.neospawn.mob.Cristian::new, MobCategory.MISC)

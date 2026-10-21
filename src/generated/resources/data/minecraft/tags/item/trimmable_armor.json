@@ -23,6 +23,14 @@
     "neospawn:experience_helmet",
     "neospawn:experience_chestplate",
     "neospawn:experience_leggings",
-    "neospawn:experience_boots"
+    "neospawn:experience_boots",
+    "neospawn:chitin_helmet",
+    "neospawn:chitin_chestplate",
+    "neospawn:chitin_leggings",
+    "neospawn:chitin_boots",
+    "neospawn:dino_hide_helmet",
+    "neospawn:dino_hide_chestplate",
+    "neospawn:dino_hide_leggings",
+    "neospawn:dino_hide_boots"
   ]
 }

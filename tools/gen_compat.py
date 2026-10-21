@@ -25,7 +25,8 @@ CHARMS = ["verdant_charm", "prospectors_charm", "crystal_charm", "sovereign_char
 WORN = {  # Curios slot -> (Accessories slot, items)
     "charm": ("charm", CHARMS + ["creeper_repellent", "kraken_repellent", "bug_repellent"]),
     "necklace": ("necklace", ["xp_siphon"]),
-    "back": ("back", ["butterfly_wings"]),
+    "back": ("back", ["butterfly_wings", "featherfall_cloak"]),
+    "hands": ("hand", ["climbing_claws"]),
     "feet": ("shoes", ["redstone_sneakers"]),
 }
 write("neospawn/curios/entities/neospawn_player.json", {"entities": ["minecraft:player"], "slots": list(WORN)})

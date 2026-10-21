@@ -40,7 +40,7 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   (`compat/CuriosCompat` + `tools/gen_compat.py`), Better Combat presets and Lootr (`tools/gen_compat.py`, `Build`).
 
 ## Commands
-- `./gradlew runGameTestServer`: 119 headless GameTests; must all pass before handing work back.
+- `./gradlew runGameTestServer`: 127 headless GameTests; must all pass before handing work back.
   GitHub Actions (`.github/workflows/build.yml`) builds and runs them on Windows for every push; a `v*` tag publishes a Release
   (notes from `docs/releases/<tag>.md`).
 - `./gradlew runData`: regenerate data (lang, recipes, models, tags).

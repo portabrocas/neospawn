@@ -52,6 +52,15 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.empress_scale.set_bonus", "Full set: Speed II, Jump Boost II, Slow Falling, Regeneration");
         add("item.neospawn.emerald.set_bonus", "Full set: Hero of the Village, Luck");
         add("item.neospawn.experience.set_bonus", "Full set: double experience from orbs");
+        add("item.neospawn.chitin.set_bonus", "Full set: Haste");
+        add("item.neospawn.dino_hide.set_bonus", "Full set: Speed");
+        add("item.neospawn.antivenom.tooltip", "Cures poison, and keeps it away for a minute");
+        add("item.neospawn.ghost_lantern.tooltip", "Hold it: invisible creatures within 24 blocks glow");
+        add("item.neospawn.featherfall_cloak.tooltip", "Wear it (chest, or a back slot) to drift down instead of falling");
+        add("item.neospawn.climbing_claws.tooltip", "Wear them (a hands slot) or hold them in your off hand: walk into a wall to climb, sneak to cling");
+        add("item.neospawn.stink_bomb.tooltip", "Throw it: a sickening cloud that sends monsters running");
+        add("item.neospawn.mining_charge.tooltip", "Use on a wall to blast a walkable 1x2 shaft 12 blocks deep. Ores are kept");
+        add("block.neospawn.ant_hill.tooltip", "%ss climb out until four are nearby. A redstone signal stops it");
         add("item.neospawn.boss_weapon.lightning", "Sometimes calls lightning on the target");
         add("item.neospawn.boss_weapon.bleed", "Makes the target bleed (Wither)");
         add("item.neospawn.boss_weapon.crush", "Launches and slows the target");

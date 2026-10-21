@@ -1,7 +1,7 @@
 {
  "pages": [
   "§lNeoSpawn§r\n§8Field Guide§r\n\nGiant bosses, strange creatures, new ores and six hidden realms.\n\nThis guide covers the basics. EMI also has info pages: look up any NeoSpawn item.",
-  "§lContents§r\n\n1. Ores & gear\n2. Creatures\n3. Eggs & hatching\n4. The Easter Bunny\n5. Mounts & pets\n6. Realms & charms\n7. Bosses\n8. Gadgets & trees",
+  "§lContents§r\n\n1. Ores & gear\n2. Creatures\n3. Eggs & hatching\n4. The Easter Bunny\n5. Mounts & pets\n6. Realms & charms\n7. Bosses\n8. Gadgets & trees\n9. Mob drops & ant hills",
   "§l1. Ores§r\n\n§4Ruby§r and §6Tanzanite§r: deep gems, like diamonds.\n\n§8Titanium§r: very deep. Smelt the raw ore.\n\n§2Uranium§r: glows, at the bottom of the world.\n\nSalt and §oFossil Ore§r sit higher up.",
   "§lGear§r\n\nRuby, Tanzanite and Titanium make full tool sets.\n\n§5Paragon§r is the best: alloy Titanium, Uranium and Ruby into Paragon Ingots. Paragon tools come enchanted, and the pickaxe mines 3x3 (sneak for 1x1).",
   "§lArmor§r\n\nBoss scales make armor: King's Scale, Gorgantua Scale, Empress Scale. Paragon, Emerald and Experience sets too.\n\nWear a full set for its bonus.",
@@ -20,6 +20,10 @@
   "§lGorgantua§r\n\nFind 9 §lEgg Fragments§r, combine them into a Dried Gorgantua Egg, add a water bucket, then place it.\n\nGood luck.",
   "§lStructures§r\n\n§6Mining:§r Mine Outposts, Excavation Sites, the Golden Spire.\n§4Danger:§r Bandit Fortresses, buried Boss Arenas.\n§5Crystal:§r Sanctums. §8Chaos:§r Sky Shrines.\nOverworld: Ruined Crypts, Sunken Vaults.\n\nThe harder the place, the better the loot.",
   "§l8. Gadgets§r\n\nSquid Zooka, Ray Gun, Chainsaw, Attitude Adjuster, Instant Shelter, Ultimate Torch, XP Siphon, Sifter, repellents and more.\n\nCheck EMI for recipes.",
-  "§lTrees§r\n\nOre trees grow iron, gold, diamonds and more.\n\nThe §lDuplicator Tree§r's core slowly copies blocks placed beside it.\n\n§oGood luck out there.§r"
+  "§lTrees§r\n\nOre trees grow iron, gold, diamonds and more.\n\nThe §lDuplicator Tree§r's core slowly copies blocks placed beside it.",
+  "§l9. Mob drops§r\n\nEveryday creatures leave useful parts:\n\n§2Chitin Plate§r: bugs, ants, crabs\n§5Venom Gland§r: scorpions, warbees, jellies\n§bEctoplasm§r: ghosts\n§eGlow Sac§r: fireflies, sprites",
+  "§lMore drops§r\n\n§6Insect Wing§r: butterflies, moths, dragonflies\n§6Dino Hide§r and the rarer §cRaptor Claw§r: dinosaurs\n§2Stink Gland§r: stinkpups, stink beetles\n§cKaboom Core§r: Kaboombas, Volatile Ants",
+  "§lWhat they make§r\n\nChitin and Dino Hide armor. Antivenom, venom arrows. Ghost Lantern, Spectral Glass. Firefly Jars, glowing arrows. Featherfall Cloak, Climbing Claws. Stink Bombs, Mining Charges.\n\nCheck EMI for recipes.",
+  "§lAnt hills§r\n\nCoarse dirt around chitin and something of the ant's own makes an ant hill. Ants climb out until four are nearby: build a farm or an enclosure around it.\n\nA redstone signal stops it.\n\n§oGood luck out there.§r"
  ]
 }

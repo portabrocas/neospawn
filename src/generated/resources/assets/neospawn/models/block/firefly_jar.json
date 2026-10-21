@@ -1,0 +1,99 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#jar"
+        },
+        "east": {
+          "texture": "#jar"
+        },
+        "north": {
+          "texture": "#jar"
+        },
+        "south": {
+          "texture": "#jar"
+        },
+        "up": {
+          "texture": "#jar"
+        },
+        "west": {
+          "texture": "#jar"
+        }
+      },
+      "from": [
+        4,
+        0,
+        4
+      ],
+      "to": [
+        12,
+        10,
+        12
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#lid"
+        },
+        "east": {
+          "texture": "#lid",
+          "uv": [
+            5.0,
+            5.0,
+            11.0,
+            11.0
+          ]
+        },
+        "north": {
+          "texture": "#lid",
+          "uv": [
+            5.0,
+            5.0,
+            11.0,
+            11.0
+          ]
+        },
+        "south": {
+          "texture": "#lid",
+          "uv": [
+            5.0,
+            5.0,
+            11.0,
+            11.0
+          ]
+        },
+        "up": {
+          "texture": "#lid"
+        },
+        "west": {
+          "texture": "#lid",
+          "uv": [
+            5.0,
+            5.0,
+            11.0,
+            11.0
+          ]
+        }
+      },
+      "from": [
+        5,
+        10,
+        5
+      ],
+      "to": [
+        11,
+        11,
+        11
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "jar": "neospawn:block/firefly_jar",
+    "lid": "minecraft:block/stripped_oak_log",
+    "particle": "neospawn:block/firefly_jar"
+  }
+}

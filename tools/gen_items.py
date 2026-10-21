@@ -316,6 +316,8 @@ ARMOR_SETS = {  # set: (main ramp, trim ramp, pattern)
     "empress_scale": ("empress", "empress_teal", "scales"),
     "emerald": ("emerald", "gold", "plate"),
     "experience": ("experience", "uranium", "plate"),
+    "chitin": ("chitin", "chitin_sheen", "plate"),
+    "dino_hide": ("hide", "bone", "scales"),
 }
 ICON_MASKS = {
     "helmet": ["................", "................", ".....######.....", "....########....", "...##########...",

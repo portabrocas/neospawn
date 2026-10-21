@@ -33,6 +33,7 @@ public final class NeoSpawnClient {
     @SuppressWarnings("unchecked")
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.INK_BOMB.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.STINK_BOMB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.CRISTIAN.get(), com.neospawn.client.renderer.CristianRenderer::new);
         for (MobSpec spec : ModMobs.ALL) {
             if (spec.geo) {

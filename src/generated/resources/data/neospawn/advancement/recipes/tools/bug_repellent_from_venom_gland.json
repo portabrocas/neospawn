@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neospawn:bug_repellent_from_venom_gland"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_venom_gland": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neospawn:venom_gland"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_venom_gland"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neospawn:bug_repellent_from_venom_gland"
+    ]
+  }
+}

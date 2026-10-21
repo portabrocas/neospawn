@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": ["AAA", "AVA", "AAA"],
+  "key": {
+    "A": {"item": "minecraft:arrow"},
+    "V": {"item": "neospawn:venom_gland"}
+  },
+  "result": {
+    "id": "minecraft:tipped_arrow",
+    "count": 8,
+    "components": {"minecraft:potion_contents": {"potion": "minecraft:poison"}}
+  }
+}

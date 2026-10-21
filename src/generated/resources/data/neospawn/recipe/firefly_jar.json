@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "S": {
+      "item": "neospawn:glow_sac"
+    },
+    "W": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "pattern": [
+    " W ",
+    "PSP",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:firefly_jar"
+  }
+}
