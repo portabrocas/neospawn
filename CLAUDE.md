@@ -40,7 +40,7 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   (`compat/CuriosCompat` + `tools/gen_compat.py`), Better Combat presets and Lootr (`tools/gen_compat.py`, `Build`).
 
 ## Commands
-- `./gradlew runGameTestServer`: 127 headless GameTests; must all pass before handing work back.
+- `./gradlew runGameTestServer`: headless GameTests (the count is printed at the end); all must pass before handing work back.
   GitHub Actions (`.github/workflows/build.yml`) builds and runs them on Windows for every push; a `v*` tag publishes a Release
   (notes from `docs/releases/<tag>.md`).
 - `./gradlew runData`: regenerate data (lang, recipes, models, tags).
@@ -53,6 +53,12 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 
 ## Working rules
 - Work on a branch, commit, fast-forward merge to `main`.
+- `src/generated` is committed but never hand-merged: after a rebase, re-run the Python generators and `runData`.
+- `py tools/item_sheet.py <names...>` shows item/block PNGs at 8x on inventory grey for reviewing icon art.
+- Parallel work: one owner per shared file; others append in their own commented section and rebase.
+  `ModItems`/`ModRecipes`/`ModLanguage`: Tanzanite stream. `ModBlocks`/`ModBlockStates`/`ModBlockLoot`/`ModTags`,
+  `gen_realms.py`, `gen_structures.py`: Utopia stream. `ModMobs` geo API, `MobSpec`, `NeoBoss`, `NeoSpawnClient`:
+  GeckoLib boss stream. `ShapeTextures`, `Shape`: mob-skin stream. `pixelart.py`: append only. Field Guide: append pages.
 - Ask before downloading anything (mod jars, modpack files) or accepting a EULA.
 
 ## Next up
