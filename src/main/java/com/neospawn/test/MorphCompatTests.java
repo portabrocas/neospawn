@@ -31,6 +31,13 @@ public class MorphCompatTests {
         helper.assertTrue(has("desert_scorpion", "abilityEffectAttack") && has("desert_scorpion", "abilityClimb"), "scorpions poison and climb");
         helper.assertTrue(!has("ostrich", "abilityFlight"), "ostriches can't fly");
         helper.assertTrue(!has("gazelle", "abilityFlight") && !has("gazelle", "traitHostile"), "gazelles are plain");
+        helper.assertTrue(has("bath_duck", "traitSwimmer") && !has("bath_duck", "traitWaterBreather"), "ducks swim but breathe air");
+        helper.assertTrue(has("sky_shark", "abilityFlight") && has("sky_shark", "traitWaterBreather"), "the Sky Shark flies and swims");
+        helper.assertTrue(has("bone_specter", "traitUndead"), "skeletal ghosts are undead");
+        helper.assertTrue(has("desert_scorpion", "traitMobEffectResistance"), "scorpions resist their own poison");
+        helper.assertTrue(has("kaboomba", "traitImmunityExplosive") && has("war_bot", "traitImmunityExplosive"), "bombs and bots shrug off blasts");
+        helper.assertTrue(has("tyrannosaurus", "traitIntimidate") && !has("gazelle", "traitIntimidate"), "bosses scare monsters, gazelles don't");
+        helper.assertTrue(has("royal_drake", "abilityRideable") && !has("songbird", "abilityRideable"), "mounts can carry a rider");
         for (var spec : ModMobs.ALL) {
             MorphCompat.mobData(spec); // every mob produces data without errors
         }

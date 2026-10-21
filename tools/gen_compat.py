@@ -19,12 +19,20 @@ def ns(names):
     return [n if ":" in n else "neospawn:" + n for n in names]
 
 
-# ---- Curios: give players charm, back and necklace slots; say which NeoSpawn items fit.
-write("neospawn/curios/entities/neospawn_player.json", {"entities": ["minecraft:player"], "slots": ["charm", "back", "necklace"]})
+# ---- Accessory slots: which NeoSpawn items fit, for Curios and for Accessories (bundled with The Aether).
+# Curios has no feet slot of its own, so we define one (same id and shape as Artifacts' feet slot; they merge).
 CHARMS = ["verdant_charm", "prospectors_charm", "crystal_charm", "sovereign_charm", "paragon_charm", "chaos_charm"]
-write("curios/tags/item/charm.json", {"replace": False, "values": ns(CHARMS + ["creeper_repellent", "kraken_repellent", "bug_repellent"])})
-write("curios/tags/item/necklace.json", {"replace": False, "values": ns(["xp_siphon"])})
-write("curios/tags/item/back.json", {"replace": False, "values": ns(["butterfly_wings"])})
+WORN = {  # Curios slot -> (Accessories slot, items)
+    "charm": ("charm", CHARMS + ["creeper_repellent", "kraken_repellent", "bug_repellent"]),
+    "necklace": ("necklace", ["xp_siphon"]),
+    "back": ("back", ["butterfly_wings"]),
+    "feet": ("shoes", ["redstone_sneakers"]),
+}
+write("neospawn/curios/entities/neospawn_player.json", {"entities": ["minecraft:player"], "slots": list(WORN)})
+write("neospawn/curios/slots/feet.json", {"size": 1, "order": 190, "icon": "curios:slot/empty_curio_slot", "add_cosmetic": True})
+for curios_slot, (accessories_slot, items) in WORN.items():
+    write(f"curios/tags/item/{curios_slot}.json", {"replace": False, "values": ns(items)})
+    write(f"accessories/tags/item/{accessories_slot}.json", {"replace": False, "values": ns(items)})
 
 # ---- Better Combat: each weapon uses the preset matching its shape.
 PRESETS = {

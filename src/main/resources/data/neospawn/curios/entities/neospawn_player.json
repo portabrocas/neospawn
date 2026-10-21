@@ -4,7 +4,8 @@
   ],
   "slots": [
     "charm",
+    "necklace",
     "back",
-    "necklace"
+    "feet"
   ]
 }
