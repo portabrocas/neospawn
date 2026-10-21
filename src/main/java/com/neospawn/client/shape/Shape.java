@@ -6,9 +6,14 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.zip.CRC32;
 
 /**
  * A model described as data: a tree of parts made of boxes, each box tagged with a
@@ -153,6 +158,87 @@ public final class Shape {
                 return this;
             }
         }
+    }
+
+    /**
+     * Identifies the packed UV layout: changes whenever the texture size or any box's place or size on
+     * it changes. Hand-painted skins record the hash they were painted against (see ShapeTextures).
+     */
+    public String layoutHash() {
+        CRC32 crc = new CRC32();
+        StringBuilder key = new StringBuilder().append(texW).append('x').append(texH);
+        for (Part part : all) {
+            for (Box box : part.boxes) {
+                key.append(';').append(box.u).append(',').append(box.v).append(',')
+                        .append(box.cw()).append(',').append(box.ch()).append(',').append(box.cd());
+            }
+        }
+        crc.update(key.toString().getBytes(StandardCharsets.UTF_8));
+        return String.format("%08x", crc.getValue());
+    }
+
+    /**
+     * Every part and box with its texture rects, for the skin painters in tools/ (see SkinDump).
+     * Face rects are [u, v, w, h] (floats) in vanilla box-UV order; "right" is the mob's right (model -x).
+     */
+    public JsonObject describe() {
+        JsonObject out = new JsonObject();
+        out.addProperty("width", texW);
+        out.addProperty("height", texH);
+        out.addProperty("layout", layoutHash());
+        JsonArray parts = new JsonArray();
+        for (Part part : roots) {
+            describe(part, null, parts);
+        }
+        out.add("parts", parts);
+        return out;
+    }
+
+    private static void describe(Part part, String parent, JsonArray out) {
+        JsonObject p = new JsonObject();
+        p.addProperty("name", part.name);
+        if (parent != null) {
+            p.addProperty("parent", parent);
+        }
+        p.addProperty("anim", part.anim.name());
+        p.add("pivot", floats(part.px, part.py, part.pz));
+        p.add("rot", floats(part.rx, part.ry, part.rz));
+        p.addProperty("side", part.side);
+        p.addProperty("index", part.index);
+        JsonArray boxes = new JsonArray();
+        for (Box box : part.boxes) {
+            JsonObject b = new JsonObject();
+            b.addProperty("role", box.role.name());
+            b.add("from", floats(box.x, box.y, box.z));
+            b.add("size", floats(box.w, box.h, box.d));
+            // Vanilla places each face's UVs with the exact (float) box size, so faces of fractional boxes
+            // start and end mid-texel; the footprint reserved by pack() is rounded up and never overlaps.
+            float u = box.u, v = box.v, w = box.w, h = box.h, d = box.d;
+            b.addProperty("u", box.u);
+            b.addProperty("v", box.v);
+            JsonObject faces = new JsonObject();
+            faces.add("top", floats(u + d, v, w, d));
+            faces.add("bottom", floats(u + d + w, v, w, d));
+            faces.add("right", floats(u, v + d, d, h));
+            faces.add("front", floats(u + d, v + d, w, h));
+            faces.add("left", floats(u + d + w, v + d, d, h));
+            faces.add("back", floats(u + 2 * d + w, v + d, w, h));
+            b.add("faces", faces);
+            boxes.add(b);
+        }
+        p.add("boxes", boxes);
+        out.add(p);
+        for (Part child : part.children) {
+            describe(child, part.name, out);
+        }
+    }
+
+    private static JsonArray floats(float... values) {
+        JsonArray array = new JsonArray();
+        for (float value : values) {
+            array.add(value);
+        }
+        return array;
     }
 
     public LayerDefinition toLayer() {

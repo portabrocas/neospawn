@@ -1,0 +1,485 @@
+"""Hand-painted mob skins: one painter per body plan plus small per-mob touches, all deterministic.
+
+    py tools/gen_skins.py              # every mob listed in MOBS
+    py tools/gen_skins.py gazelle      # just these
+
+Reads tools/skin_base/ (from `gradlew runSkinDump`), writes textures/entity/<id>.png and records the UV
+layout each skin was painted for in skins/layout.json. If a mob's Look changes its model, the game notices
+the layout no longer matches, warns and falls back to the runtime painter until the dump and this are re-run.
+Never hand-edit the PNGs: change a painter or a MOBS entry and re-run. Glow maps stay runtime-painted.
+Review with `py tools/skin_preview.py <ids>`, then runPhotos.
+"""
+import sys
+
+from skinkit import (FACES, SIDES, Skin, chitin, claws, coat, eye, feathers, fur, hooves, horn, luma, membrane,
+                     mix, noise, nostrils, paint_box, rgb, scales, teeth, tone)
+
+
+# ------------------------------------------------------------------ marks: fn(texel, color) -> color or None
+
+def on(kinds, mark):
+    """Only on parts of these kinds."""
+    return lambda t, c: mark(t, c) if t.box.part.kind in kinds else None
+
+
+def band(color, lo, hi, faces=SIDES, k=0.9):
+    """A horizontal band between ry lo..hi of the reference box, like a gazelle's flank stripe."""
+    return lambda t, c: mix(c, color, k) if t.face.name in faces and lo <= t.ry < hi else None
+
+
+def patch_back(color, k=0.95, inset=0.18):
+    """A pale patch on the back face (a rump or a tail-end), leaving a rim of the coat."""
+    def mark(t, c):
+        if t.face.name == "back" and inset * 0.6 < t.ry and inset < t.rx < 1 - inset:
+            return mix(c, color, k)
+        return None
+    return mark
+
+
+def tiger_bands(color, period, width, reach=0.62, offset=0.0, k=0.85):
+    """Dark bands across the back that taper down the flanks (by z in part space, so boxes line up)."""
+    def mark(t, c):
+        if t.face.name == "bottom" or t.ry > reach:
+            return None
+        z = t.p[2] + offset
+        taper = width * (1 - max(0.0, t.ry) / reach * 0.7)
+        if (z % period) < taper:
+            return mix(c, color, k)
+        return None
+    return mark
+
+
+def dorsal(color, depth=0.3, k=0.6):
+    """A darker saddle along the top and the upper flanks."""
+    def mark(t, c):
+        if t.face.name == "top":
+            return mix(c, color, k)
+        if t.face.name in SIDES and t.ry < depth:
+            return mix(c, color, k * (1 - t.ry / depth))
+        return None
+    return mark
+
+
+def spots(color, cell=4, chance=0.34, k=0.75, salt=0):
+    """Blobby spots on a grid in part space."""
+    def mark(t, c):
+        if t.face.name == "bottom":
+            return None
+        a, b = (t.p[2], t.p[1]) if t.face.name in ("right", "left") else (t.p[0], t.p[2] if t.face.name == "top" else t.p[1])
+        cx, cy = int(a // cell), int(b // cell)
+        if noise(cx, cy, 991 + salt) > chance:
+            return None
+        dx, dy = (a % cell) / cell - 0.5, (b % cell) / cell - 0.5
+        return mix(c, color, k) if dx * dx + dy * dy < 0.17 else None
+    return mark
+
+
+def pattern_marks(skin, cfg):
+    """Markings from the Look's pattern (cfg can replace them with its own 'marks')."""
+    second = skin.second
+    return {
+        "STRIPES": [tiger_bands(tone(second, -0.1), 3.0, 1.2)],
+        "SPOTS": [spots(second)],
+        "BANDS": [tiger_bands(second, 4.0, 2.0, reach=1.1, k=0.6)],
+        "SPECKLE": [lambda t, c: mix(c, second, 0.6) if noise(t.lx, t.ly, t.box.index) < 0.12 else None],
+    }.get(skin.pattern, [])
+
+
+# ------------------------------------------------------------------ shared pieces
+
+def common(skin, box, cfg, eye_style, head):
+    """Paints the roles every family shares. Returns True when the box is done."""
+    role = box.role
+    if role == "EYE":
+        eye(skin, box, head, style=cfg.get("eye_style", eye_style), iris=cfg.get("iris"))
+        return True
+    if role == "TOOTH":
+        if skin.under(box.part, "leg") or skin.under(box.part, "arm"):
+            claws(box, cfg.get("claw", (226, 216, 190)))
+        else:
+            teeth(box)
+        return True
+    if role == "MEMBRANE":
+        membrane(box, cfg.get("membrane", skin.second), tone(skin.second, -0.35), skin.seed)
+        return True
+    return role in ("WICKER", "CANDY")  # keep the runtime basket and eggs
+
+
+def head_of(skin, box):
+    """The head part's main box for an eye on it, if any."""
+    head = skin.by_name.get(box.part.name) if box.part.kind == "head" else None
+    return head.main() if head else None
+
+
+def mouth_line(box, color, row_from_bottom=0, faces=("front", "right", "left")):
+    """A dark lip line along the bottom of a muzzle box."""
+    for name in faces:
+        f = box[name]
+        if f:
+            ly = f.rows - 1 - row_from_bottom
+            for lx in range(f.cols):
+                if name == "front" or (f.along(lx, ly) < 0.85):
+                    f.put(lx, ly, color)
+
+
+def mouth_inside(box, color):
+    """Top face of a jaw: the inside of the mouth, seen when it opens."""
+    f = box["top"]
+    if f:
+        f.fill(lambda lx, ly: tone(color, -0.25 if ly % 2 else 0.0))
+
+
+def ear(skin, box, coat_color, inner, seed):
+    def paint(f, lx, ly):
+        if f.name == "front":
+            edge = lx in (0, f.cols - 1) or ly == 0
+            return tone(coat_color, -0.1) if edge else tone(inner, 0.1 - 0.2 * f.fy(ly))
+        return tone(coat_color, fur(f, lx, ly, seed) + (0.08 if f.name == "top" else -0.05))
+    paint_box(box, paint)
+
+
+# ------------------------------------------------------------------ body plans
+
+def quadruped(skin, cfg):
+    hide = rgb(cfg.get("coat", skin.base_c))
+    texture = {"fur": fur, "scales": scales, "smooth": None}[cfg.get("texture", "fur")]
+    marks = cfg.get("marks") or pattern_marks(skin, cfg)
+    belly = cfg.get("belly", skin.belly)
+    start = cfg.get("belly_start", 0.6)
+    hoof = rgb(cfg.get("hoof", tone(mix(skin.base_c, skin.second, 0.5), -0.75)))
+    inner_ear = rgb(cfg.get("inner_ear", mix(skin.second, (232, 160, 150), 0.35)))
+    muzzle = rgb(cfg.get("muzzle", tone(hide, 0.2)))
+    body = skin.first("body").main()
+    for box in skin.boxes:
+        part = box.part
+        head = head_of(skin, box)
+        if common(skin, box, cfg, "mammal", head):
+            continue
+        kind = part.kind
+        if box.role == "DARK":
+            if kind == "leg":
+                hooves(box, hoof, cloven=cfg.get("cloven", True))
+            else:
+                nostrils([box])
+        elif box.role == "ACCENT":
+            horn(box, skin.accent, rings=kind in ("horn", "tip"))
+        elif kind == "jaw":
+            coat(skin, box, mix(belly, skin.second, 0.3), texture=texture, marks=cfg.get("jaw_marks", ()))
+            mouth_inside(box, (150, 70, 70))
+        elif kind == "ear":
+            ear(skin, box, hide, inner_ear, skin.seed + box.index)
+        elif kind == "leg":
+            sock = rgb(cfg.get("sock", tone(hide, -0.2)))
+            coat(skin, box, hide, texture=texture, marks=cfg.get("leg_marks", ()), ref=part.boxes[0],
+                 shading=lambda t: -0.25 * max(0.0, t.p[1] / 10) - (0.18 if t.p[1] < 0.6 else 0),
+                 belly=sock, start=0.55)
+        elif kind == "head" and box is not part.main():
+            # Muzzle: lighter toward the nose, with a lip line.
+            coat(skin, box, muzzle, texture=texture, marks=cfg.get("muzzle_marks", ()))
+            mouth_line(box, tone(muzzle, -0.55))
+        elif kind == "head":
+            coat(skin, box, hide, texture=texture, marks=cfg.get("head_marks", ()),
+                 shading=lambda t: 0.08 if t.face.name == "front" else 0)
+        elif box.role == "SECOND":
+            coat(skin, box, skin.second, texture=texture)
+        else:
+            coat(skin, box, hide, texture=texture, marks=marks, belly=belly, start=start,
+                 ref=body if part.kind == "body" else None)
+
+
+def theropod(skin, cfg):
+    hide = rgb(cfg.get("coat", skin.base_c))
+    marks = cfg.get("marks") or pattern_marks(skin, cfg)
+    belly = cfg.get("belly", skin.belly)
+    body = skin.first("body").main()
+    iris = cfg.get("iris") or ((228, 168, 40) if luma(skin.eye) < 0.2 else skin.eye)
+    cfg = dict(cfg, iris=iris)
+    for box in skin.boxes:
+        part = box.part
+        kind = part.kind
+        head = head_of(skin, box)
+        if common(skin, box, cfg, "reptile", head):
+            continue
+        if box.role == "DARK":
+            if kind == "leg":
+                coat(skin, box, tone(hide, -0.45), texture=scales)
+            else:
+                nostrils([box])
+        elif box.role == "ACCENT":
+            # Crest or spikes: bright edge fading to the root.
+            paint_box(box, lambda f, lx, ly: tone(skin.accent, 0.2 - 0.45 * f.fy(ly) if f.name in SIDES else 0.15))
+        elif kind == "jaw":
+            coat(skin, box, mix(skin.second, belly, 0.35), texture=scales, belly=belly, start=0.4)
+            mouth_inside(box, (160, 60, 60))
+        elif kind == "head" and box.h <= 1.01 and box.d <= 2.5:
+            # Brow ridge.
+            coat(skin, box, tone(hide, -0.3), texture=scales)
+        elif kind == "head":
+            coat(skin, box, hide, texture=scales, marks=cfg.get("head_marks", marks), belly=belly, start=0.75)
+            mouth_line(box, tone(hide, -0.6))
+        elif kind == "leg":
+            coat(skin, box, hide, texture=scales, marks=marks, ref=part.boxes[0],
+                 shading=lambda t: -0.3 * max(0.0, t.p[1] / 12))
+        elif kind == "arm":
+            coat(skin, box, hide, texture=scales, shading=lambda t: -0.2 * t.ry)
+        else:
+            coat(skin, box, hide, texture=scales, marks=marks, belly=belly, start=cfg.get("belly_start", 0.58),
+                 ref=body if kind == "body" else None)
+
+
+def insect(skin, cfg):
+    shell = rgb(cfg.get("coat", skin.base_c))
+    rear = rgb(cfg.get("abdomen", skin.base_c))
+    joint = tone(skin.second, -0.3)
+
+    def gloss(t):
+        # A glossy highlight along the upper flank, the underside in shadow.
+        if t.face.name in SIDES and 0.12 < t.ry < 0.32:
+            return 0.22
+        return 0.0
+
+    for box in skin.boxes:
+        part = box.part
+        kind = part.kind
+        head = head_of(skin, box)
+        if common(skin, box, cfg, "insect", head):
+            continue
+        if box.role == "DARK":
+            coat(skin, box, tone(skin.second, -0.6))
+        elif box.role == "ACCENT":
+            # Mandibles and pincers: base color at the root darkening to a hard tip.
+            paint_box(box, lambda f, lx, ly: tone(skin.accent, -0.55 if f.name == "front" or f.along(lx, ly) < 0.3 else 0.1))
+        elif kind == "abdomen":
+            coat(skin, box, rear, shading=gloss,
+                 texture=lambda f, lx, ly, seed: chitin(f, lx, ly, seed, plate=cfg.get("plate", 2),
+                                                        pos=lx if f.name in ("right", "left") else ly))
+        elif kind in ("leg", "shin"):
+            def joints(t, c):
+                return joint if t.face.name in SIDES and (t.lx == 0 or t.lx == t.face.cols - 1) else None
+            coat(skin, box, shell if box.role == "BASE" else skin.second, marks=[joints], shading=lambda t: 0.1 if t.face.name == "top" else -0.05)
+        elif kind in ("antenna_l", "antenna_r"):
+            paint_box(box, lambda f, lx, ly: tone(skin.second, 0.15 if (lx + ly) % 2 == 0 else -0.2))
+        else:
+            coat(skin, box, shell, shading=gloss, texture=lambda f, lx, ly, seed: chitin(f, lx, ly, seed, plate=4))
+
+
+def bird(skin, cfg):
+    plumage = rgb(cfg.get("coat", skin.base_c))
+    belly = cfg.get("belly", skin.belly)
+    wing = rgb(cfg.get("wing", skin.second))
+    beak = rgb(cfg.get("beak", skin.accent))
+    for box in skin.boxes:
+        part = box.part
+        kind = part.kind
+        head = head_of(skin, box)
+        if common(skin, box, cfg, "bird", head):
+            continue
+        if kind == "leg":
+            paint_box(box, lambda f, lx, ly: tone(beak, (-0.15 if ly % 2 else 0.05) - (0.3 if f.name == "front" and box.h < 1.5 else 0)))
+        elif box.role == "ACCENT" and kind == "head":
+            # Beak: a darker cutting edge through the middle and a darker tip.
+            def paint(f, lx, ly):
+                k = 0.15 if f.name == "top" else -0.1
+                if f.name in ("right", "left") and f.rows >= 1 and ly == f.rows - 1 and f.rows > 1:
+                    k -= 0.35
+                if f.name == "front" or f.along(lx, ly) < 0.34:
+                    k -= 0.2
+                return tone(beak, k)
+            paint_box(box, paint)
+        elif kind in ("wing_l", "wing_r", "tail", "fan"):
+            def plume(f, lx, ly, flat=box.h < 0.01):
+                if flat:
+                    # Flight feathers: separated along the span, dark tips at the trailing edge.
+                    k = 0.1 if lx % 2 == 0 else -0.08
+                    if ly == 0:
+                        k -= 0.35
+                    elif ly == f.rows - 1:
+                        k += 0.18
+                    return tone(wing, k)
+                return tone(wing, feathers(f, lx, ly, skin.seed) + (0.12 if f.name == "top" else -0.1))
+            paint_box(box, plume)
+        elif box.role == "ACCENT":
+            paint_box(box, lambda f, lx, ly: tone(skin.accent, 0.15 if f.name == "top" else -0.1))
+        else:
+            coat(skin, box, plumage, texture=feathers, belly=belly, start=cfg.get("belly_start", 0.5),
+                 marks=cfg.get("marks", ()))
+
+
+def fish(skin, cfg):
+    hide = rgb(cfg.get("coat", skin.base_c))
+    belly = cfg.get("belly", mix(hide, (255, 244, 214), 0.6))
+    fin = rgb(cfg.get("fin", skin.second))
+    body = skin.first("body").main()
+
+    def gills(t, c):
+        # A gill arc a quarter of the way back, the cheek in front of it a shade lighter.
+        if t.box is body and t.face.name in ("right", "left"):
+            a = t.face.along(t.lx, t.ly)
+            if 0.2 <= a < 0.2 + 1.0 / max(1, t.face.cols):
+                return tone(c, -0.35)
+            if a < 0.2:
+                return tone(c, 0.12)
+        return None
+
+    for box in skin.boxes:
+        part = box.part
+        kind = part.kind
+        if box.role == "EYE":
+            eye(skin, box, body, style="fish", iris=cfg.get("iris"))
+            continue
+        if common(skin, box, cfg, "fish", None):
+            continue
+        if box.role == "SECOND" or kind == "fin":
+            def rays(f, lx, ly):
+                k = 0.12 if (lx if f.name in ("right", "left") else lx) % 2 == 0 else -0.12
+                return tone(fin, k + (0.15 if f.name == "top" else 0))
+            paint_box(box, rays)
+        else:
+            coat(skin, box, hide, texture=scales, belly=belly, start=cfg.get("belly_start", 0.55),
+                 marks=[gills] + list(cfg.get("marks", ())), shading=lambda t: 0.12 if t.face.name == "front" else 0)
+            if box is body:
+                mouth_line(box, tone(hide, -0.5), row_from_bottom=box["front"].rows // 3, faces=("front",))
+
+
+def humanoid(skin, cfg):
+    cloth = rgb(cfg.get("coat", skin.base_c))
+    trousers = rgb(cfg.get("trousers", skin.second))
+    leather = rgb(cfg.get("leather", tone(skin.second, 0.25)))
+    skin_c = rgb(cfg.get("skin", skin.accent))
+    boots = rgb(cfg.get("boots", tone(skin.second, -0.35)))
+
+    def folds(f, lx, ly, seed):
+        # Cloth: soft vertical folds and a woven grain.
+        fold = noise(lx // 2, 3, seed)
+        return 0.07 if fold > 0.65 else -0.09 if fold < 0.25 else 0.0
+
+    for box in skin.boxes:
+        part = box.part
+        kind = part.kind
+        head = head_of(skin, box)
+        if common(skin, box, cfg, "human", head):
+            continue
+        main = part.main()
+        if box.role == "DARK":
+            if kind == "leg":
+                def boot(t, c):
+                    return tone(c, 0.3) if t.face.name in SIDES and t.ly == 0 else tone(c, -0.35) if t.face.name in SIDES and t.ly == t.face.rows - 1 else None
+                coat(skin, box, boots, marks=[boot], texture=lambda f, lx, ly, s: 0.0)
+            elif kind == "head":
+                coat(skin, box, tone(skin_c, -0.55))   # brows
+            else:
+                coat(skin, box, leather, texture=lambda f, lx, ly, s: 0.06 if ly == 0 else 0.0)   # gloves
+        elif kind == "leg":
+            def seam(t, c):
+                return tone(c, -0.2) if t.face.name in ("right", "left") and t.lx == t.face.cols // 2 else None
+            coat(skin, box, trousers, texture=folds, marks=[seam] + list(cfg.get("leg_marks", ())), shading=lambda t: -0.12 * t.ry)
+        elif kind == "head" and box is main:
+            coat(skin, box, cloth, marks=cfg.get("head_marks", ()))
+        elif kind == "head" and box.role == "SECOND":
+            # Hood: deep shadow inside the opening, a lit rim and folds down the back.
+            hood = rgb(cfg.get("hood", skin.second))
+            def hood_paint(f, lx, ly):
+                if f.name == "front":
+                    edge = lx in (0, f.cols - 1) or ly == 0
+                    return tone(hood, 0.15) if edge else tone(hood, -0.75)
+                return tone(hood, folds(f, lx, ly, skin.seed) + (0.12 if f.name == "top" else 0.0) - 0.12 * f.fy(ly))
+            paint_box(box, hood_paint)
+        elif kind == "arm" and box.role == "SECOND":
+            coat(skin, box, leather, texture=lambda f, lx, ly, s: 0.1 if ly == 0 else -0.05 if ly % 2 else 0.0)
+        elif kind == "arm":
+            coat(skin, box, cloth, texture=folds, shading=lambda t: -0.15 * t.ry)
+        elif box.role == "SECOND":
+            # Belt with a buckle at the front.
+            buckle = rgb(cfg.get("buckle", (196, 170, 96)))
+            def belt(t, c):
+                f = t.face
+                if f.name == "front" and abs(t.lx - (f.cols - 1) / 2) < 1:
+                    return tone(buckle, 0.2 if t.ly == 0 else -0.1)
+                return None
+            coat(skin, box, leather, marks=[belt], texture=lambda f, lx, ly, s: 0.06 if ly == 0 else -0.06)
+        else:
+            coat(skin, box, cloth, texture=folds, marks=cfg.get("marks", ()), ref=part.boxes[0],
+                 shading=lambda t: -0.1 * t.ry)
+
+
+PAINTERS = {"QUADRUPED": quadruped, "THEROPOD": theropod, "INSECT": insect, "BIRD": bird, "FISH": fish,
+            "HUMANOID": humanoid}
+
+
+# ------------------------------------------------------------------ per-mob touches
+
+def face_mask(skin_c, mask_c, eye_row):
+    """A bandit's face: skin above, a cloth mask over the nose and mouth."""
+    def mark(t, c):
+        if t.box.part.kind != "head":
+            return None
+        if t.face.name == "front":
+            return mask_c if t.ry > eye_row else skin_c
+        if t.face.name in ("right", "left"):
+            return mask_c if t.ry > eye_row and t.face.along(t.lx, t.ly) < 0.35 else skin_c
+        return None
+    return mark
+
+
+def bandolier(color, buckle):
+    """A strap across the chest from the right shoulder to the left hip (front and back)."""
+    def mark(t, c):
+        f = t.face
+        if f.name not in ("front", "back"):
+            return None
+        x = t.rx if f.name == "front" else 1 - t.rx
+        if abs((1 - x) - t.ry) < 0.12:
+            return buckle if abs(t.ry - 0.45) < 0.06 and f.name == "front" else color
+        return None
+    return mark
+
+
+MOBS = {
+    # Thomson's-gazelle colors: tan back, black flank stripe, white belly and rump, dark tail and horns.
+    "gazelle": dict(
+        belly_start=0.66,
+        marks=[band((40, 26, 16), 0.5, 0.66), patch_back((246, 238, 224))],
+        head_marks=[band((246, 236, 220), 0.0, 0.3, faces=("right", "left")),
+                    lambda t, c: tone(c, -0.12) if t.face.name in ("front", "top") else None],
+        muzzle=(214, 168, 112),
+        muzzle_marks=[band((46, 30, 20), 0.0, 0.5, faces=("right", "left"), k=0.7)],
+        sock=(236, 222, 200),
+        hoof=(44, 34, 30),
+        inner_ear=(244, 236, 226),
+    ),
+    # Sandy raptor with dark tiger bands, a pale throat and an amber eye under a heavy brow.
+    "swift_raptor": dict(
+        belly=(222, 200, 152),
+        marks=[tiger_bands((58, 44, 24), 3.0, 1.3, reach=0.6), dorsal((96, 70, 40), depth=0.25, k=0.4)],
+        iris=(236, 176, 44),
+    ),
+    # Glossy red head and thorax, a darker banded gaster, orange mandibles.
+    "fire_ant": dict(abdomen=(150, 32, 22), plate=2),
+    # A robin-like songbird: red back, a warm cream breast, dark flight feathers.
+    "songbird": dict(belly=(240, 196, 150), belly_start=0.45, wing=(138, 40, 36)),
+    # Orange goldfish with a pale belly and golden fins.
+    "goldfish": dict(belly=(255, 214, 150), fin=(255, 186, 96)),
+    # Hooded bandit: tanned face behind a dark cloth mask, cloak with a leather bandolier.
+    "bandit": dict(
+        skin=(200, 160, 120),
+        head_marks=[face_mask((200, 160, 120), (44, 44, 56), 0.62)],
+        marks=[bandolier((92, 62, 38), (210, 184, 104))],
+        hood=(58, 44, 32),
+    ),
+}
+
+
+def main(ids):
+    for mob in ids or MOBS:
+        skin = Skin(mob)
+        painter = PAINTERS.get(skin.family)
+        if painter is None:
+            print(f"{mob}: no painter for {skin.family} yet, skipped")
+            continue
+        painter(skin, MOBS.get(mob, {}))
+        skin.save()
+        print(f"{mob}: painted ({skin.family}, layout {skin.layout})")
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
