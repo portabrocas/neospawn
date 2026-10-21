@@ -318,6 +318,7 @@ ARMOR_SETS = {  # set: (main ramp, trim ramp, pattern)
     "experience": ("experience", "uranium", "plate"),
     "chitin": ("chitin", "chitin_sheen", "plate"),
     "dino_hide": ("hide", "bone", "scales"),
+    "arcane": ("arcane", "arcane_star", "plate"),
 }
 ICON_MASKS = {
     "helmet": ["................", "................", ".....######.....", "....########....", "...##########...",

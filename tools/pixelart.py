@@ -145,3 +145,8 @@ def save(img, rel):
     img.save(path)
 
 
+
+
+# Arcane Tanzanite armor (gen_items.py): a midnight-violet robe with pale starlit trim.
+RAMPS["arcane"] = [(20, 12, 54), (44, 30, 112), (76, 56, 176), (118, 96, 222), (190, 176, 252)]
+RAMPS["arcane_star"] = [(70, 54, 120), (128, 116, 196), (186, 196, 240), (220, 232, 255), (255, 255, 255)]

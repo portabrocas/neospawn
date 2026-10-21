@@ -54,6 +54,10 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.experience.set_bonus", "Full set: double experience from orbs");
         add("item.neospawn.chitin.set_bonus", "Full set: Haste");
         add("item.neospawn.dino_hide.set_bonus", "Full set: Speed");
+        // Arcane Tanzanite
+        add("item.neospawn.arcane.set_bonus", "Full set: +50% experience from orbs; anvil work refunds half its levels, never damages the anvil and doesn't get pricier");
+        add("item.neospawn.tanzanite_tools.tooltip", "Awakens free enchantments as you use it (%s/%s)");
+        add("message.neospawn.tanzanite_bonus", "Your %s awakens: %s!");
         add("item.neospawn.antivenom.tooltip", "Cures poison, and keeps it away for a minute");
         add("item.neospawn.ghost_lantern.tooltip", "Hold it: invisible creatures within 24 blocks glow");
         add("item.neospawn.featherfall_cloak.tooltip", "Wear it (chest, or a back slot) to drift down instead of falling");

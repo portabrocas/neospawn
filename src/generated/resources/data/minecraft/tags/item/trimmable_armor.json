@@ -31,6 +31,10 @@
     "neospawn:dino_hide_helmet",
     "neospawn:dino_hide_chestplate",
     "neospawn:dino_hide_leggings",
-    "neospawn:dino_hide_boots"
+    "neospawn:dino_hide_boots",
+    "neospawn:arcane_helmet",
+    "neospawn:arcane_chestplate",
+    "neospawn:arcane_leggings",
+    "neospawn:arcane_boots"
   ]
 }

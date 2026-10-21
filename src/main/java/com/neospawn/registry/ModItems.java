@@ -15,6 +15,7 @@ import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ParagonFishingRod;
 import com.neospawn.item.ParagonTools;
 import com.neospawn.item.SetArmorItem;
+import com.neospawn.item.TanzaniteTools;
 import com.neospawn.item.TunnelChargeItem;
 import com.neospawn.item.UtilityItems;
 import com.neospawn.item.ZooCageItem;
@@ -102,7 +103,18 @@ public final class ModItems {
     }
 
     public static final ToolSet RUBY_TOOLS = toolSet("ruby", RUBY_TIER);
-    public static final ToolSet TANZANITE_TOOLS = toolSet("tanzanite", TANZANITE_TIER);
+    // Tanzanite tools awaken free enchantments as they're used (see TanzaniteTools).
+    public static final ToolSet TANZANITE_TOOLS = new ToolSet("tanzanite",
+            ITEMS.register("tanzanite_sword", () -> new TanzaniteTools.Sword(TANZANITE_TIER, new Item.Properties()
+                    .attributes(SwordItem.createAttributes(TANZANITE_TIER, 3, -2.4f)))),
+            ITEMS.register("tanzanite_pickaxe", () -> new TanzaniteTools.Pickaxe(TANZANITE_TIER, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(TANZANITE_TIER, 1, -2.8f)))),
+            ITEMS.register("tanzanite_axe", () -> new TanzaniteTools.Axe(TANZANITE_TIER, new Item.Properties()
+                    .attributes(AxeItem.createAttributes(TANZANITE_TIER, 5, -3.0f)))),
+            ITEMS.register("tanzanite_shovel", () -> new TanzaniteTools.Shovel(TANZANITE_TIER, new Item.Properties()
+                    .attributes(ShovelItem.createAttributes(TANZANITE_TIER, 1.5f, -3.0f)))),
+            ITEMS.register("tanzanite_hoe", () -> new TanzaniteTools.Hoe(TANZANITE_TIER, new Item.Properties()
+                    .attributes(HoeItem.createAttributes(TANZANITE_TIER, -3.0f, 0.0f)))));
     public static final ToolSet TITANIUM_TOOLS = toolSet("titanium", TITANIUM_TIER);
     public static final ToolSet PARAGON_TOOLS = new ToolSet("paragon",
             ITEMS.register("paragon_sword", () -> new ParagonTools.Sword(PARAGON_TIER, paragonProps()
@@ -215,8 +227,13 @@ public final class ModItems {
     public static final DeferredItem<TunnelChargeItem> MINING_CHARGE = ITEMS.register("mining_charge",
             () -> new TunnelChargeItem(new Item.Properties().stacksTo(16), 12, 0, true, "mining_charge"));
 
+    // ---------------------------------------------------------------- Arcane Tanzanite (keep these ids stable: Utopia loot uses them)
+    /** No potion bonus: +50% experience and cheaper anvil work instead (see ArmorEvents). */
+    public static final ArmorSet ARCANE_ARMOR = armorSet("arcane", ModArmor.ARCANE, 33, List.of(),
+            () -> new Item.Properties().rarity(Rarity.RARE));
+
     public static final List<ArmorSet> ARMOR_SETS = List.of(KING_SCALE_ARMOR, PARAGON_ARMOR, GORGANTUA_SCALE_ARMOR,
-            EMPRESS_SCALE_ARMOR, EMERALD_ARMOR, EXPERIENCE_ARMOR, CHITIN_ARMOR, DINO_HIDE_ARMOR);
+            EMPRESS_SCALE_ARMOR, EMERALD_ARMOR, EXPERIENCE_ARMOR, CHITIN_ARMOR, DINO_HIDE_ARMOR, ARCANE_ARMOR);
 
     // ---------------------------------------------------------------- boss weapons (dropped, not crafted)
     public static final DeferredItem<BossWeapon> KINGS_FANG = weapon("kings_fang", BossWeapon.Effect.LIGHTNING, 22, -2.4f, 1);

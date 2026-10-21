@@ -53,6 +53,8 @@ public class ModRecipes extends RecipeProvider {
         armor(out, ModItems.EMPRESS_SCALE_ARMOR, ModItems.EMPRESS_SCALE.get());
         armor(out, ModItems.EMERALD_ARMOR, Items.EMERALD);
         armor(out, ModItems.EXPERIENCE_ARMOR, Items.EXPERIENCE_BOTTLE);
+        // Arcane Tanzanite
+        armor(out, ModItems.ARCANE_ARMOR, ModItems.TANZANITE.get());
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PARAGON_INGOT.get())
                 .pattern("TUT").pattern("URU").pattern("TUT")
