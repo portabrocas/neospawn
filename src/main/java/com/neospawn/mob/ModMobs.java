@@ -662,6 +662,7 @@ public final class ModMobs {
         // ---------------------------------------------------------------- sea bosses
         seaBoss("kraken", "Kraken", look(Family.JELLY).body(0, 16, 24).tail(36).segments(10)
                 .colors(0x6A1A2A, 0x4A0E1A, 0xF2C83A).eye(0xF2E84A).pattern(Pattern.SPOTS).scale(2.5f))
+                .geo("kraken", 2.0f, KrakenBoss::new)
                 .size(4.0f, 9.0f).stats(800, 22, 1.0).armor(12).voice(Voice.SQUID).xp(800).bar(BossEvent.BossBarColor.PURPLE)
                 .attacks(BossAttack.GRAB, BossAttack.INK, BossAttack.WHIRLPOOL, BossAttack.TENTACLE_SLAM)
                 .drop(ModItems.KRAKEN_HOOK, 1, 1).drop(v(Items.INK_SAC), 16, 32).drop(v(Items.NAUTILUS_SHELL), 2, 4)
