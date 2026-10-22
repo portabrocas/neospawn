@@ -92,7 +92,7 @@ def common(skin, box, cfg, eye_style, head):
     """Paints the roles every family shares. Returns True when the box is done."""
     role = box.role
     if role == "EYE":
-        eye(skin, box, head, style=cfg.get("eye_style", eye_style), iris=cfg.get("iris"))
+        eye(skin, box, head, style=cfg.get("eye_style", eye_style), iris=cfg.get("iris"), lid=cfg.get("lid"))
         return True
     if role == "TOOTH":
         if skin.under(box.part, "leg") or skin.under(box.part, "arm"):
@@ -295,8 +295,10 @@ def quadruped(skin, cfg):
 
 def theropod(skin, cfg):
     hide = rgb(cfg.get("coat", skin.base_c))
-    marks = cfg.get("marks") or pattern_marks(skin, cfg)
+    marks = list(cfg.get("marks") or pattern_marks(skin, cfg))
     belly = cfg.get("belly", skin.belly)
+    if cfg.get("scutes", skin.pattern == "SCALES"):
+        marks.append(scutes(belly))
     body = skin.first("body").main()
     iris = cfg.get("iris") or ((228, 168, 40) if luma(skin.eye) < 0.2 else skin.eye)
     cfg = dict(cfg, iris=iris)
@@ -308,9 +310,11 @@ def theropod(skin, cfg):
             continue
         if box.role == "DARK":
             if kind == "leg":
-                coat(skin, box, tone(hide, -0.45), texture=scales)
+                dragon_claws(box, tone(hide, -0.4))
             else:
-                nostrils([box])
+                nostrils([box], tone(hide, -0.6))
+        elif box.role == "ACCENT" and kind in ("horn", "tip"):
+            horn(box, skin.accent)
         elif box.role == "ACCENT":
             # Crest or spikes: bright edge fading to the root.
             paint_box(box, lambda f, lx, ly: tone(skin.accent, 0.2 - 0.45 * f.fy(ly) if f.name in SIDES else 0.15))
@@ -447,65 +451,163 @@ def fish(skin, cfg):
                 mouth_line(box, tone(hide, -0.5), row_from_bottom=box["front"].rows // 3, faces=("front",))
 
 
+def folds(f, lx, ly, seed):
+    """Cloth: soft vertical folds."""
+    fold = noise(lx // 2, 3, seed)
+    return 0.07 if fold > 0.65 else -0.09 if fold < 0.25 else 0.0
+
+
+def metal(f, lx, ly, seed):
+    """Armor plate or robot hull: panel seams every few texels, rivets, a lit top edge."""
+    if f.name in SIDES and (ly % 5 == 4 or (lx % 6 == 5 and f.cols > 6)):
+        return -0.3
+    k = 0.12 if ly % 5 == 0 and f.name in SIDES else 0.0
+    if f.name in SIDES and ly % 5 == 1 and lx % 6 in (0, 4) and f.cols > 3:
+        k += 0.28
+    return k + (noise(0, ly, seed) - 0.5) * 0.06
+
+
+def bone(f, lx, ly, seed):
+    """Old bone: faint cracks and stains."""
+    n = noise(lx, ly, seed + 23)
+    return -0.18 if n < 0.06 else (noise(lx // 3, ly // 3, seed) - 0.5) * 0.1
+
+
+MATERIALS = {"cloth": folds, "metal": metal, "bone": bone, "hide": hide_texture, "fur": fur, "scales": scales,
+             "smooth": lambda f, lx, ly, seed: 0.0}
+
+
+def rib_cage(gap):
+    """Ribs across the chest and back either side of the sternum and spine, on bony torsos."""
+    def mark(t, c):
+        f = t.face
+        if t.box.part.kind != "body" or f.name not in ("front", "back") or not 0.12 < t.ry < 0.62:
+            return None
+        if abs(t.rx - 0.5) < 0.12:
+            return tone(c, 0.08)
+        return gap if t.ly % 2 == 1 else None
+    return mark
+
+
+def skull(socket, teeth_row=0.8):
+    """A skull face: dark sockets around the eyes, a nose hole and a row of teeth."""
+    def mark(t, c):
+        if t.box.part.kind != "head" or t.face.name != "front":
+            return None
+        f = t.face
+        mid = (f.cols - 1) / 2
+        if 0.3 < t.ry < 0.62 and 0.12 < abs(t.lx - mid) / max(1, f.cols) < 0.42:
+            return socket
+        if 0.62 <= t.ry < 0.74 and abs(t.lx - mid) < 0.6:
+            return socket
+        if t.ry >= teeth_row and t.ry < 0.95 and abs(t.lx - mid) < f.cols * 0.32:
+            return socket if t.lx % 2 else tone(c, 0.15)
+        return None
+    return mark
+
+
+def visor(color, lo=0.3, hi=0.6):
+    """A dark visor band across the face, eyes glowing through it."""
+    def mark(t, c):
+        if t.box.part.kind == "head" and t.face.name in ("front", "right", "left") and lo <= t.ry < hi:
+            return color
+        return None
+    return mark
+
+
 def humanoid(skin, cfg):
     cloth = rgb(cfg.get("coat", skin.base_c))
     trousers = rgb(cfg.get("trousers", skin.second))
     leather = rgb(cfg.get("leather", tone(skin.second, 0.25)))
-    skin_c = rgb(cfg.get("skin", skin.accent))
+    face_c = rgb(cfg.get("skin", cfg.get("face", cloth)))
     boots = rgb(cfg.get("boots", tone(skin.second, -0.35)))
-
-    def folds(f, lx, ly, seed):
-        # Cloth: soft vertical folds and a woven grain.
-        fold = noise(lx // 2, 3, seed)
-        return 0.07 if fold > 0.65 else -0.09 if fold < 0.25 else 0.0
+    material = cfg.get("material", "cloth")
+    tex = MATERIALS[material]
+    head_tex = MATERIALS[cfg.get("head_material", "smooth" if "skin" in cfg else material)]
+    leg_tex = MATERIALS[cfg.get("leg_material", material)]
+    eye_style = cfg.get("eye_style", "human" if luma(skin.eye) > 0.9 else "glow")
+    cfg = dict(cfg, eye_style=eye_style)
+    marks = list(cfg.get("marks", ()))
 
     for box in skin.boxes:
         part = box.part
         kind = part.kind
         head = head_of(skin, box)
-        if common(skin, box, cfg, "human", head):
+        if common(skin, box, cfg, eye_style, head):
             continue
         main = part.main()
         if box.role == "DARK":
             if kind == "leg":
                 def boot(t, c):
-                    return tone(c, 0.3) if t.face.name in SIDES and t.ly == 0 else tone(c, -0.35) if t.face.name in SIDES and t.ly == t.face.rows - 1 else None
-                coat(skin, box, boots, marks=[boot], texture=lambda f, lx, ly, s: 0.0)
+                    if t.face.name in SIDES and t.ly == 0:
+                        return tone(c, 0.3)
+                    if t.face.name in SIDES and t.ly == t.face.rows - 1:
+                        return tone(c, -0.35)
+                    return None
+                coat(skin, box, boots, marks=[boot], texture=leg_tex)
             elif kind == "head":
-                coat(skin, box, tone(skin_c, -0.55))   # brows
+                coat(skin, box, rgb(cfg.get("brow", tone(face_c, -0.55))))   # brows
             else:
-                coat(skin, box, leather, texture=lambda f, lx, ly, s: 0.06 if ly == 0 else 0.0)   # gloves
+                coat(skin, box, rgb(cfg.get("hands", leather)), texture=lambda f, lx, ly, s: 0.06 if ly == 0 else 0.0)
+        elif box.role == "ACCENT" and kind in ("horn", "tip"):
+            horn(box, skin.accent)
+        elif box.role == "ACCENT":
+            paint_box(box, lambda f, lx, ly: tone(skin.accent, 0.2 - 0.4 * f.fy(ly) if f.name in SIDES else 0.15))
+        elif kind in ("antenna_l", "antenna_r"):
+            paint_box(box, lambda f, lx, ly: tone(skin.second, 0.15 if (lx + ly) % 2 == 0 else -0.2))
+        elif box.role == "MEMBRANE":
+            membrane(box, rgb(cfg.get("membrane", skin.second)), tone(skin.second, -0.3), skin.seed)
         elif kind == "leg":
             def seam(t, c):
                 return tone(c, -0.2) if t.face.name in ("right", "left") and t.lx == t.face.cols // 2 else None
-            coat(skin, box, trousers, texture=folds, marks=[seam] + list(cfg.get("leg_marks", ())), shading=lambda t: -0.12 * t.ry)
+            coat(skin, box, trousers, texture=leg_tex, marks=[seam] + list(cfg.get("leg_marks", ())),
+                 shading=lambda t: -0.12 * t.ry)
         elif kind == "head" and box is main:
-            coat(skin, box, cloth, marks=cfg.get("head_marks", ()))
+            coat(skin, box, face_c, texture=head_tex, marks=cfg.get("head_marks", ()))
         elif kind == "head" and box.role == "SECOND":
             # Hood: deep shadow inside the opening, a lit rim and folds down the back.
             hood = rgb(cfg.get("hood", skin.second))
+
             def hood_paint(f, lx, ly):
                 if f.name == "front":
-                    edge = f.cols >= 3 and (lx in (0, f.cols - 1) or ly == 0)
+                    edge = lx in (0, f.cols - 1) or ly == 0
                     return tone(hood, 0.15) if edge else tone(hood, -0.75)
                 return tone(hood, folds(f, lx, ly, skin.seed) + (0.12 if f.name == "top" else 0.0) - 0.12 * f.fy(ly))
             paint_box(box, hood_paint)
         elif kind == "arm" and box.role == "SECOND":
-            coat(skin, box, leather, texture=lambda f, lx, ly, s: 0.1 if ly == 0 else -0.05 if ly % 2 else 0.0)
+            coat(skin, box, rgb(cfg.get("pad", leather)), texture=tex if material == "metal" else
+                 (lambda f, lx, ly, s: 0.1 if ly == 0 else -0.05 if ly % 2 else 0.0))
         elif kind == "arm":
-            coat(skin, box, cloth, texture=folds, shading=lambda t: -0.15 * t.ry)
+            coat(skin, box, rgb(cfg.get("sleeve", cloth)), texture=tex, shading=lambda t: -0.15 * t.ry,
+                 marks=cfg.get("arm_marks", ()))
         elif box.role == "SECOND":
             # Belt with a buckle at the front.
             buckle = rgb(cfg.get("buckle", (196, 170, 96)))
+
             def belt(t, c):
                 f = t.face
                 if f.name == "front" and abs(t.lx - (f.cols - 1) / 2) < 1:
                     return tone(buckle, 0.2 if t.ly == 0 else -0.1)
                 return None
-            coat(skin, box, leather, marks=[belt], texture=lambda f, lx, ly, s: 0.06 if ly == 0 else -0.06)
+            coat(skin, box, rgb(cfg.get("belt", leather)), marks=[belt],
+                 texture=lambda f, lx, ly, s: 0.06 if ly == 0 else -0.06)
         else:
-            coat(skin, box, cloth, texture=folds, marks=cfg.get("marks", ()), ref=part.boxes[0],
-                 shading=lambda t: -0.1 * t.ry)
+            coat(skin, box, cloth, texture=tex, marks=marks, ref=part.boxes[0], shading=lambda t: -0.1 * t.ry)
+    if cfg.get("ragged"):
+        fray(skin, cfg["ragged"])
+
+
+def fray(skin, depth):
+    """Ghost hems: texels along the bottom of the robe, sleeves and legs drop out, so the spirit frays away."""
+    for box in skin.boxes:
+        if box.part.kind not in ("body", "leg", "arm") or box.role not in ("BASE", "SECOND"):
+            continue
+        for name in SIDES:
+            f = box[name]
+            for lx, ly in f.pixels():
+                below = ly - (f.rows - depth)
+                if below >= 0 and noise(lx, ly, box.index + 5) < 0.4 + 0.25 * below:
+                    f.put(lx, ly, (0, 0, 0), a=0)
 
 
 PAINTERS = {"QUADRUPED": quadruped, "THEROPOD": theropod, "INSECT": insect, "BIRD": bird, "FISH": fish,
@@ -615,6 +717,33 @@ MOBS.update({
     "tamed_tide_dragon": dict(belly=(168, 216, 232)),
 })
 
+# ---- theropods and humanoids (batch 3)
+MOBS.update({
+    "allosaurus": dict(marks=[tiger_bands((92, 46, 18), 3.5, 1.4), dorsal((140, 72, 30), k=0.45)], belly=(236, 214, 178)),
+    "baryonyx": dict(marks=[dorsal((52, 72, 46), depth=0.35, k=0.6), spots((70, 92, 58), cell=3, chance=0.3, k=0.6)],
+                     belly=(214, 206, 160)),
+    "brutosaurus": dict(marks=[dorsal((70, 24, 24), k=0.5)], belly=(170, 120, 90), iris=(240, 200, 60)),
+    # Pale ice-crested raptor with slate stripes and a red crest.
+    "cryolophosaurus": dict(marks=[tiger_bands((92, 118, 146), 3.0, 1.2)], belly=(240, 242, 246)),
+    "tyrannosaurus": dict(marks=[tiger_bands((52, 40, 26), 4.0, 1.5, reach=0.5), dorsal((72, 58, 40), k=0.4)],
+                          belly=(200, 184, 150), iris=(222, 140, 30)),
+    # Skeleton: bone with a rib cage and a skull face; eyes glow in the sockets.
+    "bone_specter": dict(material="bone", trousers=(214, 212, 196), hands=(200, 198, 182), pad=(170, 168, 152),
+                         marks=[rib_cage((52, 54, 50))], head_marks=[skull((40, 44, 42))]),
+    "crypt_beast": dict(material="fur", trousers=(58, 58, 44), leg_material="fur", eye_style="mammal",
+                        hands=(40, 40, 30)),
+    # Robots: riveted hull plates, a dark visor with the eyes glowing through it.
+    "siege_bot": dict(material="metal", trousers=(96, 96, 104), head_marks=[visor((30, 32, 40))]),
+    "war_bot": dict(material="metal", trousers=(70, 70, 80), head_marks=[visor((30, 26, 30))]),
+    "sniper_bot": dict(material="metal", trousers=(52, 66, 52), head_marks=[visor((24, 30, 24), 0.25, 0.55)]),
+    "void_knight": dict(material="metal", trousers=(40, 32, 70), pad=(70, 52, 110), head_marks=[visor((10, 8, 16))]),
+    # Ghosts: frayed hems.
+    "specter": dict(ragged=2, eye_style="mammal", trousers=(200, 214, 228)),
+    "void_reaper": dict(ragged=3, hood=(30, 20, 44)),
+    "starborn": dict(material="smooth", skin=(150, 232, 130), eye_style="mammal", trousers=(80, 168, 64),
+                     brow=(98, 170, 84)),
+})
+
 # Mobs each batch covers; a plain run paints every one of them (MOBS only adds touches).
 BATCHES = {
     # Owner's scope: quadrupeds, theropods, humanoids and about ten hero mobs. Bugs, birds, fish, jellies,
@@ -626,6 +755,11 @@ BATCHES = {
                    "hammerhorn", "molelord", "ninetail", "orchard_cow", "royal_drake", "royal_drakeling",
                    "royal_hatchling", "sand_lizard", "sewer_rat", "skyclaw", "snapwyrm", "spikeback", "stinkpup",
                    "tamed_azure_drake", "tamed_skyclaw", "tamed_tide_dragon", "tide_dragon"],
+    "theropods": ["allosaurus", "baryonyx", "brutosaurus", "cryolophosaurus", "swift_raptor", "tyrannosaurus"],
+    # Every humanoid except Gorgantua (getting a GeckoLib model) and the tiny Glimmer Sprite, whose 3-texel
+    # pastel body looked better with the runtime painter.
+    "humanoids": ["bandit", "bone_specter", "crypt_beast", "siege_bot", "sniper_bot", "specter",
+                  "starborn", "void_knight", "void_reaper", "war_bot"],
 }
 
 

@@ -496,14 +496,16 @@ def rim(face, amount=-0.12):
 def eye(skin, eye_box, head, style="mammal", iris=None, lid=None):
     """Paints one eye box and the skin around it on the head.
 
-    style: mammal (dark glossy eye, lid line above, lighter ring under), reptile (iris with a slit pupil,
+    style: mammal (dark glossy eye, lid line above, lighter ring under), glow (bright, no pupil), reptile (iris with a slit pupil,
     heavy brow shadow), bird (bright ring), insect (faceted compound eye), fish (big ring), human (white,
     iris and pupil, lid above).
     """
     iris = rgb(iris or skin.eye)
     lid = rgb(lid) if lid else tone(skin.base_c, -0.55)
     ex, ey, ez = eye_box.center()
-    outward = "front" if style == "human" else "right" if ex < 0 else "left"
+    # Eyes set into the face (inside the head's width) look forward; the rest sit on the flanks.
+    facing = style == "human" or (head is not None and abs(ex) + eye_box.w / 2 <= head.w / 2 - 0.2)
+    outward = "front" if facing else "right" if ex < 0 else "left"
     face = eye_box[outward]
     if style == "insect":
         dark = luma(iris) < 0.2
@@ -522,6 +524,10 @@ def eye(skin, eye_box, head, style="mammal", iris=None, lid=None):
         if f != outward and eye_box[f]:
             eye_box[f].fill(lambda lx, ly, name=f: lid if name == "top" else tone(iris, -0.3))
     if face.cols >= 2 and face.rows >= 2:
+        if style == "glow":
+            # Glowing eyes: a hot core, no pupil.
+            face.fill(lambda lx, ly: tone(iris, 0.45 if ly == 0 else 0.1))
+            return
         if style == "human":
             white = (236, 232, 222)
             face.fill(lambda lx, ly: white)
