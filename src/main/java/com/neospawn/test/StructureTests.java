@@ -63,28 +63,29 @@ public class StructureTests {
         int c = 18, top = tree.top();
         var box = new net.minecraft.world.level.levelgen.structure.BoundingBox(origin.getX() - 2, origin.getY() - tree.below() - 30,
                 origin.getZ() - 2, origin.getX() + tree.sizeX() + 2, origin.getY() + tree.above() + 2, origin.getZ() + tree.sizeZ() + 2);
-        // The boss lands in a chunk far from the test grid: force it fully loaded first, or the guardian is lost.
+        // The tree is built far from the test grid. Force the crown's chunk and give it a second to finish loading:
+        // a guardian added to a chunk that is still loading is lost.
         var crown = new ChunkPos(origin.offset(c, 0, c - 6));
         level.setChunkForced(crown.x, crown.z, true);
-        tree.build(new com.neospawn.worldgen.build.Build(level, box, origin, net.minecraft.world.level.block.Rotation.NONE,
-                net.minecraft.util.RandomSource.create(3), tree.sizeX(), tree.sizeZ()));
-        helper.assertTrue(level.getBlockState(origin.offset(c + 4, 10, c)).is(log), name + ": no trunk wall");
-        helper.assertTrue(level.getBlockState(origin.offset(c, 10, c + 2)).isAir() || level.getBlockState(origin.offset(c, 10, c + 2))
-                .getBlock() instanceof net.minecraft.world.level.block.StairBlock, name + ": the trunk is not hollow");
-        helper.assertTrue(level.getBlockState(origin.offset(c + 6, top, c)).is(platform), name + ": no platform inlay at the crown");
-        BlockPos crownFrom = origin.offset(c - 9, top + 1, c - 9), crownTo = origin.offset(c + 9, top + 1, c + 9);
-        helper.assertTrue(count(helper, crownFrom, crownTo, ChestBlockEntity.class) == 1, name + ": no chest on the platform");
-        helper.assertTrue(chestsHaveLoot(helper, crownFrom, crownTo), name + ": the crown chest has no loot table");
-        helper.assertTrue(count(helper, origin.offset(c - 6, -9, c - 6), origin.offset(c + 6, -2, c + 6),
-                net.minecraft.world.level.block.entity.BarrelBlockEntity.class) == 2, name + ": the root cellar has no stores");
-        helper.succeedWhen(() -> {
+        helper.startSequence().thenIdle(20).thenExecute(() -> {
+            tree.build(new com.neospawn.worldgen.build.Build(level, box, origin, net.minecraft.world.level.block.Rotation.NONE,
+                    net.minecraft.util.RandomSource.create(3), tree.sizeX(), tree.sizeZ()));
+            helper.assertTrue(level.getBlockState(origin.offset(c + 4, 10, c)).is(log), name + ": no trunk wall");
+            helper.assertTrue(level.getBlockState(origin.offset(c, 10, c + 2)).isAir() || level.getBlockState(origin.offset(c, 10, c + 2))
+                    .getBlock() instanceof net.minecraft.world.level.block.StairBlock, name + ": the trunk is not hollow");
+            helper.assertTrue(level.getBlockState(origin.offset(c + 6, top, c)).is(platform), name + ": no platform inlay at the crown");
+            BlockPos crownFrom = origin.offset(c - 9, top + 1, c - 9), crownTo = origin.offset(c + 9, top + 1, c + 9);
+            helper.assertTrue(count(helper, crownFrom, crownTo, ChestBlockEntity.class) == 1, name + ": no chest on the platform");
+            helper.assertTrue(chestsHaveLoot(helper, crownFrom, crownTo), name + ": the crown chest has no loot table");
+            helper.assertTrue(count(helper, origin.offset(c - 6, -9, c - 6), origin.offset(c + 6, -2, c + 6),
+                    net.minecraft.world.level.block.entity.BarrelBlockEntity.class) == 2, name + ": the root cellar has no stores");
+        }).thenWaitUntil(() -> {
             var guards = bossesNear(helper, origin.offset(c, top + 2, c), 40);
-            helper.assertTrue(guards.stream().anyMatch(g -> g.spec().id.equals(boss)), name + ": " + boss + " is not guarding the tree"
-                    + " (bosses within 200: " + bossesNear(helper, origin, 200).stream().map(g -> g.spec().id + "@" + g.blockPosition()
-                    + " hp " + g.getHealth()).toList() + ", crown at " + origin.offset(c, top + 1, c - 6) + ")");
-            guards.forEach(g -> g.discard());
+            helper.assertTrue(guards.stream().anyMatch(g -> g.spec().id.equals(boss)), name + ": " + boss + " is not guarding the tree");
+        }).thenExecute(() -> {
+            bossesNear(helper, origin.offset(c, top + 2, c), 40).forEach(g -> g.discard());
             level.setChunkForced(crown.x, crown.z, false);
-        });
+        }).thenSucceed();
     }
 
     @GameTest(template = "arena", batch = "structure_tree", timeoutTicks = 100)
