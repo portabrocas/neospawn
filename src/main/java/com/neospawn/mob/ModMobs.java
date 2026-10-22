@@ -272,6 +272,20 @@ public final class ModMobs {
                 .size(0.7f, 0.5f).stats(4, 0, 0.2).flySpeed(0.35).voice(Voice.BUG).xp(2).abilities(Ability.GLOW_PARTICLES)
                 .drop(v(Items.GLOWSTONE_DUST), 1, 2).drop(ModItems.INSECT_WING, 1, 2)
                 .egg(0xF2B53A, 0xD9661E);
+        // Utopia's structure pests: weak and quick, they pester treasure hunters without being a real threat.
+        // They come only from spawners in Utopia's structures (worldgen/build), never from natural spawns.
+        hostileFlyer("gilded_wasp", "Gilded Wasp", look(Family.FLYING_BUG).body(5, 2, 2).head(2).wing(5)
+                .with(Extra.STINGER, Extra.ANTENNAE).colors(0xF2C028, 0x1E1608, 0xFFF4C8).pattern(Pattern.BANDS).scale(0.8f))
+                .size(0.45f, 0.4f).stats(6, 2, 0.3).flySpeed(0.55).abilities(Ability.POISON).dayActive().voice(Voice.BUZZ).xp(2)
+                .egg(0xF2C028, 0x1E1608).drop(v(Items.HONEYCOMB), 0, 1).drop(ModItems.INSECT_WING, 0, 1);
+        monster("bookmite", "Bookmite", look(Family.INSECT).body(5, 3, 2).leg(2)
+                .with(Extra.ANTENNAE, Extra.MANDIBLES).colors(0xE8DCC0, 0x3A2A4A, 0x6A4AA8).pattern(Pattern.STRIPES))
+                .size(0.45f, 0.3f).stats(6, 2, 0.32).abilities(Ability.BLIND, Ability.PACK).dayActive().voice(Voice.BUG).xp(2)
+                .egg(0xE8DCC0, 0x3A2A4A).drop(v(Items.PAPER), 0, 2).drop(v(Items.INK_SAC), 0, 1);
+        hostileFlyer("cloud_wisp", "Cloud Wisp", look(Family.SPHERE).body(0, 6, 6).leg(0)
+                .colors(0xF4F6FF, 0xC8D4F0, 0xFFE08A).eye(0x3A4A8A).translucent().glow())
+                .size(0.6f, 0.6f).stats(8, 2, 0.3).flySpeed(0.4).abilities(Ability.SLOW, Ability.GLOW_PARTICLES).dayActive()
+                .voice(Voice.GHOST).xp(3).egg(0xF4F6FF, 0xFFE08A).drop(v(Items.FEATHER), 0, 2).drop(v(Items.GLOWSTONE_DUST), 0, 1);
 
         // ---------------------------------------------------------------- swimmers (passive)
         swimmer("goldfish", "Goldfish", look(Family.FISH).body(6, 2, 4).tail(3)

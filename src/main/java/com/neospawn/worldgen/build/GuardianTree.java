@@ -1,6 +1,7 @@
 package com.neospawn.worldgen.build;
 
 import com.neospawn.realm.RealmTravel;
+import com.neospawn.registry.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -125,6 +126,10 @@ public final class GuardianTree implements Blueprint {
             }
         }
 
+        // Wasps nest in the trunk wall halfway up: they pester you on the climb.
+        b.pestSpawner(C + 3, h / 2, C, "gilded_wasp");
+        b.pestSpawner(C - 3, h / 2 + 9, C + 1, "gilded_wasp");
+
         roots(b, bark);
         branches(b, bark, leaf);
         crown(b, leaf);
@@ -151,6 +156,16 @@ public final class GuardianTree implements Blueprint {
         b.chest(C - 5, -8, C + 2, Direction.EAST, "utopia_garden");
         b.set(C - 5, -8, C - 2, Blocks.COMPOSTER);
         b.set(C - 4, -8, C - 5, Blocks.FLOWERING_AZALEA);
+        // A keeper's corner: workbench, stove, shelves of seeds and jars, a reading candle.
+        b.set(C - 5, -8, C - 1, Blocks.CRAFTING_TABLE);
+        b.facing(C - 5, -8, C, Blocks.SMOKER.defaultBlockState(), Direction.EAST);
+        b.fill(C + 2, -8, C + 5, C + 4, -7, C + 5, Blocks.BOOKSHELF);
+        b.set(C + 3, -6, C + 5, Blocks.CANDLE.defaultBlockState().setValue(net.minecraft.world.level.block.CandleBlock.LIT, true));
+        b.set(C - 3, -8, C + 5, Blocks.DECORATED_POT);
+        b.set(C - 2, -8, C + 5, Blocks.DECORATED_POT);
+        b.set(C + 1, -8, C - 5, Blocks.POTTED_FLOWERING_AZALEA);
+        // Termites have got into the roots.
+        b.pestSpawner(C + 3, -9, C - 3, "termite");
     }
 
     /** Buttress roots: seven fins sloping from the trunk down into the ground. */
@@ -208,9 +223,9 @@ public final class GuardianTree implements Blueprint {
 
     private void blob(Build b, int cx, int cy, int cz, int radius, BlockState leaf) {
         for (int x = cx - radius; x <= cx + radius; x++) {
-            for (int y = cy - radius / 2; y <= cy + radius / 2 + 1; y++) {
+            for (int y = cy - radius + 1; y <= cy + radius; y++) {
                 for (int z = cz - radius; z <= cz + radius; z++) {
-                    double dx = x - cx, dy = (y - cy) * 1.8, dz = z - cz;
+                    double dx = x - cx, dy = (y - cy - 0.5) * 1.25, dz = z - cz;
                     if (dx * dx + dy * dy + dz * dz <= radius * radius + 1 && x >= 0 && z >= 0 && x < SIZE && z < SIZE
                             && b.get(x, y, z).isAir()) {
                         b.set(x, y, z, leaf);
@@ -227,7 +242,7 @@ public final class GuardianTree implements Blueprint {
             for (int z = 0; z < SIZE; z++) {
                 double d = Math.hypot(x - C, z - C);
                 for (int y = h - 4; y <= h + 16; y++) {
-                    double ex = (x - C) / 15.0, ey = (y - (h + 5)) / 10.0, ez = (z - C) / 15.0;
+                    double ex = (x - C) / 14.0, ey = (y - (h + 6)) / 7.5, ez = (z - C) / 14.0;
                     boolean dome = ex * ex + ey * ey + ez * ez <= 1 + (b.random.nextFloat() - 0.5) * 0.08;
                     boolean open = d <= 9.5 && y > h && y <= h + 10;
                     if (dome && !open && (d >= 5 || y > h)) {
@@ -251,6 +266,15 @@ public final class GuardianTree implements Blueprint {
             b.set(x, h + 1, z, fence.get());
             b.set(x, h + 2, z, fence.get());
             b.set(x, h + 3, z, Blocks.LANTERN);
+        }
+        // Benches and potted plants around the rail, carpet leading to the chest.
+        for (int i = 0; i < 4; i++) {
+            double a = Math.PI / 4 + i * Math.PI / 2;
+            int x = C + (int) Math.round(Math.cos(a) * 7.5), z = C + (int) Math.round(Math.sin(a) * 7.5);
+            b.set(x, h + 1, z, i % 2 == 0 ? ModBlocks.POTTED_SUNBLOOM.get() : ModBlocks.POTTED_STARPETAL.get());
+        }
+        for (int dz = 4; dz <= 6; dz++) {
+            b.set(C, h + 1, C + dz, Blocks.YELLOW_CARPET);
         }
         b.chest(C, h + 1, C + 7, Direction.NORTH, loot);
         b.set(C - 1, h + 1, C + 7, platform.get());

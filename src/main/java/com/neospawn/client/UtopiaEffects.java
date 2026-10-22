@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 @EventBusSubscriber(modid = NeoSpawn.MODID, value = Dist.CLIENT)
 public final class UtopiaEffects {
     /** The haze colour mixed into the fog, and how much of it. */
-    private static final float HAZE_R = 1.0f, HAZE_G = 0.80f, HAZE_B = 0.48f, HAZE = 0.45f;
+    private static final float HAZE_R = 1.0f, HAZE_G = 0.84f, HAZE_B = 0.58f, HAZE = 0.22f;
 
     @SubscribeEvent
     static void registerEffects(RegisterDimensionSpecialEffectsEvent event) {
@@ -59,7 +59,7 @@ public final class UtopiaEffects {
     @SubscribeEvent
     static void fogDistance(ViewportEvent.RenderFog event) {
         if (inUtopia(event) && event.getMode() == net.minecraft.client.renderer.FogRenderer.FogMode.FOG_TERRAIN) {
-            event.setNearPlaneDistance(event.getFarPlaneDistance() * 0.3f);
+            event.setNearPlaneDistance(event.getFarPlaneDistance() * 0.55f);
             event.setFarPlaneDistance(event.getFarPlaneDistance() * 0.95f);
             event.setCanceled(true);
         }

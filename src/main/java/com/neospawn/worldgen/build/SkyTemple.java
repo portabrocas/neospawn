@@ -112,6 +112,31 @@ public final class SkyTemple implements Blueprint {
         b.barrel(C - 3, 0, C + 3, Direction.UP, "utopia_supply");
         b.barrel(C + 3, 0, C - 3, Direction.UP, "utopia_supply");
         b.chest(C + 3, 0, C + 3, Direction.WEST, "utopia_garden");
+        // Inside the sanctum: a white carpet cross, offering basins, lanterns on chains, amethyst at the altar corners.
+        for (int i = -3; i <= 3; i++) {
+            if (Math.abs(i) > 1) {
+                b.set(C + i, 0, C, Blocks.WHITE_CARPET);
+                b.set(C, 0, C + i, Blocks.WHITE_CARPET);
+            }
+        }
+        for (int[] p : new int[][]{{-3, -3}, {3, 1}}) {
+            b.set(C + p[0], 0, C + p[1], Blocks.WATER_CAULDRON.defaultBlockState()
+                    .setValue(net.minecraft.world.level.block.LayeredCauldronBlock.LEVEL, 3));
+        }
+        for (int[] p : new int[][]{{-2, -2}, {2, 2}, {-2, 2}, {2, -2}}) {
+            b.set(C + p[0], 5, C + p[1], Blocks.CHAIN);
+            b.set(C + p[0], 4, C + p[1], Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        }
+        b.set(C - 1, 1, C + 1, Blocks.AMETHYST_CLUSTER);
+        b.set(C + 1, 1, C - 1, Blocks.AMETHYST_CLUSTER);
+        // Potted blooms at the foot of every other column.
+        for (int i = 0; i < 12; i += 2) {
+            double a = i * Math.PI / 6;
+            b.set(C + (int) Math.round(Math.cos(a) * 8), 0, C + (int) Math.round(Math.sin(a) * 8), ModBlocks.POTTED_SUNBLOOM.get());
+        }
+        // Cloud wisps drift out of two cages in the court.
+        b.pestSpawner(C + 6, -1, C + 2, "cloud_wisp");
+        b.pestSpawner(C - 6, -1, C - 2, "cloud_wisp");
 
         // Cloud stair: a 2-wide spiral, one level per 3-4 blocks of arc, a full turn every 24 levels, down until
         // it meets the ground (cells already solid are left alone).

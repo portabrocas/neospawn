@@ -74,12 +74,13 @@ public final class HoneyOrchard implements Blueprint {
         var leaf = ModBlocks.AURELIAN_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
         int h = 3 + b.random.nextInt(2);
         b.fill(x, 0, z, x, h, z, Blocks.BIRCH_LOG);
-        for (int dx = -2; dx <= 2; dx++) {
-            for (int dy = 0; dy <= 2; dy++) {
-                for (int dz = -2; dz <= 2; dz++) {
-                    int r = dy == 2 ? 1 : 2;
-                    if (Math.abs(dx) <= r && Math.abs(dz) <= r && !(Math.abs(dx) == 2 && Math.abs(dz) == 2)
-                            && !(dx == 0 && dz == 0 && dy < 1)) {
+        // A rounded crown: a ball of blossom, a little wider than tall, its edge left ragged.
+        for (int dx = -3; dx <= 3; dx++) {
+            for (int dy = -1; dy <= 3; dy++) {
+                for (int dz = -3; dz <= 3; dz++) {
+                    double d = dx * dx / 6.5 + (dy - 1) * (dy - 1) / 3.2 + dz * dz / 6.5;
+                    boolean edge = d > 0.75;
+                    if (d <= 1.0 && !(edge && b.chance(0.35f)) && !(dx == 0 && dz == 0 && dy < 1)) {
                         b.set(x + dx, h + dy, z + dz, leaf);
                     }
                 }
@@ -129,5 +130,20 @@ public final class HoneyOrchard implements Blueprint {
         b.barrel(10, 0, 20, Direction.UP, "utopia_supply");
         b.chest(15, 0, 20, Direction.WEST, "utopia_garden");
         b.set(14, 0, 20, Blocks.BEE_NEST.defaultBlockState().setValue(BeehiveBlock.FACING, Direction.NORTH));
+        // The beekeeper lives here: a yellow bed, a shelf of books, a little table with a stool and a candle.
+        var bed = Blocks.YELLOW_BED.defaultBlockState().setValue(net.minecraft.world.level.block.BedBlock.FACING, Direction.SOUTH);
+        b.set(13, 0, 19, bed.setValue(net.minecraft.world.level.block.BedBlock.PART, net.minecraft.world.level.block.state.properties.BedPart.FOOT));
+        b.set(13, 0, 20, bed.setValue(net.minecraft.world.level.block.BedBlock.PART, net.minecraft.world.level.block.state.properties.BedPart.HEAD));
+        b.fill(15, 0, 18, 15, 1, 19, Blocks.BOOKSHELF);
+        b.set(11, 0, 18, ModBlocks.AURELIAN_FENCE.get());
+        b.set(11, 1, 18, ModBlocks.AURELIAN_PRESSURE_PLATE.get());
+        b.set(11, 0, 19, ModBlocks.AURELIAN_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH));
+        b.set(12, 0, 17, Blocks.CANDLE.defaultBlockState().setValue(net.minecraft.world.level.block.CandleBlock.CANDLES, 3)
+                .setValue(net.minecraft.world.level.block.CandleBlock.LIT, true));
+        b.set(14, 0, 17, ModBlocks.POTTED_HONEYBELL.get());
+        b.set(12, 0, 18, Blocks.YELLOW_CARPET);
+        // Wild wasps nest in two of the trees, and they don't like visitors.
+        b.pestSpawner(8, 6, 8, "gilded_wasp");
+        b.pestSpawner(16, 6, 3, "gilded_wasp");
     }
 }

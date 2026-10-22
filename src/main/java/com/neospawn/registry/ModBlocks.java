@@ -119,7 +119,7 @@ public final class ModBlocks {
     /** A cloud you can stand on, and land on from any height without a scratch. */
     public static final DeferredBlock<SkyFluffBlock> SKY_FLUFF = BLOCKS.register("sky_fluff",
             () -> new SkyFluffBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL).mapColor(MapColor.SNOW)
-                    .strength(0.4f).noOcclusion().isViewBlocking((s, l, p) -> false).isSuffocating((s, l, p) -> false)));
+                    .strength(0.4f).lightLevel(state -> 6).noOcclusion().isViewBlocking((s, l, p) -> false).isSuffocating((s, l, p) -> false)));
 
     // Glowing flowers, each with a potted version (FlowerPotBlock pots them via registerPots).
     public static final DeferredBlock<FlowerBlock> SUNBLOOM = flower("sunbloom", MobEffects.REGENERATION, 10);

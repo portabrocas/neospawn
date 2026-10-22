@@ -104,7 +104,7 @@ REALMS = {
         type=dim_type(fixed_time=11800, raids=False, effects="neospawn:utopia"),
         noise="neospawn:utopia",
         biome=biome(
-            effects(0xF2C27A, 0xFFE0A8, 0x5CD6E0, 0x2A7A80, grass=0xE8C25A, foliage=0xF0B840,
+            effects(0x8EC3F0, 0xFFD9A0, 0x5CD6E0, 0x2A7A80, grass=0xE0C860, foliage=0xF0B840,
                     particle=("neospawn:golden_mote", 0.006), music="minecraft:music.overworld.cherry_grove"),
             ns("utopia_aurelian_trees", "utopia_sunbloom_trees", "utopia_flowers") +
             mc("forest_flowers", "patch_grass_plain", "patch_sugar_cane", "patch_pumpkin") + ns("duplicator_tree"),
@@ -436,7 +436,7 @@ def per_chunk(*weights):
 
 
 write("worldgen/placed_feature/utopia_aurelian_trees.json",
-      {"feature": "neospawn:aurelian_tree", "placement": [per_chunk(6, 2, 1)] + ON_LAND})
+      {"feature": "neospawn:aurelian_tree", "placement": [per_chunk(10, 2, 1)] + ON_LAND})
 write("worldgen/placed_feature/utopia_sunbloom_trees.json",
       {"feature": "neospawn:sunbloom_tree", "placement": [per_chunk(4, 3, 1)] + ON_LAND})
 write("worldgen/placed_feature/utopia_flowers.json", {"feature": "neospawn:utopia_flowers", "placement": [

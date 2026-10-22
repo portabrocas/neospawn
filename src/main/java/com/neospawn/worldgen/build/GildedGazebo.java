@@ -100,6 +100,26 @@ public final class GildedGazebo implements Blueprint {
         }
         b.chest(C, 0, C + 4, Direction.NORTH, "utopia_garden");
         b.barrel(C - 1, 0, C + 4, Direction.UP, "utopia_supply");
-        b.set(C + 1, 0, C + 4, Blocks.FLOWER_POT);
+        b.set(C + 1, 0, C + 4, ModBlocks.POTTED_SUNBLOOM.get());
+        // A tea table under the north arch: fence-post legs, a plate top, candles and a potted bloom.
+        b.set(C, 0, C - 4, ModBlocks.AURELIAN_FENCE.get());
+        b.set(C, 1, C - 4, ModBlocks.AURELIAN_PRESSURE_PLATE.get());
+        b.set(C - 1, 0, C - 4, Blocks.CANDLE.defaultBlockState().setValue(net.minecraft.world.level.block.CandleBlock.CANDLES, 2)
+                .setValue(net.minecraft.world.level.block.CandleBlock.LIT, true));
+        b.set(C + 1, 0, C - 4, ModBlocks.POTTED_HONEYBELL.get());
+        // A carpet ring round the planter, chains and lanterns hanging from the eaves.
+        for (int x = C - 2; x <= C + 2; x++) {
+            for (int z = C - 2; z <= C + 2; z++) {
+                if ((Math.abs(x - C) == 2 || Math.abs(z - C) == 2) && b.get(x, 0, z).isAir()) {
+                    b.set(x, 0, z, Blocks.YELLOW_CARPET);
+                }
+            }
+        }
+        for (int[] p : new int[][]{{3, 3}, {-3, 3}, {3, -3}, {-3, -3}}) {
+            b.set(C + p[0], 5, C + p[1], Blocks.CHAIN);
+            b.set(C + p[0], 4, C + p[1], Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        }
+        // Wasps have built a nest in the floor.
+        b.pestSpawner(C + 4, -1, C - 2, "gilded_wasp");
     }
 }

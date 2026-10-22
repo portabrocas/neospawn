@@ -127,7 +127,27 @@ public final class SunlitLibrary implements Blueprint {
                 }
             }
         }
+        // Between the upper shelves, lanterns and potted plants; a carpet runner up the aisle.
+        for (int x = 3; x < W - 1; x += 3) {
+            for (int z : new int[]{1, D - 2}) {
+                b.set(x, 6, z, x % 6 == 0 ? ModBlocks.POTTED_STARPETAL.get().defaultBlockState()
+                        : Blocks.LANTERN.defaultBlockState());
+            }
+        }
+        for (int z = 1; z <= 6; z++) {
+            b.set(9, 0, z, Blocks.YELLOW_CARPET);
+        }
+        // A reading nook in the east end: a bookshelf alcove, an armchair, a reading lamp.
+        b.fill(W - 2, 0, 9, W - 2, 3, 12, Blocks.BOOKSHELF);
+        b.fill(W - 4, 3, 9, W - 2, 3, 12, Blocks.BOOKSHELF);
+        b.set(W - 3, 0, 10, ModBlocks.AURELIAN_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.EAST));
+        b.set(W - 3, 0, 11, Blocks.LECTERN.defaultBlockState().setValue(net.minecraft.world.level.block.LecternBlock.FACING, Direction.WEST));
+        b.set(W - 3, 2, 10, Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        b.set(W - 4, 0, 9, ModBlocks.POTTED_SUNBLOOM.get());
         b.chest(16, 6, 6, Direction.WEST, "utopia_library");
+        // Bookmites have eaten into the shelves.
+        b.pestSpawner(4, 1, 1, "bookmite");
+        b.pestSpawner(14, 1, D - 2, "bookmite");
         b.barrel(16, 6, 8, Direction.UP, "utopia_supply");
 
         // Observatory: a ladder through the ceiling to a glass dome and an amethyst-tipped telescope on the roof.

@@ -224,6 +224,10 @@ public final class Build {
      * lanterns and candles in our dungeons prevent) and spawn faster, in bigger groups.
      */
     static net.minecraft.nbt.CompoundTag spawnerTag(EntityType<?> type) {
+        return spawnerTag(type, 3, 6);
+    }
+
+    static net.minecraft.nbt.CompoundTag spawnerTag(EntityType<?> type, int count, int maxNearby) {
         net.minecraft.nbt.CompoundTag entity = new net.minecraft.nbt.CompoundTag();
         entity.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(type).toString());
         var rules = new net.minecraft.world.level.SpawnData.CustomSpawnRules(
@@ -236,11 +240,23 @@ public final class Build {
         tag.putShort("Delay", (short) 20);
         tag.putShort("MinSpawnDelay", (short) 140);
         tag.putShort("MaxSpawnDelay", (short) 380);
-        tag.putShort("SpawnCount", (short) 3);
-        tag.putShort("MaxNearbyEntities", (short) 6);
+        tag.putShort("SpawnCount", (short) count);
+        tag.putShort("MaxNearbyEntities", (short) maxNearby);
         tag.putShort("RequiredPlayerRange", (short) 20);
         tag.putShort("SpawnRange", (short) 4);
         return tag;
+    }
+
+    /** A gentler spawner for nuisance mobs: two at a time, never more than four about. */
+    public void pestSpawner(int x, int y, int z, String neospawnMob) {
+        BlockPos pos = at(x, y, z);
+        if (!clip.isInside(pos)) {
+            return;
+        }
+        level.setBlock(pos, Blocks.SPAWNER.defaultBlockState(), 2);
+        if (level.getBlockEntity(pos) instanceof SpawnerBlockEntity spawner) {
+            spawner.getSpawner().load(null, pos, spawnerTag(ModMobs.byId(neospawnMob).type.get(), 2, 4));
+        }
     }
 
     public void spawner(int x, int y, int z, String neospawnMob) {
