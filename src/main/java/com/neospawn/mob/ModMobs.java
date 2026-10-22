@@ -505,6 +505,7 @@ public final class ModMobs {
                 .egg(0xB86A2A, 0xF2E8D8).dayActive().spawn("c:is_savanna", 1, 1, 1).spawn("c:is_badlands", 1, 1, 1);
         boss("gorgantua", "Gorgantua", look(Family.HUMANOID).body(0, 16, 20).leg(16).head(10).snout(6).tail(28)
                 .with(Extra.PLATES).colors(0x3A4A3A, 0x23302A, 0x8AE8F8).eye(0xFFE84A).pattern(Pattern.SCALES).glow().scale(4.0f))
+                .geo("gorgantua", 1.0f, GorgantuaBoss::new)
                 .size(5.0f, 11.5f).stats(1024, 34, 0.26).armor(20).damageTaken(0.6f).voice(Voice.BIG_DINO).xp(2000)
                 .smashesBlocks().stepHeight(3.0).bar(BossEvent.BossBarColor.BLUE)
                 .attacks(BossAttack.BEAM, BossAttack.STOMP, BossAttack.TAIL_SWIPE, BossAttack.ROAR, BossAttack.FIRE_BREATH)
