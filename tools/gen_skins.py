@@ -337,16 +337,38 @@ def theropod(skin, cfg):
                  ref=body if kind == "body" else None)
 
 
+def ring_bands(colors, period=1.0, k=0.85):
+    """Bands of color around a body by z position (banded ant abdomens, warning stripes)."""
+    def mark(t, c):
+        i = int((t.p[2] // period)) % len(colors)
+        col = colors[i]
+        return mix(c, col, k) if col is not None else None
+    return mark
+
+
+def elytra_seam(color):
+    """The seam down the middle of a beetle's wing cases, on the top and back faces."""
+    def mark(t, c):
+        if t.face.name in ("top", "back") and abs(t.rx - 0.5) < 0.06:
+            return color
+        return None
+    return mark
+
+
 def insect(skin, cfg):
     shell = rgb(cfg.get("coat", skin.base_c))
     rear = rgb(cfg.get("abdomen", skin.base_c))
     joint = tone(skin.second, -0.3)
+    plate = cfg.get("plate", 2)
 
     def gloss(t):
         # A glossy highlight along the upper flank, the underside in shadow.
         if t.face.name in SIDES and 0.12 < t.ry < 0.32:
             return 0.22
         return 0.0
+
+    def plates(f, lx, ly, seed, size=plate):
+        return chitin(f, lx, ly, seed, plate=size, pos=lx if f.name in ("right", "left") else ly)
 
     for box in skin.boxes:
         part = box.part
@@ -356,21 +378,46 @@ def insect(skin, cfg):
             continue
         if box.role == "DARK":
             coat(skin, box, tone(skin.second, -0.6))
+        elif box.role == "ACCENT" and kind == "horn":
+            coat(skin, box, rgb(cfg.get("horn", skin.accent)), shading=lambda t: 0.25 if t.face.name == "top" else -0.05,
+                 texture=lambda f, lx, ly, seed: 0.12 if f.name in SIDES and ly == 0 else 0.0)
+        elif box.role == "ACCENT" and kind == "sting":
+            # The barb: venom-bright at the bulb, black at the point.
+            paint_box(box, lambda f, lx, ly: tone(skin.accent, -0.7 if f.name == "front" or f.along(lx, ly) < 0.35 else 0.15))
         elif box.role == "ACCENT":
             # Mandibles and pincers: base color at the root darkening to a hard tip.
             paint_box(box, lambda f, lx, ly: tone(skin.accent, -0.55 if f.name == "front" or f.along(lx, ly) < 0.3 else 0.1))
+        elif kind == "sting":
+            coat(skin, box, rgb(cfg.get("sting", skin.second)), shading=gloss, texture=plates)
         elif kind == "abdomen":
-            coat(skin, box, rear, shading=gloss,
-                 texture=lambda f, lx, ly, seed: chitin(f, lx, ly, seed, plate=cfg.get("plate", 2),
-                                                        pos=lx if f.name in ("right", "left") else ly))
+            coat(skin, box, rear, shading=gloss, texture=plates, marks=cfg.get("abdomen_marks", ()))
         elif kind in ("leg", "shin"):
             def joints(t, c):
                 return joint if t.face.name in SIDES and (t.lx == 0 or t.lx == t.face.cols - 1) else None
-            coat(skin, box, shell if box.role == "BASE" else skin.second, marks=[joints], shading=lambda t: 0.1 if t.face.name == "top" else -0.05)
+            coat(skin, box, shell if box.role == "BASE" else skin.second, marks=[joints],
+                 shading=lambda t: 0.1 if t.face.name == "top" else -0.05)
         elif kind in ("antenna_l", "antenna_r"):
             paint_box(box, lambda f, lx, ly: tone(skin.second, 0.15 if (lx + ly) % 2 == 0 else -0.2))
+        elif kind == "pincer":
+            coat(skin, box, shell, shading=gloss, texture=lambda f, lx, ly, seed: plates(f, lx, ly, seed, 3))
         else:
-            coat(skin, box, shell, shading=gloss, texture=lambda f, lx, ly, seed: chitin(f, lx, ly, seed, plate=4))
+            shell_tex = None if cfg.get("smooth") else (lambda f, lx, ly, seed: chitin(f, lx, ly, seed, plate=4))
+            coat(skin, box, shell, shading=gloss, texture=shell_tex, marks=cfg.get("marks", ()))
+
+
+def eyespots(ground, rings, cell=4.0):
+    """Peacock-tail eyespots on a staggered grid, with feather shafts between them."""
+    def color(f, lx, ly):
+        x, y = f.fx(lx) * f.w, f.fy(ly) * f.h
+        row = int(y // cell)
+        cx = (x + (cell / 2 if row % 2 else 0)) % cell - cell / 2
+        cy = y % cell - cell / 2
+        d = (cx * cx + cy * cy) ** 0.5
+        for radius, col in rings:
+            if d < radius:
+                return col
+        return tone(ground, 0.12 if lx % 2 == 0 else -0.08)
+    return color
 
 
 def bird(skin, cfg):
@@ -382,6 +429,12 @@ def bird(skin, cfg):
         part = box.part
         kind = part.kind
         head = head_of(skin, box)
+        if kind == "fan" and "fan" in cfg:
+            fan = cfg["fan"]
+            # Eyespots face forward; the back of the train is plain dull feathers.
+            paint_box(box, lambda f, lx, ly: fan(f, lx, ly) if f.name == "front" else
+                      tone(mix(wing, (90, 80, 60), 0.5), 0.08 if lx % 2 == 0 else -0.08))
+            continue
         if common(skin, box, cfg, "bird", head):
             continue
         if kind == "leg":
@@ -410,9 +463,40 @@ def bird(skin, cfg):
             paint_box(box, plume)
         elif box.role == "ACCENT":
             paint_box(box, lambda f, lx, ly: tone(skin.accent, 0.15 if f.name == "top" else -0.1))
+        elif kind == "neck" and "neck" in cfg:
+            coat(skin, box, rgb(cfg["neck"]), texture=TEXTURES[cfg.get("neck_texture", "smooth")])
+        elif kind == "head" and "head" in cfg:
+            coat(skin, box, rgb(cfg["head"]), texture=TEXTURES[cfg.get("neck_texture", "smooth")])
         else:
             coat(skin, box, plumage, texture=feathers, belly=belly, start=cfg.get("belly_start", 0.5),
                  marks=cfg.get("marks", ()))
+
+
+def flank_dots(color, ry=0.55, every=3, k=1.0):
+    """A row of dots along each flank (photophores, portholes)."""
+    def mark(t, c):
+        if t.face.name in ("right", "left") and abs(t.ry - ry) < 0.08 and t.lx % every == 1:
+            return mix(c, color, k)
+        return None
+    return mark
+
+
+def throat_pleats(color, reach=0.55):
+    """A rorqual's throat grooves: pale lines along the front of the belly."""
+    def mark(t, c):
+        if t.face.name == "bottom" and t.rz < reach:
+            return color if t.lx % 2 == 0 else tone(color, -0.25)
+        return None
+    return mark
+
+
+def barnacles(color, reach=0.3, chance=0.12):
+    def mark(t, c):
+        if t.face.name in ("top", "right", "left", "front") and t.rz < reach and t.ry < 0.6 \
+                and noise(t.lx, t.ly, t.box.index + 77) < chance:
+            return color
+        return None
+    return mark
 
 
 def fish(skin, cfg):
@@ -420,6 +504,7 @@ def fish(skin, cfg):
     belly = cfg.get("belly", mix(hide, (255, 244, 214), 0.6))
     fin = rgb(cfg.get("fin", skin.second))
     body = skin.first("body").main()
+    texture = TEXTURES[cfg.get("texture", "scales")]
 
     def gills(t, c):
         # A gill arc a quarter of the way back, the cheek in front of it a shade lighter.
@@ -441,14 +526,114 @@ def fish(skin, cfg):
             continue
         if box.role == "SECOND" or kind == "fin":
             def rays(f, lx, ly):
-                k = 0.12 if (lx if f.name in ("right", "left") else lx) % 2 == 0 else -0.12
+                k = 0.12 if lx % 2 == 0 else -0.12
                 return tone(fin, k + (0.15 if f.name == "top" else 0))
             paint_box(box, rays)
         else:
-            coat(skin, box, hide, texture=scales, belly=belly, start=cfg.get("belly_start", 0.55),
-                 marks=[gills] + list(cfg.get("marks", ())), shading=lambda t: 0.12 if t.face.name == "front" else 0)
+            marks = ([gills] if cfg.get("gills", True) else []) + list(cfg.get("marks", ()))
+            coat(skin, box, hide, texture=texture, belly=belly, start=cfg.get("belly_start", 0.55),
+                 marks=marks, shading=lambda t: 0.12 if t.face.name == "front" else 0)
             if box is body:
                 mouth_line(box, tone(hide, -0.5), row_from_bottom=box["front"].rows // 3, faces=("front",))
+
+
+def diamonds(color, k=0.7):
+    """A diamondback pattern down the top of each segment."""
+    def mark(t, c):
+        if t.face.name != "top" and not (t.face.name in ("right", "left") and t.ry < 0.25):
+            return None
+        dx, dz = abs(t.rx - 0.5) * 2, abs(t.rz - 0.5) * 2
+        if 0.45 < dx + dz < 0.8:
+            return mix(c, color, k)
+        return None
+    return mark
+
+
+def serpent(skin, cfg):
+    hide = rgb(cfg.get("coat", skin.base_c))
+    band = rgb(cfg.get("band", skin.second))
+    belly = cfg.get("belly", skin.belly)
+    texture = TEXTURES[cfg.get("texture", "scales")]
+    iris = cfg.get("iris") or ((228, 168, 40) if luma(skin.eye) < 0.2 else skin.eye)
+    cfg = dict(cfg, iris=iris)
+    marks = list(cfg.get("marks", ())) + [scutes(belly)]
+    for box in skin.boxes:
+        part = box.part
+        kind = part.kind
+        head = head_of(skin, box)
+        if common(skin, box, cfg, "reptile", head):
+            continue
+        if box.role == "ACCENT" and kind == "head" and box.d <= 1.01 and box.w > 2:
+            # Mandible plate over the mouth: fangs along the bottom edge.
+            def fangs(f, lx, ly):
+                if f.name == "front" and ly >= f.rows - 2:
+                    return (236, 228, 206) if lx % 2 == 0 else tone(skin.accent, -0.6)
+                return tone(skin.accent, 0.15 - 0.4 * f.fy(ly))
+            paint_box(box, fangs)
+        elif box.role == "ACCENT":
+            paint_box(box, lambda f, lx, ly: tone(skin.accent, 0.2 - 0.45 * f.fy(ly) if f.name in SIDES else 0.15))
+        elif kind == "jaw":
+            coat(skin, box, mix(band, belly, 0.4), texture=texture)
+            mouth_inside(box, (150, 50, 60))
+        elif kind == "head" and box.h <= 1.01:
+            coat(skin, box, tone(hide, -0.35), texture=texture)
+        elif kind == "head":
+            coat(skin, box, hide, texture=texture, marks=cfg.get("head_marks", ()))
+        else:
+            coat(skin, box, band if box.role == "SECOND" else hide, texture=texture, marks=marks, belly=belly, start=0.7)
+
+
+def moth_wing(base, inner, margin, spot, spot_core, vein):
+    """Moth or butterfly wing on a flat membrane: dusky root, a ringed eyespot, a dark margin with pale dots."""
+    def color(f, lx, ly):
+        b = f.box
+        x, y, z = f.point(lx, ly)
+        out = abs(x) / max(1.0, max(abs(b.x), abs(b.x1)))          # 0 at the body, 1 at the wing tip
+        ch = (z - b.z) / b.d if b.d else 0.5                           # 0 leading edge, 1 trailing edge
+        c = base
+        if out < 0.3:
+            c = mix(inner, base, out / 0.3)
+        dx, dy = (out - 0.6) * f.w * 0.5, (ch - 0.5) * f.h if f.name in ("top", "bottom") else 0
+        d = (dx * dx + dy * dy) ** 0.5
+        if d < 1.0:
+            return spot_core
+        if d < 2.2:
+            return spot
+        if d < 3.0:
+            return tone(margin, 0.1)
+        if out > 0.86 or ch > 0.9:
+            return (236, 220, 180) if (lx + ly) % 4 == 0 else margin
+        if ly % 3 == 0:
+            return tone(c, -0.18)
+        return tone(c, 0.06 if f.name == "top" else -0.1)
+    return color
+
+
+def flying_bug(skin, cfg):
+    hide = rgb(cfg.get("coat", skin.base_c))
+    for box in skin.boxes:
+        part = box.part
+        kind = part.kind
+        head = head_of(skin, box)
+        if box.role == "MEMBRANE":
+            wing = cfg.get("wing_paint") or moth_wing(skin.second, hide, tone(hide, -0.3), skin.accent,
+                                                       tone(hide, -0.6), tone(skin.second, -0.3))
+            paint_box(box, wing)
+            continue
+        if common(skin, box, cfg, "insect", head):
+            continue
+        if kind in ("wing_l", "wing_r"):
+            wing_bone(skin, box, tone(hide, -0.2))
+        elif kind in ("antenna_l", "antenna_r"):
+            # Feathery antennae: alternating fronds.
+            paint_box(box, lambda f, lx, ly: tone(skin.second, 0.2 if (lx + ly) % 2 == 0 else -0.3))
+        elif box.role == "ACCENT":
+            coat(skin, box, skin.accent, texture=lambda f, lx, ly, seed: chitin(f, lx, ly, seed, plate=2,
+                                                                                    pos=lx if f.name in ("right", "left") else ly))
+        elif box.role == "SECOND":
+            coat(skin, box, tone(hide, -0.35))   # legs
+        else:
+            coat(skin, box, hide, texture=fur, shading=lambda t: 0.1 if t.face.name == "top" else 0)
 
 
 def folds(f, lx, ly, seed):
@@ -611,6 +796,7 @@ def fray(skin, depth):
 
 
 PAINTERS = {"QUADRUPED": quadruped, "THEROPOD": theropod, "INSECT": insect, "BIRD": bird, "FISH": fish,
+            "SERPENT": serpent, "FLYING_BUG": flying_bug,
             "HUMANOID": humanoid}
 
 
@@ -744,6 +930,30 @@ MOBS.update({
                      brow=(98, 170, 84)),
 })
 
+# ---- heroes (batch 4): picked mobs from the families that otherwise keep the runtime painter
+MOBS.update({
+    # Black body plumes, white wing and tail plumes, a bare pinkish neck and head.
+    "ostrich": dict(neck=(214, 172, 160), head=(204, 164, 152), belly=(52, 50, 50)),
+    # Blue body, green tail fan full of eyespots.
+    "peacock": dict(fan=eyespots((14, 120, 84), [(0.7, (24, 30, 96)), (1.2, (40, 168, 176)), (1.6, (214, 176, 64))],
+                                 cell=5.5),
+                    belly=(30, 70, 170), neck=(28, 84, 204), neck_texture="scales"),
+    # Realm ants: glossy, the gaster banded in each ant's colors.
+    "worker_ant": dict(abdomen=(30, 28, 30), abdomen_marks=[ring_bands([None, (60, 56, 60)], k=0.6)]),
+    "fire_ant": dict(abdomen=(150, 32, 22), plate=2),
+    "prism_ant": dict(abdomen_marks=[ring_bands([(232, 74, 232), (74, 232, 232), (232, 232, 74)], k=0.9)]),
+    "volatile_ant": dict(abdomen_marks=[ring_bands([None, (232, 232, 74)], k=0.85)]),
+    "giant_mantis": dict(marks=[dorsal((70, 140, 46), depth=0.3, k=0.5)]),
+    "sovereign_scorpion": dict(sting=(64, 44, 80)),
+    "hercules_beetle": dict(marks=[elytra_seam((14, 10, 6))], horn=(210, 180, 100), smooth=True),
+    # Leviathan: dark scales with a row of glowing photophores; whale: smooth, pale throat grooves, barnacles.
+    "leviathan": dict(marks=[flank_dots((90, 242, 232), ry=0.5, every=4)], gills=True),
+    "whale": dict(texture="hide", gills=False,
+                  marks=[throat_pleats((214, 220, 228)), barnacles((150, 160, 170), chance=0.05)]),
+    "basilisk": dict(marks=[diamonds((26, 40, 18))], iris=(255, 232, 58)),
+    "moth_titan": dict(),
+})
+
 # Mobs each batch covers; a plain run paints every one of them (MOBS only adds touches).
 BATCHES = {
     # Owner's scope: quadrupeds, theropods, humanoids and about ten hero mobs. Bugs, birds, fish, jellies,
@@ -758,6 +968,8 @@ BATCHES = {
     "theropods": ["allosaurus", "baryonyx", "brutosaurus", "cryolophosaurus", "swift_raptor", "tyrannosaurus"],
     # Every humanoid except Gorgantua (getting a GeckoLib model) and the tiny Glimmer Sprite, whose 3-texel
     # pastel body looked better with the runtime painter.
+    "heroes": ["ostrich", "peacock", "worker_ant", "fire_ant", "prism_ant", "volatile_ant", "giant_mantis",
+               "sovereign_scorpion", "hercules_beetle", "leviathan", "whale", "basilisk", "moth_titan"],
     "humanoids": ["bandit", "bone_specter", "crypt_beast", "siege_bot", "sniper_bot", "specter",
                   "starborn", "void_knight", "void_reaper", "war_bot"],
 }
