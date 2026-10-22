@@ -279,6 +279,22 @@ public final class Build {
         }
     }
 
+    /** A persistent creature of any kind, placed once when its chunk is drawn (bees for an orchard, say). */
+    public void creature(int x, int y, int z, EntityType<? extends Mob> type) {
+        BlockPos pos = at(x, y, z);
+        float yaw = random.nextFloat() * 360;
+        if (!clip.isInside(pos)) {
+            return;
+        }
+        Mob mob = type.create(level.getLevel());
+        if (mob != null) {
+            mob.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, yaw, 0);
+            mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.STRUCTURE, null);
+            mob.setPersistenceRequired();
+            level.addFreshEntityWithPassengers(mob);
+        }
+    }
+
     /** A structure's guardian: four times the health, harder hits, heavier armor, and a name to match. */
     public static void champion(Mob mob) {
         var attrs = mob.getAttributes();

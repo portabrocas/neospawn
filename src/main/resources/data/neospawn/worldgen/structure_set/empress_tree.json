@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "neospawn:empress_tree",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 20,
+    "separation": 8,
+    "salt": 51631,
+    "exclusion_zone": {
+      "other_set": "neospawn:tree_of_goodness",
+      "chunk_count": 6
+    }
+  }
+}

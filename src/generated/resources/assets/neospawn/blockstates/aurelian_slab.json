@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "neospawn:block/aurelian_slab"
+    },
+    "type=double": {
+      "model": "neospawn:block/aurelian_planks"
+    },
+    "type=top": {
+      "model": "neospawn:block/aurelian_slab_top"
+    }
+  }
+}

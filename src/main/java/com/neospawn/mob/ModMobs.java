@@ -260,6 +260,19 @@ public final class ModMobs {
                 .egg(0xF7C6E0, 0xFFF6A8).spawn("c:is_flower_forest", 4, 1, 2).spawn("c:is_floral", 3, 1, 2)
                 .drop(ModItems.GLOW_SAC, 1, 2);
 
+        // ---------------------------------------------------------------- Utopia creatures (WS-E): spawns only in Utopia,
+        // from its biome in tools/gen_realms.py.
+        animal("gilded_stag", "Gilded Stag", look(Family.QUADRUPED).body(13, 7, 8).leg(11).neck(6).head(5).snout(2).tail(2)
+                .with(Extra.ANTLERS, Extra.EARS).colors(0xE8C27A, 0xFFF4D6, 0xFFD24A).belly(0xFFF4D6).pattern(Pattern.SPECKLE))
+                .size(1.0f, 1.7f).stats(22, 0, 0.32).tameWith(v(Items.GOLDEN_CARROT)).mount(MobSpec.MountType.GROUND)
+                .drop(v(Items.LEATHER), 1, 2).drop(v(Items.GOLD_NUGGET), 2, 5).drop(v(Items.GOLDEN_CARROT), 1, 1, 0.15f)
+                .egg(0xE8C27A, 0xFFD24A);
+        flyer("sunwing_moth", "Sunwing Moth", look(Family.FLYING_BUG).body(6, 3, 3).head(3).wing(9)
+                .with(Extra.ANTENNAE, Extra.FOUR_WINGS).colors(0xF2B53A, 0xFFF1B8, 0xD9661E).pattern(Pattern.BANDS).glow())
+                .size(0.7f, 0.5f).stats(4, 0, 0.2).flySpeed(0.35).voice(Voice.BUG).xp(2).abilities(Ability.GLOW_PARTICLES)
+                .drop(v(Items.GLOWSTONE_DUST), 1, 2).drop(ModItems.INSECT_WING, 1, 2)
+                .egg(0xF2B53A, 0xD9661E);
+
         // ---------------------------------------------------------------- swimmers (passive)
         swimmer("goldfish", "Goldfish", look(Family.FISH).body(6, 2, 4).tail(3)
                 .with(Extra.DORSAL).colors(0xF58A1F, 0xFFB347, 0xFFFFFF))

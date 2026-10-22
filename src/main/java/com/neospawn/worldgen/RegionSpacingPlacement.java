@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * Lets a feature through in at most one chunk per {@code spacing}×{@code spacing}-chunk region, the way vanilla
  * structure sets space out villages. The chunk is picked from the world seed, so it's the same every time, and
- * neighbouring regions' picks are always at least {@code separation} chunks apart. Used for realm trees, whose
+ * neighbouring regions' picks are always at least {@code separation} chunks apart. For boss-guarded features, whose
  * guardians are bosses: a rarity_filter alone let several Kings generate side by side.
  */
 public class RegionSpacingPlacement extends PlacementModifier {

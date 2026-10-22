@@ -1,0 +1,9 @@
+{
+  "parent": "neospawn:block/turf",
+  "textures": {
+    "bottom": "minecraft:block/dirt",
+    "overlay": "neospawn:block/golden_grass_side_overlay",
+    "side": "minecraft:block/dirt",
+    "top": "neospawn:block/golden_grass_top"
+  }
+}

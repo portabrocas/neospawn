@@ -173,6 +173,9 @@ public final class RealmTravel {
         BlockPos column = land != null ? land : near;
         level.getChunk(column.getX() >> 4, column.getZ() >> 4);
         BlockPos surface = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column);
+        if (level.dimension().equals(Realm.UTOPIA.dimension)) {
+            surface = meadow(level, column, surface);
+        }
         boolean hasGround = surface.getY() > level.getMinBuildHeight() + 1;
         if (hasGround && level.getFluidState(surface.below()).isEmpty()) {
             return Vec3.atBottomCenterOf(surface);
@@ -185,6 +188,24 @@ public final class RealmTravel {
             }
         }
         return Vec3.atBottomCenterOf(platform);
+    }
+
+    /** Utopia's floating islands start above this height; arrivals land on the meadow below them. */
+    public static final int UTOPIA_ISLANDS_FLOOR = 130;
+
+    /** The first standable spot under Utopia's island band: the meadow surface, not an island overhead. */
+    private static BlockPos meadow(ServerLevel level, BlockPos column, BlockPos surface) {
+        if (surface.getY() <= UTOPIA_ISLANDS_FLOOR) {
+            return surface;
+        }
+        for (int y = UTOPIA_ISLANDS_FLOOR; y > level.getMinBuildHeight() + 1; y--) {
+            BlockPos pos = new BlockPos(column.getX(), y, column.getZ());
+            if (level.getBlockState(pos).isAir() && level.getBlockState(pos.above()).isAir()
+                    && !level.getBlockState(pos.below()).isAir() && !level.getBlockState(pos.below()).is(net.minecraft.tags.BlockTags.LEAVES)) {
+                return pos;
+            }
+        }
+        return surface;
     }
 
     private static void effects(ServerPlayer player) {
