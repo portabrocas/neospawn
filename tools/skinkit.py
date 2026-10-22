@@ -545,7 +545,9 @@ def eye(skin, eye_box, head, style="mammal", iris=None, lid=None):
         # Glint toward the front-top corner (front is high lx on the right flank, low lx on the left).
         face.put(face.cols - 1 if outward == "right" else 0, 0, tone(iris, 0.9) if luma(iris) > 0.3 else (235, 240, 245))
     else:
-        face.fill(lambda lx, ly: iris)
+        # A one-texel eye: the iris only shows as the rim on the eyeball's other faces, so the outward texel is the
+        # dark pupil. Painting it iris-coloured made small eyes (frogs, lizards) vanish into the skin.
+        face.fill(lambda lx, ly: iris if style == "glow" else (16, 12, 10))
     if head is None:
         return
     # Around the eye on the head's flank (or front for faces).
