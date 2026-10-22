@@ -133,7 +133,7 @@ def mouth_inside(box, color):
 def ear(skin, box, coat_color, inner, seed):
     def paint(f, lx, ly):
         if f.name == "front":
-            edge = lx in (0, f.cols - 1) or ly == 0
+            edge = f.cols >= 3 and (lx in (0, f.cols - 1) or ly == 0)
             return tone(coat_color, -0.1) if edge else tone(inner, 0.1 - 0.2 * f.fy(ly))
         return tone(coat_color, fur(f, lx, ly, seed) + (0.08 if f.name == "top" else -0.05))
     paint_box(box, paint)
@@ -254,7 +254,8 @@ def quadruped(skin, cfg):
                 else:
                     paws(box, rgb(cfg.get("paw", tone(hide, -0.45))))
             else:
-                nostrils([box])
+                # Nostrils cover much of a small snout's front, so keep them a shade, not a hole.
+                nostrils([box], tone(muzzle, -0.5))
         elif box.role == "ACCENT":
             horn(box, rgb(cfg.get("horn", skin.accent)), rings=kind in ("horn", "tip"))
         elif kind in ("wing_l", "wing_r"):
@@ -263,6 +264,9 @@ def quadruped(skin, cfg):
             coat(skin, box, rgb(cfg.get("jaw", mix(belly, skin.second, 0.3))), texture=texture,
                  marks=cfg.get("jaw_marks", ()))
             mouth_inside(box, (150, 70, 70))
+        elif kind == "ear" and box.role == "SECOND" and any(b.role == "BASE" for b in part.boxes):
+            # The inner lining of a long ear.
+            paint_box(box, lambda f, lx, ly: tone(inner_ear, 0.1 - 0.25 * f.fy(ly)))
         elif kind == "ear":
             ear(skin, box, rgb(cfg.get("ear", hide)), inner_ear, skin.seed + box.index)
         elif kind == "leg":
@@ -274,7 +278,7 @@ def quadruped(skin, cfg):
             # Muzzle (or brow ridge): lighter toward the nose, with a lip line.
             coat(skin, box, muzzle, texture=texture, marks=cfg.get("muzzle_marks", ()))
             if box.h > 1.2:
-                mouth_line(box, tone(muzzle, -0.55))
+                mouth_line(box, tone(muzzle, -0.45), faces=("right", "left"))
         elif kind == "head" and box.role == "BASE":
             coat(skin, box, hide, texture=texture, marks=cfg.get("head_marks", ()),
                  shading=lambda t: 0.08 if t.face.name == "front" else 0)
@@ -482,7 +486,7 @@ def humanoid(skin, cfg):
             hood = rgb(cfg.get("hood", skin.second))
             def hood_paint(f, lx, ly):
                 if f.name == "front":
-                    edge = lx in (0, f.cols - 1) or ly == 0
+                    edge = f.cols >= 3 and (lx in (0, f.cols - 1) or ly == 0)
                     return tone(hood, 0.15) if edge else tone(hood, -0.75)
                 return tone(hood, folds(f, lx, ly, skin.seed) + (0.12 if f.name == "top" else 0.0) - 0.12 * f.fy(ly))
             paint_box(box, hood_paint)
@@ -576,11 +580,13 @@ MOBS = {
 WHITE, PINK = (244, 240, 232), (232, 150, 150)
 MOBS.update({
     # Lengthwise dark stripes down the back, a creamy belly.
-    "chipmunk": dict(marks=[back_stripes((52, 32, 18), (0.0, -1.5, 1.5), width=0.7)], tail=(110, 72, 40)),
+    "chipmunk": dict(marks=[back_stripes((44, 26, 14), (0.0, -1.6, 1.6), width=0.7),
+                            back_stripes((236, 214, 176), (-0.8, 0.8), width=0.5)], tail=(110, 72, 40)),
     # Skunk: two white stripes from the crown down the back, a white plume at the tail tip.
-    "stinkpup": dict(marks=[back_stripes(WHITE, (-1.2, 1.2), width=1.0)],
-                     head_marks=[back_stripes(WHITE, (0.0,), width=1.0, faces=("top", "front"))],
-                     tail_marks=[tail_tip(WHITE, segments=1)], belly=(36, 34, 38), sock=(20, 20, 22)),
+    "stinkpup": dict(marks=[back_stripes(WHITE, (-1.3, 1.3), width=1.6)],
+                     head_marks=[back_stripes(WHITE, (0.0,), width=1.4, faces=("top", "front"))],
+                     tail_marks=[tail_tip(WHITE, segments=2)], belly=(36, 34, 38), sock=(20, 20, 22),
+                     inner_ear=(62, 52, 58)),
     # Grey rat with a bare pink tail, pink ears and nose.
     "sewer_rat": dict(tail=PINK, tail_texture="hide", inner_ear=PINK, muzzle=(150, 130, 130)),
     # Glossy brown beaver, a flat dark scaly tail.
@@ -588,7 +594,8 @@ MOBS.update({
     # Smooth spotted frog with a gold eye.
     "bullfrog": dict(texture="hide", marks=[spots((44, 72, 20), cell=3, chance=0.45)], iris=(214, 178, 60),
                      eye_style="reptile", feet="paw"),
-    "sand_lizard": dict(texture="scales", eye_style="reptile", feet="claw", scutes=True, iris=(200, 150, 40)),
+    "sand_lizard": dict(texture="scales", eye_style="reptile", feet="claw", scutes=True, iris=(200, 150, 40),
+                        marks=[spots((150, 104, 52), cell=2, chance=0.3, k=0.8)]),
     "camarasaurus": dict(texture="hide", eye_style="reptile", feet="paw", paw=(84, 92, 60)),
     "spikeback": dict(texture="hide", eye_style="reptile", feet="paw", marks=[dorsal((70, 82, 36), k=0.5)]),
     "hammerhorn": dict(texture="hide", eye_style="reptile", feet="paw"),
@@ -610,7 +617,9 @@ MOBS.update({
 
 # Mobs each batch covers; a plain run paints every one of them (MOBS only adds touches).
 BATCHES = {
-    "pilot": ["gazelle", "swift_raptor", "fire_ant", "songbird", "goldfish", "bandit"],
+    # Owner's scope: quadrupeds, theropods, humanoids and about ten hero mobs. Bugs, birds, fish, jellies,
+    # serpents, spheres and plants keep the runtime painter (their insect/bird/fish painters stay for heroes).
+    "pilot": ["gazelle", "swift_raptor", "bandit"],
     # Every quadruped except the Empress, who is getting a GeckoLib model.
     "quadrupeds": ["azure_drake", "beaver", "brookdrake", "bullfrog", "burrow_lurker", "camarasaurus", "chipmunk",
                    "crystal_cow", "dread_steed", "egg_bunny", "ember_dragon", "ember_hatchling", "gilded_cow",

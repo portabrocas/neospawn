@@ -52,7 +52,7 @@ def transforms(parts):
 NORMALS = {"front": (0, 0, -1), "back": (0, 0, 1), "right": (-1, 0, 0), "left": (1, 0, 0), "top": (0, -1, 0), "bottom": (0, 1, 0)}
 
 
-def render(data, tex, yaw, pitch=0.42, size=360):
+def render(data, tex, yaw, pitch=-0.42, size=360):
     tex = tex.convert("RGBA")
     tw, th = tex.size
     sx_tex, sy_tex = tw / data["width"], th / data["height"]
