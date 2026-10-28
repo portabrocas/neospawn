@@ -29,5 +29,12 @@ public final class ModEntities {
             () -> EntityType.Builder.<com.neospawn.mob.Cristian>of(com.neospawn.mob.Cristian::new, MobCategory.MISC)
                     .sized(0.6f, 1.8f).clientTrackingRange(10).build("cristian"));
 
+    // ---------------------------------------------------------------- Rift Gun (stream B)
+    /** A Rift Gun's blue or orange rift, flat on a block face. Its real box comes from its face (see RiftEntity). */
+    public static final DeferredHolder<EntityType<?>, EntityType<com.neospawn.item.RiftEntity>> RIFT = ENTITY_TYPES.register("rift",
+            () -> EntityType.Builder.<com.neospawn.item.RiftEntity>of(com.neospawn.item.RiftEntity::new, MobCategory.MISC)
+                    .sized(1.0f, 1.0f).noSummon().fireImmune().clientTrackingRange(8).updateInterval(Integer.MAX_VALUE)
+                    .build("rift"));
+
     private ModEntities() {}
 }

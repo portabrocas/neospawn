@@ -250,6 +250,10 @@ for vault, p in (("mine_vault", 0.05), ("spire_treasure", 0.08), ("fortress_vaul
                  ("sanctum_relic", 0.06), ("shrine_chaos", 0.08), ("crypt_treasure", 0.04), ("vault_treasure", 0.05), ("utopia_vault", 0.03)):
     LOOT[vault]["pools"].append(chance(item("cristian_phone"), p))
 
+# The Rift Gun: rarer still, never crafted.
+for vault, p in (("arena_vault", 0.06), ("vault_treasure", 0.04), ("utopia_vault", 0.04), ("shrine_chaos", 0.05)):
+    LOOT[vault]["pools"].append(chance(item("rift_gun"), p))
+
 for name, loot in LOOT.items():
     write(f"loot_table/chests/{name}.json", loot)
 print(f"{len(STRUCTURES)} structures, {len(LOOT)} loot tables")

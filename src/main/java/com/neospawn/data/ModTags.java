@@ -158,7 +158,7 @@ public final class ModTags {
             ModItems.BOSS_WEAPONS.forEach(weapon -> tag(ItemTags.SWORDS).add(weapon.get()));
             tag(ItemTags.SWORDS).add(ModItems.ATTITUDE_ADJUSTER.get(), ModItems.NETHER_SWORD.get(), ModItems.BEHEMOTH_BLADE.get());
             tag(ItemTags.AXES).add(ModItems.CHAINSAW.get());
-            tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.SQUID_ZOOKA.get(), ModItems.RAY_GUN.get());
+            tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.SQUID_ZOOKA.get(), ModItems.RAY_GUN.get(), ModItems.RIFT_GUN.get());
             tag(ItemTags.BOW_ENCHANTABLE).add(ModItems.PARAGON_BOW.get());
             tag(ItemTags.FISHING_ENCHANTABLE).add(ModItems.PARAGON_FISHING_ROD.get());
             tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.PARAGON_BOW.get(), ModItems.PARAGON_FISHING_ROD.get());

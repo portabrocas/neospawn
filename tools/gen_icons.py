@@ -805,4 +805,64 @@ for name, leaf, fruit in (("duplicator_sapling", "dup_leaf", "cyan_glow"), ("exp
                           ("ruby_ore_sapling", "leaf", "ruby")):
     save(sapling(leaf, fruit, name, "dup_bark" if name.startswith("duplicator") else "wood"), f"block/{name}.png")
 save(summoning_altar(), "block/summoning_altar.png")
+
+
+# ------------------------------------------------------------------ Rift Gun (stream B): gun icon and the two rifts
+
+RAMPS.update({
+    "rift_blue": [(6, 30, 80), (20, 80, 170), (50, 150, 240), (130, 210, 255), (230, 250, 255)],
+    "rift_orange": [(90, 30, 0), (190, 80, 10), (250, 140, 30), (255, 200, 100), (255, 248, 220)],
+    "rift_shell": [(16, 12, 26), (38, 32, 54), (62, 56, 82), (96, 90, 118), (140, 136, 164)],
+})
+
+
+def rift_gun():
+    """A stubby dark handgun, drawn like the other guns (barrel right): a forked emitter holding a spark between its
+    prongs, and two charge cells, blue and orange, along the top."""
+    s = sprite()
+    s.part(poly_mask([(1.5, 5.5), (10.5, 5.5), (11.5, 6.5), (11.5, 9.5), (1.5, 9.5)]), "rift_shell")   # body
+    s.part(poly_mask([(3, 9.5), (6.5, 9.5), (5.5, 14.5), (2, 14.5)]), "dark_steel")                    # grip
+    s.part({(11, 5), (12, 5), (13, 5), (14, 5)}, "steel")                                             # upper prong
+    s.part({(11, 10), (12, 10), (13, 10), (14, 10)}, "steel")                                         # lower prong
+    for (x, y) in ((12, 7), (13, 7), (12, 8), (13, 8), (14, 7), (14, 8)):                              # spark
+        s.put(x, y, ramp("rift_blue", 3) if x < 14 else (255, 255, 255))
+    s.put(13, 6, ramp("rift_orange", 3))
+    s.put(13, 9, ramp("rift_blue", 3))
+    s.part({(3, 6), (4, 6), (3, 7), (4, 7)}, "rift_orange")                                            # cells
+    s.part({(7, 6), (8, 6), (7, 7), (8, 7)}, "rift_blue")
+    s.put(3, 6, ramp("rift_orange", 4))
+    s.put(7, 6, ramp("rift_blue", 4))
+    s.put(5, 12, ramp("dark_steel", 3))                                                                # grip ridge
+    return s.image()
+
+
+def rift_texture(mat, seed):
+    """A rift, 32x64: a bright rim, a swirl spiralling into a dark eye, and fully clear outside the oval. The renderer
+    stretches it over a 1x2 wall rift and squashes it round on floors and ceilings."""
+    w, h = 32, 64
+    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    r = random.Random(seed)
+    for x in range(w):
+        for y in range(h):
+            dx, dy = (x + 0.5 - w / 2) / (w / 2), (y + 0.5 - h / 2) / (h / 2)
+            d = math.hypot(dx, dy)
+            if d > 0.98:
+                continue
+            a = math.atan2(dy, dx)
+            if d > 0.86:
+                k, alpha = (4 if d < 0.92 else 3), 255                       # the rim
+            else:
+                swirl = math.sin(a * 3 + d * 9.0)
+                k = 1 + (swirl > 0.2) + (swirl > 0.75) + (d > 0.7)
+                if d < 0.28:
+                    k = 0 if d < 0.16 else 1                                  # the eye
+                alpha = int(150 + 90 * d)
+            k = max(0, min(4, k + (r.random() < 0.06)))                       # a little sparkle
+            img.putpixel((x, y), ramp(mat, k) + (alpha,))
+    return img
+
+
+save(rift_gun(), "item/rift_gun.png")
+save(rift_texture("rift_blue", 11), "entity/rift_blue.png")
+save(rift_texture("rift_orange", 12), "entity/rift_orange.png")
 print("icon art written")

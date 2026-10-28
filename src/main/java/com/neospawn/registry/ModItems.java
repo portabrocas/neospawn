@@ -310,6 +310,10 @@ public final class ModItems {
     public static final DeferredItem<BossSummonItem> GORGANTUA_EGG = ITEMS.register("gorgantua_egg",
             () -> new BossSummonItem("gorgantua", "message.neospawn.gorgantua_hatched", paragonProps().stacksTo(1)));
 
+    // ---------------------------------------------------------------- Rift Gun (stream B): a rare find, never crafted
+    public static final DeferredItem<Gadgets.RiftGun> RIFT_GUN = ITEMS.register("rift_gun",
+            () -> new Gadgets.RiftGun(new Item.Properties().durability(500).rarity(Rarity.EPIC)));
+
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()
             .filter(block -> !block.getId().getPath().startsWith("potted_")) // Utopia: flower pots hold the flower's own item

@@ -149,6 +149,10 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.dried_egg.tooltip", "Just add water: drop it in water or use it on water to hatch it");
         add("item.neospawn.painted_egg.tooltip", "Laid by the Easter Bunny. Use it to crack it open: usually a spawn egg");
         add("item.neospawn.field_guide.tooltip", "Everything you need to know about NeoSpawn. Right-click to read");
+        // Rift Gun (stream B)
+        add("item.neospawn.rift_gun.tooltip", "Right-click: blue rift. Sneak + right-click: orange rift. Step into one, come out of the other. Ammo: ender pearls");
+        add("message.neospawn.rift_gun.no_surface", "No room for a rift there: it needs a flat, solid face (two blocks tall on walls)");
+        add("entity.neospawn.rift", "Rift");
         // EMI info pages.
         add("emi.info.neospawn.easter_bunny", "The Easter Bunny wanders flower forests and plains with a basket of eggs, laying an egg every few minutes: usually a spawn egg for any creature in the game (never a boss), sometimes a painted surprise egg. Breed them with carrots.\n\nCrack a painted egg open for a surprise: usually another spawn egg, sometimes gems, emeralds or experience.");
         add("emi.info.neospawn.dried_egg", "Dried spawn eggs come from Fossil Ore and sifting. Just add water: drop one in water or use it on water and the creature inside hatches. A Mystery Dried Egg hatches a random creature.");

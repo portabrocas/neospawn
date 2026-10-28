@@ -48,6 +48,7 @@ public class ModItemModels extends ItemModelProvider {
             Map.entry("plague_lance", "polearm"),
             Map.entry("predator_claw", "dagger"),
             Map.entry("ray_gun", "gun"),
+            Map.entry("rift_gun", "gun"),
             Map.entry("serpent_fang", "dagger"),
             Map.entry("siege_hammer", "large"),
             Map.entry("skyclaw_talon", "dagger"),

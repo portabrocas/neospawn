@@ -76,6 +76,10 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
   Experience Tree; the Gorgantua egg quest and the Summoning Altar; Instant Shelter, Ultimate Torch,
   XP Siphon and Sifter; and more dungeons (Ruined Crypts and Sunken Vaults in the overworld, the
   Golden Spire, Challenge Dungeon and Empress Tree in the realms).
+- **The Rift Gun**: a rare find (strongholds, ancient cities, end cities, the toughest NeoSpawn
+  vaults), never crafted. Fire a blue rift, sneak-fire an orange one, on any wall, floor or ceiling;
+  players, mobs, items and arrows that touch one come out of the other with their momentum. One
+  ender pearl per shot.
 - **Mob battles**: rival bosses fight on sight, even with you nearby (The King vs Gorgantua,
   T. rex vs Brutosaurus, the Ember Dragon vs the Kraken, and more), and predators hunt prey.
 - **The Royal line**: The King drops a Royal Egg. Hatch it, feed it gold to grow a Drakeling,
