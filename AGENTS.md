@@ -37,7 +37,8 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   completes NeoSpawn quests via these ids, so don't rename them. Run `runData` first: the script checks ids against the lang file.
 - The quest book (FTB Quests, needs FTB Library + FTB Teams) is `tools/gen_quests.py` → `modpack/ftbquests/quests/`.
   It checks every id against the repo and the Prism instance's mod jars, and caps rewards per tier (never endgame items).
-  Quest ids are hashes of chapter/quest keys: renaming a key resets players' progress on it. Install with
+  Quest ids are hashes of chapter/quest keys: renaming a key resets players' progress on it. Ids must stay below
+  8000000000000000: FTB Quests silently replaces larger ones, orphaning their titles ("Unnamed") and dependencies. Install with
   `tools/install-quests.ps1` (game closed).
 - The owner plays in Prism on a **Windows** gaming PC (moved from a MacBook at v0.21.3):
   `%APPDATA%\PrismLauncher\instances\NeoSpawnPack-Prism\minecraft\mods` (the instance name may differ on the PC).

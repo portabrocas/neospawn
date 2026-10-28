@@ -22,7 +22,7 @@
 				}
 				{
 					count: 6
-					id: "9E198E3F8EDDC6A9"
+					id: "1E198E3F8EDDC6A9"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -43,7 +43,7 @@
 				{
 					advancement: "neospawn:ruby"
 					criterion: ""
-					id: "ECB2351B76593849"
+					id: "6CB2351B76593849"
 					type: "advancement"
 				}
 			]
@@ -72,7 +72,7 @@
 				}
 				{
 					count: 8
-					id: "CBCE950F300CAA21"
+					id: "4BCE950F300CAA21"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -83,7 +83,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "E12A8029B6E44F4A"
+					id: "612A8029B6E44F4A"
 					item: {
 						count: 1
 						id: "neospawn:ruby_pickaxe"
@@ -157,7 +157,7 @@
 				}
 				{
 					count: 8
-					id: "E9E85A3EE52A9757"
+					id: "69E85A3EE52A9757"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -168,7 +168,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "848A48C24FC04F32"
+					id: "048A48C24FC04F32"
 					item: {
 						count: 1
 						id: "neospawn:tanzanite_pickaxe"
@@ -183,16 +183,16 @@
 			dependencies: [
 				"457064F60E0CD576"
 			]
-			id: "B8B5B8DDBBFF467F"
+			id: "38B5B8DDBBFF467F"
 			rewards: [
 				{
-					id: "A344E9F955E75A92"
+					id: "2344E9F955E75A92"
 					type: "xp"
 					xp: 300
 				}
 				{
 					count: 2
-					id: "D347A83F11A50783"
+					id: "5347A83F11A50783"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -224,7 +224,7 @@
 			dependencies: [
 				"3BA6BA40C3D8BC7E"
 			]
-			id: "DC67FF42C36867AD"
+			id: "5C67FF42C36867AD"
 			rewards: [
 				{
 					id: "559E30E8360AFFE7"
@@ -233,7 +233,7 @@
 				}
 				{
 					count: 6
-					id: "C14EC527883503A9"
+					id: "414EC527883503A9"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -242,7 +242,7 @@
 				}
 				{
 					count: 8
-					id: "BA6E55EBCC0DE7E5"
+					id: "3A6E55EBCC0DE7E5"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -254,7 +254,7 @@
 				{
 					advancement: "neospawn:titanium"
 					criterion: ""
-					id: "AC29CA5E36F02559"
+					id: "2C29CA5E36F02559"
 					type: "advancement"
 				}
 			]
@@ -263,7 +263,7 @@
 		}
 		{
 			dependencies: [
-				"DC67FF42C36867AD"
+				"5C67FF42C36867AD"
 			]
 			id: "61B49E2F9AB786BE"
 			rewards: [
@@ -274,7 +274,7 @@
 				}
 				{
 					count: 6
-					id: "C3BF8C59B0A48612"
+					id: "43BF8C59B0A48612"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -283,7 +283,7 @@
 				}
 				{
 					count: 8
-					id: "B124598098A98DC6"
+					id: "3124598098A98DC6"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -294,7 +294,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "C5D690488BC16274"
+					id: "45D690488BC16274"
 					item: {
 						count: 1
 						id: "neospawn:titanium_pickaxe"
@@ -307,12 +307,12 @@
 		}
 		{
 			dependencies: [
-				"DC67FF42C36867AD"
+				"5C67FF42C36867AD"
 			]
-			id: "F547E65D254466F0"
+			id: "7547E65D254466F0"
 			rewards: [
 				{
-					id: "CDA32376468FC419"
+					id: "4DA32376468FC419"
 					type: "xp"
 					xp: 300
 				}
@@ -348,18 +348,18 @@
 		}
 		{
 			dependencies: [
-				"F547E65D254466F0"
+				"7547E65D254466F0"
 			]
-			id: "D86BAFE71CD4345B"
+			id: "586BAFE71CD4345B"
 			rewards: [
 				{
-					id: "8E31C42C28302FC1"
+					id: "0E31C42C28302FC1"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "FE1FBEABAEB91C51"
+					id: "7E1FBEABAEB91C51"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -396,13 +396,13 @@
 			id: "74B65F1530274EE0"
 			rewards: [
 				{
-					id: "FDBD0931FF8A8DF1"
+					id: "7DBD0931FF8A8DF1"
 					type: "xp"
 					xp: 150
 				}
 				{
 					count: 6
-					id: "E30EBCC73AFB1FB4"
+					id: "630EBCC73AFB1FB4"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -411,7 +411,7 @@
 				}
 				{
 					count: 8
-					id: "9B99774C42587D89"
+					id: "1B99774C42587D89"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -423,7 +423,7 @@
 				{
 					advancement: "neospawn:mob_armor"
 					criterion: ""
-					id: "CB4C963B82D70924"
+					id: "4B4C963B82D70924"
 					type: "advancement"
 				}
 			]

@@ -7,13 +7,13 @@
 		count: 1
 		id: "neospawn:king_scale"
 	}
-	id: "FA25D1A2C851F11B"
+	id: "7A25D1A2C851F11B"
 	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
 			dependencies: [ ]
-			id: "FE5D09C118E6574E"
+			id: "7E5D09C118E6574E"
 			rewards: [
 				{
 					id: "2EE93CFA64A79482"
@@ -22,7 +22,7 @@
 				}
 				{
 					count: 2
-					id: "D02E824B393AAF9F"
+					id: "502E824B393AAF9F"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -31,7 +31,7 @@
 				}
 				{
 					count: 8
-					id: "EB7B8A1F69AA9C88"
+					id: "6B7B8A1F69AA9C88"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"
@@ -45,7 +45,7 @@
 				{
 					advancement: "neospawn:first_boss"
 					criterion: ""
-					id: "CC01BCEB31E75DDC"
+					id: "4C01BCEB31E75DDC"
 					type: "advancement"
 				}
 			]
@@ -54,12 +54,12 @@
 		}
 		{
 			dependencies: [
-				"FE5D09C118E6574E"
+				"7E5D09C118E6574E"
 			]
-			id: "D186DA902E0B37A7"
+			id: "5186DA902E0B37A7"
 			rewards: [
 				{
-					id: "AE31C66606A729EE"
+					id: "2E31C66606A729EE"
 					type: "xp_levels"
 					xp_levels: 5
 				}
@@ -74,7 +74,7 @@
 				}
 				{
 					count: 2
-					id: "D141DB3D2D1E6082"
+					id: "5141DB3D2D1E6082"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -87,7 +87,7 @@
 				{
 					advancement: "neospawn:boss_tyrannosaurus"
 					criterion: ""
-					id: "CD8BB226A16AF1F5"
+					id: "4D8BB226A16AF1F5"
 					type: "advancement"
 				}
 			]
@@ -96,7 +96,7 @@
 		}
 		{
 			dependencies: [
-				"FE5D09C118E6574E"
+				"7E5D09C118E6574E"
 			]
 			id: "17ACF564C58B08C4"
 			rewards: [
@@ -107,7 +107,7 @@
 				}
 				{
 					count: 4
-					id: "BFE8C6206DFA3879"
+					id: "3FE8C6206DFA3879"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -138,18 +138,18 @@
 		}
 		{
 			dependencies: [
-				"FE5D09C118E6574E"
+				"7E5D09C118E6574E"
 			]
-			id: "C31779C548CD0659"
+			id: "431779C548CD0659"
 			rewards: [
 				{
-					id: "89F38272492AD1AA"
+					id: "09F38272492AD1AA"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "A23A01DB60DCD8FD"
+					id: "223A01DB60DCD8FD"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -158,7 +158,7 @@
 				}
 				{
 					count: 2
-					id: "D243528444B3036A"
+					id: "5243528444B3036A"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -171,7 +171,7 @@
 				{
 					advancement: "neospawn:boss_empress"
 					criterion: ""
-					id: "DAC708090C9D9FD8"
+					id: "5AC708090C9D9FD8"
 					type: "advancement"
 				}
 			]
@@ -180,18 +180,18 @@
 		}
 		{
 			dependencies: [
-				"FE5D09C118E6574E"
+				"7E5D09C118E6574E"
 			]
-			id: "F24A418B1CC85170"
+			id: "724A418B1CC85170"
 			rewards: [
 				{
-					id: "806AB82BEC4F60A2"
+					id: "006AB82BEC4F60A2"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "D96F31B752C3311B"
+					id: "596F31B752C3311B"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -222,9 +222,9 @@
 		}
 		{
 			dependencies: [
-				"FE5D09C118E6574E"
+				"7E5D09C118E6574E"
 			]
-			id: "C2B48ABD2F175EAA"
+			id: "42B48ABD2F175EAA"
 			rewards: [
 				{
 					id: "00AB8B2521033561"
@@ -242,7 +242,7 @@
 				}
 				{
 					count: 2
-					id: "D7E2CC57C8E38F5D"
+					id: "57E2CC57C8E38F5D"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -265,18 +265,18 @@
 		{
 			dependencies: [
 				"17ACF564C58B08C4"
-				"C31779C548CD0659"
+				"431779C548CD0659"
 			]
-			id: "E1DEDDDAC5125E07"
+			id: "61DEDDDAC5125E07"
 			rewards: [
 				{
-					id: "E5F72D7251DEEA76"
+					id: "65F72D7251DEEA76"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "DDF96A7283248A1C"
+					id: "5DF96A7283248A1C"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -285,7 +285,7 @@
 				}
 				{
 					count: 2
-					id: "EFB12D477CD61B1A"
+					id: "6FB12D477CD61B1A"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -306,12 +306,12 @@
 		}
 		{
 			dependencies: [
-				"E1DEDDDAC5125E07"
+				"61DEDDDAC5125E07"
 			]
-			id: "9889F39991226F4D"
+			id: "1889F39991226F4D"
 			rewards: [
 				{
-					id: "CBDA759E180044A5"
+					id: "4BDA759E180044A5"
 					type: "xp_levels"
 					xp_levels: 10
 				}
@@ -326,7 +326,7 @@
 				}
 				{
 					count: 8
-					id: "9E18EE89A9859AA5"
+					id: "1E18EE89A9859AA5"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -335,7 +335,7 @@
 				}
 				{
 					count: 3
-					id: "BE25CFD859A961C7"
+					id: "3E25CFD859A961C7"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -358,7 +358,7 @@
 		}
 		{
 			dependencies: [
-				"9889F39991226F4D"
+				"1889F39991226F4D"
 			]
 			id: "4663BCCE0C1A3368"
 			rewards: [
@@ -369,7 +369,7 @@
 				}
 				{
 					count: 6
-					id: "BDE3DD80D4CCE483"
+					id: "3DE3DD80D4CCE483"
 					item: {
 						count: 6
 						id: "minecraft:diamond"
@@ -378,7 +378,7 @@
 				}
 				{
 					count: 8
-					id: "BABC36E2B2EA6F22"
+					id: "3ABC36E2B2EA6F22"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -401,7 +401,7 @@
 				{
 					advancement: "neospawn:all_bosses"
 					criterion: ""
-					id: "D7484B1090ECAF77"
+					id: "57484B1090ECAF77"
 					type: "advancement"
 				}
 			]

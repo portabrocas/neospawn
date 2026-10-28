@@ -8,7 +8,7 @@
 	drop_loot_crates: false
 	emergency_items_cooldown: 300
 	grid_scale: 0.5d
-	id: "971C419DD6093313"
+	id: "171C419DD6093313"
 	lock_message: ""
 	pause_game: false
 	progression_mode: "linear"

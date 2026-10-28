@@ -7,16 +7,16 @@
 		count: 1
 		id: "irons_spellbooks:copper_spell_book"
 	}
-	id: "C66F5E413FABD185"
+	id: "466F5E413FABD185"
 	order_index: 9
 	quest_links: [ ]
 	quests: [
 		{
 			dependencies: [ ]
-			id: "EE4DAEA45F035DB9"
+			id: "6E4DAEA45F035DB9"
 			rewards: [
 				{
-					id: "93441A63927B7948"
+					id: "13441A63927B7948"
 					type: "xp"
 					xp: 150
 				}
@@ -42,7 +42,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "D6882CD307EB15EB"
+					id: "56882CD307EB15EB"
 					item: {
 						count: 1
 						id: "irons_spellbooks:inscription_table"
@@ -55,18 +55,18 @@
 		}
 		{
 			dependencies: [
-				"EE4DAEA45F035DB9"
+				"6E4DAEA45F035DB9"
 			]
-			id: "FA01B4732D0719E1"
+			id: "7A01B4732D0719E1"
 			rewards: [
 				{
-					id: "B00C57C46460C503"
+					id: "300C57C46460C503"
 					type: "xp"
 					xp: 150
 				}
 				{
 					count: 6
-					id: "AC046DD2E381B89E"
+					id: "2C046DD2E381B89E"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -86,7 +86,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "D6CBFAF9910DD970"
+					id: "56CBFAF9910DD970"
 					item: {
 						count: 1
 						id: "irons_spellbooks:copper_spell_book"
@@ -99,18 +99,18 @@
 		}
 		{
 			dependencies: [
-				"FA01B4732D0719E1"
+				"7A01B4732D0719E1"
 			]
 			id: "28B420EBC83CD9BA"
 			rewards: [
 				{
-					id: "867F90840673B227"
+					id: "067F90840673B227"
 					type: "xp"
 					xp: 300
 				}
 				{
 					count: 2
-					id: "80756C872E4693C7"
+					id: "00756C872E4693C7"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -119,7 +119,7 @@
 				}
 				{
 					count: 8
-					id: "9F4A2455C229653F"
+					id: "1F4A2455C229653F"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"
@@ -146,13 +146,13 @@
 			id: "2C56C9A1886A3E7D"
 			rewards: [
 				{
-					id: "92FA2C382CD72080"
+					id: "12FA2C382CD72080"
 					type: "xp"
 					xp: 150
 				}
 				{
 					count: 6
-					id: "8C1E8F1E17D44980"
+					id: "0C1E8F1E17D44980"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -161,7 +161,7 @@
 				}
 				{
 					count: 8
-					id: "CCEB4B91840E06E4"
+					id: "4CEB4B91840E06E4"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -172,7 +172,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "A5D6003EA13AA495"
+					id: "25D6003EA13AA495"
 					item: {
 						count: 1
 						id: "witchery:altar"
@@ -187,7 +187,7 @@
 			dependencies: [
 				"2C56C9A1886A3E7D"
 			]
-			id: "B1339683D2FA959A"
+			id: "31339683D2FA959A"
 			rewards: [
 				{
 					id: "1D9726D80454C3BC"
@@ -205,7 +205,7 @@
 				}
 				{
 					count: 8
-					id: "A86D052D821EA512"
+					id: "286D052D821EA512"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -229,9 +229,9 @@
 		}
 		{
 			dependencies: [
-				"B1339683D2FA959A"
+				"31339683D2FA959A"
 			]
-			id: "86D14C51EC7E8AF9"
+			id: "06D14C51EC7E8AF9"
 			rewards: [
 				{
 					id: "3BC832807FC17AEC"
@@ -240,7 +240,7 @@
 				}
 				{
 					count: 2
-					id: "C36E9B2C71750075"
+					id: "436E9B2C71750075"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -260,7 +260,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "C1C4945A4E72AEA6"
+					id: "41C4945A4E72AEA6"
 					item: {
 						count: 1
 						id: "witchery:distillery"
@@ -273,16 +273,16 @@
 		}
 		{
 			dependencies: [ ]
-			id: "8F776C91A4E662D9"
+			id: "0F776C91A4E662D9"
 			rewards: [
 				{
-					id: "F49FE76804A52BD3"
+					id: "749FE76804A52BD3"
 					type: "xp"
 					xp: 150
 				}
 				{
 					count: 6
-					id: "AEE020155AEA6C40"
+					id: "2EE020155AEA6C40"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -291,7 +291,7 @@
 				}
 				{
 					count: 8
-					id: "CD22BAD7A3EEF572"
+					id: "4D22BAD7A3EEF572"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -315,9 +315,9 @@
 		}
 		{
 			dependencies: [
-				"8F776C91A4E662D9"
+				"0F776C91A4E662D9"
 			]
-			id: "B962591DDB4C7EFC"
+			id: "3962591DDB4C7EFC"
 			rewards: [
 				{
 					id: "4C4CCA2C5E05B3C8"
@@ -335,7 +335,7 @@
 				}
 				{
 					count: 8
-					id: "9240363674FF0D39"
+					id: "1240363674FF0D39"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -359,12 +359,12 @@
 		}
 		{
 			dependencies: [
-				"B962591DDB4C7EFC"
+				"3962591DDB4C7EFC"
 			]
-			id: "DD0E45B816213D95"
+			id: "5D0E45B816213D95"
 			rewards: [
 				{
-					id: "D5BE86ADCA2EE104"
+					id: "55BE86ADCA2EE104"
 					type: "xp"
 					xp: 300
 				}
@@ -403,9 +403,9 @@
 		}
 		{
 			dependencies: [
-				"DD0E45B816213D95"
+				"5D0E45B816213D95"
 			]
-			id: "E0EF9DD52725D35C"
+			id: "60EF9DD52725D35C"
 			rewards: [
 				{
 					id: "75FF210F1FF02B33"
@@ -457,7 +457,7 @@
 		}
 		{
 			dependencies: [ ]
-			id: "B90C7DD27581B79F"
+			id: "390C7DD27581B79F"
 			rewards: [
 				{
 					id: "75618211B682B252"
@@ -475,7 +475,7 @@
 				}
 				{
 					count: 8
-					id: "8EB0A91F4F49FEDA"
+					id: "0EB0A91F4F49FEDA"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"
@@ -499,18 +499,18 @@
 		}
 		{
 			dependencies: [
-				"B90C7DD27581B79F"
+				"390C7DD27581B79F"
 			]
 			id: "52CF5E79E16C3EC3"
 			rewards: [
 				{
-					id: "9794724131C4187C"
+					id: "1794724131C4187C"
 					type: "xp"
 					xp: 300
 				}
 				{
 					count: 2
-					id: "B992DCAA7DBA96B2"
+					id: "3992DCAA7DBA96B2"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -530,7 +530,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "B6C424942F7009C7"
+					id: "36C424942F7009C7"
 					item: {
 						count: 1
 						id: "immersive_aircraft:airship"
@@ -543,9 +543,9 @@
 		}
 		{
 			dependencies: [
-				"B90C7DD27581B79F"
+				"390C7DD27581B79F"
 			]
-			id: "C0C976354242CB61"
+			id: "40C976354242CB61"
 			rewards: [
 				{
 					id: "41067D52011D8C71"
@@ -563,7 +563,7 @@
 				}
 				{
 					count: 8
-					id: "E28CDF887D97D0FC"
+					id: "628CDF887D97D0FC"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"

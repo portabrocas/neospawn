@@ -100,7 +100,10 @@ def check(kind, rid):
 
 
 def hexid(*parts):
-    return hashlib.sha1("/".join(parts).encode()).hexdigest()[:16].upper()
+    # FTB Quests reads ids as signed longs and silently replaces any with the top bit set (8xxx... to Fxxx...),
+    # which orphans their lang titles ("Unnamed") and drops dependencies on them. Keep ids below 0x8000000000000000.
+    value = int(hashlib.sha1("/".join(parts).encode()).hexdigest()[:16], 16) & 0x7FFFFFFFFFFFFFFF
+    return f"{value:016X}"
 
 
 class Long(int):

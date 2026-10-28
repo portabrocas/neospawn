@@ -7,13 +7,13 @@
 		count: 1
 		id: "neospawn:field_guide"
 	}
-	id: "D556FECB89D4939B"
+	id: "5556FECB89D4939B"
 	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{
 			dependencies: [ ]
-			id: "DEBCC26E8097F15D"
+			id: "5EBCC26E8097F15D"
 			rewards: [
 				{
 					id: "27F42C4927D143CA"
@@ -43,12 +43,12 @@
 		}
 		{
 			dependencies: [
-				"DEBCC26E8097F15D"
+				"5EBCC26E8097F15D"
 			]
 			id: "51E38C25D932DC38"
 			rewards: [
 				{
-					id: "8ED0DEBBB0F20B93"
+					id: "0ED0DEBBB0F20B93"
 					type: "xp"
 					xp: 50
 				}
@@ -78,7 +78,7 @@
 		}
 		{
 			dependencies: [
-				"DEBCC26E8097F15D"
+				"5EBCC26E8097F15D"
 			]
 			id: "6CD213C438BB0810"
 			rewards: [
@@ -89,7 +89,7 @@
 				}
 				{
 					count: 8
-					id: "AC8327D5AD249638"
+					id: "2C8327D5AD249638"
 					item: {
 						count: 8
 						id: "minecraft:bread"
@@ -100,7 +100,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "F6BD1D35C1204AD7"
+					id: "76BD1D35C1204AD7"
 					item: {
 						count: 1
 						id: "minecraft:crafting_table"
@@ -135,7 +135,7 @@
 			tasks: [
 				{
 					count: 8L
-					id: "ACB9DBC708D503A9"
+					id: "2CB9DBC708D503A9"
 					item: {
 						count: 8
 						id: "minecraft:iron_ingot"
@@ -159,7 +159,7 @@
 				}
 				{
 					count: 8
-					id: "C3FF84150CCB2B54"
+					id: "43FF84150CCB2B54"
 					item: {
 						count: 8
 						id: "minecraft:bread"
@@ -249,7 +249,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "D7A3890D15B0C801"
+					id: "57A3890D15B0C801"
 					item: {
 						count: 1
 						id: "sophisticatedbackpacks:backpack"
@@ -311,7 +311,7 @@
 			id: "77298B388C8EB02E"
 			rewards: [
 				{
-					id: "814BCEE3F623C8BA"
+					id: "014BCEE3F623C8BA"
 					type: "xp"
 					xp: 150
 				}
@@ -337,7 +337,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "8979D461F37F7DD7"
+					id: "0979D461F37F7DD7"
 					item: {
 						count: 1
 						id: "farmersdelight:cooking_pot"
@@ -352,7 +352,7 @@
 			dependencies: [
 				"24DBBF22D0030B4E"
 			]
-			id: "FDD4D476D167D815"
+			id: "7DD4D476D167D815"
 			rewards: [
 				{
 					id: "5B356E8DDB774387"
@@ -370,7 +370,7 @@
 				}
 				{
 					count: 8
-					id: "AFB756DA5DC84F86"
+					id: "2FB756DA5DC84F86"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -394,18 +394,18 @@
 		}
 		{
 			dependencies: [
-				"FDD4D476D167D815"
+				"7DD4D476D167D815"
 			]
-			id: "EA4700C4769E8F68"
+			id: "6A4700C4769E8F68"
 			rewards: [
 				{
-					id: "EF63EDAD2AC6AE8E"
+					id: "6F63EDAD2AC6AE8E"
 					type: "xp"
 					xp: 150
 				}
 				{
 					count: 6
-					id: "C678749493974157"
+					id: "4678749493974157"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"

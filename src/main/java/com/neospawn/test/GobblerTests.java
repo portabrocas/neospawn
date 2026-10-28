@@ -128,6 +128,23 @@ public class GobblerTests {
         helper.succeed();
     }
 
+    /** Death drops are held until the death finishes: if any part of the loot throws, nothing drops at all. */
+    @GameTest(template = "arena", batch = "gobbler_loot", timeoutTicks = 100)
+    public static void killedGobblerDropsLoot(GameTestHelper helper) {
+        ServerPlayer player = player(helper);
+        GobblerBoss boss = (GobblerBoss) helper.spawn(ModMobs.byId("gobbler").type.get(), new BlockPos(12, 2, 12));
+        boss.setNoAi(true);
+        boss.hurt(helper.getLevel().damageSources().playerAttack(player), Float.MAX_VALUE);
+        AABB area = new AABB(helper.absolutePos(new BlockPos(12, 2, 12))).inflate(8);
+        helper.succeedWhen(() -> {
+            helper.assertTrue(boss.isDeadOrDying(), "the Gobbler survived");
+            helper.assertTrue(!helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, area).isEmpty(),
+                    "the Gobbler dropped nothing");
+            player.discard();
+            helper.killAllEntities();
+        });
+    }
+
     @GameTest(template = "arena", batch = "gobbler_treasure")
     public static void treasureFollowsRarity(GameTestHelper helper) {
         var random = net.minecraft.util.RandomSource.create(42);
@@ -156,6 +173,10 @@ public class GobblerTests {
         }
         helper.assertTrue(epic > 0 && epic * 5 < common, "epic should be far rarer than common: " + epic + " vs " + common);
         helper.assertTrue(GobblerTreasure.pool().stream().allMatch(c -> c.weight() > 0), "a candidate has no weight");
+        // Mods extend Rarity (Cataclysm, Undergarden, Aether, Iron's Spells); every value must have a weight.
+        for (var rarity : net.minecraft.world.item.Rarity.values()) {
+            helper.assertTrue(GobblerTreasure.weight(rarity) > 0, "no weight for rarity " + rarity);
+        }
         helper.succeed();
     }
 

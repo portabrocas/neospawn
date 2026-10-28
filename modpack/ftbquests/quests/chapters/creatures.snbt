@@ -34,7 +34,7 @@
 				{
 					advancement: "neospawn:dried_egg"
 					criterion: ""
-					id: "C231353412A02040"
+					id: "4231353412A02040"
 					type: "advancement"
 				}
 			]
@@ -54,7 +54,7 @@
 				}
 				{
 					count: 6
-					id: "94EA6B4C147ED019"
+					id: "14EA6B4C147ED019"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -75,7 +75,7 @@
 				{
 					advancement: "neospawn:painted_egg"
 					criterion: ""
-					id: "97AD8FF28C6D8BCD"
+					id: "17AD8FF28C6D8BCD"
 					type: "advancement"
 				}
 			]
@@ -89,7 +89,7 @@
 			id: "54A9356DA29E0224"
 			rewards: [
 				{
-					id: "F761BD19D1FF5522"
+					id: "7761BD19D1FF5522"
 					type: "xp"
 					xp: 150
 				}
@@ -104,7 +104,7 @@
 				}
 				{
 					count: 8
-					id: "C55D40327EDA5613"
+					id: "455D40327EDA5613"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -116,7 +116,7 @@
 				{
 					advancement: "neospawn:zoo_cage"
 					criterion: ""
-					id: "E213553FBA4D32C4"
+					id: "6213553FBA4D32C4"
 					type: "advancement"
 				}
 			]
@@ -137,7 +137,7 @@
 				}
 				{
 					count: 2
-					id: "C937C0496415D62F"
+					id: "4937C0496415D62F"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -146,7 +146,7 @@
 				}
 				{
 					count: 8
-					id: "E127009A8F86DED5"
+					id: "6127009A8F86DED5"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"
@@ -160,7 +160,7 @@
 				{
 					advancement: "neospawn:spring_basket"
 					criterion: ""
-					id: "F092B4824AFEA417"
+					id: "7092B4824AFEA417"
 					type: "advancement"
 				}
 			]
@@ -180,7 +180,7 @@
 				}
 				{
 					count: 6
-					id: "801C89FBDAAF920C"
+					id: "001C89FBDAAF920C"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -201,7 +201,7 @@
 				{
 					advancement: "neospawn:tame_mount"
 					criterion: ""
-					id: "C2D78652F4045403"
+					id: "42D78652F4045403"
 					type: "advancement"
 				}
 			]
@@ -215,13 +215,13 @@
 			id: "4E7683DE8A73C78B"
 			rewards: [
 				{
-					id: "8F3FCF79A848E316"
+					id: "0F3FCF79A848E316"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "D5F2C531C2769785"
+					id: "55F2C531C2769785"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -230,7 +230,7 @@
 				}
 				{
 					count: 2
-					id: "D3F113895B2B4C74"
+					id: "53F113895B2B4C74"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -242,7 +242,7 @@
 				{
 					advancement: "neospawn:sky_mount"
 					criterion: ""
-					id: "E7FC60FC0999A501"
+					id: "67FC60FC0999A501"
 					type: "advancement"
 				}
 			]
@@ -256,13 +256,13 @@
 			id: "70AC77B059CA53B1"
 			rewards: [
 				{
-					id: "C7D8E6DC370805E5"
+					id: "47D8E6DC370805E5"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "98F1766C5EC8C515"
+					id: "18F1766C5EC8C515"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -271,7 +271,7 @@
 				}
 				{
 					count: 2
-					id: "CBA575E4D560320D"
+					id: "4BA575E4D560320D"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -297,7 +297,7 @@
 			id: "16DB7B77AEC7769A"
 			rewards: [
 				{
-					id: "ADF0EB574E2DA590"
+					id: "2DF0EB574E2DA590"
 					type: "xp_levels"
 					xp_levels: 10
 				}
@@ -321,7 +321,7 @@
 				}
 				{
 					count: 3
-					id: "B784E61DC9C4715D"
+					id: "3784E61DC9C4715D"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"

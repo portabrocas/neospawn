@@ -33,12 +33,16 @@ public final class GobblerTreasure {
 
     public record Candidate(Item item, int weight) {}
 
+    /**
+     * Mods add their own rarities (NeoForge lets them extend the enum: Cataclysm, Undergarden, the Aether and Iron's
+     * Spells all do), so anything past the vanilla four counts as epic. A switch without that default throws on them.
+     */
     public static int weight(Rarity rarity) {
         return switch (rarity) {
             case COMMON -> 60;
             case UNCOMMON -> 25;
             case RARE -> 10;
-            case EPIC -> 3;
+            default -> 3;
         };
     }
 

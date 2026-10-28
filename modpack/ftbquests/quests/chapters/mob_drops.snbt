@@ -13,10 +13,10 @@
 	quests: [
 		{
 			dependencies: [ ]
-			id: "C866CC2D31023E3B"
+			id: "4866CC2D31023E3B"
 			rewards: [
 				{
-					id: "CF61D63AB8AA6602"
+					id: "4F61D63AB8AA6602"
 					type: "xp"
 					xp: 50
 				}
@@ -43,12 +43,12 @@
 		}
 		{
 			dependencies: [
-				"C866CC2D31023E3B"
+				"4866CC2D31023E3B"
 			]
-			id: "D66543B9B64F9447"
+			id: "566543B9B64F9447"
 			rewards: [
 				{
-					id: "D957597E5686789A"
+					id: "5957597E5686789A"
 					type: "xp"
 					xp: 150
 				}
@@ -63,7 +63,7 @@
 				}
 				{
 					count: 8
-					id: "B41046012D4FFC92"
+					id: "341046012D4FFC92"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -84,7 +84,7 @@
 		}
 		{
 			dependencies: [
-				"C866CC2D31023E3B"
+				"4866CC2D31023E3B"
 			]
 			id: "2D41A07254C3C913"
 			rewards: [
@@ -95,7 +95,7 @@
 				}
 				{
 					count: 6
-					id: "B20C3A7F55D08701"
+					id: "320C3A7F55D08701"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -125,9 +125,9 @@
 		}
 		{
 			dependencies: [
-				"C866CC2D31023E3B"
+				"4866CC2D31023E3B"
 			]
-			id: "E0603F32FFCD119A"
+			id: "60603F32FFCD119A"
 			rewards: [
 				{
 					id: "17CDA85FF2D7202C"
@@ -136,7 +136,7 @@
 				}
 				{
 					count: 6
-					id: "81464CF6C05F92F9"
+					id: "01464CF6C05F92F9"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -166,9 +166,9 @@
 		}
 		{
 			dependencies: [
-				"C866CC2D31023E3B"
+				"4866CC2D31023E3B"
 			]
-			id: "BAEA778ECC999FA5"
+			id: "3AEA778ECC999FA5"
 			rewards: [
 				{
 					id: "5913A29199036B27"
@@ -186,7 +186,7 @@
 				}
 				{
 					count: 8
-					id: "8C1B9B3B73505EAA"
+					id: "0C1B9B3B73505EAA"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -210,7 +210,7 @@
 		}
 		{
 			dependencies: [
-				"C866CC2D31023E3B"
+				"4866CC2D31023E3B"
 			]
 			id: "3EC4C5A67D976508"
 			rewards: [
@@ -232,7 +232,7 @@
 			tasks: [
 				{
 					count: 4L
-					id: "D1C634888607FC67"
+					id: "51C634888607FC67"
 					item: {
 						count: 4
 						id: "neospawn:stink_bomb"
@@ -245,12 +245,12 @@
 		}
 		{
 			dependencies: [
-				"C866CC2D31023E3B"
+				"4866CC2D31023E3B"
 			]
 			id: "22A3938A247A1E9D"
 			rewards: [
 				{
-					id: "CB894A674DA70B77"
+					id: "4B894A674DA70B77"
 					type: "xp"
 					xp: 50
 				}
@@ -267,7 +267,7 @@
 			tasks: [
 				{
 					count: 1L
-					id: "E81B1BA5177EE1AA"
+					id: "681B1BA5177EE1AA"
 					item: {
 						count: 1
 						id: "neospawn:firefly_jar"
@@ -280,12 +280,12 @@
 		}
 		{
 			dependencies: [
-				"C866CC2D31023E3B"
+				"4866CC2D31023E3B"
 			]
-			id: "A34C06C21F24F0D8"
+			id: "234C06C21F24F0D8"
 			rewards: [
 				{
-					id: "F27E23F0CA233B71"
+					id: "727E23F0CA233B71"
 					type: "xp"
 					xp: 150
 				}
@@ -311,7 +311,7 @@
 			tasks: [
 				{
 					count: 2L
-					id: "96F8D1B8C148477C"
+					id: "16F8D1B8C148477C"
 					item: {
 						count: 2
 						id: "neospawn:mining_charge"

@@ -88,7 +88,12 @@ public class GobblerBoss extends GeoBoss {
     @Override
     protected void dropCustomDeathLoot(ServerLevel level, net.minecraft.world.damagesource.DamageSource source, boolean recentlyHit) {
         super.dropCustomDeathLoot(level, source, recentlyHit);
-        GobblerTreasure.drop(this);
+        // Death drops are held until the death finishes, so an exception here would throw away all of them.
+        try {
+            GobblerTreasure.drop(this);
+        } catch (RuntimeException e) {
+            com.neospawn.NeoSpawn.LOGGER.error("Gobbler treasure failed; dropping its normal loot only", e);
+        }
     }
 
     @Override

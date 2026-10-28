@@ -7,7 +7,7 @@
 		count: 1
 		id: "farmersdelight:cooking_pot"
 	}
-	id: "FD2F7748380711AD"
+	id: "7D2F7748380711AD"
 	order_index: 10
 	quest_links: [ ]
 	quests: [
@@ -16,7 +16,7 @@
 			id: "19703E368DA6F53B"
 			rewards: [
 				{
-					id: "C2F092A9FB009278"
+					id: "42F092A9FB009278"
 					type: "xp"
 					xp: 50
 				}
@@ -48,16 +48,16 @@
 			dependencies: [
 				"19703E368DA6F53B"
 			]
-			id: "9D6BF505DB741C8C"
+			id: "1D6BF505DB741C8C"
 			rewards: [
 				{
-					id: "A9D65922A6B9FEEE"
+					id: "29D65922A6B9FEEE"
 					type: "xp"
 					xp: 50
 				}
 				{
 					count: 8
-					id: "9FCD9013088A4555"
+					id: "1FCD9013088A4555"
 					item: {
 						count: 8
 						id: "minecraft:bread"
@@ -81,9 +81,9 @@
 		}
 		{
 			dependencies: [
-				"9D6BF505DB741C8C"
+				"1D6BF505DB741C8C"
 			]
-			id: "ABF41EE86E5A6896"
+			id: "2BF41EE86E5A6896"
 			rewards: [
 				{
 					id: "2AD343522BA73CCD"
@@ -101,7 +101,7 @@
 				}
 				{
 					count: 8
-					id: "855F8BBAE723CF26"
+					id: "055F8BBAE723CF26"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -125,12 +125,12 @@
 		}
 		{
 			dependencies: [
-				"ABF41EE86E5A6896"
+				"2BF41EE86E5A6896"
 			]
 			id: "552D6317BEE6323D"
 			rewards: [
 				{
-					id: "EE713D817BE3AB6A"
+					id: "6E713D817BE3AB6A"
 					type: "xp"
 					xp: 150
 				}
@@ -156,7 +156,7 @@
 			tasks: [
 				{
 					count: 3L
-					id: "F4D9DA228956C03C"
+					id: "74D9DA228956C03C"
 					item: {
 						count: 3
 						id: "farmersdelight:beef_stew"
@@ -171,10 +171,10 @@
 			dependencies: [
 				"19703E368DA6F53B"
 			]
-			id: "B3D85254FD77517D"
+			id: "33D85254FD77517D"
 			rewards: [
 				{
-					id: "E30057460CC3BCA4"
+					id: "630057460CC3BCA4"
 					type: "xp"
 					xp: 50
 				}
@@ -204,7 +204,7 @@
 		}
 		{
 			dependencies: [ ]
-			id: "8EB52F36EF1C8D31"
+			id: "0EB52F36EF1C8D31"
 			rewards: [
 				{
 					id: "0A86219089CB468A"
@@ -213,7 +213,7 @@
 				}
 				{
 					count: 6
-					id: "95A59D84C02A85CB"
+					id: "15A59D84C02A85CB"
 					item: {
 						count: 6
 						id: "minecraft:iron_ingot"
@@ -222,7 +222,7 @@
 				}
 				{
 					count: 8
-					id: "E1F5CDECE35E3D6A"
+					id: "61F5CDECE35E3D6A"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -233,7 +233,7 @@
 			tasks: [
 				{
 					entity: "alexsmobs:crocodile"
-					id: "E095661B5A7C5EA0"
+					id: "6095661B5A7C5EA0"
 					type: "kill"
 					value: 1L
 				}
@@ -243,7 +243,7 @@
 		}
 		{
 			dependencies: [
-				"8EB52F36EF1C8D31"
+				"0EB52F36EF1C8D31"
 			]
 			id: "1DD5FC66185A8F8E"
 			rewards: [
@@ -263,7 +263,7 @@
 				}
 				{
 					count: 8
-					id: "95D6E58D0BF8570E"
+					id: "15D6E58D0BF8570E"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -274,7 +274,7 @@
 			tasks: [
 				{
 					count: 2L
-					id: "B71893FD85400CAA"
+					id: "371893FD85400CAA"
 					item: {
 						count: 2
 						id: "alexsmobs:bear_fur"
@@ -292,7 +292,7 @@
 			id: "0D4BFA382DD6CF06"
 			rewards: [
 				{
-					id: "B08D381A4819D867"
+					id: "308D381A4819D867"
 					type: "xp_levels"
 					xp_levels: 10
 				}
@@ -307,7 +307,7 @@
 				}
 				{
 					count: 8
-					id: "8140947CBC265335"
+					id: "0140947CBC265335"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -316,7 +316,7 @@
 				}
 				{
 					count: 3
-					id: "AF37A5F4A24408A0"
+					id: "2F37A5F4A24408A0"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -338,9 +338,9 @@
 		}
 		{
 			dependencies: [
-				"8EB52F36EF1C8D31"
+				"0EB52F36EF1C8D31"
 			]
-			id: "E5E5F377EB368542"
+			id: "65E5F377EB368542"
 			rewards: [
 				{
 					id: "20A29BF9A2E80F04"
@@ -349,7 +349,7 @@
 				}
 				{
 					count: 2
-					id: "C2B969FFADA4D09B"
+					id: "42B969FFADA4D09B"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -358,7 +358,7 @@
 				}
 				{
 					count: 8
-					id: "9FD1338D530C6E2A"
+					id: "1FD1338D530C6E2A"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"
@@ -369,7 +369,7 @@
 			tasks: [
 				{
 					entity: "weeping_angels:weeping_angel"
-					id: "836823B26D9F6551"
+					id: "036823B26D9F6551"
 					type: "kill"
 					value: 1L
 				}

@@ -13,10 +13,10 @@
 	quests: [
 		{
 			dependencies: [ ]
-			id: "FFBDC0CA7F7E39A6"
+			id: "7FBDC0CA7F7E39A6"
 			rewards: [
 				{
-					id: "D55536F4D97E291B"
+					id: "555536F4D97E291B"
 					type: "xp"
 					xp: 150
 				}
@@ -54,12 +54,12 @@
 		}
 		{
 			dependencies: [
-				"FFBDC0CA7F7E39A6"
+				"7FBDC0CA7F7E39A6"
 			]
-			id: "CE447D74BD90302D"
+			id: "4E447D74BD90302D"
 			rewards: [
 				{
-					id: "E3F8607D11FD5E06"
+					id: "63F8607D11FD5E06"
 					type: "xp"
 					xp: 150
 				}
@@ -95,9 +95,9 @@
 		}
 		{
 			dependencies: [
-				"CE447D74BD90302D"
+				"4E447D74BD90302D"
 			]
-			id: "93B2E809108CCE1C"
+			id: "13B2E809108CCE1C"
 			rewards: [
 				{
 					id: "3010E54EB754935B"
@@ -115,7 +115,7 @@
 				}
 				{
 					count: 8
-					id: "AECD7AA077222C07"
+					id: "2ECD7AA077222C07"
 					item: {
 						count: 8
 						id: "minecraft:cooked_beef"
@@ -127,7 +127,7 @@
 				{
 					advancement: "neospawn:realm_mining_realm"
 					criterion: ""
-					id: "9B4499FFC8E6E59C"
+					id: "1B4499FFC8E6E59C"
 					type: "advancement"
 				}
 			]
@@ -136,18 +136,18 @@
 		}
 		{
 			dependencies: [
-				"93B2E809108CCE1C"
+				"13B2E809108CCE1C"
 			]
-			id: "D50F5EFB2B4FA208"
+			id: "550F5EFB2B4FA208"
 			rewards: [
 				{
-					id: "922263365769A228"
+					id: "122263365769A228"
 					type: "xp"
 					xp: 300
 				}
 				{
 					count: 2
-					id: "A4FEE856332D85E5"
+					id: "24FEE856332D85E5"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -156,7 +156,7 @@
 				}
 				{
 					count: 8
-					id: "C47E08476C19CFBD"
+					id: "447E08476C19CFBD"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"
@@ -177,18 +177,18 @@
 		}
 		{
 			dependencies: [
-				"D50F5EFB2B4FA208"
+				"550F5EFB2B4FA208"
 			]
 			id: "254ACA2ED7C6C792"
 			rewards: [
 				{
-					id: "A1DBFBBF321F1CED"
+					id: "21DBFBBF321F1CED"
 					type: "xp"
 					xp: 300
 				}
 				{
 					count: 2
-					id: "AFAF2048A019E596"
+					id: "2FAF2048A019E596"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -197,7 +197,7 @@
 				}
 				{
 					count: 8
-					id: "DC494E1BDB0537E2"
+					id: "5C494E1BDB0537E2"
 					item: {
 						count: 8
 						id: "minecraft:golden_carrot"
@@ -220,7 +220,7 @@
 			dependencies: [
 				"254ACA2ED7C6C792"
 			]
-			id: "8022FE70885459ED"
+			id: "0022FE70885459ED"
 			rewards: [
 				{
 					id: "3C3399D39FF08CE4"
@@ -238,7 +238,7 @@
 				}
 				{
 					count: 2
-					id: "FF476FF3BE116C06"
+					id: "7F476FF3BE116C06"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -250,7 +250,7 @@
 				{
 					advancement: "neospawn:realm_danger_realm"
 					criterion: ""
-					id: "BFD2B64DDADEDD97"
+					id: "3FD2B64DDADEDD97"
 					type: "advancement"
 				}
 			]
@@ -259,7 +259,7 @@
 		}
 		{
 			dependencies: [
-				"8022FE70885459ED"
+				"0022FE70885459ED"
 			]
 			id: "6457A06BEEA80D9B"
 			rewards: [
@@ -302,7 +302,7 @@
 			dependencies: [
 				"6457A06BEEA80D9B"
 			]
-			id: "8D1D24207D51CB7D"
+			id: "0D1D24207D51CB7D"
 			rewards: [
 				{
 					id: "18758FFD4E4379C0"
@@ -320,7 +320,7 @@
 				}
 				{
 					count: 8
-					id: "E0F498CD89A92669"
+					id: "60F498CD89A92669"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -329,7 +329,7 @@
 				}
 				{
 					count: 3
-					id: "F17ED57D82439518"
+					id: "717ED57D82439518"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"

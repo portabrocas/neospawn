@@ -7,7 +7,7 @@
 		count: 1
 		id: "cataclysm:monstrous_horn"
 	}
-	id: "C6F2DC6C7333FFC6"
+	id: "46F2DC6C7333FFC6"
 	order_index: 8
 	quest_links: [ ]
 	quests: [
@@ -16,13 +16,13 @@
 			id: "2A179E20617AF7E6"
 			rewards: [
 				{
-					id: "DB672288BB85F844"
+					id: "5B672288BB85F844"
 					type: "xp"
 					xp: 50
 				}
 				{
 					count: 8
-					id: "8AFC9B39A4383112"
+					id: "0AFC9B39A4383112"
 					item: {
 						count: 8
 						id: "minecraft:bread"
@@ -63,7 +63,7 @@
 				}
 				{
 					count: 8
-					id: "8D760B28255D2A45"
+					id: "0D760B28255D2A45"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -72,7 +72,7 @@
 				}
 				{
 					count: 3
-					id: "FAE1E45620A6D161"
+					id: "7AE1E45620A6D161"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -99,7 +99,7 @@
 			id: "5F1EB7278903FA68"
 			rewards: [
 				{
-					id: "BB1FB5494442A952"
+					id: "3B1FB5494442A952"
 					type: "xp_levels"
 					xp_levels: 10
 				}
@@ -114,7 +114,7 @@
 				}
 				{
 					count: 8
-					id: "DF6C07C51370F152"
+					id: "5F6C07C51370F152"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -123,7 +123,7 @@
 				}
 				{
 					count: 3
-					id: "FCA3A7246290E5CA"
+					id: "7CA3A7246290E5CA"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -135,7 +135,7 @@
 			tasks: [
 				{
 					entity: "cataclysm:ender_guardian"
-					id: "80D2AFF277A2E1E6"
+					id: "00D2AFF277A2E1E6"
 					type: "kill"
 					value: 1L
 				}
@@ -147,10 +147,10 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "BD0DBC260E511C7E"
+			id: "3D0DBC260E511C7E"
 			rewards: [
 				{
-					id: "B490B4DFF37D5394"
+					id: "3490B4DFF37D5394"
 					type: "xp_levels"
 					xp_levels: 10
 				}
@@ -186,7 +186,7 @@
 			tasks: [
 				{
 					entity: "cataclysm:netherite_monstrosity"
-					id: "8FC517AC2128B050"
+					id: "0FC517AC2128B050"
 					type: "kill"
 					value: 1L
 				}
@@ -198,7 +198,7 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "8B11B5DD2381BE97"
+			id: "0B11B5DD2381BE97"
 			rewards: [
 				{
 					id: "14C5FE181E492FF9"
@@ -207,7 +207,7 @@
 				}
 				{
 					count: 6
-					id: "BF89957CFE6B77F3"
+					id: "3F89957CFE6B77F3"
 					item: {
 						count: 6
 						id: "minecraft:diamond"
@@ -216,7 +216,7 @@
 				}
 				{
 					count: 8
-					id: "B073E3C9D6400EA4"
+					id: "3073E3C9D6400EA4"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -225,7 +225,7 @@
 				}
 				{
 					count: 3
-					id: "D75E54BA347C4E8A"
+					id: "575E54BA347C4E8A"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -249,7 +249,7 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "A2DDCCE8F534B14F"
+			id: "22DDCCE8F534B14F"
 			rewards: [
 				{
 					id: "190DEBF283294459"
@@ -258,7 +258,7 @@
 				}
 				{
 					count: 6
-					id: "B829A6FED9C89826"
+					id: "3829A6FED9C89826"
 					item: {
 						count: 6
 						id: "minecraft:diamond"
@@ -267,7 +267,7 @@
 				}
 				{
 					count: 8
-					id: "9A0BEEB353C4A363"
+					id: "1A0BEEB353C4A363"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -300,7 +300,7 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "F1C5B193AD881C80"
+			id: "71C5B193AD881C80"
 			rewards: [
 				{
 					id: "36E10AD71838AA41"
@@ -309,7 +309,7 @@
 				}
 				{
 					count: 6
-					id: "9D6227CBDE1BF98E"
+					id: "1D6227CBDE1BF98E"
 					item: {
 						count: 6
 						id: "minecraft:diamond"
@@ -318,7 +318,7 @@
 				}
 				{
 					count: 8
-					id: "CF4793616704CB2F"
+					id: "4F4793616704CB2F"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -327,7 +327,7 @@
 				}
 				{
 					count: 3
-					id: "ADC56DCECFDB659A"
+					id: "2DC56DCECFDB659A"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -351,16 +351,16 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "97CC26DBBF084A18"
+			id: "17CC26DBBF084A18"
 			rewards: [
 				{
-					id: "C530C670B11AEA71"
+					id: "4530C670B11AEA71"
 					type: "xp_levels"
 					xp_levels: 10
 				}
 				{
 					count: 6
-					id: "EE84AB8F6D6DDE86"
+					id: "6E84AB8F6D6DDE86"
 					item: {
 						count: 6
 						id: "minecraft:diamond"
@@ -378,7 +378,7 @@
 				}
 				{
 					count: 3
-					id: "F5F276BE65D3D838"
+					id: "75F276BE65D3D838"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -390,7 +390,7 @@
 			tasks: [
 				{
 					entity: "cataclysm:maledictus"
-					id: "A36155CA110BE649"
+					id: "236155CA110BE649"
 					type: "kill"
 					value: 1L
 				}
@@ -420,7 +420,7 @@
 				}
 				{
 					count: 8
-					id: "9A6AFCF3578965DD"
+					id: "1A6AFCF3578965DD"
 					item: {
 						count: 8
 						id: "minecraft:emerald"
@@ -429,7 +429,7 @@
 				}
 				{
 					count: 3
-					id: "95285B737D4EC437"
+					id: "15285B737D4EC437"
 					item: {
 						count: 3
 						id: "minecraft:golden_apple"
@@ -453,7 +453,7 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "DFE2A92A4E293490"
+			id: "5FE2A92A4E293490"
 			rewards: [
 				{
 					id: "72289704CFFBA62F"
@@ -471,7 +471,7 @@
 				}
 				{
 					count: 2
-					id: "DA46173A5C87EA1E"
+					id: "5A46173A5C87EA1E"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -483,7 +483,7 @@
 			tasks: [
 				{
 					entity: "mowziesmobs:frostmaw"
-					id: "AF615FDAAB1BBE16"
+					id: "2F615FDAAB1BBE16"
 					type: "kill"
 					value: 1L
 				}
@@ -495,16 +495,16 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "E51BA13859015A81"
+			id: "651BA13859015A81"
 			rewards: [
 				{
-					id: "8AC5B7386FF55C83"
+					id: "0AC5B7386FF55C83"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "F0B18A176663894F"
+					id: "70B18A176663894F"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -513,7 +513,7 @@
 				}
 				{
 					count: 2
-					id: "BEBA95A622EDF523"
+					id: "3EBA95A622EDF523"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -537,7 +537,7 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "A6594C536937B55D"
+			id: "26594C536937B55D"
 			rewards: [
 				{
 					id: "464341F3181EB588"
@@ -567,7 +567,7 @@
 			tasks: [
 				{
 					entity: "mowziesmobs:umvuthi"
-					id: "FC8484E7E136F16B"
+					id: "7C8484E7E136F16B"
 					type: "kill"
 					value: 1L
 				}
@@ -579,16 +579,16 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "E4602BD1889D4D5A"
+			id: "64602BD1889D4D5A"
 			rewards: [
 				{
-					id: "E313F73280D98AC9"
+					id: "6313F73280D98AC9"
 					type: "xp"
 					xp: 300
 				}
 				{
 					count: 2
-					id: "811001E10C1D5A16"
+					id: "011001E10C1D5A16"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -609,7 +609,7 @@
 			tasks: [
 				{
 					entity: "mowziesmobs:naga"
-					id: "C07420FB649FE2ED"
+					id: "407420FB649FE2ED"
 					type: "kill"
 					value: 1L
 				}
@@ -621,16 +621,16 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "B5ABA1BDF82EB86C"
+			id: "35ABA1BDF82EB86C"
 			rewards: [
 				{
-					id: "F420ED2B84C1A223"
+					id: "7420ED2B84C1A223"
 					type: "xp"
 					xp: 300
 				}
 				{
 					count: 2
-					id: "FB1730F0341F0DB1"
+					id: "7B1730F0341F0DB1"
 					item: {
 						count: 2
 						id: "minecraft:diamond"
@@ -651,7 +651,7 @@
 			tasks: [
 				{
 					entity: "mutantmonsters:mutant_zombie"
-					id: "C51B46F2F6CB807B"
+					id: "451B46F2F6CB807B"
 					type: "kill"
 					value: 1L
 				}
@@ -663,10 +663,10 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "CAFFA7844EF0988A"
+			id: "4AFFA7844EF0988A"
 			rewards: [
 				{
-					id: "9A20BB52D8881943"
+					id: "1A20BB52D8881943"
 					type: "xp"
 					xp: 300
 				}
@@ -693,7 +693,7 @@
 			tasks: [
 				{
 					entity: "mutantmonsters:mutant_skeleton"
-					id: "8F52516AA6FBA399"
+					id: "0F52516AA6FBA399"
 					type: "kill"
 					value: 1L
 				}
@@ -735,7 +735,7 @@
 			tasks: [
 				{
 					entity: "mutantmonsters:mutant_creeper"
-					id: "DF64C20425269C40"
+					id: "5F64C20425269C40"
 					type: "kill"
 					value: 1L
 				}
@@ -747,7 +747,7 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "D063E7CC599B8A5C"
+			id: "5063E7CC599B8A5C"
 			rewards: [
 				{
 					id: "05BD2184C691EBF6"
@@ -765,7 +765,7 @@
 				}
 				{
 					count: 2
-					id: "D70868E5160E508F"
+					id: "570868E5160E508F"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -789,16 +789,16 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "8A0EFB9FF24745EC"
+			id: "0A0EFB9FF24745EC"
 			rewards: [
 				{
-					id: "FF604BF8C410C09C"
+					id: "7F604BF8C410C09C"
 					type: "xp_levels"
 					xp_levels: 5
 				}
 				{
 					count: 4
-					id: "F38117A7EBEB18EE"
+					id: "738117A7EBEB18EE"
 					item: {
 						count: 4
 						id: "minecraft:diamond"
@@ -807,7 +807,7 @@
 				}
 				{
 					count: 2
-					id: "CEBC76494F3747FC"
+					id: "4EBC76494F3747FC"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -831,10 +831,10 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "93CE26CADF3381C8"
+			id: "13CE26CADF3381C8"
 			rewards: [
 				{
-					id: "87C4A43B1F9C1B1B"
+					id: "07C4A43B1F9C1B1B"
 					type: "xp_levels"
 					xp_levels: 5
 				}
@@ -849,7 +849,7 @@
 				}
 				{
 					count: 2
-					id: "8109E1F2E397096C"
+					id: "0109E1F2E397096C"
 					item: {
 						count: 2
 						id: "minecraft:golden_apple"
@@ -861,7 +861,7 @@
 			tasks: [
 				{
 					entity: "aquamirae:captain_cornelia"
-					id: "8CE3309C02F4AF09"
+					id: "0CE3309C02F4AF09"
 					type: "kill"
 					value: 1L
 				}
@@ -873,7 +873,7 @@
 			dependencies: [
 				"2A179E20617AF7E6"
 			]
-			id: "E55D5FEC1CB9F7C4"
+			id: "655D5FEC1CB9F7C4"
 			rewards: [
 				{
 					id: "64570A13AA30C226"
@@ -882,7 +882,7 @@
 				}
 				{
 					count: 6
-					id: "F3C1556526E20E73"
+					id: "73C1556526E20E73"
 					item: {
 						count: 6
 						id: "minecraft:diamond"
@@ -912,7 +912,7 @@
 			tasks: [
 				{
 					entity: "irons_spellbooks:dead_king"
-					id: "877F2292C01A7E5E"
+					id: "077F2292C01A7E5E"
 					type: "kill"
 					value: 1L
 				}
