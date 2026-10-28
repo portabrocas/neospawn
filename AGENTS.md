@@ -7,9 +7,8 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 - `README.md`: features, commands. `docs/ROSTER.md`: every OreSpawn mob/ore/item and our equivalent.
 - `docs/FAN_FAVORITES.md`: the owner's Must/Nice/Skip picks (Skip = girlfriends/companions; food comes from other mods).
 - `docs/BOSS_POLISH.md`: boss balance. `docs/MODPACK.md`: the original modpack research list.
-- `docs/PACK.md`: snapshot of the owner's pack at 0.21.2 (Mac, 2026-10-20): every jar, what was removed and why,
-  and how to read its logs and freezes. The pack has changed since (FTB Quests and more on the PC); update it
-  from the Prism instance when you next touch the pack.
+- `docs/PACK.md`: the owner's pack as installed on the Mac (0.24.0, 2026-10-28): every jar, what was removed and
+  why, and how to read its logs and freezes. Update it from the Prism instance when the pack changes.
 
 ## Decisions to respect
 - Six realms reached via ants, each gated by a per-realm **charm** (crafted or found) so they can't skip progression.

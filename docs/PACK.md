@@ -1,12 +1,13 @@
 # NeoSpawn Pack: current state
 
-A snapshot of the owner's playable modpack as installed in Prism on the Mac on 2026-10-20 (NeoSpawn 0.21.2).
-The pack has changed since on the Windows PC (FTB Quests, FTB Library, FTB Teams and more): refresh the jar list
-from the Prism instance before relying on it. `docs/MODPACK.md` is the original research list.
+The owner's playable modpack as installed in Prism on the Mac on 2026-10-28 (NeoSpawn 0.24.0), synced with what the
+PC pack needs: the quest book's mods resolve and the Gobbler's treasure mods are present. The PC may have extra
+mods the repo doesn't reference. `docs/MODPACK.md` is the original research list.
 
-- **Minecraft 1.21.1, NeoForge 21.1.259, Java 21.** 168 jars, about 760 MB. Prism memory: 2 GB min, 8 GB max.
-- **NeoSpawn 0.21.2.**
-- Last launch (2026-10-16) loaded cleanly into a world. The remaining log errors are other mods' own recipe and
+- **Minecraft 1.21.1, NeoForge 21.1.259, Java 21.** 172 jars. Prism memory: 2 GB min, 8 GB max.
+- **NeoSpawn 0.24.0.** FTB Quests 2101.1.37, FTB Library 2101.1.39, FTB Teams 2101.1.11 (from FTB's Maven) for the
+  quest book, which is installed in `config/ftbquests/quests` from `modpack/ftbquests/quests`.
+- Not yet launched on the Mac with 0.24.0 and the FTB mods. The 2026-10-16 launch (0.21.2) loaded cleanly into a world. The remaining log errors are other mods' own recipe and
   loot-table data (Every Compat, Pam's, Witchery, Decocraft, ExtendedAE) and two animations in other mods.
 - A shareable Prism import zip was built from the instance (instance.cfg + mmc-pack.json at the root; mods,
   config, resourcepacks, shaderpacks, options.txt; no saves; no Mac Java path). It is not in this repo.
@@ -29,13 +30,15 @@ Dungeons Arise, Explorer's Compass, Undergarden, Twigs, AE2WTLib, Expanded Delig
 Common trap: Modrinth and CurseForge list builds for Minecraft **26.x** next to 1.21.1. They need Java 25 and
 crash this pack. Always pick a file marked 1.21.1 + NeoForge.
 
+Weeping Angels was removed on 2026-10-16, then restored on 2026-10-28 (the dimension trouble blamed on it was
+NeoSpawn's worldgen freeze, fixed in 0.21.2; a quest uses it).
+
 ## Removed on purpose (kept in `minecraft/disabled-mods/`, not deleted)
 
 | Mod | Why |
 |---|---|
 | Hbm's Nuclear Tech: Neo Edition | Owner's call: early port |
 | Distant Horizons | Owner's call |
-| Weeping Angels | Owner's call: blamed for dimension problems (the real cause was a NeoSpawn worldgen freeze, fixed in 0.21.2) |
 | Macaw's Furniture, Lights, Roofs | Overlap with Handcrafted / Another Furniture / Decocraft / Supplementaries; Furniture alone made Every Compat generate 2,628 blocks |
 | Easy Magic | Conflicts with Apothic Enchanting (both rework the enchanting table) |
 | Tom's Simple Storage | Overlaps AE2 and Sophisticated Storage |
@@ -156,8 +159,12 @@ Structures, Fossils and Archaeology + NeoSpawn's own Fossil Ore, Artifacts + Neo
 - expandeddelight-0.1.4.jar
 - fastpaintings-1.21-1.3.1-neoforge.jar
 - ferritecore-7.0.3-neoforge.jar
+- forge-weeping_angels-mc1.21-v1.0.5-forge.jar
 - fossilslegacy-1.4.9.jar
 - fragmentum-5.3.0+1.21.1-neoforge.jar
+- ftb-library-neoforge-2101.1.39.jar
+- ftb-quests-neoforge-2101.1.37.jar
+- ftb-teams-neoforge-2101.1.11.jar
 - fusion-1.3.16-neoforge-mc1.21.1.jar
 - fzzy_config-0.7.7+1.21+neoforge.jar
 - geckolib-neoforge-1.21.1-4.9.3.jar
@@ -197,7 +204,7 @@ Structures, Fossils and Archaeology + NeoSpawn's own Fossil Ore, Artifacts + Neo
 - morph-0.1.4.jar
 - mowziesmobs-1.21.1-1.8.2.jar
 - naturalist-2.0.5-neoforge-1.21.1.jar
-- neospawn-0.21.2.jar
+- neospawn-0.24.0.jar
 - owo-lib-neoforge-0.12.15.5-beta.1+1.21.jar
 - pamhc2foodcore-NEOFORGE-1.21.1-1.0.2.jar
 - pamhc2foodextended-NEOFORGE-1.21.1-1.0.0.jar
