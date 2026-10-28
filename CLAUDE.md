@@ -27,7 +27,7 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   `tools/gen_structures.py` (structures, sets, tiered loot). Surface ones need dry, level land. Containers
   become Lootr chests/barrels when Lootr is installed. Realm charms in vault loot lead to the next realm.
 - Utopia's boss trees (Tree of Goodness / The King, Empress Tree) are `GuardianTree` blueprint structures whose
-  structure sets (`tools/gen_structures.py`) space them like villages: 24/10 and 20/8 chunks, Empresses kept 6 chunks
+  structure sets (`tools/gen_structures.py`) space them like villages: 40/16 and 32/12 chunks, Empresses kept 10 chunks
   from Kings. Don't go back to a bare rarity_filter for boss-guarded features. Utopia's terrain is
   `noise_settings/utopia` (meadow + floating islands above y 130); meadow blueprints set `ceiling()`, sky ones `skyY()`.
 - Field Guide pages: `assets/neospawn/books/field_guide.json` (given on first join).

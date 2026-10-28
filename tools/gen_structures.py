@@ -30,14 +30,15 @@ STRUCTURES = {
     "sunken_vault": (["#minecraft:is_overworld"], "underground_structures", "none", 46, 16, 51629),
     # Utopia. The boss trees are spaced like villages: at most one King per 24x24-chunk region, never closer than
     # 10 chunks (160 blocks) to the next; Empresses one per 20x20 and 8 apart, and kept 6 chunks from any King.
-    "tree_of_goodness": (["neospawn:utopia"], "surface_structures", "beard_thin", 24, 10, 51630),
-    "empress_tree": (["neospawn:utopia"], "surface_structures", "beard_thin", 20, 8, 51631),
+    # Boss trees are far apart so a simulation distance of 12 (25x25 chunks) holds about one of each, not four.
+    "tree_of_goodness": (["neospawn:utopia"], "surface_structures", "beard_thin", 40, 16, 51630),
+    "empress_tree": (["neospawn:utopia"], "surface_structures", "beard_thin", 32, 12, 51631),
     "gilded_gazebo": (["neospawn:utopia"], "surface_structures", "beard_thin", 12, 4, 51632),
     "honey_orchard": (["neospawn:utopia"], "surface_structures", "beard_thin", 16, 6, 51633),
     "sunlit_library": (["neospawn:utopia"], "surface_structures", "beard_thin", 22, 8, 51634),
     "sky_temple": (["neospawn:utopia"], "surface_structures", "none", 18, 6, 51635),
 }
-EXCLUSIONS = {"empress_tree": ("neospawn:tree_of_goodness", 6)}
+EXCLUSIONS = {"empress_tree": ("neospawn:tree_of_goodness", 10)}
 
 for name, (biomes, step, adapt, spacing, separation, salt) in STRUCTURES.items():
     write(f"tags/worldgen/biome/has_structure/{name}.json", {"values": biomes})

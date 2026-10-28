@@ -59,7 +59,8 @@ NEOSPAWN_ORES = ns("ruby_ore", "tanzanite_ore", "titanium_ore", "uranium_ore", "
 
 
 def biome(effects, vegetation, spawners, ores=None, extra_local=(), underground=mc("monster_room", "monster_room_deep"),
-          surface=(), temperature=0.8, downfall=0.4, precipitation=True, lakes=mc("lake_lava_underground", "lake_lava_surface")):
+          surface=(), temperature=0.8, downfall=0.4, precipitation=True, lakes=mc("lake_lava_underground", "lake_lava_surface"),
+          springs=mc("spring_water", "spring_lava")):
     features = [
         [],                                                    # raw generation
         list(lakes),                                           # lakes
@@ -69,7 +70,7 @@ def biome(effects, vegetation, spawners, ores=None, extra_local=(), underground=
         [],                                                    # strongholds
         ores if ores is not None else BASE_ORES + NEOSPAWN_ORES,  # underground ores
         [],                                                    # underground decoration
-        mc("spring_water", "spring_lava"),                     # fluid springs
+        list(springs),                                         # fluid springs
         mc("glow_lichen") + vegetation,                        # vegetal decoration
         mc("freeze_top_layer"),                                # top layer modification
     ]
@@ -115,7 +116,10 @@ REALMS = {
              "ambient": [spawn("butterfly", 12, 2, 4), spawn("glimmer_sprite", 6, 1, 2), spawn("songbird", 8, 1, 3),
                          spawn("firefly", 4, 2, 4), spawn("sunwing_moth", 8, 1, 3)],
              "monster": []},
-            underground=[], lakes=mc("lake_lava_underground"), temperature=0.9, downfall=0.5)),
+            # Performance: no lava (springs and lakes in the floating islands poured onto golden grass and leaves and
+            # set the realm ablaze) and no gravel (blobs inside the islands fell as hundreds of falling-block entities).
+            ores=[o for o in BASE_ORES if o not in mc("ore_gravel", "disk_gravel")] + NEOSPAWN_ORES,
+            springs=mc("spring_water"), underground=[], lakes=(), temperature=0.9, downfall=0.5)),
 
     # Ore-rich and dangerous: every ore, extra rich veins, and dinosaurs.
     "mining_realm": dict(

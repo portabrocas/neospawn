@@ -222,6 +222,9 @@ public class NeoBoss extends Monster implements NeoMob {
 
     @Override
     public void tick() {
+        if (!level().isClientSide && tickCount % 20 == 0) {
+            updateSleep();
+        }
         if (!spec().isSkyBoss()) {
             super.tick();
             return;
@@ -706,7 +709,7 @@ public class NeoBoss extends Monster implements NeoMob {
         if (beamTicks < 30 && beamTicks % 3 == 0) {
             double t = 1.15 - beamTicks / 30.0;
             Vec3 blast = mouth.add(toTarget.scale(t));
-            level.explode(this, blast.x, blast.y, blast.z, 2.5f, true, Level.ExplosionInteraction.MOB);
+            level.explode(this, blast.x, blast.y, blast.z, 2.5f, false, Level.ExplosionInteraction.MOB);
         }
     }
 
@@ -715,19 +718,52 @@ public class NeoBoss extends Monster implements NeoMob {
         Vec3 aim = target.getEyePosition().subtract(mouth);
         for (int i = 0; i < (enraged ? 9 : 6); i++) {
             Vec3 dir = aim.add(random.nextGaussian() * 1.5, random.nextGaussian() * 0.7, random.nextGaussian() * 1.5).normalize();
-            SmallFireball fireball = new SmallFireball(level(), this, dir);
+            SmallFireball fireball = flame(dir);
             fireball.setPos(mouth);
             level().addFreshEntity(fireball);
         }
         playSound(SoundEvents.BLAZE_SHOOT, 3.0f, 0.5f);
     }
 
+    /** Lightning that strikes what stands under it but starts no fires (in Utopia's meadows it lit whole forests). */
     private void lightning(BlockPos pos) {
         LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level());
         if (bolt != null) {
             bolt.moveTo(Vec3.atBottomCenterOf(pos));
+            bolt.setVisualOnly(true);
             level().addFreshEntity(bolt);
+            for (LivingEntity victim : level().getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(3, 6, 3),
+                    e -> e != this && !(e instanceof NeoBoss))) {
+                victim.thunderHit((ServerLevel) level(), bolt);
+            }
         }
+    }
+
+    /** A small fireball that burns what it hits but never sets blocks alight. */
+    private SmallFireball flame(Vec3 dir) {
+        return new SmallFireball(level(), this, dir) {
+            @Override
+            protected void onHitBlock(net.minecraft.world.phys.BlockHitResult result) {
+            }
+        };
+    }
+
+    /** A big fireball that explodes (breaking blocks, if mobGriefing allows) but leaves no fire behind. */
+    private LargeFireball blast(Vec3 dir, int power) {
+        return new LargeFireball(level(), this, dir, power) {
+            @Override
+            protected void onHit(net.minecraft.world.phys.HitResult result) {
+                if (result.getType() == net.minecraft.world.phys.HitResult.Type.ENTITY) {
+                    onHitEntity((net.minecraft.world.phys.EntityHitResult) result);
+                } else if (result.getType() == net.minecraft.world.phys.HitResult.Type.BLOCK) {
+                    onHitBlock((net.minecraft.world.phys.BlockHitResult) result);
+                }
+                if (!level().isClientSide) {
+                    level().explode(this, getX(), getY(), getZ(), power, false, Level.ExplosionInteraction.MOB);
+                    discard();
+                }
+            }
+        };
     }
 
     private void summon(LivingEntity target) {
@@ -827,13 +863,13 @@ public class NeoBoss extends Monster implements NeoMob {
         Vec3 aim = target.getEyePosition().subtract(mouth);
         for (int i = 0; i < (enraged ? 5 : 3); i++) {
             Vec3 dir = aim.add(random.nextGaussian() * 2, random.nextGaussian(), random.nextGaussian() * 2).normalize();
-            SmallFireball fireball = new SmallFireball(level(), this, dir);
+            SmallFireball fireball = flame(dir);
             fireball.setPos(mouth);
             level().addFreshEntity(fireball);
         }
         // Every third volley adds one big explosive fireball (respects the mobGriefing gamerule).
         if (++volleyCount % 3 == 0) {
-            LargeFireball big = new LargeFireball(level(), this, aim.normalize(), 2);
+            LargeFireball big = blast(aim.normalize(), 2);
             big.setPos(mouth);
             level().addFreshEntity(big);
         }
@@ -859,7 +895,7 @@ public class NeoBoss extends Monster implements NeoMob {
             double x = aim.x + (random.nextDouble() - 0.5) * 16;
             double z = aim.z + (random.nextDouble() - 0.5) * 16;
             Vec3 down = new Vec3(random.nextGaussian() * 0.05, -1, random.nextGaussian() * 0.05);
-            LargeFireball meteor = new LargeFireball(level(), this, down, 1);
+            LargeFireball meteor = blast(down, 1);
             meteor.setPos(x, aim.y + 24 + random.nextInt(8), z);
             level().addFreshEntity(meteor);
         }
@@ -1185,6 +1221,91 @@ public class NeoBoss extends Monster implements NeoMob {
         return position().add(forward.scale(getBbWidth() * 0.6)).add(0, getBbHeight() * 0.8, 0);
     }
 
+    // ------------------------------------------------------------------ sleeping (performance)
+
+    /** A boss with no player this close, and nothing to fight, falls asleep: no AI, no boss bar. */
+    static final double SLEEP_RANGE = 96;
+    /** A sleeping boss wakes when a player comes this close, or when it is hit. */
+    static final double WAKE_RANGE = 48;
+    /** At most this many bosses are awake around one player; the rest wait their turn (unless hit). */
+    public static final int MAX_AWAKE = 2;
+    private boolean asleep;
+    private int idleChecks;
+    private int lastHurtTick = -10000;
+
+    public boolean isAsleep() {
+        return asleep;
+    }
+
+    /**
+     * Once a second on the server. Several Kings meeting a player at once used to freeze the game (and burn
+     * Utopia down); now a lone boss naps when nobody is near, and around a player only the nearest two fight.
+     * Public for the GameTests.
+     */
+    public void updateSleep() {
+        ServerLevel level = (ServerLevel) level();
+        Player near = level.getNearestPlayer(getX(), getY(), getZ(), asleep ? WAKE_RANGE : SLEEP_RANGE,
+                net.minecraft.world.entity.EntitySelector.NO_SPECTATORS);
+        if (asleep) {
+            if (near != null && awakeAround(near) < MAX_AWAKE) {
+                wake();
+            }
+            return;
+        }
+        if (tickCount - lastHurtTick < 400) {
+            idleChecks = 0;
+            return;
+        }
+        if (near == null) {
+            // Alone: nap after 10 s, or after a minute when busy fighting a rival that nobody is watching.
+            idleChecks++;
+            if (idleChecks >= (getTarget() == null ? 10 : 60)) {
+                sleep();
+            }
+            return;
+        }
+        idleChecks = 0;
+        java.util.List<NeoBoss> awake = level.getEntitiesOfClass(NeoBoss.class, near.getBoundingBox().inflate(SLEEP_RANGE),
+                b -> !b.asleep);
+        if (awake.size() > MAX_AWAKE) {
+            awake.sort(java.util.Comparator.comparingDouble(b -> b.distanceToSqr(near)));
+            if (awake.indexOf(this) >= MAX_AWAKE) {
+                sleep();
+            }
+        }
+    }
+
+    private int awakeAround(Player player) {
+        return level().getEntitiesOfClass(NeoBoss.class, player.getBoundingBox().inflate(SLEEP_RANGE),
+                b -> !b.asleep && b != this).size();
+    }
+
+    private void sleep() {
+        asleep = true;
+        idleChecks = 0;
+        setTarget(null);
+        getNavigation().stop();
+        setDeltaMovement(Vec3.ZERO);
+        pendingAttack = null;
+        windupTicks = 0;
+        chargeTicks = 0;
+        leapTicks = 0;
+        beamTicks = 0;
+        whirlpoolTicks = 0;
+        grabTicks = 0;
+        swoopTicks = 0;
+        grabbed = null;
+        setNoAi(true);
+        bossEvent.setVisible(false);
+    }
+
+    private void wake() {
+        asleep = false;
+        idleChecks = 0;
+        setNoAi(false);
+        bossEvent.setVisible(true);
+    }
+
     // ------------------------------------------------------------------ boss plumbing
 
     @Override
@@ -1195,6 +1316,12 @@ public class NeoBoss extends Monster implements NeoMob {
         }
         if (transitionTicks > 0) {
             return false;
+        }
+        if (source.getEntity() != null && !level().isClientSide) {
+            lastHurtTick = tickCount;
+            if (asleep) {
+                wake();
+            }
         }
         return super.hurt(source, amount * spec().damageTaken * (recoverTicks > 0 ? 1.5f : 1.0f));
     }
@@ -1248,8 +1375,16 @@ public class NeoBoss extends Monster implements NeoMob {
     }
 
     @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("NeoSpawnAsleep", asleep);
+    }
+
+    @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+        asleep = tag.getBoolean("NeoSpawnAsleep");
+        bossEvent.setVisible(!asleep);
         if (hasCustomName()) {
             bossEvent.setName(getDisplayName());
         }

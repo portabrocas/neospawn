@@ -123,7 +123,7 @@ public class StructureTests {
             var set = sets.getOrThrow(ResourceKey.create(Registries.STRUCTURE_SET, NeoSpawn.id(tree)));
             helper.assertTrue(set.placement() instanceof RandomSpreadStructurePlacement, tree + " is not spread out like a village");
             var spread = (RandomSpreadStructurePlacement) set.placement();
-            int size = tree.equals("tree_of_goodness") ? 24 : 20, gap = tree.equals("tree_of_goodness") ? 10 : 8;
+            int size = tree.equals("tree_of_goodness") ? 40 : 32, gap = tree.equals("tree_of_goodness") ? 16 : 12;
             helper.assertTrue(spread.spacing() == size && spread.separation() == gap,
                     tree + ": spacing " + spread.spacing() + "/" + spread.separation() + ", expected " + size + "/" + gap);
             helper.assertTrue(helper.getLevel().registryAccess().registryOrThrow(Registries.PLACED_FEATURE)
