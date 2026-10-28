@@ -1,0 +1,305 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "tide"
+	group: "27F7BE0CA4D022F8"
+	icon: {
+		count: 1
+		id: "tide:fishing_journal"
+	}
+	id: "0AA0DD0F1BCDA3A1"
+	order_index: 28
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "3E10200103923557"
+			rewards: [
+				{
+					id: "32FDFAE6B190CCBB"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "27DFBF1C185F6EE2"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "tide:root"
+					criterion: ""
+					id: "59E445AD34FB9BEC"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3E10200103923557"
+			]
+			id: "56D41A98D7A214CB"
+			rewards: [
+				{
+					id: "6A50DDC52391BFEE"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "73E3CEA6C7A16CC2"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "45445F014D19ED43"
+					item: {
+						count: 1
+						id: "tide:fishing_journal"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"56D41A98D7A214CB"
+			]
+			id: "062021B1CC78329A"
+			rewards: [
+				{
+					id: "4A89C378CE1D94B9"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "48DF75AC2F474190"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "tide:journal_halfway_completed"
+					criterion: ""
+					id: "2447D197750CD3CD"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"062021B1CC78329A"
+			]
+			id: "1EA9128F2856814E"
+			rewards: [
+				{
+					id: "01B7375AA517F354"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "74E6AE0215493BE8"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "12F810A53BBE16F1"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "tide:journal_completed"
+					criterion: ""
+					id: "3AB5C68572843510"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3E10200103923557"
+			]
+			id: "1433DE8692E78704"
+			rewards: [
+				{
+					id: "27A7A8B4227A781F"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "316FE8C90B7344A6"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "tide:get_bait"
+					criterion: ""
+					id: "4468239D4E4DE961"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"1433DE8692E78704"
+			]
+			id: "5064B4856042258D"
+			rewards: [
+				{
+					id: "308CA6BECDADBFC1"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "36032136A8E53D14"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "tide:catch_legendary"
+					criterion: ""
+					id: "17F6AE8521E98702"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3E10200103923557"
+			]
+			id: "1EC524782335FED2"
+			rewards: [
+				{
+					id: "0130D8335BDE03F8"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "77E6716134AFFEB2"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "tide:pull_crate"
+					criterion: ""
+					id: "77E6BF11C1410080"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"3E10200103923557"
+			]
+			id: "6C136FE2D7DCC0B9"
+			rewards: [
+				{
+					id: "7FD7D00991643002"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "1529E1162075F3E0"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "tide:fish_in_lava"
+					criterion: ""
+					id: "218716233030AAC3"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"6C136FE2D7DCC0B9"
+			]
+			id: "2B8F643D44190253"
+			rewards: [
+				{
+					id: "74F173B200F9A440"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "5574164F79BC2127"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "tide:fish_in_void"
+					criterion: ""
+					id: "5EDBB8F1EF245FE4"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"1EC524782335FED2"
+			]
+			id: "5FAA319AC65B3384"
+			rewards: [
+				{
+					id: "22A19D535C17EAC6"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "4E31850D6A615254"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "tide:all_fishing_rods"
+					criterion: ""
+					id: "74083FA8578F2F23"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+	]
+}

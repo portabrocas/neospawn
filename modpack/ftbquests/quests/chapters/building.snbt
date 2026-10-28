@@ -1,0 +1,363 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "building"
+	group: "57690735B767071A"
+	icon: {
+		count: 1
+		id: "chisel:chisel"
+	}
+	id: "3F317967CDFC610F"
+	order_index: 33
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "6B544392A174A144"
+			rewards: [
+				{
+					id: "26210E946D0C3C52"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "5714D9EDE5503D4A"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7C2A54C9088E5044"
+					item: {
+						count: 1
+						id: "chisel:chisel"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "6F90EF64D2A825B9"
+			rewards: [
+				{
+					id: "6F5F45089543BC3F"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "12297C6831322669"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5B6BAB2AEE617368"
+					item: {
+						count: 1
+						id: "framedblocks:framed_hammer"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "2D58905223EA8728"
+			rewards: [
+				{
+					id: "0D0DFE5A9A98A7C5"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "68566E6C5F03A0A6"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "70E92A0600F18AF0"
+					item: {
+						count: 1
+						id: "handcrafted:hammer"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "7749686167DD4B70"
+			rewards: [
+				{
+					id: "3ABD96FD8BE20D59"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "5C484ADB02B96FD8"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6AE0CB3B30435C03"
+					item: {
+						count: 1
+						id: "another_furniture:oak_chair"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "120551C985B96A1A"
+			rewards: [
+				{
+					id: "3048D1D0D37F0CF2"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "7718241479E4C8F4"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "762DDFB62D67E326"
+					item: {
+						count: 1
+						id: "decocraft:baking_table"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [ ]
+			id: "41F6BD291A0438F6"
+			rewards: [
+				{
+					id: "76E288727C7DBC69"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "35C69936AC94B3CA"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "4EF301E33B095512"
+					item: {
+						count: 1
+						id: "mcwwindows:oak_window"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [ ]
+			id: "412266AFB1AA9F1B"
+			rewards: [
+				{
+					id: "3F72CDF70BD1F441"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "2393DE3949CF46A0"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3133114C6D833BD4"
+					item: {
+						count: 1
+						id: "mcwbridges:rope_oak_bridge"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [ ]
+			id: "7140CF9B108C8552"
+			rewards: [
+				{
+					id: "7D8018F3721CBF83"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "5815FDD8035C75C1"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "359D397C8463097F"
+					item: {
+						count: 1
+						id: "mcwpaths:cobblestone_basket_weave_paving"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [ ]
+			id: "2442C694BD168DA1"
+			rewards: [
+				{
+					id: "3CD3BC0AD4B57D8B"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "1D64A7632B15DB84"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2887DFA8B74417D1"
+					item: {
+						count: 1
+						id: "connectedglass:borderless_glass"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [ ]
+			id: "005E76F629983860"
+			rewards: [
+				{
+					id: "5DF1C7F8CF03A986"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "68A6CA6F20BD66C0"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "47C89E17116C1167"
+					item: {
+						count: 1
+						id: "decorative_blocks:brazier"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [ ]
+			id: "0B631E68F7CDEC91"
+			rewards: [
+				{
+					id: "115626EA8C436844"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4D62865EA7599C2A"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "47E73785BAD14040"
+					item: {
+						count: 1
+						id: "twigs:pebble"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [ ]
+			id: "0FB72A006CDE9383"
+			rewards: [
+				{
+					id: "051CD735CD5AEB1E"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "70F297D9F6D529A4"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "14020F1A47AF4AB6"
+					item: {
+						count: 1
+						id: "supplementaries:way_sign"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 3.0d
+		}
+	]
+}

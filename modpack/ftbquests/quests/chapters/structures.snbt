@@ -1,0 +1,899 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "structures"
+	group: "76581968F62E459A"
+	icon: {
+		count: 1
+		id: "minecraft:chest"
+	}
+	id: "4566D4B92928F04F"
+	order_index: 20
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "4C2E49A87CC01B27"
+			rewards: [
+				{
+					id: "7B7D5A727F20DC12"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "1373772BD3EDA52A"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "lootr:1chest"
+					criterion: ""
+					id: "13648962009F48C8"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "07EBB978AE708011"
+			rewards: [
+				{
+					id: "32D21440FC288516"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "179B326851F59240"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "lootr:10loot"
+					criterion: ""
+					id: "78A3A8A55BAB0C17"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"07EBB978AE708011"
+			]
+			id: "4B69590953AEC0C3"
+			rewards: [
+				{
+					id: "1693F26AB2772708"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "592DE293220DC244"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "lootr:50loot"
+					criterion: ""
+					id: "5D957015F4D9B27C"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"4B69590953AEC0C3"
+			]
+			id: "6644646FF4B90CEB"
+			rewards: [
+				{
+					id: "3EDAE07BD6A69CB7"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "355571C5FDC40061"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "lootr:100loot"
+					criterion: ""
+					id: "2C97FEC71FBE8376"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "02984025889D6951"
+			rewards: [
+				{
+					id: "5EF58A1B7B9A66EE"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "48DB84467EF3B266"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "lootr:1barrel"
+					criterion: ""
+					id: "0EABD9C002D2C70B"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "7C09E69AC4659D4E"
+			rewards: [
+				{
+					id: "2F2D277951D1339D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "3EC1AD03989ECEE9"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "lootr:1cart"
+					criterion: ""
+					id: "47FD415E3602C298"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "3A3E1C2C0C2EEB4F"
+			rewards: [
+				{
+					id: "174EBB70FAA338E9"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "65F3B232F67D87EA"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "artifacts:amateur_archaeologist"
+					criterion: ""
+					id: "46F7527766FD094B"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"3A3E1C2C0C2EEB4F"
+			]
+			id: "24D370470E258657"
+			rewards: [
+				{
+					id: "7743DE408C13CEA7"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "42627FC5020B87C1"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "artifacts:chest_slayer"
+					criterion: ""
+					id: "5FE3EA85C447E57E"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "60DBB2FBFC286E62"
+			rewards: [
+				{
+					id: "1D94827D1B04BC5A"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "3F3B64E46C05BAE8"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "betterdungeons:all_dungeons"
+					criterion: ""
+					id: "4DAED40713D930E8"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "4E8F360C6A6A0089"
+			rewards: [
+				{
+					id: "1A29164E5FA2DDC5"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "747170B7C9445A14"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "betterdungeons:skeleton_dungeon"
+					criterion: ""
+					id: "2679D761EF24FE0E"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "2322BD7171303AFD"
+			rewards: [
+				{
+					id: "5C35DA588D54C764"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "115183DB85787060"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "betterdungeons:zombie_dungeon"
+					criterion: ""
+					id: "520868D1D8A4299B"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "39B08520D798B537"
+			rewards: [
+				{
+					id: "3F5F854EC50735A8"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "6F88B4BF92E76B69"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "betterdungeons:spider_dungeon"
+					criterion: ""
+					id: "1DF53B629F1C8D4A"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 5.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "1C6F461F10B7B67C"
+			rewards: [
+				{
+					id: "0CA6B4B0A24E26EF"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "70A28DB3099FC19A"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_abandoned_temple"
+					criterion: ""
+					id: "6D25B2A6CC49CBDF"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "7DE92702F2EB85D9"
+			rewards: [
+				{
+					id: "6BF77FDA78A723F4"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "2D3BB4954F3A012F"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_bandit_village"
+					criterion: ""
+					id: "3662E87A78E5FC45"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "25074F4B2C481DB4"
+			rewards: [
+				{
+					id: "0908B049020A3276"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "2D2FAC475C106786"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_coliseum"
+					criterion: ""
+					id: "00708467E47C294A"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "11671DE580B3A785"
+			rewards: [
+				{
+					id: "1ECF630B5672E095"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "53817F85E40D6A98"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_undead_pirate_ship"
+					criterion: ""
+					id: "328DCFC1684BB1D4"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "6E71C86E80E61919"
+			rewards: [
+				{
+					id: "3AE502D163502C64"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "0820325CCAF29816"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_illager_fort"
+					criterion: ""
+					id: "145AAFC6B23D6646"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "74FAF0765954E022"
+			rewards: [
+				{
+					id: "3BF2C54E295785CB"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "532EEA7A2204646A"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_small_blimp"
+					criterion: ""
+					id: "3D4B74E54C2767F9"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "0191D42E925599AA"
+			rewards: [
+				{
+					id: "4DC2F46183C32A17"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "0C66A78F192A355B"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_scorched_mines"
+					criterion: ""
+					id: "30BFB00612744C49"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "0C2A431799040B56"
+			rewards: [
+				{
+					id: "470982CAE39C2437"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "400DA375FC4487A2"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_shiraz_palace"
+					criterion: ""
+					id: "7BB7ADD2DBB47D8F"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "339C01B396425C9F"
+			rewards: [
+				{
+					id: "451F2CCE5A4524A8"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "775B162B527EEC2F"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_keep_kayra"
+					criterion: ""
+					id: "39C4758CA53A99FC"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"74FAF0765954E022"
+			]
+			id: "5AED2D02D95186F3"
+			rewards: [
+				{
+					id: "5733C6CAB2BC3604"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "7DD50D1BC0D519A4"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_heavenly_rider"
+					criterion: ""
+					id: "6AF20854249B234A"
+					type: "advancement"
+				}
+			]
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5AED2D02D95186F3"
+			]
+			id: "1ACCD694224A6B88"
+			rewards: [
+				{
+					id: "20248D633650189E"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "48A1D916EE8AC7FE"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_heavenly_conqueror"
+					criterion: ""
+					id: "542E97EA7E085A5A"
+					type: "advancement"
+				}
+			]
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"1ACCD694224A6B88"
+			]
+			id: "26379CC15C3C77CE"
+			rewards: [
+				{
+					id: "019A8C25B010CE29"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "1EB15CC459B2C4F8"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "0FF3DA7905E06FD8"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "dungeons_arise:find_heavenly_challenger"
+					criterion: ""
+					id: "61EFDBD207316B11"
+					type: "advancement"
+				}
+			]
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "4A7AF7F19DAB1BED"
+			rewards: [
+				{
+					id: "6E5D5CA898DE0488"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "25AD56C71D407E88"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "repurposed_structures:city_overworld"
+					criterion: ""
+					id: "70173DEDB2B9F8A4"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "50C790347BDE9D9C"
+			rewards: [
+				{
+					id: "353D8C1870C55EA3"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "714EAF3614295D1D"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "repurposed_structures:fortress_jungle"
+					criterion: ""
+					id: "6CDC31780A917D49"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "6D1B3901A5556B15"
+			rewards: [
+				{
+					id: "57D9A29A5F8E3524"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "1F78B643A1E0E27B"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "repurposed_structures:city_nether"
+					criterion: ""
+					id: "7C83F9A393A62FB9"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "1271D876A47B9D30"
+			rewards: [
+				{
+					id: "107C7625EA1F0F9A"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "28B2757CD205EE17"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "repurposed_structures:bastion_underground"
+					criterion: ""
+					id: "6C0A1AEDFD6D7C91"
+					type: "advancement"
+				}
+			]
+			x: 14.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "52B24196A9DE529A"
+			rewards: [
+				{
+					id: "6C0E9D5C155A96FE"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "44FF6C1B976A9F5C"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "biomesoplenty:biomesoplenty/root"
+					criterion: ""
+					id: "7D4146130E526214"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 4.5d
+		}
+		{
+			dependencies: [
+				"52B24196A9DE529A"
+			]
+			id: "0310001A9D8085A6"
+			rewards: [
+				{
+					id: "48FB04FD424519DB"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "4CF1C0F72CF5CDC5"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "50EDE814BE54FA19"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "biomesoplenty:biomesoplenty/all_biomes"
+					criterion: ""
+					id: "4D9EE3D1FB6519A1"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 4.5d
+		}
+		{
+			dependencies: [
+				"4C2E49A87CC01B27"
+			]
+			id: "382E35F2BC720704"
+			rewards: [
+				{
+					id: "174C349A9E2E0E01"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "721B195681464DCC"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "43871668245016C3"
+					item: {
+						count: 1
+						id: "explorerscompass:explorerscompass"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+	]
+}

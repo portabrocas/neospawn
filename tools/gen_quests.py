@@ -29,7 +29,7 @@ FILE_VERSION = 13  # BaseQuestFile.VERSION in FTB Quests 2101.1.x
 
 # ------------------------------------------------------------------ what exists
 
-VANILLA_ITEMS = set("""crafting_table furnace iron_ingot gold_ingot diamond emerald coal torch bread cooked_beef
+VANILLA_ITEMS = set("""chest crafting_table furnace iron_ingot gold_ingot diamond emerald coal torch bread cooked_beef
 golden_apple golden_carrot white_bed shield bow arrow iron_pickaxe diamond_pickaxe enchanting_table anvil
 brewing_stand blaze_rod ender_pearl ender_eye obsidian flint_and_steel book bookshelf saddle lead name_tag
 experience_bottle iron_block gold_block oak_log cobblestone hay_block carrot wheat netherite_scrap elytra
@@ -73,6 +73,9 @@ if os.path.isdir(MODS):
                             entry["mobs"].add(parts[2])
                 if mod == "ftbquests":
                     FTB_TYPES |= {k.split(".")[3] for k in lang if re.match(r"^ftbquests\.(task|reward)\.ftbquests\.[a-z_]+$", k)}
+            m = re.match(r"assets/([a-z0-9_]+)/models/item/([a-z0-9_]+)\.json$", n)
+            if m:
+                PACK.setdefault(m.group(1), {"items": set(), "mobs": set(), "dims": set()})["items"].add(m.group(2))
             m = re.match(r"data/([a-z0-9_]+)/advancements?/(.+)\.json$", n)
             if m:
                 MOD_ADV.add(f"{m.group(1)}:{m.group(2)}")
@@ -236,7 +239,8 @@ TIERS = {
     5: [levels(10), crate("epic"), crate("epic")],
 }
 GROUPS = [("neospawn", "NeoSpawn"), ("tech", "Tech & Storage"), ("magic", "Magic"), ("dims", "Dimensions"),
-          ("bosses", "Bosses & Beasts"), ("food", "Food & Farming")]
+          ("explore", "Exploration"), ("bosses", "Bosses & Beasts"), ("combat", "Combat & Gadgets"), ("food", "Food & Farming"),
+          ("building", "Building & Quality of Life")]
 BANNED = {"minecraft:nether_star", "minecraft:netherite_ingot", "minecraft:enchanted_golden_apple", "neospawn:paragon_ingot",
           "neospawn:behemoth_blade", "minecraft:elytra", "minecraft:totem_of_undying"}
 
@@ -743,21 +747,6 @@ q(c, "carver", "Break On Through", ["Craft a Dimensional Carver from the Void Wo
 q(c, "farseer", "Farland Security", ["Shatter a Dimensional Carver in a Capsid to travel a million blocks, and meet the Farseer."],
   [madv("alexsmobs:alexsmobs/farseer")], 5, ["carver"], 18, 0, shape="hexagon")
 
-# 20. Monsters of the pack: everything that hasn't got its own chapter
-c = chapter("pack_bosses", "Monsters of the Pack", "Mutants, the deep sea and things that move when you blink",
-            "mutantmonsters:endersoul_hand", "bosses")
-q(c, "hunter", "Monster Hunter's Oath", ["The pack's other mods have monsters of their own. Here's the hit list."],
-  [checkmark()], 1, x=0, y=0, shape="gear", size=1.5)
-for i, (mob_id, title, desc, tier) in enumerate([
-        ("mutantmonsters:mutant_zombie", "Mutant Zombie", "Rare and enormous.", 3),
-        ("mutantmonsters:mutant_skeleton", "Mutant Skeleton", "Fires bone spears.", 3),
-        ("mutantmonsters:mutant_creeper", "Mutant Creeper", "Mind the jumping explosions.", 3),
-        ("mutantmonsters:mutant_enderman", "Mutant Enderman", "Throws blocks and teleports.", 4),
-        ("aquamirae:maze_mother", "Maze Mother", "Rules the Ice Maze.", 4),
-        ("aquamirae:captain_cornelia", "Captain Cornelia", "Commands the Ship Graveyard.", 4),
-        ("weeping_angels:weeping_angel", "Don't Blink", "Weeping Angels move when you look away. Defeat one.", 3)]):
-    q(c, mob_id.split(":")[1], title, [desc], [kill(mob_id)], tier, ["hunter"], 2 + (i % 4) * 2, -1 + (i // 4) * 2, shape="hexagon")
-
 # 21. Farmer's Delight (its advancement tree)
 c = chapter("farmers_delight", "Farmer's Delight", "Real meals from real farms", "farmersdelight:cooking_pot", "food")
 q(c, "knife", "Hunt and Gather", ["Craft a Knife: it gets extra drops from plants and animals."], [madv("farmersdelight:main/craft_knife")], 1,
@@ -792,7 +781,369 @@ q(c, "feast", "A Glorious Feast", ["Some meals are big enough to place down and 
 q(c, "master_chef", "Master Chef", ["Eat a serving of every meal in Farmer's Delight."], [madv("farmersdelight:main/master_chef")], 5,
   ["feast"], 10, 0.5, shape="hexagon", size=1.3)
 
-# 22. Final challenges
+# 22. Dungeons & Structures (When Dungeons Arise, Repurposed Structures, YUNG's Better Dungeons, Lootr, Artifacts, BOP:
+# their own advancements; Lootr makes every structure chest give each player their own loot)
+c = chapter("structures", "Dungeons & Structures", "Ruins, fortresses, airships and the loot inside", "minecraft:chest", "explore")
+q(c, "lootr", "It Belongs in a Museum", ["Lootr gives every player their own copy of a structure's loot. Open your first Lootr chest."],
+  [madv("lootr:1chest")], 1, x=0, y=0, shape="gear", size=1.3)
+q(c, "loot_10", "Delightful Decade", ["Open 10 Lootr containers."], [madv("lootr:10loot")], 2, ["lootr"], 2, -0.5)
+q(c, "loot_50", "Half-Century", ["Open 50 Lootr containers."], [madv("lootr:50loot")], 3, ["loot_10"], 4, -0.5)
+q(c, "loot_100", "Centennial", ["Open 100 Lootr containers."], [madv("lootr:100loot")], 4, ["loot_50"], 6, -0.5, shape="hexagon")
+q(c, "barrel", "Barrel Booty", ["Open a Lootr barrel."], [madv("lootr:1barrel")], 1, ["lootr"], 2, 0.5)
+q(c, "cart", "Tunnel Treasures", ["Open a Lootr minecart, usually down a mineshaft."], [madv("lootr:1cart")], 1, ["lootr"], 2, 1.5)
+q(c, "artifact", "Amateur Archaeologist", ["Artifacts are magical trinkets found in chests. Find one."], [madv("artifacts:amateur_archaeologist")],
+  2, ["lootr"], 4, 1)
+q(c, "mimic", "Chest Slayer", ["Some chests bite back. Kill a Mimic."], [madv("artifacts:chest_slayer")], 3, ["artifact"], 6, 1)
+q(c, "yung", "Professional Dungeoneer", ["YUNG's Better Dungeons rebuilds the vanilla dungeons. Explore all of them."],
+  [madv("betterdungeons:all_dungeons")], 4, ["lootr"], 2, 3)
+q(c, "undead_fortress", "A Bone to Pick", ["Enter a Fortress of the Undead."], [madv("betterdungeons:skeleton_dungeon")], 3, ["lootr"], 0, 3)
+q(c, "catacomb", "When in Rome", ["Set foot in a Catacomb."], [madv("betterdungeons:zombie_dungeon")], 3, ["lootr"], 0, 4)
+q(c, "spider_cave", "Cobweb Entanglement", ["Discover a Spider Cave."], [madv("betterdungeons:spider_dungeon")], 2, ["lootr"], 0, 5)
+for i, (adv_id, title, desc, tier) in enumerate([
+        ("find_abandoned_temple", "Lost for Words", "When Dungeons Arise: find an Abandoned Temple.", 2),
+        ("find_bandit_village", "Rusted Root", "Find a Bandit Village.", 2),
+        ("find_coliseum", "Remember Me for Centuries", "Find a Coliseum.", 3),
+        ("find_undead_pirate_ship", "Smoke on the Water", "Find an Undead Pirate Ship.", 3),
+        ("find_illager_fort", "Wild Tales", "Find an Illager Fort.", 3),
+        ("find_small_blimp", "Sky High", "Find a Small Blimp drifting in the sky.", 3),
+        ("find_scorched_mines", "Katabasis", "Find the Scorched Mines.", 3),
+        ("find_shiraz_palace", "Enter Sandman", "Find the Shiraz Palace.", 4),
+        ("find_keep_kayra", "Distant Dreamer", "Find Keep Kayra.", 4)]):
+    q(c, adv_id, title, [desc], [madv("dungeons_arise:" + adv_id)], tier, ["lootr"], 8 + (i % 3) * 2, -2 + (i // 3) * 1.5)
+q(c, "heavenly_rider", "Ride of the Valkyries", ["Find a Heavenly Rider."], [madv("dungeons_arise:find_heavenly_rider")], 3,
+  ["find_small_blimp"], 14, 0)
+q(c, "heavenly_conqueror", "Ghost Riders in the Sky", ["Find a Heavenly Conqueror."], [madv("dungeons_arise:find_heavenly_conqueror")],
+  4, ["heavenly_rider"], 16, 0)
+q(c, "heavenly_challenger", "The Imperial March", ["Find a Heavenly Challenger, the greatest of the sky fortresses."],
+  [madv("dungeons_arise:find_heavenly_challenger")], 5, ["heavenly_conqueror"], 18, 0, shape="hexagon")
+for i, (adv_id, title, desc) in enumerate([("city_overworld", "Skyward Cities", "Repurposed Structures: enter an Overworld City."),
+                                           ("fortress_jungle", "Decaying Glory", "Enter a Jungle Fortress."),
+                                           ("city_nether", "Blazing Cities", "Enter a Nether City."),
+                                           ("bastion_underground", "Bastions, Evil, and Bones", "Enter an Underground Bastion.")]):
+    q(c, adv_id, title, [desc], [madv("repurposed_structures:" + adv_id)], 3, ["lootr"], 8 + i * 2, 3)
+q(c, "bop", "Biomes O' Plenty", ["Biomes O' Plenty adds dozens of new biomes. Explore one."], [madv("biomesoplenty:biomesoplenty/root")], 1,
+  ["lootr"], 4, 4.5)
+q(c, "wanderer", "Wanderer", ["Discover every Biomes O' Plenty biome."], [madv("biomesoplenty:biomesoplenty/all_biomes")], 5, ["bop"], 6, 4.5,
+  shape="hexagon")
+q(c, "explorers_compass", "Explorer's Compass", ["Craft an Explorer's Compass: it can point to any structure in the pack."],
+  [item("explorerscompass:explorerscompass")], 2, ["lootr"], 4, 3)
+
+# 23. Storage Drawers, Traveler's Backpack and Iron Furnaces (Traveler's Backpack's own advancements; recipes from the jars)
+c = chapter("more_storage", "Drawers, Backpacks & Furnaces", "Bulk storage, a backpack with a bed and faster smelting",
+            "travelersbackpack:standard", "tech")
+q(c, "sleeping_bag", "Getting Started", ["Traveler's Backpack: craft a sleeping bag. Every backpack needs one."],
+  [madv("travelersbackpack:sleeping_bag")], 1, x=0, y=0)
+q(c, "tb_standard", "Traveler's Backpack", ["Craft a standard Traveler's Backpack. Equip it from its screen."],
+  [madv("travelersbackpack:standard")], 1, ["sleeping_bag"], 2, 0, shape="gear", size=1.3)
+q(c, "tb_hose", "Craft and Use the Hose", ["Craft the Hose. With the backpack equipped it drinks, spills or sucks up fluids from the tanks."],
+  [madv("travelersbackpack:hose")], 2, ["tb_standard"], 4, 1)
+q(c, "tb_sleep", "Time to Sleep", ["Sleep in the backpack's sleeping bag from its screen."], [madv("travelersbackpack:use_sleeping_bag")], 1,
+  ["tb_standard"], 4, -1)
+q(c, "tb_upgrade", "Base for Upgrades", ["Craft a Blank Upgrade."], [madv("travelersbackpack:blank_upgrade")], 1, ["tb_standard"], 4, 0)
+for i, (metal, tier) in enumerate([("iron", 2), ("gold", 2), ("diamond", 3), ("netherite", 4)]):
+    q(c, "tb_" + metal, f"{metal.title()} Tier", [f"Upgrade the backpack to {metal} at a Smithing Table with a {metal.title()} Tier "
+      "Upgrade and leather."], [madv(f"travelersbackpack:{metal}_upgrade")], tier, ["tb_upgrade" if i == 0 else
+      "tb_" + ("iron", "gold", "diamond")[i - 1]], 6 + i * 2, 0)
+q(c, "drawer", "Drawer Organizer", ["Storage Drawers hold big stacks of one item each. Craft a drawer."],
+  [item("storagedrawers:oak_full_drawers_1")], 1, x=0, y=2.5)
+q(c, "compacting", "Compactor", ["A Compacting Drawer turns ingots into blocks and back automatically."],
+  [item("storagedrawers:compacting_drawers_3")], 2, ["drawer"], 2, 2)
+q(c, "drawer_controller", "Drawer Controller", ["A Drawer Controller makes a wall of drawers act as one inventory."],
+  [item("storagedrawers:controller")], 3, ["drawer"], 2, 3)
+q(c, "drawer_upgrade", "More Room", ["Iron Storage Upgrades multiply what each drawer holds."], [item("storagedrawers:iron_storage_upgrade")], 2,
+  ["drawer"], 4, 3)
+q(c, "iron_furnace", "Iron Furnace", ["Iron Furnaces smelt faster than a vanilla furnace."], [item("ironfurnaces:iron_furnace")], 1, x=0, y=4.5)
+q(c, "diamond_furnace", "Diamond Furnace", ["Craft a Diamond Furnace, or turn a placed furnace into one with an Iron Furnaces upgrade."], [item("ironfurnaces:diamond_furnace")],
+  2, ["iron_furnace"], 2, 4.5)
+q(c, "netherite_furnace", "Netherite Furnace", ["The Netherite Furnace is one of the fastest smelters there is."],
+  [item("ironfurnaces:netherite_furnace")], 4, ["diamond_furnace"], 4, 4.5)
+
+# 24. Apothic Enchanting (its advancement tree: bookshelf tiers, then the Eterna/Quanta/Arcana stats)
+c = chapter("apothic", "Apothic Enchanting", "Enchanting past level 30", "apothic_enchanting:hellshelf", "magic")
+q(c, "enchanter", "The Secrets of Enchanting", ["Apothic Enchanting reworks the enchanting table. Get one, and read its stats."],
+  [madv("apothic_enchanting:enchanter")], 1, x=0, y=0, shape="gear", size=1.3)
+q(c, "lvl30", "The Basics", ["Enchant an item at level 30."], [madv("apothic_enchanting:30ench")], 2, ["enchanter"], 2, -1.5)
+q(c, "lvl60", "Mastering Hell and Sea", ["Enchant at level 60."], [madv("apothic_enchanting:60ench")], 3, ["lvl30"], 4, -1.5)
+q(c, "lvl80", "Enchantments from the Depths", ["Enchant at level 80."], [madv("apothic_enchanting:80ench")], 4, ["lvl60"], 6, -1.5)
+q(c, "lvl100", "Draconic Enchanting", ["Enchant at level 100."], [madv("apothic_enchanting:100ench")], 5, ["lvl80"], 8, -1.5, shape="hexagon")
+q(c, "bookshelf", "Local Librarian", ["Bookshelves raise Eterna. Make one."], [madv("apothic_enchanting:bookshelf")], 1, ["enchanter"], 2, 0)
+q(c, "hellshelf", "The Chaos of Hell", ["Get a Hellshelf: more power, more chaos."], [madv("apothic_enchanting:hellshelf")], 2, ["bookshelf"], 4, 0)
+q(c, "seashelf", "The Purity of the Seas", ["Get a Seashelf."], [madv("apothic_enchanting:seashelf")], 2, ["bookshelf"], 4, 1)
+q(c, "upgrade_hellshelf", "Mastering the Inferno", ["Upgrade an Infused Hellshelf."], [madv("apothic_enchanting:upgrade_hellshelf")], 3,
+  ["hellshelf"], 6, 0)
+q(c, "upgrade_seashelf", "Sleeping in the Cold Below", ["Upgrade an Infused Seashelf."], [madv("apothic_enchanting:upgrade_seashelf")], 3,
+  ["seashelf"], 6, 1)
+q(c, "deepshelf", "Delving into Darkness", ["Activate a Dormant Deepshelf."], [madv("apothic_enchanting:deepshelf")], 4, ["upgrade_hellshelf"],
+  8, 0)
+q(c, "sculkshelf", "Embracing the Sculk", ["Make a Sculkshelf with a Warden Tendril."], [madv("apothic_enchanting:sculkshelf")], 4,
+  ["deepshelf"], 10, 0)
+q(c, "endshelf", "Dragon-Slaying Enchanter", ["Get Infused Dragon's Breath and make an Endshelf."], [madv("apothic_enchanting:endshelf")], 5,
+  ["sculkshelf"], 12, 0)
+q(c, "draconic", "The Final Bookshelf", ["Upgrade an Endshelf into a Draconic Endshelf."], [madv("apothic_enchanting:upgrade_endshelf")], 5,
+  ["endshelf"], 14, 0, shape="hexagon")
+q(c, "stats", "Eterna, Quanta, Arcana", ["Enchant with at least 10 of each stat."], [madv("apothic_enchanting:enchanting_stats")], 2,
+  ["enchanter"], 2, 2.5)
+q(c, "arcana", "Arcane Power", ["Enchant at 100% Arcana: rarer enchantments."], [madv("apothic_enchanting:arcana100")], 4, ["stats"], 4, 2.5)
+q(c, "quanta0", "Begone, Flux", ["Enchant at 0% Quanta: no randomness."], [madv("apothic_enchanting:quanta0")], 3, ["stats"], 4, 3.5)
+q(c, "max_stats", "Maximum Strength", ["Enchant with every stat at maximum."], [madv("apothic_enchanting:max_stats")], 5, ["arcana", "quanta0"],
+  6, 3, shape="hexagon")
+
+# 25. Aquamirae (its advancement tree: the Ice Maze and its ship graveyard)
+c = chapter("aquamirae", "Aquamirae", "The frozen ship graveyard", "aquamirae:shell_horn", "bosses")
+q(c, "ice_maze", "Ice Maze", ["Find the Ice Maze that covers the Deep Frozen Ocean."], [madv("aquamirae:adventure/find_ice_maze")], 2,
+  x=0, y=0, shape="gear", size=1.3)
+q(c, "pirate_pouch", "Left Behind", ["Find an abandoned Pirate Pouch in the Ice Maze."], [madv("aquamirae:adventure/obtain_pirate_pouch")], 2,
+  ["ice_maze"], 2, -1)
+q(c, "terrible_template", "Terrible Upgrade", ["Get a Terrible Upgrade Smithing Template."],
+  [madv("aquamirae:adventure/obtain_terrible_upgrade_smithing_template")], 3, ["pirate_pouch"], 4, -1)
+q(c, "terrible_armor", "Terribly Equipped", ["Get a full suit of Terrible Armor."], [madv("aquamirae:adventure/obtain_all_terrible_armor")], 4,
+  ["terrible_template"], 6, -1.5)
+q(c, "abyssal_template", "Abyssal Upgrade", ["Get an Abyssal Upgrade Smithing Template."],
+  [madv("aquamirae:adventure/obtain_abyssal_upgrade_smithing_template")], 4, ["terrible_template"], 6, -0.5)
+q(c, "abyssal_armor", "One with the Abyss", ["Get a full suit of Abyssal Armor."], [madv("aquamirae:adventure/obtain_all_abyssal_armor")], 5,
+  ["abyssal_template"], 8, -0.5, shape="hexagon")
+q(c, "shell_horn", "Curious Find", ["Maze Captains on the frozen pirate ships carry Shell Horns. Get one."],
+  [madv("aquamirae:adventure/obtain_shell_horn")], 2, ["ice_maze"], 2, 1)
+q(c, "frozen_key", "The Dead Sea", ["Claim the key from the restless Ghost of Captain Cornelia."],
+  [madv("aquamirae:adventure/obtain_frozen_key")], 4, ["shell_horn"], 4, 1, shape="hexagon")
+q(c, "tidepiercer", "Cornelia's Legacy", ["Loot the Tidepiercer from Captain Cornelia."], [madv("aquamirae:adventure/obtain_tidepiercer")], 5,
+  ["frozen_key"], 6, 1.5)
+q(c, "salvager", "Dressed for the Deep", ["Get a full suit of Salvager Armor."], [madv("aquamirae:adventure/obtain_all_salvager_armor")], 4,
+  ["frozen_key"], 6, 0.5)
+q(c, "shipbreaker", "The Shipbreaker", ["Encounter the most fearsome thing in the Ice Maze."],
+  [madv("aquamirae:adventure/encounter_the_shipbreaker")], 4, ["ice_maze"], 2, 2.5, shape="hexagon")
+q(c, "echo", "Trace of the Leviathan", ["Collect the eerie trace the Shipbreaker leaves behind."],
+  [madv("aquamirae:adventure/obtain_ship_graveyard_echo")], 5, ["shipbreaker"], 4, 2.5)
+q(c, "shellback", "Beast of Burden", ["Raise a Scuttler into a Shellback and tame it as a mount."], [madv("aquamirae:adventure/tame_shellback")],
+  3, ["ice_maze"], 2, 3.5)
+
+# 26. Fossils and Archaeology: Legacy (its advancement tree)
+c = chapter("fossils", "Fossils & Archaeology", "Dig up the past and bring it back", "fossilslegacy:fossil", "bosses")
+q(c, "fossil", "Fossils!", ["Mine Fossil Ore underground for fossils and relic scraps."], [madv("fossilslegacy:legacy/fossil")], 1, x=0, y=0,
+  shape="gear", size=1.3)
+q(c, "analyzer", "Analyzer!", ["Build an Analyzer from a fossil, relic scrap and iron: it extracts DNA."], [madv("fossilslegacy:legacy/analyzer")],
+  2, ["fossil"], 2, -1)
+q(c, "palaeontology", "A Palaeontologist's Table!", ["Make a Palaeontology Table."], [madv("fossilslegacy:legacy/palaeontology_table")], 2,
+  ["fossil"], 2, 0)
+q(c, "relic", "Old News", ["Get a relic scrap."], [madv("fossilslegacy:legacy/relic_scrap")], 1, ["fossil"], 2, 1)
+q(c, "archaeology", "An Archaeologist's Table!", ["Make an Archaeology Workbench: it repairs ancient artifacts."],
+  [madv("fossilslegacy:legacy/archaeology_workbench")], 2, ["relic"], 4, 1)
+q(c, "sword_artifact", "Once Feared", ["Find an Ancient Sword artifact."], [madv("fossilslegacy:legacy/sword_artifact")], 2, ["relic"], 4, 2)
+q(c, "ancient_sword", "1.21 Gigawatts!", ["Repair the Ancient Sword at the Archaeology Workbench."], [madv("fossilslegacy:legacy/ancient_sword")], 3,
+  ["sword_artifact", "archaeology"], 6, 2)
+q(c, "helmet_artifact", "Black Magic", ["Find an Ancient Helmet artifact."], [madv("fossilslegacy:legacy/helmet_artifact")], 2, ["relic"], 4, 3)
+q(c, "decked_out", "Decked Out!", ["Repair a full set of ancient armor."], [madv("fossilslegacy:legacy/decked_out")], 4,
+  ["helmet_artifact", "archaeology"], 6, 3)
+q(c, "skull", "Spooky Skeletons!", ["Get a skull block."], [madv("fossilslegacy:legacy/skull_block")], 2, ["fossil"], 2, 4.5)
+q(c, "anu", "The Master!", ["Summon Anu, master of the zombified piglins."], [madv("fossilslegacy:legacy/anu")], 5, ["skull", "decked_out"], 8, 4,
+  shape="hexagon")
+q(c, "coin", "Ticket to the Past!", ["Get a Prehistoric Coin."], [madv("fossilslegacy:legacy/prehistoric_coin")], 3, ["fossil"], 2, -2.5)
+q(c, "time_travel", "Time Traveller!", ["Travel to the Prehistory dimension."], [madv("fossilslegacy:legacy/time_machine")], 4, ["coin"], 4, -2.5,
+  shape="hexagon")
+q(c, "overworld_coin", "Back to the Future!", ["Get an Overworld Coin to come home."], [madv("fossilslegacy:legacy/overworld_coin")], 3,
+  ["time_travel"], 6, -2.5)
+
+# 27. Monsters of the pack (Mutant Monsters' own advancements, Creeper Overhaul and Weeping Angels)
+c = chapter("pack_bosses", "Mutants, Creepers & Angels", "Mutant Monsters, Creeper Overhaul and things that move when you blink",
+            "mutantmonsters:endersoul_hand", "bosses")
+q(c, "mutants", "Mutant Monsters", ["Mutants are rare, huge versions of vanilla mobs. Kill one."], [madv("mutantmonsters:root")], 3, x=0, y=0,
+  shape="gear", size=1.3)
+for i, (mob, title, desc, tier) in enumerate([("mutant_zombie", "Mutant Zombie", "Rare and enormous. It gets back up unless you burn it.", 3),
+                                              ("mutant_skeleton", "Mutant Skeleton", "Fires bone spears.", 3),
+                                              ("mutant_creeper", "Mutant Creeper", "Mind the jumping explosions.", 3),
+                                              ("mutant_enderman", "Mutant Enderman", "Throws blocks and teleports.", 4)]):
+    q(c, mob, title, [desc], [kill("mutantmonsters:" + mob)], tier, ["mutants"], 2, -1.5 + i, shape="hexagon")
+q(c, "burn", "Burn Zombie Burn", ["When a Mutant Zombie goes down, light it on fire with flint and steel so it stays down."],
+  [madv("mutantmonsters:burn_zombie_burn")], 3, ["mutant_zombie"], 4, -1.5)
+q(c, "chemical_x", "Gunpowder, Spice...", ["Brew a potion of Chemical X."], [madv("mutantmonsters:gunpowder_spice")], 3, ["mutants"], 4, 1)
+q(c, "snow_golem", "Frosty the Snow Golem", ["Make a Mutant Snow Golem with Chemical X."], [madv("mutantmonsters:frosty_the_snow_golem")], 3,
+  ["chemical_x"], 6, 1)
+q(c, "creeper_minion", "You da Bomby", ["Hatch a Creeper Minion from its egg."], [madv("mutantmonsters:you_da_bomby")], 3, ["mutant_creeper"],
+  4, 0)
+for i, (mob, title) in enumerate([("desert_creeper", "Desert Creeper"), ("jungle_creeper", "Jungle Creeper"),
+                                  ("snowy_creeper", "Snowy Creeper"), ("ocean_creeper", "Ocean Creeper")]):
+    q(c, mob, title, ["Creeper Overhaul gives every biome its own creeper. Defeat this one."], [kill("creeperoverhaul:" + mob)], 2, x=0,
+      y=3 + i)
+q(c, "angel", "Don't Blink", ["Weeping Angels move when you look away. Defeat one."], [kill("weeping_angels:weeping_angel")], 3, x=2, y=4.5,
+  shape="hexagon")
+
+# 28. Inventory Pets and Naturalist (their own advancements; pet recipes from the jar)
+c = chapter("pets", "Pets & Wildlife", "Inventory Pets and Naturalist", "inventorypets:pet_pacman", "bosses")
+q(c, "loot_pet", "Looter", ["Inventory Pets live in your inventory and give you powers. Craft the Loot Pet."], [madv("inventorypets:loot")], 2,
+  x=0, y=0, shape="gear", size=1.3)
+q(c, "meta", "Meet the Meta", ["Create a Meta Pet."], [madv("inventorypets:meta")], 3, ["loot_pet"], 2, -1.5)
+q(c, "pacman", "Wakka Wakka", ["The Pac-Man Pet: a fan favourite, and the Gobbler's favourite treasure."], [item("inventorypets:pet_pacman")],
+  2, ["loot_pet"], 2, -0.5)
+for i, (adv_id, title, desc, tier) in enumerate([("peaceful", "Pacifist", "Collect all the Peaceful Pets.", 3),
+                                                 ("mob", "Mobster", "Collect all the Mob Pets.", 4),
+                                                 ("utilitarian", "Utilitarian", "Collect all the Utility Pets.", 4),
+                                                 ("legend", "Legendary", "Collect all the Legendary Pets.", 5)]):
+    q(c, adv_id, title, [desc], [madv("inventorypets:" + adv_id)], tier, ["loot_pet"], 2 + (i // 2) * 2, 0.5 + (i % 2),
+      shape="hexagon" if adv_id == "legend" else None)
+q(c, "bear", "Oh Bother", ["Naturalist: feed a Honeycomb to a Bear."], [madv("naturalist:husbandry/feed_bear_honeycomb")], 1, x=0, y=3)
+q(c, "hippo", "Hungry Hungry Hippos", ["Feed a Melon to a Hippo."], [madv("naturalist:husbandry/feed_hippo_melon")], 1, ["bear"], 2, 3)
+q(c, "giraffe", "A Whole New World", ["Use a Map while riding a Giraffe."], [madv("naturalist:husbandry/ride_giraffe_with_map")], 2, ["hippo"], 4, 3)
+
+# 29. Pam's HarvestCraft 2 and Expanded Delight (no advancements: tools and foods from the jars)
+c = chapter("harvestcraft", "Pam's HarvestCraft", "Hundreds of crops and recipes", "pamhc2foodcore:potitem", "food")
+q(c, "cutting_board", "Kitchen Tools", ["Pam's recipes need kitchen tools. Craft a Cutting Board."], [item("pamhc2foodcore:cuttingboarditem")], 1,
+  x=0, y=0, shape="gear", size=1.3)
+for i, (tool, title) in enumerate([("potitem", "Pot"), ("skilletitem", "Skillet"), ("saucepanitem", "Saucepan"),
+                                   ("bakewareitem", "Bakeware"), ("juiceritem", "Juicer"), ("mixingbowlitem", "Mixing Bowl"),
+                                   ("grinderitem", "Grinder"), ("rolleritem", "Roller")]):
+    q(c, tool, title, [f"Craft a {title}: many Pam's recipes call for it."], [item("pamhc2foodcore:" + tool)], 1,
+      ["cutting_board"], 2 + (i % 4) * 2, -1 if i < 4 else 1)
+q(c, "pot_pie", "Pot Pie", ["Cook a Chicken Pot Pie."], [item("pamhc2foodcore:chickenpotpieitem")], 2, ["potitem", "bakewareitem"], 10, -1)
+q(c, "pot_roast", "Pot Roast", ["Cook a Pot Roast."], [item("pamhc2foodcore:potroastitem")], 2, ["potitem"], 10, 0)
+q(c, "baked_alaska", "Baked Alaska", ["A showpiece dessert from Food Extended."], [item("pamhc2foodextended:bakedalaskaitem")], 3,
+  ["bakewareitem", "mixingbowlitem"], 10, 1)
+q(c, "asparagus", "Expanded Delight", ["Expanded Delight adds new crops for Farmer's Delight. Grow some asparagus."],
+  [item("expandeddelight:asparagus", 8)], 1, x=0, y=3)
+q(c, "peanut_butter", "Peanut Butter", ["Make Peanut Butter, then a Peanut Butter and Honey Sandwich."],
+  [item("expandeddelight:peanut_butter"), item("expandeddelight:peanut_butter_honey_sandwich")], 2, ["asparagus"], 2, 3)
+q(c, "casserole", "Sweet Potato Casserole", ["Cook a Sweet Potato Casserole."], [item("expandeddelight:sweet_potato_casserole")], 2,
+  ["asparagus"], 2, 4)
+q(c, "calendar", "Know Your Seasons", ["Serene Seasons changes the seasons, and crops only grow in theirs. Craft a Calendar."],
+  [item("sereneseasons:calendar")], 1, x=0, y=5.5)
+
+# 30. Tide (its advancement tree: rods, bait, the fishing journal)
+c = chapter("tide", "Tide", "Fishing, reworked", "tide:fishing_journal", "food")
+q(c, "rod", "Tide", ["Grab a fishing rod. Tide adds hundreds of new fish, rods, bait and bobbers."], [madv("tide:root")], 1, x=0, y=0, shape="gear",
+  size=1.3)
+q(c, "journal", "Fishing Journal", ["Craft a Fishing Journal from a book and a fish. It records every fish you catch."],
+  [item("tide:fishing_journal")], 1, ["rod"], 2, -1)
+q(c, "halfway", "Aquatic Archivist", ["Complete half the fishing journal."], [madv("tide:journal_halfway_completed")], 4, ["journal"], 4, -1)
+q(c, "complete", "A Reel Completionist", ["Complete the whole fishing journal."], [madv("tide:journal_completed")], 5, ["halfway"], 6, -1,
+  shape="hexagon")
+q(c, "bait", "Oldest Trick in the Book", ["Get some fish bait."], [madv("tide:get_bait")], 1, ["rod"], 2, 0)
+q(c, "legendary", "One in a Million", ["Catch a legendary fish."], [madv("tide:catch_legendary")], 4, ["bait"], 4, 0, shape="hexagon")
+q(c, "crate", "That's No Fish!", ["Reel in a crate."], [madv("tide:pull_crate")], 2, ["rod"], 2, 1)
+q(c, "lava", "Hot Rod", ["Fish in lava."], [madv("tide:fish_in_lava")], 3, ["rod"], 2, 2)
+q(c, "void", "Into the A-fish", ["Fish in the void."], [madv("tide:fish_in_void")], 4, ["lava"], 4, 2)
+q(c, "all_rods", "Hooked on Variety", ["Own every type of fishing rod."], [madv("tide:all_fishing_rods")], 4, ["crate"], 4, 1)
+
+# 31. Simply Swords (its advancement tree: runic tablets and unique weapons)
+c = chapter("simplyswords", "Simply Swords", "Runic weapons and legendary blades", "simplyswords:runic_tablet", "combat")
+q(c, "tablet", "Simply Swords", ["Runic Tablets turn up in structure chests. Find one."], [madv("simplyswords:simplyswords")], 2, x=0, y=0,
+  shape="gear", size=1.3)
+q(c, "runic", "Rune Etching", ["At a Smithing Table, combine a Runic Tablet, a Netherite weapon and a diamond for a Runic weapon."],
+  [madv("simplyswords:runic_weapon")], 3, ["tablet"], 2, 0)
+for i, (adv_id, title, desc, tier) in enumerate([("decaying_relic", "Ancient Relic", "Obtain the Decaying Relic.", 3),
+                                                 ("dormant_relic", "Batteries Not Included", "Find a Dormant Relic.", 3),
+                                                 ("slumbering_lichblade", "Wake Up!", "Find the Slumbering Lichblade.", 3),
+                                                 ("awakened_lichblade", "Awake at Last!", "Awaken the Lichblade.", 5),
+                                                 ("mjolnir", "It Comes Back, Right?", "Find Mjolnir.", 4),
+                                                 ("riftmane", "Hold the Line", "Find Riftmane.", 5),
+                                                 ("dawnquiver", "Loose the Dawn", "Find Dawnquiver.", 5),
+                                                 ("the_devourer", "All-Consuming", "Find The Devourer.", 5),
+                                                 ("ionbound_stormscale", "Lightning in a Bottle", "Find the Ionbound Stormscale.", 5)]):
+    deps = ["slumbering_lichblade"] if adv_id == "awakened_lichblade" else ["runic"]
+    q(c, adv_id, title, [desc + " Unique weapons are rare: most are found, some are crafted or won from bosses."], [madv("simplyswords:" + adv_id)], tier, deps,
+      4 + (i % 3) * 2, -1 + (i // 3), shape="hexagon" if tier == 5 else None)
+
+# 32. Superheroes (Marvel Superheroes on Palladium: its advancement tree)
+c = chapter("superheroes", "Superheroes", "Suit up: Marvel Superheroes", "marvel:vibranium", "combat")
+q(c, "marvel", "A Bigger Universe", ["Marvel Superheroes adds wearable hero suits with real powers."], [madv("marvel:root")], 1, x=0, y=0,
+  shape="gear", size=1.3)
+q(c, "leather", "Yellow Spandex?", ["Craft Reinforced Leather: the base of most suits."], [madv("marvel:reinforced_leather")], 1, ["marvel"],
+  2, -1.5)
+for i, (adv_id, title, desc) in enumerate([("captain_america", "Star-Spangled Man", "Become Captain America."),
+                                           ("spider_man", "With Great Power...", "Become Spider-Man."),
+                                           ("ant_man", "Someone Your Own Size", "Become Ant-Man."),
+                                           ("wolverine", "The Best There Is", "Become Wolverine."),
+                                           ("cyclops", "To Me, My X-Men", "Become Cyclops.")]):
+    q(c, adv_id, title, [desc], [madv("marvel:" + adv_id)], 3, ["leather"], 4 + (i % 3) * 2, -2 + (i // 3))
+q(c, "wasp", "You Gave Her Wings?", ["Become Wasp."], [madv("marvel:wasp")], 3, ["ant_man"], 8, -1)
+q(c, "vibranium", "The Strongest Metal on Earth", ["Mine Vibranium ore and smelt it in a blast furnace."], [madv("marvel:vibranium")], 3,
+  ["marvel"], 2, 1)
+q(c, "black_panther", "Protector of Wakanda", ["Become the Black Panther."], [madv("marvel:black_panther")], 4, ["vibranium"], 4, 1)
+q(c, "shield", "They Made a Frisbee!", ["Craft a vibranium or proto-adamantium shield."], [madv("marvel:vibranium_shield")], 4, ["vibranium"],
+  4, 2)
+q(c, "uru", "Ingots of the Gods", ["Forge Uru: gold and a Nether Star."], [madv("marvel:uru")], 4, ["marvel"], 2, 3)
+q(c, "mjolnir", "Whosoever Crafts This Hammer", ["Craft Mjölnir."], [madv("marvel:mjolnir")], 5, ["uru"], 4, 3, shape="hexagon")
+q(c, "stormbreaker", "The Thanos-Killing Kind", ["Craft Stormbreaker."], [madv("marvel:stormbreaker")], 5, ["uru"], 4, 4, shape="hexagon")
+
+# 33. Gadgets and fun (Aperture Innovations' advancements; Time Vortex, Lucky Block and Mob Battle from their jars)
+c = chapter("fun", "Portals, TARDISes & Lucky Blocks", "The silly side of the pack", "aperture_innovations:portal_gun", "combat")
+q(c, "portal_gun", "Aperture Science", ["Get the Aperture Science Handheld Portal Device."], [madv("aperture_innovations:aperture/root")], 3,
+  x=0, y=0, shape="gear", size=1.3)
+q(c, "long_jump", "Long Jump", ["Jump 100 blocks with portals without touching the ground."], [madv("aperture_innovations:aperture/long_jump")],
+  3, ["portal_gun"], 2, -0.5)
+q(c, "terminal_velocity", "Terminal Velocity", ["Fall 800 blocks through portals without touching the ground."],
+  [madv("aperture_innovations:aperture/terminal_velocity")], 4, ["long_jump"], 4, -0.5)
+q(c, "lunacy", "Lunacy", ["Shoot a portal at the moon, and go through it."], [madv("aperture_innovations:aperture/lunacy")], 5,
+  ["terminal_velocity"], 6, -0.5, shape="hexagon")
+q(c, "vortex_core", "Vortex Core", ["Time Vortex: craft a Vortex Core from a diamond, an ender pearl, amethyst and quartz."],
+  [item("vortexmod:vortex_core")], 2, x=0, y=2)
+q(c, "interface", "Heart of the TARDIS", ["The Interface block is the heart of every TARDIS. It runs on power and outputs redstone in flight."],
+  [item("vortexmod:interface_block")], 3, ["vortex_core"], 2, 2)
+q(c, "throttle", "Flight Controls", ["Craft a Throttle to start and stop flight and a Coordinate module to pick where you land."],
+  [item("vortexmod:throttle_block"), item("vortexmod:coordinate_block")], 3, ["interface"], 4, 2)
+q(c, "bigger_inside", "Bigger on the Inside", ["Use a Euclidean Upgrade on the Interface to make your TARDIS bigger on the inside."],
+  [item("vortexmod:euclidean_upgrade")], 4, ["throttle"], 6, 2, shape="hexagon")
+q(c, "lucky_block", "Feeling Lucky?", ["Craft a Lucky Block from gold and a dispenser, then break it. Anything can happen."],
+  [item("lucky:lucky_block")], 1, x=0, y=4)
+q(c, "mob_battle", "Mob Battle", ["Craft a Mob Stick: tag two mobs and they fight each other."], [item("mobbattle:mob_stick")], 1, ["lucky_block"],
+  2, 4)
+q(c, "biomass", "A Mutation Complication", ["Morph: have Wither and Regeneration at once to unlock Biomass absorption."],
+  [madv("morph:morph/unlock_biomass")], 4, ["mob_battle"], 4, 4)
+
+# 34. Quark and Supplementaries (their own advancements)
+c = chapter("quark", "Quark & Supplementaries", "A hundred small things that make Minecraft better", "quark:pickarang", "building")
+for i, (adv_id, title, desc, tier) in enumerate([
+        ("crab_in_a_bucket", "Crabtured", "Capture a Crab in a bucket.", 1),
+        ("get_bottled_cloud", "Cloud Storage", "Put a cloud in a bottle.", 1),
+        ("throw_pickarang", "Somehow, Pickarang Returned", "Throw a Pickarang.", 2),
+        ("mine_toretoise", "Mine Turtle!", "Mine a wild Oretoise with a pickaxe.", 2),
+        ("tame_foxhound", "Playing with Fire", "Tame a Foxhound with coal while you have Fire Resistance.", 2),
+        ("get_diamond_heart", "Shape of My Heart", "Sneak up on a Stoneling and break its shell for its Heart.", 3),
+        ("get_forgotten_hat", "This Belongs in a Museum", "Kill a Forgotten underground and loot its hat.", 3),
+        ("overlevel_enchant", "Limit Breaker", "Overlevel an enchantment with Ancient Tomes.", 4),
+        ("use_viaduct", "Chase Me", "Throw an Ender Pearl along a line of Myalite Crystals to travel through them.", 3),
+        ("pathfinder_map_center", "Road to Tomorrow", "Reach the X on a Pathfinder Map.", 3)]):
+    q(c, adv_id, title, [desc], [madv("quark:content/" + adv_id)], tier, x=(i % 5) * 2, y=-1 if i < 5 else 0.5)
+q(c, "retrieve_flamerang", "Fly to the Sky, Fire Bird", ["Throw a Flamerang and catch it while it carries something on fire."],
+  [madv("quark:content/retreive_flamerang")], 3, ["throw_pickarang"], 4, -2.5)
+q(c, "wrench", "Engineer Gaming", ["Supplementaries: rotate a block with a Wrench."], [madv("supplementaries:husbandry/wrench")], 1, x=0, y=2.5)
+q(c, "road_sign", "This Must Be a Sign!", ["Follow a Supplementaries road sign to a village."], [madv("supplementaries:adventure/road_sign")], 1,
+  x=2, y=2.5)
+q(c, "soap", "Tide Pod Challenge", ["Eat a bar of soap. Don't try this at home."], [madv("supplementaries:husbandry/soap")], 1, x=4, y=2.5)
+
+# 35. Builder's toolkit (no advancements: items from the jars)
+c = chapter("building", "Builder's Toolkit", "Chisels, frames, furniture and finishing touches", "chisel:chisel", "building")
+for i, (rid, title, desc) in enumerate([
+        ("chisel:chisel", "Chisel", "Chisel Reborn: turn a stack of blocks into decorative variants."),
+        ("framedblocks:framed_hammer", "Framed Blocks", "Framed Blocks take the look of any block you put in them. The hammer shapes them."),
+        ("handcrafted:hammer", "Handcrafted", "Handcrafted furniture: the hammer changes the style of placed pieces."),
+        ("another_furniture:oak_chair", "Pull Up a Chair", "Another Furniture: chairs, tables, shelves and more."),
+        ("decocraft:baking_table", "Decocraft", "Decocraft has thousands of decorations. Start with something for the kitchen."),
+        ("mcwwindows:oak_window", "Windows", "Macaw's Windows: proper windows, curtains and blinds."),
+        ("mcwbridges:rope_oak_bridge", "Bridges", "Macaw's Bridges: rope, log and stone bridges."),
+        ("mcwpaths:cobblestone_basket_weave_paving", "Paths", "Macaw's Paths and Pavings."),
+        ("connectedglass:borderless_glass", "Seamless Glass", "Connected Glass: glass that joins up into one clean pane."),
+        ("decorative_blocks:brazier", "Brazier", "Decorative Blocks: beams, seats, chains and braziers."),
+        ("twigs:pebble", "Twigs and Pebbles", "Twigs adds small natural details: twigs, pebbles, lamps and tables."),
+        ("supplementaries:way_sign", "Way Sign", "Supplementaries: way signs that point anywhere you like.")]):
+    q(c, rid.split(":")[0] + "_" + rid.split(":")[1], title, [desc], [item(rid)], 1, x=(i % 4) * 2, y=(i // 4) * 1.5)
+
+# 36. Quality of life (Waystones, GraveStone and Guard Villagers: items and advancements from their jars)
+c = chapter("qol", "Quality of Life", "Teleporters, graves and village guards", "waystones:waystone", "building")
+q(c, "warp_stone", "Warp Stone", ["Craft a Warp Stone from an emerald, an ender pearl and amethyst."], [item("waystones:warp_stone")], 1, x=0,
+  y=0)
+q(c, "waystone", "Waystone", ["Craft a Waystone. Activate waystones you find, then warp between them."], [item("waystones:waystone")], 2,
+  ["warp_stone"], 2, 0, shape="gear", size=1.3)
+q(c, "return_scroll", "Way Home", ["Return Scrolls take you back to the last waystone you used."], [item("waystones:return_scroll", 2)], 1,
+  ["warp_stone"], 2, -1)
+q(c, "sharestone", "Sharestone", ["Sharestones of the same colour link to each other for everyone."], [item("waystones:blue_sharestone")], 2,
+  ["waystone"], 4, 0)
+q(c, "warp_plate", "Warp Plate", ["Warp Plates teleport whoever stands on them to a linked plate."], [item("waystones:warp_plate", 2)], 3,
+  ["waystone"], 4, 1)
+q(c, "gravestone", "Rest in Peace", ["When you die, a GraveStone keeps your items safe. Craft one for decoration, or just know it's there."],
+  [item("gravestone:gravestone")], 1, x=0, y=2.5)
+q(c, "recruit", "We Want You!", ["Guard Villagers: give a sword to an unemployed villager and they become a guard."],
+  [madv("guardvillagers:adventure/recruit_guard")], 1, x=0, y=3.5)
+
+# 37. Final challenges
 c = chapter("final", "Final Challenges", "For legends only", "minecraft:nether_star", "neospawn")
 q(c, "dragon", "Dragon Slayer", ["Defeat the Ender Dragon."], [kill("minecraft:ender_dragon")], 5, x=0, y=0, shape="hexagon", size=1.5)
 q(c, "wither", "Wither Away", ["Defeat the Wither."], [kill("minecraft:wither")], 5, ["dragon"], 2, -1, shape="hexagon")

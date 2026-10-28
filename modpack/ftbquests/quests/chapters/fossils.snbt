@@ -1,0 +1,417 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "fossils"
+	group: "2EC6052336A88AD1"
+	icon: {
+		count: 1
+		id: "fossilslegacy:fossil"
+	}
+	id: "72B8266E2135E925"
+	order_index: 24
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "7042903AB74FBC54"
+			rewards: [
+				{
+					id: "3175274058968793"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "27F918AD35AD6C8C"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/fossil"
+					criterion: ""
+					id: "64F2B62C41A23A35"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"7042903AB74FBC54"
+			]
+			id: "0B791AA9C750974C"
+			rewards: [
+				{
+					id: "6E05C1403D25554B"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "47F3BA6536235BED"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/analyzer"
+					criterion: ""
+					id: "634ACCBA113763EE"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"7042903AB74FBC54"
+			]
+			id: "7586D74F838EF5F1"
+			rewards: [
+				{
+					id: "7FFC4F63E0CD9854"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "004CCEF96A89A011"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/palaeontology_table"
+					criterion: ""
+					id: "1AFA75136CBC9560"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"7042903AB74FBC54"
+			]
+			id: "07EB4C85AB05F9E7"
+			rewards: [
+				{
+					id: "0B86CE56DCDA90A4"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "22F7FB9256F24590"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/relic_scrap"
+					criterion: ""
+					id: "61328CFE6F1C7167"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"07EB4C85AB05F9E7"
+			]
+			id: "261B12F8CBBF9A79"
+			rewards: [
+				{
+					id: "1CDE3911115BFE95"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "3FFC8855769B85B4"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/archaeology_workbench"
+					criterion: ""
+					id: "2AFA2CCA6B56F63D"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"07EB4C85AB05F9E7"
+			]
+			id: "48D2D9889DFEEB17"
+			rewards: [
+				{
+					id: "128CA94AD1FCBB0B"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "42F83E17941A73EF"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/sword_artifact"
+					criterion: ""
+					id: "510316130C3ECBE5"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"48D2D9889DFEEB17"
+				"261B12F8CBBF9A79"
+			]
+			id: "610311A32333CA1D"
+			rewards: [
+				{
+					id: "7E6D164D9AA41162"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "66BCFFAD3B7EF243"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/ancient_sword"
+					criterion: ""
+					id: "7D0804F0BA6B5989"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"07EB4C85AB05F9E7"
+			]
+			id: "5E79769E658C3684"
+			rewards: [
+				{
+					id: "34E30A8A65C77319"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "4ED0D9E892D6B76A"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/helmet_artifact"
+					criterion: ""
+					id: "75D09E6CE7EF9BC6"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"5E79769E658C3684"
+				"261B12F8CBBF9A79"
+			]
+			id: "0B2C4A38E954410A"
+			rewards: [
+				{
+					id: "2892B46136B48ABE"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "0C54D0C7F4B4A835"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/decked_out"
+					criterion: ""
+					id: "3D6B58A072B73547"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"7042903AB74FBC54"
+			]
+			id: "6D8363B73CFBA685"
+			rewards: [
+				{
+					id: "2CA99D1FA2A73115"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "42C9080E7AF53042"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/skull_block"
+					criterion: ""
+					id: "4F42DA0A60764939"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 4.5d
+		}
+		{
+			dependencies: [
+				"6D8363B73CFBA685"
+				"0B2C4A38E954410A"
+			]
+			id: "2E3D8CCE6C405B53"
+			rewards: [
+				{
+					id: "6553D94E1846CF3C"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "23B46C3B65831C61"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "653D013E24584396"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/anu"
+					criterion: ""
+					id: "037E9CDD1AD7BCA0"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"7042903AB74FBC54"
+			]
+			id: "2B098D58ADDAE219"
+			rewards: [
+				{
+					id: "6008770EACCAAD2B"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "1137A19C6083F761"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/prehistoric_coin"
+					criterion: ""
+					id: "781EAC3D4B8734F8"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"2B098D58ADDAE219"
+			]
+			id: "48BCA9FB99EB4B3D"
+			rewards: [
+				{
+					id: "4C4DA1F7957589DC"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "2B77C4B8BE4D8FE3"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/time_machine"
+					criterion: ""
+					id: "7E7138F33BBC806F"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"48BCA9FB99EB4B3D"
+			]
+			id: "2518FD109A117210"
+			rewards: [
+				{
+					id: "70DF959DDAE2D33A"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "5C08626D4FCBC8AF"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "fossilslegacy:legacy/overworld_coin"
+					criterion: ""
+					id: "6A0E322EC2FCBAED"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -2.5d
+		}
+	]
+}

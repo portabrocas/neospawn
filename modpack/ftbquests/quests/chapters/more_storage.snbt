@@ -1,0 +1,480 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "more_storage"
+	group: "2EAA9718BAF5A32A"
+	icon: {
+		count: 1
+		id: "travelersbackpack:standard"
+	}
+	id: "07C7D5B54C4840B4"
+	order_index: 21
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "5861B3C7C81D1C8A"
+			rewards: [
+				{
+					id: "68192CDDD584F82D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "03AEDD2FE03004FA"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:sleeping_bag"
+					criterion: ""
+					id: "04045848A9A69F55"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5861B3C7C81D1C8A"
+			]
+			id: "5917669FEBFCC18E"
+			rewards: [
+				{
+					id: "578A7B402820A5FE"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "73FF8B7603415B7D"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "travelersbackpack:standard"
+					criterion: ""
+					id: "474DF4E2570ED238"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5917669FEBFCC18E"
+			]
+			id: "20405721B6F7232B"
+			rewards: [
+				{
+					id: "396D7140E5E9B663"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "50C66B1BEF4B49CE"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:hose"
+					criterion: ""
+					id: "69D7557EFF273FA6"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"5917669FEBFCC18E"
+			]
+			id: "3BD792DC635FA313"
+			rewards: [
+				{
+					id: "5D33F3CE54DBC30E"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "09CD76D2BDE677DB"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:use_sleeping_bag"
+					criterion: ""
+					id: "26287ADAE233D764"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"5917669FEBFCC18E"
+			]
+			id: "51C97D21E5C8B737"
+			rewards: [
+				{
+					id: "458EFB458D1AB123"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "612E40E64D2D8CAC"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:blank_upgrade"
+					criterion: ""
+					id: "3CA284AB19D6F0CE"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"51C97D21E5C8B737"
+			]
+			id: "5190EC4D018A9C38"
+			rewards: [
+				{
+					id: "60C6D20BB59BB3CD"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "76CEA8F4C4C4A00E"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:iron_upgrade"
+					criterion: ""
+					id: "4E7DB865E5554398"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5190EC4D018A9C38"
+			]
+			id: "6C20A5500CFFF29D"
+			rewards: [
+				{
+					id: "4D17DCF375293718"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "6A41EE2261EF2279"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:gold_upgrade"
+					criterion: ""
+					id: "1519E978E06247B2"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"6C20A5500CFFF29D"
+			]
+			id: "44DD16ACE70CB770"
+			rewards: [
+				{
+					id: "1BED95A0D47C4FB4"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "13E9391DE1AD5CB4"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:diamond_upgrade"
+					criterion: ""
+					id: "4F87C029DB8B4B52"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"44DD16ACE70CB770"
+			]
+			id: "563DED38A6CC3B87"
+			rewards: [
+				{
+					id: "756C53AEC43A4806"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "05B4E6F58E2EF83C"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "travelersbackpack:netherite_upgrade"
+					criterion: ""
+					id: "73AEB204B3DE8DBC"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "427307797F002585"
+			rewards: [
+				{
+					id: "2A32EB49AD307B3B"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "74D8C33251517D62"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "045B8E291609A958"
+					item: {
+						count: 1
+						id: "storagedrawers:oak_full_drawers_1"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"427307797F002585"
+			]
+			id: "03E0993ACC8AD78B"
+			rewards: [
+				{
+					id: "39565B7B7EF97689"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "1FFCB34E9D35572D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "14B350D26E14A23D"
+					item: {
+						count: 1
+						id: "storagedrawers:compacting_drawers_3"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"427307797F002585"
+			]
+			id: "4D1E398093698FA3"
+			rewards: [
+				{
+					id: "3423714048D07D06"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "3D9FC80109565CF1"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6E6CD169A1CA13FF"
+					item: {
+						count: 1
+						id: "storagedrawers:controller"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"427307797F002585"
+			]
+			id: "2F1B40AC03A8FE15"
+			rewards: [
+				{
+					id: "1B1E233FAF366A14"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "516BAA25788E2079"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3223BE5122318768"
+					item: {
+						count: 1
+						id: "storagedrawers:iron_storage_upgrade"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [ ]
+			id: "1969A0AABE763956"
+			rewards: [
+				{
+					id: "6473B15FBA59D2CF"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "2ADA81F484A6F845"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "053035243210B4FF"
+					item: {
+						count: 1
+						id: "ironfurnaces:iron_furnace"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			dependencies: [
+				"1969A0AABE763956"
+			]
+			id: "49E4DEC1C867CD32"
+			rewards: [
+				{
+					id: "3D89EC7019F597C5"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "4A0251ACC49C1F4D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5084D9C8C64BC763"
+					item: {
+						count: 1
+						id: "ironfurnaces:diamond_furnace"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 4.5d
+		}
+		{
+			dependencies: [
+				"49E4DEC1C867CD32"
+			]
+			id: "1DE705342F81323B"
+			rewards: [
+				{
+					id: "308AFC316E944F86"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "2A5428A490A88C29"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7C1D1B44694F0E07"
+					item: {
+						count: 1
+						id: "ironfurnaces:netherite_furnace"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 4.5d
+		}
+	]
+}

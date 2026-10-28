@@ -1,0 +1,518 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "harvestcraft"
+	group: "27F7BE0CA4D022F8"
+	icon: {
+		count: 1
+		id: "pamhc2foodcore:potitem"
+	}
+	id: "5AB42441D65CB116"
+	order_index: 27
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "6063F49F72935AED"
+			rewards: [
+				{
+					id: "704F53EA3C6D65C4"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "623CFA39F24972B0"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					count: 1L
+					id: "5CF80079D27205DF"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:cuttingboarditem"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "4228660608CC0341"
+			rewards: [
+				{
+					id: "3BC3E6A1AA5B8509"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "39DA350FC9F8B1E6"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "74AD9F85114B2F32"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:potitem"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "649B37EB25478C68"
+			rewards: [
+				{
+					id: "698BB1F1853151F6"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "30E3BC28E0AD0B49"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "117FC265FF12146B"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:skilletitem"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "2BBD1DAB101B47E2"
+			rewards: [
+				{
+					id: "0EF606DA18F0DC2E"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "52A327F0EA22C0D7"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3D52553B42C0EF08"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:saucepanitem"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "0F620D330F1851F4"
+			rewards: [
+				{
+					id: "2681DA84C27157DB"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "239812E07BB7A48D"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "79C45D0017FEFAE7"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:bakewareitem"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "374EF75C50CC2B8C"
+			rewards: [
+				{
+					id: "7C0BB7286C837BC4"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4C48FC5C6AB010AE"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2A48ABCACE922733"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:juiceritem"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "1651C60DCFA45211"
+			rewards: [
+				{
+					id: "2BCF4B20CA3F8666"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "1168DBCACF76A3E0"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "69946F6E9A2A089D"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:mixingbowlitem"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "521C0942C054FCD2"
+			rewards: [
+				{
+					id: "3F39A577EDE21992"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "41DA0DF44886EC52"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7A3E08B268E210CC"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:grinderitem"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"6063F49F72935AED"
+			]
+			id: "11AF2C69B3A3D102"
+			rewards: [
+				{
+					id: "32DB78FFC040264D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4AC47D163CD1FBA8"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7EB0D22137364AA0"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:rolleritem"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"4228660608CC0341"
+				"0F620D330F1851F4"
+			]
+			id: "45B6097920E2619A"
+			rewards: [
+				{
+					id: "70CCCE2FA70B9117"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "67D623BAA91FD991"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6BA01C9EA12BD3E1"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:chickenpotpieitem"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"4228660608CC0341"
+			]
+			id: "6E64A8829368E50E"
+			rewards: [
+				{
+					id: "30BA0ED75A5C8228"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "164CDF231E0546EB"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "0ABA5BD39DEDE9CE"
+					item: {
+						count: 1
+						id: "pamhc2foodcore:potroastitem"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"0F620D330F1851F4"
+				"1651C60DCFA45211"
+			]
+			id: "5A36C365C0C6B19C"
+			rewards: [
+				{
+					id: "64BB9D2279BD9E01"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "040BB0AFD4AEC630"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6A5461A3B1FA6CDE"
+					item: {
+						count: 1
+						id: "pamhc2foodextended:bakedalaskaitem"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [ ]
+			id: "1B0985BA9B0EAA93"
+			rewards: [
+				{
+					id: "57D143F8ECDA3F67"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "73FB6EC9901C10AF"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "7D2EA99A440DF113"
+					item: {
+						count: 8
+						id: "expandeddelight:asparagus"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"1B0985BA9B0EAA93"
+			]
+			id: "6D998AFA6D7227A2"
+			rewards: [
+				{
+					id: "6D0A06FC07BA5341"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "7EBFCD8F65D99BBA"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7D14BC852CF96FE7"
+					item: {
+						count: 1
+						id: "expandeddelight:peanut_butter"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "2E4D5D43BD09E24A"
+					item: {
+						count: 1
+						id: "expandeddelight:peanut_butter_honey_sandwich"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"1B0985BA9B0EAA93"
+			]
+			id: "71FE08E57F94C75E"
+			rewards: [
+				{
+					id: "6DAB560FA958F185"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "10D87C907B0D1BF8"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "26EDE1193F42E9D1"
+					item: {
+						count: 1
+						id: "expandeddelight:sweet_potato_casserole"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [ ]
+			id: "6361DB14397EAE05"
+			rewards: [
+				{
+					id: "6884FC33BC5E5BAF"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "05D28AFD58893BCC"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "58D5665C9D365806"
+					item: {
+						count: 1
+						id: "sereneseasons:calendar"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 5.5d
+		}
+	]
+}

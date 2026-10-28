@@ -8,30 +8,32 @@
 		id: "mutantmonsters:endersoul_hand"
 	}
 	id: "46F2DC6C7333FFC6"
-	order_index: 19
+	order_index: 25
 	quest_links: [ ]
 	quests: [
 		{
 			dependencies: [ ]
-			id: "2A179E20617AF7E6"
+			id: "09F06A3B1243CFF2"
 			rewards: [
 				{
-					id: "5B672288BB85F844"
+					id: "21D8C3A5DACB6267"
 					type: "xp"
-					xp: 50
+					xp: 300
 				}
 				{
-					id: "0AFC9B39A4383112"
-					table_id: 3387655264753127369L
+					id: "76AD61DC52EB2999"
+					table_id: 2744027256347266820L
 					type: "loot"
 				}
 			]
 			shape: "gear"
-			size: 1.5d
+			size: 1.3d
 			tasks: [
 				{
-					id: "3376E65D813CB39B"
-					type: "checkmark"
+					advancement: "mutantmonsters:root"
+					criterion: ""
+					id: "16964619B61DE0CC"
+					type: "advancement"
 				}
 			]
 			x: 0.0d
@@ -39,7 +41,7 @@
 		}
 		{
 			dependencies: [
-				"2A179E20617AF7E6"
+				"09F06A3B1243CFF2"
 			]
 			id: "35ABA1BDF82EB86C"
 			rewards: [
@@ -64,11 +66,11 @@
 				}
 			]
 			x: 2.0d
-			y: -1.0d
+			y: -1.5d
 		}
 		{
 			dependencies: [
-				"2A179E20617AF7E6"
+				"09F06A3B1243CFF2"
 			]
 			id: "4AFFA7844EF0988A"
 			rewards: [
@@ -92,12 +94,12 @@
 					value: 1L
 				}
 			]
-			x: 4.0d
-			y: -1.0d
+			x: 2.0d
+			y: -0.5d
 		}
 		{
 			dependencies: [
-				"2A179E20617AF7E6"
+				"09F06A3B1243CFF2"
 			]
 			id: "389007084CA0D51E"
 			rewards: [
@@ -121,12 +123,12 @@
 					value: 1L
 				}
 			]
-			x: 6.0d
-			y: -1.0d
+			x: 2.0d
+			y: 0.5d
 		}
 		{
 			dependencies: [
-				"2A179E20617AF7E6"
+				"09F06A3B1243CFF2"
 			]
 			id: "5063E7CC599B8A5C"
 			rewards: [
@@ -150,62 +152,60 @@
 					value: 1L
 				}
 			]
-			x: 8.0d
-			y: -1.0d
-		}
-		{
-			dependencies: [
-				"2A179E20617AF7E6"
-			]
-			id: "0A0EFB9FF24745EC"
-			rewards: [
-				{
-					id: "7F604BF8C410C09C"
-					type: "xp_levels"
-					xp_levels: 5
-				}
-				{
-					id: "738117A7EBEB18EE"
-					table_id: 5331656449326829094L
-					type: "loot"
-				}
-			]
-			shape: "hexagon"
-			tasks: [
-				{
-					entity: "aquamirae:maze_mother"
-					id: "6D81E67614F4100C"
-					type: "kill"
-					value: 1L
-				}
-			]
 			x: 2.0d
-			y: 1.0d
+			y: 1.5d
 		}
 		{
 			dependencies: [
-				"2A179E20617AF7E6"
+				"35ABA1BDF82EB86C"
 			]
-			id: "13CE26CADF3381C8"
+			id: "12FEE1D33D3821F8"
 			rewards: [
 				{
-					id: "07C4A43B1F9C1B1B"
-					type: "xp_levels"
-					xp_levels: 5
+					id: "4CDE26E800693E2D"
+					type: "xp"
+					xp: 300
 				}
 				{
-					id: "6A570BC74A754D2C"
-					table_id: 5331656449326829094L
+					id: "06F167DF9D74C96D"
+					table_id: 2744027256347266820L
 					type: "loot"
 				}
 			]
-			shape: "hexagon"
 			tasks: [
 				{
-					entity: "aquamirae:captain_cornelia"
-					id: "0CE3309C02F4AF09"
-					type: "kill"
-					value: 1L
+					advancement: "mutantmonsters:burn_zombie_burn"
+					criterion: ""
+					id: "2DB8759D16157491"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"09F06A3B1243CFF2"
+			]
+			id: "1B48EE00D8F6B04A"
+			rewards: [
+				{
+					id: "372594F916F75E53"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "1F0DFBAD02CBA44E"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "mutantmonsters:gunpowder_spice"
+					criterion: ""
+					id: "0876CDBB8B20449C"
+					type: "advancement"
 				}
 			]
 			x: 4.0d
@@ -213,17 +213,175 @@
 		}
 		{
 			dependencies: [
-				"2A179E20617AF7E6"
+				"1B48EE00D8F6B04A"
 			]
-			id: "7E1EAFB732873311"
+			id: "1DCF9AF3989E8FB8"
 			rewards: [
 				{
-					id: "761D8DFDB589ED8F"
+					id: "0AEB7EC306D1AAE6"
 					type: "xp"
 					xp: 300
 				}
 				{
-					id: "3B33D9C847501BE9"
+					id: "16B573E71E63D0E3"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "mutantmonsters:frosty_the_snow_golem"
+					criterion: ""
+					id: "0EAD2A584C326A8B"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"389007084CA0D51E"
+			]
+			id: "7E39B772C2678FF5"
+			rewards: [
+				{
+					id: "63E6F3F1A3DE2A99"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "5C2C5D0C519612F1"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "mutantmonsters:you_da_bomby"
+					criterion: ""
+					id: "4AC10553CEDE3993"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "25DD6CCB3A40EA88"
+			rewards: [
+				{
+					id: "024B53229F48C2E6"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "26F5DAB4A578BC83"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					entity: "creeperoverhaul:desert_creeper"
+					id: "1978E89497CFD45D"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [ ]
+			id: "5A9EC83581ADFB4C"
+			rewards: [
+				{
+					id: "5C50F0B163035BB3"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "7F380C605D102D62"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					entity: "creeperoverhaul:jungle_creeper"
+					id: "17843F26378EC1DF"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [ ]
+			id: "102A3B744558FC1D"
+			rewards: [
+				{
+					id: "7FFE84438EC00598"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "70062993FA05A840"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					entity: "creeperoverhaul:snowy_creeper"
+					id: "7D6B6F9D80B73504"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 0.0d
+			y: 5.0d
+		}
+		{
+			dependencies: [ ]
+			id: "55EB2104B360F58A"
+			rewards: [
+				{
+					id: "1E1D80018410029D"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "2745010CE8AC6722"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					entity: "creeperoverhaul:ocean_creeper"
+					id: "2E4581C7C88FB9FD"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [ ]
+			id: "399EA57D5BE3AE25"
+			rewards: [
+				{
+					id: "4481BF0A933EB21A"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "36A0B2DDCA482DF1"
 					table_id: 2744027256347266820L
 					type: "loot"
 				}
@@ -232,13 +390,13 @@
 			tasks: [
 				{
 					entity: "weeping_angels:weeping_angel"
-					id: "0A4FE4778CEE0C99"
+					id: "5D3368DF59FF4DC1"
 					type: "kill"
 					value: 1L
 				}
 			]
-			x: 6.0d
-			y: 1.0d
+			x: 2.0d
+			y: 4.5d
 		}
 	]
 }

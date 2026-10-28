@@ -1,0 +1,353 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "simplyswords"
+	group: "75D26D7A788B4CE3"
+	icon: {
+		count: 1
+		id: "simplyswords:runic_tablet"
+	}
+	id: "07FE103290010615"
+	order_index: 29
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "1948D808C193295C"
+			rewards: [
+				{
+					id: "6F674C0B147B31D0"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "390CBE4485FD6C12"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "simplyswords:simplyswords"
+					criterion: ""
+					id: "77D8707B350F894C"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"1948D808C193295C"
+			]
+			id: "3B291A776620F2AA"
+			rewards: [
+				{
+					id: "3F24A1DCDC1DF9CA"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "24EF3C2F7E9286A1"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "simplyswords:runic_weapon"
+					criterion: ""
+					id: "1ED56F4108277137"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "10FBDA80BC08C3FD"
+			rewards: [
+				{
+					id: "00878F3FC1F770C9"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "0857F9D52C5FB25D"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "simplyswords:decaying_relic"
+					criterion: ""
+					id: "39C59DB12840390A"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "194AC002F96BDBBD"
+			rewards: [
+				{
+					id: "1862FEB4A1A22023"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "1B901D60A9462D35"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "simplyswords:dormant_relic"
+					criterion: ""
+					id: "3715126AA1446DD1"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "09D83EB8BA77F0A6"
+			rewards: [
+				{
+					id: "362E5685C2BAB5F3"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "31123D21B31A9450"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "simplyswords:slumbering_lichblade"
+					criterion: ""
+					id: "66167125746AE64D"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"09D83EB8BA77F0A6"
+			]
+			id: "0E7E526251BF1D7C"
+			rewards: [
+				{
+					id: "7A471D22C191F7AB"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "1CE7120685EB7820"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "7AAF4EE3BF993A28"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "simplyswords:awakened_lichblade"
+					criterion: ""
+					id: "65ADCEDC79E15734"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "0E4E01D2FBBFA27B"
+			rewards: [
+				{
+					id: "626B392397625601"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "45F5A66FECF0A3D0"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "simplyswords:mjolnir"
+					criterion: ""
+					id: "6A34C75C2F628020"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "33911D58C94C1946"
+			rewards: [
+				{
+					id: "4E5394CC4CEDA4C6"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "40F4C73DDAB4F27A"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "42EE387306B86148"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "simplyswords:riftmane"
+					criterion: ""
+					id: "257FE181EAF873EC"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "0F6D609B210F984E"
+			rewards: [
+				{
+					id: "11FD6C5F49996955"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "5F0404539FE97D7F"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "2F6DD3A8BCA8CDB2"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "simplyswords:dawnquiver"
+					criterion: ""
+					id: "6B28D315030AB221"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "409DC8B25978AB68"
+			rewards: [
+				{
+					id: "7BCB96CAF3B2C3BD"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "53AC158E8F84B409"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "242853074C3A7117"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "simplyswords:the_devourer"
+					criterion: ""
+					id: "285C5B5FEAA09770"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"3B291A776620F2AA"
+			]
+			id: "4A79A3C240344275"
+			rewards: [
+				{
+					id: "1850002209E32A5D"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "247328B2AEF6FAA5"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "25A864EDB4B780FF"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "simplyswords:ionbound_stormscale"
+					criterion: ""
+					id: "05E77D6174B45A5D"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 1.0d
+		}
+	]
+}

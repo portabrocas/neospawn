@@ -1,0 +1,225 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "qol"
+	group: "57690735B767071A"
+	icon: {
+		count: 1
+		id: "waystones:waystone"
+	}
+	id: "7285D725520E4165"
+	order_index: 34
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "36648CCC444AE1F1"
+			rewards: [
+				{
+					id: "74FC0DC4A106F3BE"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4470D6C574096A00"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6BA98CA35BF57425"
+					item: {
+						count: 1
+						id: "waystones:warp_stone"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"36648CCC444AE1F1"
+			]
+			id: "10B69A67E0BA27E6"
+			rewards: [
+				{
+					id: "4B801FBF02739BDB"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "49CD582BC1D6BC0B"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					count: 1L
+					id: "5F726C5F0EE878AF"
+					item: {
+						count: 1
+						id: "waystones:waystone"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"36648CCC444AE1F1"
+			]
+			id: "5A4CAE4D71697518"
+			rewards: [
+				{
+					id: "7B6F6E7305355BF1"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4667E587AB7C6B83"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "769DFCE734FA7527"
+					item: {
+						count: 2
+						id: "waystones:return_scroll"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"10B69A67E0BA27E6"
+			]
+			id: "206A36887F0F4375"
+			rewards: [
+				{
+					id: "135690C1B05933EA"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "3E7B2D88AF28E49F"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "28C5B2FA376DD244"
+					item: {
+						count: 1
+						id: "waystones:blue_sharestone"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"10B69A67E0BA27E6"
+			]
+			id: "5A860730297B0E89"
+			rewards: [
+				{
+					id: "31BC5B123995CC59"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "32BA7DBF56597FD6"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "0B0472E5991A870C"
+					item: {
+						count: 2
+						id: "waystones:warp_plate"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [ ]
+			id: "13C19B254EEC8DEC"
+			rewards: [
+				{
+					id: "5503A7E820D93383"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "56A400A39B694BCE"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3240440212876149"
+					item: {
+						count: 1
+						id: "gravestone:gravestone"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [ ]
+			id: "300EEC9112D2962B"
+			rewards: [
+				{
+					id: "6E98E6F23960B351"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "537589BAE1A3BA08"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "guardvillagers:adventure/recruit_guard"
+					criterion: ""
+					id: "4C1F006923C50370"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 3.5d
+		}
+	]
+}

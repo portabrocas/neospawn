@@ -1,0 +1,397 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "aquamirae"
+	group: "2EC6052336A88AD1"
+	icon: {
+		count: 1
+		id: "aquamirae:shell_horn"
+	}
+	id: "41DD07C76CA9AFF6"
+	order_index: 23
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "02712B3EAF3AA8EB"
+			rewards: [
+				{
+					id: "5896C3A641BC5BDA"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "61F93F4FFE23D34C"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/find_ice_maze"
+					criterion: ""
+					id: "1A30CA1E28A80CAA"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"02712B3EAF3AA8EB"
+			]
+			id: "71AF9FD5A10EA7AF"
+			rewards: [
+				{
+					id: "5A58BF840ABAA613"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5C4F01262C0934FB"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_pirate_pouch"
+					criterion: ""
+					id: "54D0EB1DC306F181"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"71AF9FD5A10EA7AF"
+			]
+			id: "47E5F6639D189AE1"
+			rewards: [
+				{
+					id: "1F0D1BC092BB22A1"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "0FC16D80DCDB6BFA"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_terrible_upgrade_smithing_template"
+					criterion: ""
+					id: "6FD753A864441EB9"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"47E5F6639D189AE1"
+			]
+			id: "1FA17BB8E56E56C3"
+			rewards: [
+				{
+					id: "08FCFEECBFD6886D"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "0BC12EC4A6F9E821"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_all_terrible_armor"
+					criterion: ""
+					id: "37C88BD5A3B712A0"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"47E5F6639D189AE1"
+			]
+			id: "276EA2591439FE44"
+			rewards: [
+				{
+					id: "4F8A533A69E26467"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "059902CEC0BD5FE7"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_abyssal_upgrade_smithing_template"
+					criterion: ""
+					id: "08745EC7BCF42C89"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"276EA2591439FE44"
+			]
+			id: "2D53EE0442B11F0C"
+			rewards: [
+				{
+					id: "459FE28554DC25D1"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "64B95CD8E8C8C6AB"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "6B7500CBBF25F8F8"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_all_abyssal_armor"
+					criterion: ""
+					id: "4A59340163CBFAD0"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"02712B3EAF3AA8EB"
+			]
+			id: "116691576E2FDB73"
+			rewards: [
+				{
+					id: "484A18E400E77D94"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "2F0DCD7ECEEFC02F"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_shell_horn"
+					criterion: ""
+					id: "0337B0CB7C2B762E"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"116691576E2FDB73"
+			]
+			id: "59A549C49067BBF7"
+			rewards: [
+				{
+					id: "68EF658CCA43BFF7"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "5FE008592503E7BE"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_frozen_key"
+					criterion: ""
+					id: "64EA70A75BCEDCB9"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"59A549C49067BBF7"
+			]
+			id: "559F965B793DB08A"
+			rewards: [
+				{
+					id: "54B19AD742C9D35C"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "1E25283CF6A5B2CB"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "33650D705D0382D2"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_tidepiercer"
+					criterion: ""
+					id: "5BE4A8CF498BC068"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"59A549C49067BBF7"
+			]
+			id: "675ACEC1FC8C7E86"
+			rewards: [
+				{
+					id: "7BD6EFD230406C28"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "4A2FB0D0C6521417"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_all_salvager_armor"
+					criterion: ""
+					id: "262F81725B449E2F"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"02712B3EAF3AA8EB"
+			]
+			id: "39F48A1A3AB3D2EF"
+			rewards: [
+				{
+					id: "724C57FB0AC7B751"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "08CC6B4A76BFB564"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/encounter_the_shipbreaker"
+					criterion: ""
+					id: "19410C29FC262D49"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"39F48A1A3AB3D2EF"
+			]
+			id: "1EA7EBEFDA623C7C"
+			rewards: [
+				{
+					id: "28F37F76D0919103"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "03B07123C37B70E3"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "7E75B9729CD4BA5B"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/obtain_ship_graveyard_echo"
+					criterion: ""
+					id: "0B1579C952015669"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"02712B3EAF3AA8EB"
+			]
+			id: "789F1A816F7618ED"
+			rewards: [
+				{
+					id: "26D1AE6E80F73224"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "4CBC3D6512911DBD"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "aquamirae:adventure/tame_shellback"
+					criterion: ""
+					id: "210C4AD1DCC675E3"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 3.5d
+		}
+	]
+}

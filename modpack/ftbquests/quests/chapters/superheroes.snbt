@@ -1,0 +1,419 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "superheroes"
+	group: "75D26D7A788B4CE3"
+	icon: {
+		count: 1
+		id: "marvel:vibranium"
+	}
+	id: "519D5575B40B868F"
+	order_index: 30
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "1F6EA8B4B47794B8"
+			rewards: [
+				{
+					id: "2FD8DA02AFC63E61"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "7385ED24087B7EA2"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "marvel:root"
+					criterion: ""
+					id: "2E8E1C7C86EA3C65"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"1F6EA8B4B47794B8"
+			]
+			id: "595730964D7E809E"
+			rewards: [
+				{
+					id: "6EA3D87BB07BE3A8"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4137475E6C380288"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:reinforced_leather"
+					criterion: ""
+					id: "1B3A3E7A40F18EC3"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"595730964D7E809E"
+			]
+			id: "6C52DBB05B8E21B6"
+			rewards: [
+				{
+					id: "3CB03F5FBC86A6F6"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "6913E33FC668A1D0"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:captain_america"
+					criterion: ""
+					id: "0A03A0112B59B13C"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"595730964D7E809E"
+			]
+			id: "429043EC4786A145"
+			rewards: [
+				{
+					id: "100AF0CA5001F362"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "4FCE720F44D6C5AC"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:spider_man"
+					criterion: ""
+					id: "056AC14373C120E2"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"595730964D7E809E"
+			]
+			id: "53692BE2A4A4CAA9"
+			rewards: [
+				{
+					id: "72E94B831CDE3D93"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "6BDF1ADED1E36EE7"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:ant_man"
+					criterion: ""
+					id: "408A8AAFAD7D2F09"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"595730964D7E809E"
+			]
+			id: "2091389681C4D1DC"
+			rewards: [
+				{
+					id: "51E83BE36C7B85EC"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "2813B593572E0E5B"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:wolverine"
+					criterion: ""
+					id: "7B71608BB6257C13"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"595730964D7E809E"
+			]
+			id: "2D90711F09496407"
+			rewards: [
+				{
+					id: "0FA1107833FC4DA0"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "5DA7882FD5DE2913"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:cyclops"
+					criterion: ""
+					id: "67AC76FE3AE55C28"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"53692BE2A4A4CAA9"
+			]
+			id: "03C19A717E215E39"
+			rewards: [
+				{
+					id: "302E9DE306B9166F"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "7DFFB5B9B97B2D9B"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:wasp"
+					criterion: ""
+					id: "49672F2324AEF5EB"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"1F6EA8B4B47794B8"
+			]
+			id: "07C1247E4AFFFB2B"
+			rewards: [
+				{
+					id: "61FBF3E369F592E8"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "00925B301FF7BE62"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:vibranium"
+					criterion: ""
+					id: "05656451D4819E95"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"07C1247E4AFFFB2B"
+			]
+			id: "35BB541E8C79519F"
+			rewards: [
+				{
+					id: "709AB1BE120013D2"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "544EE561DB9D3D52"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:black_panther"
+					criterion: ""
+					id: "15D8AF298F9F485B"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"07C1247E4AFFFB2B"
+			]
+			id: "5934D5B75DD6AD17"
+			rewards: [
+				{
+					id: "52B47EF2307E1CC2"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "5A5BB42B2176842B"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:vibranium_shield"
+					criterion: ""
+					id: "2D5EE82D051C7A21"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"1F6EA8B4B47794B8"
+			]
+			id: "1CD86B2514FE679A"
+			rewards: [
+				{
+					id: "0BFA5B0006DA6459"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "2D27FD96A11025F7"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "marvel:uru"
+					criterion: ""
+					id: "7C2A1FFDFF283A24"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"1CD86B2514FE679A"
+			]
+			id: "4675CFA1D106EF05"
+			rewards: [
+				{
+					id: "77A55AE3AAA9900E"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "4D7575A853F6638D"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "3CD38033D4BED069"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "marvel:mjolnir"
+					criterion: ""
+					id: "75126BA4957A1E52"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"1CD86B2514FE679A"
+			]
+			id: "2170DBA9380DEE31"
+			rewards: [
+				{
+					id: "3A168F40F29AD71C"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "0F96FEFAE00718CB"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "0D83315780DE4166"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "marvel:stormbreaker"
+					criterion: ""
+					id: "50D030FF5590C511"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+	]
+}

@@ -1,0 +1,381 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "quark"
+	group: "57690735B767071A"
+	icon: {
+		count: 1
+		id: "quark:pickarang"
+	}
+	id: "52426F5F19A93D19"
+	order_index: 32
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "67FCE82DD42EBC7E"
+			rewards: [
+				{
+					id: "1FEEC9689C1D6991"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4E386668BCC0BE63"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/crab_in_a_bucket"
+					criterion: ""
+					id: "36A2B199C250FB06"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [ ]
+			id: "6BC8F463E56E838D"
+			rewards: [
+				{
+					id: "7EAAE302D8DF62B3"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "7F4512808E2B4599"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/get_bottled_cloud"
+					criterion: ""
+					id: "56B2C98BC9F3889C"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [ ]
+			id: "15FA5B9E9E54112F"
+			rewards: [
+				{
+					id: "7570BFDC77C2C261"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "18D15B66B8ABBC72"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/throw_pickarang"
+					criterion: ""
+					id: "5F00695C791D4536"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [ ]
+			id: "6B4D6E906042078C"
+			rewards: [
+				{
+					id: "2F648B552DF03669"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "63D3683FD1293A36"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/mine_toretoise"
+					criterion: ""
+					id: "252E57BA7331DD37"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [ ]
+			id: "4218ABADA7B2FE58"
+			rewards: [
+				{
+					id: "073C2C5858DA17A4"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "3E344BD1CB08AA5E"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/tame_foxhound"
+					criterion: ""
+					id: "65B07B99EE4D8AB9"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [ ]
+			id: "3F61E741333F8A8D"
+			rewards: [
+				{
+					id: "23F4E3878EA2B783"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "76E31CC259D0602D"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/get_diamond_heart"
+					criterion: ""
+					id: "7EBDF4EF1FF57690"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [ ]
+			id: "177A79259951782A"
+			rewards: [
+				{
+					id: "376E3F603358686A"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "22E1F6D03C0C42BA"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/get_forgotten_hat"
+					criterion: ""
+					id: "5BEC125F11E702A6"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [ ]
+			id: "35050DF6FAA42B6B"
+			rewards: [
+				{
+					id: "6F257215A8869D3A"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "2587DABEE25FD9BE"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/overlevel_enchant"
+					criterion: ""
+					id: "7753DB61F8A7A98B"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [ ]
+			id: "7B7AAC226A53B5DB"
+			rewards: [
+				{
+					id: "13CD0364E2532B57"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "26DF58AACB8F81FB"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/use_viaduct"
+					criterion: ""
+					id: "65BF893E2CE660AA"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [ ]
+			id: "3DD33A6F235DFCFC"
+			rewards: [
+				{
+					id: "57A8B4E95F8C2AE5"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "2CC4839FE5C473C2"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/pathfinder_map_center"
+					criterion: ""
+					id: "3119A1875FD31A9D"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"15FA5B9E9E54112F"
+			]
+			id: "55A49512475A7E2A"
+			rewards: [
+				{
+					id: "0C452B22BD330A33"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "24B63ADD25ED52FA"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "quark:content/retreive_flamerang"
+					criterion: ""
+					id: "7C09AC9703CB4CFA"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [ ]
+			id: "1F6A772819A1C805"
+			rewards: [
+				{
+					id: "6B7C47AE8DE21D61"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "0A3EDD2A27B66656"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "supplementaries:husbandry/wrench"
+					criterion: ""
+					id: "33A74A05D02588BE"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [ ]
+			id: "0CBE7770FA47A70B"
+			rewards: [
+				{
+					id: "46E643386F9D1E27"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "3A8D5A5C03B6E087"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "supplementaries:adventure/road_sign"
+					criterion: ""
+					id: "13D91CEC0836EF02"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [ ]
+			id: "062BD84AE0183AB3"
+			rewards: [
+				{
+					id: "7330E72573DF7D97"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "716C96906B094602"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "supplementaries:husbandry/soap"
+					criterion: ""
+					id: "3554013FB29EEE5F"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.5d
+		}
+	]
+}

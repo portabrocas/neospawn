@@ -1,0 +1,302 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pets"
+	group: "2EC6052336A88AD1"
+	icon: {
+		count: 1
+		id: "inventorypets:pet_pacman"
+	}
+	id: "30B8EFB28F81CA1A"
+	order_index: 26
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "2F68384C43750EAB"
+			rewards: [
+				{
+					id: "3331ED42E0D8D94E"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "68C9FBD9D273574D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "inventorypets:loot"
+					criterion: ""
+					id: "62F3961A4D191399"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"2F68384C43750EAB"
+			]
+			id: "5257DBCA418BCE0D"
+			rewards: [
+				{
+					id: "35649473ABC88F60"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "7E91DC5840892B2C"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "inventorypets:meta"
+					criterion: ""
+					id: "343EFD374CC9B0B9"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"2F68384C43750EAB"
+			]
+			id: "75BE4E9B0ED99E1A"
+			rewards: [
+				{
+					id: "1C1CDB8C93547420"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5E9BD1FF45B9E764"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "24AEEB639045A561"
+					item: {
+						count: 1
+						id: "inventorypets:pet_pacman"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"2F68384C43750EAB"
+			]
+			id: "73320A3D79A73BD3"
+			rewards: [
+				{
+					id: "1011BA4853AFF42E"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "0285246BF5E390F1"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "inventorypets:peaceful"
+					criterion: ""
+					id: "45B40E58340EA5FD"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"2F68384C43750EAB"
+			]
+			id: "51D80A10C4C214CB"
+			rewards: [
+				{
+					id: "32B95CBECB4A3DD7"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "00F4B02BA4BD596E"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "inventorypets:mob"
+					criterion: ""
+					id: "15F364D36C16253E"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"2F68384C43750EAB"
+			]
+			id: "6B873C12AF35C500"
+			rewards: [
+				{
+					id: "7510B65133AD67F9"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "19392B7089798551"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "inventorypets:utilitarian"
+					criterion: ""
+					id: "64535969DA234E9C"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"2F68384C43750EAB"
+			]
+			id: "1FCCCF642DCDCA62"
+			rewards: [
+				{
+					id: "15116092102361FC"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "2D628680E75CC308"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "11BAC359167E986F"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "inventorypets:legend"
+					criterion: ""
+					id: "1A94B34F18D3976A"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [ ]
+			id: "3E25583A48480821"
+			rewards: [
+				{
+					id: "518037273C81E487"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "69E2E0A335C612AF"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "naturalist:husbandry/feed_bear_honeycomb"
+					criterion: ""
+					id: "4DE709EE33786A05"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"3E25583A48480821"
+			]
+			id: "260E68A30B7FF734"
+			rewards: [
+				{
+					id: "055DCF17C3473299"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "24E4223688916AAB"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "naturalist:husbandry/feed_hippo_melon"
+					criterion: ""
+					id: "45AB4FBE52F9B270"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"260E68A30B7FF734"
+			]
+			id: "21BE3F56B079E7B6"
+			rewards: [
+				{
+					id: "32D69E797A5A414E"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "4D8280C49F06670D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "naturalist:husbandry/ride_giraffe_with_map"
+					criterion: ""
+					id: "05F91CABE8C51667"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+	]
+}

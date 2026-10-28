@@ -1,0 +1,543 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "apothic"
+	group: "03203A1312E25E36"
+	icon: {
+		count: 1
+		id: "apothic_enchanting:hellshelf"
+	}
+	id: "68F1853CB1F523CF"
+	order_index: 22
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "07CB743359215A4A"
+			rewards: [
+				{
+					id: "643894FE7B91241D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "71A22FA0F3F13D31"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "apothic_enchanting:enchanter"
+					criterion: ""
+					id: "52BC7BE71450EC6C"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"07CB743359215A4A"
+			]
+			id: "57F011B9D9E2D1AF"
+			rewards: [
+				{
+					id: "6A74490CB1CBB8E8"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "33C7BCD67C3BE444"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:30ench"
+					criterion: ""
+					id: "2F5BD5CE08A608FC"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"57F011B9D9E2D1AF"
+			]
+			id: "7F66689630F0B377"
+			rewards: [
+				{
+					id: "01E5A8CD17AB43E5"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "6272E00E02F47AC4"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:60ench"
+					criterion: ""
+					id: "437AF18CA7C97FE9"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"7F66689630F0B377"
+			]
+			id: "718276982B598457"
+			rewards: [
+				{
+					id: "37A8CA7823AC28F0"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "682D9AD1BB21913A"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:80ench"
+					criterion: ""
+					id: "019605BE313DBF4F"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"718276982B598457"
+			]
+			id: "324BC14BFD6B558D"
+			rewards: [
+				{
+					id: "3B5DFC2E33DDBD3E"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "5108DC2822C92CF1"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "02E38713BB494CE5"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "apothic_enchanting:100ench"
+					criterion: ""
+					id: "79235BD1E6A0435A"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"07CB743359215A4A"
+			]
+			id: "1C2E4F6C0A1CDCC1"
+			rewards: [
+				{
+					id: "343008578A830611"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "7E21865BA613D9C9"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:bookshelf"
+					criterion: ""
+					id: "272D1BB16D7E6D61"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"1C2E4F6C0A1CDCC1"
+			]
+			id: "17F696A422F5651E"
+			rewards: [
+				{
+					id: "4463C5F1030C6732"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "1A12E8AE070BAF6C"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:hellshelf"
+					criterion: ""
+					id: "2E71DEBD2EF0E274"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"1C2E4F6C0A1CDCC1"
+			]
+			id: "12DA2D3591E6D6CC"
+			rewards: [
+				{
+					id: "78A815FA97C75700"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5395728C1FD053B3"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:seashelf"
+					criterion: ""
+					id: "692A4337443A1CBC"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"17F696A422F5651E"
+			]
+			id: "5CEA076AA380DC39"
+			rewards: [
+				{
+					id: "3A9D374EAFDDDFC2"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "19A7BD16C6AB84AC"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:upgrade_hellshelf"
+					criterion: ""
+					id: "4962BD6B7F29CD75"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"12DA2D3591E6D6CC"
+			]
+			id: "252DA30FBFB417BC"
+			rewards: [
+				{
+					id: "002E70096D656CEF"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "038D53AB20DA28E1"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:upgrade_seashelf"
+					criterion: ""
+					id: "4CAFDB3684E58FE0"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"5CEA076AA380DC39"
+			]
+			id: "545F0BF2E8DD1D26"
+			rewards: [
+				{
+					id: "11170BDDE9389FD0"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "4E38284A8B7228F0"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:deepshelf"
+					criterion: ""
+					id: "5E2CA66E8CF79CC6"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"545F0BF2E8DD1D26"
+			]
+			id: "48A29139151C05AD"
+			rewards: [
+				{
+					id: "3BB88AAFB9A07415"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "47A1934C5F5D4CF2"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:sculkshelf"
+					criterion: ""
+					id: "0AC52C13747F6B4D"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"48A29139151C05AD"
+			]
+			id: "1F529B77E083067E"
+			rewards: [
+				{
+					id: "5CAC71AF6651F0A9"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "1F4DBD96B3A61AB6"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "6711179AEE7AF837"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:endshelf"
+					criterion: ""
+					id: "2EF6E47D54ABE885"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"1F529B77E083067E"
+			]
+			id: "62AF45F94D8FA1FB"
+			rewards: [
+				{
+					id: "42E9C41DFC9200A2"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "502A62C5C50260A9"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "14997D9F338F00B9"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "apothic_enchanting:upgrade_endshelf"
+					criterion: ""
+					id: "6A82F5499BC33318"
+					type: "advancement"
+				}
+			]
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"07CB743359215A4A"
+			]
+			id: "7085DBCB3728E175"
+			rewards: [
+				{
+					id: "561FFA7899EB6AEE"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "49F8EF771C24B0B4"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:enchanting_stats"
+					criterion: ""
+					id: "0F601946D7451B8F"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"7085DBCB3728E175"
+			]
+			id: "5882FBFE2F8CF358"
+			rewards: [
+				{
+					id: "02B653E371356ABC"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "1F9FAB03037537A0"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:arcana100"
+					criterion: ""
+					id: "1DCA06F780C59098"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"7085DBCB3728E175"
+			]
+			id: "68E768419345E37E"
+			rewards: [
+				{
+					id: "0F343DF99D8FBBC1"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "539B7BAA01E19941"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "apothic_enchanting:quanta0"
+					criterion: ""
+					id: "5EA44C24F57B365C"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 3.5d
+		}
+		{
+			dependencies: [
+				"5882FBFE2F8CF358"
+				"68E768419345E37E"
+			]
+			id: "6C55BCCACCC139A3"
+			rewards: [
+				{
+					id: "17A9D62591B4B3EE"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "5CB3737D2E5127BA"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "65CE9FA1CF1BE5A5"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "apothic_enchanting:max_stats"
+					criterion: ""
+					id: "0832AB279B183E61"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 3.0d
+		}
+	]
+}
