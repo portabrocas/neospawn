@@ -1,0 +1,652 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "ae2"
+	group: "2EAA9718BAF5A32A"
+	icon: {
+		count: 1
+		id: "ae2:controller"
+	}
+	id: "32F4545024F13413"
+	order_index: 8
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "171F2A1FCB706A27"
+			rewards: [
+				{
+					id: "602D8E9727C3B0AB"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "15E7A27EB09F9F72"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "ae2:main/root"
+					criterion: ""
+					id: "5411BAA7F5E57A9D"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"171F2A1FCB706A27"
+			]
+			id: "3232EFF1505A74C3"
+			rewards: [
+				{
+					id: "0A6E88F2A8FF4CF8"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "0FF2FB9895219FCB"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/charger"
+					criterion: ""
+					id: "2CDFF117B866569B"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3232EFF1505A74C3"
+			]
+			id: "609FC144CB431019"
+			rewards: [
+				{
+					id: "796925E319ECEACD"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "27F4BE2A99F01D36"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/charged_quartz"
+					criterion: ""
+					id: "67154C2881378394"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"609FC144CB431019"
+			]
+			id: "70289A0EF28C852A"
+			rewards: [
+				{
+					id: "2EFAAFD131B4771D"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5FE60DA83E4BC104"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/fluix"
+					criterion: ""
+					id: "40777867243D2997"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"70289A0EF28C852A"
+			]
+			id: "04AED7EE8CA044E5"
+			rewards: [
+				{
+					id: "7495417700E52F10"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5456FAFF1AF27C26"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/growth_accelerator"
+					criterion: ""
+					id: "59D5B94E201E65E9"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"70289A0EF28C852A"
+			]
+			id: "48BF982BB762AB7D"
+			rewards: [
+				{
+					id: "5BF508ED44A5B339"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "74F68A24C02E46A0"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/glass_cable"
+					criterion: ""
+					id: "14577DF71095DD18"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3232EFF1505A74C3"
+			]
+			id: "4C84FE84B7E58603"
+			rewards: [
+				{
+					id: "4FA7C03898297DBE"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4B5CA3E2794AF992"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/compass"
+					criterion: ""
+					id: "1CAD513BC51D04F3"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"4C84FE84B7E58603"
+			]
+			id: "0DDCF058D133D244"
+			rewards: [
+				{
+					id: "41F29310698C87A4"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "7DD0FEE03204A009"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/presses"
+					criterion: ""
+					id: "69DE83469F9D1360"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"0DDCF058D133D244"
+				"70289A0EF28C852A"
+			]
+			id: "0C0843DE3D831B45"
+			rewards: [
+				{
+					id: "2FAB0F7FDCF51AC3"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "12CDF35D4AB6029A"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "698B7B71918AF61B"
+					item: {
+						count: 1
+						id: "ae2:inscriber"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "7BA74081B6D2AF52"
+					item: {
+						count: 1
+						id: "ae2:logic_processor"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "41B8371E9CB93E88"
+					item: {
+						count: 1
+						id: "ae2:calculation_processor"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "7406FF20D00D17C2"
+					item: {
+						count: 1
+						id: "ae2:engineering_processor"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"0C0843DE3D831B45"
+				"48BF982BB762AB7D"
+			]
+			id: "44AF6ABEE259F331"
+			rewards: [
+				{
+					id: "6F9F74512DBD9966"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "6E1EF2C6C251A599"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "ae2:main/controller"
+					criterion: ""
+					id: "6F7CFBAB17D3882B"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"44AF6ABEE259F331"
+			]
+			id: "5C98BC19F017F26F"
+			rewards: [
+				{
+					id: "16EFF884901F27D1"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "4C2B27D7BC696FD2"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/storage_cell"
+					criterion: ""
+					id: "11732AE6C169EB83"
+					type: "advancement"
+				}
+				{
+					count: 1L
+					id: "77FC11FC02741B26"
+					item: {
+						count: 1
+						id: "ae2:drive"
+					}
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"44AF6ABEE259F331"
+			]
+			id: "4ED73AA04E6B6423"
+			rewards: [
+				{
+					id: "29E3D80C46FED194"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "44BB224068E68A3A"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/crafting_terminal"
+					criterion: ""
+					id: "0B2AF6237666DFA5"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"44AF6ABEE259F331"
+			]
+			id: "0F9EAA2081D27F7A"
+			rewards: [
+				{
+					id: "2038780314D5DBC9"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "7381DBE2F7578DC8"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/network_tool"
+					criterion: ""
+					id: "55002F921ADD1F1F"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"4ED73AA04E6B6423"
+			]
+			id: "0BB37084A4AB6D92"
+			rewards: [
+				{
+					id: "682C702401696641"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "04AEEACCABF76385"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/pattern_encoding_terminal"
+					criterion: ""
+					id: "74B38C89DBB9E8A8"
+					type: "advancement"
+				}
+			]
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"0BB37084A4AB6D92"
+			]
+			id: "661A5ACAEE9A1588"
+			rewards: [
+				{
+					id: "71205F9D505123DC"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "106D10DED92DD43E"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/crafting_cpu"
+					criterion: ""
+					id: "5A77845277605D95"
+					type: "advancement"
+				}
+				{
+					count: 1L
+					id: "38E7880C2D12C975"
+					item: {
+						count: 1
+						id: "ae2:pattern_provider"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "047AD2C71FC24E9D"
+					item: {
+						count: 1
+						id: "ae2:molecular_assembler"
+					}
+					type: "item"
+				}
+			]
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5C98BC19F017F26F"
+			]
+			id: "41BB0589C98E47B2"
+			rewards: [
+				{
+					id: "3FC8029CC9DF4B29"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "798B4282B1202D0F"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/portable_cell"
+					criterion: ""
+					id: "1AD7638910C35540"
+					type: "advancement"
+				}
+			]
+			x: 14.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"48BF982BB762AB7D"
+			]
+			id: "3647FC22948329C2"
+			rewards: [
+				{
+					id: "3994138736D07A71"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "5355EDE3FD5FA761"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/p2p"
+					criterion: ""
+					id: "1E41211A5A0B20CC"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"661A5ACAEE9A1588"
+			]
+			id: "005DE63BE2A0C9D4"
+			rewards: [
+				{
+					id: "178E510F61B43524"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "05B84036787BB2B3"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "ae2:main/network2"
+					criterion: ""
+					id: "4D6C9709C09F4F6A"
+					type: "advancement"
+				}
+			]
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3647FC22948329C2"
+				"005DE63BE2A0C9D4"
+			]
+			id: "59D0F37F549BA51E"
+			rewards: [
+				{
+					id: "3C8FC2DCDB3A766B"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "15E391C2B7A26DD9"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "009AD1FD8ACE1A3A"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "ae2:main/qnb"
+					criterion: ""
+					id: "26A1A322FE3840E6"
+					type: "advancement"
+				}
+			]
+			x: 18.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"661A5ACAEE9A1588"
+			]
+			id: "5256F03E7D57C75E"
+			rewards: [
+				{
+					id: "73D15D880F277971"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "2199EBBE751F06F9"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "74E13FBE8EE177CC"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					count: 1L
+					id: "58C6C524F181EF57"
+					item: {
+						count: 1
+						id: "extendedae:ex_pattern_provider"
+					}
+					type: "item"
+				}
+			]
+			x: 18.0d
+			y: 1.0d
+		}
+	]
+}

@@ -1,0 +1,471 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "undergarden"
+	group: "71258E98B60BA7B1"
+	icon: {
+		count: 1
+		id: "undergarden:catalyst"
+	}
+	id: "064F614F36047AE4"
+	order_index: 14
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "69F94B4509AF8F33"
+			rewards: [
+				{
+					id: "51A2F5BAE0A8435D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "14658D94738F96B6"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/catalyst"
+					criterion: ""
+					id: "45338FD6B5E3E5D4"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"69F94B4509AF8F33"
+			]
+			id: "45CFB74255566BE7"
+			rewards: [
+				{
+					id: "0DEAD7A8FEB0FA67"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "0861534E5FB38103"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/enter_undergarden"
+					criterion: ""
+					id: "247B386697AA75C3"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"45CFB74255566BE7"
+			]
+			id: "3F92F3BAF71F5F76"
+			rewards: [
+				{
+					id: "416688758D02E505"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "22A3F641EC2C740D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/mine_ore"
+					criterion: ""
+					id: "59D73E2AD82DD434"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3F92F3BAF71F5F76"
+			]
+			id: "1BFDAFAE6A3C5D99"
+			rewards: [
+				{
+					id: "18FA72551098D357"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "3F1DBAB8A74CB65B"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/cloggrum_armor"
+					criterion: ""
+					id: "2CD9E9F185735D6B"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"45CFB74255566BE7"
+			]
+			id: "5F84A7F82C2B92CE"
+			rewards: [
+				{
+					id: "0EF0B2B1D53F2425"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "230C4F2D83EE16E2"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/kill_rotling"
+					criterion: ""
+					id: "61139B6BF71EA739"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"5F84A7F82C2B92CE"
+			]
+			id: "062379C67E14B4C2"
+			rewards: [
+				{
+					id: "242AFEBD41568158"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "17967BBE8EBDD511"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/shard_torch"
+					criterion: ""
+					id: "43FBABB94A890133"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"5F84A7F82C2B92CE"
+			]
+			id: "321AE7C73B08FF79"
+			rewards: [
+				{
+					id: "21B249B852BCC86A"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "30C5BEC903062218"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/contract_utheric_infection"
+					criterion: ""
+					id: "3BACA3261D864E04"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"321AE7C73B08FF79"
+			]
+			id: "739D65BBECB6855B"
+			rewards: [
+				{
+					id: "4147C9C1BFEAD0C5"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "0D96F075154BF764"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/cure_utheric_infection"
+					criterion: ""
+					id: "09B0BC7B73B6A653"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"45CFB74255566BE7"
+			]
+			id: "74456541C4B62F76"
+			rewards: [
+				{
+					id: "31C022E2E29A831B"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "6CFD4EA9F51A2752"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/stoneborn_trade"
+					criterion: ""
+					id: "2777A48857A7EF21"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"45CFB74255566BE7"
+			]
+			id: "45586A7003E369B7"
+			rewards: [
+				{
+					id: "11F951EA2BECF0A1"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "6F0B716DC55572F3"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/catacombs"
+					criterion: ""
+					id: "4AEFC9A0C3B7FE9D"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"45586A7003E369B7"
+			]
+			id: "707147DCCE104EC6"
+			rewards: [
+				{
+					id: "6BC873265A728BD0"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "147A31E440494541"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/cloggrum_battleaxe"
+					criterion: ""
+					id: "78959CC2DB653E77"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"707147DCCE104EC6"
+			]
+			id: "59AAD91CE2D28D63"
+			rewards: [
+				{
+					id: "0E673C2A1E42ECC6"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "7D375A2930FC3E6C"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/kill_forgotten_guardian"
+					criterion: ""
+					id: "7378FD4DF8E56AC6"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"59AAD91CE2D28D63"
+			]
+			id: "5E22E2343E1BC516"
+			rewards: [
+				{
+					id: "346C2F5C936477AE"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "6F9B574D9595178D"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/forgotten_ingot"
+					criterion: ""
+					id: "61FF6792298E82B2"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5E22E2343E1BC516"
+			]
+			id: "3B8E1A16ABE701CC"
+			rewards: [
+				{
+					id: "03C2D06940C54129"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "039E1E07E366B067"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/enter_depths"
+					criterion: ""
+					id: "476D1670785D0E6B"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3B8E1A16ABE701CC"
+			]
+			id: "14BE7952F56669DF"
+			rewards: [
+				{
+					id: "550A961D34591DE0"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "7D01C0346661AD8A"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/obtain_denizen_mask"
+					criterion: ""
+					id: "3299434E657C8EFE"
+					type: "advancement"
+				}
+			]
+			x: 14.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"5E22E2343E1BC516"
+			]
+			id: "60A45FA63B934B2A"
+			rewards: [
+				{
+					id: "44C7DB4F2EC1E07D"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "6D11F744FF5FDD24"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "1945FE6DA3677ABC"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "undergarden:undergarden/forgotten_tools"
+					criterion: ""
+					id: "3B81D8BEEC66837F"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 1.0d
+		}
+	]
+}

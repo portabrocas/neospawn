@@ -1,0 +1,129 @@
+{
+	empty_weight: 0.0f
+	hide_tooltip: false
+	id: "2614BE404C918F04"
+	loot_crate: {
+		color: 11163135
+		drops: {
+			boss: 0
+			monster: 0
+			passive: 0
+		}
+		glow: true
+		string_id: "neospawn_rare"
+	}
+	loot_size: 3
+	rewards: [
+		{
+			count: 4
+			id: "63117581553ED249"
+			item: {
+				count: 4
+				id: "minecraft:diamond"
+			}
+			type: "item"
+			weight: 10.0f
+		}
+		{
+			count: 2
+			id: "134241E2482040B6"
+			item: {
+				count: 2
+				id: "minecraft:golden_apple"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 16
+			id: "509D5720777256D3"
+			item: {
+				count: 16
+				id: "minecraft:emerald"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 1
+			id: "7B9544194F050629"
+			item: {
+				count: 1
+				id: "minecraft:netherite_scrap"
+			}
+			type: "item"
+			weight: 4.0f
+		}
+		{
+			count: 6
+			id: "2FCED4D107505626"
+			item: {
+				count: 6
+				id: "neospawn:ruby"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 4
+			id: "29E2D0753F4308F2"
+			item: {
+				count: 4
+				id: "neospawn:tanzanite"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 24
+			id: "4F8253B3880361AC"
+			item: {
+				count: 24
+				id: "minecraft:experience_bottle"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 4
+			id: "0FE2B9924FAA137C"
+			item: {
+				count: 4
+				id: "minecraft:ender_eye"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 24
+			id: "1541B17042B84D03"
+			item: {
+				count: 24
+				id: "irons_spellbooks:arcane_essence"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 2
+			id: "025C7E0F66E14286"
+			item: {
+				count: 2
+				id: "lucky:lucky_block"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 1
+			id: "3BB0CBC34724D54C"
+			item: {
+				count: 1
+				id: "minecraft:heart_of_the_sea"
+			}
+			type: "item"
+			weight: 2.0f
+		}
+	]
+	use_title: true
+}

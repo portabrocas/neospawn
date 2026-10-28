@@ -1,0 +1,109 @@
+{
+	empty_weight: 0.0f
+	hide_tooltip: false
+	id: "49FDD94AD68BCE26"
+	loot_crate: {
+		color: 16755200
+		drops: {
+			boss: 0
+			monster: 0
+			passive: 0
+		}
+		glow: true
+		string_id: "neospawn_epic"
+	}
+	loot_size: 3
+	rewards: [
+		{
+			count: 8
+			id: "727BBDEA1BD57329"
+			item: {
+				count: 8
+				id: "minecraft:diamond"
+			}
+			type: "item"
+			weight: 10.0f
+		}
+		{
+			count: 4
+			id: "3A8DCE92D1CDF420"
+			item: {
+				count: 4
+				id: "minecraft:golden_apple"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 2
+			id: "23C81B49C225A306"
+			item: {
+				count: 2
+				id: "minecraft:netherite_scrap"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 4
+			id: "60B77261D2B7ACF0"
+			item: {
+				count: 4
+				id: "minecraft:echo_shard"
+			}
+			type: "item"
+			weight: 4.0f
+		}
+		{
+			count: 8
+			id: "0AC4DF6617919FAC"
+			item: {
+				count: 8
+				id: "neospawn:tanzanite"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 12
+			id: "56DF9720286FD8E3"
+			item: {
+				count: 12
+				id: "neospawn:ruby"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 48
+			id: "55A287C593334DA2"
+			item: {
+				count: 48
+				id: "minecraft:experience_bottle"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 4
+			id: "193A89C2619FE174"
+			item: {
+				count: 4
+				id: "lucky:lucky_block"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 1
+			id: "4B11198003C61F2C"
+			item: {
+				count: 1
+				id: "minecraft:heart_of_the_sea"
+			}
+			type: "item"
+			weight: 4.0f
+		}
+	]
+	use_title: true
+}

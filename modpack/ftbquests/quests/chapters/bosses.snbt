@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "bosses"
-	group: ""
+	group: "25BAEDC4F70D77FA"
 	icon: {
 		count: 1
 		id: "neospawn:king_scale"
@@ -21,22 +21,9 @@
 					xp: 300
 				}
 				{
-					count: 2
 					id: "502E824B393AAF9F"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "6B7B8A1F69AA9C88"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
+					table_id: 2744027256347266820L
+					type: "loot"
 				}
 			]
 			shape: "gear"
@@ -64,22 +51,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "61F7C6507FB83E63"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "5141DB3D2D1E6082"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"
@@ -106,22 +80,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "3FE8C6206DFA3879"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "0654F9C4F0AC67FD"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"
@@ -148,22 +109,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "223A01DB60DCD8FD"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "5243528444B3036A"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"
@@ -190,22 +138,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "596F31B752C3311B"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "5DAEB346CBAABA3C"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"
@@ -232,22 +167,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "79D1C0FFDF294335"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "57E2CC57C8E38F5D"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"
@@ -275,22 +197,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "5DF96A7283248A1C"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "6FB12D477CD61B1A"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -316,31 +225,14 @@
 					xp_levels: 10
 				}
 				{
-					count: 6
 					id: "3E69317B240792A3"
-					item: {
-						count: 6
-						id: "minecraft:diamond"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 				{
-					count: 8
 					id: "1E18EE89A9859AA5"
-					item: {
-						count: 8
-						id: "minecraft:emerald"
-					}
-					type: "item"
-				}
-				{
-					count: 3
-					id: "3E25CFD859A961C7"
-					item: {
-						count: 3
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"
@@ -368,31 +260,14 @@
 					xp_levels: 10
 				}
 				{
-					count: 6
 					id: "3DE3DD80D4CCE483"
-					item: {
-						count: 6
-						id: "minecraft:diamond"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 				{
-					count: 8
 					id: "3ABC36E2B2EA6F22"
-					item: {
-						count: 8
-						id: "minecraft:emerald"
-					}
-					type: "item"
-				}
-				{
-					count: 3
-					id: "5A898892A4A7C5E7"
-					item: {
-						count: 3
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "gear"

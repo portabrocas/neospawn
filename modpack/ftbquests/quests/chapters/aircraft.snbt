@@ -1,0 +1,462 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "aircraft"
+	group: "2EAA9718BAF5A32A"
+	icon: {
+		count: 1
+		id: "immersive_aircraft:biplane"
+	}
+	id: "5FB59D9042515BA2"
+	order_index: 10
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "7234087E2C719BDD"
+			rewards: [
+				{
+					id: "722B2EDD5D3EFF6F"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "1041656DE2C459E9"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					count: 2L
+					id: "62D61377933952A5"
+					item: {
+						count: 2
+						id: "immersive_aircraft:hull"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"7234087E2C719BDD"
+			]
+			id: "571509B968175166"
+			rewards: [
+				{
+					id: "33FD898F384E82E1"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "0DCAC2764004F01F"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "16B20C63FB0592B5"
+					item: {
+						count: 1
+						id: "immersive_aircraft:propeller"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"7234087E2C719BDD"
+			]
+			id: "43E1FFAAA69A5F0B"
+			rewards: [
+				{
+					id: "133CF09D04725A14"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "25750AA4F04B370E"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "4AB4A3AE7671520A"
+					item: {
+						count: 2
+						id: "immersive_aircraft:sail"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"7234087E2C719BDD"
+			]
+			id: "76610188E03A5D03"
+			rewards: [
+				{
+					id: "55790D1E98AAF72B"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "19116386D0E877DB"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "25D114096B065F3F"
+					item: {
+						count: 1
+						id: "immersive_aircraft:boiler"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"76610188E03A5D03"
+			]
+			id: "74AC8847C36A2872"
+			rewards: [
+				{
+					id: "6E009D0A75152E44"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "6B10C726334528A9"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "12AE6DF1645AEE8C"
+					item: {
+						count: 1
+						id: "immersive_aircraft:engine"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"571509B968175166"
+				"43E1FFAAA69A5F0B"
+			]
+			id: "554A75CA2A115C3A"
+			rewards: [
+				{
+					id: "68182E946086E6BC"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "353E3DE9ED26B5E0"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2F0C53093B13B08B"
+					item: {
+						count: 1
+						id: "immersive_aircraft:gyrodyne"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"74AC8847C36A2872"
+				"571509B968175166"
+			]
+			id: "5FF7C2A5E7B3EC2F"
+			rewards: [
+				{
+					id: "11067B552C69D031"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "38D9305ACAFF8684"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "679B3C708509A5BE"
+					item: {
+						count: 1
+						id: "immersive_aircraft:biplane"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"74AC8847C36A2872"
+				"43E1FFAAA69A5F0B"
+			]
+			id: "13966CF6020306F6"
+			rewards: [
+				{
+					id: "772B461491EFFE24"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "2253562637BD7557"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "1C8C2EC714895834"
+					item: {
+						count: 1
+						id: "immersive_aircraft:airship"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"74AC8847C36A2872"
+			]
+			id: "5924CE4821AF4394"
+			rewards: [
+				{
+					id: "1808D921A372AC17"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "3ECD8BDB9523B529"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "0EF7051C96E5F575"
+					item: {
+						count: 1
+						id: "immersive_aircraft:quadrocopter"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"13966CF6020306F6"
+			]
+			id: "33C612BE355323BE"
+			rewards: [
+				{
+					id: "134E1B44EBC8AB55"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "1DEFD391389CFF21"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7A2F6DCF050C45AD"
+					item: {
+						count: 1
+						id: "immersive_aircraft:cargo_airship"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"33C612BE355323BE"
+			]
+			id: "68EAB51DB70485A7"
+			rewards: [
+				{
+					id: "26F9EED9AC153631"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "4C4A5038C1B91325"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					count: 1L
+					id: "69789610D09D1924"
+					item: {
+						count: 1
+						id: "immersive_aircraft:warship"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"5FF7C2A5E7B3EC2F"
+			]
+			id: "675A33C67F68D9CB"
+			rewards: [
+				{
+					id: "2557FDE09FE0B6F8"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "0CBE00D142F4A30F"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "156C670E0B256465"
+					item: {
+						count: 1
+						id: "immersive_aircraft:enhanced_propeller"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "107BEE7817065BB6"
+					item: {
+						count: 1
+						id: "immersive_aircraft:eco_engine"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"675A33C67F68D9CB"
+			]
+			id: "53485587CBEBE532"
+			rewards: [
+				{
+					id: "4D61D50CEED19FA4"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "6C33BE1649B6A7A7"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7200AC7D068410B7"
+					item: {
+						count: 1
+						id: "immersive_aircraft:rotary_cannon"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"5FF7C2A5E7B3EC2F"
+			]
+			id: "6C91EEE00EAB5A46"
+			rewards: [
+				{
+					id: "14255FB60D5415B2"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "5FE6616964D4242F"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "683A29A089B60FAD"
+					item: {
+						count: 1
+						id: "immersive_aircraft:telescope"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -1.5d
+		}
+	]
+}

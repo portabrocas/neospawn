@@ -1,0 +1,483 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "storage"
+	group: "2EAA9718BAF5A32A"
+	icon: {
+		count: 1
+		id: "sophisticatedbackpacks:backpack"
+	}
+	id: "0E77E388D0A9F0D1"
+	order_index: 9
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "09FA53FE86B8ECDE"
+			rewards: [
+				{
+					id: "63CBCE8BE5C9D67D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "5411FCE3884329EC"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					count: 1L
+					id: "7A8CE836FB5B4311"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:backpack"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"09FA53FE86B8ECDE"
+			]
+			id: "362845899777FBF7"
+			rewards: [
+				{
+					id: "11FBA2830947BD9A"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "367B8257075E1E5A"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "51E6F129CE012324"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:iron_backpack"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"362845899777FBF7"
+			]
+			id: "23EB2B4F8FE82199"
+			rewards: [
+				{
+					id: "6A05BEBFB65DCADD"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "2CE8DD322EADBEE9"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "62CFE8C694CED9FB"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:gold_backpack"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"23EB2B4F8FE82199"
+			]
+			id: "383A8BECDCA9A695"
+			rewards: [
+				{
+					id: "5344BB499006BEC4"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "5B0D10EF1691DF8A"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7CE3515867ED7B0D"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:diamond_backpack"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"383A8BECDCA9A695"
+			]
+			id: "388E2856322AEA97"
+			rewards: [
+				{
+					id: "5959EB964AAF0E47"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "1420F1FC1ACFB481"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "59E0B0D975584E11"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:netherite_backpack"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"09FA53FE86B8ECDE"
+			]
+			id: "7113895AA38387CC"
+			rewards: [
+				{
+					id: "36AA17B5C00F35DE"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "7FACEA0618463F84"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "0383E748B4468ED6"
+					item: {
+						count: 4
+						id: "sophisticatedbackpacks:upgrade_base"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"7113895AA38387CC"
+			]
+			id: "047E48F1C8D1B989"
+			rewards: [
+				{
+					id: "1D6AEF7DE119246D"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "1519427F4C7A8B99"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "581CFD0F7566CDC6"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:pickup_upgrade"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"7113895AA38387CC"
+			]
+			id: "7FDDC3A2F37BC6D7"
+			rewards: [
+				{
+					id: "0CD279736028616E"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "2D62A0B18C4319AE"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6D549380549E2863"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:magnet_upgrade"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"7113895AA38387CC"
+			]
+			id: "60CE3054EF703237"
+			rewards: [
+				{
+					id: "55A667C03D6DFED8"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "18D9933A45DEC8ED"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "3A20EE700DB0900A"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:feeding_upgrade"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"7113895AA38387CC"
+			]
+			id: "3546D3DF902B8D60"
+			rewards: [
+				{
+					id: "184A401D6127EF33"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "29EC3C0E077815CF"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "4A6BBCD8163B909C"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:crafting_upgrade"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"7FDDC3A2F37BC6D7"
+				"3546D3DF902B8D60"
+			]
+			id: "19009C4C38151016"
+			rewards: [
+				{
+					id: "41A93484F4990D6C"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "342873CE4A325B45"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "57A67C9EF6D1CA63"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:stack_upgrade_tier_1"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"09FA53FE86B8ECDE"
+			]
+			id: "1237EF8B25F399B0"
+			rewards: [
+				{
+					id: "75958A6C0F6A388C"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "2592B1725F405C73"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "12D2008D677F2A73"
+					item: {
+						count: 1
+						id: "sophisticatedstorage:chest"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"1237EF8B25F399B0"
+			]
+			id: "44A8F4160E0A0FD1"
+			rewards: [
+				{
+					id: "6FE1E07C891E0E16"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "0C30BD0D706B1579"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "05A69CE254EDF9A1"
+					item: {
+						count: 1
+						id: "sophisticatedstorage:barrel"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 3.5d
+		}
+		{
+			dependencies: [
+				"1237EF8B25F399B0"
+			]
+			id: "4C26E85A83B22D91"
+			rewards: [
+				{
+					id: "1E527BEB6DCF92DE"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "633CF9EB48A61F9D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5AD0AF01E6B69F6B"
+					item: {
+						count: 1
+						id: "sophisticatedstorage:basic_to_iron_tier_upgrade"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"44A8F4160E0A0FD1"
+				"4C26E85A83B22D91"
+			]
+			id: "3CEC503F60C10794"
+			rewards: [
+				{
+					id: "07B5A1675F3404FB"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "00EDF7B3D0E7C0EC"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					count: 1L
+					id: "7CAE141AB654E400"
+					item: {
+						count: 1
+						id: "sophisticatedstorage:controller"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+	]
+}

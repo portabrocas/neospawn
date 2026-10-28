@@ -1,0 +1,129 @@
+{
+	empty_weight: 0.0f
+	hide_tooltip: false
+	id: "1D95C29311282415"
+	loot_crate: {
+		color: 5614335
+		drops: {
+			boss: 0
+			monster: 0
+			passive: 0
+		}
+		glow: false
+		string_id: "neospawn_uncommon"
+	}
+	loot_size: 2
+	rewards: [
+		{
+			count: 1
+			id: "1254E1B4B2DBDF7A"
+			item: {
+				count: 1
+				id: "minecraft:diamond"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 1
+			id: "33FE64010BABDECE"
+			item: {
+				count: 1
+				id: "minecraft:iron_block"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 12
+			id: "273DD1CBB931F928"
+			item: {
+				count: 12
+				id: "minecraft:golden_carrot"
+			}
+			type: "item"
+			weight: 10.0f
+		}
+		{
+			count: 4
+			id: "05DDFE886574CDA3"
+			item: {
+				count: 4
+				id: "minecraft:ender_pearl"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 12
+			id: "51E7E3324FADF789"
+			item: {
+				count: 12
+				id: "minecraft:experience_bottle"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 6
+			id: "1F001DE3F8C4AE68"
+			item: {
+				count: 6
+				id: "minecraft:emerald"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 1
+			id: "5F83E608ABE12CBE"
+			item: {
+				count: 1
+				id: "minecraft:name_tag"
+			}
+			type: "item"
+			weight: 4.0f
+		}
+		{
+			count: 1
+			id: "65D1052F45348B04"
+			item: {
+				count: 1
+				id: "minecraft:saddle"
+			}
+			type: "item"
+			weight: 4.0f
+		}
+		{
+			count: 2
+			id: "6C7A350359CFD4DF"
+			item: {
+				count: 2
+				id: "neospawn:ruby"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 8
+			id: "7024289A8C998B6B"
+			item: {
+				count: 8
+				id: "irons_spellbooks:arcane_essence"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 1
+			id: "5B77AADCE8F65A65"
+			item: {
+				count: 1
+				id: "lucky:lucky_block"
+			}
+			type: "item"
+			weight: 5.0f
+		}
+	]
+	use_title: true
+}

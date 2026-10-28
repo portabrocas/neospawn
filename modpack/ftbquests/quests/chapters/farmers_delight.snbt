@@ -1,0 +1,474 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "farmers_delight"
+	group: "27F7BE0CA4D022F8"
+	icon: {
+		count: 1
+		id: "farmersdelight:cooking_pot"
+	}
+	id: "602A10CDAD1A40BF"
+	order_index: 20
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "6C09E821C47BD8DA"
+			rewards: [
+				{
+					id: "4E73180F2A4B3503"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "480FB647692EC04F"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "farmersdelight:main/craft_knife"
+					criterion: ""
+					id: "3D39678D935A3945"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"6C09E821C47BD8DA"
+			]
+			id: "3F1225CF28038847"
+			rewards: [
+				{
+					id: "61940B3B624456F0"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "6175D7DBE36A63E9"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/harvest_straw"
+					criterion: ""
+					id: "184AC692F99709EA"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"3F1225CF28038847"
+			]
+			id: "2833C0B4A3AC7833"
+			rewards: [
+				{
+					id: "3EA45315EA3BCF22"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "27B83D5AF237E40E"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/place_organic_compost"
+					criterion: ""
+					id: "3F779D5C1E06D410"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"2833C0B4A3AC7833"
+			]
+			id: "123734FE53008CA9"
+			rewards: [
+				{
+					id: "3B74298B68815273"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "6752F4B1C924E88D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/get_rich_soil"
+					criterion: ""
+					id: "064C32D27B3AB9C2"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"123734FE53008CA9"
+			]
+			id: "431646C710BEEE9A"
+			rewards: [
+				{
+					id: "3E6FF28B2B54B3B6"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "6A463344D1DCFA4D"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/get_mushroom_colony"
+					criterion: ""
+					id: "37B70B6C16C33845"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"6C09E821C47BD8DA"
+			]
+			id: "6908FA1CBA42624E"
+			rewards: [
+				{
+					id: "4D61F1516914C007"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "51973D4EB099C0ED"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/get_ham"
+					criterion: ""
+					id: "330389E89163A878"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"6C09E821C47BD8DA"
+			]
+			id: "07AE2E38F5D24BAE"
+			rewards: [
+				{
+					id: "2077B062D377C06F"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "1EE6C97204BF36C1"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/use_cutting_board"
+					criterion: ""
+					id: "4A378A8738DD6A09"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"6C09E821C47BD8DA"
+			]
+			id: "18FDB96CEB0E060C"
+			rewards: [
+				{
+					id: "028F8A36B5442930"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "4464FFDDC37712C1"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/get_fd_seed"
+					criterion: ""
+					id: "0B763951A4C59FCA"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"18FDB96CEB0E060C"
+			]
+			id: "76F9ACD74D91A641"
+			rewards: [
+				{
+					id: "57F5937D1652EA30"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "0F1E15D5E52DE814"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/plant_rice"
+					criterion: ""
+					id: "5BBF98239A88B796"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"18FDB96CEB0E060C"
+			]
+			id: "2EA041A07BECC604"
+			rewards: [
+				{
+					id: "026FF4EE4C5009D9"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "022350ECE13A8B5B"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/harvest_ropelogged_tomato"
+					criterion: ""
+					id: "516A877A76AF740E"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"76F9ACD74D91A641"
+				"2EA041A07BECC604"
+			]
+			id: "4CA67AE835D9AE4F"
+			rewards: [
+				{
+					id: "1AB0F800C15E154E"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "499CE676EFC96226"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "farmersdelight:main/plant_all_crops"
+					criterion: ""
+					id: "54936380BD61C059"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"07AE2E38F5D24BAE"
+			]
+			id: "2359A21812B76933"
+			rewards: [
+				{
+					id: "5F91F891EC504CC0"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "2D80A9F95738C796"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/place_cooking_pot"
+					criterion: ""
+					id: "675DD4F27BFE3104"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"07AE2E38F5D24BAE"
+			]
+			id: "0834CBF4ADB3BB94"
+			rewards: [
+				{
+					id: "55F6C37B3D1F67CD"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "21D31EED4A5653B9"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/use_skillet"
+					criterion: ""
+					id: "21FD97587DD57F7C"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"2359A21812B76933"
+			]
+			id: "2997F28DDDB02701"
+			rewards: [
+				{
+					id: "6536E0BDDD27CFFD"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "27AED6AB7919C015"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "farmersdelight:main/eat_nourishing_food"
+					criterion: ""
+					id: "3EA1AFE1503125A2"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"2997F28DDDB02701"
+			]
+			id: "6A41D4E12AE7321F"
+			rewards: [
+				{
+					id: "5B24869DAB4ECD64"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "3B29B02F78098498"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			shape: "heart"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "farmersdelight:main/place_feast"
+					criterion: ""
+					id: "5F922D0925D4E16C"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"6A41D4E12AE7321F"
+			]
+			id: "0B39729F1F845482"
+			rewards: [
+				{
+					id: "4420D628C2C3F9D6"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					id: "1DE5CA53548472C5"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+				{
+					id: "3F75203D94C8DC1B"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "farmersdelight:main/master_chef"
+					criterion: ""
+					id: "6B830CEE7E80C17A"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 0.5d
+		}
+	]
+}

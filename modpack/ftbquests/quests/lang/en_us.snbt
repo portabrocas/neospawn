@@ -1,10 +1,34 @@
 {
+	"chapter.064F614F36047AE4.chapter_subtitle": [
+		"A rotting world beneath the world"
+	]
+	"chapter.064F614F36047AE4.title": "The Undergarden"
 	"chapter.0918A69A6C47CB39.chapter_subtitle": [
 		"For legends only"
 	]
 	"chapter.0918A69A6C47CB39.title": "Final Challenges"
+	"chapter.0D90856177C221ED.chapter_subtitle": [
+		"A world under a sky full of stars"
+	]
+	"chapter.0D90856177C221ED.title": "Eternal Starlight"
+	"chapter.0E77E388D0A9F0D1.chapter_subtitle": [
+		"Backpacks, chests and the upgrades that make them clever"
+	]
+	"chapter.0E77E388D0A9F0D1.title": "Sophisticated Storage"
+	"chapter.163FF317AF5DEE1B.chapter_subtitle": [
+		"Over a hundred creatures to meet"
+	]
+	"chapter.163FF317AF5DEE1B.title": "Alex's Mobs"
+	"chapter.1B43247ADAE7E6DC.chapter_subtitle": [
+		"Eight bosses in eight great structures"
+	]
+	"chapter.1B43247ADAE7E6DC.title": "L_Ender's Cataclysm"
+	"chapter.200858C54988A3D0.chapter_subtitle": [
+		"Giants of ice, iron, sun and stone"
+	]
+	"chapter.200858C54988A3D0.title": "Mowzie's Mobs"
 	"chapter.2051175E8CA671FD.chapter_subtitle": [
-		"The Aether, the Undergarden, Starlight and more"
+		"The Nether, the End and the distant past"
 	]
 	"chapter.2051175E8CA671FD.title": "Other Worlds"
 	"chapter.213CD2B6F880FAFF.chapter_subtitle": [
@@ -15,6 +39,14 @@
 		"Ruby, Tanzanite, Titanium, Uranium and Paragon"
 	]
 	"chapter.2230D3FBDE424494.title": "Ores & Gear"
+	"chapter.2F776931D0304949.chapter_subtitle": [
+		"Islands in the sky and three dungeons"
+	]
+	"chapter.2F776931D0304949.title": "The Aether"
+	"chapter.32F4545024F13413.chapter_subtitle": [
+		"Never lose an item again"
+	]
+	"chapter.32F4545024F13413.title": "Applied Energistics 2"
 	"chapter.3331E374101510CD.chapter_subtitle": [
 		"Ride the ants into hidden worlds"
 	]
@@ -23,12 +55,8 @@
 		"Every creature leaves something useful"
 	]
 	"chapter.3F658798EEE3EC01.title": "Mob Drops"
-	"chapter.466F5E413FABD185.chapter_subtitle": [
-		"Spells, witchcraft, storage networks and aircraft"
-	]
-	"chapter.466F5E413FABD185.title": "Magic, Tech & Travel"
 	"chapter.46F2DC6C7333FFC6.chapter_subtitle": [
-		"Cataclysm, Mowzie's Mobs, Mutants and the deep sea"
+		"Mutants, the deep sea and things that move when you blink"
 	]
 	"chapter.46F2DC6C7333FFC6.title": "Monsters of the Pack"
 	"chapter.528EEC168398F2CE.chapter_subtitle": [
@@ -39,75 +67,217 @@
 		"Find your feet in a world of monsters"
 	]
 	"chapter.5556FECB89D4939B.title": "Getting Started"
+	"chapter.587B7D766DEDD29E.chapter_subtitle": [
+		"Brew, chant and curse"
+	]
+	"chapter.587B7D766DEDD29E.title": "Witchery"
+	"chapter.5FB59D9042515BA2.chapter_subtitle": [
+		"Planes, gyrodynes and airships"
+	]
+	"chapter.5FB59D9042515BA2.title": "Immersive Aircraft"
+	"chapter.602A10CDAD1A40BF.chapter_subtitle": [
+		"Real meals from real farms"
+	]
+	"chapter.602A10CDAD1A40BF.title": "Farmer's Delight"
+	"chapter.7190A20637CE4339.chapter_subtitle": [
+		"Write spells, wear robes, face the Dead King"
+	]
+	"chapter.7190A20637CE4339.title": "Iron's Spells 'n Spellbooks"
 	"chapter.7A25D1A2C851F11B.chapter_subtitle": [
 		"Every attack is telegraphed: learn the pattern"
 	]
 	"chapter.7A25D1A2C851F11B.title": "Bosses"
-	"chapter.7D2F7748380711AD.chapter_subtitle": [
-		"Alex's Mobs, Farmer's Delight and the wild"
-	]
-	"chapter.7D2F7748380711AD.title": "Wildlife & Food"
+	"chapter_group.03203A1312E25E36.title": "Magic"
+	"chapter_group.25BAEDC4F70D77FA.title": "NeoSpawn"
+	"chapter_group.27F7BE0CA4D022F8.title": "Food & Farming"
+	"chapter_group.2EAA9718BAF5A32A.title": "Tech & Storage"
+	"chapter_group.2EC6052336A88AD1.title": "Bosses & Beasts"
+	"chapter_group.71258E98B60BA7B1.title": "Dimensions"
 	"file.171C419DD6093313.title": "NeoSpawnPack"
 	"quest.0022FE70885459ED.quest_desc": [
 		"Monsters spawn in any light. Bring your best."
 	]
 	"quest.0022FE70885459ED.title": "Eternal Night"
+	"quest.005DE63BE2A0C9D4.quest_desc": [
+		"Grow a network to 128 channels."
+	]
+	"quest.005DE63BE2A0C9D4.title": "Network Engineer"
+	"quest.02BF723CE4303798.quest_desc": [
+		"Defeat the Slider in the Bronze Dungeon."
+	]
+	"quest.02BF723CE4303798.title": "Like a Bossaru!"
 	"quest.0314AB532A89FEBD.quest_desc": [
-		"Find a stronghold and enter the End."
+		"Follow Eyes of Ender to a stronghold and enter the End."
 	]
 	"quest.0314AB532A89FEBD.title": "The End?"
+	"quest.036D73AC934D04A7.quest_desc": [
+		"Throw the Mysterious Worm into the void of the End, and prepare to meet the Void Worm."
+	]
+	"quest.036D73AC934D04A7.title": "A Soul for a Soul"
 	"quest.044A3463B325E4F2.quest_desc": [
 		"Defeat every NeoSpawn flagship boss."
 	]
 	"quest.044A3463B325E4F2.title": "Monster Hunter"
+	"quest.047E48F1C8D1B989.quest_desc": [
+		"Picks up items straight into the backpack."
+	]
+	"quest.047E48F1C8D1B989.title": "Vacuum"
+	"quest.04AED7EE8CA044E5.quest_desc": [
+		"Budding quartz grows new crystals. A Crystal Growth Accelerator next to it speeds that up a lot."
+	]
+	"quest.04AED7EE8CA044E5.title": "Grow Your Own"
+	"quest.0524B5326CD63FF0.quest_desc": [
+		"Cataclysm's bosses guard huge structures across every dimension. Each structure has a finding quest, then the boss. Bring a full kit."
+	]
+	"quest.0524B5326CD63FF0.title": "Cataclysm!"
+	"quest.062379C67E14B4C2.quest_desc": [
+		"Craft a Shard Torch: it hurts Rotspawn that come near."
+	]
+	"quest.062379C67E14B4C2.title": "Warding Device"
 	"quest.06441A150A52AE99.quest_desc": [
 		"Smelt some iron. Most of the good stuff starts here."
 	]
 	"quest.06441A150A52AE99.title": "Iron Age"
-	"quest.06D14C51EC7E8AF9.quest_desc": [
-		"Distill your first witchery ingredients."
+	"quest.06BD34E06BBA3DEE.quest_desc": [
+		"Claim the Dead King's spell book."
 	]
-	"quest.06D14C51EC7E8AF9.title": "Distillery"
+	"quest.06BD34E06BBA3DEE.title": "Necronomicon"
 	"quest.078EAC6DAD7F337D.quest_desc": [
 		"A Sophisticated Backpack keeps your loot together."
 	]
 	"quest.078EAC6DAD7F337D.title": "Pack Your Bags"
+	"quest.07AACA2C1F7A84F6.quest_desc": [
+		"A stronger Mutandis that changes wheat, cactus, sugar cane and even grass."
+	]
+	"quest.07AACA2C1F7A84F6.title": "Mutandis Extremis"
+	"quest.07AE2E38F5D24BAE.quest_desc": [
+		"With a tool in hand, use a Cutting Board to break an item down."
+	]
+	"quest.07AE2E38F5D24BAE.title": "Watch Your Fingers"
+	"quest.07BB00DA286D1F3C.quest_desc": [
+		"Meet a Crimson Mosquito in the Nether."
+	]
+	"quest.07BB00DA286D1F3C.title": "Nightmare Fuel"
+	"quest.0834CBF4ADB3BB94.quest_desc": [
+		"Hold food in your off hand and use a Skillet near heat to cook on the go."
+	]
+	"quest.0834CBF4ADB3BB94.title": "Portable Cooking"
+	"quest.084ECDD21FE0EE58.quest_desc": [
+		"Get a Golem Steel Ingot."
+	]
+	"quest.084ECDD21FE0EE58.title": "Redox Reactions"
+	"quest.095120A62EFBBADD.quest_desc": [
+		"Foliaaths hide in jungles, disguised as plants. Kill one."
+	]
+	"quest.095120A62EFBBADD.title": "Something in the Leaves"
+	"quest.09FA53FE86B8ECDE.quest_desc": [
+		"A Sophisticated Backpack: right-click to open, or wear it on your back."
+	]
+	"quest.09FA53FE86B8ECDE.title": "Pack Your Bags"
 	"quest.0A0EFB9FF24745EC.quest_desc": [
 		"Rules the Ice Maze."
 	]
 	"quest.0A0EFB9FF24745EC.title": "Maze Mother"
-	"quest.0B11B5DD2381BE97.quest_desc": [
-		"A wither-powered machine in the Ancient Factory."
+	"quest.0AA2F8018F442A14.quest_desc": [
+		"Craft an Inscription Table from a book, wooden slabs and fences. It writes spells into spell books."
 	]
-	"quest.0B11B5DD2381BE97.title": "The Harbinger"
+	"quest.0AA2F8018F442A14.title": "Quaint Scribe"
+	"quest.0ABA5B53A46FFBD6.quest_desc": [
+		"Sneak into an Umvuthana grove wearing their mask."
+	]
+	"quest.0ABA5B53A46FFBD6.title": "Birds of a Feather"
+	"quest.0B2C8D76FC60E5DF.quest_desc": [
+		"Craft an Abyssal Sacrifice and offer it at the Altar of Abyss. It drops Tidal Claws."
+	]
+	"quest.0B2C8D76FC60E5DF.title": "The Leviathan"
+	"quest.0B39729F1F845482.quest_desc": [
+		"Eat a serving of every meal in Farmer's Delight."
+	]
+	"quest.0B39729F1F845482.title": "Master Chef"
+	"quest.0B80D129FE812874.quest_desc": [
+		"Defeat the Starlight Golem: throw Frozen Tubes at it and shut down its Energy Blocks."
+	]
+	"quest.0B80D129FE812874.title": "Ancient Wisdom"
+	"quest.0BAAD72078BC49B8.quest_desc": [
+		"The Naga is a flying sea serpent that nests in coastal cliffs. It drops a Naga Fang."
+	]
+	"quest.0BAAD72078BC49B8.title": "Wingin' It"
+	"quest.0BB37084A4AB6D92.quest_desc": [
+		"A Pattern Encoding Terminal writes crafting patterns."
+	]
+	"quest.0BB37084A4AB6D92.title": "Crafting Maestro"
+	"quest.0C0843DE3D831B45.quest_desc": [
+		"Build an Inscriber, then press Logic, Calculation and Engineering Processors."
+	]
+	"quest.0C0843DE3D831B45.title": "Inscriber"
+	"quest.0D1CD60EE8C0A4F3.quest_desc": [
+		"Claim Netherite Monstrosity's prize."
+	]
+	"quest.0D1CD60EE8C0A4F3.title": "Spoils: Netherite Monstrosity"
 	"quest.0D1D24207D51CB7D.quest_desc": [
 		"Visit all six realms."
 	]
 	"quest.0D1D24207D51CB7D.title": "Realm Walker"
-	"quest.0D4BFA382DD6CF06.quest_desc": [
-		"The Void Worm is one of the toughest creatures alive. Good luck."
+	"quest.0D4D1681DB13B661.quest_desc": [
+		"Claim The Harbinger's prize."
 	]
-	"quest.0D4BFA382DD6CF06.title": "Void Worm"
-	"quest.0EB52F36EF1C8D31.quest_desc": [
-		"Alex's Mobs: crocodiles lurk in swamps and rivers."
+	"quest.0D4D1681DB13B661.title": "Spoils: The Harbinger"
+	"quest.0DDCF058D133D244.quest_desc": [
+		"Meteorites hide the four Inscriber presses. Collect all four."
 	]
-	"quest.0EB52F36EF1C8D31.title": "Crocodile Hunter"
+	"quest.0DDCF058D133D244.title": "Unknown Technology"
+	"quest.0DF75A8DD1D2C772.quest_desc": [
+		"Freeze an accessory in a Freezer with Icestone: an Ice Ring or Ice Pendant."
+	]
+	"quest.0DF75A8DD1D2C772.title": "Cool Jewelry"
 	"quest.0EF71F2C87BF8038.quest_desc": [
 		"A cobblestone hut, instantly."
 	]
 	"quest.0EF71F2C87BF8038.title": "Instant House"
-	"quest.0F776C91A4E662D9.quest_desc": [
-		"Applied Energistics 2 starts with Certus Quartz."
+	"quest.0F9EAA2081D27F7A.quest_desc": [
+		"The Network Tool shows channel use and stores upgrades."
 	]
-	"quest.0F776C91A4E662D9.title": "Certus Quartz"
-	"quest.0FEF2C2E2E8ED0AA.quest_desc": [
-		"Defeat the Lunar Monstrosity."
+	"quest.0F9EAA2081D27F7A.title": "Network Diagnostics"
+	"quest.0FB4672279651019.quest_desc": [
+		"Enter the Golem Forge."
 	]
-	"quest.0FEF2C2E2E8ED0AA.title": "Lunar Monstrosity"
+	"quest.0FB4672279651019.title": "Cradle of Legion"
+	"quest.1046035F96BE72B7.quest_desc": [
+		"Get an Aethersent Ingot from meteorite debris."
+	]
+	"quest.1046035F96BE72B7.title": "Gift from the Sky"
+	"quest.105958EDF881CEFC.quest_desc": [
+		"Grottols are gem-crusted cave critters. Kill one with a Silk Touch pickaxe to catch it."
+	]
+	"quest.105958EDF881CEFC.title": "You're Coming with Me"
+	"quest.11CFE727F6854797.quest_desc": [
+		"Get a Glacite Shard."
+	]
+	"quest.11CFE727F6854797.title": "My December"
+	"quest.123734FE53008CA9.quest_desc": [
+		"Organic Compost slowly turns into Rich Soil, which speeds up any crop."
+	]
+	"quest.123734FE53008CA9.title": "Plant Food"
+	"quest.1237EF8B25F399B0.quest_desc": [
+		"Sophisticated Storage chests and barrels take upgrades just like the backpacks."
+	]
+	"quest.1237EF8B25F399B0.title": "Sophisticated Chest"
+	"quest.1265815AE08BC412.quest_desc": [
+		"Slay a Froststalker in the snow."
+	]
+	"quest.1265815AE08BC412.title": "Ice Scream"
+	"quest.12DB3CA9B25F48E0.quest_desc": [
+		"Claim a piece of Valkyrie gear from the Silver Dungeon."
+	]
+	"quest.12DB3CA9B25F48E0.title": "Earning Your Wings"
 	"quest.131DD0D03D9404D5.quest_desc": [
 		"Nights are dangerous here. Make a bed."
 	]
 	"quest.131DD0D03D9404D5.title": "Sleep Tight"
+	"quest.13966CF6020306F6.quest_desc": [
+		"Hull, engine and sail: the Airship is slow but steady, good for long trips."
+	]
+	"quest.13966CF6020306F6.title": "Airship Captain"
 	"quest.13B2E809108CCE1C.quest_desc": [
 		"Ore everywhere, and dinosaurs guarding it."
 	]
@@ -116,50 +286,74 @@
 		"Commands the Ship Graveyard."
 	]
 	"quest.13CE26CADF3381C8.title": "Captain Cornelia"
-	"quest.15F49D8B256DD13A.quest_desc": [
-		"Defeat the Slider in the Bronze Dungeon."
+	"quest.14BE7952F56669DF.quest_desc": [
+		"Find a Denizen Camp in the Depths and get a Mysterious Mask from a Denizen."
 	]
-	"quest.15F49D8B256DD13A.title": "The Slider"
+	"quest.14BE7952F56669DF.title": "One of Us"
+	"quest.14CF44CF7F372EFB.quest_desc": [
+		"Steal the Ice Crystal from a Frostmaw."
+	]
+	"quest.14CF44CF7F372EFB.title": "Big Brain Time"
+	"quest.15842FD4D3496F32.quest_desc": [
+		"Find Gypsum: the base of ritual chalk."
+	]
+	"quest.15842FD4D3496F32.title": "Chalk and Talk"
 	"quest.16DB7B77AEC7769A.quest_desc": [
 		"Raise your hatchling into a Royal Drake and take to the skies."
 	]
 	"quest.16DB7B77AEC7769A.title": "Dragon Rider"
+	"quest.171F2A1FCB706A27.quest_desc": [
+		"AE2 starts with copper and Certus Quartz, found in quartz geodes underground."
+	]
+	"quest.171F2A1FCB706A27.title": "Applied Energistics"
 	"quest.17ACF564C58B08C4.quest_desc": [
 		"The King guards the Tree of Goodness in Utopia."
 	]
 	"quest.17ACF564C58B08C4.title": "Long Live the King"
-	"quest.17CC26DBBF084A18.quest_desc": [
-		"Haunts the Frosted Prison."
+	"quest.17FED24D1012C888.quest_desc": [
+		"Defeat every Cataclysm boss."
 	]
-	"quest.17CC26DBBF084A18.title": "Maledictus"
+	"quest.17FED24D1012C888.title": "The Cataclysmfarer"
 	"quest.1889F39991226F4D.quest_desc": [
 		"Use the Royal Sigil in open sky and defeat The Ascended King."
 	]
 	"quest.1889F39991226F4D.title": "Ascension"
-	"quest.19703E368DA6F53B.quest_desc": [
-		"Farmer's Delight knives harvest extra drops."
+	"quest.18FDB96CEB0E060C.quest_desc": [
+		"Find a wild Cabbage, Tomato, Onion or Rice plant."
 	]
-	"quest.19703E368DA6F53B.title": "Sharp Edge"
+	"quest.18FDB96CEB0E060C.title": "Crops of the Wild"
+	"quest.19009C4C38151016.quest_desc": [
+		"A Stack Upgrade lets every slot hold more than a normal stack."
+	]
+	"quest.19009C4C38151016.title": "Stacked"
+	"quest.1B3EAF7E5DB221B9.quest_desc": [
+		"Brew Mutandis in the Cauldron. Use it on a plant to mutate it into another kind."
+	]
+	"quest.1B3EAF7E5DB221B9.title": "Lost Plants"
+	"quest.1BFDAFAE6A3C5D99.quest_desc": [
+		"Make a full suit of Cloggrum armor."
+	]
+	"quest.1BFDAFAE6A3C5D99.title": "Cover Me in Coprolites"
 	"quest.1C4394701B2A5B03.quest_desc": [
 		"An instant beam. Ammo: redstone."
 	]
 	"quest.1C4394701B2A5B03.title": "Pew Pew"
-	"quest.1D07704FD9024CE3.quest_desc": [
-		"Build a glowstone portal frame and light it with water to reach the Aether."
+	"quest.1D95A2FE33E282DD.quest_desc": [
+		"Craft and open the Animal Dictionary: it describes every creature in the mod."
 	]
-	"quest.1D07704FD9024CE3.title": "Into the Sky"
-	"quest.1D6BF505DB741C8C.quest_desc": [
-		"A Cutting Board slices ingredients."
-	]
-	"quest.1D6BF505DB741C8C.title": "Prep Station"
+	"quest.1D95A2FE33E282DD.title": "Alex's Mobs"
 	"quest.1DCFC088EAD8AD90.quest_desc": [
 		"Waystones let you warp between places you've found. Very handy for realm-hopping."
 	]
 	"quest.1DCFC088EAD8AD90.title": "Way Home"
-	"quest.1DD5FC66185A8F8E.quest_desc": [
-		"Collect bear fur."
+	"quest.1FD97D05F92746CD.quest_desc": [
+		"Claim The Leviathan's prize."
 	]
-	"quest.1DD5FC66185A8F8E.title": "Bear Necessities"
+	"quest.1FD97D05F92746CD.title": "Spoils: The Leviathan"
+	"quest.204061821D6CE206.quest_desc": [
+		"Destroy the Void Worm."
+	]
+	"quest.204061821D6CE206.title": "Wormy"
 	"quest.20CCC3C51C1D699E.quest_desc": [
 		"Cristian's phone hides in the deepest vaults. Call him for help."
 	]
@@ -168,14 +362,22 @@
 		"A Firefly Jar lights a room and can't start a fire."
 	]
 	"quest.22A3938A247A1E9D.title": "Bottled Light"
-	"quest.22DDCCE8F534B14F.quest_desc": [
-		"Lurks in the Sunken City."
+	"quest.2346146239D2AF92.quest_desc": [
+		"Meet a Skelewag near a sunken ship."
 	]
-	"quest.22DDCCE8F534B14F.title": "The Leviathan"
+	"quest.2346146239D2AF92.title": "We Just Want Our Hat Back"
 	"quest.234C06C21F24F0D8.quest_desc": [
 		"A Mining Charge blasts a walkable tunnel and keeps the ores."
 	]
 	"quest.234C06C21F24F0D8.title": "Shortcut"
+	"quest.2359A21812B76933.quest_desc": [
+		"Place a Cooking Pot over heat and start cooking meals."
+	]
+	"quest.2359A21812B76933.title": "Dinner's Served!"
+	"quest.23EB2B4F8FE82199.quest_desc": [
+		"Upgrade your backpack to gold: more slots and more upgrade slots, and everything inside stays put."
+	]
+	"quest.23EB2B4F8FE82199.title": "Gold Backpack"
 	"quest.24DBBF22D0030B4E.quest_desc": [
 		"Bosses telegraph their attacks: a shield buys you time to dodge."
 	]
@@ -184,58 +386,162 @@
 		"Villages, and robots that raid them."
 	]
 	"quest.254ACA2ED7C6C792.title": "Strange Neighbours"
-	"quest.25F15DD76D23AEAD.quest_desc": [
-		"Storms over the sea."
+	"quest.2833C0B4A3AC7833.quest_desc": [
+		"Place Organic Compost. It works faster with sun, water and mushrooms nearby."
 	]
-	"quest.25F15DD76D23AEAD.title": "Scylla"
-	"quest.26594C536937B55D.quest_desc": [
-		"The sun chief of the Umvuthana."
+	"quest.2833C0B4A3AC7833.title": "Advanced Composting"
+	"quest.28AD3B2CB9AA0A40.quest_desc": [
+		"Restore the Ancient Codex: the best spell book there is."
 	]
-	"quest.26594C536937B55D.title": "Umvuthi"
-	"quest.28B420EBC83CD9BA.quest_desc": [
-		"Upgrade to an Iron Spell Book."
+	"quest.28AD3B2CB9AA0A40.title": "Ancient Knowledge"
+	"quest.28AE1E2F7EC32F09.quest_desc": [
+		"Read a Book of Lore: put any item in it to learn about it."
 	]
-	"quest.28B420EBC83CD9BA.title": "Bigger Book"
+	"quest.28AE1E2F7EC32F09.title": "The More You Know"
+	"quest.28AEFCFE8EBEBB5C.quest_desc": [
+		"Craft the Mechanical Fusion Anvil from Witherite, an anvil and redstone: it fuses boss materials into Cataclysm's best gear."
+	]
+	"quest.28AEFCFE8EBEBB5C.title": "Mechanical Fusion Anvil"
+	"quest.28C8CCC2F19E78DE.quest_desc": [
+		"Slay the Warped Mosco."
+	]
+	"quest.28C8CCC2F19E78DE.title": "Destroyer of Chads"
+	"quest.29827343669530A7.quest_desc": [
+		"Beat the Gatekeeper and he gives up the Orb of Prophecy."
+	]
+	"quest.29827343669530A7.title": "The Deep Magic"
+	"quest.2987B6E45E544792.quest_desc": [
+		"Spin enchanted threads and fabrics. Many recipes use Altar Power."
+	]
+	"quest.2987B6E45E544792.title": "Spinning Wheel"
+	"quest.2997F28DDDB02701.quest_desc": [
+		"Eat a balanced meal for the Nourishment effect."
+	]
+	"quest.2997F28DDDB02701.title": "Nourishing!"
 	"quest.2A179E20617AF7E6.quest_desc": [
-		"The pack's other mods have bosses of their own. Here's the hit list."
+		"The pack's other mods have monsters of their own. Here's the hit list."
 	]
 	"quest.2A179E20617AF7E6.title": "Monster Hunter's Oath"
 	"quest.2A71EECE0982ADAA.quest_desc": [
 		"Defeat the Wither."
 	]
 	"quest.2A71EECE0982ADAA.title": "Wither Away"
-	"quest.2BF41EE86E5A6896.quest_desc": [
-		"A Stove heats your Cooking Pot."
+	"quest.2A8C437262AA3434.quest_desc": [
+		"Defeat the Valkyrie Queen in the Silver Dungeon."
 	]
-	"quest.2BF41EE86E5A6896.title": "Stove Top"
-	"quest.2C56C9A1886A3E7D.quest_desc": [
-		"Witchery: build an Altar to channel natural power."
+	"quest.2A8C437262AA3434.title": "Dethroned"
+	"quest.2B47C8C7F97B4922.quest_desc": [
+		"With the Sun Spirit gone, you can finally sleep in the Aether."
 	]
-	"quest.2C56C9A1886A3E7D.title": "The Old Ways"
+	"quest.2B47C8C7F97B4922.title": "A Well-Earned Rest"
+	"quest.2C0310337E97D827.quest_desc": [
+		"A Taglock captures a creature's essence: the link for poppets, curses and rites."
+	]
+	"quest.2C0310337E97D827.title": "Taglock"
 	"quest.2D41A07254C3C913.quest_desc": [
 		"A Ghost Lantern makes invisible creatures glow."
 	]
 	"quest.2D41A07254C3C913.title": "I See You"
-	"quest.2E0ED3D0B8A7878A.quest_desc": [
-		"Defeat The Gatekeeper."
+	"quest.2D54985DEC4D6354.quest_desc": [
+		"Mowzie's bosses each live somewhere specific. Find them, learn their patterns, take their gear."
 	]
-	"quest.2E0ED3D0B8A7878A.title": "The Gatekeeper"
-	"quest.31339683D2FA959A.quest_desc": [
-		"Mutandis transforms plants. Witchery starts here."
+	"quest.2D54985DEC4D6354.title": "Mowzie's Mobs"
+	"quest.2E0B374E6406C715.quest_desc": [
+		"Bind a Poppet with a Taglock."
 	]
-	"quest.31339683D2FA959A.title": "Mutandis"
-	"quest.33D85254FD77517D.quest_desc": [
-		"Grow rice in shallow water."
+	"quest.2E0B374E6406C715.title": "Poppet"
+	"quest.2EA041A07BECC604.quest_desc": [
+		"Hang rope above a tomato crop so it grows taller."
 	]
-	"quest.33D85254FD77517D.title": "Rice Paddy"
+	"quest.2EA041A07BECC604.title": "Tall-mato"
+	"quest.2FADBFA647B280EA.quest_desc": [
+		"Golden Chalk marks the centre of every rite."
+	]
+	"quest.2FADBFA647B280EA.title": "Golden Chalk"
+	"quest.304B1115E012B030.quest_desc": [
+		"The compass leads to the Catacombs. Go in."
+	]
+	"quest.304B1115E012B030.title": "Dungeon Delving"
+	"quest.3079368E8EE14E26.quest_desc": [
+		"Claim Ancient Remnant's prize."
+	]
+	"quest.3079368E8EE14E26.title": "Spoils: Ancient Remnant"
+	"quest.315F7E3269F1CDF3.quest_desc": [
+		"Enchant Gravitite at the Altar. Gravitite floats, and its tools lift blocks."
+	]
+	"quest.315F7E3269F1CDF3.title": "Pink Is the New Blue"
+	"quest.321AE7C73B08FF79.quest_desc": [
+		"Utherium and Rotspawn carry the Utheric Infection. Catching it is part of the trip."
+	]
+	"quest.321AE7C73B08FF79.title": "The Plague Upon the Land"
+	"quest.3232EFF1505A74C3.quest_desc": [
+		"Craft a Charger. Give it power and it charges Certus Quartz."
+	]
+	"quest.3232EFF1505A74C3.title": "It's Chargin' Time!"
+	"quest.32B8FDCD33EFA14F.quest_desc": [
+		"Umvuthana live in savanna groves. Kill an Umvuthana Raptor."
+	]
+	"quest.32B8FDCD33EFA14F.title": "Masquerade"
+	"quest.33C612BE355323BE.quest_desc": [
+		"Add a hull and chests to an Airship for a Cargo Airship."
+	]
+	"quest.33C612BE355323BE.title": "Cargo Hauler"
+	"quest.33C94FF8C9D59520.quest_desc": [
+		"Craft a Dimensional Carver from the Void Worm's drops: it cuts a portal home from anywhere."
+	]
+	"quest.33C94FF8C9D59520.title": "Break On Through"
+	"quest.348FCD06530B4004.quest_desc": [
+		"Ride a Black Moa: the only Moa that truly flies."
+	]
+	"quest.348FCD06530B4004.title": "Let's Fly!"
+	"quest.34ACAF461BC0427C.quest_desc": [
+		"Find the Frosted Prison in the snow (an Eye of Curse points the way)."
+	]
+	"quest.34ACAF461BC0427C.title": "Frosted Prison"
+	"quest.34C03ED12C342702.quest_desc": [
+		"Get some ink: it's how spell scrolls are written."
+	]
+	"quest.34C03ED12C342702.title": "Tools of the Trade"
+	"quest.351C0DB2FEF8DEC8.quest_desc": [
+		"Take the Valkyrie Lance from the Bronze Dungeon. Time for the Silver Dungeon."
+	]
+	"quest.351C0DB2FEF8DEC8.title": "Challenger to the Throne"
+	"quest.3546D3DF902B8D60.quest_desc": [
+		"Adds a crafting grid to the backpack."
+	]
+	"quest.3546D3DF902B8D60.title": "Craft on the Go"
 	"quest.35ABA1BDF82EB86C.quest_desc": [
 		"Rare and enormous."
 	]
 	"quest.35ABA1BDF82EB86C.title": "Mutant Zombie"
+	"quest.35C32ACBE59406FF.quest_desc": [
+		"The Distillery separates brews into their parts, powered by the Altar."
+	]
+	"quest.35C32ACBE59406FF.title": "Distillery"
+	"quest.362845899777FBF7.quest_desc": [
+		"Upgrade your backpack to iron: more slots and more upgrade slots, and everything inside stays put."
+	]
+	"quest.362845899777FBF7.title": "Iron Backpack"
+	"quest.3647FC22948329C2.quest_desc": [
+		"P2P Tunnels send items, power or redstone through a single channel."
+	]
+	"quest.3647FC22948329C2.title": "Point to Point"
+	"quest.365C860F8990FC3C.quest_desc": [
+		"All witchery begins with the green. Break wild grass for Belladonna, Mandrake and Water Artichoke seeds."
+	]
+	"quest.365C860F8990FC3C.title": "The Start"
 	"quest.37B78FC7B8803498.quest_desc": [
 		"Fells a whole tree at once."
 	]
 	"quest.37B78FC7B8803498.title": "Lumberjack"
+	"quest.383A8BECDCA9A695.quest_desc": [
+		"Upgrade your backpack to diamond: more slots and more upgrade slots, and everything inside stays put."
+	]
+	"quest.383A8BECDCA9A695.title": "Diamond Backpack"
+	"quest.388E2856322AEA97.quest_desc": [
+		"Upgrade your backpack to netherite: more slots and more upgrade slots, and everything inside stays put."
+	]
+	"quest.388E2856322AEA97.title": "Netherite Backpack"
 	"quest.389007084CA0D51E.quest_desc": [
 		"Mind the jumping explosions."
 	]
@@ -244,22 +550,38 @@
 		"Arcane Tanzanite armor: +50% experience, and cheaper anvil repairs with the full set."
 	]
 	"quest.38B5B8DDBBFF467F.title": "Arcane Scholar"
-	"quest.390C7DD27581B79F.quest_desc": [
-		"Immersive Aircraft: build a Biplane."
+	"quest.39443FA3BED44572.quest_desc": [
+		"Get a Capsid from a slain Enderiophage."
 	]
-	"quest.390C7DD27581B79F.title": "Take Flight"
-	"quest.3962591DDB4C7EFC.quest_desc": [
-		"Grow and combine crystals into Fluix."
+	"quest.39443FA3BED44572.title": "Capsid-19"
+	"quest.3954C74FA7148795.quest_desc": [
+		"Meet a Crocodile in a swamp or river."
 	]
-	"quest.3962591DDB4C7EFC.title": "Fluix"
+	"quest.3954C74FA7148795.title": "Chompy"
+	"quest.39570321B36C9666.quest_desc": [
+		"Craft the Ironbound Tome."
+	]
+	"quest.39570321B36C9666.title": "Knowledge Unchained"
+	"quest.39758666EC577CDD.quest_desc": [
+		"Waits in the chamber at the bottom of the prison. It drops Cursium."
+	]
+	"quest.39758666EC577CDD.title": "Maledictus"
 	"quest.3A364D6FD4A2C181.quest_desc": [
 		"Tanzanite tools sometimes enchant themselves as you use them, up to three times."
 	]
 	"quest.3A364D6FD4A2C181.title": "Self-Enchanting"
+	"quest.3AC74DFF7F405AB6.quest_desc": [
+		"Defeat the Sun Spirit in the Gold Dungeon."
+	]
+	"quest.3AC74DFF7F405AB6.title": "Extinguished"
 	"quest.3AEA778ECC999FA5.quest_desc": [
 		"Raptor claws on a strap: Climbing Claws let you walk up walls."
 	]
 	"quest.3AEA778ECC999FA5.title": "Wall Crawler"
+	"quest.3B8E1A16ABE701CC.quest_desc": [
+		"Break through the Dreadrock at the bottom of the Undergarden into the Depths."
+	]
+	"quest.3B8E1A16ABE701CC.title": "Into the Depths"
 	"quest.3BA6BA40C3D8BC7E.quest_desc": [
 		"Rubies sit deep, near diamond level. Ruby tools beat diamond."
 	]
@@ -268,34 +590,58 @@
 		"Place a Spring Basket near a captured Easter Bunny: it lays eggs three times as often."
 	]
 	"quest.3BCF8C190B856397.title": "Bunny Farmer"
-	"quest.3D0DBC260E511C7E.quest_desc": [
-		"A lava giant from the Soul Black Smith."
+	"quest.3CEC503F60C10794.quest_desc": [
+		"A Storage Controller joins nearby Sophisticated storage into one inventory."
 	]
-	"quest.3D0DBC260E511C7E.title": "Netherite Monstrosity"
+	"quest.3CEC503F60C10794.title": "Storage Controller"
 	"quest.3E8020E92E32A9A5.quest_desc": [
-		"Enter the Nether."
+		"Build an obsidian portal and enter the Nether."
 	]
 	"quest.3E8020E92E32A9A5.title": "Hot Stuff"
 	"quest.3EC4C5A67D976508.quest_desc": [
 		"Stink Bombs send monsters running."
 	]
 	"quest.3EC4C5A67D976508.title": "Clear the Room"
-	"quest.405ED30B330B14BC.quest_desc": [
-		"Defeat the Valkyrie Queen in the Silver Dungeon."
+	"quest.3F1225CF28038847.quest_desc": [
+		"Harvest grass, wheat or rice with a Knife for Straw."
 	]
-	"quest.405ED30B330B14BC.title": "Valkyrie Queen"
-	"quest.40C976354242CB61.quest_desc": [
-		"The Gyrodyne climbs steeply."
+	"quest.3F1225CF28038847.title": "Grasping at Straws"
+	"quest.3F855D7742D9F62C.quest_desc": [
+		"Find a Portal Ruin in the overworld. Its Gatekeeper sits by the frame: challenge him to his trial."
 	]
-	"quest.40C976354242CB61.title": "Gyrodyne"
+	"quest.3F855D7742D9F62C.title": "Duke It Out!"
+	"quest.3F92F3BAF71F5F76.quest_desc": [
+		"Mine any Undergarden ore: Cloggrum, Froststeel, Utherium or Regalium."
+	]
+	"quest.3F92F3BAF71F5F76.title": "Deep Extraction"
+	"quest.3FFE5656FB4313A9.quest_desc": [
+		"Claim Scylla's prize."
+	]
+	"quest.3FFE5656FB4313A9.title": "Spoils: Scylla"
+	"quest.40B73277F0D1A7FC.quest_desc": [
+		"Craft an Altar. It enchants with Ambrosium."
+	]
+	"quest.40B73277F0D1A7FC.title": "Do You Believe in Magic?"
+	"quest.41035F2E83D7B850.quest_desc": [
+		"Red chalk for rites that draw on the Nether."
+	]
+	"quest.41035F2E83D7B850.title": "Infernal Chalk"
 	"quest.41B7713DFDD30563.quest_desc": [
 		"Fires ink bombs. Ammo: ink sacs."
 	]
 	"quest.41B7713DFDD30563.title": "Ink Blast"
+	"quest.41BB0589C98E47B2.quest_desc": [
+		"A Portable Cell carries a slice of storage in your pocket."
+	]
+	"quest.41BB0589C98E47B2.title": "Storage Nomad"
 	"quest.42B48ABD2F175EAA.quest_desc": [
 		"The Kraken grabs and drowns. Fight it from the shallows."
 	]
 	"quest.42B48ABD2F175EAA.title": "Release the Kraken"
+	"quest.431646C710BEEE9A.quest_desc": [
+		"Grow a mushroom on Rich Soil until it becomes a colony, then shear it."
+	]
+	"quest.431646C710BEEE9A.title": "Fungus Among Us"
 	"quest.431779C548CD0659.quest_desc": [
 		"The Empress rains crystal shards. Keep moving."
 	]
@@ -304,10 +650,30 @@
 		"Forge the Behemoth Blade from four bosses' weapons."
 	]
 	"quest.4395FE6EEC28C906.title": "Big Bertha"
+	"quest.43E1FFAAA69A5F0B.quest_desc": [
+		"Sails catch the wind for gyrodynes and airships."
+	]
+	"quest.43E1FFAAA69A5F0B.title": "Sail"
 	"quest.43F0986A0980547D.quest_desc": [
 		"Defeat the Ender Dragon."
 	]
 	"quest.43F0986A0980547D.title": "Dragon Slayer"
+	"quest.43F3BBECFB68ACC4.quest_desc": [
+		"Mine a Zanite Gemstone. Zanite tools get faster as they wear down."
+	]
+	"quest.43F3BBECFB68ACC4.title": "Exotic Hardware"
+	"quest.44A8F4160E0A0FD1.quest_desc": [
+		"Barrels can show what's inside on their front."
+	]
+	"quest.44A8F4160E0A0FD1.title": "Barrel of Tricks"
+	"quest.44AF6ABEE259F331.quest_desc": [
+		"Craft an ME Controller: the heart of any network bigger than 8 channels."
+	]
+	"quest.44AF6ABEE259F331.title": "Networking Switchboard"
+	"quest.45586A7003E369B7.quest_desc": [
+		"Find the Catacombs."
+	]
+	"quest.45586A7003E369B7.title": "Forgotten Halls"
 	"quest.457064F60E0CD576.quest_desc": [
 		"Tanzanite: diamond-strong and wonderfully enchantable."
 	]
@@ -316,54 +682,138 @@
 		"Visit all six NeoSpawn realms."
 	]
 	"quest.45A6CA7A4B62226F.title": "Realm Walker"
-	"quest.46000AF2A68F6E4F.quest_desc": [
-		"Froststeel slows what it hits."
+	"quest.45CFB74255566BE7.quest_desc": [
+		"Build a stone-brick portal frame and light it with the Catalyst."
 	]
-	"quest.46000AF2A68F6E4F.title": "Froststeel"
+	"quest.45CFB74255566BE7.title": "Enter the Undergarden"
 	"quest.4663BCCE0C1A3368.quest_desc": [
 		"Defeat every flagship boss."
 	]
 	"quest.4663BCCE0C1A3368.title": "Monster Hunter"
+	"quest.4691192B4531D033.quest_desc": [
+		"Shatter a Dimensional Carver in a Capsid to travel a million blocks, and meet the Farseer."
+	]
+	"quest.4691192B4531D033.title": "Farland Security"
+	"quest.48182E41AB91D46B.quest_desc": [
+		"Find the Acropolis."
+	]
+	"quest.48182E41AB91D46B.title": "Acropolis"
 	"quest.4866CC2D31023E3B.quest_desc": [
 		"Bugs drop chitin, ghosts ectoplasm, dinosaurs hide... collect something useful."
 	]
 	"quest.4866CC2D31023E3B.title": "Waste Not"
+	"quest.48BF982BB762AB7D.quest_desc": [
+		"Craft ME Glass Cable to connect machines into a network."
+	]
+	"quest.48BF982BB762AB7D.title": "Plugged In"
+	"quest.48CE865BCAC18E42.quest_desc": [
+		"Craft a Wayward Compass from Arcane Essence, an iron ingot and a soul lantern. Follow it."
+	]
+	"quest.48CE865BCAC18E42.title": "And So a Quest Begins"
+	"quest.49429E1D18436EC2.quest_desc": [
+		"Build an Altar and surround it with nature: more plants and wildlife nearby means more Altar Power."
+	]
+	"quest.49429E1D18436EC2.title": "The Altar"
+	"quest.496E0ED84C823076.quest_desc": [
+		"Dream your way into the Spirit World."
+	]
+	"quest.496E0ED84C823076.title": "The Spirit World"
+	"quest.498D83B97FB989D9.quest_desc": [
+		"Find the Sunken City in a deep ocean."
+	]
+	"quest.498D83B97FB989D9.title": "Sunken City"
+	"quest.49CB4786388C6B0A.quest_desc": [
+		"Take the Wrought Axe and Wrought Helm from the Wroughtnaut."
+	]
+	"quest.49CB4786388C6B0A.title": "Axe and Helm"
+	"quest.4AC9BB774D0F4DA5.quest_desc": [
+		"Craft a Crimson Mosquito Larva from a maggot and a mosquito's proboscis."
+	]
+	"quest.4AC9BB774D0F4DA5.title": "Pest Control"
 	"quest.4AFFA7844EF0988A.quest_desc": [
 		"Fires bone spears."
 	]
 	"quest.4AFFA7844EF0988A.title": "Mutant Skeleton"
+	"quest.4C26E85A83B22D91.quest_desc": [
+		"A Tier Upgrade turns a placed chest or barrel into a bigger one without emptying it."
+	]
+	"quest.4C26E85A83B22D91.title": "In-Place Upgrade"
+	"quest.4C84FE84B7E58603.quest_desc": [
+		"Craft a Meteorite Compass: it points to the nearest meteorite."
+	]
+	"quest.4C84FE84B7E58603.title": "Meteorite Hunter"
+	"quest.4C97F146E1CF2695.quest_desc": [
+		"Feed a Crimson Mosquito a Warped Fungus-covered creature and watch it change."
+	]
+	"quest.4C97F146E1CF2695.title": "Down with the Sickness"
+	"quest.4CA67AE835D9AE4F.quest_desc": [
+		"Plant every food crop you can find."
+	]
+	"quest.4CA67AE835D9AE4F.title": "Crop Rotation"
 	"quest.4E447D74BD90302D.quest_desc": [
 		"Golden meadows and floating islands. Watch out for the guardians in the giant trees."
 	]
 	"quest.4E447D74BD90302D.title": "Paradise Found"
+	"quest.4E5766817EEA260D.quest_desc": [
+		"A Copper Spell Book is the cheapest start. Equip a spell book in its own slot."
+	]
+	"quest.4E5766817EEA260D.title": "Magery"
 	"quest.4E7683DE8A73C78B.quest_desc": [
 		"Boss eggs hatch flying mounts: a Skyclaw or an Azure Drake."
 	]
 	"quest.4E7683DE8A73C78B.title": "Wings of Your Own"
+	"quest.4ED73AA04E6B6423.quest_desc": [
+		"A Crafting Terminal shows the whole network and crafts straight from it."
+	]
+	"quest.4ED73AA04E6B6423.title": "A (Much) Bigger Table"
 	"quest.4EEA4E38E7F0437B.quest_desc": [
 		"Creepers leave you alone while you carry it."
 	]
 	"quest.4EEA4E38E7F0437B.title": "Creeper Be Gone"
-	"quest.4FCC76E1A2F430EB.quest_desc": [
-		"Smelt Cloggrum, the Undergarden's iron."
+	"quest.4FD54D58C9BDFDB3.quest_desc": [
+		"Build a Witch's Oven. Put Clay Jars beside it to catch the fumes, or they float away."
 	]
-	"quest.4FCC76E1A2F430EB.title": "Cloggrum"
+	"quest.4FD54D58C9BDFDB3.title": "Smells Nice"
+	"quest.4FF903BAF55C8A4A.quest_desc": [
+		"Find Icestone."
+	]
+	"quest.4FF903BAF55C8A4A.title": "Cold as Ice"
 	"quest.5063E7CC599B8A5C.quest_desc": [
 		"Throws blocks and teleports."
 	]
 	"quest.5063E7CC599B8A5C.title": "Mutant Enderman"
+	"quest.509EA20A2C2ECED0.quest_desc": [
+		"It wakes when you enter its chamber. It drops the Infernal Forge, a Monstrous Horn and a Lava Power Cell."
+	]
+	"quest.509EA20A2C2ECED0.title": "Netherite Monstrosity"
+	"quest.5139CB4FBE22A3F6.quest_desc": [
+		"Claim Maledictus's prize."
+	]
+	"quest.5139CB4FBE22A3F6.title": "Spoils: Maledictus"
 	"quest.5186DA902E0B37A7.quest_desc": [
 		"A Tyrannosaurus roams the savanna."
 	]
 	"quest.5186DA902E0B37A7.title": "Tyrant Lizard"
+	"quest.51B9F385F74C47E5.quest_desc": [
+		"Craft an Arcane Anvil: upgrade spells and imbue weapons with them."
+	]
+	"quest.51B9F385F74C47E5.title": "It's Purple!"
 	"quest.51E38C25D932DC38.quest_desc": [
 		"Keep the NeoSpawn Field Guide handy. Lost it? Craft a new one from a book and an egg."
 	]
 	"quest.51E38C25D932DC38.title": "The Field Guide"
-	"quest.52CF5E79E16C3EC3.quest_desc": [
-		"Build an Airship for long, slow journeys."
+	"quest.5256F03E7D57C75E.quest_desc": [
+		"ExtendedAE's Extended Pattern Provider runs far more patterns than the normal one."
 	]
-	"quest.52CF5E79E16C3EC3.title": "Airship Captain"
+	"quest.5256F03E7D57C75E.title": "Extended AE"
+	"quest.52754C4D36C837B4.quest_desc": [
+		"Clear the vines off the portal frame, then use the Orb on it."
+	]
+	"quest.52754C4D36C837B4.title": "Sky of a Million Stars"
+	"quest.52950DC046B44BE9.quest_desc": [
+		"Get any staff: a casting implement you hold instead of a book."
+	]
+	"quest.52950DC046B44BE9.title": "No Longer Short-Staffed"
 	"quest.52D182457DF516F7.quest_desc": [
 		"Find the Easter Bunny in flower forests and plains: it lays painted eggs."
 	]
@@ -372,6 +822,22 @@
 		"Get your hands on any NeoSpawn gadget."
 	]
 	"quest.53471FF3EFC3B18A.title": "Gadgeteer"
+	"quest.53485587CBEBE532.quest_desc": [
+		"Mount a Rotary Cannon."
+	]
+	"quest.53485587CBEBE532.title": "Armed and Ready"
+	"quest.54123E209B201F3A.quest_desc": [
+		"Chalk for rites that lead somewhere else."
+	]
+	"quest.54123E209B201F3A.title": "Otherwhere Chalk"
+	"quest.543B11C0E766D30A.quest_desc": [
+		"The Dead King rules the Catacombs. Defeat him: he drops the Necronomicon and his Blood Staff."
+	]
+	"quest.543B11C0E766D30A.title": "The Dead King"
+	"quest.543CEEF55BCD305B.quest_desc": [
+		"Claim a piece of Phoenix armor from the Gold Dungeon."
+	]
+	"quest.543CEEF55BCD305B.title": "Fireproof"
 	"quest.54A9356DA29E0224.quest_desc": [
 		"Zoo Cages catch creatures so you can carry them home. Catch the Easter Bunny!"
 	]
@@ -380,38 +846,78 @@
 		"You must enter empty-handed."
 	]
 	"quest.550F5EFB2B4FA208.title": "Through the Looking Glass"
-	"quest.552D6317BEE6323D.quest_desc": [
-		"Cook a Beef Stew."
+	"quest.554A75CA2A115C3A.quest_desc": [
+		"Hull, propeller and sail: the Gyrodyne is pedal-powered, so it needs no fuel."
 	]
-	"quest.552D6317BEE6323D.title": "Hearty Stew"
+	"quest.554A75CA2A115C3A.title": "Gyrodyne"
 	"quest.566543B9B64F9447.quest_desc": [
 		"Brew Antivenom from a Venom Gland: it cures poison and keeps it away for a minute."
 	]
 	"quest.566543B9B64F9447.title": "Antidote"
+	"quest.567B324F266959EA.quest_desc": [
+		"The Storm Empress. She drops the Essence of the Storm."
+	]
+	"quest.567B324F266959EA.title": "Scylla"
+	"quest.56F9C985CCDC5FB6.quest_desc": [
+		"Watch a meteor shower."
+	]
+	"quest.56F9C985CCDC5FB6.title": "Wish upon a Star"
+	"quest.571509B968175166.quest_desc": [
+		"Something has to push."
+	]
+	"quest.571509B968175166.title": "Propeller"
+	"quest.578279563BDEF49D.quest_desc": [
+		"Find the Ancient Factory underground (an Eye of Mech points the way)."
+	]
+	"quest.578279563BDEF49D.title": "Ancient Factory"
 	"quest.57CDA15A17285485.quest_desc": [
 		"Lights every dark spot nearby."
 	]
 	"quest.57CDA15A17285485.title": "Let There Be Light"
-	"quest.57D1647EE9F3901A.quest_desc": [
-		"Defeat the Sun Spirit in the Gold Dungeon."
-	]
-	"quest.57D1647EE9F3901A.title": "Sun Spirit"
 	"quest.586BAFE71CD4345B.quest_desc": [
 		"Alloy Titanium, Uranium and Ruby into a Paragon Ingot. Paragon gear is the best there is."
 	]
 	"quest.586BAFE71CD4345B.title": "Paragon"
+	"quest.5924CE4821AF4394.quest_desc": [
+		"An engine, a propeller and bamboo: the Quadrocopter hovers in place."
+	]
+	"quest.5924CE4821AF4394.title": "Quadrocopter"
 	"quest.599783DADA9CB6EA.quest_desc": [
 		"Sift treasure out of sand, gravel and dirt."
 	]
 	"quest.599783DADA9CB6EA.title": "Gold Panning"
+	"quest.59AAD91CE2D28D63.quest_desc": [
+		"Slay a Forgotten Guardian in the Catacombs."
+	]
+	"quest.59AAD91CE2D28D63.title": "Decommissioned"
+	"quest.59D0F37F549BA51E.quest_desc": [
+		"Craft a Quantum Link: connect two networks across any distance, even dimensions."
+	]
+	"quest.59D0F37F549BA51E.title": "Quantum Tunneling"
 	"quest.59E17757209F725F.quest_desc": [
 		"Fossils and Archaeology can take you to the Prehistory dimension."
 	]
 	"quest.59E17757209F725F.title": "Back in Time"
-	"quest.5BF63B2D4736BB64.quest_desc": [
-		"A burning knight in the Burning Arena of the Nether."
+	"quest.5AAC7397E74DFFA2.quest_desc": [
+		"Tame a Bald Eagle with fish oil."
 	]
-	"quest.5BF63B2D4736BB64.title": "Ignis"
+	"quest.5AAC7397E74DFFA2.title": "Freedom Intensifies"
+	"quest.5AD823A775F37516.quest_desc": [
+		"Find the ashen snow beneath the Permafrost Forest."
+	]
+	"quest.5AD823A775F37516.title": "Under the Permafrost"
+	"quest.5B60A322D481414A.quest_desc": [
+		"Get a Moa Egg."
+	]
+	"quest.5B60A322D481414A.title": "Don't Count Your Moas..."
+	"quest.5B7EF1744A8FA65F.quest_desc": [
+		"Get Thermal Springstone. Only flames can destroy the giant plants that grow around it."
+	]
+	"quest.5B7EF1744A8FA65F.title": "Watch Out for Hand Burns"
+	"quest.5B91FAA51ACDB077.quest_desc": [
+		"Put a Crimson Mosquito Larva in a Capsid to make a Mysterious Worm."
+	]
+	"quest.5B91FAA51ACDB077.title": "Destroy the Child"
 	"quest.5C67FF42C36867AD.quest_desc": [
 		"Titanium sits very deep. Smelt the raw ore."
 	]
@@ -420,31 +926,67 @@
 		"Tame a Gazelle or an Ostrich and ride it."
 	]
 	"quest.5C95262A756C2CE0.title": "Saddle Up"
-	"quest.5D0E45B816213D95.quest_desc": [
-		"Build an Inscriber to press processors."
+	"quest.5C983E83A5E545EB.quest_desc": [
+		"The Ferrous Wroughtnaut waits in an underground chamber. Dodge its axe, then hit the back."
 	]
-	"quest.5D0E45B816213D95.title": "Inscriber"
+	"quest.5C983E83A5E545EB.title": "Just a Flesh Wound"
+	"quest.5C98BC19F017F26F.quest_desc": [
+		"Craft a Storage Cell and put it in an ME Drive."
+	]
+	"quest.5C98BC19F017F26F.title": "Better Than Chests"
+	"quest.5E22E2343E1BC516.quest_desc": [
+		"Forge a Forgotten Ingot from the Guardian's nuggets."
+	]
+	"quest.5E22E2343E1BC516.title": "What Now Is"
+	"quest.5E2918FB0546B8E3.quest_desc": [
+		"Get a Banana from jungle leaves."
+	]
+	"quest.5E2918FB0546B8E3.title": "Gone Bananas!"
 	"quest.5EBCC26E8097F15D.quest_desc": [
 		"Giant bosses, strange creatures, six hidden realms and a lot of mods."
 		"Read the Field Guide you were given: it covers NeoSpawn's basics. This book walks you through the rest."
 	]
 	"quest.5EBCC26E8097F15D.title": "Welcome to NeoSpawnPack"
-	"quest.5F1EB7278903FA68.quest_desc": [
-		"Guards the Ruined Citadel in the End."
+	"quest.5F702BE65D91382B.quest_desc": [
+		"Beat the Ignited Revenants for Burning Ashes, then put them on the Altar of Fire at the top of the arena."
 	]
-	"quest.5F1EB7278903FA68.title": "Ender Guardian"
-	"quest.5FE2A92A4E293490.quest_desc": [
-		"A frost giant in snowy biomes."
+	"quest.5F702BE65D91382B.title": "Ignis"
+	"quest.5F84A7F82C2B92CE.quest_desc": [
+		"Slay a Rotling, the weakest of the Rotspawn."
 	]
-	"quest.5FE2A92A4E293490.title": "Frostmaw"
+	"quest.5F84A7F82C2B92CE.title": "Birth Control"
+	"quest.5FCF87E8708E8F6E.quest_desc": [
+		"Build a frame of Glowstone the shape of a Nether portal, then pour water into it."
+	]
+	"quest.5FCF87E8708E8F6E.title": "Hostile Paradise"
+	"quest.5FF7C2A5E7B3EC2F.quest_desc": [
+		"Hull, engine and propeller: the Biplane is fast and agile."
+	]
+	"quest.5FF7C2A5E7B3EC2F.title": "Take Flight"
+	"quest.604C3F1C1A1F91E7.quest_desc": [
+		"Climb the Sculptor's pillar and complete its challenge. It drops the Sculptor Staff and Geomancer gear."
+	]
+	"quest.604C3F1C1A1F91E7.title": "You Must Believe"
 	"quest.60603F32FFCD119A.quest_desc": [
 		"Weave a Featherfall Cloak from insect wings."
 	]
 	"quest.60603F32FFCD119A.title": "Gentle Landing"
-	"quest.60EF9DD52725D35C.quest_desc": [
-		"Build an ME Controller and Terminal: never lose an item again."
+	"quest.609FC144CB431019.quest_desc": [
+		"Charge some Certus Quartz in the Charger."
 	]
-	"quest.60EF9DD52725D35C.title": "Storage Network"
+	"quest.609FC144CB431019.title": "Shocking"
+	"quest.60A45FA63B934B2A.quest_desc": [
+		"Upgrade Cloggrum tools with Forgotten Ingots into all six Forgotten tools."
+	]
+	"quest.60A45FA63B934B2A.title": "Forgotten Arsenal"
+	"quest.60CE3054EF703237.quest_desc": [
+		"Feeds you from the backpack when you're hungry."
+	]
+	"quest.60CE3054EF703237.title": "Never Hungry"
+	"quest.60D8FE2923B7DE0A.quest_desc": [
+		"Tame a Grizzly Bear with honey and salmon."
+	]
+	"quest.60D8FE2923B7DE0A.title": "Arcturus!"
 	"quest.61B49E2F9AB786BE.quest_desc": [
 		"Titanium tools have enormous durability."
 	]
@@ -453,42 +995,114 @@
 		"Craft a Royal Sigil from King's Scales, a Nether Star and Paragon."
 	]
 	"quest.61DEDDDAC5125E07.title": "Summoner"
+	"quest.61FCA4B624739C64.quest_desc": [
+		"Craft a Straddlite Saddle."
+	]
+	"quest.61FCA4B624739C64.title": "The Family Sedan"
+	"quest.62273444170A33AF.quest_desc": [
+		"Smelt a Deepsilver Ingot."
+	]
+	"quest.62273444170A33AF.title": "Unstained in the Mud"
+	"quest.62D1FF8B050CAF8A.quest_desc": [
+		"Claim the Crescent Spear."
+	]
+	"quest.62D1FF8B050CAF8A.title": "Complete Darkness"
+	"quest.6358F1EBB9329FC9.quest_desc": [
+		"Meet a Grizzly Bear."
+	]
+	"quest.6358F1EBB9329FC9.title": "Pic-a-Nic Basket?"
+	"quest.63C950FCCEE836F5.quest_desc": [
+		"Draw a circle with Ritual Chalk."
+	]
+	"quest.63C950FCCEE836F5.title": "Rituals"
+	"quest.63D5A4275C8D4CDF.quest_desc": [
+		"Find the Soul Forge in the Nether."
+	]
+	"quest.63D5A4275C8D4CDF.title": "Soul Forge"
+	"quest.63DFF7ABA3D30FC2.quest_desc": [
+		"Find the Cursed Pyramid in a desert."
+	]
+	"quest.63DFF7ABA3D30FC2.title": "Cursed Pyramid"
+	"quest.641F08516F66A1A4.quest_desc": [
+		"Craft an Apprentice's Spell Book."
+	]
+	"quest.641F08516F66A1A4.title": "Getting the Hang of It"
 	"quest.6457A06BEEA80D9B.quest_desc": [
 		"Floating islands at the edge of the sky."
 	]
 	"quest.6457A06BEEA80D9B.title": "Lost in the Clouds"
-	"quest.64602BD1889D4D5A.quest_desc": [
-		"A sea serpent of the cliffs."
+	"quest.64975CE5BF8C117A.quest_desc": [
+		"Craft a Cauldron. Fill it with water and light a fire under it."
 	]
-	"quest.64602BD1889D4D5A.title": "Naga"
-	"quest.651BA13859015A81.quest_desc": [
-		"An armored knight in its chamber."
+	"quest.64975CE5BF8C117A.title": "A Stew Is Due"
+	"quest.661A5ACAEE9A1588.quest_desc": [
+		"Build a Crafting CPU from Crafting Units, then add a Pattern Provider and a Molecular Assembler."
 	]
-	"quest.651BA13859015A81.title": "Ferrous Wroughtnaut"
-	"quest.655D5FEC1CB9F7C4.quest_desc": [
-		"Rises in the Catacombs."
+	"quest.661A5ACAEE9A1588.title": "Next Gen Crafting"
+	"quest.66CE5118048F024F.quest_desc": [
+		"Find the Ruined Citadel on the outer End islands (an Eye of Void points the way)."
 	]
-	"quest.655D5FEC1CB9F7C4.title": "The Dead King"
-	"quest.65899F2D754CB15A.quest_desc": [
-		"Reach the Starlight dimension."
+	"quest.66CE5118048F024F.title": "Ruined Citadel"
+	"quest.675A33C67F68D9CB.quest_desc": [
+		"Fit an Enhanced Propeller and an Eco Engine for speed and range."
 	]
-	"quest.65899F2D754CB15A.title": "Eternal Starlight"
-	"quest.65E5F377EB368542.quest_desc": [
-		"Weeping Angels move when you look away. Defeat one."
+	"quest.675A33C67F68D9CB.title": "Tuned Up"
+	"quest.6847EDD21E651FB6.quest_desc": [
+		"Meet a Straddler in the Basalt Deltas."
 	]
-	"quest.65E5F377EB368542.title": "Don't Blink"
-	"quest.681897E558B2E588.quest_desc": [
-		"Light a portal in a stone-brick frame with a Catalyst to reach the Undergarden."
+	"quest.6847EDD21E651FB6.title": "Straddle My Ol' Saddle"
+	"quest.68EAB51DB70485A7.quest_desc": [
+		"Build a Warship from a Cargo Airship, Industrial Gears and more: a flying fortress."
 	]
-	"quest.681897E558B2E588.title": "The Undergarden"
-	"quest.691FAE9028550838.quest_desc": [
-		"Mine Zanite in the Aether."
+	"quest.68EAB51DB70485A7.title": "Warship"
+	"quest.6908FA1CBA42624E.quest_desc": [
+		"Use a Knife on a Pig or Hoglin to get Ham."
 	]
-	"quest.691FAE9028550838.title": "Zanite"
+	"quest.6908FA1CBA42624E.title": "Wild Butcher"
+	"quest.69F94B4509AF8F33.quest_desc": [
+		"Craft the Catalyst from ender pearls, copper and stone."
+	]
+	"quest.69F94B4509AF8F33.title": "One Ticket Please"
+	"quest.6A41D4E12AE7321F.quest_desc": [
+		"Some meals are big enough to place down and share. Place a feast."
+	]
+	"quest.6A41D4E12AE7321F.title": "A Glorious Feast"
 	"quest.6A4700C4769E8F68.quest_desc": [
 		"Build an enchanting table."
 	]
 	"quest.6A4700C4769E8F68.title": "Arcane Knowledge"
+	"quest.6AF2762A098D411D.quest_desc": [
+		"Craft a Scroll Forge to write your own spell scrolls."
+	]
+	"quest.6AF2762A098D411D.title": "New Age Librarian"
+	"quest.6B1C17CC6F76555D.quest_desc": [
+		"Arcane Essence turns up in dungeon chests and drops from spellcasting mobs. You'll need lots."
+	]
+	"quest.6B1C17CC6F76555D.title": "Arcane Essence"
+	"quest.6B26A322093B8E7D.quest_desc": [
+		"Take a Regeneration Stone from the Silver Dungeon. The final dungeon awaits."
+	]
+	"quest.6B26A322093B8E7D.title": "Battle Hardened"
+	"quest.6B2CDBCB908D30CC.quest_desc": [
+		"Get a Tooth of Hunger: kill a Thirst Walker, or block its attack."
+	]
+	"quest.6B2CDBCB908D30CC.title": "Dental Surgery"
+	"quest.6B89A75F1AA2E964.quest_desc": [
+		"A Death Protection Poppet sacrifices itself to save you from death, once."
+	]
+	"quest.6B89A75F1AA2E964.title": "Saved by a Doll"
+	"quest.6C09E821C47BD8DA.quest_desc": [
+		"Craft a Knife: it gets extra drops from plants and animals."
+	]
+	"quest.6C09E821C47BD8DA.title": "Hunt and Gather"
+	"quest.6C6EF53B0509C1BF.quest_desc": [
+		"Hatch it in an Incubator."
+	]
+	"quest.6C6EF53B0509C1BF.title": "...Until They Hatch!"
+	"quest.6C91EEE00EAB5A46.quest_desc": [
+		"A Telescope for scouting from the air."
+	]
+	"quest.6C91EEE00EAB5A46.title": "Eyes in the Sky"
 	"quest.6CB459CE3B0522D7.quest_desc": [
 		"Nearby XP flies to you."
 	]
@@ -497,30 +1111,74 @@
 		"Every journey starts at a crafting table."
 	]
 	"quest.6CD213C438BB0810.title": "A Place to Work"
-	"quest.6E4DAEA45F035DB9.quest_desc": [
-		"Iron's Spells: build an Inscription Table to write spells into books."
+	"quest.6D0D46D19FAF1918.quest_desc": [
+		"Claim Ignis's prize."
 	]
-	"quest.6E4DAEA45F035DB9.title": "Spellcraft"
+	"quest.6D0D46D19FAF1918.title": "Spoils: Ignis"
+	"quest.6FF5C65A4175CD42.quest_desc": [
+		"Bounce on a Blue Aercloud."
+	]
+	"quest.6FF5C65A4175CD42.title": "To Infinity and Beyond!"
+	"quest.70289A0EF28C852A.quest_desc": [
+		"Drop Charged Certus Quartz, Redstone and Nether Quartz in water together to make Fluix Crystals."
+	]
+	"quest.70289A0EF28C852A.title": "Unnatural"
 	"quest.70341D779CB5BF5F.quest_desc": [
 		"Craft a Ruby pickaxe."
 	]
 	"quest.70341D779CB5BF5F.title": "Ruby Toolkit"
+	"quest.703643A30EF4E220.quest_desc": [
+		"Find the Crystallized Desert."
+	]
+	"quest.703643A30EF4E220.title": "Castle of Glass"
+	"quest.707147DCCE104EC6.quest_desc": [
+		"Take a Cloggrum Battleaxe from a Forgotten carrying one."
+	]
+	"quest.707147DCCE104EC6.title": "Cold Dead Hands"
 	"quest.70AC77B059CA53B1.quest_desc": [
 		"The King drops a Royal Egg. Hatch it, then feed it gold and diamonds."
 	]
 	"quest.70AC77B059CA53B1.title": "Heir to the Throne"
+	"quest.7113895AA38387CC.quest_desc": [
+		"Every backpack upgrade starts from an Upgrade Base."
+	]
+	"quest.7113895AA38387CC.title": "Upgrade Base"
 	"quest.718A801FD0B54BAA.quest_desc": [
 		"Defeat a Warden."
 	]
 	"quest.718A801FD0B54BAA.title": "Silence"
-	"quest.71C5B193AD881C80.quest_desc": [
-		"Sleeps beneath the desert in the Cursed Pyramid."
+	"quest.7234087E2C719BDD.quest_desc": [
+		"Every aircraft starts with a hull of logs and iron."
 	]
-	"quest.71C5B193AD881C80.title": "Ancient Remnant"
+	"quest.7234087E2C719BDD.title": "Hull"
 	"quest.724A418B1CC85170.quest_desc": [
 		"Gorgantua smashes through terrain and breathes a blue beam."
 	]
 	"quest.724A418B1CC85170.title": "Kaiju Killer"
+	"quest.72DD5C361FAB9FD8.quest_desc": [
+		"Craft a Falconry Glove to launch your eagle."
+	]
+	"quest.72DD5C361FAB9FD8.title": "Hand in Glove"
+	"quest.73986E464BE3CA17.quest_desc": [
+		"A Seeking Eye leads to the Golem Forge."
+	]
+	"quest.73986E464BE3CA17.title": "Guided by Starlight"
+	"quest.739D65BBECB6855B.quest_desc": [
+		"Find a way to hold back the Utheric Infection."
+	]
+	"quest.739D65BBECB6855B.title": "A Much Needed Antidote"
+	"quest.74456541C4B62F76.quest_desc": [
+		"Trade with a Stoneborn."
+	]
+	"quest.74456541C4B62F76.title": "Interdimensional Business"
+	"quest.7450848AEF67266D.quest_desc": [
+		"Find the Burning Arena in the Nether."
+	]
+	"quest.7450848AEF67266D.title": "Burning Arena"
+	"quest.74AC8847C36A2872.quest_desc": [
+		"Build an Engine from a Boiler, a Blast Furnace, a Piston and cobblestone."
+	]
+	"quest.74AC8847C36A2872.title": "Engine"
 	"quest.74B65F1530274EE0.quest_desc": [
 		"Chitin and Dino Hide make solid early armor from everyday creatures."
 	]
@@ -533,22 +1191,70 @@
 		"Dried Eggs come from Fossil Ore and sifting. Drop one in water to hatch it."
 	]
 	"quest.765CB72408B70B82.title": "Just Add Water"
+	"quest.76610188E03A5D03.quest_desc": [
+		"A Boiler is the core of an engine."
+	]
+	"quest.76610188E03A5D03.title": "Boiler"
+	"quest.76AD1D63CB610C98.quest_desc": [
+		"Dig the suspicious sand inside to wake it. It drops Ancient Metal and the Sandstorm in a Bottle."
+	]
+	"quest.76AD1D63CB610C98.title": "Ancient Remnant"
+	"quest.76F9ACD74D91A641.quest_desc": [
+		"Plant Rice in a shallow puddle of water."
+	]
+	"quest.76F9ACD74D91A641.title": "Dipping Your Roots"
 	"quest.77298B388C8EB02E.quest_desc": [
 		"Farmer's Delight turns food into real meals. Craft a Cooking Pot."
 	]
 	"quest.77298B388C8EB02E.title": "Home Cooking"
-	"quest.79E8BFAA1CB96734.quest_desc": [
-		"Defeat the Forgotten Guardian in its catacombs."
+	"quest.783D34D3755DE401.quest_desc": [
+		"Defeat the Lunar Monstrosity. Set it on fire to make it vulnerable."
 	]
-	"quest.79E8BFAA1CB96734.title": "The Forgotten Guardian"
-	"quest.7A01B4732D0719E1.quest_desc": [
-		"Craft a Copper Spell Book."
+	"quest.783D34D3755DE401.title": "Through the Thorns"
+	"quest.784770982BAAC860.quest_desc": [
+		"Craft an Enchanted Spell Book."
 	]
-	"quest.7A01B4732D0719E1.title": "First Spellbook"
+	"quest.784770982BAAC860.title": "Master Enchanter"
+	"quest.78E9B31A5593977C.quest_desc": [
+		"Receive the Sun's Blessing."
+	]
+	"quest.78E9B31A5593977C.title": "Heliomancer"
+	"quest.79932E5B029FAE2D.quest_desc": [
+		"Approach the central pedestal on the lowest level. It drops the Gauntlet of Guard."
+	]
+	"quest.79932E5B029FAE2D.title": "Ender Guardian"
+	"quest.79E7FB5FA5143AA2.quest_desc": [
+		"Defeat the Permafrost."
+	]
+	"quest.79E7FB5FA5143AA2.title": "Winter Is Leaving"
+	"quest.7BA55FCA38738A3D.quest_desc": [
+		"Claim Ender Guardian's prize."
+	]
+	"quest.7BA55FCA38738A3D.title": "Spoils: Ender Guardian"
+	"quest.7C65EF33097371CD.quest_desc": [
+		"Put a Nether Star in its chest to wake it. It drops Witherite."
+	]
+	"quest.7C65EF33097371CD.title": "The Harbinger"
+	"quest.7C9D928BC1ACF2C3.quest_desc": [
+		"Defeat Umvuthi, the Sunbird chief of the grove. He drops the Sol Visage."
+	]
+	"quest.7C9D928BC1ACF2C3.title": "Praise the Sun"
+	"quest.7CBD2898A3E42B5F.quest_desc": [
+		"The Frostmaw sleeps in snowy biomes. Wake it and defeat it."
+	]
+	"quest.7CBD2898A3E42B5F.title": "Rude Awakening"
 	"quest.7DD4D476D167D815.quest_desc": [
 		"Find some diamonds: the gateway to better gear."
 	]
 	"quest.7DD4D476D167D815.title": "Shiny!"
+	"quest.7E1EAFB732873311.quest_desc": [
+		"Weeping Angels move when you look away. Defeat one."
+	]
+	"quest.7E1EAFB732873311.title": "Don't Blink"
+	"quest.7E2040A123F319F4.quest_desc": [
+		"Meet an Enderiophage in the End Midlands. Mind the Ender Flu."
+	]
+	"quest.7E2040A123F319F4.title": "Ender Distancing"
 	"quest.7E5D09C118E6574E.quest_desc": [
 		"Defeat any NeoSpawn boss. They telegraph every attack; strike while they're stunned."
 	]
@@ -557,4 +1263,12 @@
 		"Each realm needs its charm. Carry it and right-click that realm's ant."
 	]
 	"quest.7FBDC0CA7F7E39A6.title": "Ticket to Ride"
+	"quest.7FDDC3A2F37BC6D7.quest_desc": [
+		"Pulls nearby items to you."
+	]
+	"quest.7FDDC3A2F37BC6D7.title": "Magnetic"
+	"reward_table.1D95C29311282415.title": "Uncommon Crate"
+	"reward_table.2614BE404C918F04.title": "Rare Crate"
+	"reward_table.2F035E83C5178FC9.title": "Common Crate"
+	"reward_table.49FDD94AD68BCE26.title": "Epic Crate"
 }

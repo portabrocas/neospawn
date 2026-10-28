@@ -2,569 +2,15 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "other_worlds"
-	group: ""
+	group: "71258E98B60BA7B1"
 	icon: {
 		count: 1
-		id: "aether:ambrosium_shard"
+		id: "minecraft:ender_eye"
 	}
 	id: "2051175E8CA671FD"
 	order_index: 7
 	quest_links: [ ]
 	quests: [
-		{
-			dependencies: [ ]
-			id: "1D07704FD9024CE3"
-			rewards: [
-				{
-					id: "280ACD744D9D52F1"
-					type: "xp"
-					xp: 300
-				}
-				{
-					count: 2
-					id: "57368FA5115EE6EE"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "12A2EB5016097B38"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					dimension: "aether:the_aether"
-					id: "29A5AC95839BA9E8"
-					type: "dimension"
-				}
-			]
-			x: 0.0d
-			y: -2.0d
-		}
-		{
-			dependencies: [
-				"1D07704FD9024CE3"
-			]
-			id: "691FAE9028550838"
-			rewards: [
-				{
-					id: "6188A5E627E19F15"
-					type: "xp"
-					xp: 150
-				}
-				{
-					count: 6
-					id: "31D5219AF07BBC5B"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "001C2B6CF54A5993"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					count: 4L
-					id: "4C505175AA9AB0B2"
-					item: {
-						count: 4
-						id: "aether:zanite_gemstone"
-					}
-					type: "item"
-				}
-			]
-			x: 2.0d
-			y: -3.0d
-		}
-		{
-			dependencies: [
-				"1D07704FD9024CE3"
-			]
-			id: "15F49D8B256DD13A"
-			rewards: [
-				{
-					id: "2948A9706B8BB9B9"
-					type: "xp_levels"
-					xp_levels: 5
-				}
-				{
-					count: 4
-					id: "029231C8B62080B7"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "6DD92558DDEA67A5"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
-				}
-			]
-			shape: "hexagon"
-			tasks: [
-				{
-					entity: "aether:slider"
-					id: "5163B9597CFCFCC3"
-					type: "kill"
-					value: 1L
-				}
-			]
-			x: 2.0d
-			y: -2.0d
-		}
-		{
-			dependencies: [
-				"15F49D8B256DD13A"
-			]
-			id: "405ED30B330B14BC"
-			rewards: [
-				{
-					id: "5FE5A635D09589E4"
-					type: "xp_levels"
-					xp_levels: 5
-				}
-				{
-					count: 4
-					id: "49847A74EC64EE4B"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "5345C11D55428F2D"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
-				}
-			]
-			shape: "hexagon"
-			tasks: [
-				{
-					entity: "aether:valkyrie_queen"
-					id: "6C7761C8AB12026F"
-					type: "kill"
-					value: 1L
-				}
-			]
-			x: 4.0d
-			y: -2.0d
-		}
-		{
-			dependencies: [
-				"405ED30B330B14BC"
-			]
-			id: "57D1647EE9F3901A"
-			rewards: [
-				{
-					id: "0D82CA8915D9AA05"
-					type: "xp_levels"
-					xp_levels: 10
-				}
-				{
-					count: 6
-					id: "7A3F78F36258A6B0"
-					item: {
-						count: 6
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "5BBE41241929BE64"
-					item: {
-						count: 8
-						id: "minecraft:emerald"
-					}
-					type: "item"
-				}
-				{
-					count: 3
-					id: "34022E8F08563C77"
-					item: {
-						count: 3
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
-				}
-			]
-			shape: "hexagon"
-			tasks: [
-				{
-					entity: "aether:sun_spirit"
-					id: "3470866ADFE0C79B"
-					type: "kill"
-					value: 1L
-				}
-			]
-			x: 6.0d
-			y: -2.0d
-		}
-		{
-			dependencies: [ ]
-			id: "681897E558B2E588"
-			rewards: [
-				{
-					id: "112B1B583549A625"
-					type: "xp"
-					xp: 300
-				}
-				{
-					count: 2
-					id: "27983E244E6888BA"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "49FA4B7B2FF512B7"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					dimension: "undergarden:undergarden"
-					id: "27DBBA576D0932EB"
-					type: "dimension"
-				}
-			]
-			x: 0.0d
-			y: 1.0d
-		}
-		{
-			dependencies: [
-				"681897E558B2E588"
-			]
-			id: "4FCC76E1A2F430EB"
-			rewards: [
-				{
-					id: "2E9977D3609DC884"
-					type: "xp"
-					xp: 150
-				}
-				{
-					count: 6
-					id: "058AF3CCBAE17ED7"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "4810065625C4C995"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					count: 4L
-					id: "74FEBF77645EEF9B"
-					item: {
-						count: 4
-						id: "undergarden:cloggrum_ingot"
-					}
-					type: "item"
-				}
-			]
-			x: 2.0d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"4FCC76E1A2F430EB"
-			]
-			id: "46000AF2A68F6E4F"
-			rewards: [
-				{
-					id: "0B6CA03CC2245EA9"
-					type: "xp"
-					xp: 300
-				}
-				{
-					count: 2
-					id: "60574A5848BB22F5"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "0DE5F26D65A8AAAA"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					count: 2L
-					id: "4531BD3C79276CBD"
-					item: {
-						count: 2
-						id: "undergarden:froststeel_ingot"
-					}
-					type: "item"
-				}
-			]
-			x: 4.0d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"46000AF2A68F6E4F"
-			]
-			id: "79E8BFAA1CB96734"
-			rewards: [
-				{
-					id: "44FDF3F694E1595A"
-					type: "xp_levels"
-					xp_levels: 5
-				}
-				{
-					count: 4
-					id: "6C336E1780D34CAC"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "4442FA7440228B80"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
-				}
-			]
-			shape: "hexagon"
-			tasks: [
-				{
-					entity: "undergarden:forgotten_guardian"
-					id: "0FA22F6B3985A338"
-					type: "kill"
-					value: 1L
-				}
-			]
-			x: 6.0d
-			y: 1.0d
-		}
-		{
-			dependencies: [ ]
-			id: "65899F2D754CB15A"
-			rewards: [
-				{
-					id: "771C5324368F8640"
-					type: "xp"
-					xp: 300
-				}
-				{
-					count: 2
-					id: "48AE001EB60938B6"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "0C0B2AC189F6CE2F"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					dimension: "eternal_starlight:starlight"
-					id: "737D893C667ABEEF"
-					type: "dimension"
-				}
-			]
-			x: 0.0d
-			y: 3.5d
-		}
-		{
-			dependencies: [
-				"65899F2D754CB15A"
-			]
-			id: "2E0ED3D0B8A7878A"
-			rewards: [
-				{
-					id: "1C222450B1CCDDC5"
-					type: "xp_levels"
-					xp_levels: 5
-				}
-				{
-					count: 4
-					id: "2F4638CDC8693029"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "6E12D587C4301970"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
-				}
-			]
-			shape: "hexagon"
-			tasks: [
-				{
-					entity: "eternal_starlight:the_gatekeeper"
-					id: "1A86899E9A6891E2"
-					type: "kill"
-					value: 1L
-				}
-			]
-			x: 2.0d
-			y: 3.5d
-		}
-		{
-			dependencies: [
-				"2E0ED3D0B8A7878A"
-			]
-			id: "0FEF2C2E2E8ED0AA"
-			rewards: [
-				{
-					id: "43762C09A7A4B6B5"
-					type: "xp_levels"
-					xp_levels: 10
-				}
-				{
-					count: 6
-					id: "13E49F2047D6D945"
-					item: {
-						count: 6
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "62D83F127394C319"
-					item: {
-						count: 8
-						id: "minecraft:emerald"
-					}
-					type: "item"
-				}
-				{
-					count: 3
-					id: "30B6536F0E49BAB8"
-					item: {
-						count: 3
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
-				}
-			]
-			shape: "hexagon"
-			tasks: [
-				{
-					entity: "eternal_starlight:lunar_monstrosity"
-					id: "568732101935488E"
-					type: "kill"
-					value: 1L
-				}
-			]
-			x: 4.0d
-			y: 3.5d
-		}
-		{
-			dependencies: [ ]
-			id: "59E17757209F725F"
-			rewards: [
-				{
-					id: "3640D9DFEA77CF40"
-					type: "xp"
-					xp: 300
-				}
-				{
-					count: 2
-					id: "2F277F8D8CE9DF25"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "677F2F5A9B009079"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					dimension: "fossilslegacy:prehistory"
-					id: "76F2B81B1F9A2728"
-					type: "dimension"
-				}
-			]
-			x: 0.0d
-			y: 5.0d
-		}
 		{
 			dependencies: [ ]
 			id: "3E8020E92E32A9A5"
@@ -575,22 +21,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "40B4FBA91A123FCA"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "09D735195699ABC1"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -600,7 +33,7 @@
 					type: "dimension"
 				}
 			]
-			x: -2.0d
+			x: 0.0d
 			y: 0.0d
 		}
 		{
@@ -615,22 +48,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "6DEB3549F4073EBB"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "66C4B1F6AF4630BC"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -640,7 +60,32 @@
 					type: "dimension"
 				}
 			]
-			x: -2.0d
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "59E17757209F725F"
+			rewards: [
+				{
+					id: "3640D9DFEA77CF40"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "2F277F8D8CE9DF25"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					dimension: "fossilslegacy:prehistory"
+					id: "76F2B81B1F9A2728"
+					type: "dimension"
+				}
+			]
+			x: 0.0d
 			y: 2.0d
 		}
 	]

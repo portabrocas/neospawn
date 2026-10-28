@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "mob_drops"
-	group: ""
+	group: "25BAEDC4F70D77FA"
 	icon: {
 		count: 1
 		id: "neospawn:chitin_plate"
@@ -21,13 +21,9 @@
 					xp: 50
 				}
 				{
-					count: 8
 					id: "3DD266242E066DCC"
-					item: {
-						count: 8
-						id: "minecraft:bread"
-					}
-					type: "item"
+					table_id: 3387655264753127369L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -53,22 +49,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "4492F924771A282A"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "341046012D4FFC92"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -94,22 +77,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "320C3A7F55D08701"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "270E0E36EC42D546"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -135,22 +105,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "01464CF6C05F92F9"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "43E08A736C413A43"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -176,22 +133,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "428B42273067B783"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "0C1B9B3B73505EAA"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -220,13 +164,9 @@
 					xp: 50
 				}
 				{
-					count: 8
 					id: "3E65E75B4AABB632"
-					item: {
-						count: 8
-						id: "minecraft:bread"
-					}
-					type: "item"
+					table_id: 3387655264753127369L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -255,13 +195,9 @@
 					xp: 50
 				}
 				{
-					count: 8
 					id: "1D69CCF1028EE975"
-					item: {
-						count: 8
-						id: "minecraft:bread"
-					}
-					type: "item"
+					table_id: 3387655264753127369L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -290,22 +226,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "390CE27594D21255"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "0A71104276129D09"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [

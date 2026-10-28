@@ -36,6 +36,11 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 - Advancements (a NeoSpawn tab, XP rewards only) come from `tools/gen_advancements.py`; the pack's FTB quest book
   completes NeoSpawn quests via these ids, so don't rename them. Run `runData` first: the script checks ids against the lang file.
 - The quest book (FTB Quests, needs FTB Library + FTB Teams) is `tools/gen_quests.py` → `modpack/ftbquests/quests/`.
+  It is pack-wide, ATM-style: chapter groups (NeoSpawn, Tech & Storage, Magic, Dimensions, Bosses & Beasts, Food), one
+  chapter per big mod, and tiered loot crates (FTB reward tables) instead of item rewards. Mod chapters follow each
+  mod's OWN progression: build them from its advancement tree and in-game guide (read from the jar), its recipes and
+  boss loot tables, and the mod's wiki, never from memory. Prefer `madv()` tasks (the mod's own advancements) so a
+  quest completes exactly when the mod says; every id is checked against the jars.
   It checks every id against the repo and the Prism instance's mod jars, and caps rewards per tier (never endgame items).
   Quest ids are hashes of chapter/quest keys: renaming a key resets players' progress on it. Ids must stay below
   8000000000000000: FTB Quests silently replaces larger ones, orphaning their titles ("Unnamed") and dependencies. Install with

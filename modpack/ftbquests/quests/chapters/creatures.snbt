@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "creatures"
-	group: ""
+	group: "25BAEDC4F70D77FA"
 	icon: {
 		count: 1
 		id: "neospawn:painted_egg"
@@ -21,13 +21,9 @@
 					xp: 50
 				}
 				{
-					count: 8
 					id: "4E2EDD6530B7B781"
-					item: {
-						count: 8
-						id: "minecraft:bread"
-					}
-					type: "item"
+					table_id: 3387655264753127369L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -53,22 +49,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "14EA6B4C147ED019"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "4E6D64A2FD4AA969"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -94,22 +77,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "797032A283B2AF7E"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "455D40327EDA5613"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -136,22 +106,9 @@
 					xp: 300
 				}
 				{
-					count: 2
 					id: "4937C0496415D62F"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "6127009A8F86DED5"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
+					table_id: 2744027256347266820L
+					type: "loot"
 				}
 			]
 			shape: "heart"
@@ -179,22 +136,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "001C89FBDAAF920C"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "30834A84569E5283"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -220,22 +164,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "55F2C531C2769785"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "53F113895B2B4C74"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -261,22 +192,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "18F1766C5EC8C515"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "4BA575E4D560320D"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -302,31 +220,14 @@
 					xp_levels: 10
 				}
 				{
-					count: 6
 					id: "447029B6C357A14A"
-					item: {
-						count: 6
-						id: "minecraft:diamond"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 				{
-					count: 8
 					id: "2468E79887A4D8E9"
-					item: {
-						count: 8
-						id: "minecraft:emerald"
-					}
-					type: "item"
-				}
-				{
-					count: 3
-					id: "3784E61DC9C4715D"
-					item: {
-						count: 3
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"

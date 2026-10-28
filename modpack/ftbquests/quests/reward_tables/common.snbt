@@ -1,0 +1,129 @@
+{
+	empty_weight: 0.0f
+	hide_tooltip: false
+	id: "2F035E83C5178FC9"
+	loot_crate: {
+		color: 5635925
+		drops: {
+			boss: 0
+			monster: 0
+			passive: 0
+		}
+		glow: false
+		string_id: "neospawn_common"
+	}
+	loot_size: 2
+	rewards: [
+		{
+			count: 8
+			id: "6CFEB6BB873B3CD2"
+			item: {
+				count: 8
+				id: "minecraft:bread"
+			}
+			type: "item"
+			weight: 10.0f
+		}
+		{
+			count: 6
+			id: "3B6A54D2D2158872"
+			item: {
+				count: 6
+				id: "minecraft:cooked_beef"
+			}
+			type: "item"
+			weight: 10.0f
+		}
+		{
+			count: 6
+			id: "4423D5E62A778618"
+			item: {
+				count: 6
+				id: "minecraft:iron_ingot"
+			}
+			type: "item"
+			weight: 10.0f
+		}
+		{
+			count: 16
+			id: "023C660EB0C7DEB9"
+			item: {
+				count: 16
+				id: "minecraft:coal"
+			}
+			type: "item"
+			weight: 10.0f
+		}
+		{
+			count: 32
+			id: "3F008F1C05477540"
+			item: {
+				count: 32
+				id: "minecraft:torch"
+			}
+			type: "item"
+			weight: 8.0f
+		}
+		{
+			count: 32
+			id: "03100641E7047B00"
+			item: {
+				count: 32
+				id: "minecraft:arrow"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 4
+			id: "0E99171EB2F693B0"
+			item: {
+				count: 4
+				id: "minecraft:gold_ingot"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 4
+			id: "3B05D6291322CAA3"
+			item: {
+				count: 4
+				id: "minecraft:experience_bottle"
+			}
+			type: "item"
+			weight: 5.0f
+		}
+		{
+			count: 32
+			id: "036B48FE664093DA"
+			item: {
+				count: 32
+				id: "minecraft:oak_log"
+			}
+			type: "item"
+			weight: 6.0f
+		}
+		{
+			count: 8
+			id: "525863A47BE242B2"
+			item: {
+				count: 8
+				id: "minecraft:lapis_lazuli"
+			}
+			type: "item"
+			weight: 4.0f
+		}
+		{
+			count: 3
+			id: "3EC42948377B5C16"
+			item: {
+				count: 3
+				id: "farmersdelight:beef_stew"
+			}
+			type: "item"
+			weight: 4.0f
+		}
+	]
+	use_title: true
+}

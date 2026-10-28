@@ -1,0 +1,515 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "witchery"
+	group: "03203A1312E25E36"
+	icon: {
+		count: 1
+		id: "witchery:mutandis"
+	}
+	id: "587B7D766DEDD29E"
+	order_index: 12
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "365C860F8990FC3C"
+			rewards: [
+				{
+					id: "4D40FFD5B94C072D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "28376F05AD6C6404"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			shape: "gear"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "witchery:seeds"
+					criterion: ""
+					id: "62B4EE5E7CAA4B28"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"365C860F8990FC3C"
+			]
+			id: "4FD54D58C9BDFDB3"
+			rewards: [
+				{
+					id: "452CFFFB27520B6F"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "09B1EF79A0748A8D"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:oven"
+					criterion: ""
+					id: "7C6C978E65743F53"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"365C860F8990FC3C"
+			]
+			id: "64975CE5BF8C117A"
+			rewards: [
+				{
+					id: "7E58E328064DDE5D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "0B13781629A4D754"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:cauldron"
+					criterion: ""
+					id: "0F5B1A6CF9B63495"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"64975CE5BF8C117A"
+			]
+			id: "1B3EAF7E5DB221B9"
+			rewards: [
+				{
+					id: "3A7D63C3B2DD15A7"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "00D90A20A9F071DE"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:mutandis"
+					criterion: ""
+					id: "29A3FBC46AFABA65"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"1B3EAF7E5DB221B9"
+			]
+			id: "07AACA2C1F7A84F6"
+			rewards: [
+				{
+					id: "5C3C5C2E3C1096B6"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "34CCDB0751D1B75C"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "039B5CBA173D7E5E"
+					item: {
+						count: 1
+						id: "witchery:mutandis_extremis"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"4FD54D58C9BDFDB3"
+			]
+			id: "49429E1D18436EC2"
+			rewards: [
+				{
+					id: "59F1B41E49727B89"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "2A366DDB5FA6157F"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "54CDAA33F6C1B08E"
+					item: {
+						count: 1
+						id: "witchery:altar"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"49429E1D18436EC2"
+			]
+			id: "35C32ACBE59406FF"
+			rewards: [
+				{
+					id: "71F8DED49B1D4E43"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "1072F71030B5F3EF"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "525831D9B9527710"
+					item: {
+						count: 1
+						id: "witchery:distillery"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"35C32ACBE59406FF"
+			]
+			id: "2987B6E45E544792"
+			rewards: [
+				{
+					id: "49E2D2912EFEBD01"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "5C1C42FBDF44677C"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "4D73FE8505C635D3"
+					item: {
+						count: 1
+						id: "witchery:spinning_wheel"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"365C860F8990FC3C"
+			]
+			id: "15842FD4D3496F32"
+			rewards: [
+				{
+					id: "1EFD5A185210A263"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "102A626F37FEE724"
+					table_id: 3387655264753127369L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:gypsum"
+					criterion: ""
+					id: "7BFB0223008CC765"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"15842FD4D3496F32"
+			]
+			id: "63C950FCCEE836F5"
+			rewards: [
+				{
+					id: "1BDA28DBCB42B4B2"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "695B20D836692170"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:chalk"
+					criterion: ""
+					id: "626F62EDF449197B"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"63C950FCCEE836F5"
+			]
+			id: "2FADBFA647B280EA"
+			rewards: [
+				{
+					id: "6824E2FE8D98107F"
+					type: "xp"
+					xp: 300
+				}
+				{
+					id: "2678B62E64462F33"
+					table_id: 2744027256347266820L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:golden_chalk"
+					criterion: ""
+					id: "09EBCC2968F00320"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"2FADBFA647B280EA"
+			]
+			id: "41035F2E83D7B850"
+			rewards: [
+				{
+					id: "4C30CFD468302EAD"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "3F6AC31B05EA91AF"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:infernal_chalk"
+					criterion: ""
+					id: "53F5AEBA551B62A0"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"2FADBFA647B280EA"
+			]
+			id: "54123E209B201F3A"
+			rewards: [
+				{
+					id: "0CF5CE5B4752E1DB"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "2E193DB3EAA0C0BF"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					advancement: "witchery:otherwhere_chalk"
+					criterion: ""
+					id: "4DE6A1F445A0F2A9"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"4FD54D58C9BDFDB3"
+			]
+			id: "2C0310337E97D827"
+			rewards: [
+				{
+					id: "292F05AC1B8F3BA3"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "78433025DB45751E"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "0EE2099B5CD9D319"
+					item: {
+						count: 1
+						id: "witchery:taglock"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"2C0310337E97D827"
+			]
+			id: "2E0B374E6406C715"
+			rewards: [
+				{
+					id: "4A9465EA12E3739F"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "576C7B135A1D6B6D"
+					table_id: 2131823935533622293L
+					type: "loot"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "7B9F791318E77E73"
+					item: {
+						count: 1
+						id: "witchery:poppet"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"2E0B374E6406C715"
+			]
+			id: "6B89A75F1AA2E964"
+			rewards: [
+				{
+					id: "2EFF4BD0C73CE5A1"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "513871563116A279"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "heart"
+			size: 1.3d
+			tasks: [
+				{
+					count: 1L
+					id: "330E387C707EFC4D"
+					item: {
+						count: 1
+						id: "witchery:death_protection_poppet"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"2987B6E45E544792"
+			]
+			id: "496E0ED84C823076"
+			rewards: [
+				{
+					id: "3BCB7676A3A2ACDC"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					id: "3A17C405D2C32301"
+					table_id: 5331656449326829094L
+					type: "loot"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "witchery:spirit_world"
+					criterion: ""
+					id: "25458262E63E5DD8"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: -1.0d
+		}
+	]
+}

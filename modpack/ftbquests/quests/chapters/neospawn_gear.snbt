@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "neospawn_gear"
-	group: ""
+	group: "25BAEDC4F70D77FA"
 	icon: {
 		count: 1
 		id: "neospawn:ruby"
@@ -21,22 +21,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "1E198E3F8EDDC6A9"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "40A21DFE50EC9D04"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -62,22 +49,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "55AB71E6CE0F01CF"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "4BCE950F300CAA21"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -106,22 +80,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "02987E7E6EC2D817"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "593B24336B08D98E"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -147,22 +108,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "5AF48DA2A644F0E6"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "69E85A3EE52A9757"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -191,22 +139,9 @@
 					xp: 300
 				}
 				{
-					count: 2
 					id: "5347A83F11A50783"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "77E22D16FC112179"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
+					table_id: 2744027256347266820L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -232,22 +167,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "414EC527883503A9"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "3A6E55EBCC0DE7E5"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -273,22 +195,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "43BF8C59B0A48612"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "3124598098A98DC6"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -317,22 +226,9 @@
 					xp: 300
 				}
 				{
-					count: 2
 					id: "7280E42382932073"
-					item: {
-						count: 2
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "25D53966CFE31374"
-					item: {
-						count: 8
-						id: "minecraft:golden_carrot"
-					}
-					type: "item"
+					table_id: 2744027256347266820L
+					type: "loot"
 				}
 			]
 			tasks: [
@@ -358,22 +254,9 @@
 					xp_levels: 5
 				}
 				{
-					count: 4
 					id: "7E1FBEABAEB91C51"
-					item: {
-						count: 4
-						id: "minecraft:diamond"
-					}
-					type: "item"
-				}
-				{
-					count: 2
-					id: "5F1B91BDC60CA9AB"
-					item: {
-						count: 2
-						id: "minecraft:golden_apple"
-					}
-					type: "item"
+					table_id: 5331656449326829094L
+					type: "loot"
 				}
 			]
 			shape: "hexagon"
@@ -401,22 +284,9 @@
 					xp: 150
 				}
 				{
-					count: 6
 					id: "630EBCC73AFB1FB4"
-					item: {
-						count: 6
-						id: "minecraft:iron_ingot"
-					}
-					type: "item"
-				}
-				{
-					count: 8
-					id: "1B99774C42587D89"
-					item: {
-						count: 8
-						id: "minecraft:cooked_beef"
-					}
-					type: "item"
+					table_id: 2131823935533622293L
+					type: "loot"
 				}
 			]
 			tasks: [
