@@ -1,0 +1,440 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "getting_started"
+	group: ""
+	icon: {
+		count: 1
+		id: "neospawn:field_guide"
+	}
+	id: "D556FECB89D4939B"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "DEBCC26E8097F15D"
+			rewards: [
+				{
+					id: "27F42C4927D143CA"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "7D2D0B6036346472"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{
+					id: "47E8BCB65DF49D6A"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"DEBCC26E8097F15D"
+			]
+			id: "51E38C25D932DC38"
+			rewards: [
+				{
+					id: "8ED0DEBBB0F20B93"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "08F0D494F7EBED63"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "076AA66729C9D385"
+					item: {
+						count: 1
+						id: "neospawn:field_guide"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"DEBCC26E8097F15D"
+			]
+			id: "6CD213C438BB0810"
+			rewards: [
+				{
+					id: "57339983C560785F"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "AC8327D5AD249638"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "F6BD1D35C1204AD7"
+					item: {
+						count: 1
+						id: "minecraft:crafting_table"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"6CD213C438BB0810"
+			]
+			id: "06441A150A52AE99"
+			rewards: [
+				{
+					id: "1F022A4816AF3893"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "7C124FFF33A32207"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "ACB9DBC708D503A9"
+					item: {
+						count: 8
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"6CD213C438BB0810"
+			]
+			id: "131DD0D03D9404D5"
+			rewards: [
+				{
+					id: "69760CFF81B22A06"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "C3FF84150CCB2B54"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "5054993F23C0F695"
+					item: {
+						count: 1
+						id: "minecraft:white_bed"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"06441A150A52AE99"
+			]
+			id: "24DBBF22D0030B4E"
+			rewards: [
+				{
+					id: "5A7F0EBCA33099D7"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "336DA51F52282225"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "6F61FA793AB43DD4"
+					item: {
+						count: 1
+						id: "minecraft:shield"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"06441A150A52AE99"
+			]
+			id: "078EAC6DAD7F337D"
+			rewards: [
+				{
+					id: "2D735FF4D953A560"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "33F478C84600CDFB"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "1666A492A308F9FB"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "D7A3890D15B0C801"
+					item: {
+						count: 1
+						id: "sophisticatedbackpacks:backpack"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"06441A150A52AE99"
+			]
+			id: "1DCFC088EAD8AD90"
+			rewards: [
+				{
+					id: "10C544D7162C2A36"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "7CD2A106DCB9DD74"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "7777BC22D3344805"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "2FD11E692BCDF289"
+					item: {
+						count: 1
+						id: "waystones:waystone"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"06441A150A52AE99"
+			]
+			id: "77298B388C8EB02E"
+			rewards: [
+				{
+					id: "814BCEE3F623C8BA"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "4BEFAA83E1608070"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "7D871F642FE915BF"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "8979D461F37F7DD7"
+					item: {
+						count: 1
+						id: "farmersdelight:cooking_pot"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"24DBBF22D0030B4E"
+			]
+			id: "FDD4D476D167D815"
+			rewards: [
+				{
+					id: "5B356E8DDB774387"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "75928DDAB227CA94"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "AFB756DA5DC84F86"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 3L
+					id: "75C683E0D6A72424"
+					item: {
+						count: 3
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"FDD4D476D167D815"
+			]
+			id: "EA4700C4769E8F68"
+			rewards: [
+				{
+					id: "EF63EDAD2AC6AE8E"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "C678749493974157"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "27F5E9E87643990A"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "672264C14FE00635"
+					item: {
+						count: 1
+						id: "minecraft:enchanting_table"
+					}
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 1.0d
+		}
+	]
+}

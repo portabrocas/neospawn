@@ -1,0 +1,434 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "neospawn_gear"
+	group: ""
+	icon: {
+		count: 1
+		id: "neospawn:ruby"
+	}
+	id: "2230D3FBDE424494"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "3BA6BA40C3D8BC7E"
+			rewards: [
+				{
+					id: "58DF04122C1BAC8A"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "9E198E3F8EDDC6A9"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "40A21DFE50EC9D04"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:ruby"
+					criterion: ""
+					id: "ECB2351B76593849"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3BA6BA40C3D8BC7E"
+			]
+			id: "70341D779CB5BF5F"
+			rewards: [
+				{
+					id: "15EBBAD391F52CE4"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "55AB71E6CE0F01CF"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "CBCE950F300CAA21"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "E12A8029B6E44F4A"
+					item: {
+						count: 1
+						id: "neospawn:ruby_pickaxe"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3BA6BA40C3D8BC7E"
+			]
+			id: "457064F60E0CD576"
+			rewards: [
+				{
+					id: "5A30DB9C5C98317B"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "02987E7E6EC2D817"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "593B24336B08D98E"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:tanzanite"
+					criterion: ""
+					id: "6DEE74744753D431"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"457064F60E0CD576"
+			]
+			id: "3A364D6FD4A2C181"
+			rewards: [
+				{
+					id: "21A9D231D23E19F2"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "5AF48DA2A644F0E6"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "E9E85A3EE52A9757"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "848A48C24FC04F32"
+					item: {
+						count: 1
+						id: "neospawn:tanzanite_pickaxe"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"457064F60E0CD576"
+			]
+			id: "B8B5B8DDBBFF467F"
+			rewards: [
+				{
+					id: "A344E9F955E75A92"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "D347A83F11A50783"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "77E22D16FC112179"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:arcane"
+					criterion: ""
+					id: "42BFAF73820CF246"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"3BA6BA40C3D8BC7E"
+			]
+			id: "DC67FF42C36867AD"
+			rewards: [
+				{
+					id: "559E30E8360AFFE7"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "C14EC527883503A9"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "BA6E55EBCC0DE7E5"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:titanium"
+					criterion: ""
+					id: "AC29CA5E36F02559"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"DC67FF42C36867AD"
+			]
+			id: "61B49E2F9AB786BE"
+			rewards: [
+				{
+					id: "4F0976553A92EBC9"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "C3BF8C59B0A48612"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "B124598098A98DC6"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "C5D690488BC16274"
+					item: {
+						count: 1
+						id: "neospawn:titanium_pickaxe"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -3.0d
+		}
+		{
+			dependencies: [
+				"DC67FF42C36867AD"
+			]
+			id: "F547E65D254466F0"
+			rewards: [
+				{
+					id: "CDA32376468FC419"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "7280E42382932073"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "25D53966CFE31374"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:uranium"
+					criterion: ""
+					id: "1E1FA60BF5150ABE"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"F547E65D254466F0"
+			]
+			id: "D86BAFE71CD4345B"
+			rewards: [
+				{
+					id: "8E31C42C28302FC1"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "FE1FBEABAEB91C51"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "5F1B91BDC60CA9AB"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					advancement: "neospawn:paragon"
+					criterion: ""
+					id: "02376D08FE12855F"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"3BA6BA40C3D8BC7E"
+			]
+			id: "74B65F1530274EE0"
+			rewards: [
+				{
+					id: "FDBD0931FF8A8DF1"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "E30EBCC73AFB1FB4"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "9B99774C42587D89"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:mob_armor"
+					criterion: ""
+					id: "CB4C963B82D70924"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 2.0d
+		}
+	]
+}

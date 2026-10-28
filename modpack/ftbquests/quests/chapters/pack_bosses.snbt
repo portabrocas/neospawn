@@ -1,0 +1,924 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pack_bosses"
+	group: ""
+	icon: {
+		count: 1
+		id: "cataclysm:monstrous_horn"
+	}
+	id: "C6F2DC6C7333FFC6"
+	order_index: 8
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "2A179E20617AF7E6"
+			rewards: [
+				{
+					id: "DB672288BB85F844"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "8AFC9B39A4383112"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{
+					id: "3376E65D813CB39B"
+					type: "checkmark"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "5BF63B2D4736BB64"
+			rewards: [
+				{
+					id: "6279C9CB4F80B80E"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "38833C73BAD79CEE"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "8D760B28255D2A45"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "FAE1E45620A6D161"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:ignis"
+					id: "3B13EAF2F850312F"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "5F1EB7278903FA68"
+			rewards: [
+				{
+					id: "BB1FB5494442A952"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "6F4EE58C2F50DFC7"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "DF6C07C51370F152"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "FCA3A7246290E5CA"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:ender_guardian"
+					id: "80D2AFF277A2E1E6"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "BD0DBC260E511C7E"
+			rewards: [
+				{
+					id: "B490B4DFF37D5394"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "04A784CFC5E42807"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "31377D24D740C15E"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "7A33FF9A352E23AE"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:netherite_monstrosity"
+					id: "8FC517AC2128B050"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "8B11B5DD2381BE97"
+			rewards: [
+				{
+					id: "14C5FE181E492FF9"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "BF89957CFE6B77F3"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "B073E3C9D6400EA4"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "D75E54BA347C4E8A"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:the_harbinger"
+					id: "22CE0543F3D71D1C"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "A2DDCCE8F534B14F"
+			rewards: [
+				{
+					id: "190DEBF283294459"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "B829A6FED9C89826"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "9A0BEEB353C4A363"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "7577201D11437B8B"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:the_leviathan"
+					id: "36E46FC0E4AE5F30"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "F1C5B193AD881C80"
+			rewards: [
+				{
+					id: "36E10AD71838AA41"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "9D6227CBDE1BF98E"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "CF4793616704CB2F"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "ADC56DCECFDB659A"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:ancient_remnant"
+					id: "42045F61C25D7B5F"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "97CC26DBBF084A18"
+			rewards: [
+				{
+					id: "C530C670B11AEA71"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "EE84AB8F6D6DDE86"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "6F70C1DCC323AFDB"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "F5F276BE65D3D838"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:maledictus"
+					id: "A36155CA110BE649"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "25F15DD76D23AEAD"
+			rewards: [
+				{
+					id: "691C02640958D59E"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "547DFE520E5684F9"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "9A6AFCF3578965DD"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "95285B737D4EC437"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "cataclysm:scylla"
+					id: "592C127B5CDB2C0E"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "DFE2A92A4E293490"
+			rewards: [
+				{
+					id: "72289704CFFBA62F"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "29BB7C4CFD9DE83A"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "DA46173A5C87EA1E"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mowziesmobs:frostmaw"
+					id: "AF615FDAAB1BBE16"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "E51BA13859015A81"
+			rewards: [
+				{
+					id: "8AC5B7386FF55C83"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "F0B18A176663894F"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "BEBA95A622EDF523"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mowziesmobs:ferrous_wroughtnaut"
+					id: "65B2FCC662E36AFB"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "A6594C536937B55D"
+			rewards: [
+				{
+					id: "464341F3181EB588"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "2295C81660EF2AB7"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "5288E320F6D15CB2"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mowziesmobs:umvuthi"
+					id: "FC8484E7E136F16B"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "E4602BD1889D4D5A"
+			rewards: [
+				{
+					id: "E313F73280D98AC9"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "811001E10C1D5A16"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "3F523D163738FABF"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mowziesmobs:naga"
+					id: "C07420FB649FE2ED"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "B5ABA1BDF82EB86C"
+			rewards: [
+				{
+					id: "F420ED2B84C1A223"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "FB1730F0341F0DB1"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "459F66EABE63C68D"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mutantmonsters:mutant_zombie"
+					id: "C51B46F2F6CB807B"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "CAFFA7844EF0988A"
+			rewards: [
+				{
+					id: "9A20BB52D8881943"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "2D5C18A0B6EF8B08"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "5AFB41069075628C"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mutantmonsters:mutant_skeleton"
+					id: "8F52516AA6FBA399"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "389007084CA0D51E"
+			rewards: [
+				{
+					id: "2FD420C940B83986"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "38A0492A16C1A32F"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "70096362E15375EF"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mutantmonsters:mutant_creeper"
+					id: "DF64C20425269C40"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "D063E7CC599B8A5C"
+			rewards: [
+				{
+					id: "05BD2184C691EBF6"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "032486F5E9701C24"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "D70868E5160E508F"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "mutantmonsters:mutant_enderman"
+					id: "7F6E299DCF57E6C1"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "8A0EFB9FF24745EC"
+			rewards: [
+				{
+					id: "FF604BF8C410C09C"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "F38117A7EBEB18EE"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "CEBC76494F3747FC"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "aquamirae:maze_mother"
+					id: "6D81E67614F4100C"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "93CE26CADF3381C8"
+			rewards: [
+				{
+					id: "87C4A43B1F9C1B1B"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "6A570BC74A754D2C"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "8109E1F2E397096C"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "aquamirae:captain_cornelia"
+					id: "8CE3309C02F4AF09"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"2A179E20617AF7E6"
+			]
+			id: "E55D5FEC1CB9F7C4"
+			rewards: [
+				{
+					id: "64570A13AA30C226"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "F3C1556526E20E73"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "7791AEB56AC0DB8E"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "1A6408CE5FC15F49"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "irons_spellbooks:dead_king"
+					id: "877F2292C01A7E5E"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 6.0d
+			y: 4.0d
+		}
+	]
+}

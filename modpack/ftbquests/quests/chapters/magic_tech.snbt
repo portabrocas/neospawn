@@ -1,0 +1,589 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "magic_tech"
+	group: ""
+	icon: {
+		count: 1
+		id: "irons_spellbooks:copper_spell_book"
+	}
+	id: "C66F5E413FABD185"
+	order_index: 9
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "EE4DAEA45F035DB9"
+			rewards: [
+				{
+					id: "93441A63927B7948"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "7CC822529F470043"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "008770F140F4B14E"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "D6882CD307EB15EB"
+					item: {
+						count: 1
+						id: "irons_spellbooks:inscription_table"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"EE4DAEA45F035DB9"
+			]
+			id: "FA01B4732D0719E1"
+			rewards: [
+				{
+					id: "B00C57C46460C503"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "AC046DD2E381B89E"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "64B0FF0ABBE7FBF4"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "D6CBFAF9910DD970"
+					item: {
+						count: 1
+						id: "irons_spellbooks:copper_spell_book"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"FA01B4732D0719E1"
+			]
+			id: "28B420EBC83CD9BA"
+			rewards: [
+				{
+					id: "867F90840673B227"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "80756C872E4693C7"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "9F4A2455C229653F"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "0E0230F3576C24F7"
+					item: {
+						count: 1
+						id: "irons_spellbooks:iron_spell_book"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [ ]
+			id: "2C56C9A1886A3E7D"
+			rewards: [
+				{
+					id: "92FA2C382CD72080"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "8C1E8F1E17D44980"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "CCEB4B91840E06E4"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "A5D6003EA13AA495"
+					item: {
+						count: 1
+						id: "witchery:altar"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"2C56C9A1886A3E7D"
+			]
+			id: "B1339683D2FA959A"
+			rewards: [
+				{
+					id: "1D9726D80454C3BC"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "5EC63A9D1C0C92E9"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "A86D052D821EA512"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "72AB141602932417"
+					item: {
+						count: 4
+						id: "witchery:mutandis"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"B1339683D2FA959A"
+			]
+			id: "86D14C51EC7E8AF9"
+			rewards: [
+				{
+					id: "3BC832807FC17AEC"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "C36E9B2C71750075"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "0B4CCAF14839FD27"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "C1C4945A4E72AEA6"
+					item: {
+						count: 1
+						id: "witchery:distillery"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [ ]
+			id: "8F776C91A4E662D9"
+			rewards: [
+				{
+					id: "F49FE76804A52BD3"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "AEE020155AEA6C40"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "CD22BAD7A3EEF572"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "023B78F7E4B743B4"
+					item: {
+						count: 8
+						id: "ae2:certus_quartz_crystal"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"8F776C91A4E662D9"
+			]
+			id: "B962591DDB4C7EFC"
+			rewards: [
+				{
+					id: "4C4CCA2C5E05B3C8"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "3368E742E563B899"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "9240363674FF0D39"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "00A8309B6D516DA0"
+					item: {
+						count: 8
+						id: "ae2:fluix_crystal"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"B962591DDB4C7EFC"
+			]
+			id: "DD0E45B816213D95"
+			rewards: [
+				{
+					id: "D5BE86ADCA2EE104"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "5283800A8EB3E303"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "093213DD90157CA0"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "786AFA9096EE854D"
+					item: {
+						count: 1
+						id: "ae2:inscriber"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"DD0E45B816213D95"
+			]
+			id: "E0EF9DD52725D35C"
+			rewards: [
+				{
+					id: "75FF210F1FF02B33"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "65108027E42B1D2C"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "5FD258A7C65C5136"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					count: 1L
+					id: "0B53C78B3DF54001"
+					item: {
+						count: 1
+						id: "ae2:controller"
+					}
+					type: "item"
+				}
+				{
+					count: 1L
+					id: "2DCC915C773675F3"
+					item: {
+						count: 1
+						id: "ae2:terminal"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [ ]
+			id: "B90C7DD27581B79F"
+			rewards: [
+				{
+					id: "75618211B682B252"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "5DE73AEBA3ED7029"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "8EB0A91F4F49FEDA"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "731C93705C0A93AC"
+					item: {
+						count: 1
+						id: "immersive_aircraft:biplane"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"B90C7DD27581B79F"
+			]
+			id: "52CF5E79E16C3EC3"
+			rewards: [
+				{
+					id: "9794724131C4187C"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "B992DCAA7DBA96B2"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "6B9B5B1398BA25C9"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "B6C424942F7009C7"
+					item: {
+						count: 1
+						id: "immersive_aircraft:airship"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"B90C7DD27581B79F"
+			]
+			id: "C0C976354242CB61"
+			rewards: [
+				{
+					id: "41067D52011D8C71"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "34E456D27585C5E7"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "E28CDF887D97D0FC"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 1L
+					id: "261CC1E8AFD06265"
+					item: {
+						count: 1
+						id: "immersive_aircraft:gyrodyne"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 5.0d
+		}
+	]
+}

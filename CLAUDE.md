@@ -33,6 +33,10 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
 - Field Guide pages: `assets/neospawn/books/field_guide.json` (given on first join).
 - Advancements (a NeoSpawn tab, XP rewards only) come from `tools/gen_advancements.py`; the pack's FTB quest book
   completes NeoSpawn quests via these ids, so don't rename them. Run `runData` first: the script checks ids against the lang file.
+- The quest book (FTB Quests, needs FTB Library + FTB Teams) is `tools/gen_quests.py` → `modpack/ftbquests/quests/`.
+  It checks every id against the repo and the Prism instance's mod jars, and caps rewards per tier (never endgame items).
+  Quest ids are hashes of chapter/quest keys: renaming a key resets players' progress on it. Install with
+  `tools/install-quests.ps1` (game closed).
 - The owner plays in Prism on a **Windows** gaming PC (moved from a MacBook at v0.21.3):
   `%APPDATA%\PrismLauncher\instances\NeoSpawnPack-Prism\minecraft\mods` (the instance name may differ on the PC).
   Install new builds by replacing `neospawn-*.jar` there (game closed).
