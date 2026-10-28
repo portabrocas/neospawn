@@ -870,6 +870,12 @@ for index, ch in enumerate(CHAPTERS):
     write(f"chapters/{ch['key']}.snbt", {
         "default_hide_dependency_lines": False, "default_quest_shape": "", "filename": ch["key"], "group": hexid("group", ch["group"]) if ch["group"] else "",
         "icon": {"id": ch["icon"], "count": 1}, "id": cid, "order_index": index, "quest_links": [], "quests": quests})
-write("lang/en_us.snbt", lang)
+# FTB Quests reads "&" as the start of a formatting code (&c, &l...), and "& " followed by a space is an error
+# ("Invalid formatting! You must escape whitespace after & with \&"). Escape every ampersand in the text.
+def ftb_text(v):
+    return [ftb_text(x) for x in v] if isinstance(v, list) else re.sub(r"(?<!\\)&", r"\\&", v)
+
+
+write("lang/en_us.snbt", {k: ftb_text(v) for k, v in lang.items()})
 print(f"{len(CHAPTERS)} chapters, {total} quests written to {os.path.relpath(OUT, ROOT)}"
       + ("" if PACK else " (other mods' ids NOT checked)"))
