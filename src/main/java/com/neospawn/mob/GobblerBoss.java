@@ -84,6 +84,13 @@ public class GobblerBoss extends GeoBoss {
         return 4;
     }
 
+    /** On top of its own loot: treasure from the pack's other mods (see {@link GobblerTreasure}). */
+    @Override
+    protected void dropCustomDeathLoot(ServerLevel level, net.minecraft.world.damagesource.DamageSource source, boolean recentlyHit) {
+        super.dropCustomDeathLoot(level, source, recentlyHit);
+        GobblerTreasure.drop(this);
+    }
+
     @Override
     public boolean doHurtTarget(Entity target) {
         boolean hit = super.doHurtTarget(target);

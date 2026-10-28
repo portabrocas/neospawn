@@ -3,6 +3,7 @@ package com.neospawn.test;
 import com.neospawn.NeoSpawn;
 import com.neospawn.mob.GobblerBoss;
 import com.neospawn.mob.GobblerGhost;
+import com.neospawn.mob.GobblerTreasure;
 import com.neospawn.mob.MobSpec;
 import com.neospawn.mob.ModMobs;
 import com.neospawn.mob.NeoBoss;
@@ -124,6 +125,37 @@ public class GobblerTests {
         helper.assertTrue(gobblers == 2, "a cake and a token should each summon the Gobbler, got " + gobblers);
         player.discard();
         helper.killAllEntities();
+        helper.succeed();
+    }
+
+    @GameTest(template = "arena", batch = "gobbler_treasure")
+    public static void treasureFollowsRarity(GameTestHelper helper) {
+        var random = net.minecraft.util.RandomSource.create(42);
+        helper.assertTrue(GobblerTreasure.pick(java.util.List.of(), random) == null, "an empty pool should give nothing");
+        helper.assertTrue(GobblerTreasure.isDroppablePet(net.minecraft.resources.ResourceLocation.parse("inventorypets:pet_pacman"))
+                        && !GobblerTreasure.isDroppablePet(net.minecraft.resources.ResourceLocation.parse("inventorypets:pet_meta"))
+                        && !GobblerTreasure.isDroppablePet(net.minecraft.resources.ResourceLocation.parse("inventorypets:pet_meta_ice"))
+                        && !GobblerTreasure.isDroppablePet(net.minecraft.resources.ResourceLocation.parse("inventorypets:pet_custom"))
+                        && !GobblerTreasure.isDroppablePet(net.minecraft.resources.ResourceLocation.parse("inventorypets:pet_april_fool"))
+                        && !GobblerTreasure.isDroppablePet(net.minecraft.resources.ResourceLocation.parse("neospawn:pet_rock")),
+                "the pet filter is wrong");
+        // A hand-built pool: the test server has no Inventory Pets.
+        var pool = java.util.List.of(
+                new GobblerTreasure.Candidate(Items.STICK, GobblerTreasure.weight(net.minecraft.world.item.Rarity.COMMON)),
+                new GobblerTreasure.Candidate(Items.NETHER_STAR, GobblerTreasure.weight(net.minecraft.world.item.Rarity.EPIC)));
+        int common = 0, epic = 0;
+        for (int i = 0; i < 10000; i++) {
+            var item = GobblerTreasure.pick(pool, random);
+            if (item == Items.STICK) {
+                common++;
+            } else if (item == Items.NETHER_STAR) {
+                epic++;
+            } else {
+                helper.fail("picked something outside the pool: " + item);
+            }
+        }
+        helper.assertTrue(epic > 0 && epic * 5 < common, "epic should be far rarer than common: " + epic + " vs " + common);
+        helper.assertTrue(GobblerTreasure.pool().stream().allMatch(c -> c.weight() > 0), "a candidate has no weight");
         helper.succeed();
     }
 
