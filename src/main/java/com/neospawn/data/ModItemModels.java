@@ -37,6 +37,7 @@ public class ModItemModels extends ItemModelProvider {
             Map.entry("dread_lance", "polearm"),
             Map.entry("ember_greatsword", "large"),
             Map.entry("empress_battleaxe", "large"),
+            Map.entry("gobblers_jaw", "large"),
             Map.entry("hercules_horn", "large"),
             Map.entry("kings_fang", "sword"),
             Map.entry("kraken_hook", "polearm"),

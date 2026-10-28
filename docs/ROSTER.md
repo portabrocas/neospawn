@@ -89,6 +89,7 @@ Status: ✅ in game · 🔜 next phase
 | Nastysaurus | Brutosaurus | ✅ |
 | Alosaurus | Allosaurus | ✅ |
 | The Kraken | Kraken | ✅ |
+| (Crazy Craft's arcade chomper) | The Gobbler, an original design, with its ghosts | ✅ |
 | Mothra | Moth Titan | ✅ |
 | Leonopteryx | Skyclaw | ✅ |
 | Cephadrome | Azure Drake | ✅ |

@@ -258,7 +258,7 @@ public class NeoBoss extends Monster implements NeoMob {
         }
 
         updatePhase();
-        if (spec().smashesBlocks && horizontalCollision && tickCount % 5 == 0) {
+        if (spec().smashesBlocks && horizontalCollision && tickCount % 5 == 0 && wantsToSmash()) {
             smashBlocks();
         }
         tickCharge();
@@ -390,7 +390,7 @@ public class NeoBoss extends Monster implements NeoMob {
         }
         return switch (attack) {
             case LEAP_SLAM -> onGround() || isInWater();
-            case SUMMON -> minionsNearby() < 6;
+            case SUMMON -> minionsNearby() < maxMinions();
             default -> true;
         };
     }
@@ -772,12 +772,22 @@ public class NeoBoss extends Monster implements NeoMob {
             return;
         }
         playSound(SoundEvents.RAVAGER_ROAR, 5.0f, 1.4f);
-        for (int i = 0; i < (enraged ? 4 : 3); i++) {
+        for (int i = 0; i < summonCount(enraged); i++) {
             BlockPos pos = blockPosition().offset(random.nextInt(9) - 4, 0, random.nextInt(9) - 4);
             if (minion.type.get().spawn((ServerLevel) level(), pos, MobSpawnType.MOB_SUMMONED) instanceof Mob mob) {
                 mob.setTarget(target);
             }
         }
+    }
+
+    /** How many minions one SUMMON calls. */
+    protected int summonCount(boolean enraged) {
+        return enraged ? 4 : 3;
+    }
+
+    /** SUMMON is skipped while this many of its minions are already around. */
+    protected int maxMinions() {
+        return 6;
     }
 
     private void tailSwipe() {
@@ -1194,8 +1204,8 @@ public class NeoBoss extends Monster implements NeoMob {
         playSound(SoundEvents.DROWNED_SHOOT, 4.0f, 0.6f);
     }
 
-    /** Knocks out soft blocks in its path, like a kaiju walking through a forest. */
-    private void smashBlocks() {
+    /** Knocks out soft blocks in its path, like a kaiju walking through a forest. Public for the GameTests. */
+    public void smashBlocks() {
         if (!(level() instanceof ServerLevel level) || !EventHooks.canEntityGrief(level, this)) {
             return;
         }
@@ -1205,10 +1215,26 @@ public class NeoBoss extends Monster implements NeoMob {
                 Mth.floor(box.maxX), Mth.floor(box.maxY), Mth.floor(box.maxZ))) {
             BlockState state = level.getBlockState(pos);
             float hardness = state.getDestroySpeed(level, pos);
-            if (!state.isAir() && hardness >= 0 && hardness <= 5 && !state.is(BlockTags.WITHER_IMMUNE)) {
-                level.destroyBlock(pos, random.nextInt(4) == 0, this);
+            if (!state.isAir() && hardness >= 0 && hardness <= 5 && !state.is(BlockTags.WITHER_IMMUNE)
+                    && canSmash(state, hardness)) {
+                smashBlock(level, pos.immutable(), state);
             }
         }
+    }
+
+    /** Which blocks {@link #smashBlocks} may break, on top of the hardness and wither-immune limits. */
+    protected boolean canSmash(BlockState state, float hardness) {
+        return true;
+    }
+
+    /** Breaks one smashed block; a quarter of them drop. */
+    protected void smashBlock(ServerLevel level, BlockPos pos, BlockState state) {
+        level.destroyBlock(pos, random.nextInt(4) == 0, this);
+    }
+
+    /** Whether to smash its way forward right now (it has bumped into something). */
+    protected boolean wantsToSmash() {
+        return true;
     }
 
     private Vec3 horizontalTo(LivingEntity target) {

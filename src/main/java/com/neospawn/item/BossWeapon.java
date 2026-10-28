@@ -65,7 +65,9 @@ public class BossWeapon extends SwordItem {
         /** Heals you for part of every hit. */
         LIFESTEAL,
         /** The Behemoth Blade: every swing also strikes and launches every monster around the target. */
-        BEHEMOTH
+        BEHEMOTH,
+        /** The Gobbler's Jaw: also gobbles up the soft blocks around the target (if mobGriefing is on). */
+        GOBBLE
     }
 
     private final Effect effect;
@@ -202,6 +204,11 @@ public class BossWeapon extends SwordItem {
                 level.sendParticles(ParticleTypes.BUBBLE, target.getX(), target.getY() + 1, target.getZ(), 30, 0.4, 0.6, 0.4, 0.1);
             }
             case LIFESTEAL -> attacker.heal(4.0f);
+            case GOBBLE -> {
+                if (level.getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_MOBGRIEFING)) {
+                    com.neospawn.mob.GobblerBoss.gobbleAround(level, target.blockPosition(), 1, attacker);
+                }
+            }
             case BEHEMOTH -> {
                 level.sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY() + 1, target.getZ(), 8, 2.5, 0.5, 2.5, 0);
                 for (LivingEntity other : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5),

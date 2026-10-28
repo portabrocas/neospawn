@@ -359,6 +359,55 @@ def ant_hill(name, accent):
     return side, top
 
 
+# ------------------------------------------------------------------ the Gobbler stream: its drops
+
+RAMPS["pellet"] = [(120, 60, 10), (210, 130, 30), (250, 200, 70), (255, 236, 150), (255, 255, 236)]
+RAMPS["token"] = [(70, 40, 6), (150, 96, 16), (208, 150, 34), (240, 196, 70), (255, 240, 170)]
+
+
+def power_pellet():
+    """A glowing orb of crackling energy, bright at the core, with sparks flying off it."""
+    s = Sprite()
+    orb = {(x, y) for x in range(16) for y in range(16) if (x - 7.5) ** 2 + (y - 8.0) ** 2 <= 20}
+    s.part(orb, "pellet")
+    for (x, y) in orb:
+        d = (x - 6.5) ** 2 + (y - 6.5) ** 2
+        if d <= 3:
+            s.px[(x, y)] = ramp("pellet", 4)
+        elif d <= 7:
+            s.px[(x, y)] = ramp("pellet", 3)
+    for x, y in ((2, 2), (13, 3), (14, 12), (1, 11), (8, 1)):
+        s.put(x, y, ramp("pellet", 4))
+    for x, y in ((3, 3), (12, 4), (13, 11)):
+        s.put(x, y, ramp("pellet", 2))
+    return s.image()
+
+
+def arcade_token():
+    """A thick brass coin with a raised rim and an embossed star."""
+    s = Sprite()
+    coin = {(x, y) for x in range(16) for y in range(16) if (x - 7.5) ** 2 + (y - 7.5) ** 2 <= 36}
+    s.part(coin, "token")
+    inner = {(x, y) for (x, y) in coin if (x - 7.5) ** 2 + (y - 7.5) ** 2 <= 16}
+    s.part(inner, "token", outline=False, flat=1)
+    pts = []
+    for i in range(10):
+        a = -math.pi / 2 + i * math.pi / 5
+        r = 3.6 if i % 2 == 0 else 1.6
+        pts.append((7.5 + r * math.cos(a) + 0.5, 7.8 + r * math.sin(a) + 0.5))
+    star = poly_mask(pts)
+    s.part(star & inner, "token", outline=False, flat=3)
+    for (x, y) in star & inner:
+        if (x - 1, y) not in star or (x, y - 1) not in star:
+            s.px[(x, y)] = ramp("token", 4)  # the star's lit upper-left edges
+    s.put(5, 3, ramp("token", 4))  # rim glint
+    s.put(4, 4, ramp("token", 4))
+    return s.image()
+
+
+for name, fn in (("power_pellet", power_pellet), ("arcade_token", arcade_token)):
+    save(fn(), f"item/{name}.png")
+
 for name, fn in (("chitin_plate", chitin_plate), ("venom_gland", venom_gland), ("ectoplasm", ectoplasm),
                  ("glow_sac", glow_sac), ("insect_wing", insect_wing), ("dino_hide", dino_hide),
                  ("raptor_claw", raptor_claw), ("stink_gland", stink_gland), ("kaboom_core", kaboom_core),

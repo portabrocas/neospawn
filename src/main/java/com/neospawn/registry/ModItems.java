@@ -267,12 +267,20 @@ public final class ModItems {
             weapon("ninetail_blade", BossWeapon.Effect.LIFESTEAL, 26, -1.8f, 1),
             weapon("siege_hammer", BossWeapon.Effect.CRUSH, 44, -3.4f, 1),
             weapon("sniper_lance", BossWeapon.Effect.SEVER, 20, -2.4f, 5),
-            weapon("war_blade", BossWeapon.Effect.CLEAVE, 34, -2.6f, 1));
+            weapon("war_blade", BossWeapon.Effect.CLEAVE, 34, -2.6f, 1),
+            // The Gobbler stream: a hammer that eats the soft blocks around what it hits.
+            weapon("gobblers_jaw", BossWeapon.Effect.GOBBLE, 30, -3.2f, 1));
 
     public static DeferredItem<? extends Item> weapon(String name) {
         return BOSS_WEAPONS.stream().filter(w -> w.getId().getPath().equals(name)).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Unknown boss weapon " + name));
     }
+
+    // ---------------------------------------------------------------- the Gobbler's drops (the Gobbler stream)
+    public static final DeferredItem<com.neospawn.item.GobblerLoot.PowerPellet> POWER_PELLET = ITEMS.register("power_pellet",
+            () -> new com.neospawn.item.GobblerLoot.PowerPellet(new Item.Properties().stacksTo(16).rarity(Rarity.RARE)));
+    public static final DeferredItem<com.neospawn.item.GobblerLoot.ArcadeToken> ARCADE_TOKEN = ITEMS.register("arcade_token",
+            () -> new com.neospawn.item.GobblerLoot.ArcadeToken(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     // ---------------------------------------------------------------- realm charms (see docs/ROSTER.md)
     public static final DeferredItem<CharmItem> VERDANT_CHARM = charm("verdant_charm", Realm.UTOPIA, Rarity.UNCOMMON);

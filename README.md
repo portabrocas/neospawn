@@ -42,6 +42,9 @@ See [docs/ROSTER.md](docs/ROSTER.md) for every OreSpawn mob and ore and its NeoS
 - **Land bosses**: Tyrannosaurus, Brutosaurus, Allosaurus (calls raptor packs) and the kaiju
   Gorgantua (blue beam breath, smashes through terrain). All bosses have a boss bar, special
   attacks, and enrage below half health. Each drops a signature weapon.
+- **The Gobbler**: a giant chomping mini-boss that hops out of plains and forests at night, eats
+  wood, leaves, dirt and sand in its way, and roars up ghosts that drift through walls. Its
+  Power Pellet turns the tables: the ghosts flee and die to one hit.
 - **Sea bosses**: the Kraken (grabs and drowns you, ink clouds, whirlpools), the Leviathan
   (breaches and slams, tidal waves, storms) and the Sea Serpent (trident volleys, geysers).
   They spawn rarely in oceans.

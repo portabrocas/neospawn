@@ -40,7 +40,7 @@ PRESETS = {
     "claymore": ["ember_greatsword", "war_blade", "ascended_blade", "behemoth_blade"],
     "heavy_axe": ["titan_cleaver"],
     "double_axe": ["empress_battleaxe"],
-    "hammer": ["siege_hammer"],
+    "hammer": ["siege_hammer", "gobblers_jaw"],
     "mace": ["bone_crusher", "hercules_horn"],
     "lance": ["dread_lance"],
     "spear": ["plague_lance", "sniper_lance"],

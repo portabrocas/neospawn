@@ -38,6 +38,10 @@ public final class NeoSpawnClient {
         for (MobSpec spec : ModMobs.ALL) {
             if (spec.geo) {
                 event.registerEntityRenderer((EntityType<GeoBoss>) spec.type.get(), context -> new GeoBossRenderer(context, spec));
+            } else if (spec.id.equals("gobbler_ghost")) {
+                // The Gobbler's ghosts: the generated model, tinted per ghost.
+                event.registerEntityRenderer((EntityType<com.neospawn.mob.GobblerGhost>) (EntityType<?>) spec.type.get(),
+                        context -> new com.neospawn.client.renderer.GobblerGhostRenderer(context, spec));
             } else {
                 event.registerEntityRenderer((EntityType<Mob>) spec.type.get(), context -> new NeoMobRenderer<>(context, spec));
             }

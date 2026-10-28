@@ -33,7 +33,9 @@ public class ModLanguage extends LanguageProvider {
             Map.entry("king_scale_boots", "King's Scale Boots"),
             Map.entry("kings_fang", "King's Fang"),
             Map.entry("prospectors_charm", "Prospector's Charm"),
-            Map.entry("gorgantua_egg_fragment", "Gorgantua Egg Fragment"));
+            Map.entry("gorgantua_egg_fragment", "Gorgantua Egg Fragment"),
+            // The Gobbler stream
+            Map.entry("gobblers_jaw", "Gobbler's Jaw"));
 
     public ModLanguage(PackOutput output) {
         super(output, NeoSpawn.MODID, "en_us");
@@ -86,6 +88,11 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.drown", "Steals the target's breath");
         add("item.neospawn.boss_weapon.lifesteal", "Heals you on every hit");
         add("item.neospawn.boss_weapon.behemoth", "Every swing strikes and launches the monsters around your target");
+        // The Gobbler stream
+        add("item.neospawn.boss_weapon.gobble", "Gobbles up wood, leaves, dirt and sand around the target");
+        add("item.neospawn.power_pellet.tooltip", "Eat it: Speed II and Strength for 15 s. The Gobbler's ghosts flee from you and die to one hit");
+        add("item.neospawn.arcade_token.tooltip", "Found in the Gobbler's belly. Offer one at the Summoning Altar for a rematch");
+        add("emi.info.neospawn.gobbler", "The Gobbler hops out of plains and forests at night, eating every log, plank, leaf, dirt and sand block in its way (never stone). It roars up ghosts that drift through walls. Eat one of its Power Pellets and the ghosts flee, and die to a single hit. Summon it at the altar with a cake or an Arcade Token.");
         add("item.neospawn.royal_sigil.tooltip", "Use on the ground, in open sky, to summon The Ascended King");
         add("item.neospawn.gorgantua_egg.tooltip", "Use on the ground, far from home, to hatch Gorgantua");
         add("item.neospawn.dried_gorgantua_egg.tooltip", "Rehydrate it: craft it with a water bucket");

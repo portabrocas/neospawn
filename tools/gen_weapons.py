@@ -668,6 +668,33 @@ def squid_zooka():
     return s
 
 
+# ------------------------------------------------------------------ the Gobbler stream
+
+RAMPS["gobbler"] = [(110, 58, 6), (204, 128, 14), (248, 194, 34), (255, 226, 92), (255, 248, 196)]
+RAMPS["gobbler_mouth"] = [(30, 2, 8), (70, 8, 18), (120, 20, 34), (170, 40, 56), (220, 90, 110)]
+
+
+def gobblers_jaw():
+    """A hammer whose head is a little Gobbler: a fuzzy yellow ball with a toothy grin, a glaring eye and a quill."""
+    s = weapon("gobblers_jaw", "large")
+    haft(s, 9, "leather", "gold")
+    head = disc(10.8, 4.8, 4.6)
+    s.part(head, "gobbler")
+    mouth = {(x, y) for (x, y) in head if y in (5, 6) and x >= 9 and (x - 1, y) in head}
+    s.part(mouth, "gobbler_mouth", outline=False, flat=1)
+    for x in range(9, 16):
+        if (x, 5) in mouth and x % 2:
+            s.put(x, 5, ramp("ivory", 4))  # upper teeth
+        if (x, 6) in mouth and not x % 2:
+            s.put(x, 6, ramp("ivory", 3))  # lower teeth
+    s.put(12, 2, (24, 8, 4))  # the eye
+    s.put(13, 2, ramp("kaboom", 3))
+    s.put(11, 1, ramp("beetle", 1))  # the scowling brow
+    s.put(12, 1, ramp("beetle", 1))
+    s.part({(9, 0), (10, 0)}, "kaboom", outline=False, flat=3)  # a quill on top
+    return s
+
+
 RAMPS["bone_grip"] = [(92, 82, 64), (160, 148, 120), (206, 196, 170), (232, 224, 204), (252, 248, 236)]
 
 for name, fn in (("kings_fang", kings_fang), ("ember_greatsword", ember_greatsword), ("ninetail_blade", ninetail_blade),
@@ -681,7 +708,8 @@ for name, fn in (("kings_fang", kings_fang), ("ember_greatsword", ember_greatswo
                  ("plague_lance", plague_lance), ("sniper_lance", sniper_lance), ("tidebreaker", tidebreaker),
                  ("tidecaller", tidecaller), ("kraken_hook", hook), ("mothwing_glaive", mothwing_glaive),
                  ("mantis_scythe", mantis_scythe), ("stormcaller", staff), ("centipede_whip", whip),
-                 ("chainsaw", chainsaw), ("ray_gun", ray_gun), ("squid_zooka", squid_zooka)):
+                 ("chainsaw", chainsaw), ("ray_gun", ray_gun), ("squid_zooka", squid_zooka),
+                 ("gobblers_jaw", gobblers_jaw)):
     save(fn().image(), f"item/{name}.png")
 
 # Keep ModItemModels.WEAPON_STYLES in sync with these styles.

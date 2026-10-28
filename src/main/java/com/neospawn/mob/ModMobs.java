@@ -718,6 +718,25 @@ public final class ModMobs {
                 .attacks(BossAttack.TRIDENT_VOLLEY, BossAttack.GEYSER, BossAttack.GRAB, BossAttack.TAIL_SWIPE)
                 .drop(ModItems.SERPENT_FANG, 1, 1).drop(v(Items.TRIDENT), 1, 1, 0.3f).drop(v(Items.PRISMARINE_SHARD), 6, 12)
                 .egg(0x2A6A4A, 0xF2E84A).spawn("c:is_ocean", 1, 1, 1);
+
+        // ---------------------------------------------------------------- the Gobbler stream
+        // A mini-boss: a giant chomping ball that eats soft blocks on the chase and roars up ghosts. Night only.
+        boss("gobbler", "The Gobbler", look(Family.SPHERE).body(0, 30, 30).leg(0)
+                .colors(0xFCCE26, 0xD67C12, 0xEC5E18).eye(0xFF461E).scale(1.0f))
+                .geo("gobbler", 1.0f, GobblerBoss::new)
+                .size(2.8f, 2.8f).stats(900, 18, 0.32).armor(8).voice(Voice.BEAST).xp(600).smashesBlocks()
+                .minion("gobbler_ghost").bar(BossEvent.BossBarColor.YELLOW)
+                .attacks(BossAttack.CHARGE, BossAttack.LEAP_SLAM, BossAttack.SUMMON, BossAttack.ROAR)
+                .drop(ModItems.POWER_PELLET, 2, 4).drop(ModItems.weapon("gobblers_jaw"), 1, 1)
+                .drop(ModItems.ARCADE_TOKEN, 3, 6).drop(v(Items.GOLD_INGOT), 6, 12).drop(v(Items.EMERALD), 4, 8)
+                .drop(v(Items.DIAMOND), 2, 4)
+                .egg(0xFCCE26, 0xEC5E18).spawn("c:is_plains", 1, 1, 1).spawn("c:is_forest", 1, 1, 1);
+        // Its ghosts: drift through walls; frightened (and one-hit) while you're on a Power Pellet. Summoned only.
+        hostileFlyer("gobbler_ghost", "Gobbler Ghost", look(Family.SPHERE).body(0, 10, 10).leg(0)
+                .with(Extra.WISP).colors(0xF4F4F8, 0xD8D8E4, 0xFFFFFF).eye(0xF4F8FF).translucent().glow())
+                .custom(GobblerGhost::new)
+                .size(0.8f, 0.9f).stats(16, 4, 0.3).flySpeed(0.4).voice(Voice.GHOST).xp(4)
+                .egg(0xF4F4F8, 0xE8484A).drop(ModItems.ECTOPLASM, 0, 1);
     }
 
     // ---------------------------------------------------------------- who fights whom
@@ -815,6 +834,9 @@ public final class ModMobs {
             case HOSTILE_SWIMMER -> NeoHostileSwimmer::new;
             case BOSS, SEA_BOSS, SKY_BOSS -> spec.geo ? spec.geoFactory : NeoBoss::new;
         };
+        if (spec.customFactory != null) {
+            factory = spec.customFactory;
+        }
         EntityType.Builder<?> builder = EntityType.Builder.of(factory, category(spec))
                 .sized(spec.hitboxWidth, spec.hitboxHeight)
                 .clientTrackingRange(spec.isBoss() ? 16 : spec.hitboxWidth > 2 ? 12 : 8);

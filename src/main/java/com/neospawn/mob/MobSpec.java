@@ -237,6 +237,14 @@ public final class MobSpec {
         return this;
     }
 
+    /** A non-boss mob with its own entity class instead of the one its kind picks (the Gobbler's ghosts). */
+    @Nullable public net.minecraft.world.entity.EntityType.EntityFactory<? extends Mob> customFactory;
+
+    public <T extends Mob> MobSpec custom(net.minecraft.world.entity.EntityType.EntityFactory<T> factory) {
+        this.customFactory = factory;
+        return this;
+    }
+
     public MobSpec hunts(String... preyIds) {
         prey.addAll(List.of(preyIds));
         return this;

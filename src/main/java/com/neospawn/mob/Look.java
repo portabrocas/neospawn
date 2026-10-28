@@ -16,7 +16,9 @@ public final class Look {
     public enum Extra {
         EARS, LONG_EARS, HORNS, ANTLERS, CREST, PLATES, SPIKES, PINCERS, STINGER, ANTENNAE, MANDIBLES,
         TAIL_FAN, DORSAL, BEAK, TUSKS, HAMMER, FOUR_WINGS, LONG_HIND_LEGS, LONG_LEGS, FLAT, FUSE, PETALS,
-        LURE, BLADES, HOOD, WALKER, SNOUT, NINE_TAILS, CROWN, BASKET
+        LURE, BLADES, HOOD, WALKER, SNOUT, NINE_TAILS, CROWN, BASKET,
+        /** Spheres: wispy tendrils trailing underneath, like a ghost's hem (the Gobbler's ghosts). */
+        WISP
     }
 
     public final Family family;

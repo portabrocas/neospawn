@@ -1,0 +1,6 @@
+{
+  "parent": "neospawn:item/weapon_large",
+  "textures": {
+    "layer0": "neospawn:item/gobblers_jaw"
+  }
+}
