@@ -1,0 +1,105 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:verdant_charm"
+    },
+    "title": {
+      "text": "Ticket to Ride"
+    },
+    "description": {
+      "text": "Get a realm charm: the ants will take you somewhere new"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "utopia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:verdant_charm"
+            ]
+          }
+        ]
+      }
+    },
+    "mining_realm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:prospectors_charm"
+            ]
+          }
+        ]
+      }
+    },
+    "crystal_realm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:crystal_charm"
+            ]
+          }
+        ]
+      }
+    },
+    "village_realm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:sovereign_charm"
+            ]
+          }
+        ]
+      }
+    },
+    "danger_realm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:paragon_charm"
+            ]
+          }
+        ]
+      }
+    },
+    "chaos_isles": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:chaos_charm"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:root",
+  "requirements": [
+    [
+      "utopia",
+      "mining_realm",
+      "crystal_realm",
+      "village_realm",
+      "danger_realm",
+      "chaos_isles"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

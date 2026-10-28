@@ -319,6 +319,11 @@ public class ModRecipes extends RecipeProvider {
                 .pattern("GGG").pattern("GEG").pattern("GGG")
                 .define('G', Items.GLASS).define('E', ecto)
                 .unlockedBy("has_ectoplasm", has(ecto)).save(out, NeoSpawn.id("spectral_glass"));
+        // Spring Basket: woven from straw, filled with carrots and a painted egg.
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.SPRING_BASKET.get())
+                .pattern("CEC").pattern("WHW")
+                .define('C', Items.CARROT).define('E', ModItems.PAINTED_EGG.get()).define('W', Items.WHEAT).define('H', Items.HAY_BLOCK)
+                .unlockedBy("has_painted_egg", has(ModItems.PAINTED_EGG.get())).save(out, NeoSpawn.id("spring_basket"));
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.FIREFLY_JAR.get())
                 .pattern(" W ").pattern("PSP").pattern(" P ")
                 .define('W', Items.OAK_SLAB).define('P', Items.GLASS_PANE).define('S', glow)

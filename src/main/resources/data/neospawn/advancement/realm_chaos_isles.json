@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:chaos_charm"
+    },
+    "title": {
+      "text": "Lost in the Clouds"
+    },
+    "description": {
+      "text": "Reach the Chaos Isles"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:chaos_isles"
+      }
+    }
+  },
+  "parent": "neospawn:realm_danger_realm",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

@@ -38,6 +38,7 @@ public class ModBlockLoot extends BlockLootSubProvider {
         fossilOre(ModBlocks.DEEPSLATE_FOSSIL_ORE);
         dropSelf(ModBlocks.SUMMONING_ALTAR.get());
         dropSelf(ModBlocks.FIREFLY_JAR.get());
+        dropSelf(ModBlocks.SPRING_BASKET.get());
         dropWhenSilkTouch(ModBlocks.SPECTRAL_GLASS.get());
         ModBlocks.ANT_HILLS.forEach(hill -> dropSelf(hill.get()));
 

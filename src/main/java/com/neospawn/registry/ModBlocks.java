@@ -103,6 +103,10 @@ public final class ModBlocks {
     public static final DeferredBlock<FireflyJarBlock> FIREFLY_JAR = BLOCKS.register("firefly_jar",
             () -> new FireflyJarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(0.5f).noOcclusion()
                     .lightLevel(state -> 15)));
+    /** Straw, carrots and painted eggs: an Easter Bunny nearby lays eggs three times as often. */
+    public static final DeferredBlock<com.neospawn.block.SpringBasketBlock> SPRING_BASKET = BLOCKS.register("spring_basket",
+            () -> new com.neospawn.block.SpringBasketBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).strength(0.5f)
+                    .noOcclusion()));
 
     // Ant hills: each lets out its own kind of ant, for ant farms and enclosures.
     public static final DeferredBlock<AntHillBlock> WORKER_ANT_HILL = antHill("worker_ant_hill", "worker_ant", MapColor.DIRT);

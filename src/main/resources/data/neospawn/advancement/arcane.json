@@ -1,0 +1,43 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:arcane_chestplate"
+    },
+    "title": {
+      "text": "Arcane Scholar"
+    },
+    "description": {
+      "text": "Craft a piece of Arcane Tanzanite armor"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:arcane_helmet",
+              "neospawn:arcane_chestplate",
+              "neospawn:arcane_leggings",
+              "neospawn:arcane_boots"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:tanzanite",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

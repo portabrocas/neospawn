@@ -1,0 +1,47 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:chitin_chestplate"
+    },
+    "title": {
+      "text": "Dressed by the Wild"
+    },
+    "description": {
+      "text": "Craft armor from Chitin or Dino Hide"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:chitin_helmet",
+              "neospawn:chitin_chestplate",
+              "neospawn:chitin_leggings",
+              "neospawn:chitin_boots",
+              "neospawn:dino_hide_helmet",
+              "neospawn:dino_hide_chestplate",
+              "neospawn:dino_hide_leggings",
+              "neospawn:dino_hide_boots"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:ruby",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

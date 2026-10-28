@@ -47,6 +47,8 @@
   "block.neospawn.salt_ore": "Salt Ore",
   "block.neospawn.sky_fluff": "Sky Fluff",
   "block.neospawn.spectral_glass": "Spectral Glass",
+  "block.neospawn.spring_basket": "Spring Basket",
+  "block.neospawn.spring_basket.tooltip": "An Easter Bunny within %s blocks lays eggs %sx as often",
   "block.neospawn.starpetal": "Starpetal",
   "block.neospawn.stripped_aurelian_log": "Stripped Aurelian Log",
   "block.neospawn.stripped_aurelian_wood": "Stripped Aurelian Wood",

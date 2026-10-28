@@ -104,6 +104,13 @@ public class GearTests3 {
 
         ServerPlayer player = player(helper, new Vec3(6, 2, 6));
         wear(player, ModItems.ARCANE_ARMOR);
+        // Wearing the set earns the "Arcane Scholar" advancement and its XP reward; grant it up front so only the orbs
+        // are measured.
+        var scholar = helper.getLevel().getServer().getAdvancements().get(com.neospawn.NeoSpawn.id("arcane"));
+        if (scholar != null) {
+            player.getAdvancements().award(scholar, "c");
+        }
+        int before = player.totalExperience;
         int[] values = {10, 3, 3};
         for (int value : values) {
             ExperienceOrb orb = new ExperienceOrb(helper.getLevel(), player.getX(), player.getY(), player.getZ(), value);
@@ -112,7 +119,8 @@ public class GearTests3 {
             orb.playerTouch(player);
         }
         // 16 XP from orbs, +5, +1 (carry 1), +2.
-        helper.assertTrue(player.totalExperience == 24, "expected 24 XP with the Arcane set, got " + player.totalExperience);
+        int gained = player.totalExperience - before;
+        helper.assertTrue(gained == 24, "expected 24 XP with the Arcane set, got " + gained);
         player.discard();
         helper.succeed();
     }

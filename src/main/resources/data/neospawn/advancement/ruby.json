@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:ruby"
+    },
+    "title": {
+      "text": "Red Gold"
+    },
+    "description": {
+      "text": "Find a Ruby, deep underground"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:ruby"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:root",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

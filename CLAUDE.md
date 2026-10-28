@@ -31,6 +31,8 @@ Original code and art only: never use decompiled OreSpawn code or assets. The go
   from Kings. Don't go back to a bare rarity_filter for boss-guarded features. Utopia's terrain is
   `noise_settings/utopia` (meadow + floating islands above y 130); meadow blueprints set `ceiling()`, sky ones `skyY()`.
 - Field Guide pages: `assets/neospawn/books/field_guide.json` (given on first join).
+- Advancements (a NeoSpawn tab, XP rewards only) come from `tools/gen_advancements.py`; the pack's FTB quest book
+  completes NeoSpawn quests via these ids, so don't rename them. Run `runData` first: the script checks ids against the lang file.
 - The owner plays in Prism on a **Windows** gaming PC (moved from a MacBook at v0.21.3):
   `%APPDATA%\PrismLauncher\instances\NeoSpawnPack-Prism\minecraft\mods` (the instance name may differ on the PC).
   Install new builds by replacing `neospawn-*.jar` there (game closed).

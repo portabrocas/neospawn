@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:royal_drake_spawn_egg"
+    },
+    "title": {
+      "text": "Dragon Rider"
+    },
+    "description": {
+      "text": "Raise a Royal Drake and ride it"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:started_riding",
+      "conditions": {
+        "player": {
+          "vehicle": {
+            "type": "neospawn:royal_drake"
+          }
+        }
+      }
+    }
+  },
+  "parent": "neospawn:royal_egg",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 250
+  }
+}

@@ -59,6 +59,16 @@ public class ModBlockStates extends BlockStateProvider {
                         .uvs(4, dir.getAxis().isVertical() ? 4 : 6, 12, dir.getAxis().isVertical() ? 12 : 16)).end();
                 jar.element().from(5, 10, 5).to(11, 11, 11).allFaces((dir, face) -> face.texture("#lid").uvs(5, 5, 11, 11)).end();
                 simpleBlockWithItem(block, jar);
+            } else if (name.equals("spring_basket")) {
+                // A low woven basket (2..14 wide, 8 tall) heaped with straw, carrots and eggs.
+                var basket = models().getBuilder(name).parent(models().getExistingFile(mcLoc("block/block")))
+                        .texture("particle", modLoc("block/spring_basket_side")).texture("side", modLoc("block/spring_basket_side"))
+                        .texture("top", modLoc("block/spring_basket_top")).texture("bottom", mcLoc("block/hay_block_top"))
+                        .renderType("cutout");
+                basket.element().from(2, 0, 2).to(14, 8, 14).allFaces((dir, face) -> face
+                        .texture(dir == net.minecraft.core.Direction.UP ? "#top" : dir == net.minecraft.core.Direction.DOWN ? "#bottom" : "#side")
+                        .uvs(2, dir.getAxis().isVertical() ? 2 : 8, 14, dir.getAxis().isVertical() ? 14 : 16)).end();
+                simpleBlockWithItem(block, basket);
             } else if (name.endsWith("_ore")) {
                 // Ores draw a transparent overlay on the real vanilla stone or deepslate, so they blend into the world.
                 boolean deep = name.startsWith("deepslate_");

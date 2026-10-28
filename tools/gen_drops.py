@@ -371,4 +371,54 @@ for name, accent in ANTS.items():
     side, top = ant_hill(name, accent)
     save(side, f"block/{name}_side.png")
     save(top, f"block/{name}_top.png")
+
+
+# ------------------------------------------------------------------ Spring Basket (Easter Bunny egg booster)
+
+WICKER = [(70, 44, 20), (112, 74, 36), (150, 104, 52), (184, 136, 74), (214, 172, 108)]
+STRAW = [(150, 120, 30), (196, 162, 50), (226, 196, 80), (242, 218, 120), (252, 236, 170)]
+
+
+def spring_basket():
+    """Side: woven wicker with a braided rim (the model shows rows 8..15). Top: straw, carrots and painted eggs."""
+    side = Image.new("RGBA", (16, 16))
+    for x in range(16):
+        for y in range(16):
+            # Over-under weave: alternating raised and sunken strands every two texels.
+            over = ((x // 2) + (y // 2)) % 2 == 0
+            k = 3 if over else 1
+            if x % 2 == 1 and over:
+                k = 2
+            if y % 2 == 1 and not over:
+                k = 0
+            side.putpixel((x, y), WICKER[k] + (255,))
+    for x in range(16):  # braided rim across the top of the visible band
+        side.putpixel((x, 8), WICKER[4 if x % 3 else 2] + (255,))
+        side.putpixel((x, 9), WICKER[2 if x % 3 else 3] + (255,))
+    top = Image.new("RGBA", (16, 16))
+    rng = random.Random("spring_basket")
+    for x in range(16):
+        for y in range(16):
+            top.putpixel((x, y), STRAW[rng.choice((1, 2, 2, 3, 3, 4))] + (255,))
+    for (x, y) in ((2, 2), (3, 2), (2, 3), (13, 13), (12, 13), (13, 12), (2, 13), (13, 2)):
+        top.putpixel((x, y), WICKER[2] + (255,))  # rim corners
+    # Two carrots lying diagonally, green tops.
+    for x0, y0 in ((4, 5), (9, 9)):
+        for i in range(4):
+            top.putpixel((x0 + i, y0 + i // 2), (234, 120, 30, 255) if i < 3 else (200, 90, 20, 255))
+        top.putpixel((x0 - 1, y0 - 1), (70, 150, 40, 255))
+        top.putpixel((x0, y0 - 1), (90, 180, 50, 255))
+    # Painted eggs: pink with a stripe, sky blue with dots.
+    for (cx, cy, base, accent) in ((10, 4, (240, 150, 190), (255, 240, 120)), (5, 10, (130, 200, 240), (255, 255, 255))):
+        for dx, dy in ((0, 0), (1, 0), (0, 1), (1, 1), (0, -1), (1, -1)):
+            top.putpixel((cx + dx, cy + dy), base + (255,))
+        top.putpixel((cx, cy), accent + (255,))
+        top.putpixel((cx + 1, cy), accent + (255,))
+        top.putpixel((cx, cy - 1), tuple(min(255, c + 30) for c in base) + (255,))
+    return side, top
+
+
+basket_side, basket_top = spring_basket()
+save(basket_side, "block/spring_basket_side.png")
+save(basket_top, "block/spring_basket_top.png")
 print("mob drop art written")

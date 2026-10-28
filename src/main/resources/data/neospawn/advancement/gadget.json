@@ -1,0 +1,45 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:squid_zooka"
+    },
+    "title": {
+      "text": "Gadgeteer"
+    },
+    "description": {
+      "text": "Get your hands on a gadget"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:squid_zooka",
+              "neospawn:ray_gun",
+              "neospawn:chainsaw",
+              "neospawn:attitude_adjuster",
+              "neospawn:tunnel_charge",
+              "neospawn:mining_charge"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:root",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

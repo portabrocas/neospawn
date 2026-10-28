@@ -1,0 +1,45 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:ostrich_spawn_egg"
+    },
+    "title": {
+      "text": "Saddle Up"
+    },
+    "description": {
+      "text": "Tame a Gazelle or an Ostrich to ride"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "gazelle": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:gazelle"
+        }
+      }
+    },
+    "ostrich": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:ostrich"
+        }
+      }
+    }
+  },
+  "parent": "neospawn:dried_egg",
+  "requirements": [
+    [
+      "gazelle",
+      "ostrich"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

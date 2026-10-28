@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:field_guide"
+    },
+    "title": {
+      "text": "NeoSpawn"
+    },
+    "description": {
+      "text": "Giant bosses, strange creatures, new ores and six hidden realms"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "minecraft:textures/block/yellow_terracotta.png"
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ]
+}

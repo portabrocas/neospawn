@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:gorgantua_scale"
+    },
+    "title": {
+      "text": "Kaiju Killer"
+    },
+    "description": {
+      "text": "Defeat Gorgantua"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:gorgantua"
+        }
+      }
+    }
+  },
+  "parent": "neospawn:first_boss",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  }
+}

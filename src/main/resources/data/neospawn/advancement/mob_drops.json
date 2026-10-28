@@ -1,0 +1,48 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:chitin_plate"
+    },
+    "title": {
+      "text": "Waste Not"
+    },
+    "description": {
+      "text": "Collect a useful part from an everyday creature"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:chitin_plate",
+              "neospawn:venom_gland",
+              "neospawn:ectoplasm",
+              "neospawn:glow_sac",
+              "neospawn:insect_wing",
+              "neospawn:dino_hide",
+              "neospawn:raptor_claw",
+              "neospawn:stink_gland",
+              "neospawn:kaboom_core"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:root",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

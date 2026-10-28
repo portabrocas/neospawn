@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:royal_sigil"
+    },
+    "title": {
+      "text": "Summoner"
+    },
+    "description": {
+      "text": "Craft a Royal Sigil from King's Scales, a Nether Star and Paragon"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:royal_sigil"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:boss_empress",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

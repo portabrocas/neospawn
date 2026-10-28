@@ -64,6 +64,7 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.climbing_claws.tooltip", "Wear them (a hands slot) or hold them in your off hand: walk into a wall to climb, sneak to cling");
         add("item.neospawn.stink_bomb.tooltip", "Throw it: a sickening cloud that sends monsters running");
         add("item.neospawn.mining_charge.tooltip", "Use on a wall to blast a walkable 1x2 shaft 12 blocks deep. Ores are kept");
+        add("block.neospawn.spring_basket.tooltip", "An Easter Bunny within %s blocks lays eggs %sx as often");
         add("block.neospawn.ant_hill.tooltip", "%ss climb out until four are nearby. A redstone signal stops it");
         add("item.neospawn.boss_weapon.lightning", "Sometimes calls lightning on the target");
         add("item.neospawn.boss_weapon.bleed", "Makes the target bleed (Wither)");

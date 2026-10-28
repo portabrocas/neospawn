@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:spring_basket"
+    },
+    "title": {
+      "text": "Bunny Farmer"
+    },
+    "description": {
+      "text": "Place a Spring Basket near an Easter Bunny so it lays eggs three times as often"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "neospawn:spring_basket"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:painted_egg",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}
