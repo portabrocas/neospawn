@@ -4,6 +4,7 @@ import com.neospawn.NeoSpawn;
 import com.neospawn.item.BossSummonItem;
 import com.neospawn.item.BossWeapon;
 import com.neospawn.item.FossilEggItem;
+import com.neospawn.item.MobDropGear;
 import com.neospawn.item.Gadgets;
 import com.neospawn.item.DriedEggItem;
 import com.neospawn.item.FieldGuideItem;
@@ -14,6 +15,7 @@ import com.neospawn.item.ParagonBow;
 import com.neospawn.item.ParagonFishingRod;
 import com.neospawn.item.ParagonTools;
 import com.neospawn.item.SetArmorItem;
+import com.neospawn.item.TanzaniteTools;
 import com.neospawn.item.TunnelChargeItem;
 import com.neospawn.item.UtilityItems;
 import com.neospawn.item.ZooCageItem;
@@ -101,7 +103,18 @@ public final class ModItems {
     }
 
     public static final ToolSet RUBY_TOOLS = toolSet("ruby", RUBY_TIER);
-    public static final ToolSet TANZANITE_TOOLS = toolSet("tanzanite", TANZANITE_TIER);
+    // Tanzanite tools awaken free enchantments as they're used (see TanzaniteTools).
+    public static final ToolSet TANZANITE_TOOLS = new ToolSet("tanzanite",
+            ITEMS.register("tanzanite_sword", () -> new TanzaniteTools.Sword(TANZANITE_TIER, new Item.Properties()
+                    .attributes(SwordItem.createAttributes(TANZANITE_TIER, 3, -2.4f)))),
+            ITEMS.register("tanzanite_pickaxe", () -> new TanzaniteTools.Pickaxe(TANZANITE_TIER, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(TANZANITE_TIER, 1, -2.8f)))),
+            ITEMS.register("tanzanite_axe", () -> new TanzaniteTools.Axe(TANZANITE_TIER, new Item.Properties()
+                    .attributes(AxeItem.createAttributes(TANZANITE_TIER, 5, -3.0f)))),
+            ITEMS.register("tanzanite_shovel", () -> new TanzaniteTools.Shovel(TANZANITE_TIER, new Item.Properties()
+                    .attributes(ShovelItem.createAttributes(TANZANITE_TIER, 1.5f, -3.0f)))),
+            ITEMS.register("tanzanite_hoe", () -> new TanzaniteTools.Hoe(TANZANITE_TIER, new Item.Properties()
+                    .attributes(HoeItem.createAttributes(TANZANITE_TIER, -3.0f, 0.0f)))));
     public static final ToolSet TITANIUM_TOOLS = toolSet("titanium", TITANIUM_TIER);
     public static final ToolSet PARAGON_TOOLS = new ToolSet("paragon",
             ITEMS.register("paragon_sword", () -> new ParagonTools.Sword(PARAGON_TIER, paragonProps()
@@ -184,8 +197,43 @@ public final class ModItems {
             new SetArmorItem.Bonus(MobEffects.LUCK, 0)));
     /** No potion bonus: doubles picked-up experience instead (see SetArmorItem). */
     public static final ArmorSet EXPERIENCE_ARMOR = armorSet("experience", ModArmor.EXPERIENCE, 25, List.of());
+    // ---------------------------------------------------------------- from regular mobs' drops
+    public static final DeferredItem<Item> CHITIN_PLATE = ITEMS.registerSimpleItem("chitin_plate");
+    public static final DeferredItem<Item> VENOM_GLAND = ITEMS.registerSimpleItem("venom_gland");
+    public static final DeferredItem<Item> ECTOPLASM = ITEMS.registerSimpleItem("ectoplasm");
+    public static final DeferredItem<Item> GLOW_SAC = ITEMS.registerSimpleItem("glow_sac");
+    public static final DeferredItem<Item> INSECT_WING = ITEMS.registerSimpleItem("insect_wing");
+    public static final DeferredItem<Item> DINO_HIDE = ITEMS.registerSimpleItem("dino_hide");
+    public static final DeferredItem<Item> RAPTOR_CLAW = ITEMS.registerSimpleItem("raptor_claw");
+    public static final DeferredItem<Item> STINK_GLAND = ITEMS.registerSimpleItem("stink_gland");
+    public static final DeferredItem<Item> KABOOM_CORE = ITEMS.registerSimpleItem("kaboom_core",
+            new Item.Properties().rarity(Rarity.UNCOMMON));
+
+    public static final ArmorSet CHITIN_ARMOR = armorSet("chitin", ModArmor.CHITIN, 18, List.of(
+            new SetArmorItem.Bonus(MobEffects.DIG_SPEED, 0)), Item.Properties::new);
+    public static final ArmorSet DINO_HIDE_ARMOR = armorSet("dino_hide", ModArmor.DINO_HIDE, 16, List.of(
+            new SetArmorItem.Bonus(MobEffects.MOVEMENT_SPEED, 0)), Item.Properties::new);
+
+    public static final DeferredItem<MobDropGear.Antivenom> ANTIVENOM = ITEMS.register("antivenom",
+            () -> new MobDropGear.Antivenom(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<MobDropGear.GhostLantern> GHOST_LANTERN = ITEMS.register("ghost_lantern",
+            () -> new MobDropGear.GhostLantern(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<MobDropGear.FeatherfallCloak> FEATHERFALL_CLOAK = ITEMS.register("featherfall_cloak",
+            () -> new MobDropGear.FeatherfallCloak(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<MobDropGear.ClimbingClaws> CLIMBING_CLAWS = ITEMS.register("climbing_claws",
+            () -> new MobDropGear.ClimbingClaws(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<MobDropGear.StinkBombItem> STINK_BOMB = ITEMS.register("stink_bomb",
+            () -> new MobDropGear.StinkBombItem(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<TunnelChargeItem> MINING_CHARGE = ITEMS.register("mining_charge",
+            () -> new TunnelChargeItem(new Item.Properties().stacksTo(16), 12, 0, true, "mining_charge"));
+
+    // ---------------------------------------------------------------- Arcane Tanzanite (keep these ids stable: Utopia loot uses them)
+    /** No potion bonus: +50% experience and cheaper anvil work instead (see ArmorEvents). */
+    public static final ArmorSet ARCANE_ARMOR = armorSet("arcane", ModArmor.ARCANE, 33, List.of(),
+            () -> new Item.Properties().rarity(Rarity.RARE));
+
     public static final List<ArmorSet> ARMOR_SETS = List.of(KING_SCALE_ARMOR, PARAGON_ARMOR, GORGANTUA_SCALE_ARMOR,
-            EMPRESS_SCALE_ARMOR, EMERALD_ARMOR, EXPERIENCE_ARMOR);
+            EMPRESS_SCALE_ARMOR, EMERALD_ARMOR, EXPERIENCE_ARMOR, CHITIN_ARMOR, DINO_HIDE_ARMOR, ARCANE_ARMOR);
 
     // ---------------------------------------------------------------- boss weapons (dropped, not crafted)
     public static final DeferredItem<BossWeapon> KINGS_FANG = weapon("kings_fang", BossWeapon.Effect.LIGHTNING, 22, -2.4f, 1);
@@ -219,12 +267,20 @@ public final class ModItems {
             weapon("ninetail_blade", BossWeapon.Effect.LIFESTEAL, 26, -1.8f, 1),
             weapon("siege_hammer", BossWeapon.Effect.CRUSH, 44, -3.4f, 1),
             weapon("sniper_lance", BossWeapon.Effect.SEVER, 20, -2.4f, 5),
-            weapon("war_blade", BossWeapon.Effect.CLEAVE, 34, -2.6f, 1));
+            weapon("war_blade", BossWeapon.Effect.CLEAVE, 34, -2.6f, 1),
+            // The Gobbler stream: a hammer that eats the soft blocks around what it hits.
+            weapon("gobblers_jaw", BossWeapon.Effect.GOBBLE, 30, -3.2f, 1));
 
     public static DeferredItem<? extends Item> weapon(String name) {
         return BOSS_WEAPONS.stream().filter(w -> w.getId().getPath().equals(name)).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Unknown boss weapon " + name));
     }
+
+    // ---------------------------------------------------------------- the Gobbler's drops (the Gobbler stream)
+    public static final DeferredItem<com.neospawn.item.GobblerLoot.PowerPellet> POWER_PELLET = ITEMS.register("power_pellet",
+            () -> new com.neospawn.item.GobblerLoot.PowerPellet(new Item.Properties().stacksTo(16).rarity(Rarity.RARE)));
+    public static final DeferredItem<com.neospawn.item.GobblerLoot.ArcadeToken> ARCADE_TOKEN = ITEMS.register("arcade_token",
+            () -> new com.neospawn.item.GobblerLoot.ArcadeToken(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     // ---------------------------------------------------------------- realm charms (see docs/ROSTER.md)
     public static final DeferredItem<CharmItem> VERDANT_CHARM = charm("verdant_charm", Realm.UTOPIA, Rarity.UNCOMMON);
@@ -262,8 +318,13 @@ public final class ModItems {
     public static final DeferredItem<BossSummonItem> GORGANTUA_EGG = ITEMS.register("gorgantua_egg",
             () -> new BossSummonItem("gorgantua", "message.neospawn.gorgantua_hatched", paragonProps().stacksTo(1)));
 
+    // ---------------------------------------------------------------- Rift Gun (stream B): a rare find, never crafted
+    public static final DeferredItem<Gadgets.RiftGun> RIFT_GUN = ITEMS.register("rift_gun",
+            () -> new Gadgets.RiftGun(new Item.Properties().durability(500).rarity(Rarity.EPIC)));
+
     // ---------------------------------------------------------------- block items
     public static final List<DeferredItem<BlockItem>> BLOCK_ITEMS = ModBlocks.BLOCKS.getEntries().stream()
+            .filter(block -> !block.getId().getPath().startsWith("potted_")) // Utopia: flower pots hold the flower's own item
             .map(block -> ITEMS.registerSimpleBlockItem((DeferredBlock<?>) block))
             .toList();
 
@@ -283,18 +344,24 @@ public final class ModItems {
     }
 
     private static ArmorSet armorSet(String name, Holder<ArmorMaterial> material, int durability, List<SetArmorItem.Bonus> bonuses) {
+        return armorSet(name, material, durability, bonuses, ModItems::paragonProps);
+    }
+
+    private static ArmorSet armorSet(String name, Holder<ArmorMaterial> material, int durability, List<SetArmorItem.Bonus> bonuses,
+                                     java.util.function.Supplier<Item.Properties> props) {
         return new ArmorSet(name,
-                armorPiece(name, "helmet", ArmorItem.Type.HELMET, material, durability, bonuses),
-                armorPiece(name, "chestplate", ArmorItem.Type.CHESTPLATE, material, durability, bonuses),
-                armorPiece(name, "leggings", ArmorItem.Type.LEGGINGS, material, durability, bonuses),
-                armorPiece(name, "boots", ArmorItem.Type.BOOTS, material, durability, bonuses));
+                armorPiece(name, "helmet", ArmorItem.Type.HELMET, material, durability, bonuses, props),
+                armorPiece(name, "chestplate", ArmorItem.Type.CHESTPLATE, material, durability, bonuses, props),
+                armorPiece(name, "leggings", ArmorItem.Type.LEGGINGS, material, durability, bonuses, props),
+                armorPiece(name, "boots", ArmorItem.Type.BOOTS, material, durability, bonuses, props));
     }
 
     private static DeferredItem<SetArmorItem> armorPiece(String set, String piece, ArmorItem.Type type,
                                                          Holder<ArmorMaterial> material, int durability,
-                                                         List<SetArmorItem.Bonus> bonuses) {
+                                                         List<SetArmorItem.Bonus> bonuses,
+                                                         java.util.function.Supplier<Item.Properties> props) {
         return ITEMS.register(set + "_" + piece, () -> new SetArmorItem(material, type, set, bonuses,
-                paragonProps().durability(type.getDurability(durability))));
+                props.get().durability(type.getDurability(durability))));
     }
 
     private static DeferredItem<BossWeapon> weapon(String name, BossWeapon.Effect effect, float damage, float speed, float reach) {

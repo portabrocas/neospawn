@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aurelian_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neospawn:aurelian_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neospawn:aurelian_fence_gate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_aurelian_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neospawn:aurelian_fence_gate"
+    ]
+  }
+}

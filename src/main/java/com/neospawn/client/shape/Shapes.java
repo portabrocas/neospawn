@@ -756,7 +756,9 @@ public final class Shapes {
     static Shape sphere(Look l) {
         Shape s = new Shape();
         float d = l.width, leg = l.leg;
-        Part core = s.root("core", 0, 24 - leg - d / 2 - (leg == 0 ? 2 : 0), 0).anim(leg == 0 ? Anim.BOB : Anim.NONE)
+        // Floating spheres hover; a wispy one hovers higher, so its tendrils clear the ground.
+        float hover = leg == 0 ? (l.has(Extra.WISP) ? 8 : 2) : 0;
+        Part core = s.root("core", 0, 24 - leg - d / 2 - hover, 0).anim(leg == 0 ? Anim.BOB : Anim.NONE)
                 .box(Role.BASE, -d / 2, -d / 2, -d / 2, d, d, d)
                 .box(Role.BASE, -d / 2 + 1, -d / 2 - 1, -d / 2 + 1, d - 2, d + 2, d - 2)
                 .box(Role.BASE, -d / 2 - 1, -d / 2 + 1, -d / 2 + 1, d + 2, d - 2, d - 2)
@@ -783,6 +785,19 @@ public final class Shapes {
         }
         if (l.has(Extra.ANTENNAE)) {
             antennae(core, d / 4, -d / 2, 0, 5);
+        }
+        if (l.has(Extra.WISP)) {
+            // Big glowing eyes, then a ragged hem: five tendrils hanging from the underside, each drifting on its own.
+            for (int side = -1; side <= 1; side += 2) {
+                core.box(Role.EYE, side * d / 4 - 1, -d / 6 - 1.5f, -d / 2 - 1.2f, 2, 3, 1);
+            }
+            float[][] spots = {{-d / 4, -d / 4}, {d / 4, -d / 4}, {-d / 4, d / 4}, {d / 4, d / 4}, {0, 0}};
+            for (int i = 0; i < spots.length; i++) {
+                float len = i == 4 ? 5 : 3 + (i % 2);
+                core.child("wisp", spots[i][0], d / 2, spots[i][1]).anim(Anim.TENTACLE).index(i)
+                        .box(Role.BASE, -1.5f, -1, -1.5f, 3, len, 3)
+                        .box(Role.BASE, -0.5f, len - 1, -0.5f, 1, 2, 1);
+            }
         }
         if (leg > 0) {
             for (int side = -1; side <= 1; side += 2) {

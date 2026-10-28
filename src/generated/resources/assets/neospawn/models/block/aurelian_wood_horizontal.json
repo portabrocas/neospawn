@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "neospawn:block/aurelian_log",
+    "side": "neospawn:block/aurelian_log"
+  }
+}

@@ -43,6 +43,18 @@ public final class ModArmor {
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> EXPERIENCE = register("experience",
             3, 6, 8, 3, 40, 1.0f, 0.0f, () -> Ingredient.of(Items.EXPERIENCE_BOTTLE));
 
+    /** Bug chitin: iron-level but light, and hard to knock around. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> CHITIN = register("chitin",
+            2, 5, 6, 2, 12, 0.0f, 0.1f, () -> Ingredient.of(ModItems.CHITIN_PLATE.get()));
+
+    /** Thick dinosaur hide: between leather and iron, a little tough. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> DINO_HIDE = register("dino_hide",
+            2, 4, 5, 2, 15, 1.0f, 0.0f, () -> Ingredient.of(ModItems.DINO_HIDE.get()));
+
+    /** Arcane Tanzanite: diamond-level, the most enchantable set; boosts experience and cheapens anvil work. */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> ARCANE = register("arcane",
+            3, 6, 8, 3, 45, 2.0f, 0.0f, () -> Ingredient.of(ModItems.TANZANITE.get()));
+
     /** Redstone Sneakers: iron-strong boots with a redstone kick. */
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> REDSTONE = register("redstone",
             2, 5, 6, 2, 15, 0.0f, 0.0f, () -> Ingredient.of(Items.REDSTONE));

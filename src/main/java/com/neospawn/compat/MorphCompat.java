@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.ModList;
 
 import java.lang.reflect.Method;
+import java.util.Set;
 
 /**
  * Morph (iChun's Morph V2) support: when Morph is installed, every NeoSpawn mob is registered with the traits
@@ -118,9 +119,50 @@ public final class MorphCompat {
             slow.addProperty("resetFallDistance", true);
             traits.add(slow);
         }
+        // Land animals at home in water swim well without a land penalty; crabs and frogs also breathe underwater.
+        // The Sky Shark flies, but it's still a shark.
+        if (!swims && (AMPHIBIOUS.contains(spec.id) || spec.id.equals("sky_shark"))) {
+            JsonObject swimmer = trait("traitSwimmer");
+            swimmer.addProperty("swimMultiplier", 1.5);
+            swimmer.addProperty("landMultiplier", 1.0);
+            traits.add(swimmer);
+            if (!spec.id.equals("bath_duck") && !spec.id.equals("beaver")) {
+                traits.add(trait("traitWaterBreather"));
+            }
+        }
+        if (UNDEAD.contains(spec.id)) {
+            traits.add(trait("traitUndead"));
+        }
+        // A venomous mob shrugs off its own venom.
+        if (effect != null && !spec.isBoss()) {
+            JsonObject resist = trait("traitMobEffectResistance");
+            resist.addProperty("effectId", effect);
+            traits.add(resist);
+        }
+        // Bombs and machines (the mechs and the Siege, Sniper and War Bots) take no blast damage.
+        if (spec.has(Ability.EXPLODE) || spec.mechanical || spec.id.endsWith("_bot")) {
+            traits.add(trait("traitImmunityExplosive"));
+        }
+        // Bosses and apex predators send ordinary monsters running.
+        if (spec.isBoss() || APEX.contains(spec.id)) {
+            JsonObject scare = trait("traitIntimidate");
+            scare.addProperty("classToIntimidate", "net.minecraft.world.entity.monster.Monster");
+            scare.addProperty("distance", spec.isBoss() ? 16.0f : 8.0f);
+            scare.addProperty("farRunSpeed", 1.0);
+            scare.addProperty("nearRunSpeed", 1.3);
+            traits.add(scare);
+        }
+        // Morphed into a mount, you can carry a friend.
+        if (spec.mount != MobSpec.MountType.NONE) {
+            traits.add(trait("abilityRideable", "requiresSaddle", false));
+        }
         data.add("traits", traits);
         return data;
     }
+
+    private static final Set<String> AMPHIBIOUS = Set.of("bath_duck", "beaver", "bullfrog", "giant_crab");
+    private static final Set<String> UNDEAD = Set.of("specter", "bone_specter", "crypt_beast", "void_reaper");
+    private static final Set<String> APEX = Set.of("swift_raptor", "baryonyx", "cryolophosaurus", "sky_shark");
 
     private static String effect(MobSpec spec) {
         if (spec.has(Ability.POISON) || spec.has(Ability.SPIT) && !spec.has(Ability.FIRE)) return "minecraft:poison";

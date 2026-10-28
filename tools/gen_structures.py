@@ -13,7 +13,7 @@ DATA = os.path.join(os.path.dirname(__file__), "..", "src", "main", "resources",
 def write(path, obj):
     full = os.path.join(DATA, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
-    with open(full, "w") as f:
+    with open(full, "w", encoding="utf-8", newline="\n") as f:
         json.dump(obj, f, indent=2)
 
 
@@ -28,7 +28,17 @@ STRUCTURES = {
     "sky_shrine": (["neospawn:chaos_isles"], "surface_structures", "none", 14, 5, 51627),
     "ruined_crypt": (["#minecraft:is_overworld"], "surface_structures", "beard_thin", 36, 12, 51628),
     "sunken_vault": (["#minecraft:is_overworld"], "underground_structures", "none", 46, 16, 51629),
+    # Utopia. The boss trees are spaced like villages: at most one King per 24x24-chunk region, never closer than
+    # 10 chunks (160 blocks) to the next; Empresses one per 20x20 and 8 apart, and kept 6 chunks from any King.
+    # Boss trees are far apart so a simulation distance of 12 (25x25 chunks) holds about one of each, not four.
+    "tree_of_goodness": (["neospawn:utopia"], "surface_structures", "beard_thin", 40, 16, 51630),
+    "empress_tree": (["neospawn:utopia"], "surface_structures", "beard_thin", 32, 12, 51631),
+    "gilded_gazebo": (["neospawn:utopia"], "surface_structures", "beard_thin", 12, 4, 51632),
+    "honey_orchard": (["neospawn:utopia"], "surface_structures", "beard_thin", 16, 6, 51633),
+    "sunlit_library": (["neospawn:utopia"], "surface_structures", "beard_thin", 22, 8, 51634),
+    "sky_temple": (["neospawn:utopia"], "surface_structures", "none", 18, 6, 51635),
 }
+EXCLUSIONS = {"empress_tree": ("neospawn:tree_of_goodness", 10)}
 
 for name, (biomes, step, adapt, spacing, separation, salt) in STRUCTURES.items():
     write(f"tags/worldgen/biome/has_structure/{name}.json", {"values": biomes})
@@ -37,7 +47,9 @@ for name, (biomes, step, adapt, spacing, separation, salt) in STRUCTURES.items()
         "step": step, "terrain_adaptation": adapt, "spawn_overrides": {}})
     write(f"worldgen/structure_set/{name}.json", {
         "structures": [{"structure": f"neospawn:{name}", "weight": 1}],
-        "placement": {"type": "minecraft:random_spread", "spacing": spacing, "separation": separation, "salt": salt}})
+        "placement": dict({"type": "minecraft:random_spread", "spacing": spacing, "separation": separation, "salt": salt},
+                          **({"exclusion_zone": {"other_set": EXCLUSIONS[name][0], "chunk_count": EXCLUSIONS[name][1]}}
+                             if name in EXCLUSIONS else {}))})
 
 
 # ------------------------------------------------------------------ loot helpers
@@ -195,10 +207,52 @@ LOOT = {
         chance(item("prospectors_charm"), 0.3), chance(item("minecraft:enchanted_golden_apple"), 0.15)),
 }
 
+# ---------------------------------------------------------------- Utopia
+# supply < garden < library < vault. The realm's charms (Sovereign, Paragon) stay in the guarded trees; the vault
+# holds the way on to the Mining Realm.
+LOOT.update({
+    "utopia_supply": table(
+        pool((2, 4), item("minecraft:bread", 2, 5, 2), item("minecraft:honey_bottle", 1, 3, 3), item("minecraft:honeycomb", 2, 5, 2),
+             item("minecraft:apple", 2, 6, 2), item("minecraft:golden_carrot", 1, 3, 2), item("minecraft:bone_meal", 3, 8, 2),
+             item("sunbloom", 1, 3, 2), item("honeybell", 1, 3, 2), item("aurelian_sapling", 1, 2, 1),
+             item("minecraft:gold_nugget", 6, 18, 2), item("sky_fluff", 2, 6, 1))),
+    "utopia_garden": table(
+        pool((3, 5), item("minecraft:gold_ingot", 2, 6, 3), item("minecraft:golden_apple", 1, 2, 2), item("minecraft:emerald", 2, 6, 2),
+             item("starpetal", 1, 3, 2), item("aurelian_sapling", 1, 3, 2), item("minecraft:glistering_melon_slice", 2, 4, 2),
+             item("minecraft:diamond", 1, 2, 1), item("ruby", 1, 3, 1), book(10, 25, 2)),
+        chance(enchanted("minecraft:golden_hoe", 15, 30), 0.25)),
+    "utopia_library": table(
+        pool((3, 5), item("minecraft:book", 2, 6, 3), book(20, 30, 4), item("minecraft:experience_bottle", 3, 8, 3),
+             item("tanzanite", 2, 5, 3), item("minecraft:amethyst_shard", 4, 10, 2), item("minecraft:lapis_lazuli", 6, 16, 2),
+             item("minecraft:ender_pearl", 1, 3, 1)),
+        pool(1, enchanted("arcane_helmet", 20, 30), enchanted("arcane_chestplate", 20, 30), enchanted("arcane_leggings", 20, 30),
+             enchanted("arcane_boots", 20, 30), enchanted("tanzanite_pickaxe", 20, 30), enchanted("tanzanite_sword", 20, 30)),
+        chance(item("tanzanite_block"), 0.3)),
+    "utopia_vault": table(
+        pool((3, 5), item("minecraft:diamond", 2, 6, 3), item("minecraft:gold_block", 1, 3, 3), item("minecraft:golden_apple", 2, 4, 2),
+             item("ruby", 2, 5, 2), item("tanzanite", 2, 5, 2), item("minecraft:emerald_block", 1, 2, 1),
+             item("minecraft:enchanted_golden_apple", 1, 1, 1)),
+        pool(1, enchanted("minecraft:diamond_sword", 25, 35), enchanted("minecraft:diamond_pickaxe", 25, 35),
+             enchanted("minecraft:golden_chestplate", 30, 39), enchanted("arcane_chestplate", 25, 35)),
+        chance(item("prospectors_charm"), 0.1)),
+    # The guarded trees (moved here from gen_realms.py when they became blueprints).
+    "tree_of_goodness": table(
+        pool(1, item("minecraft:golden_apple", 2, 5)), pool(1, item("king_scale", 4, 8)), pool(1, item("minecraft:diamond", 4, 8)),
+        pool(1, item("minecraft:emerald", 8, 16)),
+        chance(item("sovereign_charm"), 0.5), chance(item("minecraft:enchanted_golden_apple"), 0.3)),
+    "empress_tree": table(
+        pool(1, item("empress_scale", 4, 8)), pool(1, item("minecraft:diamond", 6, 12)), pool(1, item("minecraft:amethyst_block", 4, 8)),
+        chance(item("paragon_charm"), 0.4), chance(item("minecraft:enchanted_golden_apple"), 0.5)),
+})
+
 # Cristian's Phone: a rare find in the hardest vaults.
 for vault, p in (("mine_vault", 0.05), ("spire_treasure", 0.08), ("fortress_vault", 0.06), ("arena_vault", 0.10),
-                 ("sanctum_relic", 0.06), ("shrine_chaos", 0.08), ("crypt_treasure", 0.04), ("vault_treasure", 0.05)):
+                 ("sanctum_relic", 0.06), ("shrine_chaos", 0.08), ("crypt_treasure", 0.04), ("vault_treasure", 0.05), ("utopia_vault", 0.03)):
     LOOT[vault]["pools"].append(chance(item("cristian_phone"), p))
+
+# The Rift Gun: rarer still, never crafted.
+for vault, p in (("arena_vault", 0.06), ("vault_treasure", 0.04), ("utopia_vault", 0.04), ("shrine_chaos", 0.05)):
+    LOOT[vault]["pools"].append(chance(item("rift_gun"), p))
 
 for name, loot in LOOT.items():
     write(f"loot_table/chests/{name}.json", loot)

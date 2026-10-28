@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "neospawn:verdant_charm",
+    "neospawn:prospectors_charm",
+    "neospawn:crystal_charm",
+    "neospawn:sovereign_charm",
+    "neospawn:paragon_charm",
+    "neospawn:chaos_charm",
+    "neospawn:creeper_repellent",
+    "neospawn:kraken_repellent",
+    "neospawn:bug_repellent"
+  ]
+}

@@ -1,0 +1,346 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "creatures"
+	group: ""
+	icon: {
+		count: 1
+		id: "neospawn:painted_egg"
+	}
+	id: "213CD2B6F880FAFF"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "765CB72408B70B82"
+			rewards: [
+				{
+					id: "5F7A1A2DB1E723A2"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 8
+					id: "4E2EDD6530B7B781"
+					item: {
+						count: 8
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:dried_egg"
+					criterion: ""
+					id: "C231353412A02040"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"765CB72408B70B82"
+			]
+			id: "52D182457DF516F7"
+			rewards: [
+				{
+					id: "14AC20BED0D43169"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "94EA6B4C147ED019"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "4E6D64A2FD4AA969"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:painted_egg"
+					criterion: ""
+					id: "97AD8FF28C6D8BCD"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"765CB72408B70B82"
+			]
+			id: "54A9356DA29E0224"
+			rewards: [
+				{
+					id: "F761BD19D1FF5522"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "797032A283B2AF7E"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "C55D40327EDA5613"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:zoo_cage"
+					criterion: ""
+					id: "E213553FBA4D32C4"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"52D182457DF516F7"
+				"54A9356DA29E0224"
+			]
+			id: "3BCF8C190B856397"
+			rewards: [
+				{
+					id: "02E2D76DC5AF2F2C"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "C937C0496415D62F"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "E127009A8F86DED5"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			shape: "heart"
+			size: 1.3d
+			tasks: [
+				{
+					advancement: "neospawn:spring_basket"
+					criterion: ""
+					id: "F092B4824AFEA417"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"54A9356DA29E0224"
+			]
+			id: "5C95262A756C2CE0"
+			rewards: [
+				{
+					id: "7E621DBA1684F048"
+					type: "xp"
+					xp: 150
+				}
+				{
+					count: 6
+					id: "801C89FBDAAF920C"
+					item: {
+						count: 6
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "30834A84569E5283"
+					item: {
+						count: 8
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:tame_mount"
+					criterion: ""
+					id: "C2D78652F4045403"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"5C95262A756C2CE0"
+			]
+			id: "4E7683DE8A73C78B"
+			rewards: [
+				{
+					id: "8F3FCF79A848E316"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "D5F2C531C2769785"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "D3F113895B2B4C74"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:sky_mount"
+					criterion: ""
+					id: "E7FC60FC0999A501"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"5C95262A756C2CE0"
+			]
+			id: "70AC77B059CA53B1"
+			rewards: [
+				{
+					id: "C7D8E6DC370805E5"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "98F1766C5EC8C515"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "CBA575E4D560320D"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:royal_egg"
+					criterion: ""
+					id: "6DF6E585D57174A7"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 3.5d
+		}
+		{
+			dependencies: [
+				"70AC77B059CA53B1"
+			]
+			id: "16DB7B77AEC7769A"
+			rewards: [
+				{
+					id: "ADF0EB574E2DA590"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "447029B6C357A14A"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "2468E79887A4D8E9"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "B784E61DC9C4715D"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					advancement: "neospawn:royal_drake"
+					criterion: ""
+					id: "1D76FA1B8EFEB104"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 3.5d
+		}
+	]
+}

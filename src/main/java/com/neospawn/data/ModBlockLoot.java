@@ -37,6 +37,10 @@ public class ModBlockLoot extends BlockLootSubProvider {
         fossilOre(ModBlocks.FOSSIL_ORE);
         fossilOre(ModBlocks.DEEPSLATE_FOSSIL_ORE);
         dropSelf(ModBlocks.SUMMONING_ALTAR.get());
+        dropSelf(ModBlocks.FIREFLY_JAR.get());
+        dropSelf(ModBlocks.SPRING_BASKET.get());
+        dropWhenSilkTouch(ModBlocks.SPECTRAL_GLASS.get());
+        ModBlocks.ANT_HILLS.forEach(hill -> dropSelf(hill.get()));
 
         dropSelf(ModBlocks.DUPLICATOR_LOG.get());
         dropSelf(ModBlocks.DUPLICATOR_CORE.get());
@@ -50,6 +54,25 @@ public class ModBlockLoot extends BlockLootSubProvider {
                 ModBlocks.TITANIUM_BLOCK, ModBlocks.URANIUM_BLOCK, ModBlocks.SALT_BLOCK, ModBlocks.PARAGON_BLOCK)) {
             dropSelf(storage.get());
         }
+        utopia();
+    }
+
+    // ---------------------------------------------------------------- Utopia
+    private void utopia() {
+        add(ModBlocks.GOLDEN_GRASS.get(), createSingleItemTableWithSilkTouch(ModBlocks.GOLDEN_GRASS.get(), net.minecraft.world.level.block.Blocks.DIRT));
+        dropSelf(ModBlocks.SKY_FLUFF.get());
+        ModBlocks.UTOPIA_FLOWERS.forEach(flower -> dropSelf(flower.get()));
+        ModBlocks.UTOPIA_POTS.forEach(pot -> dropPottedContents(pot.get()));
+        for (DeferredBlock<? extends Block> wood : List.of(ModBlocks.AURELIAN_LOG, ModBlocks.AURELIAN_WOOD, ModBlocks.STRIPPED_AURELIAN_LOG,
+                ModBlocks.STRIPPED_AURELIAN_WOOD, ModBlocks.AURELIAN_PLANKS, ModBlocks.AURELIAN_STAIRS, ModBlocks.AURELIAN_FENCE,
+                ModBlocks.AURELIAN_FENCE_GATE, ModBlocks.AURELIAN_TRAPDOOR, ModBlocks.AURELIAN_BUTTON, ModBlocks.AURELIAN_PRESSURE_PLATE,
+                ModBlocks.AURELIAN_SAPLING)) {
+            dropSelf(wood.get());
+        }
+        add(ModBlocks.AURELIAN_SLAB.get(), createSlabItemTable(ModBlocks.AURELIAN_SLAB.get()));
+        add(ModBlocks.AURELIAN_DOOR.get(), createDoorTable(ModBlocks.AURELIAN_DOOR.get()));
+        add(ModBlocks.AURELIAN_LEAVES.get(), createLeavesDrops(ModBlocks.AURELIAN_LEAVES.get(), ModBlocks.AURELIAN_SAPLING.get(),
+                0.05f, 0.0625f, 0.083f, 0.1f));
     }
 
     /** Fossil Ore: a Fossilized Egg, plus a 4% chance of a Gorgantua Egg Fragment (unless silk-touched). */

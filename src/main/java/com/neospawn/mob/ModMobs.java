@@ -138,11 +138,13 @@ public final class ModMobs {
                 .with(Extra.EARS).colors(0x1A1A1A, 0xFFFFFF, 0xFFFFFF).pattern(Pattern.STRIPES))
                 .size(0.55f, 0.6f).stats(20, 4, 0.3).temper(Temper.NEUTRAL).voice(Voice.BEAST)
                 .abilities(Ability.NAUSEA).tameWith(v(Items.EGG))
-                .egg(0x1A1A1A, 0xFFFFFF).spawn("c:is_swamp", 4, 1, 2).spawn("c:is_forest", 2, 1, 1);
+                .egg(0x1A1A1A, 0xFFFFFF).spawn("c:is_swamp", 4, 1, 2).spawn("c:is_forest", 2, 1, 1)
+                .drop(ModItems.STINK_GLAND, 1, 1);
         animal("cricket", "Cricket", look(Family.INSECT).body(6, 3, 3).leg(4)
                 .with(Extra.LONG_HIND_LEGS, Extra.ANTENNAE).colors(0x5E4A2A, 0x3A2C16, 0x8B6D3F).scale(0.7f))
                 .size(0.4f, 0.3f).stats(4, 0, 0.3).voice(Voice.BUG).breed(v(Items.WHEAT_SEEDS))
-                .egg(0x5E4A2A, 0x8B6D3F).spawn("c:is_plains", 6, 2, 4);
+                .egg(0x5E4A2A, 0x8B6D3F).spawn("c:is_plains", 6, 2, 4)
+                .drop(ModItems.CHITIN_PLATE, 0, 1);
         animal("brookdrake", "Brookdrake", look(Family.QUADRUPED).body(12, 5, 6).leg(3).head(5).snout(3).tail(12)
                 .with(Extra.CREST).colors(0x2F7F8F, 0x174A55, 0xF2C14E).pattern(Pattern.SCALES))
                 .size(0.8f, 0.5f).stats(24, 5, 0.28).temper(Temper.NEUTRAL).voice(Voice.REPTILE).tameWith(v(Items.COD))
@@ -151,27 +153,32 @@ public final class ModMobs {
                 .colors(0x7C8A5C, 0x5A6640, 0xD8D2B0).belly(0xCFC8A8).scale(2.0f))
                 .size(2.6f, 4.5f).stats(80, 0, 0.18).voice(Voice.BIG_DINO).breed(v(Items.WHEAT))
                 .drop(v(Items.BEEF), 4, 8).drop(v(Items.LEATHER), 2, 5).drop(v(Items.BONE), 2, 4)
-                .egg(0x7C8A5C, 0xD8D2B0).spawn("c:is_plains", 2, 1, 2).spawn("c:is_savanna", 2, 1, 2);
+                .egg(0x7C8A5C, 0xD8D2B0).spawn("c:is_plains", 2, 1, 2).spawn("c:is_savanna", 2, 1, 2)
+                .drop(ModItems.DINO_HIDE, 1, 3);
         animal("spikeback", "Spikeback", look(Family.QUADRUPED).body(18, 10, 12).leg(8).head(5).snout(2).tail(14)
                 .with(Extra.PLATES, Extra.SPIKES).colors(0x6E7F3A, 0x3F4A1F, 0xC8642B).scale(1.5f))
                 .size(1.6f, 2.2f).stats(60, 10, 0.2).armor(6).temper(Temper.NEUTRAL).voice(Voice.BIG_DINO).breed(v(Items.WHEAT))
                 .drop(v(Items.BEEF), 2, 5).drop(v(Items.BONE), 1, 3)
-                .egg(0x6E7F3A, 0xC8642B).spawn("c:is_plains", 2, 1, 2).spawn("c:is_forest", 2, 1, 1);
+                .egg(0x6E7F3A, 0xC8642B).spawn("c:is_plains", 2, 1, 2).spawn("c:is_forest", 2, 1, 1)
+                .drop(ModItems.DINO_HIDE, 0, 2);
         animal("hammerhorn", "Hammerhorn", look(Family.QUADRUPED).body(18, 12, 12).leg(10).head(8).tail(10)
                 .with(Extra.HAMMER).colors(0x6A5A7A, 0x3A2E4A, 0xC8B8D8).scale(1.4f))
                 .size(1.6f, 2.2f).stats(70, 12, 0.24).armor(8).temper(Temper.NEUTRAL).voice(Voice.BIG_DINO).breed(v(Items.WHEAT))
                 .drop(v(Items.BEEF), 3, 6).drop(v(Items.LEATHER), 2, 4)
-                .egg(0x6A5A7A, 0xC8B8D8).spawn("c:is_plains", 2, 1, 1).spawn("c:is_savanna", 3, 1, 2);
+                .egg(0x6A5A7A, 0xC8B8D8).spawn("c:is_plains", 2, 1, 1).spawn("c:is_savanna", 3, 1, 2)
+                .drop(ModItems.DINO_HIDE, 0, 2);
         animal("stink_beetle", "Stink Beetle", look(Family.INSECT).body(8, 4, 6).leg(4)
                 .with(Extra.ANTENNAE).colors(0x5A6A2A, 0x3A4A1A, 0xC8A84A).pattern(Pattern.SPOTS))
                 .size(0.6f, 0.4f).stats(10, 3, 0.22).temper(Temper.NEUTRAL).voice(Voice.BUG)
                 .abilities(Ability.NAUSEA).breed(v(Items.ROTTEN_FLESH))
-                .egg(0x5A6A2A, 0xC8A84A).spawn("c:is_swamp", 8, 1, 3).spawn("c:is_forest", 4, 1, 2);
+                .egg(0x5A6A2A, 0xC8A84A).spawn("c:is_swamp", 8, 1, 3).spawn("c:is_forest", 4, 1, 2)
+                .drop(ModItems.CHITIN_PLATE, 0, 1).drop(ModItems.STINK_GLAND, 1, 1);
         animal("giant_crab", "Giant Crab", look(Family.INSECT).body(10, 4, 12).leg(6).legPairs(4)
                 .with(Extra.FLAT, Extra.PINCERS).colors(0xC83A2A, 0x8A2214, 0xF2E8D8).pattern(Pattern.SPECKLE))
                 .size(1.2f, 0.7f).stats(30, 6, 0.25).armor(6).temper(Temper.NEUTRAL).voice(Voice.SPIDER).breed(v(Items.COD))
                 .drop(v(Items.COD), 1, 2)
-                .egg(0xC83A2A, 0xF2E8D8).spawn("c:is_beach", 8, 1, 2);
+                .egg(0xC83A2A, 0xF2E8D8).spawn("c:is_beach", 8, 1, 2)
+                .drop(ModItems.CHITIN_PLATE, 1, 2);
 
         animal("ember_hatchling", "Ember Hatchling", look(Family.QUADRUPED).body(8, 5, 5).leg(4).neck(3).head(5).snout(2).tail(8).wing(7)
                 .with(Extra.HORNS).colors(0xD84A2A, 0x7A1A0A, 0xFFC83A).eye(0xFFE84A).pattern(Pattern.SCALES))
@@ -229,24 +236,56 @@ public final class ModMobs {
         flyer("butterfly", "Butterfly", look(Family.FLYING_BUG).body(4, 1, 1).head(2).wing(6)
                 .with(Extra.ANTENNAE).colors(0x222222, 0xF28C28, 0x111111).pattern(Pattern.SPOTS))
                 .size(0.4f, 0.3f).stats(2, 0, 0.2).flySpeed(0.35).voice(Voice.BUG).xp(1)
-                .egg(0xF28C28, 0x222222).spawn("c:is_flower_forest", 12, 2, 4).spawn("c:is_plains", 4, 1, 3).spawn("c:is_floral", 8, 2, 3);
+                .egg(0xF28C28, 0x222222).spawn("c:is_flower_forest", 12, 2, 4).spawn("c:is_plains", 4, 1, 3).spawn("c:is_floral", 8, 2, 3)
+                .drop(ModItems.INSECT_WING, 1, 2);
         flyer("moth", "Moth", look(Family.FLYING_BUG).body(5, 2, 2).head(2).wing(6)
                 .with(Extra.ANTENNAE).colors(0x8A7A62, 0xB8A88A, 0x5A4A3A).pattern(Pattern.SPECKLE))
                 .size(0.4f, 0.3f).stats(3, 0, 0.2).flySpeed(0.35).voice(Voice.BUG).xp(1)
-                .egg(0x8A7A62, 0xB8A88A).spawn("c:is_forest", 6, 1, 3);
+                .egg(0x8A7A62, 0xB8A88A).spawn("c:is_forest", 6, 1, 3)
+                .drop(ModItems.INSECT_WING, 1, 2);
         flyer("firefly", "Firefly", look(Family.FLYING_BUG).body(4, 2, 2).head(2).wing(3)
                 .with(Extra.ANTENNAE).colors(0x2A2A1A, 0x9FA6A8, 0xEFFF5A).glow().scale(0.6f))
                 .size(0.3f, 0.3f).stats(2, 0, 0.2).flySpeed(0.3).voice(Voice.BUG).xp(1).abilities(Ability.GLOW_PARTICLES)
-                .egg(0x2A2A1A, 0xEFFF5A).spawn("c:is_swamp", 10, 3, 6).spawn("c:is_forest", 4, 2, 4);
+                .egg(0x2A2A1A, 0xEFFF5A).spawn("c:is_swamp", 10, 3, 6).spawn("c:is_forest", 4, 2, 4)
+                .drop(ModItems.GLOW_SAC, 1, 1);
         flyer("dragonfly", "Dragonfly", look(Family.FLYING_BUG).body(10, 1, 1).head(2).wing(7)
                 .with(Extra.FOUR_WINGS).colors(0x2A9DD9, 0xCDE8F2, 0x1A5C80))
                 .size(0.6f, 0.3f).stats(3, 0, 0.2).flySpeed(0.6).voice(Voice.BUG).xp(1)
-                .egg(0x2A9DD9, 0xCDE8F2).spawn("c:is_swamp", 8, 1, 3).spawn("c:is_river", 6, 1, 2);
+                .egg(0x2A9DD9, 0xCDE8F2).spawn("c:is_swamp", 8, 1, 3).spawn("c:is_river", 6, 1, 2)
+                .drop(ModItems.INSECT_WING, 1, 2);
         flyer("glimmer_sprite", "Glimmer Sprite", look(Family.HUMANOID).body(0, 3, 4).leg(3).head(4).wing(6)
                 .colors(0xF7C6E0, 0xB0E0FF, 0xFFF6A8).glow())
                 .size(0.35f, 0.7f).stats(6, 0, 0.2).flySpeed(0.45).voice(Voice.SPRITE).xp(2)
                 .abilities(Ability.GLOW_PARTICLES).drop(v(Items.GLOWSTONE_DUST), 0, 2)
-                .egg(0xF7C6E0, 0xFFF6A8).spawn("c:is_flower_forest", 4, 1, 2).spawn("c:is_floral", 3, 1, 2);
+                .egg(0xF7C6E0, 0xFFF6A8).spawn("c:is_flower_forest", 4, 1, 2).spawn("c:is_floral", 3, 1, 2)
+                .drop(ModItems.GLOW_SAC, 1, 2);
+
+        // ---------------------------------------------------------------- Utopia creatures (WS-E): spawns only in Utopia,
+        // from its biome in tools/gen_realms.py.
+        animal("gilded_stag", "Gilded Stag", look(Family.QUADRUPED).body(13, 7, 8).leg(11).neck(6).head(5).snout(2).tail(2)
+                .with(Extra.ANTLERS, Extra.EARS).colors(0xE8C27A, 0xFFF4D6, 0xFFD24A).belly(0xFFF4D6).pattern(Pattern.SPECKLE))
+                .size(1.0f, 1.7f).stats(22, 0, 0.32).tameWith(v(Items.GOLDEN_CARROT)).mount(MobSpec.MountType.GROUND)
+                .drop(v(Items.LEATHER), 1, 2).drop(v(Items.GOLD_NUGGET), 2, 5).drop(v(Items.GOLDEN_CARROT), 1, 1, 0.15f)
+                .egg(0xE8C27A, 0xFFD24A);
+        flyer("sunwing_moth", "Sunwing Moth", look(Family.FLYING_BUG).body(6, 3, 3).head(3).wing(9)
+                .with(Extra.ANTENNAE, Extra.FOUR_WINGS).colors(0xF2B53A, 0xFFF1B8, 0xD9661E).pattern(Pattern.BANDS).glow())
+                .size(0.7f, 0.5f).stats(4, 0, 0.2).flySpeed(0.35).voice(Voice.BUG).xp(2).abilities(Ability.GLOW_PARTICLES)
+                .drop(v(Items.GLOWSTONE_DUST), 1, 2).drop(ModItems.INSECT_WING, 1, 2)
+                .egg(0xF2B53A, 0xD9661E);
+        // Utopia's structure pests: weak and quick, they pester treasure hunters without being a real threat.
+        // They come only from spawners in Utopia's structures (worldgen/build), never from natural spawns.
+        hostileFlyer("gilded_wasp", "Gilded Wasp", look(Family.FLYING_BUG).body(5, 2, 2).head(2).wing(5)
+                .with(Extra.STINGER, Extra.ANTENNAE).colors(0xF2C028, 0x1E1608, 0xFFF4C8).pattern(Pattern.BANDS).scale(0.8f))
+                .size(0.45f, 0.4f).stats(6, 2, 0.3).flySpeed(0.55).abilities(Ability.POISON).dayActive().voice(Voice.BUZZ).xp(2)
+                .egg(0xF2C028, 0x1E1608).drop(v(Items.HONEYCOMB), 0, 1).drop(ModItems.INSECT_WING, 0, 1);
+        monster("bookmite", "Bookmite", look(Family.INSECT).body(5, 3, 2).leg(2)
+                .with(Extra.ANTENNAE, Extra.MANDIBLES).colors(0xE8DCC0, 0x3A2A4A, 0x6A4AA8).pattern(Pattern.STRIPES))
+                .size(0.45f, 0.3f).stats(6, 2, 0.32).abilities(Ability.BLIND, Ability.PACK).dayActive().voice(Voice.BUG).xp(2)
+                .egg(0xE8DCC0, 0x3A2A4A).drop(v(Items.PAPER), 0, 2).drop(v(Items.INK_SAC), 0, 1);
+        hostileFlyer("cloud_wisp", "Cloud Wisp", look(Family.SPHERE).body(0, 6, 6).leg(0)
+                .colors(0xF4F6FF, 0xC8D4F0, 0xFFE08A).eye(0x3A4A8A).translucent().glow())
+                .size(0.6f, 0.6f).stats(8, 2, 0.3).flySpeed(0.4).abilities(Ability.SLOW, Ability.GLOW_PARTICLES).dayActive()
+                .voice(Voice.GHOST).xp(3).egg(0xF4F6FF, 0xFFE08A).drop(v(Items.FEATHER), 0, 2).drop(v(Items.GLOWSTONE_DUST), 0, 1);
 
         // ---------------------------------------------------------------- swimmers (passive)
         swimmer("goldfish", "Goldfish", look(Family.FISH).body(6, 2, 4).tail(3)
@@ -266,7 +305,8 @@ public final class ModMobs {
                 .with(Extra.FLAT).colors(0x6A5A4A, 0x3A2E24, 0xE8DCC8).pattern(Pattern.SPOTS))
                 .size(0.9f, 0.3f).stats(12, 4, 1.0).temper(Temper.NEUTRAL).voice(Voice.FISH).abilities(Ability.POISON)
                 .drop(v(Items.COD), 1, 2)
-                .egg(0x6A5A4A, 0xE8DCC8).spawn("c:is_ocean", 4, 1, 2);
+                .egg(0x6A5A4A, 0xE8DCC8).spawn("c:is_ocean", 4, 1, 2)
+                .drop(ModItems.VENOM_GLAND, 0, 1);
 
         // ---------------------------------------------------------------- land monsters
         monster("sewer_rat", "Sewer Rat", look(Family.QUADRUPED).body(7, 4, 4).leg(2).head(4).snout(2).tail(8)
@@ -278,42 +318,52 @@ public final class ModMobs {
                 .with(Extra.PINCERS, Extra.STINGER).colors(0x8B5A2B, 0x5A3A1A, 0x2A1A0A))
                 .size(1.0f, 0.6f).stats(18, 4, 0.3).abilities(Ability.POISON).dayActive().voice(Voice.SPIDER)
                 .drop(v(Items.SPIDER_EYE), 0, 1).drop(v(Items.STRING), 0, 2)
-                .egg(0x8B5A2B, 0x2A1A0A).spawn("c:is_desert", 20, 1, 2).spawn("c:is_badlands", 20, 1, 2);
+                .egg(0x8B5A2B, 0x2A1A0A).spawn("c:is_desert", 20, 1, 2).spawn("c:is_badlands", 20, 1, 2)
+                .drop(ModItems.CHITIN_PLATE, 0, 1).drop(ModItems.VENOM_GLAND, 0, 1);
         monster("termite", "Termite", look(Family.INSECT).body(6, 3, 3).leg(4)
                 .with(Extra.MANDIBLES, Extra.ANTENNAE).colors(0xE8D5B0, 0x8B5A2B, 0x5A3A1A).pattern(Pattern.BANDS))
                 .size(0.5f, 0.3f).stats(6, 2, 0.3).temper(Temper.NEUTRAL).abilities(Ability.PACK).voice(Voice.BUG)
-                .egg(0xE8D5B0, 0x8B5A2B).spawn("c:is_savanna", 20, 2, 4).spawn("c:is_forest", 10, 2, 3);
+                .egg(0xE8D5B0, 0x8B5A2B).spawn("c:is_savanna", 20, 2, 4).spawn("c:is_forest", 10, 2, 3)
+                .drop(ModItems.CHITIN_PLATE, 0, 2);
         ant("worker_ant", "Worker Ant", 0x1A1A1A, 0x333333, 0x5A5A5A, false).stats(4, 1, 0.3)
-                .spawn("c:is_plains", 15, 3, 5).spawn("c:is_forest", 10, 3, 5);
+                .spawn("c:is_plains", 15, 3, 5).spawn("c:is_forest", 10, 3, 5)
+                .drop(ModItems.CHITIN_PLATE, 0, 1);
         ant("fire_ant", "Fire Ant", 0xC0281C, 0x7A1810, 0xFF8A1C, false).stats(6, 2, 0.3)
                 .abilities(Ability.FIRE, Ability.FIREPROOF)
-                .spawn("c:is_savanna", 15, 2, 4).spawn("c:is_badlands", 12, 2, 4).spawn("c:is_nether", 10, 2, 4);
+                .spawn("c:is_savanna", 15, 2, 4).spawn("c:is_badlands", 12, 2, 4).spawn("c:is_nether", 10, 2, 4)
+                .drop(ModItems.CHITIN_PLATE, 0, 1);
         ant("prism_ant", "Prism Ant", 0xE84AE8, 0x4AE8E8, 0xE8E84A, true).stats(6, 2, 0.3)
                 .abilities(Ability.RANDOM_EFFECT)
-                .spawn("c:is_flower_forest", 10, 2, 3).spawn("c:is_magical", 8, 2, 3);
+                .spawn("c:is_flower_forest", 10, 2, 3).spawn("c:is_magical", 8, 2, 3)
+                .drop(ModItems.CHITIN_PLATE, 0, 1);
         ant("volatile_ant", "Volatile Ant", 0x3AAA3A, 0x1A6A1A, 0xE8E84A, false).stats(4, 1, 0.3)
                 .abilities(Ability.EXPLODE).voice(Voice.CREEPER)
-                .spawn("c:is_overworld", 8, 1, 2);
+                .spawn("c:is_overworld", 8, 1, 2)
+                .drop(ModItems.CHITIN_PLATE, 0, 1).drop(ModItems.KABOOM_CORE, 1, 1, 0.25f);
         monster("swift_raptor", "Swift Raptor", look(Family.THEROPOD).body(12, 7, 6).leg(10).neck(4).head(5).snout(3).tail(14)
                 .with(Extra.CREST).colors(0x8A6A3A, 0x4A3A1A, 0xC83A2A).pattern(Pattern.STRIPES))
                 .size(0.8f, 1.4f).stats(20, 5, 0.36).abilities(Ability.LEAP, Ability.PACK).dayActive().voice(Voice.DINO).xp(8)
                 .drop(v(Items.CHICKEN), 1, 2).drop(v(Items.FEATHER), 1, 3).drop(v(Items.BONE), 0, 1)
-                .egg(0x8A6A3A, 0xC83A2A).spawn("c:is_plains", 12, 2, 4).spawn("c:is_savanna", 12, 2, 4);
+                .egg(0x8A6A3A, 0xC83A2A).spawn("c:is_plains", 12, 2, 4).spawn("c:is_savanna", 12, 2, 4)
+                .drop(ModItems.DINO_HIDE, 0, 1).drop(ModItems.RAPTOR_CLAW, 1, 1, 0.35f);
         monster("baryonyx", "Baryonyx", look(Family.THEROPOD).body(18, 10, 9).leg(14).neck(7).head(6).snout(8).tail(20)
                 .with(Extra.CREST).colors(0x5A7A4A, 0x2A3A2A, 0xD8C88A).scale(1.3f))
                 .size(1.4f, 2.6f).stats(50, 8, 0.28).armor(4).dayActive().voice(Voice.BIG_DINO).xp(15)
                 .drop(v(Items.BEEF), 2, 4).drop(v(Items.BONE), 1, 3)
-                .egg(0x5A7A4A, 0xD8C88A).spawn("c:is_swamp", 6, 1, 1).spawn("c:is_river", 4, 1, 1);
+                .egg(0x5A7A4A, 0xD8C88A).spawn("c:is_swamp", 6, 1, 1).spawn("c:is_river", 4, 1, 1)
+                .drop(ModItems.DINO_HIDE, 1, 2).drop(ModItems.RAPTOR_CLAW, 1, 1, 0.25f);
         monster("cryolophosaurus", "Cryolophosaurus", look(Family.THEROPOD).body(16, 9, 8).leg(13).neck(6).head(6).snout(3).tail(18)
                 .with(Extra.CREST).colors(0xD8DEE6, 0x5A7A9A, 0xE84A2A).pattern(Pattern.STRIPES).scale(1.2f))
                 .size(1.2f, 2.2f).stats(45, 8, 0.3).dayActive().voice(Voice.BIG_DINO).xp(15)
                 .drop(v(Items.BEEF), 2, 3).drop(v(Items.BONE), 1, 2)
-                .egg(0xD8DEE6, 0xE84A2A).spawn("c:is_snowy", 8, 1, 2);
+                .egg(0xD8DEE6, 0xE84A2A).spawn("c:is_snowy", 8, 1, 2)
+                .drop(ModItems.DINO_HIDE, 1, 2).drop(ModItems.RAPTOR_CLAW, 1, 1, 0.25f);
         monster("burrow_lurker", "Burrow Lurker", look(Family.QUADRUPED).body(14, 6, 10).leg(3).head(7).snout(4).tail(8)
                 .with(Extra.SPIKES).colors(0x4A3A2A, 0x2A1E14, 0xE8E8C8).pattern(Pattern.SCALES))
                 .size(1.0f, 0.7f).stats(30, 7, 0.33).abilities(Ability.LEAP).voice(Voice.BEAST).xp(10)
                 .drop(v(Items.LEATHER), 1, 2).drop(v(Items.BONE), 1, 2)
-                .egg(0x4A3A2A, 0xE8E8C8).spawn("c:is_plains", 10, 1, 1).spawn("c:is_forest", 10, 1, 1);
+                .egg(0x4A3A2A, 0xE8E8C8).spawn("c:is_plains", 10, 1, 1).spawn("c:is_forest", 10, 1, 1)
+                .drop(ModItems.DINO_HIDE, 0, 1);
         monster("night_crawler", "Night Crawler", look(Family.SERPENT).body(32, 5, 5).head(6).segments(8)
                 .with(Extra.SPIKES).colors(0x2A1E3A, 0x140E1E, 0x9A4AE8).eye(0xE84AE8).glow())
                 .size(0.8f, 0.5f).stats(32, 6, 0.25).abilities(Ability.WITHER).underground().voice(Voice.BUG).xp(10)
@@ -333,7 +383,8 @@ public final class ModMobs {
                 .with(Extra.HORNS).colors(0x4A4A3A, 0x2A2A1E, 0xC8C8A8).scale(1.3f))
                 .size(1.2f, 3.0f).stats(50, 10, 0.23).armor(6).underground().voice(Voice.BEAST).xp(15)
                 .drop(v(Items.BONE), 2, 4).drop(v(Items.IRON_INGOT), 0, 2)
-                .egg(0x4A4A3A, 0xC8C8A8).spawn("c:is_cave", 8, 1, 1).spawn("c:is_overworld", 4, 1, 1);
+                .egg(0x4A4A3A, 0xC8C8A8).spawn("c:is_cave", 8, 1, 1).spawn("c:is_overworld", 4, 1, 1)
+                .drop(ModItems.ECTOPLASM, 0, 1);
         monster("void_knight", "Void Knight", look(Family.HUMANOID).body(0, 8, 14).leg(14).head(7)
                 .with(Extra.HORNS).colors(0x1A1A2A, 0x3A2A5A, 0xC84AE8).eye(0xE84AE8).glow())
                 .size(0.7f, 2.9f).stats(60, 11, 0.3).armor(10).abilities(Ability.TELEPORT).voice(Voice.ENDER).xp(20)
@@ -343,17 +394,20 @@ public final class ModMobs {
                 .with(Extra.HOOD).colors(0x0E0E14, 0x2A1A3A, 0x8A2AE8).eye(0xFF2A2A).translucent().glow())
                 .size(0.7f, 3.0f).stats(50, 9, 0.32).abilities(Ability.WITHER, Ability.TELEPORT).voice(Voice.ENDER).xp(20)
                 .drop(v(Items.ENDER_PEARL), 1, 2).drop(v(Items.PHANTOM_MEMBRANE), 0, 1)
-                .egg(0x0E0E14, 0x8A2AE8).spawn("c:is_end", 6, 1, 1);
+                .egg(0x0E0E14, 0x8A2AE8).spawn("c:is_end", 6, 1, 1)
+                .drop(ModItems.ECTOPLASM, 1, 2);
         monster("bone_specter", "Bone Specter", look(Family.HUMANOID).body(0, 8, 12).leg(12).head(8)
                 .colors(0xE8E8D8, 0x9A9A8A, 0x5AF2E8).eye(0x5AF2E8).translucent().glow())
                 .size(0.6f, 1.99f).stats(22, 5, 0.27).abilities(Ability.WEAKNESS, Ability.SUN_BURN).voice(Voice.UNDEAD)
                 .drop(v(Items.BONE), 1, 3)
-                .egg(0xE8E8D8, 0x5AF2E8).spawn("c:is_overworld", 12, 1, 2);
+                .egg(0xE8E8D8, 0x5AF2E8).spawn("c:is_overworld", 12, 1, 2)
+                .drop(ModItems.ECTOPLASM, 0, 2);
         monster("kaboomba", "Kaboomba", look(Family.SPHERE).body(0, 10, 10).leg(3)
                 .with(Extra.FUSE).colors(0x1A1A1A, 0x3A3A3A, 0xF2C83A).eye(0xFFFFFF))
                 .size(0.7f, 0.9f).stats(12, 1, 0.28).abilities(Ability.EXPLODE).voice(Voice.CREEPER)
                 .drop(v(Items.GUNPOWDER), 1, 3)
-                .egg(0x1A1A1A, 0xF2C83A).spawn("c:is_overworld", 10, 1, 1);
+                .egg(0x1A1A1A, 0xF2C83A).spawn("c:is_overworld", 10, 1, 1)
+                .drop(ModItems.KABOOM_CORE, 1, 1);
         monster("oddity", "Oddity", look(Family.SPHERE).body(0, 10, 10).leg(4)
                 .with(Extra.ANTENNAE).colors(0xE84AE8, 0x4AE84A, 0x4A4AE8).eye(0xFFFF00).pattern(Pattern.SPOTS).glow())
                 .size(0.8f, 0.9f).stats(30, 4, 0.3).temper(Temper.NEUTRAL)
@@ -378,12 +432,14 @@ public final class ModMobs {
         monster("leaper_bug", "Leaper Bug", look(Family.INSECT).body(6, 4, 4).leg(5)
                 .with(Extra.LONG_HIND_LEGS, Extra.ANTENNAE).colors(0x7AC83A, 0x3A6A1A, 0xE8E83A))
                 .size(0.5f, 0.4f).stats(10, 3, 0.3).abilities(Ability.LEAP).dayActive().voice(Voice.BUG)
-                .egg(0x7AC83A, 0xE8E83A).spawn("c:is_plains", 15, 1, 3).spawn("c:is_forest", 10, 1, 3);
+                .egg(0x7AC83A, 0xE8E83A).spawn("c:is_plains", 15, 1, 3).spawn("c:is_forest", 10, 1, 3)
+                .drop(ModItems.CHITIN_PLATE, 1, 2);
         monster("spitter_beetle", "Spitter Beetle", look(Family.INSECT).body(8, 5, 6).leg(5)
                 .with(Extra.MANDIBLES, Extra.ANTENNAE).colors(0x3A5A2A, 0x1A2A12, 0xA8E83A).pattern(Pattern.SPOTS))
                 .size(0.7f, 0.5f).stats(16, 3, 0.25).abilities(Ability.SPIT).voice(Voice.BUG)
                 .drop(v(Items.SPIDER_EYE), 0, 1).drop(v(Items.SLIME_BALL), 0, 2)
-                .egg(0x3A5A2A, 0xA8E83A).spawn("c:is_jungle", 15, 1, 2).spawn("c:is_swamp", 12, 1, 2);
+                .egg(0x3A5A2A, 0xA8E83A).spawn("c:is_jungle", 15, 1, 2).spawn("c:is_swamp", 12, 1, 2)
+                .drop(ModItems.CHITIN_PLATE, 0, 1).drop(ModItems.VENOM_GLAND, 0, 1);
         monster("snapvine", "Snapvine", look(Family.PLANT).body(0, 0, 16).head(8)
                 .with(Extra.PETALS).colors(0xC83A5A, 0x3A7A2A, 0xF2E84A).eye(0x101010))
                 .size(0.8f, 2.0f).stats(30, 7, 0.0).abilities(Ability.ROOTED).dayActive().voice(Voice.PLANT).xp(8)
@@ -395,7 +451,8 @@ public final class ModMobs {
                 .with(Extra.HOOD).colors(0xE8F0F8, 0xB8C8D8, 0x8AE8F8).eye(0x1A1A3A).translucent().glow())
                 .size(0.6f, 1.9f).stats(20, 5, 0.3).flySpeed(0.5).abilities(Ability.WEAKNESS).voice(Voice.GHOST)
                 .drop(v(Items.PHANTOM_MEMBRANE), 0, 1).drop(v(Items.GLOWSTONE_DUST), 0, 2)
-                .egg(0xE8F0F8, 0x8AE8F8).spawn("c:is_overworld", 6, 1, 1);
+                .egg(0xE8F0F8, 0x8AE8F8).spawn("c:is_overworld", 6, 1, 1)
+                .drop(ModItems.ECTOPLASM, 1, 2);
         hostileFlyer("gyre", "Gyre", look(Family.SPHERE).body(0, 8, 8).leg(0)
                 .with(Extra.BLADES).colors(0x8A8A9A, 0x5A5A6A, 0xE8E8F8).eye(0xFF3A3A))
                 .size(1.0f, 0.6f).stats(16, 6, 0.3).flySpeed(0.55).voice(Voice.BUZZ)
@@ -404,12 +461,14 @@ public final class ModMobs {
         hostileFlyer("mosquito", "Mosquito", look(Family.FLYING_BUG).body(6, 1, 1).head(2).wing(4)
                 .with(Extra.LONG_LEGS, Extra.SNOUT, Extra.ANTENNAE).colors(0x3A3A3A, 0xC8D8E8, 0xC83A3A).scale(0.8f))
                 .size(0.4f, 0.3f).stats(4, 1, 0.3).flySpeed(0.5).abilities(Ability.HUNGER).voice(Voice.BUZZ).xp(2)
-                .egg(0x3A3A3A, 0xC83A3A).spawn("c:is_swamp", 15, 2, 3);
+                .egg(0x3A3A3A, 0xC83A3A).spawn("c:is_swamp", 15, 2, 3)
+                .drop(ModItems.INSECT_WING, 0, 1);
         hostileFlyer("warbee", "Warbee", look(Family.FLYING_BUG).body(10, 6, 6).head(5).wing(8)
                 .with(Extra.STINGER, Extra.ANTENNAE).colors(0xF2C83A, 0x1A1A1A, 0xE8E8F8).pattern(Pattern.BANDS))
                 .size(0.9f, 0.7f).stats(20, 5, 0.3).flySpeed(0.5).abilities(Ability.POISON).dayActive().voice(Voice.BUZZ)
                 .drop(v(Items.HONEYCOMB), 1, 2)
-                .egg(0xF2C83A, 0x1A1A1A).spawn("c:is_flower_forest", 12, 1, 2).spawn("c:is_plains", 6, 1, 1);
+                .egg(0xF2C83A, 0x1A1A1A).spawn("c:is_flower_forest", 12, 1, 2).spawn("c:is_plains", 6, 1, 1)
+                .drop(ModItems.VENOM_GLAND, 1, 1, 0.5f);
         hostileFlyer("cliff_diver", "Cliff Diver", look(Family.BIRD).body(8, 4, 4).leg(3).neck(3).head(4).snout(4).tail(10).wing(12)
                 .colors(0xB86A3A, 0x6A3A1A, 0xF2D8A8))
                 .size(0.9f, 0.6f).stats(16, 4, 0.3).flySpeed(0.6).dayActive().voice(Voice.BIRD)
@@ -431,7 +490,8 @@ public final class ModMobs {
                 .colors(0xC8E8F8, 0x8AB8E8, 0xF28AE8).translucent().glow())
                 .size(0.5f, 0.8f).stats(6, 6, 0.4).abilities(Ability.POISON).voice(Voice.SQUID)
                 .drop(v(Items.SLIME_BALL), 0, 1)
-                .egg(0xC8E8F8, 0xF28AE8).spawn("c:is_ocean", 10, 1, 3);
+                .egg(0xC8E8F8, 0xF28AE8).spawn("c:is_ocean", 10, 1, 3)
+                .drop(ModItems.VENOM_GLAND, 0, 1);
         hostileSwimmer("ambush_squid", "Ambush Squid", look(Family.JELLY).body(0, 8, 12).tail(12).segments(8)
                 .colors(0x8A2A3A, 0x5A1424, 0xE8C8D8).pattern(Pattern.SPOTS))
                 .size(0.9f, 1.2f).stats(20, 5, 1.0).abilities(Ability.BLIND).voice(Voice.SQUID)
@@ -448,7 +508,7 @@ public final class ModMobs {
         skyBoss("the_king", "The King", look(Family.QUADRUPED).body(28, 12, 12).leg(10).neck(10).head(10).snout(6).tail(32)
                 .wing(40).with(Extra.HORNS, Extra.SPIKES, Extra.CROWN).colors(0xDDB443, 0x9A1424, 0xFFE066).eye(0xFFF07A)
                 .belly(0xF0DFA8).pattern(Pattern.SCALES).glow().scale(4.0f))
-                .geo().size(7.0f, 5.0f).stats(1000, 24, 0.3).flySpeed(0.6).armor(12).voice(Voice.DRAGON).xp(500)
+                .geo("the_king", 1.7f, KingBoss::new).size(7.0f, 5.0f).stats(1000, 24, 0.3).flySpeed(0.6).armor(12).voice(Voice.DRAGON).xp(500)
                 .bar(BossEvent.BossBarColor.YELLOW)
                 .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP)
                 .egg(0xD4AF37, 0x8B0000);
@@ -472,6 +532,7 @@ public final class ModMobs {
                 .egg(0xB86A2A, 0xF2E8D8).dayActive().spawn("c:is_savanna", 1, 1, 1).spawn("c:is_badlands", 1, 1, 1);
         boss("gorgantua", "Gorgantua", look(Family.HUMANOID).body(0, 16, 20).leg(16).head(10).snout(6).tail(28)
                 .with(Extra.PLATES).colors(0x3A4A3A, 0x23302A, 0x8AE8F8).eye(0xFFE84A).pattern(Pattern.SCALES).glow().scale(4.0f))
+                .geo("gorgantua", 1.0f, GorgantuaBoss::new)
                 .size(5.0f, 11.5f).stats(1024, 34, 0.26).armor(20).damageTaken(0.6f).voice(Voice.BIG_DINO).xp(2000)
                 .smashesBlocks().stepHeight(3.0).bar(BossEvent.BossBarColor.BLUE)
                 .attacks(BossAttack.BEAM, BossAttack.STOMP, BossAttack.TAIL_SWIPE, BossAttack.ROAR, BossAttack.FIRE_BREATH)
@@ -483,7 +544,7 @@ public final class ModMobs {
         skyBoss("the_ascended_king", "The Ascended King", look(Family.QUADRUPED).body(28, 12, 12).leg(10).neck(12).head(10).snout(6)
                 .tail(36).wing(44).with(Extra.HORNS, Extra.SPIKES, Extra.CROWN).colors(0xD8DCE6, 0x4A2378, 0xC79BFF).eye(0xFF465A)
                 .belly(0xF4F2FA).pattern(Pattern.SCALES).glow().scale(5.5f))
-                .geo().size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.5f)
+                .geo("the_king", 2.4f, KingBoss::new).size(10.0f, 7.0f).stats(1024, 50, 0.3).flySpeed(0.75).armor(25).damageTaken(0.5f)
                 .voice(Voice.DRAGON).xp(5000).minion("snapwyrm").bar(BossEvent.BossBarColor.PURPLE)
                 .attacks(BossAttack.FIREBALL_VOLLEY, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.METEOR_SHOWER,
                         BossAttack.BEAM, BossAttack.WIND_GUST, BossAttack.SUMMON)
@@ -524,9 +585,11 @@ public final class ModMobs {
         skyBoss("empress", "The Empress", look(Family.QUADRUPED).body(28, 14, 14).leg(10).neck(16).head(9).snout(5).tail(34).wing(44)
                 .with(Extra.HORNS, Extra.CREST, Extra.SPIKES).colors(0x7A3AB8, 0x3AB8C8, 0xF2A8E8).eye(0xFFF2A8)
                 .pattern(Pattern.SCALES).glow().scale(3.0f))
+                .geo("empress", 1.6f, EmpressBoss::new)
                 .size(7.0f, 6.0f).stats(1024, 30, 0.3).flySpeed(0.65).armor(18).damageTaken(0.6f).voice(Voice.DRAGON).xp(2500)
                 .bar(BossEvent.BossBarColor.PINK)
-                .attacks(BossAttack.BEAM, BossAttack.METEOR_SHOWER, BossAttack.LIGHTNING, BossAttack.SWOOP, BossAttack.FIREBALL_VOLLEY)
+                .attacks(BossAttack.BEAM, BossAttack.CRYSTAL_SHARD_RAIN, BossAttack.LIGHTNING, BossAttack.SWOOP,
+                        BossAttack.WIND_GUST, BossAttack.METEOR_SHOWER)
                 .drop(ModItems.EMPRESS_BATTLEAXE, 1, 1).drop(ModItems.EMPRESS_SCALE, 12, 18).drop(ModItems.PARAGON_INGOT, 3, 6)
                 .drop(v(Items.NETHER_STAR), 1, 1)
                 .drop(v(Items.DIAMOND), 8, 16)
@@ -626,6 +689,7 @@ public final class ModMobs {
         // ---------------------------------------------------------------- sea bosses
         seaBoss("kraken", "Kraken", look(Family.JELLY).body(0, 16, 24).tail(36).segments(10)
                 .colors(0x6A1A2A, 0x4A0E1A, 0xF2C83A).eye(0xF2E84A).pattern(Pattern.SPOTS).scale(2.5f))
+                .geo("kraken", 2.0f, KrakenBoss::new)
                 .size(4.0f, 9.0f).stats(800, 22, 1.0).armor(12).voice(Voice.SQUID).xp(800).bar(BossEvent.BossBarColor.PURPLE)
                 .attacks(BossAttack.GRAB, BossAttack.INK, BossAttack.WHIRLPOOL, BossAttack.TENTACLE_SLAM)
                 .drop(ModItems.KRAKEN_HOOK, 1, 1).drop(v(Items.INK_SAC), 16, 32).drop(v(Items.NAUTILUS_SHELL), 2, 4)
@@ -654,6 +718,25 @@ public final class ModMobs {
                 .attacks(BossAttack.TRIDENT_VOLLEY, BossAttack.GEYSER, BossAttack.GRAB, BossAttack.TAIL_SWIPE)
                 .drop(ModItems.SERPENT_FANG, 1, 1).drop(v(Items.TRIDENT), 1, 1, 0.3f).drop(v(Items.PRISMARINE_SHARD), 6, 12)
                 .egg(0x2A6A4A, 0xF2E84A).spawn("c:is_ocean", 1, 1, 1);
+
+        // ---------------------------------------------------------------- the Gobbler stream
+        // A mini-boss: a giant chomping ball that eats soft blocks on the chase and roars up ghosts. Night only.
+        boss("gobbler", "The Gobbler", look(Family.SPHERE).body(0, 30, 30).leg(0)
+                .colors(0xFCCE26, 0xD67C12, 0xEC5E18).eye(0xFF461E).scale(1.0f))
+                .geo("gobbler", 1.0f, GobblerBoss::new)
+                .size(2.8f, 2.8f).stats(900, 18, 0.32).armor(8).voice(Voice.BEAST).xp(600).smashesBlocks()
+                .minion("gobbler_ghost").bar(BossEvent.BossBarColor.YELLOW)
+                .attacks(BossAttack.CHARGE, BossAttack.LEAP_SLAM, BossAttack.SUMMON, BossAttack.ROAR)
+                .drop(ModItems.POWER_PELLET, 2, 4).drop(ModItems.weapon("gobblers_jaw"), 1, 1)
+                .drop(ModItems.ARCADE_TOKEN, 3, 6).drop(v(Items.GOLD_INGOT), 6, 12).drop(v(Items.EMERALD), 4, 8)
+                .drop(v(Items.DIAMOND), 2, 4)
+                .egg(0xFCCE26, 0xEC5E18).spawn("c:is_plains", 1, 1, 1).spawn("c:is_forest", 1, 1, 1);
+        // Its ghosts: drift through walls; frightened (and one-hit) while you're on a Power Pellet. Summoned only.
+        hostileFlyer("gobbler_ghost", "Gobbler Ghost", look(Family.SPHERE).body(0, 10, 10).leg(0)
+                .with(Extra.WISP).colors(0xF4F4F8, 0xD8D8E4, 0xFFFFFF).eye(0xF4F8FF).translucent().glow())
+                .custom(GobblerGhost::new)
+                .size(0.8f, 0.9f).stats(16, 4, 0.3).flySpeed(0.4).voice(Voice.GHOST).xp(4)
+                .egg(0xF4F4F8, 0xE8484A).drop(ModItems.ECTOPLASM, 0, 1);
     }
 
     // ---------------------------------------------------------------- who fights whom
@@ -718,6 +801,11 @@ public final class ModMobs {
                 .voice(Voice.BUG).egg(base, accent);
     }
 
+    /** The spec for a NeoSpawn mob type, or null for anything else (vanilla and other mods' mobs). */
+    public static MobSpec find(EntityType<?> type) {
+        return BY_TYPE.get(type);
+    }
+
     public static MobSpec byType(EntityType<?> type) {
         MobSpec spec = BY_TYPE.get(type);
         if (spec == null) {
@@ -744,8 +832,11 @@ public final class ModMobs {
             case HOSTILE_FLYER -> NeoHostileFlyer::new;
             case SWIMMER -> NeoSwimmer::new;
             case HOSTILE_SWIMMER -> NeoHostileSwimmer::new;
-            case BOSS, SEA_BOSS, SKY_BOSS -> spec.geo ? KingBoss::new : NeoBoss::new;
+            case BOSS, SEA_BOSS, SKY_BOSS -> spec.geo ? spec.geoFactory : NeoBoss::new;
         };
+        if (spec.customFactory != null) {
+            factory = spec.customFactory;
+        }
         EntityType.Builder<?> builder = EntityType.Builder.of(factory, category(spec))
                 .sized(spec.hitboxWidth, spec.hitboxHeight)
                 .clientTrackingRange(spec.isBoss() ? 16 : spec.hitboxWidth > 2 ? 12 : 8);
@@ -804,7 +895,7 @@ public final class ModMobs {
             if (spec.underground) {
                 event.register(type, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                         (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) ->
-                                pos.getY() < 50 && !level.canSeeSky(pos)
+                                pos.getY() < 50 && !level.canSeeSky(pos) && wildOk(level, pos)
                                         && Monster.checkMonsterSpawnRules((EntityType) t, level, reason, pos, random),
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
                 continue;
@@ -840,8 +931,15 @@ public final class ModMobs {
                                         && level.getFluidState(pos).is(FluidTags.WATER)
                                         && level.getFluidState(pos.above(4)).is(FluidTags.WATER),
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
-                case SWIMMER, HOSTILE_SWIMMER -> event.register(type, SpawnPlacementTypes.IN_WATER,
+                case SWIMMER -> event.register(type, SpawnPlacementTypes.IN_WATER,
                         Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WaterAnimal::checkSurfaceWaterAnimalSpawnRules,
+                        RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                // Stinging and grabbing sea creatures are monsters: none on Peaceful, none off Mushroom Fields.
+                case HOSTILE_SWIMMER -> event.register(type, SpawnPlacementTypes.IN_WATER,
+                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        (SpawnPlacements.SpawnPredicate) (t, level, reason, pos, random) ->
+                                level.getDifficulty() != Difficulty.PEACEFUL && wildOk(level, pos)
+                                        && WaterAnimal.checkSurfaceWaterAnimalSpawnRules((EntityType) t, level, reason, pos, random),
                         RegisterSpawnPlacementsEvent.Operation.REPLACE);
             }
         }

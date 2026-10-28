@@ -1,7 +1,8 @@
 # NeoSpawn Pack: current state
 
-The owner's playable modpack, as installed in Prism on 2026-10-20. `docs/MODPACK.md` is the original research
-list; this file is what is actually in the pack.
+A snapshot of the owner's playable modpack as installed in Prism on the Mac on 2026-10-20 (NeoSpawn 0.21.2).
+The pack has changed since on the Windows PC (FTB Quests, FTB Library, FTB Teams and more): refresh the jar list
+from the Prism instance before relying on it. `docs/MODPACK.md` is the original research list.
 
 - **Minecraft 1.21.1, NeoForge 21.1.259, Java 21.** 168 jars, about 760 MB. Prism memory: 2 GB min, 8 GB max.
 - **NeoSpawn 0.21.2.**

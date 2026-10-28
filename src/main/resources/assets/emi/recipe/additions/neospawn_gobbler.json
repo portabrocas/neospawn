@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:neospawn:power_pellet",
+    "item:neospawn:arcade_token",
+    "item:neospawn:gobblers_jaw",
+    "item:neospawn:gobbler_spawn_egg"
+  ],
+  "text": "emi.info.neospawn.gobbler"
+}

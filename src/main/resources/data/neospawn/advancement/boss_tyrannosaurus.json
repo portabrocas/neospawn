@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:tyrannosaurus_spawn_egg"
+    },
+    "title": {
+      "text": "Tyrant Lizard"
+    },
+    "description": {
+      "text": "Defeat a Tyrannosaurus"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:tyrannosaurus"
+        }
+      }
+    }
+  },
+  "parent": "neospawn:first_boss",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  }
+}

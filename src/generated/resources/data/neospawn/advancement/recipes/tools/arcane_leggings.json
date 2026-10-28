@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcane": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neospawn:tanzanite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neospawn:arcane_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_arcane"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neospawn:arcane_leggings"
+    ]
+  }
+}

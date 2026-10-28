@@ -1,0 +1,322 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "final"
+	group: ""
+	icon: {
+		count: 1
+		id: "neospawn:nether_star"
+	}
+	id: "0918A69A6C47CB39"
+	order_index: 11
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "C3F0986A0980547D"
+			rewards: [
+				{
+					id: "E8BBFF091EC37508"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "3CD5D82A57C0A36A"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "A4D15F1344288E8F"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "3CCAFF7A732112EF"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{
+					entity: "minecraft:ender_dragon"
+					id: "C975966B89D1E887"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"C3F0986A0980547D"
+			]
+			id: "2A71EECE0982ADAA"
+			rewards: [
+				{
+					id: "32F07749292DC245"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "D02E88471FEFE8B6"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "CCD2A750CD92FD03"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "024A0C07659671D5"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "minecraft:wither"
+					id: "D4DDF344FB51DFCE"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"C3F0986A0980547D"
+			]
+			id: "F18A801FD0B54BAA"
+			rewards: [
+				{
+					id: "EA4A769B54F7CADC"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "497097673DF1AC3C"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "42DADC9232935C5D"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "3D1CE966C92F5B96"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					entity: "minecraft:warden"
+					id: "D21459506B381CEB"
+					type: "kill"
+					value: 1L
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"2A71EECE0982ADAA"
+				"F18A801FD0B54BAA"
+			]
+			id: "C5A6CA7A4B62226F"
+			rewards: [
+				{
+					id: "46A4E91FAA1E6AE3"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "EACCF909B354245B"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "52C1F6356B339CBA"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "4F9F8B6C0FCF67A9"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:all_realms"
+					criterion: ""
+					id: "2BD3F603C9126AF1"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"2A71EECE0982ADAA"
+				"F18A801FD0B54BAA"
+			]
+			id: "844A3463B325E4F2"
+			rewards: [
+				{
+					id: "C937491D933FC31A"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "C82AE5A84DA970E8"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "682DEAAF6802639F"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "EBD5286CB176CE97"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:all_bosses"
+					criterion: ""
+					id: "BC7FFD42C15F890D"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"C5A6CA7A4B62226F"
+				"844A3463B325E4F2"
+			]
+			id: "4395FE6EEC28C906"
+			rewards: [
+				{
+					id: "FB74174BEC1664C2"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "93DC02178795159D"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "401B6D346B33912D"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "706882720455C117"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{
+					advancement: "neospawn:behemoth"
+					criterion: ""
+					id: "9CFFB0327BEE9C6F"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+	]
+}

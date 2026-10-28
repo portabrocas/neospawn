@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:antivenom"
+    },
+    "title": {
+      "text": "Antidote"
+    },
+    "description": {
+      "text": "Brew Antivenom from a Venom Gland"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:antivenom"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:mob_drops",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

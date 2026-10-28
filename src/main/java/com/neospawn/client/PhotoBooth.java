@@ -61,6 +61,10 @@ public final class PhotoBooth {
             structures(mc, server);
             return;
         }
+        if (Boolean.getBoolean("neospawn.photos.rift")) {
+            rifts(mc, server);
+            return;
+        }
         if (Boolean.getBoolean("neospawn.photos.weapons")) {
             weapons(mc, server);
             return;
@@ -265,6 +269,7 @@ public final class PhotoBooth {
             weaponQueue.addAll(List.of(com.neospawn.registry.ModItems.BEHEMOTH_BLADE.get(), com.neospawn.registry.ModItems.ATTITUDE_ADJUSTER.get(),
                     com.neospawn.registry.ModItems.NETHER_SWORD.get(), com.neospawn.registry.ModItems.CHAINSAW.get(),
                     com.neospawn.registry.ModItems.RAY_GUN.get(), com.neospawn.registry.ModItems.SQUID_ZOOKA.get(),
+                    com.neospawn.registry.ModItems.RIFT_GUN.get(),
                     com.neospawn.registry.ModItems.RUBY_TOOLS.sword().get(), net.minecraft.world.item.Items.DIAMOND_SWORD));
             mc.options.hideGui = true;
             new java.io.File(mc.gameDirectory, "screenshots/neospawn").mkdirs();
@@ -337,6 +342,88 @@ public final class PhotoBooth {
                     (float) (Math.atan2(-look.x, look.z) * 180 / Math.PI), (float) (-Math.atan2(look.y, look.horizontalDistance()) * 180 / Math.PI));
         });
         weaponWait = first ? 30 : 15;
+    }
+
+    // ------------------------------------------------------------------ Rift Gun (stream B)
+
+    private static int riftShot, riftWait = 60;
+    /** Camera and target for each shot, relative to STAGE; the fifth is the same wide shot at night. */
+    private static final double[][] RIFT_VIEWS = {
+            {0.5, 2.6, 4.0, 0.5, 1.6, -8}, {-5.2, 2.0, -4.6, -2.5, 1.6, -8}, {7.2, 2.0, -4.6, 4.5, 1.6, -8},
+            {2.2, 1.5, 0.4, 0.5, 1.2, -2.5}, {0.5, 2.6, 4.0, 0.5, 1.6, -8}, {9.5, 3.4, 4.5, 10.5, 0.4, -1}};
+
+    /**
+     * -Prift=true: a stone wall with a linked blue and orange rift on it, an armor stand holding the Rift Gun, and a
+     * second pair (floor and wall) beside it; photographed wide, close up on each rift, at the gun, and at night.
+     */
+    private static void rifts(Minecraft mc, MinecraftServer server) {
+        if (riftShot == 0 && riftWait == 60) {
+            mc.options.hideGui = true;
+            new java.io.File(mc.gameDirectory, "screenshots/neospawn").mkdirs();
+            server.execute(() -> {
+                setUpStage(server);
+                ServerLevel level = server.overworld();
+                for (Entity old : level.getEntitiesOfClass(Entity.class, new AABB(STAGE).inflate(40), e -> !(e instanceof ServerPlayer))) {
+                    old.discard();
+                }
+                for (BlockPos pos : BlockPos.betweenClosed(STAGE.offset(-12, 0, -12), STAGE.offset(14, 6, 8))) {
+                    level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState()); // clears the ore row too
+                }
+                for (BlockPos pos : BlockPos.betweenClosed(STAGE.offset(-7, 0, -9), STAGE.offset(7, 3, -9))) {
+                    level.setBlockAndUpdate(pos, Blocks.STONE_BRICKS.defaultBlockState());
+                }
+                for (BlockPos pos : BlockPos.betweenClosed(STAGE.offset(13, 0, -3), STAGE.offset(13, 2, 1))) {
+                    level.setBlockAndUpdate(pos, Blocks.POLISHED_DEEPSLATE.defaultBlockState());
+                }
+                java.util.UUID wall = java.util.UUID.randomUUID(), mixed = java.util.UUID.randomUUID();
+                open(level, wall, com.neospawn.item.RiftEntity.BLUE, STAGE.offset(-3, 1, -9), net.minecraft.core.Direction.SOUTH);
+                open(level, wall, com.neospawn.item.RiftEntity.ORANGE, STAGE.offset(4, 1, -9), net.minecraft.core.Direction.SOUTH);
+                open(level, mixed, com.neospawn.item.RiftEntity.BLUE, STAGE.offset(10, -1, -1), net.minecraft.core.Direction.UP);
+                open(level, mixed, com.neospawn.item.RiftEntity.ORANGE, STAGE.offset(13, 1, -1), net.minecraft.core.Direction.WEST);
+                var stand = new net.minecraft.world.entity.decoration.ArmorStand(level, STAGE.getX() + 0.5, STAGE.getY(), STAGE.getZ() - 2.5);
+                stand.setShowArms(true);
+                stand.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,
+                        new net.minecraft.world.item.ItemStack(com.neospawn.registry.ModItems.RIFT_GUN.get()));
+                level.addFreshEntity(stand);
+            });
+        }
+        mc.options.pauseOnLostFocus = false;
+        if (mc.screen != null) {
+            mc.setScreen(null);
+        }
+        if (--riftWait > 0) {
+            return;
+        }
+        if (riftShot > 0) {
+            Screenshot.grab(mc.gameDirectory, "neospawn/rift_" + riftShot + ".png", mc.getMainRenderTarget(), message -> {});
+        }
+        if (riftShot >= RIFT_VIEWS.length) {
+            finished = true;
+            ClientShutdown.stop();
+            return;
+        }
+        double[] v = RIFT_VIEWS[riftShot++];
+        boolean night = riftShot == 5;
+        server.execute(() -> {
+            ServerLevel level = server.overworld();
+            level.setDayTime(night ? 18000 : 6000);
+            Vec3 cam = Vec3.atLowerCornerOf(STAGE).add(v[0], v[1], v[2]);
+            Vec3 look = Vec3.atLowerCornerOf(STAGE).add(v[3], v[4], v[5]).subtract(cam);
+            ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+            player.setGameMode(GameType.SPECTATOR);
+            player.teleportTo(level, cam.x, cam.y - player.getEyeHeight(), cam.z,
+                    (float) (Math.atan2(-look.x, look.z) * 180 / Math.PI), (float) (-Math.atan2(look.y, look.horizontalDistance()) * 180 / Math.PI));
+        });
+        riftWait = riftShot == 1 ? 60 : 25;
+    }
+
+    private static void open(ServerLevel level, java.util.UUID link, int color, BlockPos pos, net.minecraft.core.Direction face) {
+        var spot = com.neospawn.item.RiftEntity.spot(level, pos, face);
+        if (spot == null) {
+            NeoSpawn.LOGGER.warn("PHOTOS: no room for a rift at {} {}", pos, face);
+            return;
+        }
+        com.neospawn.item.RiftEntity.open(level, link, color, spot);
     }
 
     private static void setUpStage(MinecraftServer server) {

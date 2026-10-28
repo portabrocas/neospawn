@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:uranium_ingot"
+    },
+    "title": {
+      "text": "Glow in the Dark"
+    },
+    "description": {
+      "text": "Smelt a Uranium Ingot"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:uranium_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:titanium",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

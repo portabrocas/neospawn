@@ -2,6 +2,7 @@ package com.neospawn.block;
 
 import com.neospawn.item.BossSummonItem;
 import com.neospawn.mob.ModMobs;
+import com.neospawn.registry.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -18,8 +19,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * The Summoning Altar: right-click it with a boss's offering to summon that boss; right-click with an
@@ -57,6 +61,26 @@ public class SummoningAltarBlock extends Block {
         OFFERINGS.put(Items.IRON_BLOCK, "siege_bot");
         OFFERINGS.put(Items.SPECTRAL_ARROW, "sniper_bot");
         OFFERINGS.put(Items.REDSTONE_BLOCK, "war_bot");
+        // The Gobbler stream: a cake to lure it (and one of its own Arcade Tokens, in MOD_OFFERINGS, for a rematch).
+        OFFERINGS.put(Items.CAKE, "gobbler");
+    }
+
+    /** Offerings that are NeoSpawn items: looked up lazily, since this block is registered before the items. */
+    public static final Map<Supplier<? extends Item>, String> MOD_OFFERINGS = new LinkedHashMap<>();
+
+    static {
+        MOD_OFFERINGS.put(ModItems.ARCADE_TOKEN, "gobbler");
+    }
+
+    /** The boss this stack summons, or null if it's no offering. */
+    @Nullable
+    public static String bossFor(ItemStack stack) {
+        String boss = OFFERINGS.get(stack.getItem());
+        if (boss != null) {
+            return boss;
+        }
+        return MOD_OFFERINGS.entrySet().stream().filter(e -> stack.is(e.getKey().get())).map(Map.Entry::getValue)
+                .findFirst().orElse(null);
     }
 
     public SummoningAltarBlock(Properties props) {
@@ -66,7 +90,7 @@ public class SummoningAltarBlock extends Block {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
                                               InteractionHand hand, BlockHitResult hit) {
-        String boss = OFFERINGS.get(stack.getItem());
+        String boss = bossFor(stack);
         if (boss == null) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -83,6 +107,8 @@ public class SummoningAltarBlock extends Block {
             player.sendSystemMessage(Component.translatable("message.neospawn.altar.offerings").withStyle(ChatFormatting.GOLD));
             OFFERINGS.forEach((item, boss) -> player.sendSystemMessage(Component.literal(" • ")
                     .append(item.getDescription()).append(" → " + ModMobs.byId(boss).name)));
+            MOD_OFFERINGS.forEach((item, boss) -> player.sendSystemMessage(Component.literal(" • ")
+                    .append(item.get().getDescription()).append(" → " + ModMobs.byId(boss).name)));
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }

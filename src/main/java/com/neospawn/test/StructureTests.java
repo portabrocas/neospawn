@@ -8,6 +8,8 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
@@ -52,18 +54,48 @@ public class StructureTests {
         return true;
     }
 
+    /** Builds a guardian tree far from the test grid and checks its trunk, stair, cellar, crown chest and boss. */
+    private static void guardianTree(GameTestHelper helper, String name, net.minecraft.world.level.block.Block log,
+                                     net.minecraft.world.level.block.Block platform, String boss) {
+        var tree = (com.neospawn.worldgen.build.GuardianTree) com.neospawn.worldgen.build.Blueprints.get(name);
+        ServerLevel level = helper.getLevel();
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO).offset(0, 12, -120);
+        int c = 18, top = tree.top();
+        var box = new net.minecraft.world.level.levelgen.structure.BoundingBox(origin.getX() - 2, origin.getY() - tree.below() - 30,
+                origin.getZ() - 2, origin.getX() + tree.sizeX() + 2, origin.getY() + tree.above() + 2, origin.getZ() + tree.sizeZ() + 2);
+        // The tree is built far from the test grid. Force the crown's chunk and give it a second to finish loading:
+        // a guardian added to a chunk that is still loading is lost.
+        var crown = new ChunkPos(origin.offset(c, 0, c - 6));
+        level.setChunkForced(crown.x, crown.z, true);
+        helper.startSequence().thenIdle(20).thenExecute(() -> {
+            tree.build(new com.neospawn.worldgen.build.Build(level, box, origin, net.minecraft.world.level.block.Rotation.NONE,
+                    net.minecraft.util.RandomSource.create(3), tree.sizeX(), tree.sizeZ()));
+            helper.assertTrue(level.getBlockState(origin.offset(c + 4, 10, c)).is(log), name + ": no trunk wall");
+            helper.assertTrue(level.getBlockState(origin.offset(c, 10, c + 2)).isAir() || level.getBlockState(origin.offset(c, 10, c + 2))
+                    .getBlock() instanceof net.minecraft.world.level.block.StairBlock, name + ": the trunk is not hollow");
+            helper.assertTrue(level.getBlockState(origin.offset(c + 6, top, c)).is(platform), name + ": no platform inlay at the crown");
+            BlockPos crownFrom = origin.offset(c - 9, top + 1, c - 9), crownTo = origin.offset(c + 9, top + 1, c + 9);
+            helper.assertTrue(count(helper, crownFrom, crownTo, ChestBlockEntity.class) == 1, name + ": no chest on the platform");
+            helper.assertTrue(chestsHaveLoot(helper, crownFrom, crownTo), name + ": the crown chest has no loot table");
+            helper.assertTrue(count(helper, origin.offset(c - 6, -9, c - 6), origin.offset(c + 6, -2, c + 6),
+                    net.minecraft.world.level.block.entity.BarrelBlockEntity.class) == 2, name + ": the root cellar has no stores");
+        }).thenWaitUntil(() -> {
+            var guards = bossesNear(helper, origin.offset(c, top + 2, c), 40);
+            helper.assertTrue(guards.stream().anyMatch(g -> g.spec().id.equals(boss)), name + ": " + boss + " is not guarding the tree");
+        }).thenExecute(() -> {
+            bossesNear(helper, origin.offset(c, top + 2, c), 40).forEach(g -> g.discard());
+            level.setChunkForced(crown.x, crown.z, false);
+        }).thenSucceed();
+    }
+
     @GameTest(template = "arena", batch = "structure_tree", timeoutTicks = 100)
     public static void treeOfGoodness(GameTestHelper helper) {
-        BlockPos base = helper.absolutePos(new BlockPos(12, 2, 12));
-        helper.assertTrue(place(helper, "tree_of_goodness", base), "the tree refused to grow");
-        helper.assertTrue(helper.getLevel().getBlockState(base.above(10)).is(Blocks.OAK_LOG), "no trunk");
-        helper.assertTrue(helper.getLevel().getBlockState(base.above(34)).is(Blocks.GOLD_BLOCK), "no golden platform on top");
-        helper.assertTrue(count(helper, base.above(34), base.above(36), ChestBlockEntity.class) == 1, "no chest on the platform");
-        helper.assertTrue(chestsHaveLoot(helper, base.above(34), base.above(36)), "the chest has no loot table");
-        helper.assertTrue(bossesNear(helper, base.above(37), 6).stream().anyMatch(b -> b.spec().id.equals("the_king")),
-                "The King is not guarding the tree");
-        helper.killAllEntities();
-        helper.succeed();
+        guardianTree(helper, "tree_of_goodness", com.neospawn.registry.ModBlocks.AURELIAN_LOG.get(), Blocks.GOLD_BLOCK, "the_king");
+    }
+
+    @GameTest(template = "arena", batch = "structure_empress_tree", timeoutTicks = 100)
+    public static void empressTree(GameTestHelper helper) {
+        guardianTree(helper, "empress_tree", Blocks.CHERRY_LOG, Blocks.AMETHYST_BLOCK, "empress");
     }
 
     @GameTest(template = "arena", batch = "structure_nest", timeoutTicks = 100)
@@ -80,15 +112,28 @@ public class StructureTests {
         helper.succeed();
     }
 
-    @GameTest(template = "tall_arena", batch = "structure_empress_tree", timeoutTicks = 100)
-    public static void empressTree(GameTestHelper helper) {
-        BlockPos base = helper.absolutePos(new BlockPos(12, 2, 12));
-        helper.assertTrue(place(helper, "empress_tree", base), "the Empress Tree refused to grow");
-        helper.assertTrue(helper.getLevel().getBlockState(base.above(10)).is(Blocks.CHERRY_LOG), "no cherry trunk");
-        helper.assertTrue(helper.getLevel().getBlockState(base.above(34)).is(Blocks.AMETHYST_BLOCK), "no amethyst platform");
-        helper.assertTrue(bossesNear(helper, base.above(37), 8).stream().anyMatch(b -> b.spec().id.equals("empress")),
-                "The Empress is not guarding her tree");
-        helper.killAllEntities();
+    /**
+     * Realm trees are boss-guarded, so they are spaced like villages: one per region, a minimum gap between
+     * neighbours, Empresses kept clear of Kings, and the old scatter feature is gone.
+     */
+    @GameTest(template = "arena", batch = "structure_tree_spacing", timeoutTicks = 20)
+    public static void realmTreesAreSpacedOut(GameTestHelper helper) {
+        var sets = helper.getLevel().registryAccess().registryOrThrow(Registries.STRUCTURE_SET);
+        for (String tree : List.of("tree_of_goodness", "empress_tree")) {
+            var set = sets.getOrThrow(ResourceKey.create(Registries.STRUCTURE_SET, NeoSpawn.id(tree)));
+            helper.assertTrue(set.placement() instanceof RandomSpreadStructurePlacement, tree + " is not spread out like a village");
+            var spread = (RandomSpreadStructurePlacement) set.placement();
+            int size = tree.equals("tree_of_goodness") ? 40 : 32, gap = tree.equals("tree_of_goodness") ? 16 : 12;
+            helper.assertTrue(spread.spacing() == size && spread.separation() == gap,
+                    tree + ": spacing " + spread.spacing() + "/" + spread.separation() + ", expected " + size + "/" + gap);
+            helper.assertTrue(helper.getLevel().registryAccess().registryOrThrow(Registries.PLACED_FEATURE)
+                    .getOptional(NeoSpawn.id(tree)).isEmpty(), tree + " is still placed as a feature too");
+        }
+        var empress = sets.getOrThrow(ResourceKey.create(Registries.STRUCTURE_SET, NeoSpawn.id("empress_tree")));
+        var json = net.minecraft.world.level.levelgen.structure.placement.StructurePlacement.CODEC
+                .encodeStart(net.minecraft.resources.RegistryOps.create(com.mojang.serialization.JsonOps.INSTANCE,
+                        helper.getLevel().registryAccess()), empress.placement()).getOrThrow().getAsJsonObject();
+        helper.assertTrue(json.has("exclusion_zone"), "Empress Trees may generate right next to a King's tree");
         helper.succeed();
     }
 

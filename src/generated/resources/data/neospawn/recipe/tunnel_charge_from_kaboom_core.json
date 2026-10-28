@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "K": {
+      "item": "neospawn:kaboom_core"
+    },
+    "T": {
+      "item": "neospawn:titanium_ingot"
+    },
+    "U": {
+      "item": "neospawn:uranium_ingot"
+    }
+  },
+  "pattern": [
+    "TKT",
+    " U "
+  ],
+  "result": {
+    "count": 3,
+    "id": "neospawn:tunnel_charge"
+  }
+}

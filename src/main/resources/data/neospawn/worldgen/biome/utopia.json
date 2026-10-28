@@ -3,23 +3,29 @@
   "temperature": 0.9,
   "downfall": 0.5,
   "effects": {
-    "sky_color": 9427199,
-    "fog_color": 14743295,
-    "water_color": 4186320,
-    "water_fog_color": 1731178,
+    "sky_color": 9356272,
+    "fog_color": 16767392,
+    "water_color": 6084320,
+    "water_fog_color": 2783872,
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2.0
     },
-    "grass_color": 8191100,
-    "foliage_color": 5955674,
+    "grass_color": 14731360,
+    "foliage_color": 15775808,
     "particle": {
       "options": {
-        "type": "minecraft:white_ash"
+        "type": "neospawn:golden_mote"
       },
-      "probability": 0.002
+      "probability": 0.006
+    },
+    "music": {
+      "sound": "minecraft:music.overworld.cherry_grove",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": false
     }
   },
   "carvers": {
@@ -31,22 +37,15 @@
   },
   "features": [
     [],
-    [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
-    ],
+    [],
     [
       "minecraft:amethyst_geode"
     ],
     [],
-    [
-      "neospawn:tree_of_goodness",
-      "neospawn:empress_tree"
-    ],
+    [],
     [],
     [
       "minecraft:ore_dirt",
-      "minecraft:ore_gravel",
       "minecraft:ore_granite_upper",
       "minecraft:ore_granite_lower",
       "minecraft:ore_diorite_upper",
@@ -73,7 +72,6 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel",
       "neospawn:ruby_ore",
       "neospawn:tanzanite_ore",
       "neospawn:titanium_ore",
@@ -83,14 +81,14 @@
     ],
     [],
     [
-      "minecraft:spring_water",
-      "minecraft:spring_lava"
+      "minecraft:spring_water"
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:flower_flower_forest",
+      "neospawn:utopia_aurelian_trees",
+      "neospawn:utopia_sunbloom_trees",
+      "neospawn:utopia_flowers",
       "minecraft:forest_flowers",
-      "minecraft:trees_flower_forest",
       "minecraft:patch_grass_plain",
       "minecraft:patch_sugar_cane",
       "minecraft:patch_pumpkin",
@@ -149,6 +147,12 @@
         "weight": 3,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "neospawn:gilded_stag",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 3
       }
     ],
     "ambient": [
@@ -175,6 +179,12 @@
         "weight": 4,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "neospawn:sunwing_moth",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 3
       }
     ],
     "monster": []

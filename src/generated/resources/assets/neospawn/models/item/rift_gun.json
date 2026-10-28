@@ -1,0 +1,6 @@
+{
+  "parent": "neospawn:item/weapon_gun",
+  "textures": {
+    "layer0": "neospawn:item/rift_gun"
+  }
+}

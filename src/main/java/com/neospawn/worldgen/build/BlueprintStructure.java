@@ -37,6 +37,8 @@ public class BlueprintStructure extends Structure {
         int[] depth = bp.depth();
         if (depth != null) {
             y = depth[0] + ctx.random().nextInt(Math.max(1, depth[1] - depth[0]));
+        } else if (bp.skyY() != null) {
+            y = bp.skyY() + ctx.random().nextInt(9);
         } else {
             // Sit on the lowest of the footprint's corners and centre; the foundation fills the rest.
             int w = rotation == Rotation.CLOCKWISE_90 || rotation == Rotation.COUNTERCLOCKWISE_90 ? bp.sizeZ() : bp.sizeX();
@@ -46,10 +48,17 @@ public class BlueprintStructure extends Structure {
             int highest = Integer.MIN_VALUE;
             int floor = ctx.heightAccessor().getMinBuildHeight() + 6;
             for (int[] p : probes) {
-                int surface = ctx.chunkGenerator().getFirstOccupiedHeight(x + p[0], z + p[1], Heightmap.Types.WORLD_SURFACE_WG,
-                        ctx.heightAccessor(), ctx.randomState());
-                int ground = ctx.chunkGenerator().getFirstOccupiedHeight(x + p[0], z + p[1], Heightmap.Types.OCEAN_FLOOR_WG,
-                        ctx.heightAccessor(), ctx.randomState());
+                int surface, ground;
+                if (bp.ceiling() != Integer.MAX_VALUE) {
+                    int[] under = under(ctx, x + p[0], z + p[1], bp.ceiling());
+                    surface = under[0];
+                    ground = under[1];
+                } else {
+                    surface = ctx.chunkGenerator().getFirstOccupiedHeight(x + p[0], z + p[1], Heightmap.Types.WORLD_SURFACE_WG,
+                            ctx.heightAccessor(), ctx.randomState());
+                    ground = ctx.chunkGenerator().getFirstOccupiedHeight(x + p[0], z + p[1], Heightmap.Types.OCEAN_FLOOR_WG,
+                            ctx.heightAccessor(), ctx.randomState());
+                }
                 if (surface <= floor || surface > ground) {
                     return Optional.empty(); // over the void, or standing in water: surface structures need dry land
                 }
@@ -63,6 +72,28 @@ public class BlueprintStructure extends Structure {
         BlockPos origin = new BlockPos(x, y, z);
         long seed = ctx.seed() ^ origin.asLong() * 31L;
         return Optional.of(new GenerationStub(origin, pieces -> pieces.addPiece(new BlueprintPiece(blueprint, origin, rotation, seed))));
+    }
+
+    /**
+     * {surface, ground} of the highest ground below {@code ceiling}, like the WORLD_SURFACE_WG / OCEAN_FLOOR_WG
+     * heightmaps but ignoring anything above (floating islands). Standing water makes surface > ground.
+     */
+    private static int[] under(GenerationContext ctx, int x, int z, int ceiling) {
+        var column = ctx.chunkGenerator().getBaseColumn(x, z, ctx.heightAccessor(), ctx.randomState());
+        int min = ctx.heightAccessor().getMinBuildHeight();
+        int surface = min;
+        for (int y = Math.min(ceiling, ctx.heightAccessor().getMaxBuildHeight() - 1); y > min; y--) {
+            var state = column.getBlock(y);
+            if (!state.isAir()) {
+                if (surface == min) {
+                    surface = y + 1;
+                }
+                if (state.getFluidState().isEmpty()) {
+                    return new int[]{surface, y + 1};
+                }
+            }
+        }
+        return new int[]{surface, min};
     }
 
     @Override

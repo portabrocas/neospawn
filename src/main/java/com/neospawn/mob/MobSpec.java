@@ -65,6 +65,8 @@ public final class MobSpec {
         WIND_GUST(160, 0, 24, 20, 10, false),
         METEOR_SHOWER(260, 0, 40, 35, 30, true),
         SPORE_CLOUD(180, 0, 30, 25, 0, true),
+        /** The Empress: amethyst shards hail down around where you stood. */
+        CRYSTAL_SHARD_RAIN(200, 0, 36, 30, 25, true),
         // Bug attacks
         SCYTHE(60, 0, 6, 12, 0, false),
         STING(120, 0, 8, 15, 0, false),
@@ -215,10 +217,33 @@ public final class MobSpec {
 
     public MobSpec laysEggs() { this.laysEggs = true; return this; }
 
-    /** Uses a hand-made GeckoLib model (assets/neospawn/geo/entity/<id>.geo.json) instead of a generated one. */
+    /** Uses a hand-made GeckoLib model (assets/neospawn/geo/entity/<geoModel>.geo.json) instead of a generated one. */
     public boolean geo;
+    public String geoModel;
+    public float geoScale = 1.0f;
+    public net.minecraft.world.entity.EntityType.EntityFactory<? extends GeoBoss> geoFactory;
 
-    public MobSpec geo() { this.geo = true; return this; }
+    /**
+     * Draw this boss with a GeckoLib model. {@code model} names the geo and animation files (several bosses may share
+     * one); the texture is always textures/entity/&lt;id&gt;.png. {@code factory} is the GeoBoss subclass that picks its
+     * animations.
+     */
+    public MobSpec geo(String model, float renderScale,
+                       net.minecraft.world.entity.EntityType.EntityFactory<? extends GeoBoss> factory) {
+        this.geo = true;
+        this.geoModel = model;
+        this.geoScale = renderScale;
+        this.geoFactory = factory;
+        return this;
+    }
+
+    /** A non-boss mob with its own entity class instead of the one its kind picks (the Gobbler's ghosts). */
+    @Nullable public net.minecraft.world.entity.EntityType.EntityFactory<? extends Mob> customFactory;
+
+    public <T extends Mob> MobSpec custom(net.minecraft.world.entity.EntityType.EntityFactory<T> factory) {
+        this.customFactory = factory;
+        return this;
+    }
 
     public MobSpec hunts(String... preyIds) {
         prey.addAll(List.of(preyIds));

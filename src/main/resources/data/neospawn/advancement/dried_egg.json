@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:dried_egg"
+    },
+    "title": {
+      "text": "Just Add Water"
+    },
+    "description": {
+      "text": "Dig up a Dried Egg from Fossil Ore, or sift one out of gravel"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:dried_egg"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:root",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

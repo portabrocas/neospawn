@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "neospawn:raptor_claw"
+    },
+    "H": {
+      "item": "neospawn:dino_hide"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "C C",
+    "HSH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:climbing_claws"
+  }
+}

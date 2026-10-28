@@ -2,6 +2,7 @@ package com.neospawn.item;
 
 import com.neospawn.registry.ModEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -27,11 +28,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -41,7 +44,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/** OreSpawn-style gadgets: the Squid Zooka, Ray Gun, Chainsaw, Attitude Adjuster and Nether Sword. */
+/** OreSpawn-style gadgets: the Squid Zooka, Ray Gun, Rift Gun, Chainsaw, Attitude Adjuster and Nether Sword. */
 public final class Gadgets {
     /** Uses one of {@code ammo} from the inventory, or nothing in Creative. Returns false if there is none. */
     private static boolean consumeAmmo(Player player, Item ammo) {
@@ -164,6 +167,80 @@ public final class Gadgets {
         @Override
         public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
             Gadgets.tooltip(tooltip, "ray_gun");
+        }
+    }
+
+    /**
+     * Fires linked rifts at walls, floors and ceilings: blue on right-click, orange when sneaking. Whatever touches one
+     * comes out of the other. Firing a color again moves that rift. Ammo: ender pearls. A rare find, never crafted.
+     */
+    public static class RiftGun extends Item {
+        private static final double RANGE = 64;
+        private static final String LINK = "rift_link";
+
+        public RiftGun(Properties props) {
+            super(props);
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            if (level instanceof ServerLevel server) {
+                int color = player.isShiftKeyDown() ? RiftEntity.ORANGE : RiftEntity.BLUE;
+                if (fire(server, player, stack, color) != null) {
+                    player.getCooldowns().addCooldown(this, 10);
+                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                }
+            }
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+        }
+
+        /**
+         * Opens this gun's {@code color} rift on the block face the player looks at, using one ender pearl.
+         * Returns the rift, or null if there's no surface in range that can hold one (no pearl is used then).
+         * Public for the GameTests.
+         */
+        @javax.annotation.Nullable
+        public static RiftEntity fire(ServerLevel level, Player player, ItemStack gun, int color) {
+            Vec3 eye = player.getEyePosition();
+            BlockHitResult hit = level.clip(new ClipContext(eye, eye.add(player.getLookAngle().scale(RANGE)),
+                    ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+            RiftEntity.Spot spot = hit.getType() == HitResult.Type.BLOCK
+                    ? RiftEntity.spot(level, hit.getBlockPos(), hit.getDirection()) : null;
+            if (spot == null) {
+                player.displayClientMessage(Component.translatable("message.neospawn.rift_gun.no_surface"), true);
+                level.playSound(null, player.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.5f, 1.8f);
+                return null;
+            }
+            if (!consumeAmmo(player, Items.ENDER_PEARL)) {
+                return null;
+            }
+            RiftEntity rift = RiftEntity.open(level, link(gun), color, spot);
+            Vec3 step = spot.center().subtract(eye);
+            for (double t = 0.05; t < 1; t += 0.6 / Math.max(1, step.length())) {
+                Vec3 p = eye.add(step.scale(t));
+                level.sendParticles(ParticleTypes.REVERSE_PORTAL, p.x, p.y, p.z, 1, 0, 0, 0, 0);
+            }
+            level.playSound(null, player.blockPosition(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.8f,
+                    color == RiftEntity.BLUE ? 1.8f : 1.4f);
+            level.playSound(null, BlockPos.containing(spot.center()), SoundEvents.ENDERMAN_TELEPORT, SoundSource.BLOCKS, 0.6f, 1.6f);
+            return rift;
+        }
+
+        /** The id that ties this gun to its two rifts, made on first use. */
+        private static java.util.UUID link(ItemStack gun) {
+            CustomData data = gun.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+            if (data.contains(LINK)) {
+                return data.copyTag().getUUID(LINK);
+            }
+            java.util.UUID link = java.util.UUID.randomUUID();
+            CustomData.update(DataComponents.CUSTOM_DATA, gun, tag -> tag.putUUID(LINK, link));
+            return link;
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+            Gadgets.tooltip(tooltip, "rift_gun");
         }
     }
 

@@ -18,8 +18,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -173,6 +175,9 @@ public final class RealmTravel {
         BlockPos column = land != null ? land : near;
         level.getChunk(column.getX() >> 4, column.getZ() >> 4);
         BlockPos surface = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column);
+        if (level.dimension().equals(Realm.UTOPIA.dimension)) {
+            surface = meadow(level, column, surface);
+        }
         boolean hasGround = surface.getY() > level.getMinBuildHeight() + 1;
         if (hasGround && level.getFluidState(surface.below()).isEmpty()) {
             return Vec3.atBottomCenterOf(surface);
@@ -187,11 +192,32 @@ public final class RealmTravel {
         return Vec3.atBottomCenterOf(platform);
     }
 
-    private static void effects(ServerPlayer player) {
-        Level level = player.level();
-        level.playSound(null, player.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0f, 0.8f);
-        ((ServerLevel) level).sendParticles(ParticleTypes.PORTAL, player.getX(), player.getY() + 1, player.getZ(),
-                60, 0.5, 1, 0.5, 0.5);
+    /** Utopia's floating islands start above this height; arrivals land on the meadow below them. */
+    public static final int UTOPIA_ISLANDS_FLOOR = 130;
+
+    /** The first standable spot under Utopia's island band: the meadow surface, not an island overhead. */
+    private static BlockPos meadow(ServerLevel level, BlockPos column, BlockPos surface) {
+        if (surface.getY() <= UTOPIA_ISLANDS_FLOOR) {
+            return surface;
+        }
+        for (int y = UTOPIA_ISLANDS_FLOOR; y > level.getMinBuildHeight() + 1; y--) {
+            BlockPos pos = new BlockPos(column.getX(), y, column.getZ());
+            if (level.getBlockState(pos).isAir() && level.getBlockState(pos.above()).isAir()
+                    && !level.getBlockState(pos.below()).isAir() && !level.getBlockState(pos.below()).is(net.minecraft.tags.BlockTags.LEAVES)) {
+                return pos;
+            }
+        }
+        return surface;
+    }
+
+    /** The whoosh and purple swirl of anything teleporting (realm travel, rifts), scaled to its size. Server side. */
+    public static void effects(Entity entity) {
+        Level level = entity.level();
+        float size = Math.min(1, entity.getBbHeight() / 1.8f);
+        level.playSound(null, entity.blockPosition(), SoundEvents.ENDERMAN_TELEPORT,
+                entity instanceof Player ? SoundSource.PLAYERS : SoundSource.NEUTRAL, 0.4f + 0.6f * size, 0.8f);
+        ((ServerLevel) level).sendParticles(ParticleTypes.PORTAL, entity.getX(), entity.getY() + entity.getBbHeight() / 2,
+                entity.getZ(), Math.max(10, (int) (60 * size)), entity.getBbWidth(), entity.getBbHeight() / 2, entity.getBbWidth(), 0.5);
     }
 
     private RealmTravel() {}

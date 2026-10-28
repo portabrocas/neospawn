@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:behemoth_blade"
+    },
+    "title": {
+      "text": "Big Bertha"
+    },
+    "description": {
+      "text": "Forge the Behemoth Blade from four bosses' weapons"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:behemoth_blade"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:boss_gorgantua",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  }
+}

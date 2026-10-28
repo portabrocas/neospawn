@@ -30,11 +30,14 @@ public class NeoSpawn {
         ModCreativeTabs.TABS.register(modEventBus);
         AddItemLootModifier.SERIALIZERS.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
+        ModFeatures.PLACEMENTS.register(modEventBus);
         com.neospawn.worldgen.build.ModStructures.TYPES.register(modEventBus);
         com.neospawn.worldgen.build.ModStructures.PIECES.register(modEventBus);
 
         modEventBus.addListener(ModMobs::registerAttributes);
         modEventBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent e) -> e.enqueueWork(com.neospawn.compat.MorphCompat::register));
+        modEventBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent e) -> e.enqueueWork(ModBlocks::registerPots));
+        com.neospawn.registry.ModParticles.PARTICLES.register(modEventBus);
         modEventBus.addListener(ModMobs::registerSpawnPlacements);
     }
 

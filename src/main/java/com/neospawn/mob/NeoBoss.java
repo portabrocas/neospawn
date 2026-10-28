@@ -222,6 +222,9 @@ public class NeoBoss extends Monster implements NeoMob {
 
     @Override
     public void tick() {
+        if (!level().isClientSide && tickCount % 20 == 0) {
+            updateSleep();
+        }
         if (!spec().isSkyBoss()) {
             super.tick();
             return;
@@ -255,7 +258,7 @@ public class NeoBoss extends Monster implements NeoMob {
         }
 
         updatePhase();
-        if (spec().smashesBlocks && horizontalCollision && tickCount % 5 == 0) {
+        if (spec().smashesBlocks && horizontalCollision && tickCount % 5 == 0 && wantsToSmash()) {
             smashBlocks();
         }
         tickCharge();
@@ -387,7 +390,7 @@ public class NeoBoss extends Monster implements NeoMob {
         }
         return switch (attack) {
             case LEAP_SLAM -> onGround() || isInWater();
-            case SUMMON -> minionsNearby() < 6;
+            case SUMMON -> minionsNearby() < maxMinions();
             default -> true;
         };
     }
@@ -464,6 +467,7 @@ public class NeoBoss extends Monster implements NeoMob {
             }
             case GEYSER, WHIRLPOOL, WAVE -> playSound(SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, 4.0f, 0.5f);
             case SPORE_CLOUD -> playSound(SoundEvents.SPORE_BLOSSOM_BREAK, 4.0f, 0.5f);
+            case CRYSTAL_SHARD_RAIN -> playSound(SoundEvents.AMETHYST_BLOCK_RESONATE, 6.0f, 0.5f);
             default -> playSound(spec().isSkyBoss() ? SoundEvents.ENDER_DRAGON_GROWL : SoundEvents.RAVAGER_ROAR,
                     2.5f, 1.3f + random.nextFloat() * 0.2f);
         }
@@ -486,6 +490,10 @@ public class NeoBoss extends Monster implements NeoMob {
                 level.sendParticles(ParticleTypes.BUBBLE_COLUMN_UP, aimPos.x, aimPos.y + 0.2, aimPos.z, 8, 0.5, 0.1, 0.5, 0.05);
             }
             case SPORE_CLOUD -> ring(aimPos, 5, ParticleTypes.SPORE_BLOSSOM_AIR);
+            case CRYSTAL_SHARD_RAIN -> {
+                ring(aimPos, SHARD_RADIUS, ParticleTypes.END_ROD);
+                ring(aimPos, SHARD_RADIUS / 2, ParticleTypes.WAX_OFF);
+            }
             case BEAM -> {
                 Vec3 mouth = mouth();
                 Vec3 to = aimPos.subtract(mouth);
@@ -573,6 +581,7 @@ public class NeoBoss extends Monster implements NeoMob {
             case WIND_GUST -> windGust();
             case METEOR_SHOWER -> meteorShower(aim);
             case SPORE_CLOUD -> sporeCloud(aim);
+            case CRYSTAL_SHARD_RAIN -> crystalShardRain(aim);
             case SCYTHE -> scythe();
             case STING -> sting(target);
             case TOSS -> toss(target);
@@ -700,7 +709,7 @@ public class NeoBoss extends Monster implements NeoMob {
         if (beamTicks < 30 && beamTicks % 3 == 0) {
             double t = 1.15 - beamTicks / 30.0;
             Vec3 blast = mouth.add(toTarget.scale(t));
-            level.explode(this, blast.x, blast.y, blast.z, 2.5f, true, Level.ExplosionInteraction.MOB);
+            level.explode(this, blast.x, blast.y, blast.z, 2.5f, false, Level.ExplosionInteraction.MOB);
         }
     }
 
@@ -709,19 +718,52 @@ public class NeoBoss extends Monster implements NeoMob {
         Vec3 aim = target.getEyePosition().subtract(mouth);
         for (int i = 0; i < (enraged ? 9 : 6); i++) {
             Vec3 dir = aim.add(random.nextGaussian() * 1.5, random.nextGaussian() * 0.7, random.nextGaussian() * 1.5).normalize();
-            SmallFireball fireball = new SmallFireball(level(), this, dir);
+            SmallFireball fireball = flame(dir);
             fireball.setPos(mouth);
             level().addFreshEntity(fireball);
         }
         playSound(SoundEvents.BLAZE_SHOOT, 3.0f, 0.5f);
     }
 
+    /** Lightning that strikes what stands under it but starts no fires (in Utopia's meadows it lit whole forests). */
     private void lightning(BlockPos pos) {
         LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level());
         if (bolt != null) {
             bolt.moveTo(Vec3.atBottomCenterOf(pos));
+            bolt.setVisualOnly(true);
             level().addFreshEntity(bolt);
+            for (LivingEntity victim : level().getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(3, 6, 3),
+                    e -> e != this && !(e instanceof NeoBoss))) {
+                victim.thunderHit((ServerLevel) level(), bolt);
+            }
         }
+    }
+
+    /** A small fireball that burns what it hits but never sets blocks alight. */
+    private SmallFireball flame(Vec3 dir) {
+        return new SmallFireball(level(), this, dir) {
+            @Override
+            protected void onHitBlock(net.minecraft.world.phys.BlockHitResult result) {
+            }
+        };
+    }
+
+    /** A big fireball that explodes (breaking blocks, if mobGriefing allows) but leaves no fire behind. */
+    private LargeFireball blast(Vec3 dir, int power) {
+        return new LargeFireball(level(), this, dir, power) {
+            @Override
+            protected void onHit(net.minecraft.world.phys.HitResult result) {
+                if (result.getType() == net.minecraft.world.phys.HitResult.Type.ENTITY) {
+                    onHitEntity((net.minecraft.world.phys.EntityHitResult) result);
+                } else if (result.getType() == net.minecraft.world.phys.HitResult.Type.BLOCK) {
+                    onHitBlock((net.minecraft.world.phys.BlockHitResult) result);
+                }
+                if (!level().isClientSide) {
+                    level().explode(this, getX(), getY(), getZ(), power, false, Level.ExplosionInteraction.MOB);
+                    discard();
+                }
+            }
+        };
     }
 
     private void summon(LivingEntity target) {
@@ -730,12 +772,22 @@ public class NeoBoss extends Monster implements NeoMob {
             return;
         }
         playSound(SoundEvents.RAVAGER_ROAR, 5.0f, 1.4f);
-        for (int i = 0; i < (enraged ? 4 : 3); i++) {
+        for (int i = 0; i < summonCount(enraged); i++) {
             BlockPos pos = blockPosition().offset(random.nextInt(9) - 4, 0, random.nextInt(9) - 4);
             if (minion.type.get().spawn((ServerLevel) level(), pos, MobSpawnType.MOB_SUMMONED) instanceof Mob mob) {
                 mob.setTarget(target);
             }
         }
+    }
+
+    /** How many minions one SUMMON calls. */
+    protected int summonCount(boolean enraged) {
+        return enraged ? 4 : 3;
+    }
+
+    /** SUMMON is skipped while this many of its minions are already around. */
+    protected int maxMinions() {
+        return 6;
     }
 
     private void tailSwipe() {
@@ -821,13 +873,13 @@ public class NeoBoss extends Monster implements NeoMob {
         Vec3 aim = target.getEyePosition().subtract(mouth);
         for (int i = 0; i < (enraged ? 5 : 3); i++) {
             Vec3 dir = aim.add(random.nextGaussian() * 2, random.nextGaussian(), random.nextGaussian() * 2).normalize();
-            SmallFireball fireball = new SmallFireball(level(), this, dir);
+            SmallFireball fireball = flame(dir);
             fireball.setPos(mouth);
             level().addFreshEntity(fireball);
         }
         // Every third volley adds one big explosive fireball (respects the mobGriefing gamerule).
         if (++volleyCount % 3 == 0) {
-            LargeFireball big = new LargeFireball(level(), this, aim.normalize(), 2);
+            LargeFireball big = blast(aim.normalize(), 2);
             big.setPos(mouth);
             level().addFreshEntity(big);
         }
@@ -853,10 +905,39 @@ public class NeoBoss extends Monster implements NeoMob {
             double x = aim.x + (random.nextDouble() - 0.5) * 16;
             double z = aim.z + (random.nextDouble() - 0.5) * 16;
             Vec3 down = new Vec3(random.nextGaussian() * 0.05, -1, random.nextGaussian() * 0.05);
-            LargeFireball meteor = new LargeFireball(level(), this, down, 1);
+            LargeFireball meteor = blast(down, 1);
             meteor.setPos(x, aim.y + 24 + random.nextInt(8), z);
             level().addFreshEntity(meteor);
         }
+    }
+
+    private static final double SHARD_RADIUS = 6;
+
+    /**
+     * Amethyst shards hail down inside the warning ring around where the target stood: each strike hurts and slows
+     * everything within two blocks of it. No fire, no block damage. Public for the GameTests (returns strike points).
+     */
+    public java.util.List<Vec3> crystalShardRain(Vec3 aim) {
+        ServerLevel level = (ServerLevel) level();
+        playSound(SoundEvents.AMETHYST_CLUSTER_BREAK, 6.0f, 0.6f);
+        java.util.List<Vec3> strikes = new java.util.ArrayList<>();
+        strikes.add(aim); // always one dead centre, so standing still is never safe
+        for (int i = 1; i < (enraged ? 11 : 7); i++) {
+            double angle = random.nextDouble() * Math.PI * 2, r = Math.sqrt(random.nextDouble()) * SHARD_RADIUS;
+            strikes.add(aim.add(Math.cos(angle) * r, 0, Math.sin(angle) * r));
+        }
+        for (Vec3 at : strikes) {
+            level.sendParticles(ParticleTypes.END_ROD, at.x, at.y + 6, at.z, 6, 0.1, 3, 0.1, 0.0);
+            level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK,
+                    net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK.defaultBlockState()), at.x, at.y + 0.2, at.z, 20, 0.4, 0.2, 0.4, 0.1);
+            for (LivingEntity victim : level.getEntitiesOfClass(LivingEntity.class, new AABB(at, at).inflate(2, 3, 2),
+                    e -> e != this && !(e instanceof NeoBoss boss && boss.getType() == getType()))) {
+                if (victim.hurt(damageSources().mobAttack(this), damage() * 0.45f)) {
+                    victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), this);
+                }
+            }
+        }
+        return strikes;
     }
 
     /** Drops lingering clouds of poisonous, dizzying spores on the target. */
@@ -1123,8 +1204,8 @@ public class NeoBoss extends Monster implements NeoMob {
         playSound(SoundEvents.DROWNED_SHOOT, 4.0f, 0.6f);
     }
 
-    /** Knocks out soft blocks in its path, like a kaiju walking through a forest. */
-    private void smashBlocks() {
+    /** Knocks out soft blocks in its path, like a kaiju walking through a forest. Public for the GameTests. */
+    public void smashBlocks() {
         if (!(level() instanceof ServerLevel level) || !EventHooks.canEntityGrief(level, this)) {
             return;
         }
@@ -1134,10 +1215,26 @@ public class NeoBoss extends Monster implements NeoMob {
                 Mth.floor(box.maxX), Mth.floor(box.maxY), Mth.floor(box.maxZ))) {
             BlockState state = level.getBlockState(pos);
             float hardness = state.getDestroySpeed(level, pos);
-            if (!state.isAir() && hardness >= 0 && hardness <= 5 && !state.is(BlockTags.WITHER_IMMUNE)) {
-                level.destroyBlock(pos, random.nextInt(4) == 0, this);
+            if (!state.isAir() && hardness >= 0 && hardness <= 5 && !state.is(BlockTags.WITHER_IMMUNE)
+                    && canSmash(state, hardness)) {
+                smashBlock(level, pos.immutable(), state);
             }
         }
+    }
+
+    /** Which blocks {@link #smashBlocks} may break, on top of the hardness and wither-immune limits. */
+    protected boolean canSmash(BlockState state, float hardness) {
+        return true;
+    }
+
+    /** Breaks one smashed block; a quarter of them drop. */
+    protected void smashBlock(ServerLevel level, BlockPos pos, BlockState state) {
+        level.destroyBlock(pos, random.nextInt(4) == 0, this);
+    }
+
+    /** Whether to smash its way forward right now (it has bumped into something). */
+    protected boolean wantsToSmash() {
+        return true;
     }
 
     private Vec3 horizontalTo(LivingEntity target) {
@@ -1150,6 +1247,91 @@ public class NeoBoss extends Monster implements NeoMob {
         return position().add(forward.scale(getBbWidth() * 0.6)).add(0, getBbHeight() * 0.8, 0);
     }
 
+    // ------------------------------------------------------------------ sleeping (performance)
+
+    /** A boss with no player this close, and nothing to fight, falls asleep: no AI, no boss bar. */
+    static final double SLEEP_RANGE = 96;
+    /** A sleeping boss wakes when a player comes this close, or when it is hit. */
+    static final double WAKE_RANGE = 48;
+    /** At most this many bosses are awake around one player; the rest wait their turn (unless hit). */
+    public static final int MAX_AWAKE = 2;
+    private boolean asleep;
+    private int idleChecks;
+    private int lastHurtTick = -10000;
+
+    public boolean isAsleep() {
+        return asleep;
+    }
+
+    /**
+     * Once a second on the server. Several Kings meeting a player at once used to freeze the game (and burn
+     * Utopia down); now a lone boss naps when nobody is near, and around a player only the nearest two fight.
+     * Public for the GameTests.
+     */
+    public void updateSleep() {
+        ServerLevel level = (ServerLevel) level();
+        Player near = level.getNearestPlayer(getX(), getY(), getZ(), asleep ? WAKE_RANGE : SLEEP_RANGE,
+                net.minecraft.world.entity.EntitySelector.NO_SPECTATORS);
+        if (asleep) {
+            if (near != null && awakeAround(near) < MAX_AWAKE) {
+                wake();
+            }
+            return;
+        }
+        if (tickCount - lastHurtTick < 400) {
+            idleChecks = 0;
+            return;
+        }
+        if (near == null) {
+            // Alone: nap after 10 s, or after a minute when busy fighting a rival that nobody is watching.
+            idleChecks++;
+            if (idleChecks >= (getTarget() == null ? 10 : 60)) {
+                sleep();
+            }
+            return;
+        }
+        idleChecks = 0;
+        java.util.List<NeoBoss> awake = level.getEntitiesOfClass(NeoBoss.class, near.getBoundingBox().inflate(SLEEP_RANGE),
+                b -> !b.asleep);
+        if (awake.size() > MAX_AWAKE) {
+            awake.sort(java.util.Comparator.comparingDouble(b -> b.distanceToSqr(near)));
+            if (awake.indexOf(this) >= MAX_AWAKE) {
+                sleep();
+            }
+        }
+    }
+
+    private int awakeAround(Player player) {
+        return level().getEntitiesOfClass(NeoBoss.class, player.getBoundingBox().inflate(SLEEP_RANGE),
+                b -> !b.asleep && b != this).size();
+    }
+
+    private void sleep() {
+        asleep = true;
+        idleChecks = 0;
+        setTarget(null);
+        getNavigation().stop();
+        setDeltaMovement(Vec3.ZERO);
+        pendingAttack = null;
+        windupTicks = 0;
+        chargeTicks = 0;
+        leapTicks = 0;
+        beamTicks = 0;
+        whirlpoolTicks = 0;
+        grabTicks = 0;
+        swoopTicks = 0;
+        grabbed = null;
+        setNoAi(true);
+        bossEvent.setVisible(false);
+    }
+
+    private void wake() {
+        asleep = false;
+        idleChecks = 0;
+        setNoAi(false);
+        bossEvent.setVisible(true);
+    }
+
     // ------------------------------------------------------------------ boss plumbing
 
     @Override
@@ -1160,6 +1342,12 @@ public class NeoBoss extends Monster implements NeoMob {
         }
         if (transitionTicks > 0) {
             return false;
+        }
+        if (source.getEntity() != null && !level().isClientSide) {
+            lastHurtTick = tickCount;
+            if (asleep) {
+                wake();
+            }
         }
         return super.hurt(source, amount * spec().damageTaken * (recoverTicks > 0 ? 1.5f : 1.0f));
     }
@@ -1213,8 +1401,16 @@ public class NeoBoss extends Monster implements NeoMob {
     }
 
     @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("NeoSpawnAsleep", asleep);
+    }
+
+    @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+        asleep = tag.getBoolean("NeoSpawnAsleep");
+        bossEvent.setVisible(!asleep);
         if (hasCustomName()) {
             bossEvent.setName(getDisplayName());
         }

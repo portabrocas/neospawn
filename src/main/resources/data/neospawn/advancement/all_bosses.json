@@ -1,0 +1,80 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:behemoth_blade"
+    },
+    "title": {
+      "text": "Monster Hunter"
+    },
+    "description": {
+      "text": "Defeat The King, The Empress, Gorgantua, the Kraken and The Ascended King"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "the_king": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:the_king"
+        }
+      }
+    },
+    "empress": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:empress"
+        }
+      }
+    },
+    "gorgantua": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:gorgantua"
+        }
+      }
+    },
+    "kraken": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:kraken"
+        }
+      }
+    },
+    "the_ascended_king": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:the_ascended_king"
+        }
+      }
+    }
+  },
+  "parent": "neospawn:boss_the_ascended_king",
+  "requirements": [
+    [
+      "the_king"
+    ],
+    [
+      "empress"
+    ],
+    [
+      "gorgantua"
+    ],
+    [
+      "kraken"
+    ],
+    [
+      "the_ascended_king"
+    ]
+  ],
+  "rewards": {
+    "experience": 1000
+  }
+}

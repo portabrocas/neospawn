@@ -11,7 +11,7 @@ RES = os.path.join(os.path.dirname(__file__), "..", "src", "main", "resources", 
 def write(path, obj):
     full = os.path.join(RES, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
-    with open(full, "w") as f:
+    with open(full, "w", encoding="utf-8", newline="\n") as f:
         json.dump(obj, f, indent=2)
 
 
@@ -19,19 +19,28 @@ def ns(names):
     return [n if ":" in n else "neospawn:" + n for n in names]
 
 
-# ---- Curios: give players charm, back and necklace slots; say which NeoSpawn items fit.
-write("neospawn/curios/entities/neospawn_player.json", {"entities": ["minecraft:player"], "slots": ["charm", "back", "necklace"]})
+# ---- Accessory slots: which NeoSpawn items fit, for Curios and for Accessories (bundled with The Aether).
+# Curios has no feet slot of its own, so we define one (same id and shape as Artifacts' feet slot; they merge).
 CHARMS = ["verdant_charm", "prospectors_charm", "crystal_charm", "sovereign_charm", "paragon_charm", "chaos_charm"]
-write("curios/tags/item/charm.json", {"replace": False, "values": ns(CHARMS + ["creeper_repellent", "kraken_repellent", "bug_repellent"])})
-write("curios/tags/item/necklace.json", {"replace": False, "values": ns(["xp_siphon"])})
-write("curios/tags/item/back.json", {"replace": False, "values": ns(["butterfly_wings"])})
+WORN = {  # Curios slot -> (Accessories slot, items)
+    "charm": ("charm", CHARMS + ["creeper_repellent", "kraken_repellent", "bug_repellent"]),
+    "necklace": ("necklace", ["xp_siphon"]),
+    "back": ("back", ["butterfly_wings", "featherfall_cloak"]),
+    "hands": ("hand", ["climbing_claws"]),
+    "feet": ("shoes", ["redstone_sneakers"]),
+}
+write("neospawn/curios/entities/neospawn_player.json", {"entities": ["minecraft:player"], "slots": list(WORN)})
+write("neospawn/curios/slots/feet.json", {"size": 1, "order": 190, "icon": "curios:slot/empty_curio_slot", "add_cosmetic": True})
+for curios_slot, (accessories_slot, items) in WORN.items():
+    write(f"curios/tags/item/{curios_slot}.json", {"replace": False, "values": ns(items)})
+    write(f"accessories/tags/item/{accessories_slot}.json", {"replace": False, "values": ns(items)})
 
 # ---- Better Combat: each weapon uses the preset matching its shape.
 PRESETS = {
     "claymore": ["ember_greatsword", "war_blade", "ascended_blade", "behemoth_blade"],
     "heavy_axe": ["titan_cleaver"],
     "double_axe": ["empress_battleaxe"],
-    "hammer": ["siege_hammer"],
+    "hammer": ["siege_hammer", "gobblers_jaw"],
     "mace": ["bone_crusher", "hercules_horn"],
     "lance": ["dread_lance"],
     "spear": ["plague_lance", "sniper_lance"],

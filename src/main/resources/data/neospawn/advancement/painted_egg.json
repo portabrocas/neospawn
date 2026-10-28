@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:painted_egg"
+    },
+    "title": {
+      "text": "Egg Hunt"
+    },
+    "description": {
+      "text": "Find a Painted Egg laid by the Easter Bunny"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:painted_egg"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:dried_egg",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

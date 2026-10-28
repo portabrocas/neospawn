@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:king_scale"
+    },
+    "title": {
+      "text": "Long Live the King"
+    },
+    "description": {
+      "text": "Defeat The King atop the Tree of Goodness"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:the_king"
+        }
+      }
+    }
+  },
+  "parent": "neospawn:first_boss",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  }
+}

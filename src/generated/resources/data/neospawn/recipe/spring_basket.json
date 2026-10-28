@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:carrot"
+    },
+    "E": {
+      "item": "neospawn:painted_egg"
+    },
+    "H": {
+      "item": "minecraft:hay_block"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "CEC",
+    "WHW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:spring_basket"
+  }
+}

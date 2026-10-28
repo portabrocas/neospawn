@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:titanium_ingot"
+    },
+    "title": {
+      "text": "Hard Metal"
+    },
+    "description": {
+      "text": "Smelt a Titanium Ingot"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:titanium_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:ruby",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

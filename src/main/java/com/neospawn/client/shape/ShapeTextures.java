@@ -1,5 +1,6 @@
 package com.neospawn.client.shape;
 
+import com.google.gson.JsonParser;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.neospawn.NeoSpawn;
 import com.neospawn.mob.Look;
@@ -8,12 +9,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.resources.ResourceLocation;
 
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Paints each mob's texture at runtime from its {@link Look}. A hand-drawn PNG at
- * assets/neospawn/textures/entity/&lt;id&gt;.png (and &lt;id&gt;_glow.png) replaces the painted one.
+ * Paints each mob's texture at runtime from its {@link Look}. A hand-painted PNG at
+ * assets/neospawn/textures/entity/&lt;id&gt;.png (and &lt;id&gt;_glow.png) replaces the painted one, as long as
+ * assets/neospawn/skins/layout.json says it was painted for the model's current UV layout
+ * (tools/gen_skins.py writes both).
  */
 public final class ShapeTextures {
     private static final Map<String, ResourceLocation> MAIN = new HashMap<>();
@@ -31,14 +35,40 @@ public final class ShapeTextures {
         String suffix = glow ? "_glow" : "";
         ResourceLocation file = NeoSpawn.id("textures/entity/" + spec.id + suffix + ".png");
         if (Minecraft.getInstance().getResourceManager().getResource(file).isPresent()) {
-            return file;
+            // A skin painted for an older UV layout would scramble on the model, so it must match.
+            String painted = layouts().get(spec.id), current = Shapes.get(spec).layoutHash();
+            if (current.equals(painted)) {
+                return file;
+            }
+            NeoSpawn.LOGGER.warn("Skin {} was painted for UV layout {} but the model's is {}: using the runtime painter."
+                    + " Re-run runSkinDump and tools/gen_skins.py.", file, painted == null ? "(none recorded)" : painted, current);
         }
         ResourceLocation dynamic = NeoSpawn.id("generated/" + spec.id + suffix);
         Minecraft.getInstance().getTextureManager().register(dynamic, new DynamicTexture(paint(spec, glow)));
         return dynamic;
     }
 
-    static NativeImage paint(MobSpec spec, boolean glowOnly) {
+    /** The UV layout hash each hand-painted skin was painted against, from {@value #LAYOUTS}. */
+    private static Map<String, String> layouts() {
+        if (layouts == null) {
+            layouts = new HashMap<>();
+            Minecraft.getInstance().getResourceManager().getResource(NeoSpawn.id(LAYOUTS)).ifPresent(resource -> {
+                try (Reader reader = resource.openAsReader()) {
+                    JsonParser.parseReader(reader).getAsJsonObject().entrySet()
+                            .forEach(e -> layouts.put(e.getKey(), e.getValue().getAsString()));
+                } catch (Exception e) {
+                    NeoSpawn.LOGGER.warn("Could not read {}", LAYOUTS, e);
+                }
+            });
+        }
+        return layouts;
+    }
+
+    private static final String LAYOUTS = "skins/layout.json";
+    private static Map<String, String> layouts;
+
+    /** The texture this mob gets when no hand-painted skin overrides it; {@code glowOnly} keeps just the emissive boxes. */
+    public static NativeImage paint(MobSpec spec, boolean glowOnly) {
         Shape shape = Shapes.get(spec);
         Look look = spec.look;
         NativeImage image = new NativeImage(shape.texW, shape.texH, true);

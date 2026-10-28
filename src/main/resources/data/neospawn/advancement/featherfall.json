@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:featherfall_cloak"
+    },
+    "title": {
+      "text": "Gentle Landing"
+    },
+    "description": {
+      "text": "Weave a Featherfall Cloak from insect wings"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:featherfall_cloak"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:mob_drops",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

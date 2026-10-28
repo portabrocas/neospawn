@@ -10,7 +10,10 @@
     "neospawn:cristian_phone_dungeon",
     "neospawn:cristian_phone_mineshaft",
     "neospawn:cristian_phone_stronghold",
-    "neospawn:cristian_phone_ancient_city"
+    "neospawn:cristian_phone_ancient_city",
+    "neospawn:rift_gun_stronghold",
+    "neospawn:rift_gun_ancient_city",
+    "neospawn:rift_gun_end_city"
   ],
   "replace": false
 }

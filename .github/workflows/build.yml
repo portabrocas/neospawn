@@ -1,0 +1,56 @@
+# Builds NeoSpawn on Windows and runs every GameTest on each push and pull request.
+# Pushing a tag like v0.21.3 also publishes a GitHub Release with the mod jar attached.
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build the jar
+        run: .\gradlew.bat build --no-configuration-cache
+
+      - name: Run GameTests
+        run: .\gradlew.bat runGameTestServer --no-configuration-cache
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: neospawn-jar
+          path: build/libs/neospawn-*.jar
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          jar="build/libs/neospawn-${version}.jar"
+          test -f "$jar" || { echo "Tag $GITHUB_REF_NAME does not match mod_version in gradle.properties"; exit 1; }
+          notes="docs/releases/${GITHUB_REF_NAME}.md"
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            # Release already drafted or published on github.com: just attach the jar.
+            gh release upload "$GITHUB_REF_NAME" "$jar" --clobber
+          elif [ -f "$notes" ]; then
+            gh release create "$GITHUB_REF_NAME" "$jar" --title "NeoSpawn $version" --notes-file "$notes"
+          else
+            gh release create "$GITHUB_REF_NAME" "$jar" --title "NeoSpawn $version" --generate-notes
+          fi

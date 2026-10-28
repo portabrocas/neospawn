@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "neospawn:ectoplasm"
+    },
+    "L": {
+      "item": "minecraft:lantern"
+    }
+  },
+  "pattern": [
+    " E ",
+    "ELE",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:ghost_lantern"
+  }
+}

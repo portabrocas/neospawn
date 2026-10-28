@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dino_hide": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neospawn:dino_hide"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neospawn:dino_hide_helmet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dino_hide"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neospawn:dino_hide_helmet"
+    ]
+  }
+}

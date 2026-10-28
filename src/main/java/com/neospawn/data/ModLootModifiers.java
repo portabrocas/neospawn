@@ -34,6 +34,10 @@ public class ModLootModifiers extends GlobalLootModifierProvider {
         chest("cristian_phone_mineshaft", ModItems.CRISTIAN_PHONE.get(), "chests/abandoned_mineshaft", 0.015f);
         chest("cristian_phone_stronghold", ModItems.CRISTIAN_PHONE.get(), "chests/stronghold_corridor", 0.03f);
         chest("cristian_phone_ancient_city", ModItems.CRISTIAN_PHONE.get(), "chests/ancient_city", 0.04f);
+        // The Rift Gun: rare, never crafted.
+        chest("rift_gun_stronghold", ModItems.RIFT_GUN.get(), "chests/stronghold_corridor", 0.03f);
+        chest("rift_gun_ancient_city", ModItems.RIFT_GUN.get(), "chests/ancient_city", 0.03f);
+        chest("rift_gun_end_city", ModItems.RIFT_GUN.get(), "chests/end_city_treasure", 0.04f);
     }
 
     private void chest(String name, Item charm, String lootTable, float chance) {

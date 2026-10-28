@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    "WFW",
+    "F F",
+    "WFW"
+  ],
+  "result": {
+    "count": 4,
+    "id": "neospawn:sky_fluff"
+  }
+}

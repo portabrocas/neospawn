@@ -1,0 +1,412 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "bosses"
+	group: ""
+	icon: {
+		count: 1
+		id: "neospawn:king_scale"
+	}
+	id: "FA25D1A2C851F11B"
+	order_index: 5
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [ ]
+			id: "FE5D09C118E6574E"
+			rewards: [
+				{
+					id: "2EE93CFA64A79482"
+					type: "xp"
+					xp: 300
+				}
+				{
+					count: 2
+					id: "D02E824B393AAF9F"
+					item: {
+						count: 2
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "EB7B8A1F69AA9C88"
+					item: {
+						count: 8
+						id: "minecraft:golden_carrot"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{
+					advancement: "neospawn:first_boss"
+					criterion: ""
+					id: "CC01BCEB31E75DDC"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"FE5D09C118E6574E"
+			]
+			id: "D186DA902E0B37A7"
+			rewards: [
+				{
+					id: "AE31C66606A729EE"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "61F7C6507FB83E63"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "D141DB3D2D1E6082"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "neospawn:boss_tyrannosaurus"
+					criterion: ""
+					id: "CD8BB226A16AF1F5"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"FE5D09C118E6574E"
+			]
+			id: "17ACF564C58B08C4"
+			rewards: [
+				{
+					id: "5E996C9A0C9B0034"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "BFE8C6206DFA3879"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "0654F9C4F0AC67FD"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "neospawn:boss_the_king"
+					criterion: ""
+					id: "664E9B9BB6B0D386"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"FE5D09C118E6574E"
+			]
+			id: "C31779C548CD0659"
+			rewards: [
+				{
+					id: "89F38272492AD1AA"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "A23A01DB60DCD8FD"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "D243528444B3036A"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "neospawn:boss_empress"
+					criterion: ""
+					id: "DAC708090C9D9FD8"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"FE5D09C118E6574E"
+			]
+			id: "F24A418B1CC85170"
+			rewards: [
+				{
+					id: "806AB82BEC4F60A2"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "D96F31B752C3311B"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "5DAEB346CBAABA3C"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "neospawn:boss_gorgantua"
+					criterion: ""
+					id: "1C887B36751EBC4B"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"FE5D09C118E6574E"
+			]
+			id: "C2B48ABD2F175EAA"
+			rewards: [
+				{
+					id: "00AB8B2521033561"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "79D1C0FFDF294335"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "D7E2CC57C8E38F5D"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "neospawn:boss_kraken"
+					criterion: ""
+					id: "01BA436615DF3889"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"17ACF564C58B08C4"
+				"C31779C548CD0659"
+			]
+			id: "E1DEDDDAC5125E07"
+			rewards: [
+				{
+					id: "E5F72D7251DEEA76"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+				{
+					count: 4
+					id: "DDF96A7283248A1C"
+					item: {
+						count: 4
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "EFB12D477CD61B1A"
+					item: {
+						count: 2
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "neospawn:royal_sigil"
+					criterion: ""
+					id: "29B4D6C6B2B25E92"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"E1DEDDDAC5125E07"
+			]
+			id: "9889F39991226F4D"
+			rewards: [
+				{
+					id: "CBDA759E180044A5"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "3E69317B240792A3"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "9E18EE89A9859AA5"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "BE25CFD859A961C7"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.8d
+			tasks: [
+				{
+					advancement: "neospawn:boss_the_ascended_king"
+					criterion: ""
+					id: "34226F06C70736CB"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"9889F39991226F4D"
+			]
+			id: "4663BCCE0C1A3368"
+			rewards: [
+				{
+					id: "4E2C3E431D7EC57A"
+					type: "xp_levels"
+					xp_levels: 10
+				}
+				{
+					count: 6
+					id: "BDE3DD80D4CCE483"
+					item: {
+						count: 6
+						id: "minecraft:diamond"
+					}
+					type: "item"
+				}
+				{
+					count: 8
+					id: "BABC36E2B2EA6F22"
+					item: {
+						count: 8
+						id: "minecraft:emerald"
+					}
+					type: "item"
+				}
+				{
+					count: 3
+					id: "5A898892A4A7C5E7"
+					item: {
+						count: 3
+						id: "minecraft:golden_apple"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{
+					advancement: "neospawn:all_bosses"
+					criterion: ""
+					id: "D7484B1090ECAF77"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: -1.0d
+		}
+	]
+}

@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:royal_sigil"
+    },
+    "title": {
+      "text": "Ascension"
+    },
+    "description": {
+      "text": "Summon and defeat The Ascended King"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "neospawn:the_ascended_king"
+        }
+      }
+    }
+  },
+  "parent": "neospawn:first_boss",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  }
+}

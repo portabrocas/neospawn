@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "neospawn:block/aurelian_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "neospawn:block/aurelian_log"
+    },
+    "axis=z": {
+      "model": "neospawn:block/aurelian_log_horizontal",
+      "x": 90
+    }
+  }
+}

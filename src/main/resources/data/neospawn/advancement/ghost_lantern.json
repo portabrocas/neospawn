@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:ghost_lantern"
+    },
+    "title": {
+      "text": "I See You"
+    },
+    "description": {
+      "text": "Craft a Ghost Lantern from Ectoplasm"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:ghost_lantern"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:mob_drops",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

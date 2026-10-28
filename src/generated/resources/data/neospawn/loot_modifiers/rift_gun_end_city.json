@@ -1,0 +1,14 @@
+{
+  "type": "neospawn:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/end_city_treasure"
+    },
+    {
+      "chance": 0.04,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "neospawn:rift_gun"
+}

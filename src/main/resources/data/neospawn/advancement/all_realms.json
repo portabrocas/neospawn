@@ -1,0 +1,79 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:chaos_charm"
+    },
+    "title": {
+      "text": "Realm Walker"
+    },
+    "description": {
+      "text": "Visit all six realms"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "utopia": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:utopia"
+      }
+    },
+    "mining_realm": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:mining_realm"
+      }
+    },
+    "crystal_realm": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:crystal_realm"
+      }
+    },
+    "village_realm": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:village_realm"
+      }
+    },
+    "danger_realm": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:danger_realm"
+      }
+    },
+    "chaos_isles": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:chaos_isles"
+      }
+    }
+  },
+  "parent": "neospawn:realm_chaos_isles",
+  "requirements": [
+    [
+      "utopia"
+    ],
+    [
+      "mining_realm"
+    ],
+    [
+      "crystal_realm"
+    ],
+    [
+      "village_realm"
+    ],
+    [
+      "danger_realm"
+    ],
+    [
+      "chaos_isles"
+    ]
+  ],
+  "rewards": {
+    "experience": 300
+  }
+}

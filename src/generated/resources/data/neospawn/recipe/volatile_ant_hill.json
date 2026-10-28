@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "neospawn:chitin_plate"
+    },
+    "D": {
+      "item": "minecraft:coarse_dirt"
+    },
+    "X": {
+      "item": "neospawn:kaboom_core"
+    }
+  },
+  "pattern": [
+    "DXD",
+    "DCD",
+    "DDD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "neospawn:volatile_ant_hill"
+  }
+}

@@ -88,7 +88,6 @@ public final class RealmSelfCheck {
             }
 
             // Structures appear naturally: generate a patch of each realm and count their loot chests.
-            census(server, Realm.UTOPIA, 24, failures, "tree_of_goodness");
             census(server, Realm.MINING_REALM, 16, failures, "skyclaw_nest");
             // Hand-written structures: locate each in its dimension, generate it, check its loot.
             locate(server, net.minecraft.world.level.Level.OVERWORLD, failures, "ruined_crypt", "sunken_vault");
@@ -96,6 +95,8 @@ public final class RealmSelfCheck {
             locate(server, Realm.DANGER_REALM.dimension, failures, "bandit_fortress", "boss_arena");
             locate(server, Realm.CRYSTAL_REALM.dimension, failures, "crystal_sanctum");
             locate(server, Realm.CHAOS_ISLES.dimension, failures, "sky_shrine");
+            locate(server, Realm.UTOPIA.dimension, failures, "tree_of_goodness", "empress_tree", "gilded_gazebo", "honey_orchard",
+                    "sunlit_library", "sky_temple");
 
             NeoSpawn.LOGGER.info(failures.isEmpty() ? "REALMCHECK PASSED" : "REALMCHECK FAILED: " + failures);
             server.halt(false);

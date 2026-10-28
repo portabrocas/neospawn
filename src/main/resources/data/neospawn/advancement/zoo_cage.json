@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:zoo_cage"
+    },
+    "title": {
+      "text": "Zookeeper"
+    },
+    "description": {
+      "text": "Make a Zoo Cage to catch and carry creatures"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:zoo_cage"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:dried_egg",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

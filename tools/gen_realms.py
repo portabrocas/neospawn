@@ -15,7 +15,7 @@ DATA = os.path.join(ROOT, "src/main/resources/data/neospawn")
 def write(path, obj):
     full = os.path.join(DATA, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
-    with open(full, "w") as f:
+    with open(full, "w", encoding="utf-8", newline="\n") as f:
         json.dump(obj, f, indent=2)
 
 
@@ -27,12 +27,12 @@ def ns(*names):
     return ["neospawn:" + n for n in names]
 
 
-def dim_type(fixed_time=None, bed=True, raids=True, monster_light=(0, 7), ambient=0.0):
+def dim_type(fixed_time=None, bed=True, raids=True, monster_light=(0, 7), ambient=0.0, effects="minecraft:overworld"):
     t = {
         "ultrawarm": False, "natural": True, "piglin_safe": False, "respawn_anchor_works": False,
         "bed_works": bed, "has_raids": raids, "has_skylight": True, "has_ceiling": False,
         "coordinate_scale": 1.0, "ambient_light": ambient, "logical_height": 384,
-        "effects": "minecraft:overworld", "infiniburn": "#minecraft:infiniburn_overworld",
+        "effects": effects, "infiniburn": "#minecraft:infiniburn_overworld",
         "min_y": -64, "height": 384,
         "monster_spawn_light_level": {"type": "minecraft:uniform", "min_inclusive": monster_light[0],
                                       "max_inclusive": monster_light[1]},
@@ -59,17 +59,18 @@ NEOSPAWN_ORES = ns("ruby_ore", "tanzanite_ore", "titanium_ore", "uranium_ore", "
 
 
 def biome(effects, vegetation, spawners, ores=None, extra_local=(), underground=mc("monster_room", "monster_room_deep"),
-          surface=(), temperature=0.8, downfall=0.4, precipitation=True):
+          surface=(), temperature=0.8, downfall=0.4, precipitation=True, lakes=mc("lake_lava_underground", "lake_lava_surface"),
+          springs=mc("spring_water", "spring_lava")):
     features = [
         [],                                                    # raw generation
-        mc("lake_lava_underground", "lake_lava_surface"),       # lakes
+        list(lakes),                                           # lakes
         list(extra_local) + mc("amethyst_geode"),               # local modifications
         list(underground),                                     # underground structures
         list(surface),                                         # surface structures
         [],                                                    # strongholds
         ores if ores is not None else BASE_ORES + NEOSPAWN_ORES,  # underground ores
         [],                                                    # underground decoration
-        mc("spring_water", "spring_lava"),                     # fluid springs
+        list(springs),                                         # fluid springs
         mc("glow_lichen") + vegetation,                        # vegetal decoration
         mc("freeze_top_layer"),                                # top layer modification
     ]
@@ -83,7 +84,7 @@ def biome(effects, vegetation, spawners, ores=None, extra_local=(), underground=
     }
 
 
-def effects(sky, fog, water, water_fog, grass=None, foliage=None, particle=None):
+def effects(sky, fog, water, water_fog, grass=None, foliage=None, particle=None, music=None):
     e = {"sky_color": sky, "fog_color": fog, "water_color": water, "water_fog_color": water_fog,
          "mood_sound": {"sound": "minecraft:ambient.cave", "tick_delay": 6000, "block_search_extent": 8, "offset": 2.0}}
     if grass is not None:
@@ -92,26 +93,33 @@ def effects(sky, fog, water, water_fog, grass=None, foliage=None, particle=None)
         e["foliage_color"] = foliage
     if particle is not None:
         e["particle"] = {"options": {"type": particle[0]}, "probability": particle[1]}
+    if music is not None:
+        e["music"] = {"sound": music, "min_delay": 12000, "max_delay": 24000, "replace_current_music": False}
     return e
 
 
 REALMS = {
-    # Peaceful: eternal day, no monsters at all, flowers and friendly creatures.
+    # Peaceful golden sky paradise: permanent golden hour over rolling golden meadows, floating islands above
+    # (noise_settings/utopia below), glowing aurelian trees, no monsters. Its structures are in gen_structures.py.
     "utopia": dict(
-        type=dim_type(fixed_time=6000, raids=False),
-        noise="minecraft:overworld",
+        type=dim_type(fixed_time=11800, raids=False, effects="neospawn:utopia"),
+        noise="neospawn:utopia",
         biome=biome(
-            effects(0x8FD8FF, 0xE0F6FF, 0x3FE0D0, 0x1A6A6A, grass=0x7CFC7C, foliage=0x5AE05A,
-                    particle=("minecraft:white_ash", 0.002)),
-            mc("flower_flower_forest", "forest_flowers", "trees_flower_forest", "patch_grass_plain",
-               "patch_sugar_cane", "patch_pumpkin") + ns("duplicator_tree"),
+            effects(0x8EC3F0, 0xFFD9A0, 0x5CD6E0, 0x2A7A80, grass=0xE0C860, foliage=0xF0B840,
+                    particle=("neospawn:golden_mote", 0.006), music="minecraft:music.overworld.cherry_grove"),
+            ns("utopia_aurelian_trees", "utopia_sunbloom_trees", "utopia_flowers") +
+            mc("forest_flowers", "patch_grass_plain", "patch_sugar_cane", "patch_pumpkin") + ns("duplicator_tree"),
             {"creature": [spawn("egg_bunny", 10, 2, 3), spawn("peacock", 8, 1, 3), spawn("chipmunk", 8, 1, 3),
                           spawn("orchard_cow", 6, 1, 3), spawn("gilded_cow", 3, 1, 2), spawn("minecraft:sheep", 8, 2, 4),
-                          spawn("minecraft:rabbit", 6, 2, 3), spawn("minecraft:horse", 3, 2, 4)],
+                          spawn("minecraft:rabbit", 6, 2, 3), spawn("minecraft:horse", 3, 2, 4),
+                          spawn("gilded_stag", 6, 1, 3)],
              "ambient": [spawn("butterfly", 12, 2, 4), spawn("glimmer_sprite", 6, 1, 2), spawn("songbird", 8, 1, 3),
-                         spawn("firefly", 4, 2, 4)],
+                         spawn("firefly", 4, 2, 4), spawn("sunwing_moth", 8, 1, 3)],
              "monster": []},
-            underground=[], surface=ns("tree_of_goodness", "empress_tree"), temperature=0.9, downfall=0.5)),
+            # Performance: no lava (springs and lakes in the floating islands poured onto golden grass and leaves and
+            # set the realm ablaze) and no gravel (blobs inside the islands fell as hundreds of falling-block entities).
+            ores=[o for o in BASE_ORES if o not in mc("ore_gravel", "disk_gravel")] + NEOSPAWN_ORES,
+            springs=mc("spring_water"), underground=[], lakes=(), temperature=0.9, downfall=0.5)),
 
     # Ore-rich and dangerous: every ore, extra rich veins, and dinosaurs.
     "mining_realm": dict(
@@ -232,7 +240,6 @@ write("worldgen/placed_feature/duplicator_tree.json", {"feature": "neospawn:dupl
 SURFACE = [{"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": "WORLD_SURFACE_WG"},
            {"type": "minecraft:biome"}]
 STRUCTURES = {
-    "tree_of_goodness": [{"type": "minecraft:rarity_filter", "chance": 90}] + SURFACE,
     "skyclaw_nest": [{"type": "minecraft:rarity_filter", "chance": 30}] + SURFACE,
 }
 for name, placement in STRUCTURES.items():
@@ -262,18 +269,11 @@ def pool(rolls, *entries):
 ENCHANTED_BOOK = {"type": "minecraft:item", "name": "minecraft:book",
                   "functions": [{"function": "minecraft:enchant_randomly"}]}
 LOOT = {
-    "tree_of_goodness": table(
-        pool(1, item("minecraft:golden_apple", 2, 5)), pool(1, item("king_scale", 4, 8)), pool(1, item("minecraft:diamond", 4, 8)),
-        pool(1, item("minecraft:emerald", 8, 16)),
-        chance(item("sovereign_charm"), 0.5), chance(item("minecraft:enchanted_golden_apple"), 0.3)),
     "skyclaw_nest": table(
         pool(1, item("minecraft:feather", 8, 16)), pool(1, item("raw_titanium", 2, 6)), pool(1, item("minecraft:gold_nugget", 6, 18)),
         pool(1, item("minecraft:diamond", 1, 3)), chance(item("skyclaw_talon"), 0.1)),
 }
 LOOT.update({
-    "empress_tree": table(
-        pool(1, item("empress_scale", 4, 8)), pool(1, item("minecraft:diamond", 6, 12)), pool(1, item("minecraft:amethyst_block", 4, 8)),
-        chance(item("paragon_charm"), 0.4), chance(item("minecraft:enchanted_golden_apple"), 0.5)),
     "challenge_dungeon": table(
         pool(3, item("minecraft:diamond", 1, 3), item("minecraft:emerald", 3, 8, 2), item("uranium_ingot", 1, 3),
              item("minecraft:golden_apple", 1, 2)), pool(1, ENCHANTED_BOOK)),
@@ -296,5 +296,155 @@ write("worldgen/structure/realm_village.json", {
 write("worldgen/structure_set/realm_villages.json", {
     "structures": [{"structure": "neospawn:realm_village", "weight": 1}],
     "placement": {"type": "minecraft:random_spread", "spacing": 12, "separation": 4, "salt": 84621357}})
+
+
+# ---------------------------------------------------------------------------------------------- Utopia terrain
+# Rolling golden meadows (surface about y 57-95, small lakes where it dips under sea level) with a band of floating
+# islands above (y 150-200): golden tops, sky-fluff undersides. A broad 2D mask keeps them to archipelagos.
+def df(kind, **kw):
+    return dict({"type": "minecraft:" + kind}, **kw)
+
+
+def add(a, b):
+    return df("add", argument1=a, argument2=b)
+
+
+def mul(a, b):
+    return df("mul", argument1=a, argument2=b)
+
+
+def noise(name, xz=1.0, y=1.0):
+    return df("noise", noise="neospawn:" + name, xz_scale=xz, y_scale=y)
+
+
+def gradient(y0, y1, v0, v1):
+    return df("y_clamped_gradient", from_y=y0, to_y=y1, from_value=v0, to_value=v1)
+
+
+def block(name, **props):
+    b = {"Name": name if ":" in name else "neospawn:" + name}
+    if props:
+        b["Properties"] = props
+    return b
+
+
+MEADOW_Y = 76
+meadow = add(gradient(-64, 320, (MEADOW_Y + 64) / 16, (MEADOW_Y - 320) / 16),
+             add(mul(0.9, noise("utopia_hills", y=0.0)), mul(0.3, noise("utopia_detail", y=0.0))))
+islands = add(add(noise("utopia_islands", y=1.6), add(gradient(146, 172, -1.4, 0.0), gradient(186, 200, 0.0, -1.6))),
+              add(mul(0.7, noise("utopia_island_mask", y=0.0)), -0.42))
+ZERO = 0.0
+
+
+def rule_block(name, **props):
+    return {"type": "minecraft:block", "result_state": block(name, **props)}
+
+
+def cond(test, then):
+    return {"type": "minecraft:condition", "if_true": test, "then_run": then}
+
+
+def stone_depth(kind, add_depth=False):
+    return {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": add_depth, "secondary_depth_range": 0,
+            "surface_type": kind}
+
+
+def dry(offset):
+    return {"type": "minecraft:water", "offset": offset, "surface_depth_multiplier": 0, "add_stone_depth": False}
+
+
+SKY = {"type": "minecraft:y_above", "anchor": {"absolute": 130}, "surface_depth_multiplier": 0, "add_stone_depth": False}
+UTOPIA_SURFACE = {"type": "minecraft:sequence", "sequence": [
+    cond({"type": "minecraft:vertical_gradient", "random_name": "minecraft:bedrock_floor",
+          "true_at_and_below": {"above_bottom": 0}, "false_at_and_above": {"above_bottom": 5}}, rule_block("minecraft:bedrock")),
+    cond(stone_depth("floor"), {"type": "minecraft:sequence", "sequence": [
+        cond(dry(-1), rule_block("golden_grass", snowy="false")), rule_block("minecraft:sand")]}),
+    cond(stone_depth("floor", add_depth=True), {"type": "minecraft:sequence", "sequence": [
+        cond(dry(-6), rule_block("minecraft:dirt")), rule_block("minecraft:sand")]}),
+    cond(SKY, {"type": "minecraft:sequence", "sequence": [
+        cond(stone_depth("ceiling"), rule_block("sky_fluff")), rule_block("minecraft:calcite")]}),
+    cond({"type": "minecraft:vertical_gradient", "random_name": "minecraft:deepslate",
+          "true_at_and_below": {"absolute": 0}, "false_at_and_above": {"absolute": 8}}, rule_block("minecraft:deepslate", axis="y")),
+]}
+
+write("worldgen/noise/utopia_hills.json", {"firstOctave": -9, "amplitudes": [1.0, 1.0, 0.5]})
+write("worldgen/noise/utopia_detail.json", {"firstOctave": -6, "amplitudes": [1.0, 0.5]})
+write("worldgen/noise/utopia_islands.json", {"firstOctave": -6, "amplitudes": [1.0, 0.6, 0.3]})
+write("worldgen/noise/utopia_island_mask.json", {"firstOctave": -8, "amplitudes": [1.0]})
+write("worldgen/noise_settings/utopia.json", {
+    "sea_level": 63, "disable_mob_generation": False, "aquifers_enabled": False, "ore_veins_enabled": False,
+    "legacy_random_source": False,
+    "default_block": block("minecraft:stone"), "default_fluid": block("minecraft:water", level="0"),
+    "noise": {"min_y": -64, "height": 384, "size_horizontal": 1, "size_vertical": 2},
+    "noise_router": {
+        "barrier": ZERO, "fluid_level_floodedness": ZERO, "fluid_level_spread": ZERO, "lava": ZERO,
+        "temperature": ZERO, "vegetation": ZERO, "continents": ZERO, "erosion": ZERO, "depth": ZERO, "ridges": ZERO,
+        "initial_density_without_jaggedness": meadow,
+        "final_density": df("squeeze", argument=mul(0.64, df("interpolated", argument=df("max", argument1=meadow, argument2=islands)))),
+        "vein_toggle": ZERO, "vein_ridged": ZERO, "vein_gap": ZERO},
+    "spawn_target": [],
+    "surface_rule": UTOPIA_SURFACE,
+})
+
+# ---------------------------------------------------------------------------------------------- Utopia vegetation
+LEAVES = {"type": "minecraft:simple_state_provider",
+          "state": block("aurelian_leaves", distance="7", persistent="false", waterlogged="false")}
+DIRT = {"type": "minecraft:simple_state_provider", "state": block("minecraft:dirt")}
+
+
+def log(name):
+    return {"type": "minecraft:simple_state_provider", "state": block(name, axis="y")}
+
+
+write("worldgen/configured_feature/aurelian_tree.json", {"type": "minecraft:tree", "config": {
+    "ignore_vines": True, "force_dirt": False, "dirt_provider": DIRT, "trunk_provider": log("aurelian_log"),
+    "trunk_placer": {"type": "minecraft:fancy_trunk_placer", "base_height": 8, "height_rand_a": 5, "height_rand_b": 0},
+    "foliage_provider": LEAVES,
+    "foliage_placer": {"type": "minecraft:fancy_foliage_placer", "radius": 2, "offset": 4, "height": 4},
+    "minimum_size": {"type": "minecraft:two_layers_feature_size", "limit": 0, "lower_size": 0, "upper_size": 0,
+                     "min_clipped_height": 4},
+    "decorators": []}})
+write("worldgen/configured_feature/sunbloom_tree.json", {"type": "minecraft:tree", "config": {
+    "ignore_vines": True, "force_dirt": False, "dirt_provider": DIRT, "trunk_provider": log("minecraft:birch_log"),
+    "trunk_placer": {"type": "minecraft:cherry_trunk_placer", "base_height": 6, "height_rand_a": 2, "height_rand_b": 0,
+                     "branch_count": {"type": "minecraft:weighted_list", "distribution": [
+                         {"data": 1, "weight": 1}, {"data": 2, "weight": 1}, {"data": 3, "weight": 1}]},
+                     "branch_horizontal_length": {"type": "minecraft:uniform", "min_inclusive": 2, "max_inclusive": 4},
+                     "branch_start_offset_from_top": {"min_inclusive": -4, "max_inclusive": -3},
+                     "branch_end_offset_from_top": {"type": "minecraft:uniform", "min_inclusive": -1, "max_inclusive": 0}},
+    "foliage_provider": LEAVES,
+    "foliage_placer": {"type": "minecraft:cherry_foliage_placer", "radius": 4, "offset": 0, "height": 5,
+                       "wide_bottom_layer_hole_chance": 0.25, "corner_hole_chance": 0.25,
+                       "hanging_leaves_chance": 0.16, "hanging_leaves_extension_chance": 0.33},
+    "minimum_size": {"type": "minecraft:two_layers_feature_size", "limit": 1, "lower_size": 0, "upper_size": 2},
+    "decorators": [{"type": "minecraft:beehive", "probability": 0.06}]}})
+write("worldgen/configured_feature/utopia_flowers.json", {"type": "minecraft:flower", "config": {
+    "tries": 64, "xz_spread": 6, "y_spread": 2, "feature": {
+        "feature": {"type": "minecraft:simple_block", "config": {"to_place": {
+            "type": "minecraft:weighted_state_provider", "entries": [
+                {"data": block("sunbloom"), "weight": 4}, {"data": block("honeybell"), "weight": 3},
+                {"data": block("starpetal"), "weight": 2}, {"data": block("minecraft:dandelion"), "weight": 2},
+                {"data": block("minecraft:oxeye_daisy"), "weight": 1}]}}},
+        "placement": [{"type": "minecraft:block_predicate_filter",
+                       "predicate": {"type": "minecraft:matching_blocks", "blocks": "minecraft:air"}}]}}})
+
+ON_LAND = [{"type": "minecraft:in_square"}, {"type": "minecraft:surface_water_depth_filter", "max_water_depth": 0},
+           {"type": "minecraft:heightmap", "heightmap": "OCEAN_FLOOR"}, {"type": "minecraft:biome"},
+           {"type": "minecraft:block_predicate_filter", "predicate": {"type": "minecraft:would_survive",
+                                                                      "state": block("aurelian_sapling", stage="0")}}]
+
+
+def per_chunk(*weights):
+    return {"type": "minecraft:count", "count": {"type": "minecraft:weighted_list", "distribution": [
+        {"data": i, "weight": w} for i, w in enumerate(weights) if w]}}
+
+
+write("worldgen/placed_feature/utopia_aurelian_trees.json",
+      {"feature": "neospawn:aurelian_tree", "placement": [per_chunk(10, 2, 1)] + ON_LAND})
+write("worldgen/placed_feature/utopia_sunbloom_trees.json",
+      {"feature": "neospawn:sunbloom_tree", "placement": [per_chunk(4, 3, 1)] + ON_LAND})
+write("worldgen/placed_feature/utopia_flowers.json", {"feature": "neospawn:utopia_flowers", "placement": [
+    {"type": "minecraft:count", "count": 3}, {"type": "minecraft:in_square"},
+    {"type": "minecraft:heightmap", "heightmap": "MOTION_BLOCKING"}, {"type": "minecraft:biome"}]})
 
 print("wrote", len(REALMS), "realms to", DATA)

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_insect_wing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neospawn:insect_wing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neospawn:featherfall_cloak"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_insect_wing"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neospawn:featherfall_cloak"
+    ]
+  }
+}

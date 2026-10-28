@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:cristian_phone"
+    },
+    "title": {
+      "text": "Phone a Friend"
+    },
+    "description": {
+      "text": "Find Cristian's phone in a deep vault"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:cristian_phone"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:gadget",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:ray_gun"
+    },
+    "title": {
+      "text": "Pew Pew"
+    },
+    "description": {
+      "text": "Build a Ray Gun"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "neospawn:ray_gun"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "neospawn:gadget",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

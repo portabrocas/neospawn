@@ -1,0 +1,49 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:skyclaw_egg"
+    },
+    "title": {
+      "text": "Wings of Your Own"
+    },
+    "description": {
+      "text": "Fly a Skyclaw or Azure Drake hatched from a boss egg"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "skyclaw": {
+      "trigger": "minecraft:started_riding",
+      "conditions": {
+        "player": {
+          "vehicle": {
+            "type": "neospawn:tamed_skyclaw"
+          }
+        }
+      }
+    },
+    "drake": {
+      "trigger": "minecraft:started_riding",
+      "conditions": {
+        "player": {
+          "vehicle": {
+            "type": "neospawn:tamed_azure_drake"
+          }
+        }
+      }
+    }
+  },
+  "parent": "neospawn:tame_mount",
+  "requirements": [
+    [
+      "skyclaw",
+      "drake"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

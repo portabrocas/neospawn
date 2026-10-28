@@ -1,0 +1,61 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "cataclysm:ancient_metal_ingot",
+      "required": false
+    },
+    {
+      "id": "cataclysm:witherite_ingot",
+      "required": false
+    },
+    {
+      "id": "cataclysm:ignitium_ingot",
+      "required": false
+    },
+    {
+      "id": "simplyswords:runic_tablet",
+      "required": false
+    },
+    {
+      "id": "aquamirae:esca",
+      "required": false
+    },
+    {
+      "id": "aquamirae:ship_graveyard_echo",
+      "required": false
+    },
+    {
+      "id": "fossilslegacy:relic_scrap",
+      "required": false
+    },
+    {
+      "id": "eternal_starlight:orb_of_prophecy",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:arcane_essence",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:blank_rune",
+      "required": false
+    },
+    {
+      "id": "undergarden:forgotten_ingot",
+      "required": false
+    },
+    {
+      "id": "undergarden:utherium_crystal",
+      "required": false
+    },
+    {
+      "id": "mowziesmobs:ice_crystal",
+      "required": false
+    },
+    {
+      "id": "lucky:lucky_block",
+      "required": false
+    }
+  ]
+}

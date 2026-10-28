@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "neospawn:crystal_charm"
+    },
+    "title": {
+      "text": "Through the Looking Glass"
+    },
+    "description": {
+      "text": "Enter the Crystal Realm, empty-handed"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "neospawn:crystal_realm"
+      }
+    }
+  },
+  "parent": "neospawn:realm_mining_realm",
+  "requirements": [
+    [
+      "c"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

@@ -87,14 +87,24 @@ neoForge {
             if (project.hasProperty('weapons')) {
                 systemProperty 'neospawn.photos.weapons', 'true'
             }
+            if (project.hasProperty('rift')) {
+                systemProperty 'neospawn.photos.rift', 'true'
+            }
             if (project.hasProperty('gear')) {
                 systemProperty 'neospawn.photos.weapons', 'true'
                 systemProperty 'neospawn.photos.gear', 'true'
             }
             if (project.hasProperty('anim')) {
-                systemProperty 'neospawn.king.anim', project.property('anim')
+                systemProperty 'neospawn.geo.anim', project.property('anim')
             }
             programArguments.addAll '--quickPlaySingleplayer', 'neospawn_photos', '--width', '1280', '--height', '720'
+        }
+
+        // Dumps every generated mob's texture and UV map into tools/skin_base/ for tools/gen_skins.py (see SkinDump).
+        skinDump {
+            client()
+            systemProperty 'neospawn.skindump', 'true'
+            systemProperty 'neospawn.skindump.dir', file('tools/skin_base').absolutePath
         }
 
         server {

@@ -33,7 +33,9 @@ public class ModLanguage extends LanguageProvider {
             Map.entry("king_scale_boots", "King's Scale Boots"),
             Map.entry("kings_fang", "King's Fang"),
             Map.entry("prospectors_charm", "Prospector's Charm"),
-            Map.entry("gorgantua_egg_fragment", "Gorgantua Egg Fragment"));
+            Map.entry("gorgantua_egg_fragment", "Gorgantua Egg Fragment"),
+            // The Gobbler stream
+            Map.entry("gobblers_jaw", "Gobbler's Jaw"));
 
     public ModLanguage(PackOutput output) {
         super(output, NeoSpawn.MODID, "en_us");
@@ -52,6 +54,20 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.empress_scale.set_bonus", "Full set: Speed II, Jump Boost II, Slow Falling, Regeneration");
         add("item.neospawn.emerald.set_bonus", "Full set: Hero of the Village, Luck");
         add("item.neospawn.experience.set_bonus", "Full set: double experience from orbs");
+        add("item.neospawn.chitin.set_bonus", "Full set: Haste");
+        add("item.neospawn.dino_hide.set_bonus", "Full set: Speed");
+        // Arcane Tanzanite
+        add("item.neospawn.arcane.set_bonus", "Full set: +50% experience from orbs; anvil work refunds half its levels, never damages the anvil and doesn't get pricier");
+        add("item.neospawn.tanzanite_tools.tooltip", "Awakens free enchantments as you use it (%s/%s)");
+        add("message.neospawn.tanzanite_bonus", "Your %s awakens: %s!");
+        add("item.neospawn.antivenom.tooltip", "Cures poison, and keeps it away for a minute");
+        add("item.neospawn.ghost_lantern.tooltip", "Hold it: invisible creatures within 24 blocks glow");
+        add("item.neospawn.featherfall_cloak.tooltip", "Wear it (chest, or a back slot) to drift down instead of falling");
+        add("item.neospawn.climbing_claws.tooltip", "Wear them (a hands slot) or hold them in your off hand: walk into a wall to climb, sneak to cling");
+        add("item.neospawn.stink_bomb.tooltip", "Throw it: a sickening cloud that sends monsters running");
+        add("item.neospawn.mining_charge.tooltip", "Use on a wall to blast a walkable 1x2 shaft 12 blocks deep. Ores are kept");
+        add("block.neospawn.spring_basket.tooltip", "An Easter Bunny within %s blocks lays eggs %sx as often");
+        add("block.neospawn.ant_hill.tooltip", "%ss climb out until four are nearby. A redstone signal stops it");
         add("item.neospawn.boss_weapon.lightning", "Sometimes calls lightning on the target");
         add("item.neospawn.boss_weapon.bleed", "Makes the target bleed (Wither)");
         add("item.neospawn.boss_weapon.crush", "Launches and slows the target");
@@ -72,6 +88,11 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.boss_weapon.drown", "Steals the target's breath");
         add("item.neospawn.boss_weapon.lifesteal", "Heals you on every hit");
         add("item.neospawn.boss_weapon.behemoth", "Every swing strikes and launches the monsters around your target");
+        // The Gobbler stream
+        add("item.neospawn.boss_weapon.gobble", "Gobbles up wood, leaves, dirt and sand around the target");
+        add("item.neospawn.power_pellet.tooltip", "Eat it: Speed II and Strength for 15 s. The Gobbler's ghosts flee from you and die to one hit");
+        add("item.neospawn.arcade_token.tooltip", "Found in the Gobbler's belly. Offer one at the Summoning Altar for a rematch");
+        add("emi.info.neospawn.gobbler", "The Gobbler hops out of plains and forests at night, eating every log, plank, leaf, dirt and sand block in its way (never stone). It roars up ghosts that drift through walls. Eat one of its Power Pellets and the ghosts flee, and die to a single hit. Summon it at the altar with a cake or an Arcade Token.");
         add("item.neospawn.royal_sigil.tooltip", "Use on the ground, in open sky, to summon The Ascended King");
         add("item.neospawn.gorgantua_egg.tooltip", "Use on the ground, far from home, to hatch Gorgantua");
         add("item.neospawn.dried_gorgantua_egg.tooltip", "Rehydrate it: craft it with a water bucket");
@@ -135,6 +156,10 @@ public class ModLanguage extends LanguageProvider {
         add("item.neospawn.dried_egg.tooltip", "Just add water: drop it in water or use it on water to hatch it");
         add("item.neospawn.painted_egg.tooltip", "Laid by the Easter Bunny. Use it to crack it open: usually a spawn egg");
         add("item.neospawn.field_guide.tooltip", "Everything you need to know about NeoSpawn. Right-click to read");
+        // Rift Gun (stream B)
+        add("item.neospawn.rift_gun.tooltip", "Right-click: blue rift. Sneak + right-click: orange rift. Step into one, come out of the other. Ammo: ender pearls");
+        add("message.neospawn.rift_gun.no_surface", "No room for a rift there: it needs a flat, solid face (two blocks tall on walls)");
+        add("entity.neospawn.rift", "Rift");
         // EMI info pages.
         add("emi.info.neospawn.easter_bunny", "The Easter Bunny wanders flower forests and plains with a basket of eggs, laying an egg every few minutes: usually a spawn egg for any creature in the game (never a boss), sometimes a painted surprise egg. Breed them with carrots.\n\nCrack a painted egg open for a surprise: usually another spawn egg, sometimes gems, emeralds or experience.");
         add("emi.info.neospawn.dried_egg", "Dried spawn eggs come from Fossil Ore and sifting. Just add water: drop one in water or use it on water and the creature inside hatches. A Mystery Dried Egg hatches a random creature.");
